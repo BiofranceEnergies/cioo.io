@@ -57,7 +57,7 @@ body {
        [[REPERE: LOGO]]
        ================================================================= */
 .logo-header { position: absolute; top: 24px; left: 24px; z-index: 10; display: block; }
-.logo-header img { height: 70px; width: auto; display: block; }
+.logo-header img { height: 90px; width: auto; display: block; }
 @media (max-width: 900px) {
   .logo-header { top: 16px; left: 16px; }
   .logo-header img { height: 48px; }
