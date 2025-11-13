@@ -467,8 +467,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (ev.submitter) {
       ev.submitter.disabled = true;
       ev.submitter.textContent = "Merci ! Nous vous envoyons un SMS dans un instant."";
-   }
-    });
-  });
+}
+});
+});
 })();
 
