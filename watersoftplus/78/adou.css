@@ -1098,6 +1098,15 @@ body.results-visible #focus-adou { display: none !important; }
   margin: 16px auto 24px !important;  /* au lieu de 40px 0 20px */
 }
 
+/* === Ajustement définitif espace financement / offre limitée === */
+.autofin .fin-card {
+  margin-bottom: 8px !important;   /* réduit l’espace sous la carte de financement */
+}
+
+.autofin .offer-strip.promo-mini {
+  margin-top: 8px !important;      /* réduit l’espace au-dessus du bandeau */
+}
+
 /* ===== FIN APPENDS ===== */
 /* ===========================
 
