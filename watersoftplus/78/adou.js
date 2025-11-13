@@ -462,13 +462,15 @@ document.addEventListener("DOMContentLoaded", function () {
       ...utm,
     });
 
-    // Feedback interface
-    phoneInput.disabled = true;
-    if (ev.submitter) {
-      ev.submitter.disabled = true;
-      ev.submitter.textContent = "Merci ! Nous vous envoyons un SMS dans un instant."";
+   // Feedback interface
+phoneInput.disabled = true;
+if (ev.submitter) {
+  ev.submitter.disabled = true;
+  ev.submitter.textContent = "Merci ! Nous vous envoyons un SMS dans un instant.";
 }
+
 });
 });
 })();
+
 
