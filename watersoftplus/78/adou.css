@@ -596,7 +596,7 @@ legend { padding: 0; margin: 0; }
 
   /* moins haut, moins d’espace autour */
   padding: 16px 22px;
-  margin: 24px auto 16px;   /* ↓ espace plus serré sous le bloc de financement */
+  margin: 8px auto 16px;   /* ↓ espace plus serré sous le bloc de financement */
   max-width: 640px;
 
   text-align: center;
