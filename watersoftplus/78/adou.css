@@ -1088,6 +1088,16 @@ body.results-visible #focus-adou { display: none !important; }
   margin-bottom: 24px !important;
 }
 
+
+/* === Ajustement écart bloc financement / offre limitée === */
+#autofin {
+  margin-bottom: 8px !important;   /* au lieu de 24px */
+}
+
+.offer-strip {
+  margin: 16px auto 24px !important;  /* au lieu de 40px 0 20px */
+}
+
 /* ===== FIN APPENDS ===== */
 /* ===========================
 
