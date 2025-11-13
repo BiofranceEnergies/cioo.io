@@ -467,7 +467,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (ev.submitter) {
       ev.submitter.disabled = true;
       ev.submitter.textContent = "Merci, nous vous rappellerons";
-    }
+   }
+    });
   });
-});
+})();
 
