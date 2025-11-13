@@ -1123,6 +1123,21 @@ body.results-visible #focus-adou { display: none !important; }
   }
 }
 
+/* ===== Ajustement de l'emoji du bandeau SMS ===== */
+.tel-banner__label {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espace propre */
+}
+
+.tel-banner__label::before {
+  content: "🔐";
+  font-size: 0.9em;      /* réduit légèrement */
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(1px); /* ajustement vertical */
+}
+
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
