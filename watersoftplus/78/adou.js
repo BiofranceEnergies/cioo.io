@@ -410,53 +410,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Hook bandeau téléphone (petit bandeau en bas de résultats)
-  document.addEventListener("DOMContentLoaded", function () {
-    const bannerForm = document.getElementById("tel-banner-form");
-    if (!bannerForm) return;
+// Hook bandeau téléphone (petit bandeau en bas de résultats)
+document.addEventListener("DOMContentLoaded", function () {
+  const bannerForm = document.getElementById("tel-banner-form");
+  if (!bannerForm) return;
 
-    const phoneInput = document.getElementById("tel-banner-input");
+  const phoneInput = document.getElementById("tel-banner-input");
 
-    bannerForm.addEventListener("submit", function (ev) {
-      ev.preventDefault();
-      if (!phoneInput) return;
-
-      const brut = (phoneInput.value || "").trim();
-      const cleaned = brut.replace(/[^0-9]/g, ""); // garde uniquement les chiffres
-      const pattern = /^0[0-9]{9}$/; // 0 + 9 chiffres
-
-      if (!pattern.test(cleaned)) {
-        alert("Merci de saisir un numéro de téléphone valide (ex : 0612345678).");
-        phoneInput.focus();
-        return;
-      }
-
-      const snap = computeSnapshot();
-      if (!snap) return;
-
-      const utm = getUtmParams();
-      const meta = commonMeta();
-
-      postLead({
-        phase: "phone",
-        foyer: snap.foyerVal,
-        peau_seche: snap.peau ? "1" : "0",
-        annual: String(snap.annual),
-        tenYears: String(snap.tenYears),
-        model: snap.model,
-        price: String(snap.price),
-        email: "",
-        phone: cleaned,
-        ...meta,
-        ...utm,
-      });
-
-      // Feedback interface
-      phoneInput.disabled = true;
-      if (ev.submitter) {
-        ev.submitter.disabled = true;
-        ev.submitter.textContent = "Merci, nous vous rappellerons";
-      }
+  // 👉 FORMATAGE EN TEMPS RÉEL DU NUMÉRO (00 00 00 00 00)
+  if (phoneInput) {
+    phoneInput.addEventListener("input", function () {
+      let v = phoneInput.value.replace(/\D/g, "");   // on garde uniquement les chiffres
+      v = v.substring(0, 10);                        // max 10 chiffres
+      let formatted = v.replace(/(\d{2})(?=\d)/g, "$1 ");
+      phoneInput.value = formatted.trim();
     });
+  }
+
+  // 👉 SUBMIT DU BANDEAU
+  bannerForm.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (!phoneInput) return;
+
+    const brut = (phoneInput.value || "").trim();
+    const cleaned = brut.replace(/[^0-9]/g, ""); // on enlève les espaces
+    const pattern = /^0[0-9]{9}$/;               // 0 + 9 chiffres
+
+    if (!pattern.test(cleaned)) {
+      alert("Merci de saisir un numéro de téléphone valide (ex : 06 12 34 56 78).");
+      phoneInput.focus();
+      return;
+    }
+
+    const snap = computeSnapshot();
+    if (!snap) return;
+
+    const utm = getUtmParams();
+    const meta = commonMeta();
+
+    postLead({
+      phase: "phone",
+      foyer: snap.foyerVal,
+      peau_seche: snap.peau ? "1" : "0",
+      annual: String(snap.annual),
+      tenYears: String(snap.tenYears),
+      model: snap.model,
+      price: String(snap.price),
+      email: "",
+      phone: cleaned,          // numéro SANS espaces envoyé au Sheets
+      ...meta,
+      ...utm,
+    });
+
+    // Feedback interface
+    phoneInput.disabled = true;
+    if (ev.submitter) {
+      ev.submitter.disabled = true;
+      ev.submitter.textContent = "Merci, nous vous rappellerons";
+    }
   });
-})();
+});
+
