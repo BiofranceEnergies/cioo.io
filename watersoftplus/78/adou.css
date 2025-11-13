@@ -950,6 +950,48 @@ body.results-visible #focus-adou { display: none !important; }
   color: #fff;
   white-space: nowrap;
 }
+/* ===== Bandeau téléphone FIXE en bas de page ===== */
+.tel-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 22px; /* distance du bas */
+  transform: translateX(-50%);
+  z-index: 2000;
+
+  display: none;
+  padding: 12px 18px;
+
+  width: calc(100% - 40px);
+  max-width: 720px;
+
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.96);
+  color: #f9fafb;
+  font-size: 14px;
+
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+.tel-banner--visible {
+  display: flex;
+}
+
+/* Responsive amélioré */
+@media (max-width: 520px) {
+  .tel-banner {
+    bottom: 16px;
+    padding: 12px 14px;
+  }
+  .tel-banner__label {
+    font-size: 13px;
+  }
+  .tel-banner__btn {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+}
 
 /* ===== FIN APPENDS ===== */
 /* ===========================
