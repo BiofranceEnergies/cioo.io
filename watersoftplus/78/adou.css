@@ -1036,8 +1036,10 @@ body.results-visible #focus-adou { display: none !important; }
    ========================================================= */
 .offer-strip {
   width: 100%;
-  margin: 40px 0 20px;
   text-align: center;
+
+  /* ⇩⇩ C’est ICI que tu règles l’écart avec le bloc du dessus ⇩⇩ */
+  margin: 12px auto 24px;
 }
 
 .offer-strip__inner {
@@ -1080,34 +1082,27 @@ body.results-visible #focus-adou { display: none !important; }
     font-size: 15px;
   }
 }
-.promo-mini {
-  margin-top: 24px !important;
-}
 
+/* === Espace financement / offre limitée === */
+
+/* On évite que #autofin rajoute du vide sous lui */
 #autofin {
-  margin-bottom: 24px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 16px !important;
 }
 
-
-/* === Ajustement écart bloc financement / offre limitée === */
-#autofin {
-  margin-bottom: 8px !important;   /* au lieu de 24px */
-}
-
-.offer-strip {
-  margin: 16px auto 24px !important;  /* au lieu de 40px 0 20px */
-}
-
-/* === Ajustement définitif espace financement / offre limitée === */
+/* On garde juste un petit espace sous la carte de financement */
 .autofin .fin-card {
-  margin-bottom: 8px !important;   /* réduit l’espace sous la carte de financement */
+  margin-bottom: 8px !important;
 }
 
-.autofin .offer-strip.promo-mini {
-  margin-top: 8px !important;      /* réduit l’espace au-dessus du bandeau */
+/* La classe promo-mini ne rajoute plus de marge parasite */
+.promo-mini {
+  margin-top: 0 !important;
 }
 
 /* ===== FIN APPENDS ===== */
-/* ===========================
+/* =========================== */
+
 
 
