@@ -1072,6 +1072,9 @@ body.results-visible #focus-adou { display: none !important; }
   margin-top: 24px !important;
 }
 
+#autofin {
+  margin-bottom: 24px !important;
+}
 
 /* ===== FIN APPENDS ===== */
 /* ===========================
