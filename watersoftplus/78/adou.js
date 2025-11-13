@@ -260,7 +260,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Scroll sur le bloc résultats
     recap?.scrollIntoView({ behavior: "smooth", block: "start" });
 
- 
+   }); // <-- fin du form.addEventListener("submit", ...)
+});
 
 
 /* =========================================================
