@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const capL   = (modele.match(/\d+\s?L/) || [""])[0]; // "10 L"|"15 L"|"20 L"
       const capNum = (modele.match(/\d+/)     || [""])[0]; // "10"  |"15"  |"20"
 
-      if (capSpan)   capSpan.textContent = capL;
+      if (capSpan)    capSpan.textContent = capL;
       if (resineSpan) resineSpan.textContent = capNum;
       if (prixSpan)   prixSpan.textContent = tarif.toLocaleString("fr-FR") + " €";
 
@@ -257,15 +257,21 @@ document.addEventListener("DOMContentLoaded", function () {
       el.style.display = "none";
     });
 
+    // 👉 Affichage du bandeau téléphone après simulation (si présent dans le HTML)
+    const telBanner = document.getElementById("tel-banner");
+    if (telBanner) {
+      telBanner.classList.add("tel-banner--visible");
+      telBanner.setAttribute("aria-hidden", "false");
+    }
+
     // Scroll sur le bloc résultats
     recap?.scrollIntoView({ behavior: "smooth", block: "start" });
-
-   }); // <-- fin du form.addEventListener("submit", ...)
+  }); // <-- fin du form.addEventListener("submit", ...)
 });
 
 
 /* =========================================================
-   Injection — Envoi Google Sheets (simu + unlock)
+   Injection — Envoi Google Sheets (simu + unlock + phone)
    ========================================================= */
 (function () {
   "use strict";
@@ -372,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Hook déverrouillage
+  // Hook déverrouillage (si le gate existe encore dans le HTML)
   document.addEventListener("DOMContentLoaded", function () {
     const gform = document.getElementById("gate-form");
     if (!gform) return;
@@ -401,6 +407,56 @@ document.addEventListener("DOMContentLoaded", function () {
           ...utm,
         });
       }, 0);
+    });
+  });
+
+  // Hook bandeau téléphone (petit bandeau en bas de résultats)
+  document.addEventListener("DOMContentLoaded", function () {
+    const bannerForm = document.getElementById("tel-banner-form");
+    if (!bannerForm) return;
+
+    const phoneInput = document.getElementById("tel-banner-input");
+
+    bannerForm.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      if (!phoneInput) return;
+
+      const brut = (phoneInput.value || "").trim();
+      const cleaned = brut.replace(/[^0-9]/g, ""); // garde uniquement les chiffres
+      const pattern = /^0[0-9]{9}$/; // 0 + 9 chiffres
+
+      if (!pattern.test(cleaned)) {
+        alert("Merci de saisir un numéro de téléphone valide (ex : 0612345678).");
+        phoneInput.focus();
+        return;
+      }
+
+      const snap = computeSnapshot();
+      if (!snap) return;
+
+      const utm = getUtmParams();
+      const meta = commonMeta();
+
+      postLead({
+        phase: "phone",
+        foyer: snap.foyerVal,
+        peau_seche: snap.peau ? "1" : "0",
+        annual: String(snap.annual),
+        tenYears: String(snap.tenYears),
+        model: snap.model,
+        price: String(snap.price),
+        email: "",
+        phone: cleaned,
+        ...meta,
+        ...utm,
+      });
+
+      // Feedback interface
+      phoneInput.disabled = true;
+      if (ev.submitter) {
+        ev.submitter.disabled = true;
+        ev.submitter.textContent = "Merci, nous vous rappellerons";
+      }
     });
   });
 })();
