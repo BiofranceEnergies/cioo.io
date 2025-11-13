@@ -1039,7 +1039,7 @@ body.results-visible #focus-adou { display: none !important; }
   text-align: center;
 
   /* ⇩⇩ C’est ICI que tu règles l’écart avec le bloc du dessus ⇩⇩ */
-  margin: 12px auto 24px;
+  margin: 8px auto 24px;
 }
 
 .offer-strip__inner {
