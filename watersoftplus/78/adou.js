@@ -466,7 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
     phoneInput.disabled = true;
     if (ev.submitter) {
       ev.submitter.disabled = true;
-      ev.submitter.textContent = "Merci, nous vous rappellerons";
+      ev.submitter.textContent = "Merci ! Nous vous envoyons un SMS dans un instant."";
    }
     });
   });
