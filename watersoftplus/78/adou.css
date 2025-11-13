@@ -588,21 +588,23 @@ legend { padding: 0; margin: 0; }
 .prod__price { margin-top: 12px; }
 
 /* --- Bandeau promo Lovable 2025 --- */
-.promo2025 {
+/* --- Bandeau promo Lovable 2025 --- */
+promo2025 {
   position: relative;
   background: linear-gradient(180deg,#f9fafc 0%, #f2f4f7 100%);
   border-radius: 30px;
   box-shadow: 0 18px 42px rgba(15,23,42,.06);
 
-  /* moins haut, moins d’espace autour */
-  padding: 16px 22px;
-  margin: 8px auto 16px;   /* ↓ espace plus serré sous le bloc de financement */
-  max-width: 640px;
+  /* ↓↓↓ nouveau : moins haut, moins d’espace autour, plus étroit ↓↓↓ */
+  padding: 18px 24px;
+  margin: 20px auto 40px;
+  max-width: 960px;
 
   text-align: center;
   transition: transform .3s, box-shadow .3s;
   overflow: hidden;
 }
+
 
 .promo2025::before {
   content: ""; position: absolute; inset: -28px;
