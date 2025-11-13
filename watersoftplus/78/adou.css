@@ -1101,6 +1101,13 @@ body.results-visible #focus-adou { display: none !important; }
   margin-top: 0 !important;
 }
 
+/* Espace supplémentaire entre offre et bandeau téléphone sur mobile */
+@media (max-width: 700px) {
+  .offer-strip {
+    margin-bottom: 80px;  /* ajuste la valeur selon l'espace voulu */
+  }
+}
+
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
