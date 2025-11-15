@@ -1167,6 +1167,44 @@ body.results-visible #focus-adou { display: none !important; }
   display: inline-block;
   transform: translateY(1px); /* ajustement vertical */
 }
+/* Puces premium dans le hero */
+.hero-bullets{
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.hero-bullets li{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 0.98rem;
+  color: #e5e7eb;
+}
+
+.hero-bullets .lb-dot{
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.9);
+  border: 1px solid rgba(148,163,184,0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1px rgba(15,23,42,0.95);
+}
+
+.hero-bullets .lb-dot svg{
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.hero-bullets .lb-dot path{
+  stroke: #22c55e; /* vert Lovable */
+}
 
 /* ===== FIN APPENDS ===== */
 /* =========================== */
