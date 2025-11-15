@@ -92,13 +92,15 @@ header.hero {
 
   background: linear-gradient(
     to right,
-    rgba(15,23,42,0.88) 0%,      /* plus sombre sur tout le bloc texte */
-    rgba(15,23,42,0.82) 30%,     /* zone texte bien couverte */
-    rgba(15,23,42,0.65) 50%,     /* transition douce */
-    rgba(15,23,42,0.30) 75%,     /* on commence à voir la PAC */
-    rgba(15,23,42,0.00) 100%     /* PAC claire */
+    rgba(15,23,42,0.90) 0%,     /* texte parfaitement protégé */
+    rgba(15,23,42,0.88) 28%,    /* encore sombre sur toute la zone texte */
+    rgba(15,23,42,0.75) 45%,    /* transition douce */
+    rgba(15,23,42,0.55) 65%,    /* commence à ouvrir mais encore contrôle */
+    rgba(15,23,42,0.25) 80%,    /* PAC visible */
+    rgba(15,23,42,0.00) 100%    /* PAC claire */
   );
 }
+
 
 
 .hero::after {
