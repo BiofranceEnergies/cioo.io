@@ -89,13 +89,14 @@ header.hero {
   position: absolute;
   inset: 0;
   z-index: -1;
+
   background: linear-gradient(
     to right,
-    rgba(15, 23, 42, 0.85) 0%,   /* gauche bien sombre pour le texte */
-    rgba(15, 23, 42, 0.80) 25%,  /* zone texte */
-    rgba(15, 23, 42, 0.45) 50%,  /* transition */
-    rgba(15, 23, 42, 0.20) 70%,  /* on commence à voir la PAC */
-    rgba(15, 23, 42, 0.00) 100%  /* PAC quasi sans voile */
+    rgba(15,23,42,0.88) 0%,      /* plus sombre sur tout le bloc texte */
+    rgba(15,23,42,0.82) 30%,     /* zone texte bien couverte */
+    rgba(15,23,42,0.65) 50%,     /* transition douce */
+    rgba(15,23,42,0.30) 75%,     /* on commence à voir la PAC */
+    rgba(15,23,42,0.00) 100%     /* PAC claire */
   );
 }
 
