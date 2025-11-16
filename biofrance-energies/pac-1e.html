@@ -168,10 +168,14 @@
   <div class="card__body">
     <!-- Indicateur de progression -->
     <div class="card-progress">
-      <p class="card-progress__text">
-        Étape <span id="step-current">1</span> sur <span id="step-total">5</span>
-      </p>
-    </div>
+  <p class="card-progress__text">
+    Étape <span id="step-current">1</span> sur <span id="step-total">5</span>
+  </p>
+  <div class="card-progress__bar" aria-hidden="true">
+    <div class="card-progress__fill" id="step-bar"></div>
+  </div>
+</div>
+
 
     <form id="form-estimation" action="#" onsubmit="return false" novalidate>
       <!-- Étape 1 : Code postal -->
