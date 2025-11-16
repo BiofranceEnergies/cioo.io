@@ -472,4 +472,57 @@ if (ev.submitter) {
 });
 });
 })();
+/* Gestion des étapes du simulateur PAC */
+document.addEventListener('DOMContentLoaded', function () {
+  const steps = Array.from(document.querySelectorAll('.card-step'));
+  if (!steps.length) return;
+
+  const total = steps.length;
+  const spanCurrent = document.getElementById('step-current');
+  const spanTotal = document.getElementById('step-total');
+  const btnPrev = document.getElementById('step-prev');
+  const btnNext = document.getElementById('step-next');
+  const form = document.getElementById('form-estimation');
+
+  if (spanTotal) spanTotal.textContent = total.toString();
+
+  let currentIndex = 0;
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.style.display = (i === index) ? 'block' : 'none';
+    });
+    currentIndex = index;
+    if (spanCurrent) spanCurrent.textContent = (currentIndex + 1).toString();
+
+    if (btnPrev) {
+      btnPrev.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+    }
+    if (btnNext) {
+      btnNext.textContent = (currentIndex === total - 1)
+        ? 'Afficher mon reste à charge'
+        : 'Suivant';
+    }
+  }
+
+  showStep(0);
+
+  if (btnNext) {
+    btnNext.addEventListener('click', function () {
+      if (currentIndex < total - 1) {
+        showStep(currentIndex + 1);
+      } else {
+        if (form) {
+          form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        }
+      }
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', function () {
+      if (currentIndex > 0) showStep(currentIndex - 1);
+    });
+  }
+});
 
