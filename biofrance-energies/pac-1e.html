@@ -160,40 +160,116 @@
     </div>
 
     <section id="simulateur" role="region" aria-labelledby="formTitle" class="card">
-      <header class="card__head">
-        <h2 id="formTitle" class="t1">Simulez vos aides en ligne&nbsp;:</h2>
-        <p class="t2">MaPrimeRénov’ • Primes CEE • Reste à charge estimé</p>
-      </header>
-      <div class="card__body">
-        <!-- ⚠️ Structure du formulaire conservée pour ne pas casser adou.js
-             On adaptera les champs (revenu fiscal, type de logement, etc.) + JS dans l’étape suivante -->
-        <form id="form-estimation" action="#" onsubmit="return false" novalidate>
-          <fieldset>
-            <legend class="sr-only">Paramètres de votre foyer</legend>
+  <header class="card__head">
+    <h2 id="formTitle" class="t1">Calculez votre reste à charge après aides CEE&nbsp;:</h2>
+    <p class="t2">Primes CEE • Profil de revenus • Zone climatique</p>
+  </header>
 
-            <div class="field">
-              <label for="foyer">Taille du foyer</label>
-              <select id="foyer" name="foyer" class="sel" required>
-                <option value="" disabled selected hidden>Choisir…</option>
-                <option value="1-2">1 à 2 personnes</option>
-                <option value="3-4">3 à 4 personnes</option>
-                <option value="5+">5 personnes ou plus</option>
-              </select>
-            </div>
+  <div class="card__body">
+    <form id="form-estimation" action="#" onsubmit="return false" novalidate>
+      <fieldset>
+        <legend class="sr-only">Informations nécessaires pour estimer vos aides</legend>
 
-            <div class="field is-inline">
-              <label for="peau">Revenus du foyer</label>
-              <label class="chk">
-                <!-- On garde l’input tel quel pour le JS, mais on change le texte pour rester cohérent -->
-                <input id="peau" name="peau_seche" type="checkbox" value="1" />
-                Revenus modestes / très modestes
-              </label>
-            </div>
-          </fieldset>
-          <button class="cta" type="submit">Vérifier mon éligibilité</button>
-        </form>
-      </div>
-    </section>
+        <!-- 1. Localisation / zone climatique -->
+        <div class="field">
+          <label for="cp">Code postal du logement</label>
+          <input
+            id="cp"
+            name="cp"
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]{5}"
+            maxlength="5"
+            class="inp"
+            placeholder="Ex : 24000, 27530, 78000…"
+            required
+          />
+          <p class="field__hint">
+            Permet d’identifier votre zone climatique (H1, H2 ou H3).
+          </p>
+        </div>
+
+        <!-- 2. Foyer fiscal -->
+        <div class="field">
+          <label for="foyer">Nombre de personnes dans le foyer fiscal</label>
+          <select id="foyer" name="foyer" class="sel" required>
+            <option value="" disabled selected hidden>Choisir…</option>
+            <option value="1">1 personne</option>
+            <option value="2">2 personnes</option>
+            <option value="3">3 personnes</option>
+            <option value="4">4 personnes</option>
+            <option value="5+">5 personnes ou plus</option>
+          </select>
+        </div>
+
+        <!-- 3. Revenu fiscal de référence -->
+        <div class="field">
+          <label for="rfr">Revenu fiscal de référence (RFR)</label>
+          <input
+            id="rfr"
+            name="rfr"
+            type="number"
+            min="0"
+            step="100"
+            class="inp"
+            placeholder="Montant indiqué sur votre avis d’imposition (en €)"
+            required
+          />
+          <p class="field__hint">
+            Indiqué en page 2 de votre dernier avis d’imposition. Exemple : 22&nbsp;500&nbsp;€.
+          </p>
+        </div>
+
+        <!-- 4. Surface habitable -->
+        <div class="field">
+          <label for="surface">Surface habitable approximative</label>
+          <select id="surface" name="surface" class="sel" required>
+            <option value="" disabled selected hidden>Choisir…</option>
+            <option value="-70">Moins de 70&nbsp;m²</option>
+            <option value="70-90">De 70 à 90&nbsp;m²</option>
+            <option value="90-110">De 90 à 110&nbsp;m²</option>
+            <option value="110-130">De 110 à 130&nbsp;m²</option>
+            <option value="130+">Plus de 130&nbsp;m²</option>
+          </select>
+        </div>
+
+        <!-- 5. Chauffage actuel (utile commercialement) -->
+        <div class="field">
+          <span class="field__label">Chauffage principal actuel</span>
+          <div class="field__options">
+            <label class="chk">
+              <input type="radio" name="chauffage" value="fioul" required />
+              Chaudière fioul
+            </label>
+            <label class="chk">
+              <input type="radio" name="chauffage" value="gaz" />
+              Chaudière gaz
+            </label>
+            <label class="chk">
+              <input type="radio" name="chauffage" value="elec" />
+              Radiateurs électriques
+            </label>
+            <label class="chk">
+              <input type="radio" name="chauffage" value="pac" />
+              Pompe à chaleur déjà installée
+            </label>
+            <label class="chk">
+              <input type="radio" name="chauffage" value="autre" />
+              Autre
+            </label>
+          </div>
+        </div>
+      </fieldset>
+
+      <button class="cta" type="submit">Calculer mon reste à charge</button>
+
+      <p class="form-note">
+        Résultat indicatif basé sur les barèmes CEE et votre profil déclaré. Validation définitive après étude complète de votre dossier.
+      </p>
+    </form>
+  </div>
+</section>
+
   </div>
 </header>
 
