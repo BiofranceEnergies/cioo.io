@@ -735,4 +735,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+    // --- Affichage carte "reste à charge" ---
+    const rcCards = document.getElementById('rc-cards');
+    if (rcCards) {
+      rcCards.style.display = 'grid'; // ou 'block' selon ton CSS
+    }
+
+    const valMat = document.getElementById('rc-val-materiel');
+    if (valMat) {
+      valMat.textContent = rac.toLocaleString('fr-FR') + ' €';
+    }
 
