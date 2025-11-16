@@ -159,20 +159,27 @@
 
     </div>
 
-   <section id="simulateur" role="region" aria-labelledby="formTitle" class="card">
+  <section id="simulateur" role="region" aria-labelledby="formTitle" class="card">
   <header class="card__head">
     <h2 id="formTitle" class="t1">Calculez votre reste à charge après aides CEE&nbsp;:</h2>
-    <p class="t2">Primes CEE • Profil de revenus • Zone climatique</p>
+    <p class="t2">5 questions simples, résultat indicatif immédiat.</p>
   </header>
 
   <div class="card__body">
-    <form id="form-estimation" action="#" onsubmit="return false" novalidate>
-      <fieldset>
-        <legend class="sr-only">Informations nécessaires pour estimer vos aides</legend>
+    <!-- Indicateur de progression -->
+    <div class="card-progress">
+      <p class="card-progress__text">
+        Étape <span id="step-current">1</span> sur <span id="step-total">5</span>
+      </p>
+    </div>
 
-        <!-- 1. Code postal -->
+    <form id="form-estimation" action="#" onsubmit="return false" novalidate>
+      <!-- Étape 1 : Code postal -->
+      <div class="card-step" data-step="1">
+        <h3 class="card-step__title">Votre logement</h3>
+        <p class="card-step__question">Dans quel code postal se situe votre logement&nbsp;?</p>
         <div class="field">
-          <label for="cp">Code postal du logement</label>
+          <label class="sr-only" for="cp">Code postal du logement</label>
           <input
             id="cp"
             name="cp"
@@ -185,41 +192,14 @@
             required
           />
         </div>
+      </div>
 
-        <!-- 2. Foyer fiscal -->
+      <!-- Étape 2 : Surface -->
+      <div class="card-step" data-step="2" style="display:none">
+        <h3 class="card-step__title">Surface habitable</h3>
+        <p class="card-step__question">Quelle est la surface habitable de votre logement&nbsp;?</p>
         <div class="field">
-          <label for="foyer">Nb de personnes dans le foyer fiscal</label>
-          <select id="foyer" name="foyer" class="sel" required>
-            <option value="" disabled selected hidden>Choisir…</option>
-            <option value="1">1 personne</option>
-            <option value="2">2 personnes</option>
-            <option value="3">3 personnes</option>
-            <option value="4">4 personnes</option>
-            <option value="5+">5 personnes ou plus</option>
-          </select>
-        </div>
-
-        <!-- 3. Revenu fiscal de référence -->
-        <div class="field">
-          <label for="rfr">Revenu fiscal de référence (RFR)</label>
-          <input
-            id="rfr"
-            name="rfr"
-            type="number"
-            min="0"
-            step="100"
-            class="inp"
-            placeholder="Montant indiqué sur votre avis d’imposition (en €)"
-            required
-          />
-          <p class="field__hint">
-            Indiqué en page 2 de votre dernier avis d’imposition. Exemple : 22&nbsp;500&nbsp;€.
-          </p>
-        </div>
-
-        <!-- 4. Surface habitable -->
-        <div class="field">
-          <label for="surface">Surface habitable</label>
+          <label class="sr-only" for="surface">Surface habitable</label>
           <select id="surface" name="surface" class="sel" required>
             <option value="" disabled selected hidden>Choisir…</option>
             <option value="-70">Moins de 70&nbsp;m²</option>
@@ -229,10 +209,53 @@
             <option value="130+">Plus de 130&nbsp;m²</option>
           </select>
         </div>
+      </div>
 
-        <!-- 5. Chauffage principal actuel -->
+      <!-- Étape 3 : Foyer fiscal -->
+      <div class="card-step" data-step="3" style="display:none">
+        <h3 class="card-step__title">Foyer fiscal</h3>
+        <p class="card-step__question">Combien de personnes composent votre foyer fiscal&nbsp;?</p>
         <div class="field">
-          <label for="chauffage">Chauffage principal actuel</label>
+          <label class="sr-only" for="foyer">Nb de personnes dans le foyer fiscal</label>
+          <select id="foyer" name="foyer" class="sel" required>
+            <option value="" disabled selected hidden>Choisir…</option>
+            <option value="1">1 personne</option>
+            <option value="2">2 personnes</option>
+            <option value="3">3 personnes</option>
+            <option value="4">4 personnes</option>
+            <option value="5+">5 personnes ou plus</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Étape 4 : RFR -->
+      <div class="card-step" data-step="4" style="display:none">
+        <h3 class="card-step__title">Revenu fiscal</h3>
+        <p class="card-step__question">Quel est votre revenu fiscal de référence (RFR)&nbsp;?</p>
+        <div class="field">
+          <label class="sr-only" for="rfr">Revenu fiscal de référence (RFR)</label>
+          <input
+            id="rfr"
+            name="rfr"
+            type="number"
+            min="0"
+            step="100"
+            class="inp"
+            placeholder="Montant en € indiqué sur votre avis d’imposition"
+            required
+          />
+          <p class="field__hint">
+            Indiqué en page 2 de votre dernier avis d’imposition. Exemple : 22&nbsp;500&nbsp;€.
+          </p>
+        </div>
+      </div>
+
+      <!-- Étape 5 : Chauffage actuel -->
+      <div class="card-step" data-step="5" style="display:none">
+        <h3 class="card-step__title">Chauffage actuel</h3>
+        <p class="card-step__question">Quel est votre chauffage principal actuel&nbsp;?</p>
+        <div class="field">
+          <label class="sr-only" for="chauffage">Chauffage principal actuel</label>
           <select id="chauffage" name="chauffage" class="sel" required>
             <option value="" disabled selected hidden>Choisir…</option>
             <option value="fioul">Chaudière fioul</option>
@@ -242,9 +265,17 @@
             <option value="autre">Autre</option>
           </select>
         </div>
-      </fieldset>
+      </div>
 
-      <button class="cta" type="submit">Calculer mon reste à charge</button>
+      <!-- Zone boutons navigation -->
+      <div class="card-nav">
+        <button type="button" class="btn-secondary" id="step-prev" style="visibility:hidden">
+          Retour
+        </button>
+        <button type="button" class="cta" id="step-next">
+          Suivant
+        </button>
+      </div>
 
       <p class="form-note">
         Résultat indicatif basé sur les barèmes CEE et votre profil déclaré. Validation définitive après étude complète de votre dossier.
