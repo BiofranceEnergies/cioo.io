@@ -170,7 +170,7 @@
       <fieldset>
         <legend class="sr-only">Informations nécessaires pour estimer vos aides</legend>
 
-        <!-- 1. Localisation / zone climatique -->
+        <!-- 1. Code postal -->
         <div class="field">
           <label for="cp">Code postal du logement</label>
           <input
@@ -181,17 +181,14 @@
             pattern="[0-9]{5}"
             maxlength="5"
             class="inp"
-            placeholder="Ex : 24000, 27530, 78000…"
+            placeholder="Ex : 75000"
             required
           />
-          <p class="field__hint">
-            Permet d’identifier votre zone climatique (H1, H2 ou H3).
-          </p>
         </div>
 
         <!-- 2. Foyer fiscal -->
         <div class="field">
-          <label for="foyer">Nombre de personnes dans le foyer fiscal</label>
+          <label for="foyer">Nb de personnes dans le foyer fiscal</label>
           <select id="foyer" name="foyer" class="sel" required>
             <option value="" disabled selected hidden>Choisir…</option>
             <option value="1">1 personne</option>
@@ -222,7 +219,7 @@
 
         <!-- 4. Surface habitable -->
         <div class="field">
-          <label for="surface">Surface habitable approximative</label>
+          <label for="surface">Surface habitable</label>
           <select id="surface" name="surface" class="sel" required>
             <option value="" disabled selected hidden>Choisir…</option>
             <option value="-70">Moins de 70&nbsp;m²</option>
@@ -233,31 +230,17 @@
           </select>
         </div>
 
-        <!-- 5. Chauffage actuel (utile commercialement) -->
+        <!-- 5. Chauffage principal actuel -->
         <div class="field">
-          <span class="field__label">Chauffage principal actuel</span>
-          <div class="field__options">
-            <label class="chk">
-              <input type="radio" name="chauffage" value="fioul" required />
-              Chaudière fioul
-            </label>
-            <label class="chk">
-              <input type="radio" name="chauffage" value="gaz" />
-              Chaudière gaz
-            </label>
-            <label class="chk">
-              <input type="radio" name="chauffage" value="elec" />
-              Radiateurs électriques
-            </label>
-            <label class="chk">
-              <input type="radio" name="chauffage" value="pac" />
-              Pompe à chaleur déjà installée
-            </label>
-            <label class="chk">
-              <input type="radio" name="chauffage" value="autre" />
-              Autre
-            </label>
-          </div>
+          <label for="chauffage">Chauffage principal actuel</label>
+          <select id="chauffage" name="chauffage" class="sel" required>
+            <option value="" disabled selected hidden>Choisir…</option>
+            <option value="fioul">Chaudière fioul</option>
+            <option value="gaz">Chaudière gaz</option>
+            <option value="elec">Radiateurs électriques</option>
+            <option value="pac">Pompe à chaleur déjà installée</option>
+            <option value="autre">Autre</option>
+          </select>
         </div>
       </fieldset>
 
@@ -269,6 +252,7 @@
     </form>
   </div>
 </section>
+
 
 
   </div>
