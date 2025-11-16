@@ -473,28 +473,29 @@ if (ev.submitter) {
 });
 })();
 /* Gestion des étapes du simulateur PAC */
+/* Gestion des étapes du simulateur PAC */
 document.addEventListener('DOMContentLoaded', function () {
-  const steps = Array.from(document.querySelectorAll('.card-step'));
+  const steps = Array.from(document.querySelectorAll('#simulateur .card-step'));
   if (!steps.length) return;
 
   const total = steps.length;
   const spanCurrent = document.getElementById('step-current');
-  const spanTotal = document.getElementById('step-total');
-  const btnPrev = document.getElementById('step-prev');
-  const btnNext = document.getElementById('step-next');
-  const form = document.getElementById('form-estimation');
+  const spanTotal   = document.getElementById('step-total');
+  const bar         = document.getElementById('step-bar');
+  const btnPrev     = document.getElementById('step-prev');
+  const btnNext     = document.getElementById('step-next');
+  const form        = document.getElementById('form-estimation');
 
-  if (spanTotal) spanTotal.textContent = total.toString();
+  if (spanTotal) spanTotal.textContent = String(total);
 
   let currentIndex = 0;
 
-  function showStep(index) {
-    steps.forEach((step, i) => {
-      step.style.display = (i === index) ? 'block' : 'none';
-    });
-    currentIndex = index;
-    if (spanCurrent) spanCurrent.textContent = (currentIndex + 1).toString();
-
+  function updateProgressUI() {
+    if (spanCurrent) spanCurrent.textContent = String(currentIndex + 1);
+    if (bar) {
+      const pct = ((currentIndex + 1) / total) * 100;
+      bar.style.width = pct + '%';
+    }
     if (btnPrev) {
       btnPrev.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
     }
@@ -505,10 +506,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.style.display = (i === index) ? 'block' : 'none';
+    });
+    currentIndex = index;
+    updateProgressUI();
+  }
+
+  function isCurrentStepValid() {
+    const stepEl = steps[currentIndex];
+    if (!stepEl) return true;
+    const fields = stepEl.querySelectorAll('input, select, textarea');
+    for (const field of fields) {
+      if (field.hasAttribute('required') && !field.checkValidity()) {
+        field.reportValidity();
+        return false;
+      }
+    }
+    return true;
+  }
+
   showStep(0);
 
   if (btnNext) {
     btnNext.addEventListener('click', function () {
+      if (!isCurrentStepValid()) return;
       if (currentIndex < total - 1) {
         showStep(currentIndex + 1);
       } else {
@@ -525,4 +548,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
 
