@@ -165,128 +165,131 @@
     <p class="t2">5 questions simples, résultat indicatif immédiat.</p>
   </header>
 
-  <div class="card__body">
-    <!-- Indicateur de progression -->
-    <div class="card-progress">
-  <p class="card-progress__text">
-    Étape <span id="step-current">1</span> sur <span id="step-total">5</span>
-  </p>
-  <div class="card-progress__bar" aria-hidden="true">
-    <div class="card-progress__fill" id="step-bar"></div>
+ <div class="card__body">
+  <!-- Indicateur de progression -->
+  <div class="card-progress">
+    <p class="card-progress__text">
+      Étape <span id="step-current">1</span> sur <span id="step-total">5</span>
+    </p>
+    <div class="card-progress__bar" aria-hidden="true">
+      <div class="card-progress__fill" id="step-bar"></div>
+    </div>
   </div>
+
+  <form id="form-estimation" action="#" onsubmit="return false" novalidate>
+    <!-- Étape 1 : Code postal -->
+    <div class="card-step" data-step="1">
+      <h3 class="card-step__title">Votre logement</h3>
+      <p class="card-step__question">Dans quel code postal se situe votre logement&nbsp;?</p>
+      <div class="field">
+        <label class="sr-only" for="cp">Code postal du logement</label>
+        <input
+          id="cp"
+          name="cp"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]{5}"
+          maxlength="5"
+          class="inp"
+          placeholder="Ex : 78000 — code postal du logement"
+          required
+        />
+      </div>
+    </div>
+
+    <!-- Étape 2 : Surface -->
+    <div class="card-step" data-step="2" style="display:none">
+      <h3 class="card-step__title">Surface habitable</h3>
+      <p class="card-step__question">Quelle est la surface habitable de votre logement&nbsp;?</p>
+      <div class="field">
+        <label class="sr-only" for="surface">Surface habitable</label>
+        <select id="surface" name="surface" class="sel" required>
+          <option value="" disabled selected hidden>Choisir…</option>
+          <option value="-70">Moins de 70&nbsp;m²</option>
+          <option value="70-90">De 70 à 90&nbsp;m²</option>
+          <option value="90-110">De 90 à 110&nbsp;m²</option>
+          <option value="110-130">De 110 à 130&nbsp;m²</option>
+          <option value="130+">Plus de 130&nbsp;m²</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Étape 3 : Foyer fiscal -->
+    <div class="card-step" data-step="3" style="display:none">
+      <h3 class="card-step__title">Foyer fiscal</h3>
+      <p class="card-step__question">Combien de personnes composent votre foyer fiscal&nbsp;?</p>
+      <div class="field">
+        <label class="sr-only" for="foyer">Nb de personnes dans le foyer fiscal</label>
+        <select id="foyer" name="foyer" class="sel">
+          <option value="" disabled selected hidden>Choisir…</option>
+          <option value="1">1 personne</option>
+          <option value="2">2 personnes</option>
+          <option value="3">3 personnes</option>
+          <option value="4">4 personnes</option>
+          <option value="5+">5 personnes ou plus</option>
+        </select>
+      </div>
+      <p class="field__hint">
+        Incluez toutes les personnes rattachées à votre foyer fiscal.
+      </p>
+    </div>
+
+    <!-- Étape 4 : RFR -->
+    <div class="card-step" data-step="4" style="display:none">
+      <h3 class="card-step__title">Revenu fiscal</h3>
+      <p class="card-step__question">Quel est votre revenu fiscal de référence (RFR)&nbsp;?</p>
+      <div class="field">
+        <label class="sr-only" for="rfr">Revenu fiscal de référence (RFR)</label>
+        <input
+          id="rfr"
+          name="rfr"
+          type="number"
+          min="0"
+          step="100"
+          class="inp"
+          placeholder="Montant en € indiqué sur votre avis d’imposition"
+          required
+        />
+        <p class="field__hint">
+          Indiqué en page 2 de votre dernier avis d’imposition. Exemple : 22&nbsp;500&nbsp;€.
+        </p>
+      </div>
+    </div>
+
+    <!-- Étape 5 : Chauffage actuel -->
+    <div class="card-step" data-step="5" style="display:none">
+      <h3 class="card-step__title">Chauffage actuel</h3>
+      <p class="card-step__question">Quel est votre chauffage principal actuel&nbsp;?</p>
+      <div class="field">
+        <label class="sr-only" for="chauffage">Chauffage principal actuel</label>
+        <select id="chauffage" name="chauffage" class="sel" required>
+          <option value="" disabled selected hidden>Choisir…</option>
+          <option value="fioul">Chaudière fioul</option>
+          <option value="gaz">Chaudière gaz</option>
+          <option value="elec">Radiateurs électriques</option>
+          <option value="pac">Pompe à chaleur déjà installée</option>
+          <option value="autre">Autre</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Zone boutons navigation -->
+    <div class="card-nav">
+      <button type="button" class="btn-secondary" id="step-prev" style="visibility:hidden">
+        Retour
+      </button>
+      <button type="button" class="cta" id="step-next">
+        Suivant
+      </button>
+    </div>
+
+    <p class="form-note">
+      Résultat indicatif basé sur les barèmes CEE et votre profil déclaré.
+      Validation définitive après étude complète de votre dossier.
+    </p>
+  </form>
 </div>
 
-
-    <form id="form-estimation" action="#" onsubmit="return false" novalidate>
-      <!-- Étape 1 : Code postal -->
-      <div class="card-step" data-step="1">
-        <h3 class="card-step__title">Votre logement</h3>
-        <p class="card-step__question">Dans quel code postal se situe votre logement&nbsp;?</p>
-        <div class="field">
-          <label class="sr-only" for="cp">Code postal du logement</label>
-          <input
-  id="cp"
-  name="cp"
-  type="text"
-  inputmode="numeric"
-  pattern="[0-9]{5}"
-  maxlength="5"
-  class="inp"
-  placeholder="Ex : 78000 — code postal du logement"
-  required
-/>
-
-        </div>
-      </div>
-
-      <!-- Étape 2 : Surface -->
-      <div class="card-step" data-step="2" style="display:none">
-        <h3 class="card-step__title">Surface habitable</h3>
-        <p class="card-step__question">Quelle est la surface habitable de votre logement&nbsp;?</p>
-        <div class="field">
-          <label class="sr-only" for="surface">Surface habitable</label>
-          <select id="surface" name="surface" class="sel" required>
-            <option value="" disabled selected hidden>Choisir…</option>
-            <option value="-70">Moins de 70&nbsp;m²</option>
-            <option value="70-90">De 70 à 90&nbsp;m²</option>
-            <option value="90-110">De 90 à 110&nbsp;m²</option>
-            <option value="110-130">De 110 à 130&nbsp;m²</option>
-            <option value="130+">Plus de 130&nbsp;m²</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Étape 3 : Foyer fiscal -->
-      <div class="card-step" data-step="3" style="display:none">
-        <h3 class="card-step__title">Foyer fiscal</h3>
-        <p class="card-step__question">Combien de personnes composent votre foyer fiscal&nbsp;?</p>
-        <div class="field">
-         <label class="sr-only" for="foyer">Nb de personnes dans le foyer fiscal</label>
-<select id="foyer" name="foyer" class="sel">
-  <option value="" disabled selected hidden>Choisir…</option>
-  <option value="1">1 personne</option>
-  <option value="2">2 personnes</option>
-  <option value="3">3 personnes</option>
-  <option value="4">4 personnes</option>
-  <option value="5+">5 personnes ou plus</option>
-</select>
-
-           
-
-      <!-- Étape 4 : RFR -->
-      <div class="card-step" data-step="4" style="display:none">
-        <h3 class="card-step__title">Revenu fiscal</h3>
-        <p class="card-step__question">Quel est votre revenu fiscal de référence (RFR)&nbsp;?</p>
-        <div class="field">
-          <label class="sr-only" for="rfr">Revenu fiscal de référence (RFR)</label>
-          <input
-            id="rfr"
-            name="rfr"
-            type="number"
-            min="0"
-            step="100"
-            class="inp"
-            placeholder="Montant en € indiqué sur votre avis d’imposition"
-            required
-          />
-          <p class="field__hint">
-            Indiqué en page 2 de votre dernier avis d’imposition. Exemple : 22&nbsp;500&nbsp;€.
-          </p>
-        </div>
-      </div>
-
-      <!-- Étape 5 : Chauffage actuel -->
-      <div class="card-step" data-step="5" style="display:none">
-        <h3 class="card-step__title">Chauffage actuel</h3>
-        <p class="card-step__question">Quel est votre chauffage principal actuel&nbsp;?</p>
-        <div class="field">
-          <label class="sr-only" for="chauffage">Chauffage principal actuel</label>
-          <select id="chauffage" name="chauffage" class="sel" required>
-            <option value="" disabled selected hidden>Choisir…</option>
-            <option value="fioul">Chaudière fioul</option>
-            <option value="gaz">Chaudière gaz</option>
-            <option value="elec">Radiateurs électriques</option>
-            <option value="pac">Pompe à chaleur déjà installée</option>
-            <option value="autre">Autre</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Zone boutons navigation -->
-      <div class="card-nav">
-        <button type="button" class="btn-secondary" id="step-prev" style="visibility:hidden">
-          Retour
-        </button>
-        <button type="button" class="cta" id="step-next">
-          Suivant
-        </button>
-      </div>
-
-      <p class="form-note">
-        Résultat indicatif basé sur les barèmes CEE et votre profil déclaré. Validation définitive après étude complète de votre dossier.
-      </p>
-    </form>
-  </div>
 </section>
 
 
