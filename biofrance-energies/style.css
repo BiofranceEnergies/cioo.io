@@ -1274,5 +1274,31 @@ body.results-visible #focus-adou { display: none !important; }
   color: #ffffff;
 }
 
+/* Style premium pour tous les champs de saisie */
+#simulateur .inp {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+/* Sur focus */
+#simulateur .inp:focus {
+  border-color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.14);
+}
+
+/* Placeholder premium */
+#simulateur .inp::placeholder {
+  color: rgba(255,255,255,0.55);
+  opacity: 1;
+  font-size: 0.92rem;
+}
+
 /* ===== FIN APPENDS ===== */
 /* =========================== */
