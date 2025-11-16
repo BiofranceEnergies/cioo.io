@@ -474,11 +474,12 @@ if (ev.submitter) {
 })();
 /* Gestion des étapes du simulateur PAC */
 /* Gestion des étapes du simulateur PAC */
+/* Gestion des étapes du simulateur PAC */
 document.addEventListener('DOMContentLoaded', function () {
   const steps = Array.from(document.querySelectorAll('#simulateur .card-step'));
   if (!steps.length) return;
 
-  const total = steps.length;
+  const total      = steps.length;
   const spanCurrent = document.getElementById('step-current');
   const spanTotal   = document.getElementById('step-total');
   const bar         = document.getElementById('step-bar');
@@ -490,12 +491,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let currentIndex = 0;
 
-  function updateProgressUI() {
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.style.display = (i === index) ? 'block' : 'none';
+    });
+    currentIndex = index;
+
+    // Texte étape
     if (spanCurrent) spanCurrent.textContent = String(currentIndex + 1);
+
+    // Barre de progression
     if (bar) {
-      const pct = ((currentIndex + 1) / total) * 100;
+      const pct = Math.min(100, ((currentIndex + 1) / total) * 100);
       bar.style.width = pct + '%';
     }
+
+    // Boutons
     if (btnPrev) {
       btnPrev.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
     }
@@ -504,14 +515,6 @@ document.addEventListener('DOMContentLoaded', function () {
         ? 'Afficher mon reste à charge'
         : 'Suivant';
     }
-  }
-
-  function showStep(index) {
-    steps.forEach((step, i) => {
-      step.style.display = (i === index) ? 'block' : 'none';
-    });
-    currentIndex = index;
-    updateProgressUI();
   }
 
   function isCurrentStepValid() {
@@ -532,6 +535,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (btnNext) {
     btnNext.addEventListener('click', function () {
       if (!isCurrentStepValid()) return;
+
       if (currentIndex < total - 1) {
         showStep(currentIndex + 1);
       } else {
