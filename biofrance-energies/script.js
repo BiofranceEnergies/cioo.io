@@ -182,6 +182,25 @@ if (selectChauffage && btnNext) {
     }
   });
 }
+/* ---------- Formatage du RFR en live (20 000 → 20 000) ---------- */
+const rfrInput = form.querySelector('#rfr');
+
+if (rfrInput) {
+  rfrInput.addEventListener('input', formatRfr);
+  rfrInput.addEventListener('blur', formatRfr);
+}
+
+function formatRfr() {
+  let val = this.value.replace(/\s/g, '').replace(/[^\d]/g, '');
+  if (!val) {
+    this.value = '';
+    return;
+  }
+  // Convertit en nombre pour éviter les "00020"
+  val = parseInt(val, 10).toString();
+  // Ajoute les espaces entre milliers
+  this.value = val.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
 
   /* ---------- 2) Données CEE & fonctions de calcul ---------- */
 
