@@ -88,8 +88,6 @@
     />
   </div>
 
-
-
   <img
     class="hero__img"
     src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/627cf67b50d87a04dccda1172dffc8f9c11089a3/pac%20angle.webp
@@ -299,36 +297,58 @@
   </div>
 </header>
 
-<section
-  id="recap"
-  style="background:#fff;color:#0f172a;padding:16px;border:1px solid #e5e7eb;border-radius:12px;max-width:1100px;margin:24px auto 0;display:none;"
->
-  <section id="resume-cout" class="rc" aria-label="Résumé des aides et du reste à charge" style="display:none">
-    <div class="rc__inner">
-      <div class="rc__icon" aria-hidden="true">
-        <!-- Icône conservée -->
-        <svg viewBox="0 0 64 64" width="44" height="44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="46" cy="18" r="16" stroke="#ffffff" stroke-width="2.5" fill="none"/>
-          <path d="M45 7.5c-3.3 0-6 2.7-6 6h-2v3h2v1h-2v3h2c0 3.3 2.7 6 6 6 1.5 0 3-.6 4.1-1.5v-3.4c-1 .9-2.2 1.5-3.6 1.5-1.9 0-3.4-1.1-3.9-2.6h5.5v-3h-6c.1-.2.1-.5.1-.7v-.6h5.9v-3h-5.2c.6-1.5 2-2.6 3.7-2.6 1.3 0 2.6.6 3.5 1.4V9c-1.2-.9-2.7-1.5-4.1-1.5z" fill="#ffffff"/>
-          <path d="M6 40c6 0 11.5 1 17 1h9.5c2.2 0 4.4-.5 6.3-1.6l3.7-2.1c1.5-.8 3.3-.8 4.8.1 1.9 1.2 2.1 3.7.4 5.2l-6.9 5.7c-2.5 2.1-5.6 3.2-8.8 3.2H23.5c-3.1 0-6.2.7-9 2l-1.8.9" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M31 41c2.1-.2 3.9-1.1 5.4-2.7 1.1-1.1 2.7-1.6 4.2-1.2" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M6 44c3.2 0 6.4.4 9.4 1.3" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-        </svg>
-      </div>
-      <div class="rc__content">
-        <h3 class="rc__title">Vos aides estimées pour la pompe à chaleur</h3>
-        <div class="rc__row">
-          <span class="rc__value" id="rc-annual">0 €</span>
-        </div>
-        <div class="rc__sub">
-          Montant total d’aides estimé (MaPrimeRénov’ + CEE). Projection sur <strong id="rc-10ans">0 €</strong> d’économies sur 10 ans.
-        </div>
-        <div class="rc__arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 14" role="img" focusable="false" aria-hidden="true"><path d="M1 1 H23 L12 13 Z"/></svg>
-        </div>
-      </div>
+<section id="recap" class="recap" style="display:none">
+  <div id="rc-cards" class="recap-card">
+    <!-- Colonne gauche : résultat -->
+    <div class="recap-main">
+      <p class="recap-label">Reste à charge estimé après aides CEE</p>
+      <p class="recap-amount" id="rc-rac-amount">0&nbsp;€</p>
+      <p class="recap-note">
+        Calcul basé sur les informations que vous avez saisies.
+      </p>
     </div>
-  </section>
+
+    <!-- Colonne droite : rappel des infos -->
+    <div class="recap-side">
+      <h3 class="recap-side__title">Rappel de vos informations</h3>
+      <dl class="recap-list">
+        <div class="recap-row">
+          <dt>Département</dt>
+          <dd id="rc-dep">—</dd>
+        </div>
+        <div class="recap-row">
+          <dt>Zone climatique</dt>
+          <dd id="rc-zone">—</dd>
+        </div>
+        <div class="recap-row">
+          <dt>Profil de revenus</dt>
+          <dd id="rc-profile">—</dd>
+        </div>
+        <div class="recap-row">
+          <dt>Foyer fiscal</dt>
+          <dd id="rc-foyer">—</dd>
+        </div>
+        <div class="recap-row">
+          <dt>Revenu fiscal (RFR)</dt>
+          <dd id="rc-rfr">—</dd>
+        </div>
+        <div class="recap-row">
+          <dt>Surface habitable</dt>
+          <dd id="rc-surface">—</dd>
+        </div>
+        <div class="recap-row">
+          <dt>Chauffage actuel</dt>
+          <dd id="rc-chauffage">—</dd>
+        </div>
+      </dl>
+      <p class="recap-legal">
+        Estimation indicative basée sur les barèmes CEE en vigueur. Le montant
+        pourra être confirmé uniquement après étude technique complète de votre
+        dossier.
+      </p>
+    </div>
+  </div>
+</section>
 
   <div id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
     <div class="gate-dim" aria-hidden="true"></div>
@@ -352,57 +372,6 @@
     </div>
   </div>
 
- <section id="rc-cards" class="rc-cards" aria-label="Résultat de votre estimation">
-  <div class="rc-wrap">
-    <!-- Résumé principal -->
-    <div class="rc-main">
-      <p class="rc-main__label">Reste à charge estimé après aides CEE</p>
-      <p class="rc-main__value" id="rc-rac-amount">0&nbsp;€</p>
-      <p class="rc-main__note">
-        Calcul basé sur les informations que vous avez saisies.
-      </p>
-    </div>
-
-    <!-- Rappel des informations saisies -->
-    <div class="rc-details">
-      <h3 class="rc-details__title">Rappel de vos informations</h3>
-      <ul class="rc-details__list">
-        <li>
-          <span>Département</span>
-          <strong id="rc-dep">—</strong>
-        </li>
-        <li>
-          <span>Zone climatique</span>
-          <strong id="rc-zone">—</strong>
-        </li>
-        <li>
-          <span>Profil de revenus</span>
-          <strong id="rc-profile">—</strong>
-        </li>
-        <li>
-          <span>Foyer fiscal</span>
-          <strong id="rc-foyer">—</strong>
-        </li>
-        <li>
-          <span>Revenu fiscal (RFR)</span>
-          <strong id="rc-rfr">—</strong>
-        </li>
-        <li>
-          <span>Surface habitable</span>
-          <strong id="rc-surface">—</strong>
-        </li>
-        <li>
-          <span>Chauffage actuel</span>
-          <strong id="rc-chauffage">—</strong>
-        </li>
-      </ul>
-      <p class="rc-details__disclaimer">
-        Estimation indicative basée sur les barèmes CEE en vigueur.
-        Le montant pourra être confirmé uniquement après étude technique complète de votre dossier.
-      </p>
-    </div>
-  </div>
-</section>
 
 
   <p id="rc-slogan" style="
