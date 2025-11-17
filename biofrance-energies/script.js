@@ -198,7 +198,20 @@ function formatRfr() {
   val = parseInt(val, 10).toString();
   this.value = val.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
+/* ---------- Formatage du téléphone (06 12 34 56 78) ---------- */
+const telInput = document.querySelector('#tel-banner input[type="tel"]');
 
+if (telInput) {
+  telInput.addEventListener('input', formatPhone);
+  telInput.addEventListener('blur', formatPhone);
+}
+
+function formatPhone() {
+  let val = this.value.replace(/\D/g, '');
+  val = val.substring(0, 10); // On limite à 10 chiffres
+  const groups = val.match(/.{1,2}/g);
+  this.value = groups ? groups.join(' ') : '';
+}
   /* ---------- 2) Données CEE & fonctions de calcul ---------- */
 
   const IDF_DEPARTMENTS = ["75","77","78","91","92","93","94","95"];
