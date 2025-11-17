@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const rcCards      = document.getElementById("rc-cards");
   const rcValMat     = document.getElementById("rc-val-materiel");
 
-  const telBanner    = document.getElementById("tel-banner");
+  const telBanner      = document.getElementById("tel-banner");
   const sectionsToHide = document.querySelectorAll("[data-hide-after-sim='1']");
 
   const total = steps.length;
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Tableau RAC CEE (montants que tu as fournis)
+  // Tableau RAC CEE
   const RAC_CEE = {
     BLEU: {
       H1: { "-70": 1, "70-90": 1, "90-110": 1, "110-130": 1, "130+": 1 },
@@ -294,107 +294,98 @@ document.addEventListener("DOMContentLoaded", function () {
   /* ---------- 3) Calcul principal PAC / CEE ---------- */
 
   function runPacSimulation() {
-  const cp        = form.querySelector('#cp')?.value || '';
-  const foyerVal  = form.querySelector('#foyer')?.value || '';
-  const surface   = form.querySelector('#surface')?.value || '';
-  const rfrRaw    = form.querySelector('#rfr')?.value || '';
-  const chauffage = form.querySelector('#chauffage')?.value || '';
+    const cp        = form.querySelector('#cp')?.value || '';
+    const foyerVal  = form.querySelector('#foyer')?.value || '';
+    const surface   = form.querySelector('#surface')?.value || '';
+    const rfrRaw    = form.querySelector('#rfr')?.value || '';
+    const chauffage = form.querySelector('#chauffage')?.value || '';
 
-  const errors = [];
+    const errors = [];
 
-  if (!cp || cp.trim().length < 4) {
-    errors.push("Merci d’indiquer un code postal valable.");
-  }
-  if (!surface) {
-    errors.push("Merci d’indiquer la surface habitable.");
-  }
-  if (!foyerVal) {
-    errors.push("Merci d’indiquer le nombre de personnes dans le foyer fiscal.");
-  }
-
-  const rfr = parseEuro(rfrRaw);
-  if (!rfr || rfr <= 0) {
-    errors.push("Merci d’indiquer votre revenu fiscal de référence.");
-  }
-
-  if (!chauffage) {
-    errors.push("Merci de préciser le chauffage principal actuel.");
-  }
-
-  if (errors.length) {
-    alert(errors[0]);
-    return;
-  }
-
-  // --- Calcul CEE / profil ---
-
-  const dep      = getDepartement(cp);
-  const zone     = getZoneFromCp(cp) || 'H2';
-  const foyerInt = parseInt(foyerVal, 10) || 1;
-  const profile  = classifyProfile(rfr, foyerInt, cp);   // BLEU / JAUNE / VIOLET / ROSE
-  const rac      = getRac(profile, zone, surface);       // reste à charge estimé
-
-  if (rac == null) {
-    alert("Impossible de calculer le reste à charge avec ces paramètres.");
-    return;
-  }
-
-  // --- Affichage du bloc résultat ---
-
-  const recap = document.getElementById('recap');
-  if (recap) recap.style.display = 'block';
-
-  const rcCards = document.getElementById('rc-cards');
-  if (rcCards) rcCards.style.display = 'block';
-
-  const racSpan = document.getElementById('rc-rac-amount');
-  if (racSpan) {
-    racSpan.textContent = rac.toLocaleString('fr-FR') + ' €';
-  }
-
-  // Helpers d’affichage
-  function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-  }
-
-  function formatSurface(key) {
-    switch (key) {
-      case '-70':    return '< 70 m²';
-      case '70-90':  return '70 à 90 m²';
-      case '90-110': return '90 à 110 m²';
-      case '110-130':return '110 à 130 m²';
-      case '130+':   return '> 130 m²';
-      default:       return '—';
+    if (!cp || cp.trim().length < 4) {
+      errors.push("Merci d’indiquer un code postal valable.");
     }
-  }
+    if (!surface) {
+      errors.push("Merci d’indiquer la surface habitable.");
+    }
+    if (!foyerVal) {
+      errors.push("Merci d’indiquer le nombre de personnes dans le foyer fiscal.");
+    }
 
-  function getChauffageLabel() {
-    const sel = form.querySelector('#chauffage');
-    if (!sel) return '';
-    const opt = sel.options[sel.selectedIndex];
-    return opt ? opt.textContent : '';
-  }
+    const rfr = parseEuro(rfrRaw);
+    if (!rfr || rfr <= 0) {
+      errors.push("Merci d’indiquer votre revenu fiscal de référence.");
+    }
 
-  // Remplissage des lignes de rappel
-  setText('rc-dep', dep || '—');
-  setText('rc-zone', zone || '—');
-  setText('rc-profile', profile || '—');
-  setText('rc-foyer', foyerInt + (foyerInt > 1 ? ' personnes' : ' personne'));
-  setText('rc-rfr', rfr.toLocaleString('fr-FR') + ' €');
-  setText('rc-surface', formatSurface(surface));
-  setText('rc-chauffage', getChauffageLabel());
+    if (!chauffage) {
+      errors.push("Merci de préciser le chauffage principal actuel.");
+    }
 
-  // Scroll sur le bloc résultat
-  recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+    if (errors.length) {
+      alert(errors[0]);
+      return;
+    }
+
+    // --- Calcul CEE / profil ---
+    const dep      = getDepartement(cp);
+    const zone     = getZoneFromCp(cp) || 'H2';
+    const foyerInt = parseInt(foyerVal, 10) || 1;
+    const profile  = classifyProfile(rfr, foyerInt, cp);   // BLEU / JAUNE / VIOLET / ROSE
+    const rac      = getRac(profile, zone, surface);       // reste à charge estimé
+
+    if (rac == null) {
+      alert("Impossible de calculer le reste à charge avec ces paramètres.");
+      return;
+    }
+
+    // --- Affichage du bloc résultat ---
+    if (recap) recap.style.display = 'block';
+    if (rcCards) rcCards.style.display = 'block';
+
+    const racSpan = document.getElementById('rc-rac-amount');
+    if (racSpan) {
+      racSpan.textContent = rac.toLocaleString('fr-FR') + ' €';
+    }
+
+    // Helpers d’affichage
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function formatSurface(key) {
+      switch (key) {
+        case '-70':    return '< 70 m²';
+        case '70-90':  return '70 à 90 m²';
+        case '90-110': return '90 à 110 m²';
+        case '110-130':return '110 à 130 m²';
+        case '130+':   return '> 130 m²';
+        default:       return '—';
+      }
+    }
+
+    function getChauffageLabel() {
+      const sel = form.querySelector('#chauffage');
+      if (!sel) return '';
+      const opt = sel.options[sel.selectedIndex];
+      return opt ? opt.textContent : '';
+    }
+
+    // Remplissage des lignes de rappel
+    setText('rc-dep', dep || '—');
+    setText('rc-zone', zone || '—');
+    setText('rc-profile', profile || '—');
+    setText('rc-foyer', foyerInt + (foyerInt > 1 ? ' personnes' : ' personne'));
+    setText('rc-rfr', rfr.toLocaleString('fr-FR') + ' €');
+    setText('rc-surface', formatSurface(surface));
+    setText('rc-chauffage', getChauffageLabel());
 
     // Masquer les blocs marqués data-hide-after-sim="1"
     sectionsToHide.forEach((el) => {
       el.style.display = "none";
     });
 
-    // Afficher le bandeau téléphone (simplement visuel pour l’instant)
+    // Afficher le bandeau téléphone
     if (telBanner) {
       telBanner.classList.add("tel-banner--visible");
       telBanner.setAttribute("aria-hidden", "false");
