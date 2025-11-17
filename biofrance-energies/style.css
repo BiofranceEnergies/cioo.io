@@ -1441,5 +1441,12 @@ body.results-visible #focus-adou { display: none !important; }
   }
 }
 
+/* Masquer le gros paragraphe du hero sur mobile */
+@media (max-width: 768px) {
+  #hero .lead {
+    display: none;
+  }
+}
+
 /* ===== FIN APPENDS ===== */
 /* =========================== */
