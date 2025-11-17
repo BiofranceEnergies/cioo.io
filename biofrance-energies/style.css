@@ -1448,6 +1448,12 @@ body.results-visible #focus-adou { display: none !important; }
   }
 }
 
+/* =========================================
+   # SIMULATEUR — ESPACE SOUS LE CTA
+   ========================================= */
+.form-note {
+  margin-top: 18px; /* au lieu de 8px */
+}
 
 
 /* ===== FIN APPENDS ===== */
