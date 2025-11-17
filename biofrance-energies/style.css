@@ -1447,6 +1447,14 @@ body.results-visible #focus-adou { display: none !important; }
     display: none;
   }
 }
+/* =========================================
+   # HERO — AMÉLIORATION VISIBILITÉ DU LOGO
+   ========================================= */
+.logo-header img {
+  background: rgba(255, 255, 255, 0.15); /* léger halo blanc */
+  padding: 6px 10px; /* respiration interne */
+  border-radius: 6px; /* angles doux */
+}
 
 /* ===== FIN APPENDS ===== */
 /* =========================== */
