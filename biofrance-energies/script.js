@@ -148,13 +148,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btnPrev) {
       btnPrev.style.visibility = currentIndex === 0 ? "hidden" : "visible";
     }
-    if (btnNext) {
-      btnNext.textContent =
-        currentIndex === total - 1
-          ? "Afficher mon reste à charge"
-          : "Suivant";
-    }
-  }
+if (btnNext) {
+  // Par défaut, le bouton dit toujours "Suivant"
+  btnNext.textContent = "Suivant";
+}
+
+ }
 
   function isCurrentStepValid() {
     const stepEl = steps[currentIndex];
@@ -173,6 +172,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   showStep(0);
+   /* ---------- Changer le texte du bouton sur la dernière étape ---------- */
+const selectChauffage = form.querySelector("#chauffage");
+
+if (selectChauffage && btnNext) {
+  selectChauffage.addEventListener("change", function () {
+    if (currentIndex === total - 1 && this.value) {
+      btnNext.textContent = "Afficher mon reste à charge";
+    }
+  });
+}
 
   /* ---------- 2) Données CEE & fonctions de calcul ---------- */
 
