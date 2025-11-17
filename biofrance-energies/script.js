@@ -182,11 +182,10 @@ if (selectChauffage && btnNext) {
     }
   });
 }
-/* ---------- Formatage du RFR en live (20 000 → 20 000) ---------- */
+/* ---------- Formatage du RFR (convertit 20000 → 20 000 au blur) ---------- */
 const rfrInput = form.querySelector('#rfr');
 
 if (rfrInput) {
-  rfrInput.addEventListener('input', formatRfr);
   rfrInput.addEventListener('blur', formatRfr);
 }
 
@@ -196,9 +195,7 @@ function formatRfr() {
     this.value = '';
     return;
   }
-  // Convertit en nombre pour éviter les "00020"
   val = parseInt(val, 10).toString();
-  // Ajoute les espaces entre milliers
   this.value = val.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
