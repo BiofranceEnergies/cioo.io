@@ -1383,5 +1383,29 @@ body.results-visible #focus-adou { display: none !important; }
   margin-top: 8px;
 }
 
+/* === Correction affichage hero sur mobile === */
+@media (max-width: 768px) {
+
+  /* On casse le mode "plein écran centré" */
+  #hero.hero {
+    min-height: auto;
+    height: auto;
+    display: block; /* au lieu de grid/flex si c'est le cas */
+    padding-top: calc(16px + env(safe-area-inset-top, 0));
+    padding-bottom: 24px;
+  }
+
+  /* On évite un éventuel décalage vertical */
+  .hero__inner {
+    margin-top: 0;
+  }
+
+  /* Par sécurité : pas de marge en haut de page */
+  body, main {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
 /* ===== FIN APPENDS ===== */
 /* =========================== */
