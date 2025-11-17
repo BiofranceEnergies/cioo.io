@@ -1406,6 +1406,40 @@ body.results-visible #focus-adou { display: none !important; }
     padding-top: 0;
   }
 }
+/* ===========================
+   HERO : ajustements mobile
+   =========================== */
+@media (max-width: 768px) {
+
+  /* On réduit la taille et les marges du bloc texte */
+  #hero .hero__copy {
+    padding: 16px 16px 20px;
+    max-width: 100%;
+  }
+
+  #hero .hero__intro {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  #hero .hero__copy h1 {
+    font-size: 1.5rem;      /* plus petit qu’en desktop */
+    line-height: 1.25;
+    margin: 4px 0 10px;     /* moins d’espace au-dessus et en dessous */
+  }
+
+  /* On évite que la liste prenne trop de place aussi */
+  #hero .hero-bullets li {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  /* Au cas où l'image du hero pousse trop en hauteur */
+  .hero__img {
+    max-height: 260px;
+    object-fit: cover;
+  }
+}
 
 /* ===== FIN APPENDS ===== */
 /* =========================== */
