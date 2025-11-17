@@ -1455,6 +1455,34 @@ body.results-visible #focus-adou { display: none !important; }
   margin-top: 22px; /* au lieu de 8px */
 }
 
+/* =======================================
+   ANIMATION BOUTON CTA — BANDEAU SMS
+   ======================================= */
+@keyframes telCtaBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-3px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Animation prête mais en pause par défaut */
+.tel-banner__btn {
+  animation: telCtaBounce 1.8s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+/* Quand le bandeau est visible → on active l’animation */
+.tel-banner--visible .tel-banner__btn {
+  animation-play-state: running;
+}
 
 /* ===== FIN APPENDS ===== */
 /* =========================== */
