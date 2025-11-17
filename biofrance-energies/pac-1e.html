@@ -231,16 +231,17 @@
       <p class="card-step__question">Quel est votre revenu fiscal de référence (RFR)&nbsp;?</p>
       <div class="field">
         <label class="sr-only" for="rfr">Revenu fiscal de référence (RFR)</label>
-        <input
-          id="rfr"
-          name="rfr"
-          type="number"
-          min="0"
-          step="100"
-          class="inp"
-          placeholder="Montant en € indiqué sur votre avis d’imposition"
-          required
-        />
+       <input
+  id="rfr"
+  name="rfr"
+  type="text"
+  inputmode="numeric"
+  pattern="[0-9 ]*"
+  class="inp"
+  placeholder="Montant en € indiqué sur votre avis d’imposition"
+  required
+/>
+
         <p class="field__hint">
           Indiqué en page 2 de votre dernier avis d’imposition. Exemple : 22&nbsp;500&nbsp;€.
         </p>
