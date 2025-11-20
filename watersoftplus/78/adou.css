@@ -1285,6 +1285,29 @@ body.results-visible #focus-adou { display: none !important; }
     padding-bottom: 40px;
   }
 }
+
+/* =================================================================
+   [[FINITION BLOC PRODUIT]]
+   1. Détourage lumineux pour que le produit noir ne disparaisse pas
+   2. Nettoyage du texte du bouton
+   ================================================================= */
+
+/* 1. On ajoute une lueur bleue douce derrière l'image */
+#focus-adou .split__media img {
+  /* Avant c'était une ombre noire (invisible), on met une lueur bleue */
+  filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.3)) !important;
+}
+
+/* 2. On enlève le soulignement du lien dans le bouton (plus propre) */
+#focus-adou .cta {
+  text-decoration: none !important; 
+}
+
+/* Optionnel : On rend le titre "NOVAQUA" un peu plus lumineux */
+#focus-adou .product-name {
+  color: #60a5fa !important; /* Même bleu clair que votre titre du haut */
+  letter-spacing: 3px;        /* Un peu plus espacé pour faire "Luxe" */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
