@@ -1214,7 +1214,11 @@ body.results-visible #focus-adou { display: none !important; }
   }
 }
 
-
+/* Fix lisibilité titre sur le robinet sombre */
+.hero__copy h1 em {
+  color: #60a5fa !important; /* Bleu beaucoup plus clair/lumineux */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Ombre portée noire pour détacher du fond */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
