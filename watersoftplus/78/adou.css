@@ -1357,6 +1357,19 @@ body.results-visible #focus-adou { display: none !important; }
   background-color: #e0f2fe !important; /* Bleu ciel très doux */
   color: #0b4fbf !important;            /* Texte en bleu foncé (votre marque) */
 }
+
+/* =================================================================
+   [[FINITION FOOTER]]
+   On empêche le bouton de devenir géant sur les écrans larges
+   ================================================================= */
+.footer-cta__right .cta {
+  max-width: 400px;       /* Largeur max confortable */
+  width: 100%;            /* S'adapte si l'écran est plus petit */
+  margin-left: auto;      /* Centrage... */
+  margin-right: auto;     /* ...automatique */
+  display: flex;          /* Pour bien centrer le texte dedans */
+  justify-content: center;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
