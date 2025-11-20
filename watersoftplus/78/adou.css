@@ -1420,6 +1420,25 @@ body.results-visible #focus-adou { display: none !important; }
   padding-top: 40px !important;    /* Décolle le texte du haut */
   padding-bottom: 40px !important; /* Équilibre avec le bas */
 }
+
+/* =================================================================
+   [[FINITION BANDEAU SMS]]
+   Effet "Verre fumé" pour détacher le bandeau du fond sombre
+   ================================================================= */
+#tel-banner {
+  /* 1. Fond noir/bleu mais semi-transparent */
+  background: rgba(11, 18, 32, 0.85) !important;
+  
+  /* 2. Le flou magique (comme sur iPhone) */
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  
+  /* 3. La ligne de séparation lumineuse en haut */
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  
+  /* 4. L'ombre qui soulève le bandeau */
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5) !important;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
