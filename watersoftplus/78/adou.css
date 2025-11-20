@@ -1324,6 +1324,20 @@ body.results-visible #focus-adou { display: none !important; }
   border: 1px solid rgba(255,255,255,0.5) !important; /* Bordure discrète */
   box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important; /* Ombre douce */
 }
+
+/* =================================================================
+   [[NETTOYAGE BARRE ETAPES]]
+   On enlève le fond "capsule" pour ne garder que les bulles 1-2-3
+   Cela allège le design et évite les problèmes d'alignement visuel.
+   ================================================================= */
+.pline {
+  background: none !important;      /* Enlève le dégradé de fond */
+  mask: none !important;            /* Enlève le masque de forme */
+  box-shadow: none !important;      /* Enlève l'ombre interne */
+  
+  /* Optionnel : on rapproche un peu les chiffres des cartes */
+  margin-bottom: 10px !important;   
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
