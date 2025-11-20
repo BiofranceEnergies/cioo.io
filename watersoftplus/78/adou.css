@@ -1348,6 +1348,15 @@ body.results-visible #focus-adou { display: none !important; }
   box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15) !important; /* Ombre bleutée */
   transform: translateY(-4px);                 /* On la remonte un tout petit peu */
 }
+
+/* =================================================================
+   [[HARMONIE AVATARS TEMOIGNAGES]]
+   On remplace le beige par un bleu pâle pour rester dans le thème "Eau"
+   ================================================================= */
+.avatar {
+  background-color: #e0f2fe !important; /* Bleu ciel très doux */
+  color: #0b4fbf !important;            /* Texte en bleu foncé (votre marque) */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
