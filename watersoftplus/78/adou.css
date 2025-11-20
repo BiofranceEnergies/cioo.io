@@ -88,10 +88,14 @@ header.hero {
 
 
 .hero::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(180deg, rgba(14,165,233,.28) 0%, rgba(14,165,233,.18) 40%, rgba(0,0,0,.42) 100%);
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(14,165,233,0.15) 0%, rgba(14,165,233,0.10) 40%, rgba(0,0,0,0.10) 100%);
   mix-blend-mode: soft-light;
 }
+
 .hero::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(to bottom, rgba(0,0,0,0) 78%, rgba(0,0,0,.78) 100%);
