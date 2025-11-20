@@ -123,11 +123,7 @@ header.hero {
   font-size: clamp(17px, 1.6vw, 20px); line-height: 1.5; color: #e2e8f0;
   font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,.35); margin-top: 14px;
 }
-.hero__copy::after {
-  content: ""; position: absolute; left: -8px; right: -8px; top: -8px; height: 340px;
-  background: linear-gradient(to bottom, rgba(0,0,0,.8) 0%, rgba(0,0,0,0) 100%);
-  filter: blur(10px); border-radius: 10px; z-index: -1; pointer-events: none;
-}
+
 
 /* --- Carte formulaire --- */
 .card {
