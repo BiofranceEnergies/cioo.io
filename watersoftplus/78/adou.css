@@ -1410,6 +1410,16 @@ body.results-visible #focus-adou { display: none !important; }
   color: #60a5fa !important; /* Le bleu lumineux de votre marque */
   font-weight: 800 !important;
 }
+
+/* =================================================================
+   [[FIX ESPACEMENT FINANCEMENT]]
+   On ajoute de l'air en haut et en bas du bloc blanc "Plutôt que de perdre..."
+   pour que le texte ne colle pas aux bords.
+   ================================================================= */
+#autofin {
+  padding-top: 40px !important;    /* Décolle le texte du haut */
+  padding-bottom: 40px !important; /* Équilibre avec le bas */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
