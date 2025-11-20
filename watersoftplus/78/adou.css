@@ -86,6 +86,8 @@ header.hero {
 
   object-fit: cover; /* GARANTIT aucune bande noire */
   object-position: left center;
+  transform: scale(0.92);        /* <<< AJOUT À FAIRE ICI */
+  transform-origin: center;      /* <<< AJOUT À FAIRE ICI */     
   background-color: #000; /* sécurité : fond jamais gris */
 }
 
