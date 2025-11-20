@@ -82,9 +82,14 @@ header.hero {
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
-  object-position: 30% 60%; /* ← réglage intelligent */
+  object-fit: contain;            /* toute l’image visible */
+  object-position: left center;   /* verre + robinet bien cadrés */
+
+  background-color: #000;         /* évite un vide gris autour */
+  transform: scale(1.08);         /* zoom doux pour enlever les bandes vides */
+  transform-origin: left center;  /* zoom depuis la gauche */
 }
+
 
 
 
