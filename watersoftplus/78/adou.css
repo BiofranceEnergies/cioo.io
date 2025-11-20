@@ -1214,24 +1214,7 @@ body.results-visible #focus-adou { display: none !important; }
   }
 }
 
-/* =================================================================
-   [[FIX FINAL: HAUTEUR + CADRAGE]]
-   1. On réduit la hauteur du bandeau (de 94vh à 75vh) pour faire moins "vide"
-   2. On réduit la hauteur minimale (de 700px à 500px) pour les écrans moyens
-   3. On remonte l'image (20%) pour garder le robinet visible dans ce cadre plus petit
-   ================================================================= */
 
-:root {
-  --hero-h-desktop: 75vh; /* Réduit la hauteur globale (était 94vh) */
-}
-
-header.hero {
-  min-height: 500px;      /* Permet au bloc d'être moins haut sur laptop (était 700px) */
-}
-
-.hero__img {
-  object-position: center 25% !important; /* Force le cadrage vers le haut */
-}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
