@@ -1247,6 +1247,44 @@ body.results-visible #focus-adou { display: none !important; }
   background: linear-gradient(180deg, #60a5fa 0%, #0b4fbf 100%) !important; /* Devient plus lumineux */
   transform: translateY(-2px);
 }
+
+/* =================================================================
+   [[MOBILE FIX: LISIBILITÉ & CADRAGE]]
+   S'applique uniquement sur tablette et mobile (< 900px)
+   ================================================================= */
+@media (max-width: 900px) {
+  
+  /* 1. CADRAGE : On décale le robinet vers la droite (65%) pour libérer 
+     de l'espace à gauche pour le texte. On vise le haut (20%). */
+  .hero__img {
+    object-position: 65% 20% !important; 
+  }
+
+  /* 2. LISIBILITÉ : On ajoute une plaque sombre derrière le texte du bas
+     pour qu'il soit lisible même s'il tombe sur l'eau blanche. */
+  .hero__copy p {
+    background: rgba(0, 0, 0, 0.6);  /* Fond noir semi-transparent */
+    padding: 10px 14px;              /* Espace interne */
+    border-radius: 10px;             /* Coins arrondis */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Ombre pour décoller du fond */
+    display: inline-block;           /* Le fond s'adapte à la taille du texte */
+    text-shadow: none;               /* Plus besoin d'ombre sur le texte lui-même */
+    margin-top: 12px;
+    color: #ffffff;                  /* Force le blanc pur */
+  }
+
+  /* 3. TITRE : On renforce l'ombre pour qu'il claque sur le fond gris */
+  .hero__copy h1 {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.95); 
+  }
+  
+  /* 4. HAUTEUR : On s'assure que le mobile prend toute la hauteur nécessaire */
+  header.hero {
+    height: auto !important;
+    min-height: 85vh !important;
+    padding-bottom: 40px;
+  }
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
