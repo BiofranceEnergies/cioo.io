@@ -1219,6 +1219,34 @@ body.results-visible #focus-adou { display: none !important; }
   color: #60a5fa !important; /* Bleu beaucoup plus clair/lumineux */
   text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Ombre portée noire pour détacher du fond */
 }
+
+/* =================================================================
+   [[FINITIONS COULEURS : HARMONIE]]
+   ================================================================= */
+
+/* 1. On ajuste le TEXTE pour qu'il soit un poil plus "profond" 
+      (moins "néon", plus "marque") tout en restant lisible */
+.hero__copy h1 em {
+  color: #3b82f6 !important; /* Un bleu azur vif, mais plus "pro" que le cyan */
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6); /* On garde l'ombre pour la lisibilité */
+}
+
+/* 2. On ajuste le BOUTON pour qu'il fasse un "rappel" de ce bleu 
+      dans sa partie supérieure, tout en gardant le bas foncé */
+.cta {
+  /* Dégradé : part du bleu du texte (haut) vers le bleu foncé actuel (bas) */
+  background: linear-gradient(180deg, #3b82f6 0%, #0a2e70 100%) !important;
+  
+  /* On ajoute une petite bordure lumineuse pour le faire "popper" */
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 25px rgba(11, 79, 191, 0.4); /* Ombre bleue assortie */
+}
+
+/* 3. Petit effet au survol pour le plaisir */
+.cta:hover {
+  background: linear-gradient(180deg, #60a5fa 0%, #0b4fbf 100%) !important; /* Devient plus lumineux */
+  transform: translateY(-2px);
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
