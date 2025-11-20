@@ -78,18 +78,12 @@ header.hero {
   position: absolute;
   inset: 0;
   z-index: -2;
-
   width: 100%;
   height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-
-  object-fit: cover; /* GARANTIT aucune bande noire */
+  object-fit: cover;
   object-position: left center;
-  transform: scale(0.92);        /* <<< AJOUT À FAIRE ICI */
-  transform-origin: center;      /* <<< AJOUT À FAIRE ICI */     
-  background-color: #000; /* sécurité : fond jamais gris */
 }
+
 
 
 
