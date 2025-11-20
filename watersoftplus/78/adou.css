@@ -1308,6 +1308,22 @@ body.results-visible #focus-adou { display: none !important; }
   color: #60a5fa !important; /* Même bleu clair que votre titre du haut */
   letter-spacing: 3px;        /* Un peu plus espacé pour faire "Luxe" */
 }
+/* =================================================================
+   [[AMELIORATION CONTRASTE BENEFICES]]
+   On fonce légèrement le fond pour faire ressortir les cartes blanches
+   ================================================================= */
+#benefits.benefits {
+  /* Un bleu-gris très pâle, un peu plus soutenu que l'actuel */
+  background-color: #eef4fa !important; 
+  
+  /* Optionnel : on ajoute une petite bordure subtile aux cartes */
+  /* Cela aide à bien délimiter la zone de lecture */
+}
+
+.bcard {
+  border: 1px solid rgba(255,255,255,0.5) !important; /* Bordure discrète */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03) !important; /* Ombre douce */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
