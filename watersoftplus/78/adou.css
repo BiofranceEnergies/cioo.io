@@ -1172,6 +1172,17 @@ body.results-visible #focus-adou { display: none !important; }
   z-index: -1;
   pointer-events: none;
 }
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42%; /* Ajustable entre 35% et 50% */
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.48), rgba(0,0,0,0));
+  z-index: -1;
+  pointer-events: none;
+}
 
 /* ===== FIN APPENDS ===== */
 /* =========================== */
