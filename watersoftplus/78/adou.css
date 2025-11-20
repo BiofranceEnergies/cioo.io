@@ -1338,6 +1338,16 @@ body.results-visible #focus-adou { display: none !important; }
   /* Optionnel : on rapproche un peu les chiffres des cartes */
   margin-bottom: 10px !important;   
 }
+
+/* =================================================================
+   [[FOCUS ARGUMENT ARGENT]]
+   On met en valeur la dernière carte (les 600€) pour qu'elle ressorte
+   ================================================================= */
+.mgrid .mcard:last-child {
+  border: 1px solid #3b82f6 !important;        /* Bordure bleue au lieu de grise */
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15) !important; /* Ombre bleutée */
+  transform: translateY(-4px);                 /* On la remonte un tout petit peu */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
