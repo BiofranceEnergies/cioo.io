@@ -1201,7 +1201,18 @@ body.results-visible #focus-adou { display: none !important; }
   z-index: -1;
   pointer-events: none;
 }
-
+/* Correctif Image Coupée Hero */
+@media (min-width: 1200px) {
+  header.hero {
+    /* Au lieu d'une hauteur fixe en pixels ou VH, on force un ratio.
+       56.25vw correspond à un ratio 16:9 standard.
+       Si votre image est plus carrée, augmentez ce chiffre (ex: 65vw). */
+    min-height: 60vw; 
+    
+    /* On garde le max-height pour ne pas que ça devienne géant sur les écrans immenses */
+    max-height: 1100px;
+  }
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
