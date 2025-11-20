@@ -1370,6 +1370,46 @@ body.results-visible #focus-adou { display: none !important; }
   display: flex;          /* Pour bien centrer le texte dedans */
   justify-content: center;
 }
+
+/* =================================================================
+   [[DESIGN RESULTATS : INTEGRATION PARFAITE]]
+   ================================================================= */
+
+/* 1. On enlève la grosse boîte blanche qui enferme les résultats */
+#recap {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-top: 40px !important;
+}
+
+/* 2. On stylise les 3 petites cartes (Produits, Énergie, Matériel) 
+   pour qu'elles soient lisibles sur le fond sombre */
+#rc-cards .rc-card {
+  /* Fond légèrement translucide ou bleu très foncé */
+  background: rgba(19, 83, 201, 0.9) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+  color: #fff !important; /* Texte blanc forcé */
+}
+
+/* 3. On adapte le SLOGAN du bas */
+/* Attention : Votre code HTML a du style "en ligne" (style="color:...") 
+   Il faut utiliser !important pour forcer le blanc/bleu clair */
+#rc-slogan {
+  color: #e0f2fe !important; /* Blanc bleuté très clair pour être lu sur fond noir */
+  font-weight: 400 !important;
+  font-size: 1.4rem !important;
+  margin-top: 50px !important;
+  margin-bottom: 40px !important;
+}
+
+/* On met en gras la partie "Watersoft+" du slogan */
+#rc-slogan strong {
+  color: #60a5fa !important; /* Le bleu lumineux de votre marque */
+  font-weight: 800 !important;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
 
