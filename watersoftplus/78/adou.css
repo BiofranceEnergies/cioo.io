@@ -82,9 +82,10 @@ header.hero {
   width: 100%;
   height: 100%;
 
-  object-fit: cover;          /* occupe toute la largeur sans bande noire */
-  object-position: left center; /* on garde le verre + robinet visibles */
+  object-fit: cover;
+  object-position: 30% 60%; /* ← réglage intelligent */
 }
+
 
 
 .hero::before {
