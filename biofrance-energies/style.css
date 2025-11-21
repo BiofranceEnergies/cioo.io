@@ -1507,5 +1507,55 @@ body.results-visible #focus-adou { display: none !important; }
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(245, 158, 11, 0.6) !important;
 }
+
+/* =================================================================
+   [[NOUVEAU : LOGOS RGE EN HAUT A DROITE]]
+   ================================================================= */
+
+.header-certifs {
+  position: absolute;
+  top: 32px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espace entre les deux logos */
+}
+
+.certif-logo {
+  height: 50px;       /* Taille idéale sur Desktop */
+  width: auto;
+  
+  /* MAGIE : Rend les logos blancs pour le fond sombre */
+  filter: brightness(0) invert(1);
+  
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.certif-logo:hover {
+  opacity: 1;
+}
+
+/* --- Adaptation Mobile --- */
+@media (max-width: 768px) {
+  .header-certifs {
+    top: 16px;        /* On remonte un peu sur mobile */
+    right: 16px;
+    gap: 10px;        /* On les rapproche */
+  }
+  
+  .certif-logo {
+    height: 32px;     /* On réduit la taille pour ne pas gêner */
+  }
+}
+
+/* --- Sécurité très petits écrans (iPhone SE, etc.) --- */
+@media (max-width: 380px) {
+  /* Si l'écran est vraiment minuscule, on cache QualiPV pour garder RGE */
+  .certif-logo:last-child {
+    display: none; 
+  }
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
