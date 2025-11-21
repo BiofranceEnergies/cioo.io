@@ -1831,5 +1831,18 @@ body.results-visible #focus-adou { display: none !important; }
   padding: 2px 6px;
   border-radius: 4px;
 }
+
+/* Rendre le champ de saisie du bandeau plus visible */
+.tel-banner__input {
+    background-color: #ffffff !important; /* Fond blanc */
+    color: #0f172a !important;            /* Texte noir/bleu pour le numéro */
+    border: 2px solid #e2e8f0 !important; /* Bordure propre */
+    font-weight: 700;                     /* Numéro écrit en gras */
+}
+
+/* Couleur du texte "Ex : 06..." (placeholder) */
+.tel-banner__input::placeholder {
+    color: #94a3b8 !important;            /* Gris moyen pour l'exemple */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
