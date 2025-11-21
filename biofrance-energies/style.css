@@ -1601,5 +1601,12 @@ body.results-visible #focus-adou { display: none !important; }
 .scard h3 {
   color: #0f172a; /* On garde noir/bleu nuit pour la lisibilité, c'est très bien */
 }
+
+/* Éclaircir le sous-titre produit pour le fond sombre */
+#focus-adou .product-name {
+  color: #38bdf8 !important; /* Bleu ciel vif (Sky Blue) au lieu de bleu foncé */
+  font-weight: 800;
+  letter-spacing: 1px;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
