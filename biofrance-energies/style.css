@@ -1509,7 +1509,7 @@ body.results-visible #focus-adou { display: none !important; }
 }
 
 /* =================================================================
-   [[NOUVEAU : LOGOS RGE EN HAUT A DROITE]]
+   [[CORRECTION : LOGOS COULEUR SUR FOND BLANC]]
    ================================================================= */
 
 .header-certifs {
@@ -1519,42 +1519,40 @@ body.results-visible #focus-adou { display: none !important; }
   z-index: 10;
   display: flex;
   align-items: center;
-  gap: 20px; /* Espace entre les deux logos */
+  gap: 15px;
 }
 
 .certif-logo {
-  height: 50px;       /* Taille idéale sur Desktop */
+  height: 45px;       /* Taille idéale */
   width: auto;
   
-  /* MAGIE : Rend les logos blancs pour le fond sombre */
-  filter: brightness(0) invert(1);
+  /* 1. On enlève le filtre blanc pour retrouver les couleurs */
+  /* filter: brightness(0) invert(1);  <-- JE L'AI SUPPRIMÉ */
   
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
+  /* 2. On ajoute un petit fond blanc pour que le logo ressorte sur le bleu nuit */
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 4px 8px;    /* Un peu d'espace autour du logo */
+  border-radius: 6px;  /* Coins arrondis pour faire moderne */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Une petite ombre pour le relief */
+  
+  transition: transform 0.3s ease;
 }
 
 .certif-logo:hover {
-  opacity: 1;
+  transform: scale(1.05); /* Petit effet de zoom au survol */
 }
 
 /* --- Adaptation Mobile --- */
 @media (max-width: 768px) {
   .header-certifs {
-    top: 16px;        /* On remonte un peu sur mobile */
+    top: 16px;
     right: 16px;
-    gap: 10px;        /* On les rapproche */
+    gap: 10px;
   }
   
   .certif-logo {
-    height: 32px;     /* On réduit la taille pour ne pas gêner */
-  }
-}
-
-/* --- Sécurité très petits écrans (iPhone SE, etc.) --- */
-@media (max-width: 380px) {
-  /* Si l'écran est vraiment minuscule, on cache QualiPV pour garder RGE */
-  .certif-logo:last-child {
-    display: none; 
+    height: 30px; /* Plus petit sur mobile */
+    padding: 3px 6px;
   }
 }
 /* ===== FIN APPENDS ===== */
