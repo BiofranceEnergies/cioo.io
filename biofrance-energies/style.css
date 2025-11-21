@@ -1634,5 +1634,44 @@ body.results-visible #focus-adou { display: none !important; }
   box-shadow: 0 12px 24px rgba(249, 115, 22, 0.15) !important; /* Ombre orangée */
   transform: translateY(-5px);
 }
+
+/* =================================================================
+   [[HARMONISATION : PROCESSUS D'INSTALLATION EN ORANGE]]
+   Transformation des bulles bleues et de la ligne en Orange
+   ================================================================= */
+
+/* 1. La barre horizontale de fond (Ligne de temps) */
+.pline {
+  /* On remplace le bleu pâle par un beige/orangé très doux */
+  background: linear-gradient(90deg, #fff7ed 0%, #ffedd5 50%, #fff7ed 100%) !important;
+}
+
+/* 2. Les bulles numérotées (1, 2, 3) */
+.pnode {
+  /* Le même dégradé puissant que ton bouton CTA */
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%) !important;
+  /* Une ombre portée chaude */
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35), inset 0 2px 4px rgba(255,255,255,.25) !important;
+}
+
+/* 3. Les cercles autour des icônes (Fiole, Éclair, Check) */
+.picon {
+  background-color: #fff7ed !important; /* Orange très pâle */
+}
+
+/* 4. Les traits des icônes */
+.picon svg path, .picon svg circle {
+  stroke: #f97316 !important; /* Orange vif */
+}
+
+/* 5. Petit effet au survol des cartes (Bonus) */
+.pstep {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.pstep:hover {
+  border-color: #fbbf24 !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.15) !important;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
