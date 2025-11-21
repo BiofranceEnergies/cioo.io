@@ -1583,5 +1583,23 @@ body.results-visible #focus-adou { display: none !important; }
     border-radius: 4px !important;
   }
 }
+
+/* =================================================================
+   [[HARMONISATION : ÉTAPES EN ORANGE]]
+   Pour rappeler la couleur du bouton d'action et réchauffer la page
+   ================================================================= */
+
+.sbullet {
+  /* On remplace le bleu par le dégradé Orange du CTA */
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%) !important;
+  
+  /* On ajoute une petite ombre chaude pour le relief */
+  box-shadow: 0 6px 15px rgba(234, 88, 12, 0.3) !important;
+}
+
+/* Optionnel : Si tu veux que le titre "Votre situation" change aussi de couleur */
+.scard h3 {
+  color: #0f172a; /* On garde noir/bleu nuit pour la lisibilité, c'est très bien */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
