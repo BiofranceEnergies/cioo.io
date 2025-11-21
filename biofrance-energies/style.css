@@ -1735,5 +1735,38 @@ body.results-visible #focus-adou { display: none !important; }
   box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
   border-color: #fdba74 !important; /* Bordure orange pâle au survol */
 }
+
+/* =================================================================
+   [[HARMONISATION FINALE : FAQ EN ORANGE]]
+   Remplace le bleu par l'orange pour les questions/réponses
+   ================================================================= */
+
+/* 1. La question quand elle est ouverte (Texte Orange + Fond pâle) */
+.faq__btn[aria-expanded="true"] {
+  color: #ea580c !important; /* Orange foncé */
+  background: linear-gradient(180deg, #fff7ed, #ffffff) !important; /* Fond orange très pâle */
+}
+
+/* 2. Survol de la question */
+.faq__btn:hover {
+  color: #ea580c !important;
+}
+
+/* 3. La bordure et l'ombre quand la question est ouverte */
+.faq__item.is-open {
+  border-color: rgba(249, 115, 22, 0.4) !important; /* Bordure Orange */
+  box-shadow: 0 8px 20px rgba(234, 88, 12, 0.15), 0 2px 6px rgba(2,6,23,.06) !important;
+}
+
+/* 4. Le fond de la réponse */
+.faq__panel {
+  background: linear-gradient(180deg, #ffffff, #fff7ed) !important;
+}
+
+/* 5. LA FLÈCHE (Remplacement du SVG Bleu par un SVG Orange) */
+.faq__btn::after {
+  /* J'ai recréé l'icône exacte mais avec le code couleur Orange (%23f97316) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M8 10l4 4 4-4' stroke='%23f97316' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
