@@ -1483,6 +1483,29 @@ body.results-visible #focus-adou { display: none !important; }
 .tel-banner--visible .tel-banner__btn {
   animation-play-state: running;
 }
+/* =================================================================
+   [[OVERRIDE : BOUTON "CHALEUR" POUR CONVERSION MAXIMALE]]
+   ================================================================= */
+:root {
+  /* On définit une variable Orange Energie */
+  --warm-grad-top: #f59e0b; /* Ambre vif */
+  --warm-grad-bot: #ea580c; /* Orange brûlé */
+}
 
+/* On applique l'orange UNIQUEMENT sur les boutons d'action principaux */
+.cta, #step-next, .gate-cta, .tel-banner__btn {
+  background: linear-gradient(135deg, var(--warm-grad-top) 0%, var(--warm-grad-bot) 100%) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  /* Une ombre portée chaude pour faire "luire" le bouton sur le fond sombre */
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+
+/* Effet au survol : on illumine encore plus */
+.cta:hover, #step-next:hover, .gate-cta:hover, .tel-banner__btn:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #c2410c 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.6) !important;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
