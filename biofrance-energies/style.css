@@ -1509,9 +1509,10 @@ body.results-visible #focus-adou { display: none !important; }
 }
 
 /* =================================================================
-   [[CORRECTION : LOGOS COULEUR SUR FOND BLANC]]
+   [[VERSION FINALE : LOGOS HEADER (Desktop & Mobile optimisé)]]
    ================================================================= */
 
+/* --- Version ORDINEATEUR (ça ne change pas, c'est parfait) --- */
 .header-certifs {
   position: absolute;
   top: 32px;
@@ -1523,36 +1524,43 @@ body.results-visible #focus-adou { display: none !important; }
 }
 
 .certif-logo {
-  height: 45px;       /* Taille idéale */
+  height: 45px;
   width: auto;
-  
-  /* 1. On enlève le filtre blanc pour retrouver les couleurs */
-  /* filter: brightness(0) invert(1);  <-- JE L'AI SUPPRIMÉ */
-  
-  /* 2. On ajoute un petit fond blanc pour que le logo ressorte sur le bleu nuit */
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 4px 8px;    /* Un peu d'espace autour du logo */
-  border-radius: 6px;  /* Coins arrondis pour faire moderne */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Une petite ombre pour le relief */
-  
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
 }
+.certif-logo:hover { transform: scale(1.05); }
 
-.certif-logo:hover {
-  transform: scale(1.05); /* Petit effet de zoom au survol */
-}
 
-/* --- Adaptation Mobile --- */
+/* --- Version MOBILE (C'est là qu'on change tout !) --- */
 @media (max-width: 768px) {
   .header-certifs {
-    top: 16px;
+    /* 1. On donne un peu plus d'air en haut */
+    top: 20px;
     right: 16px;
-    gap: 10px;
+    /* 2. On resserre l'espace entre les deux logos */
+    gap: 8px;
   }
   
   .certif-logo {
-    height: 30px; /* Plus petit sur mobile */
-    padding: 3px 6px;
+    /* 3. RÉGIME DRASTIQUE : On réduit fortement la taille */
+    height: 26px; /* C'est petit, mais le logo RGE reste très lisible */
+    
+    /* 4. On réduit le "gras" (padding) autour du logo */
+    padding: 2px 5px;
+    border-radius: 4px;
+  }
+}
+
+/* --- SÉCURITÉ : Pour les TRÈS petits écrans (ex: iPhone SE) --- */
+@media (max-width: 360px) {
+  /* Si l'écran est vraiment trop étroit, on cache le 2ème logo (QualiPV) */
+  /* pour éviter que ça chevauche le logo de gauche. Le RGE suffit. */
+  .certif-logo:last-child {
+    display: none;
   }
 }
 /* ===== FIN APPENDS ===== */
