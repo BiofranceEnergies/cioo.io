@@ -1608,5 +1608,31 @@ body.results-visible #focus-adou { display: none !important; }
   font-weight: 800;
   letter-spacing: 1px;
 }
+
+/* =================================================================
+   [[BOOST VISUEL : BÉNÉFICES EN ORANGE]]
+   Pour casser le côté "froid/médical" et rappeler l'énergie
+   ================================================================= */
+
+/* 1. On change le fond des carrés d'icônes (Orange très pâle) */
+.bicon {
+  background-color: #fff7ed !important; /* Orange "vanille" très doux */
+}
+
+/* 2. On change la couleur du trait des icônes (Orange vif) */
+.bicon svg path {
+  stroke: #f97316 !important; /* Orange standard */
+}
+
+/* 3. Petit bonus : Au survol de la carte, on colore la bordure */
+.bcard {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bcard:hover {
+  border-color: #fbbf24 !important; /* Bordure devient dorée/orange */
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.15) !important; /* Ombre orangée */
+  transform: translateY(-5px);
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
