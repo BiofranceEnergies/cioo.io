@@ -1563,5 +1563,25 @@ body.results-visible #focus-adou { display: none !important; }
     display: none;
   }
 }
+
+/* =================================================================
+   [[FORCAGE MOBILE : LOGOS PETITS]]
+   Colle ceci tout à la fin de ton fichier CSS
+   ================================================================= */
+
+@media screen and (max-width: 768px) {
+  .header-certifs {
+    top: 12px !important;         /* On remonte bien haut */
+    right: 12px !important;       /* On colle bien à droite */
+    gap: 6px !important;          /* On serre les logos */
+  }
+
+  .certif-logo {
+    height: 24px !important;      /* FORCE la petite taille (très important) */
+    width: auto !important;
+    padding: 2px 4px !important;  /* Réduit le blanc autour */
+    border-radius: 4px !important;
+  }
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
