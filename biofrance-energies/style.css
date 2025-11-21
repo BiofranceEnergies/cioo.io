@@ -1768,5 +1768,13 @@ body.results-visible #focus-adou { display: none !important; }
   /* J'ai recréé l'icône exacte mais avec le code couleur Orange (%23f97316) */
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M8 10l4 4 4-4' stroke='%23f97316' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
 }
+
+/* Optionnel : Rendre le bouton du bas moins large sur PC */
+@media (min-width: 768px) {
+  .footer-cta__right .cta {
+    max-width: 400px; /* On empêche qu'il prenne toute la largeur */
+    margin-top: 20px;
+  }
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
