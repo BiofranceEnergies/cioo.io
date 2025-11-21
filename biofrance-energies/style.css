@@ -1776,5 +1776,60 @@ body.results-visible #focus-adou { display: none !important; }
     margin-top: 20px;
   }
 }
+
+/* =================================================================
+   [[RESULTAT FINAL : PREMIUM & PUNCHY]]
+   ================================================================= */
+
+/* 1. LE PRIX : On le passe en Orange + Plus Gros + Effet Glow */
+#rc-rac-amount, .rc-main__value {
+  color: #ea580c !important;       /* Orange foncé */
+  font-size: clamp(4rem, 6vw, 5.5rem) !important; /* Beaucoup plus gros */
+  font-weight: 800 !important;
+  letter-spacing: -2px;
+  
+  /* Petite ombre portée orange pour le faire "sortir" de l'écran */
+  text-shadow: 0 10px 30px rgba(234, 88, 12, 0.25); 
+  margin-bottom: 10px !important;
+}
+
+/* 2. LE LABEL "Reste à charge..." au dessus du prix */
+.rc-main__label {
+  color: #94a3b8;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+}
+
+/* 3. LA BANNIÈRE PROMO EN BAS (Cadeau) */
+/* On remplace le bleu par un fond orange très pâle (Urgence douce) */
+.offer-strip__inner {
+  background: #fff7ed !important;  /* Fond Orange Vanille */
+  border: 1px solid #fed7aa !important; /* Bordure Orange pâle */
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.05);
+}
+
+/* Le badge "Offre limitée" */
+.offer-strip__badge {
+  background: #ea580c !important;  /* Fond Orange Vif */
+  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+}
+
+/* 4. LA BARRE DE SÉPARATION SOUS LE SLOGAN */
+.slogan-sep {
+  background: #ea580c !important;  /* Orange */
+  height: 6px !important;          /* Un peu plus épaisse */
+  width: 120px !important;         /* Plus courte pour faire "Signature" */
+}
+
+/* 5. PETIT DÉTAIL CLASSE : La liste de droite */
+/* On met en gras les valeurs (78, H1, 45 000 €...) pour qu'elles ressortent */
+.rc-details__list strong {
+  color: #0f172a; 
+  font-weight: 800;
+  background: #f1f5f9; /* Petit surlignage gris très léger */
+  padding: 2px 6px;
+  border-radius: 4px;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
