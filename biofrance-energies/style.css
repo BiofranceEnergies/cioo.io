@@ -1673,5 +1673,36 @@ body.results-visible #focus-adou { display: none !important; }
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(249, 115, 22, 0.15) !important;
 }
+
+/* =================================================================
+   [[METRICS EN ORANGE : CHIFFRES CLÉS]]
+   Pour rendre les économies plus visibles et chaudes
+   ================================================================= */
+
+/* 1. Les ronds des icônes en beige/orange pâle */
+.micon {
+  background-color: #fff7ed !important; 
+}
+
+/* 2. Les traits des icônes en Orange Vif */
+.micon svg path, .micon svg circle {
+  stroke: #f97316 !important; 
+}
+
+/* 3. LE PLUS IMPORTANT : Les gros chiffres (60%, 90%, 1€) en Orange Foncé */
+.mvalue {
+  color: #ea580c !important; 
+  text-shadow: 0 2px 10px rgba(234, 88, 12, 0.15); /* Petit éclat lumineux */
+}
+
+/* 4. Effet survol des cartes */
+.mcard {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.mcard:hover {
+  transform: translateY(-5px);
+  border-color: #fbbf24 !important;
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.15) !important;
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
