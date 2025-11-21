@@ -1704,5 +1704,36 @@ body.results-visible #focus-adou { display: none !important; }
   border-color: #fbbf24 !important;
   box-shadow: 0 12px 24px rgba(249, 115, 22, 0.15) !important;
 }
+
+/* =================================================================
+   [[HARMONISATION : AVIS CLIENTS EN OR]]
+   Pour respecter les codes visuels de la confiance (Gold)
+   ================================================================= */
+
+/* 1. Les étoiles (Toutes) passent en Jaune/Or */
+.testi__stars svg path, 
+.tcard__stars svg path,
+.testi__stars svg, 
+.tcard__stars svg {
+  fill: #fbbf24 !important; /* Jaune Or standard (Amber-400) */
+}
+
+/* 2. Les ronds des initiales (JT, CR, NV) */
+/* On remplace le fond beige/gris par un orange très pâle */
+.avatar {
+  background-color: #fff7ed !important; /* Orange vanille */
+  color: #ea580c !important;            /* Texte Orange foncé */
+  border: 1px solid #fed7aa !important; /* Petite bordure subtile */
+}
+
+/* 3. Petit effet relief sur les cartes avis */
+.tcard {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+  border-color: #fdba74 !important; /* Bordure orange pâle au survol */
+}
 /* ===== FIN APPENDS ===== */
 /* =========================== */
