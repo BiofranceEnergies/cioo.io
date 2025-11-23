@@ -11,7 +11,54 @@
 
 /* --- RESET & BASE --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+/* --- NAVIGATION --- */
+.navbar {
+    position: absolute; /* Flotte au-dessus du fond */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 50px; /* Espace aéré */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100; /* Toujours au-dessus de tout */
+}
 
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800; /* Très gras */
+    color: var(--text-white);
+    letter-spacing: -1px; /* Resserre les lettres pour un look moderne */
+    text-transform: uppercase;
+    cursor: default;
+}
+
+/* Le point final orange pour la touche design */
+.dot {
+    color: var(--primary);
+}
+
+.nav-contact {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-contact:hover {
+    color: var(--text-white);
+}
+
+/* Ajustement Mobile pour la nav */
+@media (max-width: 968px) {
+    .navbar {
+        padding: 20px;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+}
 body {
     font-family: var(--font-main);
     background-color: var(--dark-bg);
