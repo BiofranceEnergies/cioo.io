@@ -653,3 +653,16 @@ h1 {
     .offer-content { padding: 40px 20px; }
     .offer-price { font-size: 2.5rem; }
 }
+
+.budget-note {
+    font-size: 0.9rem;
+    color: #a0aec0; /* Gris clair */
+    margin-top: -10px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+.budget-note em {
+    opacity: 0.8;
+}
