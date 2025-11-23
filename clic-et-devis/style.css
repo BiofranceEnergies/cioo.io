@@ -737,3 +737,100 @@ h1 {
         display: none; /* On cache les flèches sur mobile */
     }
 }
+/* --- SECTION RÉALITÉ (Carré VIP) --- */
+.reality-section {
+    padding: 80px 20px;
+    background-color: #02040a; /* Presque noir */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.reality-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--text-white);
+}
+
+.reality-intro {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    line-height: 1.6;
+}
+
+.vip-comparison {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+}
+
+/* Zone Jungle (Triste) */
+.zone.jungle {
+    flex: 1;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    opacity: 0.7;
+}
+
+.zone.jungle h3 { color: #a0aec0; margin-bottom: 15px; }
+
+/* Zone VIP (Brillante) */
+.zone.vip {
+    flex: 1;
+    padding: 40px 30px;
+    background: linear-gradient(145deg, rgba(255, 107, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    border: 2px solid var(--primary);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.2);
+    transform: scale(1.05);
+    position: relative;
+    z-index: 10;
+}
+
+.zone.vip h3 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.zone p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.zone strong { color: var(--text-white); }
+
+.vs-badge {
+    background: var(--text-white);
+    color: var(--dark-bg);
+    font-weight: 900;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 20;
+}
+
+.reality-conclusion {
+    font-size: 1.2rem;
+    color: var(--text-white);
+    font-style: italic;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .vip-comparison { flex-direction: column; gap: 30px; }
+    .zone.vip { transform: scale(1); }
+}
