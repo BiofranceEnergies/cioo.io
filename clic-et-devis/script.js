@@ -22,3 +22,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // On lance l'observation sur chaque élément
     elementsToAnimate.forEach(el => observer.observe(el));
 });
+
+// --- GESTION DES MENTIONS LÉGALES ---
+const modal = document.getElementById("legal-modal");
+const btn = document.getElementById("open-legal");
+const span = document.getElementsByClassName("close-btn")[0];
+
+// Ouvrir
+if(btn) {
+    btn.onclick = function(e) {
+      e.preventDefault();
+      modal.style.display = "block";
+    }
+}
+
+// Fermer avec la croix
+if(span) {
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+}
+
+// Fermer en cliquant à côté
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
