@@ -390,3 +390,266 @@ h1 {
     .section-header h2 { font-size: 2rem; }
     .projects-grid { gap: 30px; }
 }
+/* --- SECTION AVANTAGES --- */
+.features-section {
+    padding: 80px 20px;
+    background-color: var(--dark-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.feature-item {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 107, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
+}
+
+.feature-item h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-white);
+}
+
+.feature-item p {
+    color: var(--text-gray);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- SECTION OFFRE SPÉCIALE --- */
+.offer-section {
+    padding: 80px 20px;
+    background-color: var(--dark-bg);
+}
+
+.offer-card {
+    max-width: 700px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 2px solid var(--primary); /* Bordure Orange */
+    border-radius: 24px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.15);
+    overflow: hidden;
+}
+
+.offer-badge {
+    position: absolute;
+    top: 30px;
+    right: -40px;
+    background: var(--primary);
+    color: white;
+    padding: 8px 40px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.offer-content {
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.offer-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--text-white);
+}
+
+.offer-price {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 20px 0;
+    letter-spacing: -1px;
+}
+
+.tax-label {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-gray);
+    vertical-align: middle;
+}
+
+.offer-desc {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.offer-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 30px 0;
+}
+
+.offer-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.offer-features li {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    color: var(--text-gray);
+}
+
+.offer-features strong {
+    color: var(--text-white);
+}
+
+.limited-stock {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #ffd700;
+    font-weight: 600;
+}
+
+/* --- SECTION CONTACT & FOOTER --- */
+.contact-section {
+    padding: 100px 20px 40px 20px;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, #050914 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.contact-info { flex: 1; }
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    color: var(--text-gray);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    max-width: 450px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.detail-item .icon { font-size: 1.5rem; }
+
+.detail-item a {
+    color: var(--text-white);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.detail-item a:hover { color: var(--primary); }
+
+.contact-form-col {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.clean-form .form-group { margin-bottom: 20px; }
+
+.clean-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-gray);
+}
+
+.clean-form input {
+    width: 100%;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.clean-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.full-width {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none; /* Important pour le bouton du form */
+}
+
+.main-footer {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* Responsive Final */
+@media (max-width: 968px) {
+    .contact-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .contact-info { text-align: center; }
+    .contact-info p { margin: 0 auto 30px auto; }
+    .detail-item { justify-content: center; }
+    .contact-form-col { width: 100%; padding: 25px; }
+    
+    .offer-content { padding: 40px 20px; }
+    .offer-price { font-size: 2.5rem; }
+}
