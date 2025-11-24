@@ -293,3 +293,93 @@ h1 {
     .sim-row { flex-direction: column; }
     .btn-primary { width: 100%; justify-content: center; }
 }
+
+/* =========================================
+   SECTION BENTO STATS (Dark Tech Style)
+   ========================================= */
+
+.stats-section {
+    padding: 100px 20px;
+    background-color: var(--dark-bg); /* Continuité parfaite avec le Hero */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ligne de séparation subtile */
+}
+
+.section-title {
+    text-align: center; margin-bottom: 60px;
+}
+.section-title h2 {
+    font-size: 2.5rem; color: white; font-weight: 800; margin-bottom: 10px;
+}
+.section-title p {
+    color: var(--text-gray); font-size: 1.1rem;
+}
+
+/* LA GRILLE BENTO */
+.bento-grid {
+    display: grid;
+    /* 3 colonnes équilibrées */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1200px; margin: 0 auto;
+}
+
+/* STYLE DES CARTES (Dark Glass) */
+.bento-card {
+    background: rgba(255, 255, 255, 0.02); /* Fond très léger */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure fine */
+    border-radius: 16px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    display: flex; flex-direction: column; align-items: flex-start;
+}
+
+/* Effet au survol : La carte s'illumine légèrement */
+.bento-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary); /* La bordure devient Cyan */
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.bento-icon {
+    font-size: 2rem; margin-bottom: 15px;
+    background: rgba(6, 182, 212, 0.1); width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.bento-number {
+    font-size: 3rem; font-weight: 900; color: white;
+    line-height: 1; margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.bento-card h3 {
+    color: var(--text-white); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;
+}
+
+.bento-card p {
+    color: var(--text-gray); font-size: 0.95rem; line-height: 1.5;
+}
+
+/* CARTE MISE EN AVANT (Le 600€) */
+.bento-card.featured {
+    grid-column: span 2; /* Elle prend 2 colonnes de large */
+    background: linear-gradient(145deg, rgba(6, 182, 212, 0.05) 0%, rgba(0,0,0,0) 100%);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+.highlight-text {
+    color: var(--primary); /* Le 600€ est en Cyan */
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.4); /* Effet Néon */
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 968px) {
+    .bento-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
+    }
+    .bento-card.featured {
+        grid-column: span 1; /* Reprend une taille normale */
+    }
+}
