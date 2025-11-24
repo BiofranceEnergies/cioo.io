@@ -128,6 +128,63 @@ h1 {
 .trust-bottom { margin-top: 2rem; color: var(--text-gray); font-size: 0.95rem; font-weight: 500;}
 .stars { color: #fbbf24; margin-right: 8px; }
 
+/* =========================================
+   CODE MANQUANT : STYLE DES BOUTONS SIMULATEUR
+   ========================================= */
+
+/* Le conteneur des boutons (1-2, 3-4, 5+) */
+.sim-options { 
+    display: flex; 
+    gap: 10px; 
+    width: 100%; 
+    margin-bottom: 15px; /* Espace avant le champ Code Postal */
+}
+
+/* Le style de base de chaque bouton */
+.option-btn {
+    flex: 1; /* Largeur égale pour tous */
+    background: #0f172a; /* Fond sombre par défaut */
+    border: 1px solid rgba(255,255,255,0.2); /* Bordure fine grise */
+    color: #cbd5e1; /* Texte gris clair */
+    padding: 12px 0; /* Hauteur confortable */
+    border-radius: 6px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+}
+
+/* Au survol */
+.option-btn:hover { 
+    border-color: var(--primary); /* Bordure Cyan */
+    color: white; 
+    background: rgba(6, 182, 212, 0.1); /* Léger fond cyan */
+}
+
+/* L'état ACTIF (Celui sélectionné) */
+.option-btn.active { 
+    background: var(--primary); /* Fond Cyan plein */
+    border-color: var(--primary); 
+    color: #0a1128; /* Texte foncé pour contraste */
+}
+
+/* On met le label "Foyer :" un peu plus joli */
+.sim-step-1 .sim-label {
+    display: block; 
+    color: var(--text-gray); 
+    font-size: 0.8rem; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    text-transform: uppercase;
+}
+
+/* Ajustement pour le gros bouton "Calculer" en dessous */
+.full-width-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 5px; /* Petit espace si besoin */
+}
 
 /* --- 5. COLONNE DROITE (VISUEL + CARTES FLOTTANTES) --- */
 .hero-visual-col {
