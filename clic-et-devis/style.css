@@ -456,18 +456,21 @@ h1 {
 
 .offer-badge {
     position: absolute;
-    top: 30px;
-    right: -40px;
+    top: 42px;            /* On le descend un peu */
+    right: -75px;         /* On le décale pour bien le centrer */
+    width: 280px;         /* Largeur fixe pour que le texte tienne */
+    text-align: center;   /* On centre le texte parfaitement */
     background: var(--primary);
     color: white;
-    padding: 8px 40px;
+    padding: 8px 0;       /* Padding haut/bas seulement */
     font-weight: 800;
-    font-size: 0.8rem;
+    font-size: 0.75rem;   /* Légèrement plus petit pour être sûr que tout rentre */
     text-transform: uppercase;
     transform: rotate(45deg);
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    z-index: 2;
+    pointer-events: none; /* Pour qu'on ne puisse pas cliquer dessus par erreur */
 }
-
 .offer-content {
     padding: 50px 40px;
     text-align: center;
