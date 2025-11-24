@@ -4,9 +4,9 @@
 
 :root {
     /* COULEURS */
-    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE (Remplace l'Orange) */
+    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE */
     --primary-hover: #0891b2;
-    --dark-bg: #0a1128;       /* Bleu Nuit Profond (Base Clic&Devis) */
+    --dark-bg: #0a1128;       /* Bleu Nuit Profond */
     --tech-blue: #1c3b70;     /* Dégradé fond */
     --text-white: #ffffff;
     --text-gray: #cbd5e1;
@@ -23,12 +23,11 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 2. NAVIGATION (Style C&D) --- */
+/* --- 2. NAVIGATION --- */
 .navbar {
     position: absolute; top: 0; width: 100%; padding: 30px 50px;
     display: flex; justify-content: space-between; align-items: center; z-index: 100;
 }
-/* Logo Texte Watersoft */
 .logo-text {
     font-size: 1.8rem; font-weight: 800; color: var(--text-white);
     letter-spacing: -1px; text-transform: uppercase;
@@ -40,7 +39,7 @@ body {
     border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
 }
 
-/* --- 3. HERO SECTION (LA GRILLE !) --- */
+/* --- 3. HERO SECTION (GRILLE) --- */
 .hero-section {
     position: relative;
     min-height: 100vh;
@@ -49,7 +48,6 @@ body {
     padding: 100px 20px; overflow: hidden;
 }
 
-/* LA GRILLE EN FOND (Copie exacte Clic&Devis) */
 .hero-overlay {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
@@ -65,7 +63,7 @@ body {
     gap: 4rem; position: relative; z-index: 1;
 }
 
-/* --- COLONNE GAUCHE --- */
+/* --- COLONNE GAUCHE (TEXTE) --- */
 .hero-text-col { flex: 1; max-width: 600px; }
 
 .badge {
@@ -84,7 +82,6 @@ h1 {
     font-size: 1.2rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2.5rem; max-width: 90%;
 }
 
-/* Arguments (Blockbuster) */
 .hero-stats {
     display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -94,39 +91,69 @@ h1 {
 .stat-lbl { font-size: 0.8rem; color: var(--text-gray); font-weight: 600; margin-top: 5px; text-transform: uppercase;}
 .stat-item.highlight .stat-val { color: var(--primary); }
 
-/* --- COLONNE DROITE (Image Splash) --- */
+/* --- COLONNE DROITE (IMAGE) --- */
 .hero-visual-col {
     flex: 1; 
     display: flex; 
-    justify-content: flex-end; /* Aligne l'image à droite */
-    align-items: center;       /* Centre verticalement dans sa colonne */
+    justify-content: flex-end; 
+    align-items: center; 
     position: relative;
-    /* On limite la hauteur de la colonne pour éviter qu'elle pousse tout */
-    max-height: 80vh; 
+    max-height: 80vh; /* Empêche l'image de pousser la page */
 }
 
-/* Cadre Image */
-.splash-wrapper {
-    position: relative;
-    transition: transform 0.5s ease;
-    /* On enlève la rotation si elle y était, on veut du stable */
-}
+.splash-wrapper { position: relative; transition: transform 0.5s ease; }
 
 .splash-img {
-    /* CORRECTION DE LA TAILLE ICI */
-    max-width: 100%;      /* On passe de 130% à 100% pour qu'il rentre */
-    max-height: 600px;    /* On force une hauteur max raisonnable (taille écran laptop) */
-    width: auto;          /* Garde les proportions */
-    margin-right: 0;      /* On enlève le décalage négatif */
-    
-    /* L'ombre portée pour le détacher du fond */
+    max-width: 100%;      /* Reste dans sa boite */
+    max-height: 600px;    /* TAILLE MAÎTRISÉE (Ta correction) */
+    width: auto; 
+    margin-right: 0;
     filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));
 }
 
-/* RESPONSIVE : IMPORTANT */
+/* --- LE SIMULATEUR (C'est ce qui manquait !) --- */
+.simulator-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px; padding: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    margin-top: 1rem;
+}
+.sim-header { font-weight: 700; color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.9rem;}
+
+.sim-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.sim-input {
+    flex: 1; padding: 12px; background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 1rem;
+}
+.btn-primary {
+    background-color: var(--primary); color: #0a1128; border: none;
+    padding: 12px 24px; border-radius: 8px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4); white-space: nowrap;
+    display: flex; align-items: center; gap: 8px; font-size: 1rem;
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover); transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(6, 182, 212, 0.5);
+}
+
+.trust-mini { font-size: 0.75rem; color: var(--text-gray); margin-top: 10px; opacity: 0.8; }
+.trust-bottom { margin-top: 1.5rem; color: var(--text-gray); font-size: 0.9rem; }
+.stars { color: #fbbf24; }
+
+/* --- RESPONSIVE --- */
 @media (max-width: 968px) {
+    .navbar { padding: 20px; }
+    .hero-container { flex-direction: column; text-align: center; padding-top: 40px; gap: 3rem; }
+    .hero-text-col { max-width: 100%; }
+    h1 { font-size: 2.5rem; }
+    .hero-stats { justify-content: center; }
+    
     .splash-img {
-        max-height: 400px; /* Plus petit sur mobile */
+        max-height: 350px; /* Plus petit sur mobile */
         margin-top: 2rem;
     }
+
+    .sim-row { flex-direction: column; }
+    .btn-primary { width: 100%; justify-content: center; }
 }
