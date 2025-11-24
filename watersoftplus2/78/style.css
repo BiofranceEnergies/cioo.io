@@ -96,61 +96,37 @@ h1 {
 
 /* --- COLONNE DROITE (Image Splash) --- */
 .hero-visual-col {
-    flex: 1; display: flex; justify-content: flex-end; position: relative;
+    flex: 1; 
+    display: flex; 
+    justify-content: flex-end; /* Aligne l'image à droite */
+    align-items: center;       /* Centre verticalement dans sa colonne */
+    position: relative;
+    /* On limite la hauteur de la colonne pour éviter qu'elle pousse tout */
+    max-height: 80vh; 
 }
 
-/* Cadre Image (Style C&D adapté sans téléphone) */
+/* Cadre Image */
 .splash-wrapper {
     position: relative;
-    /* On garde un peu de perspective pour le style */
-    /* transform: rotateY(-5deg);  (Optionnel, si tu veux de la 3D) */
     transition: transform 0.5s ease;
+    /* On enlève la rotation si elle y était, on veut du stable */
 }
+
 .splash-img {
-    max-width: 130%; /* Image très grande comme demandé */
-    margin-right: -10%;
-    height: auto; 
+    /* CORRECTION DE LA TAILLE ICI */
+    max-width: 100%;      /* On passe de 130% à 100% pour qu'il rentre */
+    max-height: 600px;    /* On force une hauteur max raisonnable (taille écran laptop) */
+    width: auto;          /* Garde les proportions */
+    margin-right: 0;      /* On enlève le décalage négatif */
+    
+    /* L'ombre portée pour le détacher du fond */
     filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));
 }
 
-/* --- LE SIMULATEUR (Intégré style Bloc) --- */
-.simulator-block {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px; padding: 1.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    margin-top: 1rem;
-}
-.sim-header { font-weight: 700; color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.9rem;}
-
-.sim-row { display: flex; gap: 10px; margin-bottom: 10px; }
-.sim-input {
-    flex: 1; padding: 12px; background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 1rem;
-}
-.btn-primary {
-    background-color: var(--primary); color: #0a1128; border: none;
-    padding: 12px 24px; border-radius: 8px; font-weight: 800; cursor: pointer;
-    box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4); white-space: nowrap;
-    display: flex; align-items: center; gap: 8px; font-size: 1rem;
-}
-.btn-primary:hover {
-    background-color: var(--primary-hover); transform: translateY(-2px);
-    box-shadow: 0 15px 30px -5px rgba(6, 182, 212, 0.5);
-}
-
-.trust-mini { font-size: 0.75rem; color: var(--text-gray); margin-top: 10px; opacity: 0.8; }
-.trust-bottom { margin-top: 1.5rem; color: var(--text-gray); font-size: 0.9rem; }
-.stars { color: #fbbf24; }
-
-/* --- RESPONSIVE --- */
+/* RESPONSIVE : IMPORTANT */
 @media (max-width: 968px) {
-    .navbar { padding: 20px; }
-    .hero-container { flex-direction: column; text-align: center; padding-top: 40px; gap: 3rem; }
-    .hero-text-col { max-width: 100%; }
-    h1 { font-size: 2.5rem; }
-    .hero-stats { justify-content: center; }
-    .sim-row { flex-direction: column; }
-    .btn-primary { width: 100%; justify-content: center; }
-    .splash-img { max-width: 100%; margin-right: 0; }
+    .splash-img {
+        max-height: 400px; /* Plus petit sur mobile */
+        margin-top: 2rem;
+    }
 }
