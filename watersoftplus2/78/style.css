@@ -81,11 +81,21 @@ body {
     mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
 }
 
+/* --- HERO CONTAINER (CORRIGÉ) --- */
 .hero-container {
-    max-width: 1280px; margin: 0 auto; width: 100%;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 4rem; position: relative; z-index: 1;
-    /* Le padding ici est géré par le .container générique ou le width 100% + max-width */
+    max-width: 1280px; 
+    margin: 0 auto; 
+    width: 100%;
+    
+    /* ON FORCE LE PADDING FIXE POUR CRÉER LE GUIDE */
+    padding: 0 40px; 
+    
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 4rem; 
+    position: relative; 
+    z-index: 1;
 }
 
 /* --- 4. COLONNE GAUCHE --- */
