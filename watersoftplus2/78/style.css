@@ -23,23 +23,54 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 2. NAVIGATION --- */
+/* --- 2. NAVIGATION (MÉTHODE BÉTON) --- */
 .navbar {
-    position: absolute; top: 0; width: 100%; padding: 30px 50px;
-    display: flex; justify-content: space-between; align-items: center; z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Prend toute la largeur écran */
+    z-index: 100;
+    padding: 25px 0; /* Juste espacement haut/bas */
 }
 
-/* Logo Texte (Style Tech) */
+/* Le container hérite déjà des marges 5% du reste du CSS */
+/* On s'occupe juste de l'alignement interne */
+.nav-flex {
+    width: 100%; /* Force à prendre toute la place du container */
+    display: flex;
+    justify-content: space-between; /* Colle aux extrémités */
+    align-items: center;
+}
+
+/* Logo Texte */
 .logo-text {
-    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
-    letter-spacing: -1px; text-transform: uppercase;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--text-white);
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0; /* Sécurité */
 }
-.logo-accent { color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; margin-left: 2px; }
+.logo-accent {
+    color: var(--primary);
+    font-size: 2rem;
+    line-height: 0;
+    vertical-align: middle;
+    margin-left: 2px;
+}
 
+/* Badge Expert */
 .nav-trust {
-    font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 50px;
     background: rgba(10, 17, 40, 0.5);
+    white-space: nowrap;
+    margin: 0; /* Sécurité */
 }
 /* --- 3. HERO SECTION --- */
 .hero-section {
