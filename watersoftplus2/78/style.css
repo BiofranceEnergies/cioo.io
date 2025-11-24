@@ -395,3 +395,84 @@ h1 {
         grid-column: span 1; /* Reprend une taille normale */
     }
 }
+
+
+/* =========================================
+   FINITIONS MOBILE (Google Ads Optimized)
+   ========================================= */
+
+@media (max-width: 968px) {
+
+    /* 1. LE HEADER */
+    .navbar {
+        padding: 15px 20px; /* Moins d'espace pour gagner de la place */
+        background: rgba(10, 17, 40, 0.9); /* Fond sombre pour lisibilité */
+        backdrop-filter: blur(10px);
+    }
+    .logo-text { font-size: 1.4rem; }
+    .nav-trust { font-size: 0.75rem; padding: 5px 10px; }
+
+    /* 2. LE HERO (Haut de page) */
+    .hero-section {
+        padding-top: 100px; /* Espace pour ne pas être caché par la barre */
+        padding-bottom: 40px;
+        height: auto; /* Pas de hauteur forcée */
+    }
+
+    .hero-flex {
+        flex-direction: column; /* On empile tout */
+        gap: 2rem;
+        text-align: center; /* On centre le texte */
+    }
+
+    /* 3. TYPOGRAPHIE MOBILE */
+    h1 {
+        font-size: 2.2rem; /* Titre plus petit pour ne pas manger l'écran */
+        margin-bottom: 1rem;
+    }
+    .hero-desc {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* 4. LE FORMULAIRE (Doit être énorme et facile) */
+    .simulator-block {
+        width: 100%;
+        margin-top: 0;
+        padding: 1.2rem;
+        /* On aligne le texte à gauche DANS le formulaire pour faire pro */
+        text-align: left; 
+    }
+    /* On passe les champs l'un sous l'autre si besoin */
+    .sim-row { flex-direction: column; gap: 10px; }
+    
+    .btn-primary {
+        width: 100%; /* Bouton pleine largeur */
+        justify-content: center;
+        height: 50px; /* Gros bouton facile à cliquer avec le pouce */
+        font-size: 1.1rem;
+    }
+
+    /* 5. L'IMAGE (La cerise sur le gâteau) */
+    /* On la met EN DESSOUS du formulaire sur mobile */
+    .hero-visual-col {
+        order: 2; /* Force l'image après le texte */
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    
+    .splash-img {
+        max-height: 300px; /* Pas trop grande pour pas scroller 100 ans */
+    }
+
+    /* On cache les cartes flottantes sur mobile (trop petit) */
+    .float-stat { display: none; }
+
+    /* 6. LA GRILLE BENTO (Les économies) */
+    .bento-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 15px;
+    }
+    /* La carte 600€ reprend une taille normale */
+    .bento-card.featured { grid-column: span 1; }
+}
