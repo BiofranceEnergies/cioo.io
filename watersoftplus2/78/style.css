@@ -235,3 +235,30 @@ h1 {
 @media (max-width: 968px) {
     .simulator-card { width: 100%; margin-top: 1rem; }
 }
+
+/* --- ALIGNEMENT DES ÉLÉMENTS DE CONFIANCE EN BAS --- */
+.trust-wrapper-bottom {
+    margin-top: 1.5rem;      /* Espace entre le formulaire et les avis */
+    display: flex;
+    flex-direction: column;  /* Les met l'un sous l'autre */
+    gap: 0.8rem;             /* Espace entre les étoiles et les garanties */
+}
+
+/* On s'assure que les étoiles sont alignées à gauche */
+.trust-wrapper-bottom .trust-indicator {
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+/* On s'assure que les garanties (10 ans / 48h) sont alignées */
+.trust-wrapper-bottom .features-mini {
+    justify-content: flex-start;
+}
+
+/* PETIT AJUSTEMENT MOBILE */
+@media (max-width: 968px) {
+    .trust-wrapper-bottom {
+        align-items: center; /* Sur mobile, on centre tout */
+    }
+}
