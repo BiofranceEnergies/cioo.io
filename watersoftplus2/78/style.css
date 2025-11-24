@@ -33,21 +33,31 @@ body {
     padding: 25px 0; /* Suppression de toute marge horizontale ici */
 }
 
-/* UTILISATION DU CONTENEUR PARTAGÉ POUR L'ALIGNEMENT */
+/* --- 2. NAVIGATION (ALIGNEMENT FIXÉ) --- */
+.navbar {
+    position: absolute; top: 0; width: 100%; z-index: 100;
+    padding: 25px 0; /* Suppression de toute marge latérale ici */
+}
+
+/* Le CONTENEUR de la barre de navigation */
 .nav-container {
-    /* Ces valeurs doivent correspondre aux marges du reste du site */
     max-width: 1280px; 
     margin: 0 auto; 
     width: 100%;
+    /* C'est ICI qu'on applique la même marge que le Hero */
+    padding: 0 40px; 
     
-    /* Le fameux padding qui doit être le même que celui de votre titre */
-    padding: 0 5%; 
-    
-    /* La Flexbox pour la séparation */
-    display: flex;
-    justify-content: space-between; /* Pousse logo à gauche, badge à droite */
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
 }
+
+/* Logo Texte (C'était le bon code) */
+.logo-text {
+    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
+    letter-spacing: -1px; text-transform: uppercase; margin: 0;
+}
+/* ... (Le reste des styles du logo et du badge) ... */
 
 /* Logo Texte */
 .logo-text {
