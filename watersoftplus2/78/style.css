@@ -28,21 +28,21 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Prend toute la largeur de l'écran */
+    width: 100%;
     z-index: 100;
-    padding: 20px 0; /* Espacement haut/bas */
+    padding: 20px 0; /* Espacement vertical seulement */
 }
 
 .nav-container {
-    max-width: 1280px;
-    margin: 0 auto; /* Centre le bloc au milieu de l'écran */
-    padding: 0 5%;  /* Marge de sécurité sur les côtés */
-    width: 100%;    /* FORCE la largeur à 100% du parent */
+    max-width: 1280px; /* MÊME LARGEUR MAX que le reste du site */
+    margin: 0 auto;    /* Centré horizontalement */
+    width: 100%;
+    padding: 0 20px;   /* Padding latéral FIXE et petit (au lieu de 5%) */
     
-    /* La magie Flexbox pour écarter les éléments */
+    /* Flexbox pour l'espacement et l'alignement */
     display: flex;
-    justify-content: space-between; /* Pousse le logo à gauche et le badge à droite */
-    align-items: center;
+    justify-content: space-between; /* Pousse le logo à gauche, le badge à droite */
+    align-items: center; /* Centre verticalement les deux éléments */
 }
 
 /* Logo Texte */
@@ -52,7 +52,9 @@ body {
     color: var(--text-white);
     letter-spacing: -1px;
     text-transform: uppercase;
-    white-space: nowrap; /* Empêche le logo de passer à la ligne */
+    white-space: nowrap;
+    /* Suppression de toute marge inutile */
+    margin: 0;
 }
 .logo-accent {
     color: var(--primary);
@@ -72,9 +74,10 @@ body {
     border-radius: 50px;
     background: rgba(10, 17, 40, 0.8);
     backdrop-filter: blur(5px);
-    white-space: nowrap; /* Empêche le texte de se casser */
+    white-space: nowrap;
+    /* Suppression de toute marge inutile */
+    margin: 0;
 }
-
 /* --- 3. HERO SECTION --- */
 .hero-section {
     position: relative;
