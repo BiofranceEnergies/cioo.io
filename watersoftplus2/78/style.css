@@ -25,19 +25,54 @@ body {
 
 /* --- 2. NAVIGATION --- */
 .navbar {
-    position: absolute; top: 0; width: 100%; padding: 30px 50px;
-    display: flex; justify-content: space-between; align-items: center; z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Prend toute la largeur de l'écran */
+    z-index: 100;
+    padding: 20px 0; /* Espacement haut/bas */
 }
-.logo-text {
-    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
-    letter-spacing: -1px; text-transform: uppercase;
-}
-.logo-accent { color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; margin-left: 2px; }
 
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto; /* Centre le bloc au milieu de l'écran */
+    padding: 0 5%;  /* Marge de sécurité sur les côtés */
+    width: 100%;    /* FORCE la largeur à 100% du parent */
+    
+    /* La magie Flexbox pour écarter les éléments */
+    display: flex;
+    justify-content: space-between; /* Pousse le logo à gauche et le badge à droite */
+    align-items: center;
+}
+
+/* Logo Texte */
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--text-white);
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    white-space: nowrap; /* Empêche le logo de passer à la ligne */
+}
+.logo-accent {
+    color: var(--primary);
+    font-size: 2rem;
+    line-height: 0;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+/* Badge Expert */
 .nav-trust {
-    font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
-    background: rgba(10, 17, 40, 0.5);
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 20px;
+    border-radius: 50px;
+    background: rgba(10, 17, 40, 0.8);
+    backdrop-filter: blur(5px);
+    white-space: nowrap; /* Empêche le texte de se casser */
 }
 
 /* --- 3. HERO SECTION --- */
