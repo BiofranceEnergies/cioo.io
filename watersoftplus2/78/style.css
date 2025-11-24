@@ -23,40 +23,45 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 2. NAVIGATION (CORRIGÉE & ALIGNÉE) --- */
+/* --- 2. NAVIGATION (ALIGNEMENT PARFAIT) --- */
 .navbar {
     position: absolute;
-    top: 0; left: 0; width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%; /* S'étend sur toute la largeur */
     z-index: 100;
-    padding: 25px 0; /* Juste hauteur, pas de largeur forcée ici */
+    padding: 25px 0; /* Suppression de toute marge horizontale ici */
 }
 
-/* On utilise .nav-container pour aligner pile avec le Hero */
+/* UTILISATION DU CONTENEUR PARTAGÉ POUR L'ALIGNEMENT */
 .nav-container {
+    /* Ces valeurs doivent correspondre aux marges du reste du site */
     max-width: 1280px; 
     margin: 0 auto; 
     width: 100%;
-    padding: 0 5%; /* C'EST LA CLÉ : 5% COMME LE RESTE DU SITE */
-    display: flex; 
-    justify-content: space-between; 
+    
+    /* Le fameux padding qui doit être le même que celui de votre titre */
+    padding: 0 5%; 
+    
+    /* La Flexbox pour la séparation */
+    display: flex;
+    justify-content: space-between; /* Pousse logo à gauche, badge à droite */
     align-items: center;
 }
 
 /* Logo Texte */
 .logo-text {
-    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
-    letter-spacing: -1px; text-transform: uppercase;
-    margin: 0; line-height: 1;
+    font-size: 1.8rem; font-weight: 900; line-height: 1; /* Assure que le texte ne prenne pas de place bizarre */
+    margin: 0; 
 }
-.logo-accent { color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; margin-left: 2px; }
 
 /* Badge Expert */
 .nav-trust {
-    font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
-    background: rgba(10, 17, 40, 0.5);
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 50px;
+    white-space: nowrap;
 }
-
 /* --- 3. HERO SECTION --- */
 .hero-section {
     position: relative;
