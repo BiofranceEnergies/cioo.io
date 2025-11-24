@@ -1,10 +1,10 @@
 /* =========================================
-   STYLE "CLIC & DEVIS" ADAPTÉ EAU (Watersoft)
+   STYLE "WATERSOFT TECH" (Final Version)
    ========================================= */
 
 :root {
-    /* COULEURS */
-    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE */
+    /* PALETTE DE COULEURS */
+    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE (Le "Pep") */
     --primary-hover: #0891b2;
     --dark-bg: #0a1128;       /* Bleu Nuit Profond */
     --tech-blue: #1c3b70;     /* Dégradé fond */
@@ -13,7 +13,7 @@
     --font-main: 'Inter', sans-serif;
 }
 
-/* --- 1. RESET --- */
+/* --- 1. RESET & BASE --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -28,18 +28,21 @@ body {
     position: absolute; top: 0; width: 100%; padding: 30px 50px;
     display: flex; justify-content: space-between; align-items: center; z-index: 100;
 }
+
+/* Logo Texte (Style Tech) */
 .logo-text {
-    font-size: 1.8rem; font-weight: 800; color: var(--text-white);
+    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
     letter-spacing: -1px; text-transform: uppercase;
 }
-.logo-accent { color: var(--primary); }
+.logo-accent { color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; margin-left: 2px; }
 
 .nav-trust {
     font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
     border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
+    background: rgba(10, 17, 40, 0.5);
 }
 
-/* --- 3. HERO SECTION (GRILLE) --- */
+/* --- 3. HERO SECTION (FOND GRILLE) --- */
 .hero-section {
     position: relative;
     min-height: 100vh;
@@ -48,6 +51,7 @@ body {
     padding: 100px 20px; overflow: hidden;
 }
 
+/* La Grille Technique en arrière-plan */
 .hero-overlay {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
@@ -55,20 +59,22 @@ body {
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     z-index: 0;
+    /* Vignette sombre pour focus centre */
+    mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
 }
 
 .hero-container {
-    max-width: 1200px; margin: 0 auto; width: 100%;
+    max-width: 1280px; margin: 0 auto; width: 100%;
     display: flex; align-items: center; justify-content: space-between;
     gap: 4rem; position: relative; z-index: 1;
 }
 
-/* --- COLONNE GAUCHE (TEXTE) --- */
+/* --- 4. COLONNE GAUCHE (TEXTE & FORMULAIRE) --- */
 .hero-text-col { flex: 1; max-width: 600px; }
 
 .badge {
     background: rgba(6, 182, 212, 0.15); color: var(--primary);
-    padding: 6px 12px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+    padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 1px; display: inline-block;
     margin-bottom: 20px; border: 1px solid rgba(6, 182, 212, 0.3);
 }
@@ -79,81 +85,150 @@ h1 {
 .highlight { color: var(--primary); }
 
 .hero-desc {
-    font-size: 1.2rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2.5rem; max-width: 90%;
+    font-size: 1.15rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2rem; max-width: 90%;
 }
 
-.hero-stats {
-    display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+/* --- LE SIMULATEUR (Style Bloc Solide) --- */
+.simulator-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; padding: 1.8rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    margin-top: 1rem;
 }
-.stat-item { display: flex; flex-direction: column; }
-.stat-val { font-size: 2.2rem; font-weight: 800; color: white; line-height: 1; }
-.stat-lbl { font-size: 0.8rem; color: var(--text-gray); font-weight: 600; margin-top: 5px; text-transform: uppercase;}
-.stat-item.highlight .stat-val { color: var(--primary); }
 
-/* --- COLONNE DROITE (IMAGE) --- */
+.sim-header { 
+    font-weight: 800; color: var(--primary); margin-bottom: 1rem; 
+    text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;
+}
+
+.sim-row { display: flex; gap: 10px; margin-bottom: 12px; }
+
+.sim-input {
+    flex: 1; padding: 14px; background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 1rem;
+}
+.sim-input:focus { outline: none; border-color: var(--primary); }
+
+.btn-primary {
+    background-color: var(--primary); color: #0a1128; border: none;
+    padding: 12px 24px; border-radius: 6px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); white-space: nowrap;
+    display: flex; align-items: center; gap: 8px; font-size: 1rem;
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover); transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+}
+
+.trust-mini { font-size: 0.8rem; color: var(--text-gray); margin-top: 5px; opacity: 0.8; font-weight: 500;}
+
+/* Etoiles en bas */
+.trust-bottom { margin-top: 2rem; color: var(--text-gray); font-size: 0.95rem; font-weight: 500;}
+.stars { color: #fbbf24; margin-right: 8px; }
+
+
+/* --- 5. COLONNE DROITE (VISUEL + CARTES FLOTTANTES) --- */
 .hero-visual-col {
     flex: 1; 
     display: flex; 
     justify-content: flex-end; 
     align-items: center; 
     position: relative;
-    max-height: 80vh; /* Empêche l'image de pousser la page */
+    /* On limite la hauteur pour ne pas pousser le layout */
+    max-height: 80vh; 
 }
 
-.splash-wrapper { position: relative; transition: transform 0.5s ease; }
+/* Conteneur de l'image et des cartes */
+.splash-wrapper {
+    position: relative;
+    width: 100%; display: flex; justify-content: center;
+}
 
 .splash-img {
-    max-width: 100%;      /* Reste dans sa boite */
-    max-height: 600px;    /* TAILLE MAÎTRISÉE (Ta correction) */
+    max-width: 100%;
+    max-height: 600px; /* Taille idéale Laptop */
     width: auto; 
-    margin-right: 0;
-    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.6));
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
 }
 
-/* --- LE SIMULATEUR (C'est ce qui manquait !) --- */
-.simulator-block {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px; padding: 1.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    margin-top: 1rem;
-}
-.sim-header { font-weight: 700; color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; font-size: 0.9rem;}
-
-.sim-row { display: flex; gap: 10px; margin-bottom: 10px; }
-.sim-input {
-    flex: 1; padding: 12px; background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 1rem;
-}
-.btn-primary {
-    background-color: var(--primary); color: #0a1128; border: none;
-    padding: 12px 24px; border-radius: 8px; font-weight: 800; cursor: pointer;
-    box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.4); white-space: nowrap;
-    display: flex; align-items: center; gap: 8px; font-size: 1rem;
-}
-.btn-primary:hover {
-    background-color: var(--primary-hover); transform: translateY(-2px);
-    box-shadow: 0 15px 30px -5px rgba(6, 182, 212, 0.5);
+/* --- LES CARTES FLOTTANTES (Glassmorphism) --- */
+.float-stat {
+    position: absolute;
+    background: rgba(16, 23, 45, 0.7); /* Fond sombre semi-transparent */
+    backdrop-filter: blur(12px);         /* Effet verre */
+    border: 1px solid rgba(6, 182, 212, 0.3); /* Bordure Cyan */
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    z-index: 10;
+    min-width: 150px;
+    transition: transform 0.3s ease;
 }
 
-.trust-mini { font-size: 0.75rem; color: var(--text-gray); margin-top: 10px; opacity: 0.8; }
-.trust-bottom { margin-top: 1.5rem; color: var(--text-gray); font-size: 0.9rem; }
-.stars { color: #fbbf24; }
+/* Interaction au survol */
+.float-stat:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+    background: rgba(16, 23, 45, 0.9);
+}
 
-/* --- RESPONSIVE --- */
+.stat-icon { font-size: 1.6rem; }
+
+.stat-info { display: flex; flex-direction: column; line-height: 1; }
+.stat-big { 
+    font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 4px; 
+}
+.stat-label { 
+    font-size: 0.7rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; 
+}
+
+/* --- POSITIONNEMENT DES CARTES (Le Secret) --- */
+
+/* 1. Haut Droite (Protection) */
+.card-top {
+    top: 12%; right: -10px;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* 2. Milieu Droite (Produits) */
+.card-right {
+    top: 55%; right: -30px;
+    animation: float 5s ease-in-out infinite 2s;
+}
+
+/* 3. Bas Gauche (Energie) */
+.card-bottom {
+    bottom: 15%; left: 20px;
+    animation: float 7s ease-in-out infinite 1s;
+}
+
+/* Animation douce de flottaison */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- 6. RESPONSIVE --- */
 @media (max-width: 968px) {
     .navbar { padding: 20px; }
-    .hero-container { flex-direction: column; text-align: center; padding-top: 40px; gap: 3rem; }
-    .hero-text-col { max-width: 100%; }
+    .hero-section { padding-top: 120px; padding-bottom: 50px; height: auto; min-height: auto; }
+    .hero-container { flex-direction: column; text-align: center; gap: 3rem; }
+    .hero-text-col { max-width: 100%; padding: 0 20px; }
     h1 { font-size: 2.5rem; }
-    .hero-stats { justify-content: center; }
     
     .splash-img {
-        max-height: 350px; /* Plus petit sur mobile */
+        max-height: 350px;
         margin-top: 2rem;
     }
 
+    /* On cache les cartes flottantes sur mobile pour éviter le désordre */
+    .float-stat { display: none; }
+
+    /* Ajustement Formulaire Mobile */
     .sim-row { flex-direction: column; }
     .btn-primary { width: 100%; justify-content: center; }
 }
