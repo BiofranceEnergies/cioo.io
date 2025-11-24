@@ -398,81 +398,73 @@ h1 {
 
 
 /* =========================================
-   FINITIONS MOBILE (Google Ads Optimized)
+   OPTIMISATION MOBILE (V2 - Compacte & Visuelle)
    ========================================= */
-
 @media (max-width: 968px) {
 
-    /* 1. LE HEADER */
-    .navbar {
-        padding: 15px 20px; /* Moins d'espace pour gagner de la place */
-        background: rgba(10, 17, 40, 0.9); /* Fond sombre pour lisibilité */
-        backdrop-filter: blur(10px);
-    }
-    .logo-text { font-size: 1.4rem; }
-    .nav-trust { font-size: 0.75rem; padding: 5px 10px; }
+    /* 1. HEADER & NAV */
+    .navbar { padding: 15px 20px; background: rgba(10, 17, 40, 0.95); }
+    .logo-text { font-size: 1.3rem; }
+    .nav-trust { display: none; } /* On cache la confiance en haut pour gagner de la place */
 
-    /* 2. LE HERO (Haut de page) */
-    .hero-section {
-        padding-top: 100px; /* Espace pour ne pas être caché par la barre */
-        padding-bottom: 40px;
-        height: auto; /* Pas de hauteur forcée */
-    }
+    /* 2. HERO SECTION */
+    .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; }
+    .hero-container { flex-direction: column; text-align: center; gap: 2rem; }
+    .hero-text-col { padding: 0; }
+    
+    h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
 
-    .hero-flex {
-        flex-direction: column; /* On empile tout */
-        gap: 2rem;
-        text-align: center; /* On centre le texte */
-    }
-
-    /* 3. TYPOGRAPHIE MOBILE */
-    h1 {
-        font-size: 2.2rem; /* Titre plus petit pour ne pas manger l'écran */
-        margin-bottom: 1rem;
-    }
-    .hero-desc {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    /* 4. LE FORMULAIRE (Doit être énorme et facile) */
-    .simulator-block {
-        width: 100%;
-        margin-top: 0;
-        padding: 1.2rem;
-        /* On aligne le texte à gauche DANS le formulaire pour faire pro */
-        text-align: left; 
-    }
-    /* On passe les champs l'un sous l'autre si besoin */
+    /* 3. LE FORMULAIRE COMPACT */
+    .simulator-block { padding: 1.2rem; margin-top: 0; }
+    .sim-header { font-size: 0.85rem; text-align: left; }
     .sim-row { flex-direction: column; gap: 10px; }
+    .btn-primary { width: 100%; justify-content: center; height: 50px; font-size: 1.1rem; }
+    .sim-options { margin-bottom: 10px; }
     
-    .btn-primary {
-        width: 100%; /* Bouton pleine largeur */
-        justify-content: center;
-        height: 50px; /* Gros bouton facile à cliquer avec le pouce */
-        font-size: 1.1rem;
-    }
-
-    /* 5. L'IMAGE (La cerise sur le gâteau) */
-    /* On la met EN DESSOUS du formulaire sur mobile */
+    /* 4. VISUEL + BADGES (Le retour !) */
     .hero-visual-col {
-        order: 2; /* Force l'image après le texte */
-        justify-content: center;
+        order: 2; /* On met l'image APRES le formulaire */
         margin-top: 2rem;
+        flex-direction: column; /* On empile image puis badges */
     }
-    
+
     .splash-img {
-        max-height: 300px; /* Pas trop grande pour pas scroller 100 ans */
+        max-height: 320px; /* Taille maîtrisée */
+        margin-bottom: 1.5rem; /* Espace avant les badges */
     }
 
-    /* On cache les cartes flottantes sur mobile (trop petit) */
-    .float-stat { display: none; }
-
-    /* 6. LA GRILLE BENTO (Les économies) */
+    /* ON RÉAFFICHE LES BADGES (En ligne sous l'image) */
+    .float-stat {
+        display: flex !important; /* Force l'affichage */
+        position: relative; /* Plus de flottement */
+        top: auto; bottom: auto; left: auto; right: auto; /* Reset position */
+        animation: none; /* Pas de mouvement qui distrait */
+        margin-bottom: 10px;
+        width: 100%; /* Largeur pleine */
+        justify-content: flex-start; /* Alignés proprement */
+        background: rgba(255, 255, 255, 0.05);
+    }
+    /* On cache la 3ème carte sur mobile si c'est trop long, ou on garde les 3 */
+    
+    /* 5. LA GRILLE BENTO (Mode 2 colonnes compactes) */
     .bento-grid {
-        grid-template-columns: 1fr; /* Une seule colonne */
-        gap: 15px;
+        /* MAGIE : 2 colonnes au lieu d'une seule */
+        grid-template-columns: 1fr 1fr; 
+        gap: 10px; /* Espace réduit */
     }
-    /* La carte 600€ reprend une taille normale */
-    .bento-card.featured { grid-column: span 1; }
+
+    .bento-card {
+        padding: 15px; /* Moins de gras */
+        min-height: 160px; /* Hauteur uniforme */
+    }
+
+    /* La carte 600€ garde toute la largeur */
+    .bento-card.featured { grid-column: span 2; }
+
+    /* On réduit la taille des textes dans les cartes */
+    .bento-number { font-size: 2rem; margin-bottom: 5px; }
+    .bento-icon { width: 40px; height: 40px; font-size: 1.5rem; margin-bottom: 10px; }
+    .bento-card h3 { font-size: 0.9rem; margin-bottom: 5px; }
+    .bento-card p { font-size: 0.8rem; line-height: 1.3; }
 }
