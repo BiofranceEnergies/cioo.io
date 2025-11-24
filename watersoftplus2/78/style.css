@@ -1,5 +1,5 @@
 /* =========================================
-   STYLE "WATERSOFT TECH" (Final Version)
+   STYLE "WATERSOFT TECH" (MASTER VERSION)
    ========================================= */
 
 :root {
@@ -23,55 +23,40 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 2. NAVIGATION (MÉTHODE BÉTON) --- */
+/* --- 2. NAVIGATION (CORRIGÉE & ALIGNÉE) --- */
 .navbar {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Prend toute la largeur écran */
+    top: 0; left: 0; width: 100%;
     z-index: 100;
-    padding: 25px 0; /* Juste espacement haut/bas */
+    padding: 25px 0; /* Juste hauteur, pas de largeur forcée ici */
 }
 
-/* Le container hérite déjà des marges 5% du reste du CSS */
-/* On s'occupe juste de l'alignement interne */
-.nav-flex {
-    width: 100%; /* Force à prendre toute la place du container */
-    display: flex;
-    justify-content: space-between; /* Colle aux extrémités */
+/* On utilise .nav-container pour aligner pile avec le Hero */
+.nav-container {
+    max-width: 1280px; 
+    margin: 0 auto; 
+    width: 100%;
+    padding: 0 5%; /* C'EST LA CLÉ : 5% COMME LE RESTE DU SITE */
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
 }
 
 /* Logo Texte */
 .logo-text {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--text-white);
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    line-height: 1;
-    margin: 0; /* Sécurité */
+    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
+    letter-spacing: -1px; text-transform: uppercase;
+    margin: 0; line-height: 1;
 }
-.logo-accent {
-    color: var(--primary);
-    font-size: 2rem;
-    line-height: 0;
-    vertical-align: middle;
-    margin-left: 2px;
-}
+.logo-accent { color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; margin-left: 2px; }
 
 /* Badge Expert */
 .nav-trust {
-    font-size: 0.9rem;
-    color: var(--text-gray);
-    font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 20px;
-    border-radius: 50px;
+    font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
     background: rgba(10, 17, 40, 0.5);
-    white-space: nowrap;
-    margin: 0; /* Sécurité */
 }
+
 /* --- 3. HERO SECTION --- */
 .hero-section {
     position: relative;
@@ -95,9 +80,10 @@ body {
     max-width: 1280px; margin: 0 auto; width: 100%;
     display: flex; align-items: center; justify-content: space-between;
     gap: 4rem; position: relative; z-index: 1;
+    /* Le padding ici est géré par le .container générique ou le width 100% + max-width */
 }
 
-/* --- COLONNE GAUCHE --- */
+/* --- 4. COLONNE GAUCHE --- */
 .hero-text-col { flex: 1; max-width: 600px; }
 
 .badge {
@@ -116,7 +102,7 @@ h1 {
     font-size: 1.15rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2rem; max-width: 90%;
 }
 
-/* --- SIMULATEUR --- */
+/* --- SIMULATEUR (Style & Boutons) --- */
 .simulator-block {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -133,13 +119,21 @@ h1 {
 .sim-row-vertical { display: flex; flex-direction: column; gap: 15px; }
 .sim-label { display: block; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600; }
 
+/* STYLE DES BOUTONS 1-2, 3-4... */
 .sim-options { display: flex; gap: 10px; width: 100%; margin-bottom: 5px; }
+
 .option-btn {
     flex: 1; background: #0f172a; border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1;
     padding: 12px 0; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; font-family: 'Inter', sans-serif; font-size: 0.9rem;
 }
 .option-btn:hover { border-color: var(--primary); color: white; background: rgba(6, 182, 212, 0.1); }
 .option-btn.active { background: var(--primary); border-color: var(--primary); color: #0a1128; }
+
+.sim-input {
+    flex: 1; padding: 14px; background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 1rem; width: 100%;
+}
+.sim-input:focus { outline: none; border-color: var(--primary); }
 
 .btn-primary {
     background-color: var(--primary); color: #0a1128; border: none;
@@ -149,10 +143,8 @@ h1 {
 .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 0 30px rgba(6, 182, 212, 0.5); }
 
 .trust-mini { font-size: 0.8rem; color: var(--text-gray); margin-top: 15px; opacity: 0.8; font-weight: 500; text-align: center;}
-.trust-bottom { margin-top: 2rem; color: var(--text-gray); font-size: 0.95rem; font-weight: 500;}
-.stars { color: #fbbf24; margin-right: 8px; }
 
-/* Styles pour le résultat (étape 2) */
+/* RÉSULTAT CALCUL (Step 2) */
 .model-box {
     background: rgba(6, 182, 212, 0.1); border: 1px solid var(--primary);
     border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px;
@@ -162,13 +154,15 @@ h1 {
 .model-tags { color: var(--primary); font-size: 0.8rem; font-weight: 600; }
 .lead-text { color: white; font-size: 0.9rem; margin-bottom: 10px; font-weight: 600; }
 .sim-row { display: flex; gap: 10px; }
-.sim-input { flex: 1; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 1rem; }
 .icon-only { padding: 0 20px; width: auto !important; }
 .restart-link { text-align: center; color: var(--text-gray); font-size: 0.8rem; text-decoration: underline; margin-top: 15px; cursor: pointer; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+.trust-bottom { margin-top: 2rem; color: var(--text-gray); font-size: 0.95rem; font-weight: 500;}
+.stars { color: #fbbf24; margin-right: 8px; }
 
-/* --- COLONNE DROITE --- */
+
+/* --- 5. COLONNE DROITE --- */
 .hero-visual-col {
     flex: 1; display: flex; justify-content: flex-end; align-items: center; 
     position: relative; max-height: 80vh;
@@ -197,7 +191,7 @@ h1 {
 .card-bottom { bottom: 15%; left: 20px; animation: float 7s ease-in-out infinite 1s; }
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-/* --- SECTION STATS BENTO --- */
+/* --- SECTION BENTO --- */
 .stats-section { padding: 100px 20px; background-color: var(--dark-bg); border-top: 1px solid rgba(255, 255, 255, 0.05); }
 .section-title { text-align: center; margin-bottom: 60px; }
 .section-title h2 { font-size: 2.5rem; color: white; font-weight: 800; margin-bottom: 10px; }
@@ -321,10 +315,10 @@ h1 {
 .close-btn:hover { color: var(--primary); }
 
 /* =========================================
-   OPTIMISATION MOBILE (V2 - Compacte & Visuelle)
+   OPTIMISATION MOBILE (V2)
    ========================================= */
 @media (max-width: 968px) {
-    .navbar { padding: 15px 20px; background: rgba(10, 17, 40, 0.95); }
+    .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.95); }
     .logo-text { font-size: 1.3rem; }
     .nav-trust { display: none; }
     
@@ -336,7 +330,7 @@ h1 {
     
     .simulator-block { padding: 1.2rem; margin-top: 0; }
     .sim-header { font-size: 0.85rem; text-align: left; }
-    .sim-row { flex-direction: column; gap: 10px; }
+    .sim-row-vertical { flex-direction: column; gap: 10px; }
     .btn-primary { width: 100%; justify-content: center; height: 50px; font-size: 1.1rem; }
     .sim-options { margin-bottom: 10px; }
     
