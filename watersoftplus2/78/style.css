@@ -4,7 +4,7 @@
 
 :root {
     /* PALETTE DE COULEURS */
-    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE (Le "Pep") */
+    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE */
     --primary-hover: #0891b2;
     --dark-bg: #0a1128;       /* Bleu Nuit Profond */
     --tech-blue: #1c3b70;     /* Dégradé fond */
@@ -28,8 +28,6 @@ body {
     position: absolute; top: 0; width: 100%; padding: 30px 50px;
     display: flex; justify-content: space-between; align-items: center; z-index: 100;
 }
-
-/* Logo Texte (Style Tech) */
 .logo-text {
     font-size: 1.8rem; font-weight: 900; color: var(--text-white);
     letter-spacing: -1px; text-transform: uppercase;
@@ -42,7 +40,7 @@ body {
     background: rgba(10, 17, 40, 0.5);
 }
 
-/* --- 3. HERO SECTION (FOND GRILLE) --- */
+/* --- 3. HERO SECTION --- */
 .hero-section {
     position: relative;
     min-height: 100vh;
@@ -51,7 +49,6 @@ body {
     padding: 100px 20px; overflow: hidden;
 }
 
-/* La Grille Technique en arrière-plan */
 .hero-overlay {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
@@ -59,7 +56,6 @@ body {
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     z-index: 0;
-    /* Vignette sombre pour focus centre */
     mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
 }
 
@@ -69,7 +65,7 @@ body {
     gap: 4rem; position: relative; z-index: 1;
 }
 
-/* --- 4. COLONNE GAUCHE (TEXTE & FORMULAIRE) --- */
+/* --- COLONNE GAUCHE --- */
 .hero-text-col { flex: 1; max-width: 600px; }
 
 .badge {
@@ -88,7 +84,7 @@ h1 {
     font-size: 1.15rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2rem; max-width: 90%;
 }
 
-/* --- LE SIMULATEUR (Style Bloc Solide) --- */
+/* --- SIMULATEUR --- */
 .simulator-block {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -98,734 +94,243 @@ h1 {
 }
 
 .sim-header { 
-    font-weight: 800; color: var(--primary); margin-bottom: 1rem; 
+    font-weight: 800; color: var(--primary); margin-bottom: 1.2rem; 
     text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;
 }
 
-.sim-row { display: flex; gap: 10px; margin-bottom: 12px; }
+.sim-row-vertical { display: flex; flex-direction: column; gap: 15px; }
+.sim-label { display: block; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600; }
 
-.sim-input {
-    flex: 1; padding: 14px; background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 1rem;
+.sim-options { display: flex; gap: 10px; width: 100%; margin-bottom: 5px; }
+.option-btn {
+    flex: 1; background: #0f172a; border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1;
+    padding: 12px 0; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; font-family: 'Inter', sans-serif; font-size: 0.9rem;
 }
-.sim-input:focus { outline: none; border-color: var(--primary); }
+.option-btn:hover { border-color: var(--primary); color: white; background: rgba(6, 182, 212, 0.1); }
+.option-btn.active { background: var(--primary); border-color: var(--primary); color: #0a1128; }
 
 .btn-primary {
     background-color: var(--primary); color: #0a1128; border: none;
-    padding: 12px 24px; border-radius: 6px; font-weight: 800; cursor: pointer;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); white-space: nowrap;
-    display: flex; align-items: center; gap: 8px; font-size: 1rem;
-    transition: all 0.2s ease;
+    padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 1.1rem; transition: 0.2s; width: 100%;
 }
-.btn-primary:hover {
-    background-color: var(--primary-hover); transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
-}
+.btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 0 30px rgba(6, 182, 212, 0.5); }
 
-.trust-mini { font-size: 0.8rem; color: var(--text-gray); margin-top: 5px; opacity: 0.8; font-weight: 500;}
-
-/* Etoiles en bas */
+.trust-mini { font-size: 0.8rem; color: var(--text-gray); margin-top: 15px; opacity: 0.8; font-weight: 500; text-align: center;}
 .trust-bottom { margin-top: 2rem; color: var(--text-gray); font-size: 0.95rem; font-weight: 500;}
 .stars { color: #fbbf24; margin-right: 8px; }
 
-/* =========================================
-   CODE MANQUANT : STYLE DES BOUTONS SIMULATEUR
-   ========================================= */
-
-/* Le conteneur des boutons (1-2, 3-4, 5+) */
-.sim-options { 
-    display: flex; 
-    gap: 10px; 
-    width: 100%; 
-    margin-bottom: 15px; /* Espace avant le champ Code Postal */
+/* Styles pour le résultat (étape 2) */
+.model-box {
+    background: rgba(6, 182, 212, 0.1); border: 1px solid var(--primary);
+    border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px;
+    animation: fadeIn 0.5s ease;
 }
+.model-name { color: white; font-size: 1.8rem; font-weight: 900; margin: 5px 0; text-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
+.model-tags { color: var(--primary); font-size: 0.8rem; font-weight: 600; }
+.lead-text { color: white; font-size: 0.9rem; margin-bottom: 10px; font-weight: 600; }
+.sim-row { display: flex; gap: 10px; }
+.sim-input { flex: 1; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 1rem; }
+.icon-only { padding: 0 20px; width: auto !important; }
+.restart-link { text-align: center; color: var(--text-gray); font-size: 0.8rem; text-decoration: underline; margin-top: 15px; cursor: pointer; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Le style de base de chaque bouton */
-.option-btn {
-    flex: 1; /* Largeur égale pour tous */
-    background: #0f172a; /* Fond sombre par défaut */
-    border: 1px solid rgba(255,255,255,0.2); /* Bordure fine grise */
-    color: #cbd5e1; /* Texte gris clair */
-    padding: 12px 0; /* Hauteur confortable */
-    border-radius: 6px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: all 0.2s ease;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-}
 
-/* Au survol */
-.option-btn:hover { 
-    border-color: var(--primary); /* Bordure Cyan */
-    color: white; 
-    background: rgba(6, 182, 212, 0.1); /* Léger fond cyan */
-}
-
-/* L'état ACTIF (Celui sélectionné) */
-.option-btn.active { 
-    background: var(--primary); /* Fond Cyan plein */
-    border-color: var(--primary); 
-    color: #0a1128; /* Texte foncé pour contraste */
-}
-
-/* On met le label "Foyer :" un peu plus joli */
-.sim-step-1 .sim-label {
-    display: block; 
-    color: var(--text-gray); 
-    font-size: 0.8rem; 
-    margin-bottom: 8px; 
-    font-weight: 600; 
-    text-transform: uppercase;
-}
-
-/* Ajustement pour le gros bouton "Calculer" en dessous */
-.full-width-btn {
-    width: 100%;
-    justify-content: center;
-    margin-top: 5px; /* Petit espace si besoin */
-}
-
-/* --- 5. COLONNE DROITE (VISUEL + CARTES FLOTTANTES) --- */
+/* --- COLONNE DROITE --- */
 .hero-visual-col {
-    flex: 1; 
-    display: flex; 
-    justify-content: flex-end; 
-    align-items: center; 
-    position: relative;
-    /* On limite la hauteur pour ne pas pousser le layout */
-    max-height: 80vh; 
+    flex: 1; display: flex; justify-content: flex-end; align-items: center; 
+    position: relative; max-height: 80vh;
 }
-
-/* Conteneur de l'image et des cartes */
-.splash-wrapper {
-    position: relative;
-    width: 100%; display: flex; justify-content: center;
-}
-
+.splash-wrapper { position: relative; width: 100%; display: flex; justify-content: center; }
 .splash-img {
-    max-width: 100%;
-    max-height: 600px; 
-    width: auto; 
-    margin-right: 0;
-    
-    /* ON CHANGE JUSTE CETTE LIGNE */
-    /* On ajoute de la luminosité (+10%) et une ombre portée cyan pour le décoller du fond */
-    filter: brightness(1.1) drop-shadow(0 0 20px rgba(6, 182, 212, 0.15));
+    max-width: 100%; max-height: 600px; width: auto; margin-right: 0;
+    filter: brightness(1.1) drop-shadow(0 20px 60px rgba(0,0,0,0.6));
 }
 
-/* --- LES CARTES FLOTTANTES (Glassmorphism) --- */
+/* Cartes flottantes */
 .float-stat {
-    position: absolute;
-    background: rgba(16, 23, 45, 0.7); /* Fond sombre semi-transparent */
-    backdrop-filter: blur(12px);         /* Effet verre */
-    border: 1px solid rgba(6, 182, 212, 0.3); /* Bordure Cyan */
-    padding: 12px 18px;
-    border-radius: 12px;
-    display: flex; align-items: center; gap: 12px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    z-index: 10;
-    min-width: 150px;
-    transition: transform 0.3s ease;
+    position: absolute; background: rgba(16, 23, 45, 0.7); backdrop-filter: blur(12px);
+    border: 1px solid rgba(6, 182, 212, 0.3); padding: 12px 18px; border-radius: 12px;
+    display: flex; align-items: center; gap: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    z-index: 10; min-width: 150px; transition: 0.3s;
 }
-
-/* Interaction au survol */
-.float-stat:hover {
-    transform: scale(1.05);
-    border-color: var(--primary);
-    background: rgba(16, 23, 45, 0.9);
-}
-
+.float-stat:hover { transform: scale(1.05); border-color: var(--primary); background: rgba(16, 23, 45, 0.9); }
 .stat-icon { font-size: 1.6rem; }
-
 .stat-info { display: flex; flex-direction: column; line-height: 1; }
-.stat-big { 
-    font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 4px; 
-}
-.stat-label { 
-    font-size: 0.7rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; 
-}
+.stat-big { font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 4px; }
+.stat-label { font-size: 0.7rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 
-/* --- POSITIONNEMENT DES CARTES (Le Secret) --- */
+.card-top { top: 12%; right: -10px; animation: float 6s ease-in-out infinite; }
+.card-right { top: 55%; right: -30px; animation: float 5s ease-in-out infinite 2s; }
+.card-bottom { bottom: 15%; left: 20px; animation: float 7s ease-in-out infinite 1s; }
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-/* 1. Haut Droite (Protection) */
-.card-top {
-    top: 12%; right: -10px;
-    animation: float 6s ease-in-out infinite;
-}
-
-/* 2. Milieu Droite (Produits) */
-.card-right {
-    top: 55%; right: -30px;
-    animation: float 5s ease-in-out infinite 2s;
-}
-
-/* 3. Bas Gauche (Energie) */
-.card-bottom {
-    bottom: 15%; left: 20px;
-    animation: float 7s ease-in-out infinite 1s;
-}
-
-/* Animation douce de flottaison */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-
-
-/* =========================================
-   SECTION BENTO STATS (Dark Tech Style)
-   ========================================= */
-
-.stats-section {
-    padding: 100px 20px;
-    background-color: var(--dark-bg); /* Continuité parfaite avec le Hero */
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ligne de séparation subtile */
-}
-
-.section-title {
-    text-align: center; margin-bottom: 60px;
-}
-.section-title h2 {
-    font-size: 2.5rem; color: white; font-weight: 800; margin-bottom: 10px;
-}
-.section-title p {
-    color: var(--text-gray); font-size: 1.1rem;
-}
-
-/* LA GRILLE BENTO */
-.bento-grid {
-    display: grid;
-    /* 3 colonnes équilibrées */
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    max-width: 1200px; margin: 0 auto;
-}
-
-/* STYLE DES CARTES (Dark Glass) */
+/* --- SECTION STATS BENTO --- */
+.stats-section { padding: 100px 20px; background-color: var(--dark-bg); border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.section-title { text-align: center; margin-bottom: 60px; }
+.section-title h2 { font-size: 2.5rem; color: white; font-weight: 800; margin-bottom: 10px; }
+.section-title p { color: var(--text-gray); font-size: 1.1rem; }
+.bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; max-width: 1200px; margin: 0 auto; }
 .bento-card {
-    background: rgba(255, 255, 255, 0.02); /* Fond très léger */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure fine */
-    border-radius: 16px;
-    padding: 30px;
-    transition: all 0.3s ease;
-    display: flex; flex-direction: column; align-items: flex-start;
+    background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px; padding: 30px; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: flex-start;
 }
-
-/* Effet au survol : La carte s'illumine légèrement */
-.bento-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary); /* La bordure devient Cyan */
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
+.bento-card:hover { transform: translateY(-5px); border-color: var(--primary); background: rgba(255, 255, 255, 0.04); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
 .bento-icon {
-    /* On enlève font-size car ce ne sont plus des emojis */
-    margin-bottom: 15px;
-    background: rgba(6, 182, 212, 0.1); 
-    width: 50px; height: 50px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 10px; 
-    border: 1px solid rgba(6, 182, 212, 0.2);
-    /* ON AJOUTE ÇA : La couleur du trait SVG sera le Cyan */
-    color: var(--primary); 
+    margin-bottom: 15px; background: rgba(6, 182, 212, 0.1); width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center; border-radius: 10px;
+    border: 1px solid rgba(6, 182, 212, 0.2); color: var(--primary);
 }
-
-/* On s'assure que le SVG prend bien la place */
-.bento-icon svg {
-    width: 28px;
-    height: 28px;
-    stroke-width: 2; /* Épaisseur du trait */
-}
-
-.bento-number {
-    font-size: 3rem; font-weight: 900; color: white;
-    line-height: 1; margin-bottom: 10px;
-    letter-spacing: -1px;
-}
-
-.bento-card h3 {
-    color: var(--text-white); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px;
-}
-
-.bento-card p {
-    color: var(--text-gray); font-size: 0.95rem; line-height: 1.5;
-}
-
-/* CARTE MISE EN AVANT (Le 600€) */
+.bento-icon svg { width: 28px; height: 28px; stroke-width: 2; }
+.bento-number { font-size: 3rem; font-weight: 900; color: white; line-height: 1; margin-bottom: 10px; letter-spacing: -1px; }
+.bento-card h3 { color: var(--text-white); font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+.bento-card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; }
 .bento-card.featured {
-    grid-column: span 2; /* Elle prend 2 colonnes de large */
-    background: linear-gradient(145deg, rgba(6, 182, 212, 0.05) 0%, rgba(0,0,0,0) 100%);
+    grid-column: span 2; background: linear-gradient(145deg, rgba(6, 182, 212, 0.05) 0%, rgba(0,0,0,0) 100%);
     border-color: rgba(6, 182, 212, 0.3);
 }
+.highlight-text { color: var(--primary); text-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
 
-.highlight-text {
-    color: var(--primary); /* Le 600€ est en Cyan */
-    text-shadow: 0 0 20px rgba(6, 182, 212, 0.4); /* Effet Néon */
+/* --- SECTION TECH --- */
+.tech-section { padding: 100px 20px; background-color: #080c16; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.tech-header { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
+.tech-header h2 { font-size: 2.5rem; color: white; font-weight: 800; margin-top: 15px; margin-bottom: 15px; }
+.tech-header p { color: var(--text-gray); font-size: 1.1rem; }
+.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; }
+.tech-item {
+    display: flex; align-items: flex-start; gap: 20px; background: rgba(255, 255, 255, 0.02);
+    padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s;
 }
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 968px) {
-    .bento-grid {
-        grid-template-columns: 1fr; /* Une seule colonne */
-    }
-    .bento-card.featured {
-        grid-column: span 1; /* Reprend une taille normale */
-    }
+.tech-item:hover { border-color: var(--primary); background: rgba(255, 255, 255, 0.04); transform: translateY(-5px); }
+.tech-icon-box {
+    flex-shrink: 0; background: rgba(6, 182, 212, 0.1); width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center; border-radius: 12px;
+    color: var(--primary); border: 1px solid rgba(6, 182, 212, 0.2);
 }
+.tech-icon-box svg { width: 30px; height: 30px; }
+.tech-content h3 { color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; margin-top: 0; }
+.tech-content p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.tech-content strong { color: white; }
 
+/* --- SECTION AVIS --- */
+.reviews-section { padding: 100px 20px; background-color: var(--dark-bg); border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.google-badge {
+    display: inline-flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 50px; margin-top: 20px;
+}
+.g-logo { font-weight: 900; font-size: 1.5rem; color: white; }
+.g-stars { color: #fbbf24; letter-spacing: 2px; font-size: 0.9rem; }
+.g-info span { color: var(--text-gray); font-size: 0.85rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px; }
+.review-card {
+    background: #111827; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 30px;
+    display: flex; flex-direction: column; transition: 0.3s;
+}
+.review-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.2); }
+.card-top-row {
+    display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.client-profile { display: flex; gap: 12px; align-items: center; }
+.avatar-circle {
+    width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary) 0%, #0e7490 100%);
+    color: white; font-weight: 800; font-size: 1.1rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+.client-name { font-weight: 700; color: white; font-size: 1rem; }
+.client-city { color: var(--text-gray); font-size: 0.75rem; margin-top: 2px; }
+.verified-tag {
+    background: rgba(34, 197, 94, 0.1); color: #22c55e; font-size: 0.7rem; font-weight: 700;
+    text-transform: uppercase; padding: 4px 8px; border-radius: 4px;
+}
+.review-content { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; font-style: italic; flex: 1; }
+.review-date { margin-top: 20px; font-size: 0.75rem; color: #64748b; text-align: right; }
+.final-cta-box {
+    text-align: center; max-width: 700px; margin: 0 auto; background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+    border: 1px solid rgba(255,255,255,0.1); padding: 50px; border-radius: 24px;
+}
+.final-cta-box h3 { font-size: 1.8rem; color: white; font-weight: 800; margin-bottom: 30px; }
+.btn-center { display: inline-flex; margin: 0 auto; padding-left: 40px; padding-right: 40px; height: 55px; width: auto !important; }
+.cta-note { color: var(--text-gray); font-size: 0.85rem; margin-top: 15px; opacity: 0.7; }
+
+/* --- FOOTER --- */
+.site-footer {
+    background-color: #020408; padding: 80px 20px 40px; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.9rem;
+}
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+.logo-text.small { font-size: 1.4rem; margin-bottom: 15px; display: block; }
+.footer-desc { color: var(--text-gray); line-height: 1.6; margin-bottom: 20px; font-size: 0.9rem; opacity: 0.7; max-width: 300px; }
+.footer-title { color: white; font-size: 1rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+.footer-list { list-style: none; padding: 0; margin: 0; }
+.footer-list li { margin-bottom: 12px; color: var(--text-gray); display: flex; align-items: center; gap: 10px; }
+.footer-list a { color: var(--text-gray); text-decoration: none; transition: 0.3s; }
+.footer-list a:hover { color: var(--primary); padding-left: 5px; }
+.phone-link { font-weight: 700; color: white !important; }
+.footer-copyright { margin-top: 30px; font-size: 0.8rem; color: #475569; }
+
+/* --- MODALES --- */
+.modal {
+    display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); align-items: center; justify-content: center; animation: fadeIn 0.3s ease;
+}
+.modal.show { display: flex; }
+.modal-content {
+    background-color: #0f172a; border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px;
+    border-radius: 20px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto;
+    position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+}
+.modal-content h2 { color: white; margin-bottom: 20px; font-size: 1.8rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+.legal-text h3 { color: var(--primary); font-size: 1.1rem; margin-top: 25px; margin-bottom: 10px; }
+.legal-text p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+.close-btn {
+    color: #aaa; position: absolute; top: 20px; right: 25px; font-size: 35px; font-weight: bold;
+    cursor: pointer; transition: 0.2s; line-height: 0.5;
+}
+.close-btn:hover { color: var(--primary); }
 
 /* =========================================
    OPTIMISATION MOBILE (V2 - Compacte & Visuelle)
    ========================================= */
 @media (max-width: 968px) {
-
-    /* 1. HEADER & NAV */
     .navbar { padding: 15px 20px; background: rgba(10, 17, 40, 0.95); }
     .logo-text { font-size: 1.3rem; }
-    .nav-trust { display: none; } /* On cache la confiance en haut pour gagner de la place */
-
-    /* 2. HERO SECTION */
+    .nav-trust { display: none; }
+    
     .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; }
     .hero-container { flex-direction: column; text-align: center; gap: 2rem; }
     .hero-text-col { padding: 0; }
-    
     h1 { font-size: 2.2rem; margin-bottom: 1rem; }
     .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
-
-    /* 3. LE FORMULAIRE COMPACT */
+    
     .simulator-block { padding: 1.2rem; margin-top: 0; }
     .sim-header { font-size: 0.85rem; text-align: left; }
     .sim-row { flex-direction: column; gap: 10px; }
     .btn-primary { width: 100%; justify-content: center; height: 50px; font-size: 1.1rem; }
     .sim-options { margin-bottom: 10px; }
     
-    /* 4. VISUEL + BADGES (Le retour !) */
-    .hero-visual-col {
-        order: 2; /* On met l'image APRES le formulaire */
-        margin-top: 2rem;
-        flex-direction: column; /* On empile image puis badges */
-    }
-
-    .splash-img {
-        max-height: 320px; /* Taille maîtrisée */
-        margin-bottom: 1.5rem; /* Espace avant les badges */
-    }
-
-    /* ON RÉAFFICHE LES BADGES (En ligne sous l'image) */
-    .float-stat {
-        display: flex !important; /* Force l'affichage */
-        position: relative; /* Plus de flottement */
-        top: auto; bottom: auto; left: auto; right: auto; /* Reset position */
-        animation: none; /* Pas de mouvement qui distrait */
-        margin-bottom: 10px;
-        width: 100%; /* Largeur pleine */
-        justify-content: flex-start; /* Alignés proprement */
-        background: rgba(255, 255, 255, 0.05);
-    }
-    /* On cache la 3ème carte sur mobile si c'est trop long, ou on garde les 3 */
+    .hero-visual-col { order: 2; margin-top: 2rem; flex-direction: column; }
+    .splash-img { max-height: 320px; margin-bottom: 1.5rem; }
     
-    /* 5. LA GRILLE BENTO (Mode 2 colonnes compactes) */
-    .bento-grid {
-        /* MAGIE : 2 colonnes au lieu d'une seule */
-        grid-template-columns: 1fr 1fr; 
-        gap: 10px; /* Espace réduit */
+    .float-stat {
+        display: flex !important; position: relative; top: auto !important; right: auto !important;
+        bottom: auto !important; left: auto !important; animation: none !important;
+        margin-bottom: 10px; width: 100%; justify-content: flex-start; background: rgba(255, 255, 255, 0.05);
     }
-
-    .bento-card {
-        padding: 15px; /* Moins de gras */
-        min-height: 160px; /* Hauteur uniforme */
-    }
-
-    /* La carte 600€ garde toute la largeur */
+    
+    .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .bento-card { padding: 15px; min-height: 160px; }
     .bento-card.featured { grid-column: span 2; }
-
-    /* On réduit la taille des textes dans les cartes */
     .bento-number { font-size: 2rem; margin-bottom: 5px; }
     .bento-icon { width: 40px; height: 40px; font-size: 1.5rem; margin-bottom: 10px; }
     .bento-card h3 { font-size: 0.9rem; margin-bottom: 5px; }
     .bento-card p { font-size: 0.8rem; line-height: 1.3; }
-}
-
-/* =========================================
-   RESPONSIVE : OPTIMISATION MOBILE
-   (S'applique uniquement sur les écrans < 968px)
-   ========================================= */
-
-@media (max-width: 968px) {
-
-    /* 1. AJUSTEMENTS GÉNÉRAUX */
-    .hero-section {
-        padding-top: 130px; /* Plus d'espace sous la barre de nav */
-        padding-bottom: 60px;
-        min-height: auto; /* On laisse la hauteur s'adapter au contenu */
-        height: auto;
-    }
-
-    .hero-container {
-        flex-direction: column; /* ON EMPILE TOUT VERTICALEMENT */
-        gap: 4rem; /* Espace entre le bloc texte et le bloc image */
-    }
-
-    /* 2. LA COLONNE DE TEXTE (En haut) */
-    .hero-text-col {
-        max-width: 100%;
-        text-align: center; /* On centre le texte sur mobile */
-        padding: 0 15px;
-    }
-
-    h1 {
-        font-size: 2.8rem; /* Titre un peu plus petit */
-    }
-
-    .hero-desc { margin: 0 auto 2.5rem auto; } /* Centrer la description */
-
-    /* On centre aussi le bloc des étoiles */
-    .trust-bottom { justify-content: center; display: flex; }
-
-
-    /* 3. LA COLONNE VISUELLE (En bas) */
-    .hero-visual-col {
-        justify-content: center;
-        max-height: none; /* On enlève la limite de hauteur */
-        margin-top: 2rem;
-    }
-
-    .splash-wrapper {
-        /* On change la direction : l'image au-dessus, les cartes en dessous */
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .splash-img {
-        max-height: 400px; /* Image plus petite pour ne pas remplir tout l'écran */
-        margin-bottom: 30px; /* Espace avant les cartes */
-    }
-
-
-    /* 4. LE GROS CHANGEMENT : LES CARTES FLOTTANTES */
-    /* Sur mobile, elles arrêtent de flotter et s'empilent sagement sous l'image */
-    .float-stat {
-        position: relative; /* Plus de position absolue */
-        top: auto !important; right: auto !important; bottom: auto !important; left: auto !important; /* On reset les positions */
-        animation: none !important; /* On arrête l'animation qui distrait */
-        
-        width: 100%; /* Elles prennent toute la largeur */
-        max-width: 350px; /* Mais pas trop larges non plus */
-        margin-bottom: 15px; /* Espace entre chaque carte */
-        justify-content: flex-start; /* Alignement propre à gauche */
-        background: rgba(16, 23, 45, 0.8); /* Fond un peu plus opaque */
-    }
-
-    /* On ajuste un peu l'icône pour l'empilement */
-    .stat-icon { font-size: 1.4rem; }
-}
-/* =========================================
-   SECTION TECH (FEATURES)
-   ========================================= */
-.tech-section {
-    padding: 100px 20px;
-    background-color: #080c16; /* Un poil plus sombre pour alterner */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.tech-header {
-    text-align: center; max-width: 800px; margin: 0 auto 60px auto;
-}
-.tech-header h2 {
-    font-size: 2.5rem; color: white; font-weight: 800; margin-top: 15px; margin-bottom: 15px;
-}
-.tech-header p { color: var(--text-gray); font-size: 1.1rem; }
-
-/* GRILLE TECH */
-.tech-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 colonnes sur ordi */
-    gap: 40px;
-    max-width: 1100px; margin: 0 auto;
-}
-
-.tech-item {
-    display: flex; align-items: flex-start; gap: 20px;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 30px; border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
-}
-
-.tech-item:hover {
-    border-color: var(--primary); /* Bordure Cyan au survol */
-    background: rgba(255, 255, 255, 0.04);
-    transform: translateY(-5px);
-}
-
-.tech-icon-box {
-    flex-shrink: 0;
-    background: rgba(6, 182, 212, 0.1);
-    width: 60px; height: 60px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 12px;
-    color: var(--primary); /* Icone Cyan */
-    border: 1px solid rgba(6, 182, 212, 0.2);
-}
-
-/* Taille des SVGs */
-.tech-icon-box svg {
-    width: 30px; height: 30px;
-}
-
-.tech-content h3 {
-    color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; margin-top: 0;
-}
-.tech-content p {
-    color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin: 0;
-}
-.tech-content strong { color: white; }
-
-/* RESPONSIVE TECH */
-@media (max-width: 968px) {
-    .tech-grid { grid-template-columns: 1fr; } /* Une seule colonne sur mobile */
-    .tech-item { flex-direction: column; text-align: center; align-items: center; }
-}
-/* =========================================
-   SECTION AVIS (Design Carte Premium)
-   ========================================= */
-.reviews-section {
-    padding: 100px 20px;
-    background-color: #05080f; /* Fond très sombre pour la fin */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Badge Google en haut */
-.google-badge {
-    display: inline-flex; align-items: center; gap: 15px;
-    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 20px; border-radius: 50px; margin-top: 20px;
-}
-.g-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 1.5rem; color: white; }
-.g-stars { color: #fbbf24; letter-spacing: 2px; font-size: 0.9rem; }
-.g-info span { color: var(--text-gray); font-size: 0.85rem; display: block; }
-
-/* Grille des avis */
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
-    gap: 30px;
-    margin-bottom: 80px;
-}
-
-/* LA CARTE AVIS (Le look "Carte de Crédit") */
-.review-card {
-    background: #111827; /* Fond carte */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure subtile */
-    border-radius: 16px;
-    padding: 30px;
-    display: flex; flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Petit effet levier au survol */
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    border-color: rgba(255,255,255,0.2);
-}
-
-/* En-tête de la carte (Avatar + Nom) */
-.card-top-row {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.client-profile { display: flex; gap: 12px; align-items: center; }
-
-.avatar-circle {
-    width: 45px; height: 45px;
-    background: linear-gradient(135deg, var(--primary) 0%, #0e7490 100%);
-    color: white; font-weight: 800; font-size: 1.1rem;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
-}
-
-.client-name { font-weight: 700; color: white; font-size: 1rem; }
-.client-city { color: var(--text-gray); font-size: 0.75rem; margin-top: 2px; }
-
-/* Badge Vert "Vérifié" */
-.verified-tag {
-    background: rgba(34, 197, 94, 0.1);
-    color: #22c55e; /* Vert flash */
-    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-    padding: 4px 8px; border-radius: 4px;
-}
-
-.review-content {
-    color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; font-style: italic;
-    flex: 1; /* Pousse la date vers le bas */
-}
-
-.review-date {
-    margin-top: 20px; font-size: 0.75rem; color: #64748b; text-align: right;
-}
-
-/* BLOC FINAL (Appel à l'action centré) */
-.final-cta-box {
-    text-align: center;
-    max-width: 700px; margin: 0 auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 50px; border-radius: 24px;
-}
-
-.final-cta-box h3 {
-    font-size: 1.8rem; color: white; font-weight: 800; margin-bottom: 30px;
-}
-
-.btn-center {
-    display: inline-flex; margin: 0 auto; padding-left: 40px; padding-right: 40px; height: 55px;
-}
-
-.cta-note { color: var(--text-gray); font-size: 0.85rem; margin-top: 15px; opacity: 0.7; }
-
-/* RESPONSIVE */
-@media (max-width: 968px) {
-    .reviews-grid { grid-template-columns: 1fr; } /* Une seule colonne sur mobile */
+    
+    .tech-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
     .final-cta-box { padding: 30px 20px; }
     .btn-center { width: 100%; }
-}
-
-/* =========================================
-   FOOTER (Style SaaS Dark)
-   ========================================= */
-.site-footer {
-    background-color: #020408; /* Plus noir que le bleu nuit */
-    padding: 80px 20px 40px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ligne de séparation très fine */
-    font-size: 0.9rem;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr; /* La colonne logo est plus large */
-    gap: 40px;
-}
-
-/* Logo en petit dans le footer */
-.logo-text.small { font-size: 1.4rem; margin-bottom: 15px; display: block; }
-
-.footer-desc {
-    color: var(--text-gray);
-    line-height: 1.6;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    opacity: 0.7;
-    max-width: 300px;
-}
-
-.footer-title {
-    color: white;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.footer-list {
-    list-style: none; padding: 0; margin: 0;
-}
-
-.footer-list li {
-    margin-bottom: 12px;
-    color: var(--text-gray);
-    display: flex; align-items: center; gap: 10px;
-}
-
-.footer-list a {
-    color: var(--text-gray);
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-/* Effet Hover sur les liens : Devient Cyan */
-.footer-list a:hover {
-    color: var(--primary);
-    padding-left: 5px; /* Petit mouvement vers la droite */
-}
-
-.phone-link {
-    font-weight: 700; color: white !important; /* Le tel ressort en blanc */
-}
-
-.footer-copyright {
-    margin-top: 30px;
-    font-size: 0.8rem;
-    color: #475569; /* Gris très foncé */
-}
-
-/* RESPONSIVE */
-@media (max-width: 968px) {
-    .footer-grid {
-        grid-template-columns: 1fr; /* Tout en une colonne */
-        text-align: center;
-        gap: 40px;
-    }
     
+    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
     .footer-desc { margin: 0 auto 20px auto; }
     .footer-list li { justify-content: center; }
-}
-
-/* =========================================
-   MODALES JURIDIQUES (SaaS Dark Style)
-   ========================================= */
-.modal {
-    display: none; /* Caché par défaut */
-    position: fixed; z-index: 9999; /* Tout en haut */
-    left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond noir transparent */
-    backdrop-filter: blur(8px); /* L'effet flou moderne */
-    align-items: center; justify-content: center;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal.show { display: flex; }
-
-.modal-content {
-    background-color: #0f172a; /* Bleu nuit */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 40px; border-radius: 20px;
-    width: 90%; max-width: 600px; max-height: 85vh;
-    overflow-y: auto; /* Scroll si le texte est long */
-    position: relative;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-}
-
-.modal-content h2 {
-    color: white; margin-bottom: 20px; font-size: 1.8rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;
-}
-
-.legal-text h3 {
-    color: var(--primary); /* Cyan */
-    font-size: 1.1rem; margin-top: 25px; margin-bottom: 10px;
-}
-
-.legal-text p {
-    color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;
-}
-
-.close-btn {
-    color: #aaa; position: absolute; top: 20px; right: 25px;
-    font-size: 35px; font-weight: bold; cursor: pointer; transition: 0.2s;
-    line-height: 0.5;
-}
-.close-btn:hover { color: var(--primary); }
-
-@keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
 }
