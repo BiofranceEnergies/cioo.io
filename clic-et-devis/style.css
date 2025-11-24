@@ -910,7 +910,9 @@ h1 {
 .old-price-strikethrough .tax-small {
     font-size: 0.9rem;
     font-weight: normal;
-    text-decoration: none;
+    /* On force la suppression de toute décoration (barré ou souligné) */
+    text-decoration: none !important;
+    display: inline-block; /* Aide parfois à nettoyer les styles hérités */
 }
 
 .new-offer-price {
