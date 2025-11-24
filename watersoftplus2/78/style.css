@@ -310,3 +310,16 @@ h1 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+/* --- CORRECTIF ESPACEMENT HAUT DE PAGE --- */
+/* On pousse la grille principale vers le bas pour ne pas toucher le logo */
+.hero-grid {
+    padding-top: 120px !important; /* Le !important force l'application */
+}
+
+/* AJUSTEMENT MOBILE */
+/* Sur mobile, le logo est plus petit, on a besoin de moins d'espace */
+@media (max-width: 968px) {
+    .hero-grid {
+        padding-top: 80px !important;
+    }
+}
