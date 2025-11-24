@@ -75,7 +75,12 @@ body {
 .badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
 
 h1 {
-    font-size: 3.5rem; line-height: 1.1; font-weight: 800; letter-spacing: -2px; margin-bottom: 1.5rem;
+    /* On réduit de 3.5rem à 2.8rem */
+    font-size: 2.8rem; 
+    line-height: 1.1; 
+    font-weight: 800; 
+    letter-spacing: -1.5px; 
+    margin-bottom: 1rem; /* Moins d'espace sous le titre */
 }
 .text-gradient {
     background: linear-gradient(90deg, #ffffff 0%, var(--accent-glow) 100%);
