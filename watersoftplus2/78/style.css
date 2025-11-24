@@ -1,14 +1,16 @@
 /* =========================================
-   STYLE "GRILLE 2x2" (Nouvelle Structure)
+   STYLE "SPLASH ENERGY" (Vibrant & Dynamique)
    ========================================= */
 
 :root {
-    --bg-dark: #0B1121;
-    --bg-glow: #1e3a8a;
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
+    --bg-dark: #080c16;       /* Noir encore plus profond */
+    --bg-blue-deep: #111827;  /* Bleu nuit pour les cartes */
+    --accent-blue: #3b82f6;   /* Bleu standard */
+    /* LA NOUVELLE COULEUR "PUNCH" : CYAN ÉLECTRIQUE */
+    --accent-cyan: #06b6d4;   
+    --accent-glow: rgba(6, 182, 212, 0.5);
     --text-white: #ffffff;
-    --text-gray: #cbd5e1;
+    --text-gray: #9ca3af;
     --font-main: 'Inter', sans-serif;
 }
 
@@ -21,164 +23,171 @@ body {
     overflow-x: hidden;
 }
 
-/* --- NAVIGATION (Inchangée) --- */
+/* --- NAVBAR --- */
 .navbar { position: absolute; top: 0; width: 100%; z-index: 100; padding: 1.5rem 0; }
-.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
-.nav-logo-img { max-height: 50px; width: auto; display: block; }
+.nav-container { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
+.nav-logo-img { max-height: 45px; width: auto; }
 .nav-trust {
-    font-size: 0.9rem; color: var(--text-gray); font-weight: 500;
-    background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px;
+    font-size: 0.85rem; color: var(--text-gray); font-weight: 600;
+    background: rgba(255,255,255,0.08); padding: 6px 12px; border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px;
 }
 
-/* --- HERO SECTION (Fond avec lueur) --- */
+/* --- HERO SECTION (Flexbox Dynamique) --- */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 100vh; /* Prend tout l'écran */
     display: flex;
-    /* Align-items start pour que le contenu commence en haut */
-    align-items: flex-start; 
-    background: radial-gradient(circle at 50% 50%, #172554 0%, var(--bg-dark) 70%);
-    padding-bottom: 4rem; /* Espace en bas */
+    align-items: center;
+    /* Fond radial puissant qui part du centre */
+    background: radial-gradient(circle at 60% 50%, #1e3a8a 0%, var(--bg-dark) 70%);
+    overflow: hidden;
 }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 5%; width: 100%; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 5%; width: 100%; }
 
-/* === LA NOUVELLE GRILLE 2x2 === */
-.hero-grid-2x2 { 
-    display: grid; 
-    /* 2 colonnes égales */
-    grid-template-columns: 1fr 1fr; 
-    /* 2 lignes dont la taille dépend du contenu */
-    grid-template-rows: auto auto; 
-    /* Espacement horizontal et vertical entre les cellules */
-    gap: 2rem 4rem; 
-    /* Espace pour le logo en haut */
-    padding-top: 140px; 
-    /* Alignement vertical des éléments en haut de leur cellule */
-    align-items: start;
+.hero-flex { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    padding-top: 80px;
 }
 
-/* --- CELLULE HAUT GAUCHE (Titre) --- */
+/* --- COLONNE GAUCHE (Contenu) --- */
+.hero-content-left { flex: 1; max-width: 550px; z-index: 2; }
+
 h1 {
-    font-size: 3.2rem; line-height: 1.1; font-weight: 800; letter-spacing: -1px; margin: 0; /* Pas de marge par défaut */
-}
-.text-gradient {
-    background: linear-gradient(90deg, #fff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-
-/* --- CELLULE HAUT DROITE (Texte SEO) --- */
-.grid-cell-top-right {
-    /* On pousse le texte à droite */
-    justify-self: end;
-    text-align: right;
-    max-width: 480px; /* Même largeur que le formulaire en dessous */
-}
-.hero-desc-right { 
-    color: var(--text-gray); font-size: 1.15rem; line-height: 1.6; margin: 0;
+    font-size: 3.8rem; /* Très gros titre */
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
 }
 
-/* --- CELLULE BAS GAUCHE (Image + Args) --- */
-.grid-cell-bottom-left {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem; /* Espace entre image et arguments */
+.text-highlight {
+    color: var(--accent-cyan); /* Le mot clé en Cyan */
+    position: relative;
+}
+/* Petit effet de soulignement brillant */
+.text-highlight::after {
+    content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 8px;
+    background: var(--accent-cyan); opacity: 0.3; z-index: -1; transform: skewX(-15deg);
 }
 
-.product-wrapper-left {
-    /* Décalage léger à gauche pour le style */
-    margin-left: -20px; 
-}
-.product-img-left {
-    max-width: 100%; max-height: 450px; object-fit: contain;
-    /* Lueur bleue derrière */
-    filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.3));
+.hero-desc { 
+    color: var(--text-gray); font-size: 1.2rem; line-height: 1.5; margin-bottom: 2.5rem;
 }
 
-/* Les arguments sous l'image */
-.benefits-grid-left {
-    display: flex; gap: 2rem; padding-top: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1); /* Ligne de séparation au-dessus */
+/* NOUVEAUX ARGUMENTS "BLOCKBUSTER" */
+.hero-stats {
+    display: flex; gap: 2.5rem; margin-bottom: 2.5rem;
+    padding-bottom: 2rem; border-bottom: 2px solid rgba(255,255,255,0.05);
 }
-.benefit-item { display: flex; align-items: center; gap: 12px; }
-.benefit-icon {
-    font-size: 1.4rem; background: rgba(59, 130, 246, 0.15); width: 45px; height: 45px;
-    display: flex; align-items: center; justify-content: center; border-radius: 10px; color: var(--accent);
+.stat-item { display: flex; flex-direction: column; }
+.stat-number {
+    font-size: 2.5rem; font-weight: 900; line-height: 1; color: var(--text-white);
 }
-.benefit-text { display: flex; flex-direction: column; }
-.benefit-text strong { color: white; font-size: 0.95rem; }
-.benefit-text span { color: var(--text-gray); font-size: 0.8rem; }
+.stat-label {
+    font-size: 0.85rem; color: var(--text-gray); font-weight: 600; margin-top: 5px;
+}
+/* On met en avant l'énergie en Cyan */
+.stat-item.highlight .stat-number { color: var(--accent-cyan); text-shadow: 0 0 15px var(--accent-glow); }
 
 
-/* --- CELLULE BAS DROITE (Formulaire) --- */
-.grid-cell-bottom-right {
-    /* On pousse tout le bloc à droite */
-    justify-self: end;
-    width: 100%;
-    max-width: 480px;
-}
-
-/* LE SIMULATEUR (Style inchangé) */
+/* LE NOUVEAU SIMULATEUR (Plus compact) */
 .simulator-card {
-    background: #111827; border: 1px solid rgba(59, 130, 246, 0.3);
-    padding: 2rem; border-radius: 16px; width: 100%;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-    text-align: left; /* On remet le texte à gauche DANS le formulaire */
+    background: var(--bg-blue-deep);
+    border: 2px solid rgba(6, 182, 212, 0.3); /* Bordure Cyan */
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
 }
-/* ... (Styles internes du simulateur identiques à avant) ... */
-.sim-header { margin-bottom: 1.5rem; }
-.sim-title { font-weight: 600; color: white; font-size: 1.05rem; }
-.sim-label { display: block; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.8rem; }
-.sim-options { display: flex; gap: 10px; margin-bottom: 1.5rem; }
-.option-btn {
-    flex: 1; background: transparent; border: 1px solid #374151; color: var(--text-gray);
-    padding: 0.8rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s;
-}
-.option-btn:hover { border-color: var(--accent); color: white; }
-.option-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
-.sim-input-group { display: flex; flex-direction: column; gap: 15px; }
-.sim-input {
-    background: #1f2937; border: 1px solid #374151; padding: 1rem;
-    border-radius: 8px; color: white; font-size: 1rem;
-}
-.sim-input:focus { outline: none; border-color: var(--accent); }
-.btn-primary {
-    background: var(--accent); color: white; border: none;
-    padding: 1rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1.05rem;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
-}
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
-.trust-mini { text-align: center; color: var(--text-gray); font-size: 0.8rem; margin-top: 1rem; opacity: 0.8; }
 
-/* Avis sous le formulaire, alignés à droite */
-.trust-wrapper-bottom.right-aligned-trust {
-    margin-top: 1.5rem;
-    display: flex; justify-content: flex-end; /* Alignement droite */
+.sim-header { margin-bottom: 1rem; }
+.sim-title { font-weight: 700; color: white; font-size: 1rem; display: flex; align-items: center; gap: 8px;}
+.sim-body { display: flex; gap: 1rem; } /* Foyer et Input sur la même ligne si possible */
+
+.sim-step-1 { flex: 0 0 auto; }
+.sim-label { display: block; color: var(--text-gray); font-size: 0.8rem; margin-bottom: 0.5rem; font-weight: 600;}
+.sim-options { display: flex; gap: 5px; }
+.option-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-gray);
+    padding: 0.6rem 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: 0.2s;
 }
-.trust-indicator { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-gray); }
+.option-btn:hover { border-color: var(--accent-cyan); color: white; }
+.option-btn.active { background: var(--accent-cyan); border-color: var(--accent-cyan); color: var(--bg-dark); }
+
+.sim-step-2 { flex: 1; display: flex; gap: 10px; align-items: flex-end;}
+.sim-input {
+    flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem;
+    border-radius: 6px; color: white; font-size: 1rem; height: 48px;
+}
+.sim-input:focus { outline: none; border-color: var(--accent-cyan); }
+
+.btn-primary {
+    background: var(--accent-cyan); /* BOUTON CYAN */
+    color: var(--bg-dark); /* Texte foncé pour contraste */
+    border: none; padding: 0 1.5rem; border-radius: 6px;
+    font-weight: 800; font-size: 1rem; height: 48px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 20px var(--accent-glow); /* Gros Glow Cyan */
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--accent-glow); filter: brightness(1.1); }
+
+.trust-mini { text-align: left; color: var(--text-gray); font-size: 0.75rem; margin-top: 0.8rem; opacity: 0.8; font-weight: 500;}
+.trust-wrapper-bottom { margin-top: 1.5rem; }
+.trust-indicator { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-gray); font-weight: 500; }
 .stars { color: #fbbf24; }
 
+/* --- COLONNE DROITE (Visuel Splash) --- */
+.hero-visual-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Pousse l'image à droite */
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
 
-/* --- RESPONSIVE MOBILE (Crucial : tout passe en une seule colonne) --- */
+.splash-wrapper {
+    position: relative;
+    /* L'image peut dépasser un peu à droite pour le dynamisme */
+    margin-right: -5%; 
+    z-index: 1;
+}
+
+.splash-img {
+    max-width: 120%; /* Image très grande */
+    height: auto;
+    max-height: 85vh; /* Prend presque toute la hauteur */
+    object-fit: contain;
+    /* Un léger drop shadow pour la détacher du fond */
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+}
+
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1100px) {
+    /* Sur tablette, le simulateur passe en colonnes */
+    .sim-body { flex-direction: column; }
+    .sim-step-2 { flex-direction: column; }
+    .btn-primary { width: 100%; }
+}
+
 @media (max-width: 968px) {
-    .hero-grid-2x2 { 
-        grid-template-columns: 1fr; /* 1 seule colonne */
-        gap: 2.5rem; 
-        padding-top: 80px; 
-        text-align: center; 
-    }
-
-    /* On remet tous les alignements au centre sur mobile */
-    .grid-cell-top-right, .grid-cell-bottom-right { justify-self: center; text-align: center; }
-    .grid-cell-bottom-left { align-items: center; }
-    .product-wrapper-left { margin-left: 0; }
-    .simulator-card { text-align: center; }
-    .trust-wrapper-bottom.right-aligned-trust { justify-content: center; }
-
-    h1 { font-size: 2.5rem; }
-    .product-img-left { max-height: 350px; }
-    /* Sur mobile, on met les arguments en colonne */
-    .benefits-grid-left { flex-direction: column; align-items: center; gap: 1rem; }
+    .hero-flex { flex-direction: column; text-align: center; gap: 3rem; padding-top: 100px;}
+    .hero-content-left { max-width: 100%; }
+    .text-highlight::after { left: 50%; transform: translateX(-50%) skewX(-15deg); width: 200px;}
+    
+    .hero-stats { justify-content: center; gap: 1.5rem; }
+    .stat-number { font-size: 2rem; }
+    
+    .simulator-card { text-align: left; max-width: 500px; margin: 0 auto; }
+    .trust-indicator { justify-content: center; }
+    
+    .hero-visual-right { justify-content: center; }
+    .splash-wrapper { margin-right: 0; }
+    .splash-img { max-width: 100%; max-height: 400px; }
 }
