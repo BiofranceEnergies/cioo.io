@@ -698,3 +698,84 @@ h1 {
     .final-cta-box { padding: 30px 20px; }
     .btn-center { width: 100%; }
 }
+
+/* =========================================
+   FOOTER (Style SaaS Dark)
+   ========================================= */
+.site-footer {
+    background-color: #020408; /* Plus noir que le bleu nuit */
+    padding: 80px 20px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ligne de séparation très fine */
+    font-size: 0.9rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* La colonne logo est plus large */
+    gap: 40px;
+}
+
+/* Logo en petit dans le footer */
+.logo-text.small { font-size: 1.4rem; margin-bottom: 15px; display: block; }
+
+.footer-desc {
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    max-width: 300px;
+}
+
+.footer-title {
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-list {
+    list-style: none; padding: 0; margin: 0;
+}
+
+.footer-list li {
+    margin-bottom: 12px;
+    color: var(--text-gray);
+    display: flex; align-items: center; gap: 10px;
+}
+
+.footer-list a {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+/* Effet Hover sur les liens : Devient Cyan */
+.footer-list a:hover {
+    color: var(--primary);
+    padding-left: 5px; /* Petit mouvement vers la droite */
+}
+
+.phone-link {
+    font-weight: 700; color: white !important; /* Le tel ressort en blanc */
+}
+
+.footer-copyright {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #475569; /* Gris très foncé */
+}
+
+/* RESPONSIVE */
+@media (max-width: 968px) {
+    .footer-grid {
+        grid-template-columns: 1fr; /* Tout en une colonne */
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .footer-desc { margin: 0 auto 20px auto; }
+    .footer-list li { justify-content: center; }
+}
