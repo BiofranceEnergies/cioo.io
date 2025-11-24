@@ -23,26 +23,27 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 2. NAVIGATION --- */
+/* --- 2. NAVIGATION (CORRIGÉ) --- */
 .navbar {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    padding: 20px 0; /* Espacement vertical seulement */
+    /* On met 0 sur les côtés pour laisser le conteneur gérer l'alignement */
+    padding: 30px 0; 
 }
 
 .nav-container {
-    max-width: 1280px; /* MÊME LARGEUR MAX que le reste du site */
-    margin: 0 auto;    /* Centré horizontalement */
+    max-width: 1280px; /* Même largeur que ton container principal */
+    margin: 0 auto;
     width: 100%;
-    padding: 0 20px;   /* Padding latéral FIXE et petit (au lieu de 5%) */
+    /* C'est ICI qu'on aligne avec le reste du site (5%) */
+    padding: 0 5%; 
     
-    /* Flexbox pour l'espacement et l'alignement */
     display: flex;
-    justify-content: space-between; /* Pousse le logo à gauche, le badge à droite */
-    align-items: center; /* Centre verticalement les deux éléments */
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Logo Texte */
@@ -52,16 +53,16 @@ body {
     color: var(--text-white);
     letter-spacing: -1px;
     text-transform: uppercase;
-    white-space: nowrap;
-    /* Suppression de toute marge inutile */
+    /* On s'assure qu'il n'a pas de marge parasite */
     margin: 0;
+    line-height: 1;
 }
-.logo-accent {
-    color: var(--primary);
-    font-size: 2rem;
-    line-height: 0;
-    vertical-align: middle;
-    margin-left: 2px;
+.logo-accent { 
+    color: var(--primary); 
+    font-size: 2rem; 
+    line-height: 0; 
+    vertical-align: middle; 
+    margin-left: 2px; 
 }
 
 /* Badge Expert */
@@ -70,13 +71,11 @@ body {
     color: var(--text-gray);
     font-weight: 600;
     border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 20px;
+    padding: 8px 16px;
     border-radius: 50px;
-    background: rgba(10, 17, 40, 0.8);
-    backdrop-filter: blur(5px);
+    background: rgba(10, 17, 40, 0.5);
+    /* On empêche le badge de toucher le bord sur mobile */
     white-space: nowrap;
-    /* Suppression de toute marge inutile */
-    margin: 0;
 }
 /* --- 3. HERO SECTION --- */
 .hero-section {
