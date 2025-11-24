@@ -23,46 +23,22 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 2. NAVIGATION (ALIGNEMENT PARFAIT) --- */
+/* --- 2. NAVIGATION --- */
 .navbar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    padding: 25px 0; /* Juste de l'espace en haut et en bas, PAS sur les côtés */
+    position: absolute; top: 0; width: 100%; padding: 30px 50px;
+    display: flex; justify-content: space-between; align-items: center; z-index: 100;
 }
 
-.nav-container {
-    /* CES 3 LIGNES SONT CRUCIALES POUR L'ALIGNEMENT */
-    max-width: 1280px;  /* Même largeur max que le reste du site */
-    margin: 0 auto;     /* Centré au milieu */
-    padding: 0 5%;      /* Même marge interne (5%) que le bloc du dessous */
-    
-    /* Mise en page */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Logo Texte */
+/* Logo Texte (Style Tech) */
 .logo-text {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: var(--text-white);
-    letter-spacing: -1px;
-    text-transform: uppercase;
+    font-size: 1.8rem; font-weight: 900; color: var(--text-white);
+    letter-spacing: -1px; text-transform: uppercase;
 }
 .logo-accent { color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; margin-left: 2px; }
 
-/* Badge Expert */
 .nav-trust {
-    font-size: 0.9rem;
-    color: var(--text-gray);
-    font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 16px;
-    border-radius: 50px;
+    font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
     background: rgba(10, 17, 40, 0.5);
 }
 /* --- 3. HERO SECTION --- */
