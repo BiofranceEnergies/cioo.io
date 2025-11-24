@@ -65,6 +65,16 @@ body {
     margin: 0; 
 }
 
+.logo-accent { 
+    /* C'est cette ligne qui change la couleur en Cyan */
+    color: var(--primary); 
+    
+    /* Le reste pour le positionnement : */
+    font-size: 2rem; 
+    line-height: 0; 
+    vertical-align: middle; 
+    margin-left: 2px; 
+}
 /* Badge Expert */
 .nav-trust {
     font-size: 0.9rem;
