@@ -148,9 +148,13 @@ h1 {
 
 .splash-img {
     max-width: 100%;
-    max-height: 600px; /* Taille idéale Laptop */
+    max-height: 600px; 
     width: auto; 
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+    margin-right: 0;
+    
+    /* ON CHANGE JUSTE CETTE LIGNE */
+    /* On ajoute de la luminosité (+10%) et une ombre portée cyan pour le décoller du fond */
+    filter: brightness(1.1) drop-shadow(0 0 20px rgba(6, 182, 212, 0.15));
 }
 
 /* --- LES CARTES FLOTTANTES (Glassmorphism) --- */
