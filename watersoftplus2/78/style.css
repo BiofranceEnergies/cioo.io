@@ -1,14 +1,14 @@
 /* =========================================
-   STYLE "CLEAN PREMIUM" (Structure Clic&Devis + Ambiance Eau)
+   STYLE "GRILLE 2x2" (Nouvelle Structure)
    ========================================= */
 
 :root {
-    --bg-dark: #0B1121;       /* Bleu Nuit très sombre (Premium) */
-    --bg-glow: #1e3a8a;       /* La lueur bleue derrière */
-    --accent: #3b82f6;        /* Bleu Électrique vibrant (Bouton) */
+    --bg-dark: #0B1121;
+    --bg-glow: #1e3a8a;
+    --accent: #3b82f6;
     --accent-hover: #2563eb;
     --text-white: #ffffff;
-    --text-gray: #cbd5e1;     /* Gris clair lisible */
+    --text-gray: #cbd5e1;
     --font-main: 'Inter', sans-serif;
 }
 
@@ -21,7 +21,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION (Inchangée) --- */
 .navbar { position: absolute; top: 0; width: 100%; z-index: 100; padding: 1.5rem 0; }
 .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
 .nav-logo-img { max-height: 50px; width: auto; display: block; }
@@ -31,48 +31,74 @@ body {
     border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px;
 }
 
-/* --- HERO SECTION (Fond Propre avec Lueur) --- */
+/* --- HERO SECTION (Fond avec lueur) --- */
 .hero {
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    /* Fond Bleu Nuit avec une lueur centrale subtile */
-    background: radial-gradient(circle at 70% 40%, #172554 0%, var(--bg-dark) 60%);
+    /* Align-items start pour que le contenu commence en haut */
+    align-items: flex-start; 
+    background: radial-gradient(circle at 50% 50%, #172554 0%, var(--bg-dark) 70%);
+    padding-bottom: 4rem; /* Espace en bas */
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; width: 100%; }
 
-.hero-grid { 
+/* === LA NOUVELLE GRILLE 2x2 === */
+.hero-grid-2x2 { 
     display: grid; 
-    grid-template-columns: 1fr 1fr; /* 50% texte / 50% image */
-    gap: 4rem; 
-    align-items: center;
-    padding-top: 100px; /* Espace pour le logo */
+    /* 2 colonnes égales */
+    grid-template-columns: 1fr 1fr; 
+    /* 2 lignes dont la taille dépend du contenu */
+    grid-template-rows: auto auto; 
+    /* Espacement horizontal et vertical entre les cellules */
+    gap: 2rem 4rem; 
+    /* Espace pour le logo en haut */
+    padding-top: 140px; 
+    /* Alignement vertical des éléments en haut de leur cellule */
+    align-items: start;
 }
 
-/* --- COLONNE GAUCHE (Alignée et Nette) --- */
+/* --- CELLULE HAUT GAUCHE (Titre) --- */
 h1 {
-    font-size: 3.2rem; /* Gros titre lisible */
-    line-height: 1.1;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin-bottom: 1.5rem;
+    font-size: 3.2rem; line-height: 1.1; font-weight: 800; letter-spacing: -1px; margin: 0; /* Pas de marge par défaut */
 }
-
 .text-gradient {
-    background: linear-gradient(90deg, #fff, #93c5fd); /* Dégradé blanc vers bleu clair */
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #fff, #93c5fd); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
-.hero-desc { 
-    color: var(--text-gray); font-size: 1.15rem; line-height: 1.6; margin-bottom: 2rem; max-width: 500px; 
+/* --- CELLULE HAUT DROITE (Texte SEO) --- */
+.grid-cell-top-right {
+    /* On pousse le texte à droite */
+    justify-self: end;
+    text-align: right;
+    max-width: 480px; /* Même largeur que le formulaire en dessous */
+}
+.hero-desc-right { 
+    color: var(--text-gray); font-size: 1.15rem; line-height: 1.6; margin: 0;
 }
 
-/* NOUVEAUX ARGUMENTS (Icones alignées) */
-.benefits-grid {
-    display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+/* --- CELLULE BAS GAUCHE (Image + Args) --- */
+.grid-cell-bottom-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Espace entre image et arguments */
+}
+
+.product-wrapper-left {
+    /* Décalage léger à gauche pour le style */
+    margin-left: -20px; 
+}
+.product-img-left {
+    max-width: 100%; max-height: 450px; object-fit: contain;
+    /* Lueur bleue derrière */
+    filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.3));
+}
+
+/* Les arguments sous l'image */
+.benefits-grid-left {
+    display: flex; gap: 2rem; padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Ligne de séparation au-dessus */
 }
 .benefit-item { display: flex; align-items: center; gap: 12px; }
 .benefit-icon {
@@ -83,78 +109,76 @@ h1 {
 .benefit-text strong { color: white; font-size: 0.95rem; }
 .benefit-text span { color: var(--text-gray); font-size: 0.8rem; }
 
-/* LE SIMULATEUR (Look Solide & Propre) */
-.simulator-card {
-    background: #111827; /* Fond solide foncé */
-    border: 1px solid rgba(59, 130, 246, 0.3); /* Bordure bleu subtile */
-    padding: 2rem;
-    border-radius: 16px;
+
+/* --- CELLULE BAS DROITE (Formulaire) --- */
+.grid-cell-bottom-right {
+    /* On pousse tout le bloc à droite */
+    justify-self: end;
+    width: 100%;
     max-width: 480px;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
+/* LE SIMULATEUR (Style inchangé) */
+.simulator-card {
+    background: #111827; border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 2rem; border-radius: 16px; width: 100%;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    text-align: left; /* On remet le texte à gauche DANS le formulaire */
+}
+/* ... (Styles internes du simulateur identiques à avant) ... */
 .sim-header { margin-bottom: 1.5rem; }
 .sim-title { font-weight: 600; color: white; font-size: 1.05rem; }
 .sim-label { display: block; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.8rem; }
-
-/* Boutons Options */
 .sim-options { display: flex; gap: 10px; margin-bottom: 1.5rem; }
 .option-btn {
     flex: 1; background: transparent; border: 1px solid #374151; color: var(--text-gray);
     padding: 0.8rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s;
 }
 .option-btn:hover { border-color: var(--accent); color: white; }
-.option-btn.active {
-    background: var(--accent); border-color: var(--accent); color: white;
-}
-
-/* Input & BOUTON ACTION */
+.option-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
 .sim-input-group { display: flex; flex-direction: column; gap: 15px; }
 .sim-input {
     background: #1f2937; border: 1px solid #374151; padding: 1rem;
     border-radius: 8px; color: white; font-size: 1rem;
 }
 .sim-input:focus { outline: none; border-color: var(--accent); }
-
 .btn-primary {
-    background: var(--accent); /* BLEU ÉLECTRIQUE */
-    color: white; border: none;
-    padding: 1rem 2rem; border-radius: 8px;
-    font-weight: 700; font-size: 1.05rem;
+    background: var(--accent); color: white; border: none;
+    padding: 1rem 2rem; border-radius: 8px; font-weight: 700; font-size: 1.05rem;
     cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4); /* Glow bleu sous le bouton */
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
 }
 .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
-
 .trust-mini { text-align: center; color: var(--text-gray); font-size: 0.8rem; margin-top: 1rem; opacity: 0.8; }
 
-/* Avis (Tout en bas) */
-.trust-wrapper-bottom { margin-top: 1.5rem; }
+/* Avis sous le formulaire, alignés à droite */
+.trust-wrapper-bottom.right-aligned-trust {
+    margin-top: 1.5rem;
+    display: flex; justify-content: flex-end; /* Alignement droite */
+}
 .trust-indicator { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-gray); }
 .stars { color: #fbbf24; }
 
-/* --- COLONNE DROITE (Produit Net) --- */
-.hero-visual {
-    position: relative; height: 100%; display: flex; justify-content: center; align-items: center;
-}
-.product-wrapper {
-    /* Pas de tilt 3D bizarre, juste une belle présentation */
-    transition: transform 0.3s ease;
-}
-.product-img {
-    max-width: 100%; max-height: 550px; object-fit: contain;
-    /* Une lueur bleue très douce derrière pour le détacher du fond */
-    filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.3));
-}
-/* On cache les cartes flottantes pour éviter le "fouillis" */
-.float-card { display: none; }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE MOBILE (Crucial : tout passe en une seule colonne) --- */
 @media (max-width: 968px) {
-    .hero-grid { grid-template-columns: 1fr; padding-top: 80px; text-align: center; }
-    .hero-content { align-items: center; }
-    .benefits-grid { flex-direction: column; align-items: flex-start; width: 100%; max-width: 350px; }
-    .product-img { max-height: 350px; margin-top: 2rem; }
-    .simulator-card { width: 100%; }
+    .hero-grid-2x2 { 
+        grid-template-columns: 1fr; /* 1 seule colonne */
+        gap: 2.5rem; 
+        padding-top: 80px; 
+        text-align: center; 
+    }
+
+    /* On remet tous les alignements au centre sur mobile */
+    .grid-cell-top-right, .grid-cell-bottom-right { justify-self: center; text-align: center; }
+    .grid-cell-bottom-left { align-items: center; }
+    .product-wrapper-left { margin-left: 0; }
+    .simulator-card { text-align: center; }
+    .trust-wrapper-bottom.right-aligned-trust { justify-content: center; }
+
+    h1 { font-size: 2.5rem; }
+    .product-img-left { max-height: 350px; }
+    /* Sur mobile, on met les arguments en colonne */
+    .benefits-grid-left { flex-direction: column; align-items: center; gap: 1rem; }
 }
