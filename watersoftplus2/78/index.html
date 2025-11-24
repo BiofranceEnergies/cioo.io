@@ -3,47 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watersoft+ | Novaqua</title>
+    <title>Watersoft+ | Adoucisseur Nouvelle Génération</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo-text">
-                WATERSOFT<span class="logo-accent">+</span>
-            </div>
-            
-            <div class="nav-trust">
-                <span class="trust-icon">🛡️</span> Expert depuis 2010
-            </div>
+        <div class="logo-text">
+            WATERSOFT<span class="logo-accent">+</span>
+        </div>
+        <div class="nav-trust">
+            🛡️ Expert depuis 2010
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="container hero-flex">
+    <section class="hero-section">
+        <div class="hero-overlay"></div> <div class="hero-container">
             
-            <div class="hero-content-left">
+            <div class="hero-text-col">
+                <div class="badge">Nouvelle Technologie 2025</div>
                 
-                <div class="product-tag">NOUVELLE GÉNÉRATION</div>
-
                 <h1>
-                    L'eau pure avec<br>
-                    <span class="product-name">NOVAQUA.</span>
+                    L'eau pure avec <br>
+                    <span class="highlight">NOVAQUA.</span>
                 </h1>
                 
                 <p class="hero-desc">
-                    La technologie connectée qui protège votre maison. <br>
-                    Obtenez le <strong>tarif direct usine</strong> sans intermédiaire.
+                    Quel est le juste <strong>prix d'un adoucisseur</strong> ? Découvrez la solution connectée qui protège votre maison, au tarif direct usine.
                 </p>
 
                 <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-val">x3</span>
-                        <span class="stat-lbl">Durée de vie</span>
+                        <span class="stat-lbl">Vie Appareils</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-val">-40%</span>
@@ -55,41 +50,31 @@
                     </div>
                 </div>
 
-                <div class="simulator-card">
-                    <div class="sim-header">
-                        <span class="sim-title">⚡ VOTRE TARIF EN 1 CLIC :</span>
+                <div class="simulator-block">
+                    <div class="sim-header">⚡ Votre tarif en 3 clics :</div>
+                    <div class="sim-row">
+                        <input type="text" class="sim-input" placeholder="Votre Code Postal">
+                        <button class="btn-primary">
+                            VOIR MON PRIX
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
+                        </button>
                     </div>
-                    <div class="sim-body">
-                        <div class="sim-step-1">
-                            <label class="sim-label">Foyer :</label>
-                            <div class="sim-options">
-                                <button class="option-btn">1-2</button>
-                                <button class="option-btn active">3-4</button>
-                                <button class="option-btn">5+</button>
-                            </div>
-                        </div>
-                        <div class="sim-step-2">
-                             <input type="text" placeholder="Code Postal" class="sim-input">
-                             <button class="btn-primary">
-                                VOIR MON PRIX
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12H19M19 12L12 5M19 12L12 19"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="trust-mini">🔒 Gratuit & Réponse immédiate</div>
+                    <div class="trust-mini">🔒 Gratuit, immédiat & sans engagement</div>
                 </div>
-
-                <div class="trust-wrapper-bottom">
-                    <span class="stars">★★★★★</span> <span class="text">4.9/5 (500+ avis)</span>
+                
+                <div class="trust-bottom">
+                    <span class="stars">★★★★★</span> 4.9/5 (500+ avis vérifiés)
                 </div>
             </div>
 
-            <div class="hero-visual-right">
-                <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/a1c3b749c01233739a813b233b23aafa05bf7d73/image%20adousplash.webp" alt="Adoucisseur Novaqua" class="splash-img">
+            <div class="hero-visual-col">
+                <div class="splash-wrapper">
+                    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/a1c3b749c01233739a813b233b23aafa05bf7d73/image%20adousplash.webp" alt="Adoucisseur Splash" class="splash-img">
+                </div>
             </div>
 
-        </div> 
-    </header>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
