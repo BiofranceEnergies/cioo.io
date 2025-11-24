@@ -283,3 +283,18 @@ h1 {
         align-items: center; /* Sur mobile, on centre tout */
     }
 }
+/* On écrase le style précédent pour simplifier */
+.nav-trust {
+    font-size: 0.9rem;
+    color: #94a3b8; /* Gris discret */
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Si tu avais un display:none sur mobile pour les liens, assure-toi que ce bloc reste visible ou s'adapte */
