@@ -1,13 +1,14 @@
 /* =========================================
-   1. VARIABLES & RESET
+   STYLE "CLEAN PREMIUM" (Structure Clic&Devis + Ambiance Eau)
    ========================================= */
+
 :root {
-    --bg-dark: #020617;       /* Noir très profond */
-    --bg-blue: #1e3a8a;       /* Bleu marine intense */
-    --accent: #3b82f6;        /* Bleu électrique */
-    --accent-glow: #60a5fa;   /* Bleu clair (lueurs) */
+    --bg-dark: #0B1121;       /* Bleu Nuit très sombre (Premium) */
+    --bg-glow: #1e3a8a;       /* La lueur bleue derrière */
+    --accent: #3b82f6;        /* Bleu Électrique vibrant (Bouton) */
+    --accent-hover: #2563eb;
     --text-white: #ffffff;
-    --text-gray: #94a3b8;
+    --text-gray: #cbd5e1;     /* Gris clair lisible */
     --font-main: 'Inter', sans-serif;
 }
 
@@ -20,263 +21,140 @@ body {
     overflow-x: hidden;
 }
 
-/* =========================================
-   2. NAVIGATION (Logo Image + Trust)
-   ========================================= */
-.navbar {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    padding: 1rem 0;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-}
-
-/* Nouveau Logo Image */
-.nav-logo-img {
-    max-height: 50px; 
-    width: auto;
-    display: block;
-}
-
-/* Badge de confiance (remplace le menu) */
+/* --- NAVIGATION --- */
+.navbar { position: absolute; top: 0; width: 100%; z-index: 100; padding: 1.5rem 0; }
+.nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 5%; }
+.nav-logo-img { max-height: 50px; width: auto; display: block; }
 .nav-trust {
-    font-size: 0.9rem;
-    color: #94a3b8;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem; color: var(--text-gray); font-weight: 500;
+    background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 8px;
 }
 
-/* =========================================
-   3. HERO SECTION (Structure)
-   ========================================= */
+/* --- HERO SECTION (Fond Propre avec Lueur) --- */
 .hero {
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: radial-gradient(circle at 80% 20%, #172554 0%, var(--bg-dark) 60%);
-    overflow: hidden;
+    /* Fond Bleu Nuit avec une lueur centrale subtile */
+    background: radial-gradient(circle at 70% 40%, #172554 0%, var(--bg-dark) 60%);
 }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; width: 100%; }
 
 .hero-grid { 
     display: grid; 
-    grid-template-columns: 1.1fr 0.9fr; 
+    grid-template-columns: 1fr 1fr; /* 50% texte / 50% image */
     gap: 4rem; 
     align-items: center;
-    /* Important : Espace pour ne pas toucher le logo */
-    padding-top: 120px; 
+    padding-top: 100px; /* Espace pour le logo */
 }
 
-/* =========================================
-   4. COLONNE GAUCHE (Textes)
-   ========================================= */
+/* --- COLONNE GAUCHE (Alignée et Nette) --- */
 h1 {
-    font-size: 2.8rem; /* Taille optimisée */
+    font-size: 3.2rem; /* Gros titre lisible */
     line-height: 1.1;
     font-weight: 800;
-    letter-spacing: -1.5px;
-    margin-bottom: 1rem;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
 }
 
 .text-gradient {
-    background: linear-gradient(90deg, #ffffff 0%, var(--accent-glow) 100%);
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(90deg, #fff, #93c5fd); /* Dégradé blanc vers bleu clair */
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
 .hero-desc { 
-    color: var(--text-gray); 
-    font-size: 1.15rem; 
-    line-height: 1.6; 
-    margin-bottom: 2rem; 
-    max-width: 500px; 
+    color: var(--text-gray); font-size: 1.15rem; line-height: 1.6; margin-bottom: 2rem; max-width: 500px; 
 }
 
-/* =========================================
-   5. LE SIMULATEUR (Formulaire)
-   ========================================= */
+/* NOUVEAUX ARGUMENTS (Icones alignées) */
+.benefits-grid {
+    display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.benefit-item { display: flex; align-items: center; gap: 12px; }
+.benefit-icon {
+    font-size: 1.4rem; background: rgba(59, 130, 246, 0.15); width: 45px; height: 45px;
+    display: flex; align-items: center; justify-content: center; border-radius: 10px; color: var(--accent);
+}
+.benefit-text { display: flex; flex-direction: column; }
+.benefit-text strong { color: white; font-size: 0.95rem; }
+.benefit-text span { color: var(--text-gray); font-size: 0.8rem; }
+
+/* LE SIMULATEUR (Look Solide & Propre) */
 .simulator-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 1.5rem;
+    background: #111827; /* Fond solide foncé */
+    border: 1px solid rgba(59, 130, 246, 0.3); /* Bordure bleu subtile */
+    padding: 2rem;
     border-radius: 16px;
-    margin-top: 1.5rem;
-    max-width: 450px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-width: 480px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
-.sim-header { display: flex; margin-bottom: 1rem; }
-.sim-title { font-weight: 600; color: white; font-size: 1rem; }
+.sim-header { margin-bottom: 1.5rem; }
+.sim-title { font-weight: 600; color: white; font-size: 1.05rem; }
 .sim-label { display: block; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.8rem; }
 
-/* Boutons 1-2, 3-4... */
+/* Boutons Options */
 .sim-options { display: flex; gap: 10px; margin-bottom: 1.5rem; }
 .option-btn {
-    flex: 1;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: var(--text-gray);
-    padding: 0.8rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
+    flex: 1; background: transparent; border: 1px solid #374151; color: var(--text-gray);
+    padding: 0.8rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s;
 }
-.option-btn:hover { border-color: var(--text-white); color: white; }
+.option-btn:hover { border-color: var(--accent); color: white; }
 .option-btn.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    background: var(--accent); border-color: var(--accent); color: white;
 }
 
-/* Input Code Postal + Bouton Tarif */
-.sim-input-group { display: flex; flex-direction: column; gap: 10px; }
-
+/* Input & BOUTON ACTION */
+.sim-input-group { display: flex; flex-direction: column; gap: 15px; }
 .sim-input {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 1rem;
-    border-radius: 8px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+    background: #1f2937; border: 1px solid #374151; padding: 1rem;
+    border-radius: 8px; color: white; font-size: 1rem;
 }
 .sim-input:focus { outline: none; border-color: var(--accent); }
 
 .btn-primary {
-    background: var(--accent); color: white; border: none;
-    padding: 1rem 2rem; border-radius: 8px; font-weight: 600; font-size: 1rem;
+    background: var(--accent); /* BLEU ÉLECTRIQUE */
+    color: white; border: none;
+    padding: 1rem 2rem; border-radius: 8px;
+    font-weight: 700; font-size: 1.05rem;
     cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px -10px rgba(59, 130, 246, 0.6);
-    width: 100%; margin-top: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4); /* Glow bleu sous le bouton */
 }
-.btn-primary:hover { 
-    transform: translateY(-3px); 
-    box-shadow: 0 15px 30px -10px rgba(59, 130, 246, 0.8); 
-    background: #2563eb; 
-}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
 
-.trust-mini {
-    text-align: center; color: var(--text-gray); font-size: 0.8rem; margin-top: 1rem; 
-    display: flex; justify-content: center; gap: 5px; opacity: 0.7;
-}
+.trust-mini { text-align: center; color: var(--text-gray); font-size: 0.8rem; margin-top: 1rem; opacity: 0.8; }
 
-/* Avis Clients en bas */
-.trust-wrapper-bottom {
-    margin-top: 1.5rem;
-    display: flex; flex-direction: column; gap: 0.8rem;
-}
-.trust-indicator {
-    display: flex; align-items: center; justify-content: flex-start;
-    font-size: 0.9rem; color: var(--text-gray);
-}
-.stars { color: #fbbf24; margin-right: 5px; }
+/* Avis (Tout en bas) */
+.trust-wrapper-bottom { margin-top: 1.5rem; }
+.trust-indicator { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-gray); }
+.stars { color: #fbbf24; }
 
-/* =========================================
-   6. COLONNE DROITE (Visuel & Cartes)
-   ========================================= */
+/* --- COLONNE DROITE (Produit Net) --- */
 .hero-visual {
-    position: relative;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
+    position: relative; height: 100%; display: flex; justify-content: center; align-items: center;
 }
-
 .product-wrapper {
-    position: relative; z-index: 2;
-    transition: transform 0.1s ease-out;
-    animation: floating 6s ease-in-out infinite;
+    /* Pas de tilt 3D bizarre, juste une belle présentation */
+    transition: transform 0.3s ease;
 }
-
 .product-img {
-    max-width: 100%;
-    max-height: 450px; /* Taille maîtrisée */
-    object-fit: contain;
-    /* Lueur Bleue Derrière */
-    filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.6));
+    max-width: 100%; max-height: 550px; object-fit: contain;
+    /* Une lueur bleue très douce derrière pour le détacher du fond */
+    filter: drop-shadow(0 0 50px rgba(59, 130, 246, 0.3));
 }
+/* On cache les cartes flottantes pour éviter le "fouillis" */
+.float-card { display: none; }
 
-/* Cartes Flottantes */
-.float-card {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 12px;
-    display: flex; align-items: center; gap: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    z-index: 3; width: 220px; /* Un peu plus large pour le texte long */
-}
-
-.icon-box { 
-    background: rgba(59, 130, 246, 0.2); width: 40px; height: 40px; 
-    border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; 
-    flex-shrink: 0;
-}
-.card-text { display: flex; flex-direction: column; }
-.card-text .label { font-size: 0.75rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 0.5px; }
-.card-text .value { 
-    font-size: 0.95rem; font-weight: 700; color: white; line-height: 1.3; 
-}
-
-/* Positionnement */
-.card-1 { top: 10%; right: -20px; animation: floating 7s ease-in-out infinite 1s; }
-.card-2 { bottom: 10%; left: -40px; animation: floating 5s ease-in-out infinite 0.5s; }
-
-/* Animation */
-@keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-}
-
-/* =========================================
-   7. RESPONSIVE MOBILE (Tout regroupé ici)
-   ========================================= */
+/* --- RESPONSIVE --- */
 @media (max-width: 968px) {
-    /* Ajustement grille et espace haut */
-    .hero { min-height: auto; padding-bottom: 4rem; }
-    .hero-grid { 
-        grid-template-columns: 1fr; 
-        gap: 3rem; 
-        padding-top: 80px !important; /* Moins d'espace nécessaire sur mobile */
-    }
-    
-    /* Centrage des textes */
-    .hero-content { display: flex; flex-direction: column; align-items: center; text-align: center; }
-    h1 { font-size: 2.5rem; }
-    
-    /* Formulaire */
-    .simulator-card { width: 100%; margin-top: 1rem; }
-    .trust-wrapper-bottom { align-items: center; }
-    
-    /* Visuel */
-    .hero-visual { height: auto; margin-top: 2rem; }
-    .product-img { max-height: 350px; }
-    
-    /* On cache les cartes flottantes sur mobile pour garder la clarté */
-    .float-card { display: none; }
+    .hero-grid { grid-template-columns: 1fr; padding-top: 80px; text-align: center; }
+    .hero-content { align-items: center; }
+    .benefits-grid { flex-direction: column; align-items: flex-start; width: 100%; max-width: 350px; }
+    .product-img { max-height: 350px; margin-top: 2rem; }
+    .simulator-card { width: 100%; }
 }
