@@ -157,9 +157,20 @@ h1 {
 .card-text .label { font-size: 0.75rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 0.5px; }
 .card-text .value { font-size: 0.95rem; font-weight: 700; color: white; }
 
-/* Positionnement des cartes */
-.card-1 { top: 20%; right: 0; animation: floating 7s ease-in-out infinite 1s; }
-.card-2 { bottom: 20%; left: -20px; animation: floating 5s ease-in-out infinite 0.5s; }
+/* Carte du haut (Goutte d'eau) */
+.card-1 { 
+    top: 10%; 
+    right: -20px; /* On la sort un peu vers la droite pour dégager le produit */
+    animation: floating 7s ease-in-out infinite 1s; 
+}
+
+/* Carte du bas (Énergie) */
+.card-2 { 
+    bottom: 10%; 
+    left: -40px; /* On la décale un peu plus à gauche */
+    z-index: 3;
+    animation: floating 5s ease-in-out infinite 0.5s; 
+}
 
 /* Animation de flottaison globale */
 @keyframes floating {
