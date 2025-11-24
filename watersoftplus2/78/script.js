@@ -39,3 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
         productWrapper.style.opacity = '1';
     }, 200);
 });
+
+// --- GESTION DES MODALES ---
+
+function openModal(modalId) {
+    document.getElementById(modalId).classList.add('show');
+    document.body.style.overflow = 'hidden'; // Empêche le scroll du site derrière
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('show');
+    document.body.style.overflow = 'auto'; // Réactive le scroll
+}
+
+// Fermer la modale si on clique en dehors de la boîte
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    }
+}
+
