@@ -24,26 +24,21 @@ body {
 }
 
 /* --- 2. NAVIGATION (CORRIGÉ) --- */
+/* --- 2. NAVIGATION (ALIGNEMENT PARFAIT) --- */
 .navbar {
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     z-index: 100;
-    /* On met 0 sur les côtés pour laisser le conteneur gérer l'alignement */
-    padding: 30px 0; 
+    padding-top: 25px; /* Juste de l'espace en haut */
 }
 
-.nav-container {
-    max-width: 1280px; /* Même largeur que ton container principal */
-    margin: 0 auto;
-    width: 100%;
-    /* C'est ICI qu'on aligne avec le reste du site (5%) */
-    padding: 0 5%; 
-    
+/* On utilise un class spécifique pour le flexbox à l'intérieur du container */
+.nav-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo à gauche, Badge à droite */
     align-items: center;
+    /* PAS de padding ici, c'est la classe .container qui gère ça */
 }
 
 /* Logo Texte */
@@ -53,16 +48,14 @@ body {
     color: var(--text-white);
     letter-spacing: -1px;
     text-transform: uppercase;
-    /* On s'assure qu'il n'a pas de marge parasite */
-    margin: 0;
-    line-height: 1;
+    margin: 0; 
 }
-.logo-accent { 
-    color: var(--primary); 
-    font-size: 2rem; 
-    line-height: 0; 
-    vertical-align: middle; 
-    margin-left: 2px; 
+.logo-accent {
+    color: var(--primary);
+    font-size: 2rem;
+    line-height: 0;
+    vertical-align: middle;
+    margin-left: 2px;
 }
 
 /* Badge Expert */
@@ -71,10 +64,9 @@ body {
     color: var(--text-gray);
     font-weight: 600;
     border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 16px;
+    padding: 8px 20px;
     border-radius: 50px;
     background: rgba(10, 17, 40, 0.5);
-    /* On empêche le badge de toucher le bord sur mobile */
     white-space: nowrap;
 }
 /* --- 3. HERO SECTION --- */
