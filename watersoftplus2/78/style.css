@@ -298,3 +298,15 @@ h1 {
 }
 
 /* Si tu avais un display:none sur mobile pour les liens, assure-toi que ce bloc reste visible ou s'adapte */
+/* --- Style du nouveau logo image --- */
+.nav-logo-img {
+    max-height: 50px; /* Ajuste cette valeur si tu le veux plus ou moins grand */
+    width: auto;      /* Garde les proportions */
+    display: block;   /* Évite les espaces parasites */
+}
+
+/* Petit ajustement pour que la nav respire mieux maintenant qu'elle est simple */
+.nav-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
