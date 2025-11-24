@@ -449,3 +449,77 @@ h1 {
     .bento-card h3 { font-size: 0.9rem; margin-bottom: 5px; }
     .bento-card p { font-size: 0.8rem; line-height: 1.3; }
 }
+
+/* =========================================
+   RESPONSIVE : OPTIMISATION MOBILE
+   (S'applique uniquement sur les écrans < 968px)
+   ========================================= */
+
+@media (max-width: 968px) {
+
+    /* 1. AJUSTEMENTS GÉNÉRAUX */
+    .hero-section {
+        padding-top: 130px; /* Plus d'espace sous la barre de nav */
+        padding-bottom: 60px;
+        min-height: auto; /* On laisse la hauteur s'adapter au contenu */
+        height: auto;
+    }
+
+    .hero-container {
+        flex-direction: column; /* ON EMPILE TOUT VERTICALEMENT */
+        gap: 4rem; /* Espace entre le bloc texte et le bloc image */
+    }
+
+    /* 2. LA COLONNE DE TEXTE (En haut) */
+    .hero-text-col {
+        max-width: 100%;
+        text-align: center; /* On centre le texte sur mobile */
+        padding: 0 15px;
+    }
+
+    h1 {
+        font-size: 2.8rem; /* Titre un peu plus petit */
+    }
+
+    .hero-desc { margin: 0 auto 2.5rem auto; } /* Centrer la description */
+
+    /* On centre aussi le bloc des étoiles */
+    .trust-bottom { justify-content: center; display: flex; }
+
+
+    /* 3. LA COLONNE VISUELLE (En bas) */
+    .hero-visual-col {
+        justify-content: center;
+        max-height: none; /* On enlève la limite de hauteur */
+        margin-top: 2rem;
+    }
+
+    .splash-wrapper {
+        /* On change la direction : l'image au-dessus, les cartes en dessous */
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .splash-img {
+        max-height: 400px; /* Image plus petite pour ne pas remplir tout l'écran */
+        margin-bottom: 30px; /* Espace avant les cartes */
+    }
+
+
+    /* 4. LE GROS CHANGEMENT : LES CARTES FLOTTANTES */
+    /* Sur mobile, elles arrêtent de flotter et s'empilent sagement sous l'image */
+    .float-stat {
+        position: relative; /* Plus de position absolue */
+        top: auto !important; right: auto !important; bottom: auto !important; left: auto !important; /* On reset les positions */
+        animation: none !important; /* On arrête l'animation qui distrait */
+        
+        width: 100%; /* Elles prennent toute la largeur */
+        max-width: 350px; /* Mais pas trop larges non plus */
+        margin-bottom: 15px; /* Espace entre chaque carte */
+        justify-content: flex-start; /* Alignement propre à gauche */
+        background: rgba(16, 23, 45, 0.8); /* Fond un peu plus opaque */
+    }
+
+    /* On ajuste un peu l'icône pour l'empilement */
+    .stat-icon { font-size: 1.4rem; }
+}
