@@ -891,3 +891,38 @@ h1 {
 }
 
 .close-btn:hover { color: var(--primary); }
+
+/* --- BLOC PROMO PRIX BARRÉ --- */
+.price-block-promo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.old-price-strikethrough {
+    text-decoration: line-through;
+    color: #a0aec0; /* Gris */
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.old-price-strikethrough .tax-small {
+    font-size: 0.9rem;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.new-offer-price {
+    font-size: 3.5rem; /* Très gros */
+    font-weight: 800;
+    color: var(--primary); /* Orange */
+    line-height: 1.1;
+    margin-top: 5px;
+}
+
+.new-offer-price .tax-label {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    font-weight: 600;
+}
