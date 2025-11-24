@@ -590,3 +590,111 @@ h1 {
     .tech-grid { grid-template-columns: 1fr; } /* Une seule colonne sur mobile */
     .tech-item { flex-direction: column; text-align: center; align-items: center; }
 }
+/* =========================================
+   SECTION AVIS (Design Carte Premium)
+   ========================================= */
+.reviews-section {
+    padding: 100px 20px;
+    background-color: #05080f; /* Fond très sombre pour la fin */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Badge Google en haut */
+.google-badge {
+    display: inline-flex; align-items: center; gap: 15px;
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px; border-radius: 50px; margin-top: 20px;
+}
+.g-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 1.5rem; color: white; }
+.g-stars { color: #fbbf24; letter-spacing: 2px; font-size: 0.9rem; }
+.g-info span { color: var(--text-gray); font-size: 0.85rem; display: block; }
+
+/* Grille des avis */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+/* LA CARTE AVIS (Le look "Carte de Crédit") */
+.review-card {
+    background: #111827; /* Fond carte */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure subtile */
+    border-radius: 16px;
+    padding: 30px;
+    display: flex; flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Petit effet levier au survol */
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* En-tête de la carte (Avatar + Nom) */
+.card-top-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.client-profile { display: flex; gap: 12px; align-items: center; }
+
+.avatar-circle {
+    width: 45px; height: 45px;
+    background: linear-gradient(135deg, var(--primary) 0%, #0e7490 100%);
+    color: white; font-weight: 800; font-size: 1.1rem;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.client-name { font-weight: 700; color: white; font-size: 1rem; }
+.client-city { color: var(--text-gray); font-size: 0.75rem; margin-top: 2px; }
+
+/* Badge Vert "Vérifié" */
+.verified-tag {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e; /* Vert flash */
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 4px;
+}
+
+.review-content {
+    color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; font-style: italic;
+    flex: 1; /* Pousse la date vers le bas */
+}
+
+.review-date {
+    margin-top: 20px; font-size: 0.75rem; color: #64748b; text-align: right;
+}
+
+/* BLOC FINAL (Appel à l'action centré) */
+.final-cta-box {
+    text-align: center;
+    max-width: 700px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 50px; border-radius: 24px;
+}
+
+.final-cta-box h3 {
+    font-size: 1.8rem; color: white; font-weight: 800; margin-bottom: 30px;
+}
+
+.btn-center {
+    display: inline-flex; margin: 0 auto; padding-left: 40px; padding-right: 40px; height: 55px;
+}
+
+.cta-note { color: var(--text-gray); font-size: 0.85rem; margin-top: 15px; opacity: 0.7; }
+
+/* RESPONSIVE */
+@media (max-width: 968px) {
+    .reviews-grid { grid-template-columns: 1fr; } /* Une seule colonne sur mobile */
+    .final-cta-box { padding: 30px 20px; }
+    .btn-center { width: 100%; }
+}
