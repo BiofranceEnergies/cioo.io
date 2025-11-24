@@ -523,3 +523,70 @@ h1 {
     /* On ajuste un peu l'icône pour l'empilement */
     .stat-icon { font-size: 1.4rem; }
 }
+/* =========================================
+   SECTION TECH (FEATURES)
+   ========================================= */
+.tech-section {
+    padding: 100px 20px;
+    background-color: #080c16; /* Un poil plus sombre pour alterner */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-header {
+    text-align: center; max-width: 800px; margin: 0 auto 60px auto;
+}
+.tech-header h2 {
+    font-size: 2.5rem; color: white; font-weight: 800; margin-top: 15px; margin-bottom: 15px;
+}
+.tech-header p { color: var(--text-gray); font-size: 1.1rem; }
+
+/* GRILLE TECH */
+.tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 colonnes sur ordi */
+    gap: 40px;
+    max-width: 1100px; margin: 0 auto;
+}
+
+.tech-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 30px; border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.tech-item:hover {
+    border-color: var(--primary); /* Bordure Cyan au survol */
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-5px);
+}
+
+.tech-icon-box {
+    flex-shrink: 0;
+    background: rgba(6, 182, 212, 0.1);
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    color: var(--primary); /* Icone Cyan */
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* Taille des SVGs */
+.tech-icon-box svg {
+    width: 30px; height: 30px;
+}
+
+.tech-content h3 {
+    color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; margin-top: 0;
+}
+.tech-content p {
+    color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin: 0;
+}
+.tech-content strong { color: white; }
+
+/* RESPONSIVE TECH */
+@media (max-width: 968px) {
+    .tech-grid { grid-template-columns: 1fr; } /* Une seule colonne sur mobile */
+    .tech-item { flex-direction: column; text-align: center; align-items: center; }
+}
