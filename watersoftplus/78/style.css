@@ -330,123 +330,99 @@ body {
 .btn-ghost:hover { color: white; }
 
 /* =========================================
-   OPTIMISATION MOBILE (VERSION SATELLITES MINIATURES)
+   OPTIMISATION MOBILE (VERSION SÉCURITÉ / LISTE PROPRE)
    ========================================= */
 @media (max-width: 968px) {
 
-    /* 1. HEADER & NAV */
-    .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.95); }
+    /* 1. CONTAINER & HEADER */
+    .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.98); }
     .logo-text { font-size: 1.3rem; }
-    .nav-trust { display: none; }
+    .nav-trust { display: none; } 
 
-    /* 2. HERO SECTION */
-    .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; min-height: auto; }
-    .hero-container { flex-direction: column; text-align: center; gap: 2rem; padding: 0 20px; }
-    .hero-text-col { padding: 0; max-width: 100%; }
-    
-    h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .hero-section { 
+        padding-top: 100px; 
+        padding-bottom: 40px; 
+        height: auto; 
+    }
+
+    .hero-container { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 30px; /* Espace net entre le haut et le bas */
+        padding: 0 20px; 
+    }
+
+    /* 2. LE FORMULAIRE (En haut) */
+    .hero-text-col { padding: 0; width: 100%; }
+    h1 { font-size: 2rem; margin-bottom: 1rem; }
     .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
 
-    /* 3. LE SIMULATEUR */
-    .simulator-block { padding: 1.2rem; margin-top: 0; }
-    .sim-header { font-size: 0.85rem; text-align: left; }
+    .simulator-block { padding: 1.5rem; margin-top: 0; }
     .sim-row-vertical { width: 100%; }
-    .sim-options { margin-bottom: 10px; }
-    .btn-primary { width: 100%; justify-content: center; font-size: 1rem; }
+    .btn-primary { width: 100%; justify-content: center; height: 50px; font-size: 1.1rem; }
 
-    /* 4. L'IMAGE ET LES CARTES FLOTTANTES (LE RETOUR) */
+    /* 3. L'IMAGE (Au milieu, posée simplement) */
     .hero-visual-col { 
-        order: 2; margin-top: 2rem; 
+        order: 2; 
+        margin-top: 20px; /* Espace pour ne pas toucher le formulaire */
         width: 100%;
-        position: relative;
-        height: 400px; /* On force une hauteur pour que les éléments flottent dedans */
-        display: flex; justify-content: center; align-items: center;
+        position: static; /* On arrête le flottement */
+        display: flex; flex-direction: column; align-items: center;
     }
 
     .splash-wrapper { 
-        width: 100%; height: 100%;
-        position: relative; /* Indispensable pour le absolute des enfants */
+        width: 100%; 
+        display: flex; flex-direction: column; align-items: center;
     }
 
     .splash-img { 
-        max-height: 350px; /* Image assez grande */
+        order: 1; 
+        max-height: 300px; 
         width: auto;
-        position: absolute;
-        left: 50%; top: 50%;
-        transform: translate(-50%, -50%); /* Centrage parfait */
-        z-index: 1;
+        margin: 0 0 30px 0; /* 30px d'espace SOUS l'image avant les cartes */
+        position: static; /* Pas d'absolute */
+        transform: none;
     }
 
-    /* --- CARTES EN MODE "MINI SATELLITES" --- */
+    /* 4. LES CARTES (En bas, liste simple) */
+    /* On force l'arrêt complet des animations et du positionnement absolu */
     .float-stat {
-        position: absolute !important; 
-        z-index: 10;
+        order: 2; 
+        position: static !important; /* On les pose dans le flux normal */
+        animation: none !important; 
+        transform: none !important;
         
-        /* On réduit la taille pour que ça rentre sur mobile */
-        padding: 8px 12px; 
-        min-width: auto; /* Pas de largeur mini forcée */
-        border-radius: 8px;
+        display: flex !important;
+        align-items: center; 
+        justify-content: flex-start; /* Texte aligné à gauche */
         
-        background: rgba(16, 23, 45, 0.9); 
-        border: 1px solid rgba(6, 182, 212, 0.4);
-        backdrop-filter: blur(4px);
+        width: 100%;
+        max-width: 320px; /* Largeur confortable */
+        margin: 0 0 10px 0; /* Espace entre les cartes */
+        padding: 12px 20px;
         
-        /* Flex pour bien aligner icone et texte */
-        display: flex; flex-direction: row; align-items: center; gap: 8px;
+        background: rgba(16, 23, 45, 0.9);
+        border: 1px solid rgba(6, 182, 212, 0.3);
+        box-shadow: none;
+        
+        /* On réinitialise les positions top/left/right/bottom */
+        top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
     }
-
-    /* On réduit les textes et icônes */
-    .stat-icon { font-size: 1.2rem; margin-bottom: 0; } /* Icone à gauche */
-    .stat-info { align-items: flex-start; }
-    .stat-big { font-size: 1rem; margin-bottom: 0; }
-    .stat-label { font-size: 0.6rem; white-space: nowrap; } /* Empêche le texte de passer à la ligne */
-
-    /* --- POSITIONNEMENT PRÉCIS SUR MOBILE --- */
     
-    /* 1. Vie x3 (Haut Gauche) */
-    .card-top { 
-        top: 0; left: 0; 
-        animation: floatMobile 4s ease-in-out infinite;
-    }
+    /* On remet les icônes et textes à une taille normale */
+    .stat-info { align-items: flex-start; text-align: left; }
+    .stat-big { font-size: 1.2rem; margin-bottom: 0; }
+    .stat-icon { font-size: 1.5rem; margin-bottom: 0; margin-right: 15px; }
+    .stat-label { font-size: 0.75rem; white-space: normal; }
 
-    /* 2. Produits -40% (Milieu Droite) */
-    .card-right { 
-        top: 40%; right: 0; 
-        flex-direction: row-reverse; /* Pour coller au bord droit */
-        text-align: right;
-        animation: floatMobile 5s ease-in-out infinite 1s;
-    }
-    /* On aligne le texte à droite pour cette carte */
-    .card-right .stat-info { align-items: flex-end; }
-
-    /* 3. Energie -18% (Bas Gauche) */
-    .card-bottom { 
-        bottom: 0; left: 0; 
-        animation: floatMobile 6s ease-in-out infinite 2s;
-    }
-
-    /* Animation plus douce pour le mobile */
-    @keyframes floatMobile { 
-        0% { transform: translateY(0px); } 
-        50% { transform: translateY(-5px); } 
-        100% { transform: translateY(0px); } 
-    }
-
-    /* 5. RESTE DU SITE */
-    .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .bento-card { padding: 15px; min-height: 160px; }
-    .bento-card.featured { grid-column: span 2; }
-    .bento-number { font-size: 2rem; margin-bottom: 5px; }
-    .bento-icon { width: 40px; height: 40px; font-size: 1.5rem; margin-bottom: 10px; }
-    .bento-card h3 { font-size: 0.9rem; margin-bottom: 5px; }
-    .bento-card p { font-size: 0.75rem; line-height: 1.3; }
+    /* 5. RESTE DU SITE (Bento, Tech...) */
+    .bento-grid { grid-template-columns: 1fr; gap: 15px; } /* 1 colonne pour être sûr */
+    .bento-card { padding: 20px; min-height: auto; }
+    .bento-card.featured { grid-column: span 1; }
     
     .tech-grid { grid-template-columns: 1fr; }
     .reviews-grid { grid-template-columns: 1fr; }
-    .final-cta-box { padding: 30px 20px; }
-    .btn-center { width: 100%; }
+    
     .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-    .footer-desc { margin: 0 auto 20px auto; }
-    .footer-list li { justify-content: center; }
     .cookie-card { left: 10px; right: 10px; bottom: 10px; width: auto; }
 }
