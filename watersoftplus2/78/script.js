@@ -145,43 +145,65 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('step-1').style.display = 'block';
     };
 
- // --- 5. BANNIÈRE COOKIES (CORRECTIF NOM DE CLASSE) ---
+// --- 5. BANNIÈRE COOKIES (VERSION DIAGNOSTIC & FORCE BRUTE) ---
     
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
-    // Fonction pour créer un cookie
+    // 1. Vérification que le HTML existe bien
+    if (!cookieBanner) {
+        console.error("ERREUR CRITIQUE : La div 'cookie-banner' n'existe pas dans le HTML !");
+    } else {
+        console.log("OK : Bannière trouvée dans le HTML.");
+    }
+
+    // 2. Fonction utilitaire pour lire les cookies proprement
+    function getCookie(name) {
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+        return null;
+    }
+
     function setCookie(name, value, days) {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = "expires=" + date.toUTCString();
+        var d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    // VÉRIFICATION
-    // Si le cookie n'est pas présent
-    if (document.cookie.indexOf('watersoft_consent') === -1) {
+    // 3. LOGIQUE D'AFFICHAGE BLINDÉE
+    // Si le cookie n'existe pas (est null)
+    if (getCookie('watersoft_consent') === null) {
+        console.log("Cookie absent : Lancement de l'affichage...");
+        
         setTimeout(function() {
             if(cookieBanner) {
-                // C'est ICI que c'était faux avant. Maintenant c'est le bon nom :
-                cookieBanner.classList.add('show-banner');
+                // ON FORCE LE STYLE DIRECTEMENT (Passe par-dessus le CSS)
+                cookieBanner.style.display = 'block';
+                
+                // On ajoute la classe pour l'animation
+                setTimeout(() => {
+                    cookieBanner.classList.add('show-banner');
+                    console.log("Bannière affichée (display: block + classe ajoutée).");
+                }, 50);
             }
         }, 1000);
+    } else {
+        console.log("Cookie déjà présent : Pas d'affichage.");
     }
 
-    // Clic Accepter
+    // 4. ACTIONS BOUTONS
     if(btnAccept) {
         btnAccept.addEventListener('click', function() {
             setCookie('watersoft_consent', 'accepted', 365);
-            if(cookieBanner) cookieBanner.classList.remove('show-banner');
+            cookieBanner.style.display = 'none'; // Disparition immédiate
         });
     }
 
-    // Clic Refuser
     if(btnRefuse) {
         btnRefuse.addEventListener('click', function() {
             setCookie('watersoft_consent', 'refused', 30);
-            if(cookieBanner) cookieBanner.classList.remove('show-banner');
+            cookieBanner.style.display = 'none'; // Disparition immédiate
         });
     }
