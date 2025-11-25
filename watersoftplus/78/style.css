@@ -381,7 +381,7 @@ body {
     }
 
     .splash-img { 
-        max-height: 300px !important; 
+        max-height: 330px !important; 
         width: auto;
         position: absolute;
         left: 50%; top: 50%;
