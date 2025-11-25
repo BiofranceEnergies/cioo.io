@@ -347,7 +347,7 @@ body {
     .logo-text { font-size: 1.3rem; }
     .nav-trust { display: none; }
 
-    .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; min-height: auto; }
+    .hero-section { padding-top: 120px; padding-bottom: 70px; height: auto; min-height: auto; }
     
     /* CONTENEUR PRINCIPAL */
     .hero-container { 
