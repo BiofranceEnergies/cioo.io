@@ -330,19 +330,20 @@ body {
 .btn-ghost:hover { color: white; }
 
 /* =========================================
-   OPTIMISATION MOBILE (VERSION GRILLE COMPACTE)
+   OPTIMISATION MOBILE (VERSION FUSION / INTEGRÉE)
    ========================================= */
 @media (max-width: 968px) {
 
-    /* 1. HEADER & NAV */
+    /* 1. LE HEADER & NAV */
     .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.95); }
     .logo-text { font-size: 1.3rem; }
-    .nav-trust { display: none; }
+    .nav-trust { display: none; } 
 
     /* 2. HERO SECTION */
     .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; min-height: auto; }
     .hero-container { flex-direction: column; text-align: center; gap: 2rem; padding: 0 20px; }
     .hero-text-col { padding: 0; max-width: 100%; }
+    
     h1 { font-size: 2.2rem; margin-bottom: 1rem; }
     .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
 
@@ -353,56 +354,63 @@ body {
     .sim-options { margin-bottom: 10px; }
     .btn-primary { width: 100%; justify-content: center; font-size: 1rem; }
 
-    /* 4. L'IMAGE ET LES CARTES EN GRILLE */
+    /* 4. L'IMAGE ET LES CARTES (EFFET FUSION) */
     .hero-visual-col { 
-        order: 2; margin-top: 1rem; width: 100%;
+        order: 2; 
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
 
-    /* C'EST ICI QUE ÇA CHANGE : ON PASSE EN GRILLE */
     .splash-wrapper { 
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 Colonnes */
-        gap: 10px; /* Petit espace entre les cartes */
-        width: 100%;
+        width: 100%; 
+        display: flex; 
+        flex-direction: column;
         align-items: center;
     }
 
-    /* L'image prend toute la largeur au dessus */
     .splash-img { 
-        grid-column: span 2; /* S'étire sur 2 colonnes */
+        order: 1; 
         max-height: 300px; 
-        margin: 0 auto 15px auto; /* Centrée */
+        
+        /* C'EST ICI LA MAGIE : MARGE NÉGATIVE */
+        margin-bottom: -50px; /* On fait remonter les cartes sur l'eau */
+        margin-right: 0;
+        
+        position: relative;
+        z-index: 1; /* Derrière les cartes */
     }
 
-    /* LES CARTES : COMPACTES ET CÔTE À CÔTE */
+    /* CARTES FLOTTANTES -> BARRES MOBILES */
     .float-stat {
-        position: relative !important; top: auto !important; right: auto !important;
-        bottom: auto !important; left: auto !important; animation: none !important; transform: none !important;
+        order: 2; 
+        position: relative !important; 
+        z-index: 10; /* DEVANT l'image */
         
-        display: flex !important; flex-direction: column; /* Icone au dessus du texte pour gagner place */
-        text-align: center; justify-content: center;
+        top: auto !important; right: auto !important; bottom: auto !important; left: auto !important;
+        animation: none !important; 
+        transform: none !important;
         
-        width: 100%; margin: 0 !important;
-        padding: 10px; /* Plus petit padding */
+        display: flex !important;
+        width: 100%;
+        max-width: 350px; 
+        margin: 0 auto 10px auto; /* Centré */
         
-        background: rgba(16, 23, 45, 0.95);
-        border: 1px solid rgba(6, 182, 212, 0.3);
+        justify-content: flex-start;
+        /* Fond un peu plus opaque pour qu'on lise bien par dessus l'eau */
+        background: rgba(11, 17, 33, 0.98); 
+        border: 1px solid rgba(6, 182, 212, 0.4);
         border-radius: 8px;
-        box-shadow: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
-    
-    /* On réduit la taille des textes à l'intérieur */
-    .stat-icon { font-size: 1.2rem; margin-bottom: 5px; }
-    .stat-big { font-size: 1rem; }
-    .stat-label { font-size: 0.6rem; }
-
-    /* La 3ème carte (Produits) prend toute la largeur en bas pour faire propre */
-    .card-right { grid-column: span 2; flex-direction: row !important; gap: 10px;}
 
     /* 5. RESTE DU SITE */
     .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .bento-card { padding: 15px; min-height: 160px; }
     .bento-card.featured { grid-column: span 2; }
+    
     .bento-number { font-size: 2rem; margin-bottom: 5px; }
     .bento-icon { width: 40px; height: 40px; font-size: 1.5rem; margin-bottom: 10px; }
     .bento-card h3 { font-size: 0.9rem; margin-bottom: 5px; }
