@@ -145,54 +145,57 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('step-1').style.display = 'block';
     };
 
-  // --- 5. BANNIÈRE COOKIES (CORRECTIF NAVIGATION PRIVÉE) ---
+ // --- 5. BANNIÈRE COOKIES (MÉTHODE UNIVERSELLE) ---
+    
+    // Fonctions utilitaires pour gérer les vrais cookies
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        const expires = "expires="+d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        const name = cname + "=";
+        const ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
-    // Fonction sécurisée pour lire la mémoire (évite le crash en privé)
-    function hasConsent() {
-        try {
-            return localStorage.getItem('watersoft_consent');
-        } catch (e) {
-            return null; // En cas d'erreur (bloqueur), on considère qu'il n'y a pas de choix
-        }
-    }
-
-    // Fonction sécurisée pour écrire (évite le crash en privé)
-    function setConsent(value) {
-        try {
-            localStorage.setItem('watersoft_consent', value);
-        } catch (e) {
-            console.log("Navigation privée : impossible de sauvegarder le choix");
-        }
-    }
-
-    // Logique d'affichage
-    if (!hasConsent()) {
+    // Si le cookie n'existe pas encore (vide), on affiche la bannière
+    if (getCookie('watersoft_consent') === "") {
         setTimeout(() => {
             if(cookieBanner) {
                 cookieBanner.style.display = 'block';
-                // Petit délai pour l'animation CSS
-                requestAnimationFrame(() => {
-                    cookieBanner.classList.add('visible');
-                });
+                // Force le navigateur à calculer le rendu avant d'ajouter la classe (Astuce CSS)
+                void cookieBanner.offsetWidth; 
+                cookieBanner.classList.add('visible');
             }
-        }, 1000); // Apparition après 1 seconde
+        }, 1000);
     }
 
-    // Clic Accepter
     if(btnAccept) {
         btnAccept.addEventListener('click', () => {
-            setConsent('accepted');
+            setCookie('watersoft_consent', 'accepted', 365); // Valide pour 1 an
             hideBanner();
         });
     }
 
-    // Clic Refuser
     if(btnRefuse) {
         btnRefuse.addEventListener('click', () => {
-            setConsent('refused');
+            setCookie('watersoft_consent', 'refused', 365);
             hideBanner();
         });
     }
