@@ -145,66 +145,43 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('step-1').style.display = 'block';
     };
 
- // --- 5. BANNIÈRE COOKIES (MÉTHODE UNIVERSELLE) ---
+ // --- 5. BANNIÈRE COOKIES (MÉTHODE FORCE BRUTE) ---
     
-    // Fonctions utilitaires pour gérer les vrais cookies
-    function setCookie(cname, cvalue, exdays) {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        const expires = "expires="+d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-
-    function getCookie(cname) {
-        const name = cname + "=";
-        const ca = document.cookie.split(';');
-        for(let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
-    // Si le cookie n'existe pas encore (vide), on affiche la bannière
-    if (getCookie('watersoft_consent') === "") {
-        setTimeout(() => {
+    // Fonction simple pour créer un cookie
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // VÉRIFICATION IMMÉDIATE
+    // On regarde simplement si le mot "watersoft_consent" est absent des cookies
+    if (document.cookie.indexOf('watersoft_consent') === -1) {
+        // S'il n'est pas là, on affiche la bannière après 1 seconde
+        setTimeout(function() {
             if(cookieBanner) {
-                cookieBanner.style.display = 'block';
-                // Force le navigateur à calculer le rendu avant d'ajouter la classe (Astuce CSS)
-                void cookieBanner.offsetWidth; 
-                cookieBanner.classList.add('visible');
+                cookieBanner.classList.add('show-banner');
             }
         }, 1000);
     }
 
+    // Clic Accepter
     if(btnAccept) {
-        btnAccept.addEventListener('click', () => {
-            setCookie('watersoft_consent', 'accepted', 365); // Valide pour 1 an
-            hideBanner();
+        btnAccept.addEventListener('click', function() {
+            setCookie('watersoft_consent', 'accepted', 365); // Valide 1 an
+            if(cookieBanner) cookieBanner.classList.remove('show-banner');
         });
     }
 
+    // Clic Refuser
     if(btnRefuse) {
-        btnRefuse.addEventListener('click', () => {
-            setCookie('watersoft_consent', 'refused', 365);
-            hideBanner();
+        btnRefuse.addEventListener('click', function() {
+            setCookie('watersoft_consent', 'refused', 30); // Valide 30 jours
+            if(cookieBanner) cookieBanner.classList.remove('show-banner');
         });
-    }
-
-    function hideBanner() {
-        if(cookieBanner) {
-            cookieBanner.classList.remove('visible');
-            setTimeout(() => {
-                cookieBanner.style.display = 'none';
-            }, 400); 
-        }
     }
