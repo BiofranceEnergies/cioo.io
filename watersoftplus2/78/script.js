@@ -145,30 +145,63 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('step-1').style.display = 'block';
     };
 
-    // --- COOKIES ---
+  // --- 5. BANNIÈRE COOKIES (CORRECTIF NAVIGATION PRIVÉE) ---
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
-    if (!localStorage.getItem('watersoft_consent')) {
+    // Fonction sécurisée pour lire la mémoire (évite le crash en privé)
+    function hasConsent() {
+        try {
+            return localStorage.getItem('watersoft_consent');
+        } catch (e) {
+            return null; // En cas d'erreur (bloqueur), on considère qu'il n'y a pas de choix
+        }
+    }
+
+    // Fonction sécurisée pour écrire (évite le crash en privé)
+    function setConsent(value) {
+        try {
+            localStorage.setItem('watersoft_consent', value);
+        } catch (e) {
+            console.log("Navigation privée : impossible de sauvegarder le choix");
+        }
+    }
+
+    // Logique d'affichage
+    if (!hasConsent()) {
         setTimeout(() => {
             if(cookieBanner) {
                 cookieBanner.style.display = 'block';
-                setTimeout(() => cookieBanner.classList.add('visible'), 10);
+                // Petit délai pour l'animation CSS
+                requestAnimationFrame(() => {
+                    cookieBanner.classList.add('visible');
+                });
             }
-        }, 1500);
+        }, 1000); // Apparition après 1 seconde
     }
 
+    // Clic Accepter
     if(btnAccept) {
         btnAccept.addEventListener('click', () => {
-            localStorage.setItem('watersoft_consent', 'accepted');
-            if(cookieBanner) cookieBanner.style.display = 'none';
+            setConsent('accepted');
+            hideBanner();
         });
     }
+
+    // Clic Refuser
     if(btnRefuse) {
         btnRefuse.addEventListener('click', () => {
-            localStorage.setItem('watersoft_consent', 'refused');
-            if(cookieBanner) cookieBanner.style.display = 'none';
+            setConsent('refused');
+            hideBanner();
         });
     }
-});
+
+    function hideBanner() {
+        if(cookieBanner) {
+            cookieBanner.classList.remove('visible');
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 400); 
+        }
+    }
