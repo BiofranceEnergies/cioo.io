@@ -1,5 +1,5 @@
 /* =========================================
-   STYLE "WATERSOFT TECH" (VERSION FINALE PROPRE)
+   STYLE "WATERSOFT TECH" (VERSION PROPRE)
    ========================================= */
 
 :root {
@@ -24,24 +24,20 @@ body {
 
 /* --- 2. NAVIGATION --- */
 .navbar {
-    position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
-    padding: 25px 0;
+    position: absolute; top: 0; left: 0; width: 100%; z-index: 100; padding: 25px 0;
 }
-
 .nav-container {
     max-width: 1280px; margin: 0 auto; width: 100%; padding: 0 40px;
     display: flex; justify-content: space-between; align-items: center;
 }
-
 .logo-text {
     font-size: 1.8rem; font-weight: 900; color: var(--text-white);
     letter-spacing: -1px; text-transform: uppercase; margin: 0; line-height: 1;
 }
 .logo-accent {
-    color: var(--primary); font-size: 2rem; line-height: 0; vertical-align: middle; 
-    margin-left: 2px; position: relative; top: -8px;
+    color: var(--primary); font-size: 2rem; line-height: 0; 
+    vertical-align: middle; margin-left: 2px; position: relative; top: -5px;
 }
-
 .nav-trust {
     font-size: 0.9rem; color: var(--text-gray); font-weight: 600;
     border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 50px;
@@ -50,68 +46,55 @@ body {
 
 /* --- 3. HERO SECTION --- */
 .hero-section {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center;
+    position: relative; min-height: 100vh; display: flex; align-items: center;
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
     padding: 100px 20px; overflow: hidden;
 }
-
 .hero-overlay {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: 0;
+    background-size: 40px 40px; z-index: 0;
     mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
 }
-
 .hero-container {
-    max-width: 1280px; margin: 0 auto; width: 100%;
-    padding: 0 40px;
+    max-width: 1280px; margin: 0 auto; width: 100%; padding: 0 40px;
     display: flex; align-items: center; justify-content: space-between;
     gap: 4rem; position: relative; z-index: 1;
 }
 
 /* --- 4. COLONNE GAUCHE --- */
 .hero-text-col { flex: 1; max-width: 600px; }
-
 .badge {
-    background: rgba(6, 182, 212, 0.15); color: var(--primary);
-    padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700;
+    background: rgba(6, 182, 212, 0.15); color: var(--primary); padding: 6px 12px;
+    border-radius: 4px; font-size: 0.8rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 1px; display: inline-block;
     margin-bottom: 20px; border: 1px solid rgba(6, 182, 212, 0.3);
 }
-
-/* Typo Inversée (SEO) */
 .visual-h1 {
-    font-size: 3.5rem; line-height: 1.1; font-weight: 800;
-    margin-bottom: 1.5rem; letter-spacing: -1.5px; color: var(--text-white);
+    font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem;
+    letter-spacing: -1.5px; color: var(--text-white);
 }
 .seo-h1-text {
-    font-size: 1.15rem; color: var(--text-gray); line-height: 1.6;
-    margin-bottom: 2rem; max-width: 90%; font-weight: 400; margin-top: 0;
+    font-size: 1.15rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 2rem;
+    max-width: 90%; font-weight: 400; margin-top: 0;
 }
 .seo-h1-text strong { font-weight: 700; color: white; }
 .highlight { color: var(--primary); }
 
 /* --- SIMULATEUR --- */
 .simulator-block {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px; padding: 1.8rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; padding: 1.8rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     margin-top: 1rem;
 }
-
 .sim-header { 
     font-weight: 800; color: var(--primary); margin-bottom: 1.2rem; 
     text-transform: uppercase; font-size: 0.9rem; letter-spacing: 0.5px;
 }
-
 .sim-row-vertical { display: flex; flex-direction: column; gap: 15px; }
 .sim-label { display: block; color: var(--text-gray); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600; }
-
 .sim-options { display: flex; gap: 10px; width: 100%; margin-bottom: 5px; }
 .option-btn {
     flex: 1; background: #0f172a; border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1;
@@ -119,23 +102,19 @@ body {
 }
 .option-btn:hover { border-color: var(--primary); color: white; background: rgba(6, 182, 212, 0.1); }
 .option-btn.active { background: var(--primary); border-color: var(--primary); color: #0a1128; }
-
 .sim-input {
-    flex: 1; padding: 14px; background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; font-size: 1rem; width: 100%;
+    flex: 1; padding: 14px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; color: white; font-size: 1rem; width: 100%;
 }
 .sim-input:focus { outline: none; border-color: var(--primary); }
-
 .btn-primary {
-    background-color: var(--primary); color: #0a1128; border: none;
-    padding: 14px; border-radius: 6px; font-weight: 800; cursor: pointer;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 1.1rem; transition: 0.2s; width: 100%;
+    background-color: var(--primary); color: #0a1128; border: none; padding: 14px;
+    border-radius: 6px; font-weight: 800; cursor: pointer; width: 100%;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); display: flex; justify-content: center;
+    align-items: center; gap: 10px; font-size: 1.1rem; transition: 0.2s;
 }
 .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 0 30px rgba(6, 182, 212, 0.5); }
-
 .trust-mini { font-size: 0.8rem; color: var(--text-gray); margin-top: 15px; opacity: 0.8; font-weight: 500; text-align: center;}
-
-/* Résultat Calcul */
 .model-box {
     background: rgba(6, 182, 212, 0.1); border: 1px solid var(--primary);
     border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px;
@@ -148,11 +127,10 @@ body {
 .icon-only { padding: 0 20px; width: auto !important; }
 .restart-link { text-align: center; color: var(--text-gray); font-size: 0.8rem; text-decoration: underline; margin-top: 15px; cursor: pointer; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
 .trust-bottom { margin-top: 2rem; color: var(--text-gray); font-size: 0.95rem; font-weight: 500;}
 .stars { color: #fbbf24; margin-right: 8px; }
 
-/* --- 5. COLONNE DROITE --- */
+/* --- 5. COLONNE DROITE (DESKTOP) --- */
 .hero-visual-col {
     flex: 1; display: flex; justify-content: flex-end; align-items: center; 
     position: relative; max-height: 80vh;
@@ -162,8 +140,7 @@ body {
     max-width: 100%; max-height: 600px; width: auto; margin-right: 0;
     filter: brightness(1.1) drop-shadow(0 20px 60px rgba(0,0,0,0.6));
 }
-
-/* Cartes flottantes */
+/* Cartes flottantes Desktop */
 .float-stat {
     position: absolute; background: rgba(16, 23, 45, 0.7); backdrop-filter: blur(12px);
     border: 1px solid rgba(6, 182, 212, 0.3); padding: 12px 18px; border-radius: 12px;
@@ -175,13 +152,12 @@ body {
 .stat-info { display: flex; flex-direction: column; line-height: 1; }
 .stat-big { font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 4px; }
 .stat-label { font-size: 0.7rem; color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-
 .card-top { top: 12%; right: -10px; animation: float 6s ease-in-out infinite; }
 .card-right { top: 55%; right: -30px; animation: float 5s ease-in-out infinite 2s; }
 .card-bottom { bottom: 15%; left: 20px; animation: float 7s ease-in-out infinite 1s; }
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-/* --- SECTION BENTO --- */
+/* --- SECTIONS CONTENU --- */
 .stats-section { padding: 100px 20px; background-color: var(--dark-bg); border-top: 1px solid rgba(255, 255, 255, 0.05); }
 .section-title { text-align: center; margin-bottom: 60px; }
 .section-title h2 { font-size: 2.5rem; color: white; font-weight: 800; margin-bottom: 10px; }
@@ -207,7 +183,6 @@ body {
 }
 .highlight-text { color: var(--primary); text-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
 
-/* --- SECTION TECH --- */
 .tech-section { padding: 100px 20px; background-color: #080c16; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 .tech-header { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
 .tech-header h2 { font-size: 2.5rem; color: white; font-weight: 800; margin-top: 15px; margin-bottom: 15px; }
@@ -228,12 +203,10 @@ body {
 .tech-content p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin: 0; }
 .tech-content strong { color: white; }
 
-/* --- SECTION AVIS --- */
 .reviews-section { padding: 100px 20px; background-color: var(--dark-bg); border-top: 1px solid rgba(255, 255, 255, 0.05); }
 .review-visual-stars { margin-bottom: 25px; }
 .stars-gold { color: #facc15; font-size: 1.8rem; letter-spacing: 2px; }
 .stars-subtext { font-size: 0.85rem; color: var(--text-gray); margin-top: 5px; }
-
 .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px; }
 .review-card {
     background: #111827; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 30px;
@@ -281,7 +254,6 @@ body {
 .phone-link { font-weight: 700; color: white !important; }
 .footer-copyright { margin-top: 30px; font-size: 0.8rem; color: #475569; }
 
-/* --- MODALES --- */
 .modal {
     display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); align-items: center; justify-content: center; animation: fadeIn 0.3s ease;
@@ -301,9 +273,6 @@ body {
 }
 .close-btn:hover { color: var(--primary); }
 
-/* =========================================
-   COOKIE CARD (FORCE BRUTE)
-   ========================================= */
 .cookie-card {
     position: fixed; bottom: 20px; left: 20px; width: 350px;
     background: rgba(11, 17, 33, 0.98); border: 1px solid rgba(255, 255, 255, 0.2);
@@ -312,7 +281,6 @@ body {
 }
 .cookie-card.show-banner { display: block !important; animation: slideUp 0.5s ease-out; }
 @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
 .cookie-content { display: flex; gap: 15px; margin-bottom: 15px; }
 .cookie-icon { font-size: 1.5rem; }
 .cookie-text h4 { color: white; font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; }
@@ -329,89 +297,65 @@ body {
 }
 .btn-ghost:hover { color: white; }
 
+
 /* =========================================
-   OPTIMISATION MOBILE (VERSION GRILLE COMPACTE)
+   OPTIMISATION MOBILE (VERSION FINALE)
    ========================================= */
 @media (max-width: 968px) {
 
-    /* 1. HEADER & NAV */
+    /* HEADER */
     .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.95); }
     .logo-text { font-size: 1.3rem; }
     .nav-trust { display: none; }
 
-    /* 2. HERO SECTION */
+    /* HERO */
     .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; min-height: auto; }
     .hero-container { flex-direction: column; text-align: center; gap: 2rem; padding: 0 20px; }
     .hero-text-col { padding: 0; max-width: 100%; }
-    
-    h1 { font-size: 2.2rem; margin-bottom: 1rem; }
-    .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
+    .visual-h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .seo-h1-text { font-size: 1rem; margin-bottom: 1.5rem; }
 
-    /* 3. LE SIMULATEUR */
+    /* SIMULATEUR */
     .simulator-block { padding: 1.2rem; margin-top: 0; }
     .sim-header { font-size: 0.85rem; text-align: left; }
     .sim-row-vertical { width: 100%; }
     .sim-options { margin-bottom: 10px; }
     .btn-primary { width: 100%; justify-content: center; font-size: 1rem; }
 
-    /* 4. L'IMAGE ET LES CARTES (MODE GRILLE 2+1) */
-    .hero-visual-col { 
-        order: 2; margin-top: 1rem; width: 100%;
-    }
-
+    /* VISUEL + GRID MOBILE */
+    .hero-visual-col { order: 2; margin-top: 1rem; width: 100%; display: flex; flex-direction: column; }
+    
     .splash-wrapper { 
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 colonnes égales */
-        gap: 10px; /* Espace entre les cartes */
-        width: 100%;
-        max-width: 400px; /* On empêche que ce soit trop large */
-        margin: 0 auto;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        width: 100%; max-width: 400px; margin: 0 auto;
     }
-
     .splash-img { 
-        grid-column: span 2; /* L'image prend toute la largeur */
-        order: 1;
-        max-height: 280px; /* Un peu plus petit pour gagner de la place */
-        margin: 0 auto -30px auto; /* Marge négative pour coller les cartes */
-        position: relative; z-index: 1;
+        grid-column: span 2; max-height: 280px; 
+        margin: 0 auto -30px auto; position: relative; z-index: 1; 
     }
 
-    /* STYLE DES CARTES MOBILES */
+    /* CARTES EN MODE GRID MOBILE */
     .float-stat {
         position: relative !important; top: auto !important; right: auto !important;
         bottom: auto !important; left: auto !important; animation: none !important; transform: none !important;
         
-        display: flex !important; 
-        flex-direction: column; /* Icone au dessus du texte */
-        align-items: center; justify-content: center; text-align: center;
+        display: flex !important; flex-direction: column;
+        text-align: center; justify-content: center;
         
-        width: 100%; margin: 0 !important; padding: 15px 10px;
-        
-        background: rgba(16, 23, 45, 0.95);
-        border: 1px solid rgba(6, 182, 212, 0.3);
-        border-radius: 12px;
-        z-index: 2; /* Devant l'image */
+        width: 100%; margin: 0 !important; padding: 10px;
+        background: rgba(16, 23, 45, 0.95); border: 1px solid rgba(6, 182, 212, 0.3);
+        border-radius: 8px; box-shadow: none; z-index: 2;
     }
+    .card-top { order: 2; }    
+    .card-bottom { order: 3; }
+    .card-right { order: 4; grid-column: span 2; flex-direction: row !important; gap: 10px; }
 
-    /* ORGANISATION */
-    .card-top { order: 2; }    /* Vie x3 (Gauche) */
-    .card-bottom { order: 3; } /* Energie (Droite) */
-    
-    /* La 3ème carte prend toute la largeur en bas */
-    .card-right { 
-        order: 4; 
-        grid-column: span 2; 
-        flex-direction: row !important; /* Celle-ci reste à l'horizontale */
-        gap: 15px;
-    }
+    .stat-icon { font-size: 1.2rem; margin-bottom: 5px; }
+    .card-right .stat-icon { margin-bottom: 0; }
+    .stat-big { font-size: 1rem; }
+    .stat-label { font-size: 0.6rem; }
 
-    /* AJUSTEMENT TEXTES */
-    .stat-icon { font-size: 1.4rem; margin-bottom: 5px; }
-    .card-right .stat-icon { margin-bottom: 0; } /* Pas de marge pour la carte large */
-    .stat-big { font-size: 1.1rem; }
-    .stat-label { font-size: 0.65rem; }
-
-    /* 5. RESTE DU SITE */
+    /* RESTE DU SITE */
     .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .bento-card { padding: 15px; min-height: 160px; }
     .bento-card.featured { grid-column: span 2; }
