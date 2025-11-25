@@ -330,67 +330,59 @@ body {
 .btn-ghost:hover { color: white; }
 
 /* =========================================
-   OPTIMISATION MOBILE (VERSION BLOC RIGIDE)
+   OPTIMISATION MOBILE (VERSION SATELLITES SECURISÉE)
    ========================================= */
 @media (max-width: 968px) {
 
-    /* 1. NAV & HERO */
+    /* 1. HEADER & NAV */
     .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.98); }
     .logo-text { font-size: 1.3rem; }
     .nav-trust { display: none; }
 
+    /* 2. HERO SECTION */
     .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; min-height: auto; }
-    
-    /* CONTENEUR PRINCIPAL */
-    .hero-container { 
-        flex-direction: column; 
-        text-align: center; 
-        /* On force un grand écart ici */
-        gap: 4rem; 
-        padding: 0 20px; 
-    }
-    
+    .hero-container { flex-direction: column; text-align: center; gap: 1rem; padding: 0 20px; }
     .hero-text-col { padding: 0; max-width: 100%; }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .hero-desc { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    
+    h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+    .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
 
-    /* 2. LE SIMULATEUR */
+    /* 3. LE SIMULATEUR */
     .simulator-block { padding: 1.2rem; margin-top: 0; position: relative; z-index: 50; }
     .sim-header { font-size: 0.85rem; text-align: left; }
     .sim-row-vertical { width: 100%; }
     .sim-options { margin-bottom: 10px; }
     .btn-primary { width: 100%; justify-content: center; font-size: 1rem; }
 
-    /* 3. LE BLOC IMAGE (C'EST ICI LE FIX) */
+    /* 4. LA ZONE VISUELLE (CADRE RIGIDE) */
     .hero-visual-col { 
         order: 2; 
         width: 100%;
-        /* ON FORCE UNE HAUTEUR MINIMALE : Le bloc prendra forcément 360px de haut */
-        min-height: 360px; 
-        /* ON FORCE UNE MARGE HAUTE : Impossible de toucher le formulaire */
-        margin-top: 20px; 
         
-        position: relative; /* Cadre pour les éléments absolus */
-        display: block; 
+        /* C'EST ICI LA SÉCURITÉ : Hauteur Fixe + Marge */
+        height: 400px !important; 
+        margin-top: 50px !important; 
+        
+        position: relative; 
+        display: block; /* On sort du Flexbox pour figer les positions */
     }
 
     .splash-wrapper { 
-        width: 100%; height: 100%; 
-        position: absolute; /* Remplit le bloc parent */
-        top: 0; left: 0;
+        width: 100%; height: 100%; position: relative;
     }
 
+    /* L'IMAGE (PETITE & CENTRÉE) */
     .splash-img { 
-        max-height: 220px !important; 
+        max-height: 220px !important; /* On force petit */
         width: auto;
         position: absolute;
         left: 50%; top: 50%;
-        transform: translate(-50%, -50%); /* Centrage */
+        transform: translate(-50%, -50%);
         margin: 0;
         z-index: 1;
     }
 
-    /* 4. LES SATELLITES */
+    /* 5. LES SATELLITES (POSITIONS ABSOLUES AUX COINS) */
     .float-stat {
         position: absolute !important; 
         z-index: 10;
@@ -398,38 +390,39 @@ body {
         flex-direction: row; 
         align-items: center; 
         gap: 6px;
-        padding: 6px 10px;
-        width: auto; max-width: 130px;
+        
+        padding: 8px 12px;
+        width: auto; max-width: 140px;
         margin: 0 !important;
+        
         background: rgba(16, 23, 45, 0.95);
         border: 1px solid rgba(6, 182, 212, 0.4);
         backdrop-filter: blur(4px);
-        border-radius: 50px; /* Capsule */
+        border-radius: 8px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        
         animation: none !important; transform: none !important;
     }
 
+    /* Texte Mini */
     .stat-icon { font-size: 1.1rem; margin-bottom: 0; } 
     .stat-info { align-items: flex-start; text-align: left; }
     .stat-big { font-size: 0.9rem; margin-bottom: 0; line-height: 1; font-weight: 800; }
     .stat-label { font-size: 0.55rem; white-space: nowrap; opacity: 0.8; }
 
-    /* POSITIONS */
+    /* --- COORDONNÉES GPS --- */
     .card-top { top: 0; left: 0; } /* Haut Gauche */
     
-    /* Milieu Droite */
     .card-right { 
         top: 50%; right: 0; 
         transform: translateY(-50%) !important; 
         flex-direction: row-reverse; text-align: right;
     }
-    .card-right .stat-info { align-items: flex-end; }
-
-    /* Bas Gauche */
-    .card-bottom { bottom: 0; left: 0; }
+    
+    .card-bottom { bottom: 10px; left: 0; } /* Bas Gauche */
 
 
-    /* 5. RESTE DU SITE */
+    /* 5. RESTE DU SITE (Inchangé) */
     .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .bento-card { padding: 15px; min-height: 160px; }
     .bento-card.featured { grid-column: span 2; }
