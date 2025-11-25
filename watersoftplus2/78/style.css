@@ -74,7 +74,7 @@ body {
     
     /* CORRECTION VERTICALE */
     position: relative; /* Permet d'utiliser 'top' */
-    top: -5px; /* Remonte le '+' de 3 pixels */
+    top: -8px; /* Remonte le '+' de 3 pixels */
 }
 /* Badge Expert */
 .nav-trust {
