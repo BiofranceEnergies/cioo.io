@@ -509,34 +509,36 @@ h1 {
 }
 
 /* =========================================
-   COOKIE CARD (SaaS 2025 Style)
+   COOKIE CARD (VERSION ROBUSTE - FORCE BRUTE)
    ========================================= */
 .cookie-card {
     position: fixed;
     bottom: 20px;
     left: 20px;
     width: 350px;
-    background: rgba(11, 17, 33, 0.95); /* Fond très sombre */
-    backdrop-filter: blur(12px);        /* Effet verre */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(11, 17, 33, 0.98); /* Quasi opaque pour être bien visible */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     padding: 20px;
-    z-index: 99999; /* Toujours au-dessus */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    z-index: 999999; /* On est sûr qu'elle est au dessus de tout */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     
-    /* Caché par défaut, le JS l'affichera */
+    /* Caché par défaut sans animation compliquée */
     display: none; 
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.cookie-card.visible {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+/* C'EST ICI QUE ÇA CHANGE : On utilise !important pour forcer l'affichage */
+.cookie-card.show-banner {
+    display: block !important; 
+    animation: slideUp 0.5s ease-out;
 }
 
+@keyframes slideUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Le reste du design (Contenu) */
 .cookie-content { display: flex; gap: 15px; margin-bottom: 15px; }
 
 .cookie-icon { font-size: 1.5rem; }
@@ -552,7 +554,7 @@ h1 {
     display: flex; gap: 10px; justify-content: space-between; align-items: center;
 }
 
-/* Bouton Accepter (Cyan) */
+/* Boutons */
 .btn-accept {
     background: var(--primary);
     color: #0a1128;
@@ -566,7 +568,6 @@ h1 {
 }
 .btn-accept:hover { background: var(--primary-hover); }
 
-/* Bouton Refuser (Discret mais présent pour le RGPD) */
 .btn-ghost {
     background: transparent;
     border: none;
@@ -578,7 +579,7 @@ h1 {
 }
 .btn-ghost:hover { color: white; }
 
-/* RESPONSIVE : Sur mobile, on prend toute la largeur en bas */
+/* RESPONSIVE */
 @media (max-width: 480px) {
     .cookie-card {
         left: 10px; right: 10px; bottom: 10px;
