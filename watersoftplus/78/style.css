@@ -330,12 +330,12 @@ body {
 .btn-ghost:hover { color: white; }
 
 /* =========================================
-   OPTIMISATION MOBILE (VERSION SATELLITES FLOTTANTS)
+   OPTIMISATION MOBILE (VERSION SATELLITES FORCÉE)
    ========================================= */
 @media (max-width: 968px) {
 
     /* 1. HEADER & NAV */
-    .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.95); }
+    .navbar { padding: 15px 0; background: rgba(10, 17, 40, 0.98); }
     .logo-text { font-size: 1.3rem; }
     .nav-trust { display: none; }
 
@@ -348,90 +348,91 @@ body {
     .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
 
     /* 3. LE SIMULATEUR */
-    .simulator-block { padding: 1.2rem; margin-top: 0; z-index: 20; position: relative; }
-    .sim-header { font-size: 0.8rem; text-align: left; }
+    .simulator-block { padding: 1.2rem; margin-top: 0; position: relative; z-index: 50; }
+    .sim-header { font-size: 0.85rem; text-align: left; }
     .sim-row-vertical { width: 100%; }
     .sim-options { margin-bottom: 10px; }
     .btn-primary { width: 100%; justify-content: center; font-size: 1rem; }
 
-    /* 4. LA ZONE VISUELLE (L'espace pour les satellites) */
+    /* 4. LA SCÈNE VISUELLE (CADRE FIGÉ) */
     .hero-visual-col { 
         order: 2; 
-        margin-top: 30px;
+        margin-top: 50px; /* GROSSE MARGE SÉCURITÉ avec le formulaire */
         width: 100%;
-        height: 400px; /* On force une hauteur pour que l'animation ait de la place */
-        position: relative; /* Vital pour le positionnement absolu */
-        display: flex; justify-content: center; align-items: center;
+        height: 350px; /* HAUTEUR FIXE : On définit un terrain de jeu */
+        position: relative; 
+        display: block; /* Important pour le positionnement absolu */
     }
 
     .splash-wrapper { 
-        width: 100%; height: 100%;
-        position: relative;
+        width: 100%; height: 100%; position: relative;
     }
 
+    /* L'IMAGE EN PETIT AU CENTRE */
     .splash-img { 
-        max-height: 340px; /* Image de bonne taille */
+        max-height: 200px !important; /* ON FORCE LA PETITE TAILLE */
         width: auto;
-        position: absolute; /* On la centre en absolu */
+        position: absolute;
         left: 50%; top: 50%;
         transform: translate(-50%, -50%); /* Centrage parfait */
+        margin: 0;
         z-index: 1;
     }
 
-    /* 5. LES MINI-SATELLITES */
+    /* 5. LES SATELLITES (POSITIONS ABSOLUES) */
     .float-stat {
         position: absolute !important; 
         z-index: 10;
+        display: flex !important; 
+        flex-direction: row; 
+        align-items: center; 
+        gap: 5px;
         
-        /* On réduit la taille (Padding et largeur) */
-        padding: 8px 12px; 
-        min-width: auto; 
-        width: auto;
-        border-radius: 8px;
+        /* Style Mini */
+        padding: 6px 10px;
+        width: auto; 
+        max-width: 130px; /* Carte étroite */
+        margin: 0 !important;
         
-        background: rgba(16, 23, 45, 0.9); 
+        background: rgba(16, 23, 45, 0.95);
         border: 1px solid rgba(6, 182, 212, 0.4);
         backdrop-filter: blur(4px);
+        border-radius: 8px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         
-        /* Flex pour bien aligner icone et texte */
-        display: flex; flex-direction: row; align-items: center; gap: 8px;
+        animation: none !important; /* Pas d'anim pour stabiliser */
+        transform: none !important;
     }
 
-    /* On réduit les textes à l'intérieur pour le mobile */
-    .stat-icon { font-size: 1.2rem; margin-bottom: 0; } 
+    /* Textes Minis */
+    .stat-icon { font-size: 1rem; margin-bottom: 0; } 
     .stat-info { align-items: flex-start; text-align: left; }
-    .stat-big { font-size: 1rem; margin-bottom: 0; line-height: 1; }
-    .stat-label { font-size: 0.6rem; white-space: nowrap; text-transform: uppercase; letter-spacing: 0; }
+    .stat-big { font-size: 0.9rem; margin-bottom: 0; line-height: 1; }
+    .stat-label { font-size: 0.55rem; white-space: nowrap; }
 
-    /* --- POSITIONNEMENT PRÉCIS SUR MOBILE --- */
+    /* --- COORDONNÉES GPS DES CARTES --- */
     
-    /* 1. Vie x3 (Haut Gauche) */
+    /* Haut Gauche (Vie x3) */
     .card-top { 
-        top: 0; left: 0; 
-        animation: floatMobile 4s ease-in-out infinite;
+        top: 0; 
+        left: 0; 
     }
 
-    /* 2. Produits -40% (Milieu Droite) */
+    /* Milieu Droite (Produits -40%) */
     .card-right { 
-        top: 40%; right: 0; 
-        flex-direction: row-reverse; /* Icone à droite pour coller au bord */
+        top: 40%; 
+        right: 0; 
+        flex-direction: row-reverse; /* Texte vers l'intérieur */
         text-align: right;
     }
     .card-right .stat-info { align-items: flex-end; }
 
-    /* 3. Energie -18% (Bas Gauche) */
+    /* Bas Gauche (Energie -18%) */
     .card-bottom { 
-        bottom: 20px; left: 0; 
-        animation: floatMobile 6s ease-in-out infinite 2s;
+        bottom: 10px; 
+        left: 0; 
     }
 
-    /* Animation douce adaptée au mobile */
-    @keyframes floatMobile { 
-        0% { transform: translateY(0px); } 
-        50% { transform: translateY(-8px); } 
-        100% { transform: translateY(0px); } 
-    }
 
     /* 5. RESTE DU SITE */
     .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
