@@ -330,7 +330,7 @@ body {
 .btn-ghost:hover { color: white; }
 
 /* =========================================
-   OPTIMISATION MOBILE (VERSION SÉCURISÉE & ESPACÉE)
+   OPTIMISATION MOBILE (VERSION SATELLITES FLOTTANTS)
    ========================================= */
 @media (max-width: 968px) {
 
@@ -341,69 +341,97 @@ body {
 
     /* 2. HERO SECTION */
     .hero-section { padding-top: 90px; padding-bottom: 40px; height: auto; min-height: auto; }
-    .hero-container { flex-direction: column; text-align: center; gap: 2rem; padding: 0 20px; }
-    
-    /* Le bloc texte (Titre + Formulaire) */
+    .hero-container { flex-direction: column; text-align: center; gap: 1rem; padding: 0 20px; }
     .hero-text-col { padding: 0; max-width: 100%; }
     
     h1 { font-size: 2.2rem; margin-bottom: 1rem; }
     .hero-desc { font-size: 1rem; margin-bottom: 1.5rem; }
 
     /* 3. LE SIMULATEUR */
-    .simulator-block { padding: 1.2rem; margin-top: 0; position: relative; z-index: 50; } /* Z-index haut pour passer devant */
-    .sim-header { font-size: 0.85rem; text-align: left; }
+    .simulator-block { padding: 1.2rem; margin-top: 0; z-index: 20; position: relative; }
+    .sim-header { font-size: 0.8rem; text-align: left; }
     .sim-row-vertical { width: 100%; }
     .sim-options { margin-bottom: 10px; }
     .btn-primary { width: 100%; justify-content: center; font-size: 1rem; }
 
-    /* 4. L'IMAGE (C'EST ICI QUE ÇA BLOQUAIT) */
+    /* 4. LA ZONE VISUELLE (L'espace pour les satellites) */
     .hero-visual-col { 
         order: 2; 
-        margin-top: 40px; /* ON FORCE UN GROS ESPACE AVEC LE FORMULAIRE */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        margin-top: 30px;
         width: 100%;
-        position: relative; 
-        z-index: 1;
+        height: 400px; /* On force une hauteur pour que l'animation ait de la place */
+        position: relative; /* Vital pour le positionnement absolu */
+        display: flex; justify-content: center; align-items: center;
     }
 
     .splash-wrapper { 
-        display: grid;
-        grid-template-columns: 1fr 1fr; 
-        gap: 10px; 
-        width: 100%;
-        max-width: 400px; 
-        margin: 0 auto;
+        width: 100%; height: 100%;
+        position: relative;
     }
 
-    /* L'Image elle-même */
     .splash-img { 
-        grid-column: span 2; 
-        max-height: 280px; 
-        margin: 0 auto 10px auto; /* Pas de marge négative ! Juste un petit espace */
-        position: relative; 
+        max-height: 340px; /* Image de bonne taille */
+        width: auto;
+        position: absolute; /* On la centre en absolu */
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%); /* Centrage parfait */
         z-index: 1;
     }
 
-    /* LES CARTES */
+    /* 5. LES MINI-SATELLITES */
     .float-stat {
-        position: relative !important; top: auto !important; right: auto !important;
-        bottom: auto !important; left: auto !important; animation: none !important; transform: none !important;
+        position: absolute !important; 
+        z-index: 10;
         
-        display: flex !important; flex-direction: column;
-        text-align: center; justify-content: center;
+        /* On réduit la taille (Padding et largeur) */
+        padding: 8px 12px; 
+        min-width: auto; 
+        width: auto;
+        border-radius: 8px;
         
-        width: 100%; margin: 0 !important; padding: 15px 10px;
+        background: rgba(16, 23, 45, 0.9); 
+        border: 1px solid rgba(6, 182, 212, 0.4);
+        backdrop-filter: blur(4px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         
-        background: rgba(16, 23, 45, 0.95);
-        border: 1px solid rgba(6, 182, 212, 0.3);
-        border-radius: 8px; box-shadow: none; z-index: 2;
+        /* Flex pour bien aligner icone et texte */
+        display: flex; flex-direction: row; align-items: center; gap: 8px;
     }
 
-    .card-top { order: 2; }    
-    .card-bottom { order: 3; }
-    .card-right { order: 4; grid-column: span 2; flex-direction: row !important; gap: 10px; }
+    /* On réduit les textes à l'intérieur pour le mobile */
+    .stat-icon { font-size: 1.2rem; margin-bottom: 0; } 
+    .stat-info { align-items: flex-start; text-align: left; }
+    .stat-big { font-size: 1rem; margin-bottom: 0; line-height: 1; }
+    .stat-label { font-size: 0.6rem; white-space: nowrap; text-transform: uppercase; letter-spacing: 0; }
+
+    /* --- POSITIONNEMENT PRÉCIS SUR MOBILE --- */
+    
+    /* 1. Vie x3 (Haut Gauche) */
+    .card-top { 
+        top: 0; left: 0; 
+        animation: floatMobile 4s ease-in-out infinite;
+    }
+
+    /* 2. Produits -40% (Milieu Droite) */
+    .card-right { 
+        top: 40%; right: 0; 
+        flex-direction: row-reverse; /* Icone à droite pour coller au bord */
+        text-align: right;
+    }
+    .card-right .stat-info { align-items: flex-end; }
+
+    /* 3. Energie -18% (Bas Gauche) */
+    .card-bottom { 
+        bottom: 20px; left: 0; 
+        animation: floatMobile 6s ease-in-out infinite 2s;
+    }
+
+    /* Animation douce adaptée au mobile */
+    @keyframes floatMobile { 
+        0% { transform: translateY(0px); } 
+        50% { transform: translateY(-8px); } 
+        100% { transform: translateY(0px); } 
+    }
 
     /* 5. RESTE DU SITE */
     .bento-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -419,5 +447,7 @@ body {
     .final-cta-box { padding: 30px 20px; }
     .btn-center { width: 100%; }
     .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .footer-desc { margin: 0 auto 20px auto; }
+    .footer-list li { justify-content: center; }
     .cookie-card { left: 10px; right: 10px; bottom: 10px; width: auto; }
 }
