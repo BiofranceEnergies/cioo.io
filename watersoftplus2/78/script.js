@@ -135,7 +135,48 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+ // --- GESTION COOKIES (RGPD) ---
+    const cookieBanner = document.getElementById('cookie-banner');
+    const btnAccept = document.getElementById('cookie-accept');
+    const btnRefuse = document.getElementById('cookie-refuse');
 
+    // Vérifier si déjà accepté/refusé
+    if (!localStorage.getItem('watersoft_consent')) {
+        // Si pas de choix, on affiche après 1.5 seconde (effet smooth)
+        setTimeout(() => {
+            if(cookieBanner) {
+                cookieBanner.style.display = 'block';
+                // Petit délai pour permettre la transition CSS
+                setTimeout(() => cookieBanner.classList.add('visible'), 10);
+            }
+        }, 1500);
+    }
+
+    // Action : ACCEPTER
+    if(btnAccept) {
+        btnAccept.addEventListener('click', () => {
+            localStorage.setItem('watersoft_consent', 'accepted');
+            hideBanner();
+            // ICI : C'est là qu'on déclencherait le tag Google Ads (GTAG)
+            console.log("Cookies acceptés - Activation GTAG");
+        });
+    }
+
+    // Action : REFUSER
+    if(btnRefuse) {
+        btnRefuse.addEventListener('click', () => {
+            localStorage.setItem('watersoft_consent', 'refused');
+            hideBanner();
+            console.log("Cookies refusés - Pas de tracking");
+        });
+    }
+
+    function hideBanner() {
+        cookieBanner.classList.remove('visible');
+        setTimeout(() => {
+            cookieBanner.style.display = 'none';
+        }, 400); // Attend la fin de l'animation
+    }
     window.restartSim = function() {
         document.getElementById('step-2').style.display = 'none';
         document.getElementById('step-1').style.display = 'block';
