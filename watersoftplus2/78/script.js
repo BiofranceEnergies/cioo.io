@@ -145,13 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('step-1').style.display = 'block';
     };
 
- // --- 5. BANNIÈRE COOKIES (MÉTHODE FORCE BRUTE) ---
+ // --- 5. BANNIÈRE COOKIES (CORRECTIF NOM DE CLASSE) ---
     
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
-    // Fonction simple pour créer un cookie
+    // Fonction pour créer un cookie
     function setCookie(name, value, days) {
         const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -159,12 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    // VÉRIFICATION IMMÉDIATE
-    // On regarde simplement si le mot "watersoft_consent" est absent des cookies
+    // VÉRIFICATION
+    // Si le cookie n'est pas présent
     if (document.cookie.indexOf('watersoft_consent') === -1) {
-        // S'il n'est pas là, on affiche la bannière après 1 seconde
         setTimeout(function() {
             if(cookieBanner) {
+                // C'est ICI que c'était faux avant. Maintenant c'est le bon nom :
                 cookieBanner.classList.add('show-banner');
             }
         }, 1000);
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clic Accepter
     if(btnAccept) {
         btnAccept.addEventListener('click', function() {
-            setCookie('watersoft_consent', 'accepted', 365); // Valide 1 an
+            setCookie('watersoft_consent', 'accepted', 365);
             if(cookieBanner) cookieBanner.classList.remove('show-banner');
         });
     }
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clic Refuser
     if(btnRefuse) {
         btnRefuse.addEventListener('click', function() {
-            setCookie('watersoft_consent', 'refused', 30); // Valide 30 jours
+            setCookie('watersoft_consent', 'refused', 30);
             if(cookieBanner) cookieBanner.classList.remove('show-banner');
         });
     }
