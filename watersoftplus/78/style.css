@@ -330,8 +330,16 @@ body {
 .btn-ghost:hover { color: white; }
 
 /* =========================================
-   OPTIMISATION MOBILE (VERSION BLOC RIGIDE)
-   ========================================= */
+    OPTIMISATION MOBILE (VERSION BLOC RIGIDE)
+    ========================================= */
+
+/* DÉFINITION DE L'ANIMATION DE FLOTTEMENT */
+@keyframes float-anim {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); } /* Déplacement léger vers le haut */
+    100% { transform: translateY(0); }
+}
+
 @media (max-width: 968px) {
 
     /* 1. NAV & HERO */
@@ -406,7 +414,11 @@ body {
         backdrop-filter: blur(4px);
         border-radius: 50px; /* Capsule */
         box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        animation: none !important; transform: none !important;
+        /* Lignes d'annulation retirées/commentées */
+        /* animation: none !important; transform: none !important; */
+
+        /* APPLICATION DE LA NOUVELLE ANIMATION */
+        animation: float-anim 3s ease-in-out infinite;
     }
 
     .stat-icon { font-size: 1.1rem; margin-bottom: 0; } 
@@ -420,7 +432,7 @@ body {
     /* Milieu Droite */
     .card-right { 
         top: 50%; right: 0; 
-        transform: translateY(-50%) !important; 
+        transform: translateY(-50%) !important; /* On maintient la transformation de positionnement */
         flex-direction: row-reverse; text-align: right;
     }
     .card-right .stat-info { align-items: flex-end; }
