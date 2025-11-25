@@ -402,3 +402,17 @@ h1 {
     .footer-desc { margin: 0 auto 20px auto; }
     .footer-list li { justify-content: center; }
 }
+/* --- NOUVEAU STYLE ÉTOILES VISUELLES --- */
+.review-visual-stars {
+    margin-bottom: 25px;
+}
+.stars-gold {
+    color: #facc15; /* Jaune Or */
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+.stars-subtext {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-top: 5px;
+}
