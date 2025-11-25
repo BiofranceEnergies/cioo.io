@@ -66,14 +66,15 @@ body {
 }
 
 .logo-accent { 
-    /* C'est cette ligne qui change la couleur en Cyan */
     color: var(--primary); 
-    
-    /* Le reste pour le positionnement : */
     font-size: 2rem; 
     line-height: 0; 
     vertical-align: middle; 
-    margin-left: 2px; 
+    margin-left: 2px;
+    
+    /* CORRECTION VERTICALE */
+    position: relative; /* Permet d'utiliser 'top' */
+    top: -3px; /* Remonte le '+' de 3 pixels */
 }
 /* Badge Expert */
 .nav-trust {
