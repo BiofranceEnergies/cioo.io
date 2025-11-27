@@ -72,7 +72,7 @@ body {
 }
 
 .trust-logo {
-    height: 45px;       /* Hauteur fixe sur PC */
+    height: 35px;       /* Hauteur fixe sur PC */
     width: auto;        /* Largeur automatique */
     border-radius: 4px; 
     background: white;  /* Fond blanc propre */
