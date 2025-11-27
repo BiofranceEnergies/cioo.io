@@ -474,3 +474,17 @@ body {
         margin-bottom: 15px;
     }
 }
+
+/* =========================================
+   *** FIX MOBILE ISOLÉ (POSITION) ***
+   Ceci écrase UNIQUEMENT le bottom du desktop sur les petits écrans
+   ========================================= */
+@media (max-width: 968px) {
+    .instruction-container {
+        /* On force la règle pour éviter de recouvrir les boutons */
+        bottom: 20px !important; 
+        
+        /* On s'assure qu'il est en position absolue (important si une règle globale le cassait) */
+        position: absolute !important; 
+    }
+}
