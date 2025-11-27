@@ -1,12 +1,16 @@
 /* =========================================
-   1. VARIABLES & RESET (LES FONDATIONS)
+   1. VARIABLES & RESET (CHARTE BIOFRANCE)
    ========================================= */
 :root {
-    /* Palette de couleurs "SaaS Solaire" */
-    --primary: #FF6B00;       /* Orange Solaire (Action) */
-    --primary-hover: #e65c00; /* Orange foncé (Survol) */
-    --dark-bg: #0a1128;       /* Bleu Nuit Profond (Fond) */
-    --tech-blue: #1c3b70;     /* Bleu Intermédiaire */
+    /* --- COULEURS --- */
+    /* Le Vert Biofrance (Récupéré du logo) */
+    --primary: #5CB885;       
+    --primary-hover: #489c6e; /* Un peu plus sombre pour le survol */
+    
+    /* Le Fond : Bleu Nuit très profond (pour faire ressortir le blanc et le vert) */
+    --dark-bg: #0B1221;       
+    
+    /* Textes */
     --text-white: #ffffff;
     --text-gray: #cbd5e1;     /* Gris clair pour les sous-titres */
     
@@ -24,12 +28,12 @@ body {
     font-family: var(--font-main);
     background-color: var(--dark-bg);
     color: var(--text-white);
-    overflow-x: hidden; /* Empêche le scroll horizontal indésirable */
+    overflow-x: hidden;
     line-height: 1.5;
 }
 
 /* =========================================
-   2. NAVIGATION (Haut de page)
+   2. NAVIGATION
    ========================================= */
 .navbar {
     position: absolute;
@@ -40,46 +44,47 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100; /* Toujours au-dessus */
+    z-index: 100;
 }
 
 .logo {
     font-size: 1.6rem;
     font-weight: 800;
-    color: var(--text-white);
+    color: var(--text-white); /* BIOFRANCE en Blanc */
     text-transform: uppercase;
     letter-spacing: -0.5px;
 }
 
 .highlight {
-    color: var(--primary);
+    color: var(--primary); /* ENERGIES en Vert */
 }
 
 .dot {
-    color: var(--primary);
+    color: var(--primary); /* Le point en Vert aussi */
 }
 
 .rge-badge {
-    border: 1px solid #10B981; /* Vert Tech */
-    color: #10B981;
+    border: 1px solid var(--primary);
+    color: var(--primary);
     padding: 6px 14px;
     border-radius: 6px;
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(92, 184, 133, 0.1); /* Fond vert très léger */
 }
 
 /* =========================================
-   3. HERO SECTION (L'écran divisé Gauche/Droite)
+   3. HERO SECTION (Split Screen)
    ========================================= */
 .hero-section {
     position: relative;
-    min-height: 100vh; /* Prend toute la hauteur de l'écran */
+    min-height: 100vh;
     display: flex;
-    align-items: center; /* Centre verticalement */
+    align-items: center;
     justify-content: center;
+    /* Dégradé subtil vers le bleu nuit */
     background: linear-gradient(135deg, var(--dark-bg) 0%, #05081c 100%);
     padding: 100px 50px 40px 50px;
     overflow: hidden;
@@ -96,7 +101,7 @@ body {
     z-index: 0;
 }
 
-/* Lueur Orange derrière la grille à droite */
+/* Lueur VERTE derrière la grille à droite */
 .solar-glow-right {
     position: absolute;
     top: 50%;
@@ -104,12 +109,12 @@ body {
     transform: translateY(-50%);
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, rgba(0,0,0,0) 70%);
+    /* C'est ici qu'on met le vert en transparence */
+    background: radial-gradient(circle, rgba(92, 184, 133, 0.15) 0%, rgba(0,0,0,0) 70%);
     pointer-events: none;
     z-index: 0;
 }
 
-/* Conteneur principal flexible */
 .hero-container {
     width: 100%;
     max-width: 1200px;
@@ -124,7 +129,7 @@ body {
     gap: 60px;
 }
 
-/* --- COLONNE GAUCHE (Texte & Argumentaire) --- */
+/* --- COLONNE GAUCHE --- */
 .hero-left {
     flex: 1;
     text-align: left;
@@ -132,7 +137,8 @@ body {
 }
 
 .badge {
-    background: rgba(255, 107, 0, 0.1);
+    /* Badge Vert Biofrance */
+    background: rgba(92, 184, 133, 0.1);
     color: var(--primary);
     padding: 6px 14px;
     border-radius: 50px;
@@ -142,7 +148,7 @@ body {
     letter-spacing: 1px;
     display: inline-block;
     margin-bottom: 25px;
-    border: 1px solid rgba(255, 107, 0, 0.2);
+    border: 1px solid rgba(92, 184, 133, 0.2);
 }
 
 .hero-left h1 {
@@ -160,7 +166,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Espace réservé pour le futur simulateur/formulaire */
+/* Placeholder pour futur form */
 .simulator-placeholder {
     padding: 25px;
     background: rgba(255,255,255,0.03);
@@ -173,7 +179,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- COLONNE DROITE (Grille de Sélection) --- */
+/* --- COLONNE DROITE (Grille) --- */
 .hero-right {
     flex: 1;
     display: flex;
@@ -181,7 +187,6 @@ body {
     align-items: center;
 }
 
-/* La Grille 2 colonnes x 3 lignes */
 .power-grid-6 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -207,15 +212,14 @@ body {
     justify-content: center;
 }
 
-/* Effet au survol */
+/* Effet au survol : Bordure Verte */
 .mini-card:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary);
+    border-color: var(--primary); /* Devient Vert */
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(92, 184, 133, 0.15); /* Ombre Verte */
 }
 
-/* Texte Puissance (ex: 6 kWc) */
 .kw-val {
     font-size: 2rem;
     font-weight: 800;
@@ -230,7 +234,6 @@ body {
     margin-left: 2px;
 }
 
-/* Description (ex: Familial) */
 .kw-desc {
     margin-top: 8px;
     font-size: 0.8rem;
@@ -240,17 +243,17 @@ body {
     font-weight: 600;
 }
 
-/* Carte "Top Vente" (Featured) */
+/* Carte "Featured" */
 .mini-card.featured {
-    border-color: rgba(255, 107, 0, 0.6);
-    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255,255,255,0.02));
-    box-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
+    border-color: rgba(92, 184, 133, 0.6);
+    background: linear-gradient(135deg, rgba(92, 184, 133, 0.1), rgba(255,255,255,0.02));
+    box-shadow: 0 0 20px rgba(92, 184, 133, 0.1);
 }
 
 .pop-badge {
     position: absolute;
     top: -10px;
-    background: var(--primary);
+    background: var(--primary); /* Fond Vert */
     color: white;
     font-size: 0.65rem;
     padding: 4px 10px;
@@ -269,73 +272,52 @@ body {
 }
 
 /* =========================================
-   4. MODALE (Pop-up)
+   4. MODALE
    ========================================= */
 .modal {
-    display: none; /* Caché par défaut */
+    display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    left: 0; top: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px); /* Effet flou derrière */
+    backdrop-filter: blur(8px);
     animation: fadeIn 0.3s;
 }
 
 .modal-content {
-    background-color: #0F172A; /* Fond Bleu Nuit */
-    margin: 10vh auto; /* Centré verticalement */
+    background-color: #0F172A;
+    margin: 10vh auto;
     padding: 40px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary); /* Bordure Verte */
     width: 90%;
     max-width: 500px;
     border-radius: 20px;
     text-align: center;
     position: relative;
-    box-shadow: 0 0 60px rgba(255, 107, 0, 0.15);
+    box-shadow: 0 0 60px rgba(92, 184, 133, 0.15); /* Ombre Verte */
 }
 
 .close-btn {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    color: #64748b;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
+    position: absolute; right: 20px; top: 15px;
+    color: #64748b; font-size: 28px; font-weight: bold; cursor: pointer;
 }
+.close-btn:hover { color: white; }
 
-.close-btn:hover {
-    color: white;
-}
-
-.modal-title {
-    font-size: 1.8rem;
-    color: white;
-    margin-bottom: 20px;
-}
+.modal-title { font-size: 1.8rem; color: white; margin-bottom: 20px; }
 
 .price-reveal {
     background: rgba(255,255,255,0.03);
-    padding: 30px 20px;
-    border-radius: 12px;
-    margin-top: 20px;
+    padding: 30px 20px; border-radius: 12px; margin-top: 20px;
 }
 
 .big-price {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #cbd5e1;
-    margin-bottom: 20px;
+    font-size: 1.2rem; font-weight: 600; color: #cbd5e1; margin-bottom: 20px;
 }
 
 .full-width {
     width: 100%;
     padding: 16px;
-    background: var(--primary);
+    background: var(--primary); /* Bouton Vert */
     color: white;
     border: none;
     border-radius: 8px;
@@ -350,71 +332,24 @@ body {
 }
 
 /* =========================================
-   5. ANIMATIONS
+   5. ANIMATIONS & RESPONSIVE
    ========================================= */
-.anim {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
+.anim { opacity: 0; transform: translateY(20px); animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.4s; }
 
-@keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
-}
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-@keyframes fadeIn {
-    from { opacity: 0; } to { opacity: 1; }
-}
-
-/* =========================================
-   6. RESPONSIVE (Mobile & Tablette)
-   ========================================= */
 @media (max-width: 968px) {
-    .navbar {
-        padding: 20px;
-    }
-    
-    .hero-section {
-        padding: 80px 20px;
-        align-items: flex-start; /* Remonte le contenu sur mobile */
-    }
-
-    .split-layout {
-        flex-direction: column; /* Empile texte puis grille */
-        gap: 40px;
-        text-align: center;
-    }
-
-    .hero-left {
-        max-width: 100%;
-        text-align: center;
-    }
-
-    .hero-left h1 {
-        font-size: 2.2rem; /* Titre plus petit sur mobile */
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    /* Sur mobile, la grille prend toute la largeur */
-    .hero-right {
-        width: 100%;
-    }
-    
-    .power-grid-6 {
-        max-width: 100%;
-        gap: 15px;
-    }
-    
-    .mini-card {
-        padding: 15px 10px;
-    }
-    
+    .navbar { padding: 20px; }
+    .hero-section { padding: 80px 20px; align-items: flex-start; }
+    .split-layout { flex-direction: column; gap: 40px; text-align: center; }
+    .hero-left { max-width: 100%; text-align: center; }
+    .hero-left h1 { font-size: 2.2rem; }
+    .hero-right { width: 100%; }
+    .power-grid-6 { max-width: 100%; gap: 15px; }
+    .mini-card { padding: 15px 10px; }
     .kw-val { font-size: 1.8rem; }
 }
