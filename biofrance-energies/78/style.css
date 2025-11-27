@@ -134,8 +134,9 @@ body {
     flex: 1;
     text-align: left;
     max-width: 550px;
+    /* AJOUTEZ CETTE LIGNE POUR REMONTER LE BLOC : */
+    margin-top: -60px; 
 }
-
 .badge {
     /* Badge Vert Biofrance */
     background: rgba(92, 184, 133, 0.1);
