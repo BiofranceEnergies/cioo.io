@@ -3,16 +3,13 @@
    ========================================= */
 :root {
     /* --- COULEURS --- */
-    /* Le Vert Biofrance (Récupéré du logo) */
-    --primary: #5CB885;       
-    --primary-hover: #489c6e; /* Un peu plus sombre pour le survol */
-    
-    /* Le Fond : Bleu Nuit très profond (pour faire ressortir le blanc et le vert) */
-    --dark-bg: #0B1221;       
+    --primary: #5CB885;        
+    --primary-hover: #489c6e; 
+    --dark-bg: #0B1221;        
     
     /* Textes */
     --text-white: #ffffff;
-    --text-gray: #cbd5e1;     /* Gris clair pour les sous-titres */
+    --text-gray: #cbd5e1;     
     
     /* Typographie */
     --font-main: 'Inter', sans-serif;
@@ -50,34 +47,29 @@ body {
 .logo {
     font-size: 1.6rem;
     font-weight: 800;
-    color: var(--text-white); /* BIOFRANCE en Blanc */
+    color: var(--text-white);
     text-transform: uppercase;
     letter-spacing: -0.5px;
 }
 
-.highlight {
-    color: var(--primary); /* ENERGIES en Vert */
-}
+.highlight { color: var(--primary); }
+.dot { color: var(--primary); }
 
-.dot {
-    color: var(--primary); /* Le point en Vert aussi */
-}
-
-/* --- NOUVEAU CODE POUR LES LOGOS --- */
-
+/* --- LOGOS DE CONFIANCE (RGE / QUALIPV) --- */
 .nav-trust {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espace entre les deux logos */
+    gap: 15px; 
 }
 
 .trust-logo {
-    height: 35px !important;  /* Le !important force la priorité */
+    height: 30px !important; /* Force la taille à 30px */
     width: auto;
     border-radius: 4px;
     background: white;
     padding: 2px;
 }
+
 /* =========================================
    3. HERO SECTION (Split Screen)
    ========================================= */
@@ -87,7 +79,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Dégradé subtil vers le bleu nuit */
     background: linear-gradient(135deg, var(--dark-bg) 0%, #05081c 100%);
     padding: 100px 50px 40px 50px;
     overflow: hidden;
@@ -104,7 +95,7 @@ body {
     z-index: 0;
 }
 
-/* Lueur VERTE derrière la grille à droite */
+/* Lueur VERTE */
 .solar-glow-right {
     position: absolute;
     top: 50%;
@@ -112,7 +103,6 @@ body {
     transform: translateY(-50%);
     width: 600px;
     height: 600px;
-    /* C'est ici qu'on met le vert en transparence */
     background: radial-gradient(circle, rgba(92, 184, 133, 0.15) 0%, rgba(0,0,0,0) 70%);
     pointer-events: none;
     z-index: 0;
@@ -137,11 +127,10 @@ body {
     flex: 1;
     text-align: left;
     max-width: 550px;
-    /* AJOUTEZ CETTE LIGNE POUR REMONTER LE BLOC : */
     margin-top: -60px; 
 }
+
 .badge {
-    /* Badge Vert Biofrance */
     background: rgba(92, 184, 133, 0.1);
     color: var(--primary);
     padding: 6px 14px;
@@ -170,7 +159,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* Placeholder pour futur form */
+/* Placeholder Simulator */
 .simulator-placeholder {
     padding: 25px;
     background: rgba(255,255,255,0.03);
@@ -184,7 +173,6 @@ body {
 }
 
 /* --- COLONNE DROITE (LE TOTEM) --- */
-/* --- COLONNE DROITE (LE TOTEM) --- */
 .hero-right {
     flex: 1;
     display: flex;
@@ -194,7 +182,6 @@ body {
     position: relative;
 }
 
-/* Le Conteneur Principal du Totem */
 .solar-totem {
     position: relative;
     width: 100%;
@@ -206,7 +193,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* L'Image du Panneau */
 .totem-img {
     width: 100%;
     height: auto;
@@ -219,7 +205,6 @@ body {
     transform: scale(1.05) rotate(1deg);
 }
 
-/* Le Conteneur des Boutons (Grille 3x2) */
 .totem-actions {
     position: absolute;
     top: 50%;
@@ -229,15 +214,15 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 15px;
-    width: 70%; /* <--- MODIFIÉ : Passage de 85% à 80% */
+    width: 70%; 
 }
-/* Les Boutons Style "Verre" (Taille Réduite) */
+
 .totem-btn {
     background: rgba(13, 27, 42, 0.75);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px; /* Arrondi réduit */
-    padding: 10px 5px; /* Padding beaucoup plus petit */
+    border-radius: 10px;
+    padding: 10px 5px;
     text-align: center;
     color: white;
     cursor: pointer;
@@ -253,16 +238,15 @@ body {
     box-shadow: 0 15px 40px rgba(92, 184, 133, 0.4);
 }
 
-/* Taille de police réduite */
 .totem-btn .kw {
-    font-size: 1.5rem; /* Avant 2rem */
+    font-size: 1.5rem;
     font-weight: 800;
     line-height: 1;
     display: block;
 }
 
 .totem-btn .unit {
-    font-size: 0.7rem; /* Avant 0.9rem */
+    font-size: 0.7rem;
     font-weight: 600;
     color: #cbd5e1;
     text-transform: uppercase;
@@ -271,7 +255,6 @@ body {
 
 .totem-btn:hover .unit { color: white; }
 
-/* Le Bouton Featured (6 kWc) */
 .totem-btn.featured {
     border-color: rgba(92, 184, 133, 0.6);
     background: rgba(92, 184, 133, 0.25);
@@ -297,24 +280,6 @@ body {
     opacity: 0.8;
 }
 
-/* Adaptation Mobile */
-@media (max-width: 968px) {
-    .solar-totem { max-width: 350px; }
-    /* Sur mobile, on repasse peut-être en 2 colonnes si c'est trop petit ?
-       Laissez comme ça pour l'instant, on verra à l'usage. */
-    .totem-actions { grid-template-columns: repeat(3, 1fr); gap: 10px; width: 95%; }
-    .totem-btn { padding: 10px 5px; }
-    .totem-btn .kw { font-size: 1.2rem; }
-}
-    .totem-actions {
-        gap: 15px;
-    }
-    .totem-btn {
-        padding: 15px 10px;
-    }
-    .totem-btn .kw { font-size: 1.6rem; }
-}
-
 /* =========================================
    4. MODALE
    ========================================= */
@@ -332,13 +297,13 @@ body {
     background-color: #0F172A;
     margin: 10vh auto;
     padding: 40px;
-    border: 1px solid var(--primary); /* Bordure Verte */
+    border: 1px solid var(--primary);
     width: 90%;
     max-width: 500px;
     border-radius: 20px;
     text-align: center;
     position: relative;
-    box-shadow: 0 0 60px rgba(92, 184, 133, 0.15); /* Ombre Verte */
+    box-shadow: 0 0 60px rgba(92, 184, 133, 0.15);
 }
 
 .close-btn {
@@ -361,7 +326,7 @@ body {
 .full-width {
     width: 100%;
     padding: 16px;
-    background: var(--primary); /* Bouton Vert */
+    background: var(--primary);
     color: white;
     border: none;
     border-radius: 8px;
@@ -371,12 +336,10 @@ body {
     transition: background 0.3s;
 }
 
-.full-width:hover {
-    background: var(--primary-hover);
-}
+.full-width:hover { background: var(--primary-hover); }
 
 /* =========================================
-   5. ANIMATIONS & RESPONSIVE
+   5. ANIMATIONS
    ========================================= */
 .anim { opacity: 0; transform: translateY(20px); animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 .delay-1 { animation-delay: 0.1s; }
@@ -386,43 +349,41 @@ body {
 @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-@media (max-width: 968px) {
-    .navbar { padding: 20px; }
-    .hero-section { padding: 80px 20px; align-items: flex-start; }
-    .split-layout { flex-direction: column; gap: 40px; text-align: center; }
-    .hero-left { max-width: 100%; text-align: center; }
-    .hero-left h1 { font-size: 2.2rem; }
-    .hero-right { width: 100%; }
-    .power-grid-6 { max-width: 100%; gap: 15px; }
-    .mini-card { padding: 15px 10px; }
-    .kw-val { font-size: 1.8rem; }
-}
 /* =========================================
-   CORRECTIF MOBILE (A mettre à la fin du CSS)
+   6. RESPONSIVE / MOBILE
    ========================================= */
 @media (max-width: 968px) {
 
-    /* 1. ON REPARE LE HAUT DE PAGE (NAVBAR) */
+    /* --- Navbar --- */
     .navbar {
-        padding: 15px 20px;       /* Moins de marge sur les côtés */
-        flex-direction: column;   /* On met le logo AU DESSUS du badge RGE */
-        gap: 10px;                /* Un petit espace entre le logo et le badge */
-        position: relative;       /* Important : on arrête qu'il flotte au dessus */
-        background: var(--dark-bg); /* On lui met un fond pour qu'il soit lisible */
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        background: var(--dark-bg);
     }
-
+    
     .logo {
-        font-size: 1.4rem;        /* On réduit la taille du logo */
-        white-space: nowrap;      /* On interdit au texte de se couper en deux */
+        font-size: 1.4rem;
+        white-space: nowrap;
     }
 
-    /* 2. ON REPARE LE CHEVAUCHEMENT (HERO) */
+    .nav-trust {
+        margin-top: 5px;
+    }
+
+    /* Force la taille réduite sur mobile */
+    .trust-logo {
+        height: 30px !important;
+    }
+
+    /* --- Hero Section --- */
     .hero-section {
-        padding-top: 20px;        /* Plus besoin d'énorme padding car la navbar n'est plus absolute */
+        padding-top: 20px;
         padding-bottom: 40px;
         align-items: center;
-        text-align: center;       /* Tout centré sur mobile */
-        min-height: auto;         /* On enlève la hauteur forcée */
+        text-align: center;
+        min-height: auto;
     }
 
     .split-layout {
@@ -430,30 +391,28 @@ body {
         gap: 40px;
     }
 
-    /* C'EST LUI LE COUPABLE : On annule la marge négative du PC */
     .hero-left {
-        margin-top: 0;            
+        margin-top: 0;      
         max-width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;      /* On centre les badges et textes */
+        align-items: center;
     }
 
     .hero-left h1 {
-        font-size: 2rem;          /* Titre un peu plus petit */
+        font-size: 2rem;
     }
 
-    /* 3. ADAPTATION DU TOTEM (IMAGE + BOUTONS) */
+    /* --- Totem --- */
     .hero-right {
         width: 100%;
         margin-top: 20px;
     }
 
     .solar-totem {
-        max-width: 320px;         /* On limite la largeur pour que ça rentre */
+        max-width: 320px;
     }
 
-    /* Grille de boutons sur mobile : on garde 2 colonnes c'est plus propre */
     .totem-actions {
         width: 85%;
         gap: 10px;
@@ -461,17 +420,10 @@ body {
     }
     
     .totem-btn {
-        padding: 8px 4px; /* Boutons plus compacts */
+        padding: 8px 4px;
     }
     
     .totem-btn .kw {
         font-size: 1.3rem;
     }
 }
-/* À ajouter DANS le bloc @media existant */
-    .trust-logo {
-        height: 35px; /* Un peu plus petit sur mobile */
-    }
-    .nav-trust {
-        margin-top: 10px; /* Un peu d'espace sous le logo Biofrance */
-    }
