@@ -180,6 +180,7 @@ body {
 }
 
 /* --- COLONNE DROITE (LE TOTEM) --- */
+/* --- COLONNE DROITE (LE TOTEM) --- */
 .hero-right {
     flex: 1;
     display: flex;
@@ -193,7 +194,7 @@ body {
 .solar-totem {
     position: relative;
     width: 100%;
-    max-width: 450px; /* Largeur max du visuel */
+    max-width: 450px;
     height: auto;
     display: flex;
     align-items: center;
@@ -201,69 +202,68 @@ body {
     margin-bottom: 20px;
 }
 
-/* L'Image du Panneau (Derrière) */
+/* L'Image du Panneau */
 .totem-img {
     width: 100%;
     height: auto;
-    /* Grosse ombre portée pour le détacher du fond */
     filter: drop-shadow(0 25px 50px rgba(0,0,0,0.6)); 
-    z-index: 1; /* Plan arrière */
+    z-index: 1;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Animation au survol de la zone */
 .solar-totem:hover .totem-img {
-    transform: scale(1.05) rotate(1deg); /* Léger zoom et rotation */
+    transform: scale(1.05) rotate(1deg);
 }
 
-/* Le Conteneur des Boutons (Par dessus l'image) */
+/* Le Conteneur des Boutons (Grille 3x2) */
 .totem-actions {
-    position: absolute; /* Permet de flotter au-dessus */
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centrage parfait */
-    z-index: 2; /* Plan avant */
+    transform: translate(-50%, -50%);
+    z-index: 2;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Grille de 2x2 */
-    gap: 25px; /* Espace entre les boutons */
-    width: 75%; /* Largeur des boutons par rapport à l'image */
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    gap: 15px; /* Espace réduit */
+    width: 85%; /* Un peu plus large pour les 3 colonnes */
 }
 
-/* Les Boutons Style "Verre" (Glassmorphism) */
+/* Les Boutons Style "Verre" (Taille Réduite) */
 .totem-btn {
-    background: rgba(13, 27, 42, 0.7); /* Fond bleu nuit très transparent */
-    backdrop-filter: blur(12px); /* Effet de flou important */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Bordure fine blanche */
-    border-radius: 16px;
-    padding: 20px 15px;
+    background: rgba(13, 27, 42, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px; /* Arrondi réduit */
+    padding: 15px 8px; /* Padding beaucoup plus petit */
     text-align: center;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3); /* Ombre douce */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     position: relative;
 }
 
-/* Effet au survol du bouton */
 .totem-btn:hover {
-    background: rgba(92, 184, 133, 0.9); /* Devient Vert Biofrance */
+    background: rgba(92, 184, 133, 0.95);
     border-color: var(--primary);
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(92, 184, 133, 0.4); /* Lueur verte */
+    box-shadow: 0 15px 40px rgba(92, 184, 133, 0.4);
 }
 
+/* Taille de police réduite */
 .totem-btn .kw {
-    font-size: 2rem;
+    font-size: 1.5rem; /* Avant 2rem */
     font-weight: 800;
     line-height: 1;
     display: block;
 }
 
 .totem-btn .unit {
-    font-size: 0.9rem;
+    font-size: 0.8rem; /* Avant 0.9rem */
     font-weight: 600;
     color: #cbd5e1;
     text-transform: uppercase;
+    margin-top: 2px;
 }
 
 .totem-btn:hover .unit { color: white; }
@@ -271,16 +271,16 @@ body {
 /* Le Bouton Featured (6 kWc) */
 .totem-btn.featured {
     border-color: rgba(92, 184, 133, 0.6);
-    background: rgba(92, 184, 133, 0.25); /* Légèrement vert par défaut */
+    background: rgba(92, 184, 133, 0.25);
 }
 
 .badge-top {
     position: absolute;
-    top: -10px; left: 50%; transform: translateX(-50%);
+    top: -8px; left: 50%; transform: translateX(-50%);
     background: var(--primary);
     color: white;
-    font-size: 0.7rem;
-    padding: 4px 12px;
+    font-size: 0.6rem;
+    padding: 2px 8px;
     border-radius: 20px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -296,9 +296,13 @@ body {
 
 /* Adaptation Mobile */
 @media (max-width: 968px) {
-    .solar-totem {
-        max-width: 350px; /* Un peu plus petit sur mobile */
-    }
+    .solar-totem { max-width: 350px; }
+    /* Sur mobile, on repasse peut-être en 2 colonnes si c'est trop petit ?
+       Laissez comme ça pour l'instant, on verra à l'usage. */
+    .totem-actions { grid-template-columns: repeat(3, 1fr); gap: 10px; width: 95%; }
+    .totem-btn { padding: 10px 5px; }
+    .totem-btn .kw { font-size: 1.2rem; }
+}
     .totem-actions {
         gap: 15px;
     }
