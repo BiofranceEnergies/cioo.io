@@ -179,83 +179,133 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- COLONNE DROITE (Grille Compacte) --- */
+/* --- COLONNE DROITE (LE TOTEM) --- */
 .hero-right {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centre la grille dans la colonne droite */
+    align-items: center;
     justify-content: center;
-}
-
-/* La Grille plus serrée */
-.power-grid-6 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px; /* Espace réduit entre les cases (avant 20px) */
-    width: 100%;
-    max-width: 380px; /* Largeur totale réduite (avant 480px) */
-}
-
-/* Style des Mini-Cartes Compactes */
-.mini-card {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px; /* Arrondi un peu plus petit */
-    padding: 15px 10px;  /* Padding réduit (avant 20px) */
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
+}
+
+/* Le Conteneur Principal du Totem */
+.solar-totem {
+    position: relative;
+    width: 100%;
+    max-width: 450px; /* Largeur max du visuel */
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px; /* On fixe une hauteur plus petite */
+    margin-bottom: 20px;
 }
 
-.mini-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary);
-    transform: translateY(-3px); /* Mouvement plus subtil */
-    box-shadow: 0 5px 20px rgba(92, 184, 133, 0.15);
+/* L'Image du Panneau (Derrière) */
+.totem-img {
+    width: 100%;
+    height: auto;
+    /* Grosse ombre portée pour le détacher du fond */
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.6)); 
+    z-index: 1; /* Plan arrière */
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Texte Puissance (ex: 6 kWc) */
-.kw-val {
-    font-size: 1.8rem; /* Police réduite (avant 2rem) */
-    font-weight: 700;
+/* Animation au survol de la zone */
+.solar-totem:hover .totem-img {
+    transform: scale(1.05) rotate(1deg); /* Léger zoom et rotation */
+}
+
+/* Le Conteneur des Boutons (Par dessus l'image) */
+.totem-actions {
+    position: absolute; /* Permet de flotter au-dessus */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrage parfait */
+    z-index: 2; /* Plan avant */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Grille de 2x2 */
+    gap: 25px; /* Espace entre les boutons */
+    width: 75%; /* Largeur des boutons par rapport à l'image */
+}
+
+/* Les Boutons Style "Verre" (Glassmorphism) */
+.totem-btn {
+    background: rgba(13, 27, 42, 0.7); /* Fond bleu nuit très transparent */
+    backdrop-filter: blur(12px); /* Effet de flou important */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Bordure fine blanche */
+    border-radius: 16px;
+    padding: 20px 15px;
+    text-align: center;
     color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); /* Ombre douce */
+    position: relative;
+}
+
+/* Effet au survol du bouton */
+.totem-btn:hover {
+    background: rgba(92, 184, 133, 0.9); /* Devient Vert Biofrance */
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(92, 184, 133, 0.4); /* Lueur verte */
+}
+
+.totem-btn .kw {
+    font-size: 2rem;
+    font-weight: 800;
     line-height: 1;
+    display: block;
 }
 
-.kw-val small {
+.totem-btn .unit {
     font-size: 0.9rem;
-    font-weight: 500;
-    color: #94a3b8;
-    margin-left: 4px;
+    font-weight: 600;
+    color: #cbd5e1;
+    text-transform: uppercase;
 }
 
-/* Badge Top Vente ajusté */
-.pop-badge {
+.totem-btn:hover .unit { color: white; }
+
+/* Le Bouton Featured (6 kWc) */
+.totem-btn.featured {
+    border-color: rgba(92, 184, 133, 0.6);
+    background: rgba(92, 184, 133, 0.25); /* Légèrement vert par défaut */
+}
+
+.badge-top {
     position: absolute;
-    top: -9px; /* Remonté légèrement */
+    top: -10px; left: 50%; transform: translateX(-50%);
     background: var(--primary);
     color: white;
-    font-size: 0.6rem;
-    padding: 3px 8px;
+    font-size: 0.7rem;
+    padding: 4px 12px;
     border-radius: 20px;
-    font-weight: 700;
-    text-transform: uppercase;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .grid-note {
-    margin-top: 20px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #64748b;
     font-style: italic;
     opacity: 0.8;
+}
+
+/* Adaptation Mobile */
+@media (max-width: 968px) {
+    .solar-totem {
+        max-width: 350px; /* Un peu plus petit sur mobile */
+    }
+    .totem-actions {
+        gap: 15px;
+    }
+    .totem-btn {
+        padding: 15px 10px;
+    }
+    .totem-btn .kw { font-size: 1.6rem; }
 }
 
 /* =========================================
