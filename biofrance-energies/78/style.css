@@ -434,7 +434,7 @@ body {
     position: absolute;
     
     /* 2. On le colle en bas du bloc (tu peux augmenter 0px si tu veux le monter) */
-    bottom: 0px; 
+    bottom: 60px; 
     left: 0;
     width: 100%;
     
