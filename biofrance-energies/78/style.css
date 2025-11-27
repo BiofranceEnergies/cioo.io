@@ -223,12 +223,11 @@ body {
     transform: translate(-50%, -50%);
     z-index: 2;
     display: grid;
-    /* C'EST LA LIGNE A CHANGER POUR AVOIR 3 COLONNES */
-    grid-template-columns: repeat(3, 1fr); 
+    /* C'EST LA LIGNE CORRIGÉE POUR AVOIR 2 COLONNES */
+    grid-template-columns: repeat(2, 1fr); 
     gap: 15px;
-    width: 85%; /* On élargit un peu pour les 3 colonnes */
+    width: 85%;
 }
-
 /* Les Boutons Style "Verre" (Taille Réduite) */
 .totem-btn {
     background: rgba(13, 27, 42, 0.75);
