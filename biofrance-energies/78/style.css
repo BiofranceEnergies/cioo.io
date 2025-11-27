@@ -225,15 +225,15 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 15px;
-    width: 60%; /* <--- MODIFIÉ : Passage de 85% à 80% */
+    width: 70%; /* <--- MODIFIÉ : Passage de 85% à 80% */
 }
 /* Les Boutons Style "Verre" (Taille Réduite) */
 .totem-btn {
     background: rgba(13, 27, 42, 0.75);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px; /* Arrondi réduit */
-    padding: 15px 8px; /* Padding beaucoup plus petit */
+    border-radius: 10px; /* Arrondi réduit */
+    padding: 10px 5px; /* Padding beaucoup plus petit */
     text-align: center;
     color: white;
     cursor: pointer;
@@ -258,7 +258,7 @@ body {
 }
 
 .totem-btn .unit {
-    font-size: 0.8rem; /* Avant 0.9rem */
+    font-size: 0.7rem; /* Avant 0.9rem */
     font-weight: 600;
     color: #cbd5e1;
     text-transform: uppercase;
