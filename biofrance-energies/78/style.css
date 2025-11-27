@@ -223,10 +223,9 @@ body {
     transform: translate(-50%, -50%);
     z-index: 2;
     display: grid;
-    /* C'EST LA LIGNE CORRIGÉE POUR AVOIR 2 COLONNES */
     grid-template-columns: repeat(2, 1fr); 
     gap: 15px;
-    width: 85%;
+    width: 80%; /* <--- MODIFIÉ : Passage de 85% à 80% */
 }
 /* Les Boutons Style "Verre" (Taille Réduite) */
 .totem-btn {
