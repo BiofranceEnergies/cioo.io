@@ -427,8 +427,6 @@ body {
         font-size: 1.3rem;
     }
 }
-/* --- INSTRUCTION AU DESSUS DU PANNEAU (CSS) --- */
-
 /* --- INSTRUCTION EN DESSOUS DU PANNEAU --- */
 .instruction-container {
     display: flex;
@@ -438,21 +436,20 @@ body {
     color: var(--primary);
     font-weight: 600;
     
-    /* C'EST ICI LE CHANGEMENT : Marge négative pour remonter */
-    margin-top: -40px; 
-    /* On ajoute un z-index pour être sûr que le texte passe PAR-DESSUS l'image du panneau */
+    /* MODIFICATION : On tire beaucoup plus fort vers le haut */
+    margin-top: -90px; 
+    
     position: relative;
     z-index: 10; 
     
     margin-bottom: 0;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    /* Petit fond sombre dégradé pour que le texte reste lisible sur le bas du panneau */
+    /* Je garde le petit fond sombre pour la lisibilité sur le panneau */
     background: linear-gradient(to top, var(--dark-bg) 20%, transparent 100%);
-    padding: 15px 0 5px 0; /* Un peu d'espace pour le dégradé */
-    width: 100%; /* Prend toute la largeur pour le dégradé */
+    padding: 20px 0 10px 0;
+    width: 100%;
 }
-
 .pointing-hand {
     animation: bounce 2s infinite; /* Animation continue */
 }
