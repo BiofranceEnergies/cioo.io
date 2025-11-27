@@ -225,7 +225,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 15px;
-    width: 80%; /* <--- MODIFIÉ : Passage de 85% à 80% */
+    width: 60%; /* <--- MODIFIÉ : Passage de 85% à 80% */
 }
 /* Les Boutons Style "Verre" (Taille Réduite) */
 .totem-btn {
