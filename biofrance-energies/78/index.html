@@ -28,54 +28,37 @@
 
         <div class="hero-container split-layout">
             
-            <div class="hero-left anim delay-2">
-                <span class="badge">Installateur Local • Yvelines</span>
-                <h1>Passez du statut de Locataire à <span class="highlight">Producteur.</span></h1>
+           <div class="hero-right anim delay-3">
                 
-                <p class="hero-subtitle">
-                    Biofrance Energies vous accompagne vers l'indépendance.
-                    Sélectionnez une puissance ci-contre pour vérifier la rentabilité sur votre toiture.
-                </p>
+                <div class="solar-totem">
+                    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/3a552a54688ffdbdba3ee202f4e911bfbd949ee7/panneaux%20full%20black%20dualsun.webp" 
+                         alt="Panneau Full Black DualSun Premium" 
+                         class="totem-img">
 
-                <div class="simulator-placeholder">
-                    <p><em>(Espace réservé pour le texte ou le formulaire direct)</em></p>
-                    <div style="margin-top:20px; padding-left:15px; border-left: 3px solid var(--primary);">
-                        <p style="color:white; font-weight:bold;">Pourquoi choisir Biofrance ?</p>
-                        <p style="font-size:0.9rem; color:#cbd5e1;">✅ Pas de sous-traitance<br>✅ Matériel Stocké en France<br>✅ Bureau d'étude interne</p>
-                    </div>
+                    <div class="totem-actions">
+                        
+                        <div class="totem-btn" onclick="openSimulation('3 kWc')">
+                            <span class="kw">3</span> <span class="unit">kWc</span>
+                        </div>
+
+                        <div class="totem-btn" onclick="openSimulation('4.5 kWc')">
+                            <span class="kw">4.5</span> <span class="unit">kWc</span>
+                        </div>
+
+                        <div class="totem-btn featured" onclick="openSimulation('6 kWc')">
+                            <div class="badge-top">TOP</div>
+                            <span class="kw">6</span> <span class="unit">kWc</span>
+                        </div>
+
+                        <div class="totem-btn" onclick="openSimulation('9 kWc')">
+                            <span class="kw">9</span> <span class="unit">kWc</span>
+                        </div>
+                        
+                        </div>
                 </div>
-            </div>
+                
+                <p class="grid-note">Sélectionnez la puissance directement sur le panneau</p>
 
-            <div class="hero-right anim delay-3">
-                <div class="power-grid-6">
-                    
-                    <article class="mini-card" onclick="openSimulation('3 kWc')">
-                        <span class="kw-val">3 <small>kWc</small></span>
-                    </article>
-
-                    <article class="mini-card" onclick="openSimulation('4.5 kWc')">
-                        <span class="kw-val">4.5 <small>kWc</small></span>
-                    </article>
-
-                    <article class="mini-card featured" onclick="openSimulation('6 kWc')">
-                        <div class="pop-badge">Top Vente</div>
-                        <span class="kw-val">6 <small>kWc</small></span>
-                    </article>
-
-                    <article class="mini-card" onclick="openSimulation('7.5 kWc')">
-                        <span class="kw-val">7.5 <small>kWc</small></span>
-                    </article>
-
-                    <article class="mini-card" onclick="openSimulation('9 kWc')">
-                        <span class="kw-val">9 <small>kWc</small></span>
-                    </article>
-
-                    <article class="mini-card" onclick="openSimulation('12 kWc')">
-                        <span class="kw-val">12 <small>kWc</small></span>
-                    </article>
-
-                </div>
-                <p class="grid-note">Cliquez sur une puissance pour voir le tarif</p>
             </div>
 
         </div>
