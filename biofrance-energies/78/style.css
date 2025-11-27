@@ -428,14 +428,19 @@ body {
     }
 }
 /* --- INSTRUCTION AU DESSUS DU PANNEAU (CSS) --- */
+
 .instruction-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    color: var(--primary); /* Le vert Biofrance */
+    color: var(--primary);
     font-weight: 600;
-    margin-bottom: 20px;
+    
+    /* C'est ici qu'on gère l'espace : on pousse vers le bas du panneau */
+    margin-top: 25px; 
+    margin-bottom: 0;
+    
     font-size: 1rem;
     letter-spacing: 0.5px;
 }
