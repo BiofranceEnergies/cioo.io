@@ -223,9 +223,10 @@ body {
     transform: translate(-50%, -50%);
     z-index: 2;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
-    gap: 15px; /* Espace réduit */
-    width: 85%; /* Un peu plus large pour les 3 colonnes */
+    /* C'EST LA LIGNE A CHANGER POUR AVOIR 3 COLONNES */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px;
+    width: 85%; /* On élargit un peu pour les 3 colonnes */
 }
 
 /* Les Boutons Style "Verre" (Taille Réduite) */
