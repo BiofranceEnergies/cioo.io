@@ -394,3 +394,74 @@ body {
     .mini-card { padding: 15px 10px; }
     .kw-val { font-size: 1.8rem; }
 }
+/* =========================================
+   CORRECTIF MOBILE (A mettre à la fin du CSS)
+   ========================================= */
+@media (max-width: 968px) {
+
+    /* 1. ON REPARE LE HAUT DE PAGE (NAVBAR) */
+    .navbar {
+        padding: 15px 20px;       /* Moins de marge sur les côtés */
+        flex-direction: column;   /* On met le logo AU DESSUS du badge RGE */
+        gap: 10px;                /* Un petit espace entre le logo et le badge */
+        position: relative;       /* Important : on arrête qu'il flotte au dessus */
+        background: var(--dark-bg); /* On lui met un fond pour qu'il soit lisible */
+    }
+
+    .logo {
+        font-size: 1.4rem;        /* On réduit la taille du logo */
+        white-space: nowrap;      /* On interdit au texte de se couper en deux */
+    }
+
+    /* 2. ON REPARE LE CHEVAUCHEMENT (HERO) */
+    .hero-section {
+        padding-top: 20px;        /* Plus besoin d'énorme padding car la navbar n'est plus absolute */
+        padding-bottom: 40px;
+        align-items: center;
+        text-align: center;       /* Tout centré sur mobile */
+        min-height: auto;         /* On enlève la hauteur forcée */
+    }
+
+    .split-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* C'EST LUI LE COUPABLE : On annule la marge négative du PC */
+    .hero-left {
+        margin-top: 0;            
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;      /* On centre les badges et textes */
+    }
+
+    .hero-left h1 {
+        font-size: 2rem;          /* Titre un peu plus petit */
+    }
+
+    /* 3. ADAPTATION DU TOTEM (IMAGE + BOUTONS) */
+    .hero-right {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .solar-totem {
+        max-width: 320px;         /* On limite la largeur pour que ça rentre */
+    }
+
+    /* Grille de boutons sur mobile : on garde 2 colonnes c'est plus propre */
+    .totem-actions {
+        width: 85%;
+        gap: 10px;
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    
+    .totem-btn {
+        padding: 8px 4px; /* Boutons plus compacts */
+    }
+    
+    .totem-btn .kw {
+        font-size: 1.3rem;
+    }
+}
