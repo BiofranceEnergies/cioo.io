@@ -15,60 +15,74 @@
 
     <nav class="navbar anim delay-1">
         <div class="logo">
-            Solution Solaire <span class="highlight">Pro</span><span class="dot">.</span>
+            Biofrance <span class="highlight">Energies</span><span class="dot">.</span>
         </div>
         <div class="nav-trust">
-            <span class="rge-badge">Certifié RGE</span>
+            <span class="rge-badge">Certifié RGE • 78</span>
         </div>
     </nav>
 
     <section class="hero-section">
         <div class="hero-overlay"></div>
-        <div class="solar-glow"></div>
+        <div class="solar-glow-right"></div>
 
-        <div class="hero-container">
+        <div class="hero-container split-layout">
             
-            <div class="hero-header-text anim delay-2">
-                <span class="badge">Yvelines (78) • Installation Premium</span>
-                <h1>Passez du statut de Locataire à <br><span class="highlight">Producteur d'Énergie</span>.</h1>
+            <div class="hero-left anim delay-2">
+                <span class="badge">Installateur Local • Yvelines</span>
+                <h1>Passez du statut de Locataire à <span class="highlight">Producteur.</span></h1>
+                
                 <p class="hero-subtitle">
-                    Sélectionnez votre profil de consommation ci-dessous pour <br><strong>débloquer le tarif et la rentabilité</strong> de votre installation.
+                    Biofrance Energies vous accompagne vers l'indépendance.
+                    Sélectionnez une puissance ci-contre pour vérifier la rentabilité sur votre toiture.
                 </p>
+
+                <div class="simulator-placeholder">
+                    <p><em>(Espace réservé pour le texte ou le formulaire direct)</em></p>
+                    <div style="margin-top:20px; padding-left:15px; border-left: 3px solid var(--primary);">
+                        <p style="color:white; font-weight:bold;">Pourquoi choisir Biofrance ?</p>
+                        <p style="font-size:0.9rem; color:#cbd5e1;">✅ Pas de sous-traitance<br>✅ Matériel Stocké en France<br>✅ Bureau d'étude interne</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="solar-grid anim delay-3">
-                <article class="solar-card" onclick="openSimulation('3kWc')">
-                    <div class="card-icon">⚡</div>
-                    <h3>Petite Conso</h3>
-                    <p class="power-label">Kit 3 kWc</p>
-                    <hr class="card-sep">
-                    <p class="target-audience">Facture < 100€ / mois</p>
-                    <button class="btn-sm">Voir Tarif & Rentabilité ></button>
-                </article>
+            <div class="hero-right anim delay-3">
+                <div class="power-grid-6">
+                    
+                    <article class="mini-card" onclick="openSimulation('3 kWc')">
+                        <span class="kw-val">3 <small>kWc</small></span>
+                        <span class="kw-desc">Petite Conso</span>
+                    </article>
 
-                <article class="solar-card featured" onclick="openSimulation('6kWc')">
-                    <div class="popular-tag">MEILLEUR CHOIX</div>
-                    <div class="card-icon">🏠</div>
-                    <h3>Familial / Confort</h3>
-                    <p class="power-label">Kit 6 kWc</p>
-                    <hr class="card-sep">
-                    <p class="target-audience">Facture 100€ - 200€ / mois</p>
-                    <button class="btn-sm">Voir Tarif & Rentabilité ></button>
-                </article>
+                    <article class="mini-card" onclick="openSimulation('4.5 kWc')">
+                        <span class="kw-val">4.5 <small>kWc</small></span>
+                        <span class="kw-desc">Intermédiaire</span>
+                    </article>
 
-                <article class="solar-card" onclick="openSimulation('9kWc')">
-                    <div class="card-icon">🔋</div>
-                    <h3>Tout Électrique</h3>
-                    <p class="power-label">Kit 9 kWc</p>
-                    <hr class="card-sep">
-                    <p class="target-audience">Facture > 200€ / mois</p>
-                    <button class="btn-sm">Voir Tarif & Rentabilité ></button>
-                </article>
+                    <article class="mini-card featured" onclick="openSimulation('6 kWc')">
+                        <div class="pop-badge">Top Vente</div>
+                        <span class="kw-val">6 <small>kWc</small></span>
+                        <span class="kw-desc">Familial</span>
+                    </article>
+
+                    <article class="mini-card" onclick="openSimulation('7.5 kWc')">
+                        <span class="kw-val">7.5 <small>kWc</small></span>
+                        <span class="kw-desc">Confort +</span>
+                    </article>
+
+                    <article class="mini-card" onclick="openSimulation('9 kWc')">
+                        <span class="kw-val">9 <small>kWc</small></span>
+                        <span class="kw-desc">Tout Élec</span>
+                    </article>
+
+                    <article class="mini-card" onclick="openSimulation('12 kWc')">
+                        <span class="kw-val">12 <small>kWc</small></span>
+                        <span class="kw-desc">Triphasé / Villa</span>
+                    </article>
+
+                </div>
+                <p class="grid-note">Cliquez sur une puissance pour voir le tarif</p>
             </div>
-            
-            <p class="trust-footer anim delay-4">
-                🔒 Analyse gratuite, sans engagement. Prix directs artisan 78.
-            </p>
 
         </div>
     </section>
@@ -76,29 +90,11 @@
     <div id="sim-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title">Kit <span id="selected-kit" class="highlight">...</span> Sélectionné</h2>
-            
+            <h2 class="modal-title">Kit <span id="selected-kit" class="highlight">...</span></h2>
             <div class="price-reveal">
-                <p style="color:#cbd5e1; font-size:0.9rem;">Tarif catalogue 2025 :</p>
-                <div class="big-price">À partir de <span class="highlight">5 900 €</span></div>
-                <p style="color:#94a3b8; font-size:0.8rem;">Pose incluse • Matériel Premium</p>
+                <div class="big-price">Tarif 2025</div>
+                <button type="button" class="full-width" onclick="alert('Suite...')">Vérifier mon éligibilité ></button>
             </div>
-
-            <p style="margin-bottom:20px; color:#cbd5e1; line-height:1.5;">
-                ⚠️ <strong>Attention :</strong> Ce tarif dépend de votre toiture.<br>Vérifiez votre éligibilité en 3 clics :
-            </p>
-            
-            <form class="clean-form">
-                <div class="form-group">
-                    <label>Code Postal (Vérification Zone 78)</label>
-                    <input type="text" placeholder="Ex: 78000" required>
-                </div>
-                <div class="form-group">
-                    <label>Montant Facture Mensuelle (€)</label>
-                    <input type="number" placeholder="Ex: 150" required>
-                </div>
-                <button type="button" class="full-width" onclick="alert('Lancement étape suivante...')">Vérifier mon éligibilité ></button>
-            </form>
         </div>
     </div>
 
