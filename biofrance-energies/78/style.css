@@ -1,1 +1,199 @@
+/* --- AJOUTS SPÉCIFIQUES SOLAIRE --- */
 
+/* 1. Layout Centré pour le Hero */
+.solar-layout {
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+    padding-top: 60px;
+}
+
+/* 2. Glow Effect (Lueur Orange derrière les cartes) */
+.solar-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 3. La Grille des Vignettes */
+.solar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 4. Design des Cartes (Vignettes) */
+.solar-card {
+    background: rgba(255, 255, 255, 0.03); /* Effet Verre */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet Hover (Survol) - Très important pour l'incitation au clic */
+.solar-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 107, 0, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.solar-card h3 {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+.power-label {
+    font-size: 1.8rem;
+    color: var(--text-white);
+    margin-bottom: 15px;
+}
+
+.power-label strong {
+    color: var(--text-white);
+}
+
+/* Séparateur fin */
+.card-sep {
+    border: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 15px auto;
+    width: 80%;
+}
+
+.target-audience {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    margin-bottom: 25px;
+}
+
+/* Bouton dans la carte */
+.btn-sm {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+/* Mise en avant de la carte centrale (Populaire) */
+.solar-card.featured {
+    border-color: rgba(255, 107, 0, 0.5);
+    background: linear-gradient(180deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    transform: scale(1.05); /* Un peu plus grosse */
+}
+
+.solar-card.featured:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.popular-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Texte de confiance sous les cartes */
+.trust-footer {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-top: 20px;
+}
+
+/* Badge RGE dans le menu */
+.rge-badge {
+    color: #10B981; /* Vert Tech */
+    font-weight: 700;
+    border: 1px solid #10B981;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* --- STYLE DE LA MODALE SOLAIRE --- */
+.solar-modal {
+    text-align: center;
+    max-width: 500px; /* Plus étroit pour focus */
+    background: #0B1120;
+    border: 1px solid var(--primary);
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.price-reveal {
+    background: rgba(255,255,255,0.03);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.big-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 5px 0;
+}
+
+.sub-price {
+    font-size: 0.9rem;
+    color: #a0aec0;
+}
+
+.form-intro {
+    font-size: 1rem;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 968px) {
+    .solar-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        max-width: 340px; /* Largeur max d'un smartphone */
+    }
+    
+    .solar-card.featured {
+        transform: scale(1); /* On annule l'effet de zoom sur mobile pour aligner */
+    }
+    
+    .hero-header-text h1 {
+        font-size: 2rem;
+    }
+}
