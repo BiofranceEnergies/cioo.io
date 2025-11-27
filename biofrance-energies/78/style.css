@@ -1,199 +1,281 @@
-/* --- AJOUTS SPÉCIFIQUES SOLAIRE --- */
-
-/* 1. Layout Centré pour le Hero */
-.solar-layout {
-    flex-direction: column;
-    text-align: center;
-    gap: 3rem;
-    padding-top: 60px;
+/* --- 1. VARIABLES & RESET --- */
+:root {
+    --primary: #FF6B00;       /* Orange Solaire */
+    --primary-hover: #e65c00;
+    --dark-bg: #0a1128;       /* Bleu Nuit Profond */
+    --tech-blue: #1c3b70;     
+    --text-white: #ffffff;
+    --text-gray: #cbd5e1;
+    --font-main: 'Inter', sans-serif;
 }
 
-/* 2. Glow Effect (Lueur Orange derrière les cartes) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    overflow-x: hidden;
+}
+
+/* --- 2. NAVIGATION --- */
+.navbar {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    padding: 30px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+    text-transform: uppercase;
+}
+
+.highlight { color: var(--primary); }
+.dot { color: var(--primary); }
+
+.rge-badge {
+    border: 1px solid #10B981;
+    color: #10B981;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- 3. HERO SECTION --- */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #05081c 100%);
+    padding: 120px 20px 60px 20px;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+}
+
 .solar-glow {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -20%);
-    width: 600px;
-    height: 400px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 400px;
     background: radial-gradient(circle, rgba(255, 107, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
-    z-index: 0;
     pointer-events: none;
+    z-index: 0;
 }
 
-/* 3. La Grille des Vignettes */
-.solar-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
-    gap: 30px;
-    width: 100%;
-    max-width: 1100px;
+.hero-container {
     position: relative;
     z-index: 2;
+    text-align: center;
+    max-width: 1100px;
+    width: 100%;
 }
 
-/* 4. Design des Cartes (Vignettes) */
+.badge {
+    background: rgba(255, 107, 0, 0.15);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 107, 0, 0.3);
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+/* GRILLE DES 3 VIGNETTES */
+.solar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+
 .solar-card {
-    background: rgba(255, 255, 255, 0.03); /* Effet Verre */
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 30px 20px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
-/* Effet Hover (Survol) - Très important pour l'incitation au clic */
 .solar-card:hover {
     transform: translateY(-10px);
     border-color: var(--primary);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 107, 0, 0.2);
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.solar-card h3 {
-    font-size: 1.1rem;
-    color: var(--text-gray);
-    margin-bottom: 5px;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .card-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 15px;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+    display: block;
+}
+
+.solar-card h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-gray);
+    margin-bottom: 5px;
 }
 
 .power-label {
-    font-size: 1.8rem;
-    color: var(--text-white);
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
     margin-bottom: 15px;
 }
 
-.power-label strong {
-    color: var(--text-white);
-}
-
-/* Séparateur fin */
 .card-sep {
-    border: 0;
-    height: 1px;
+    border: 0; height: 1px;
     background: rgba(255,255,255,0.1);
-    margin: 15px auto;
-    width: 80%;
+    margin: 15px auto; width: 60%;
 }
 
 .target-audience {
     font-size: 0.9rem;
-    color: #a0aec0;
+    color: #94a3b8;
     margin-bottom: 25px;
 }
 
-/* Bouton dans la carte */
 .btn-sm {
-    padding: 10px 20px;
-    font-size: 0.9rem;
+    padding: 10px 0;
     width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-/* Mise en avant de la carte centrale (Populaire) */
+.btn-sm:hover { background: var(--primary-hover); }
+
+/* Carte Centrale (Featured) */
 .solar-card.featured {
-    border-color: rgba(255, 107, 0, 0.5);
-    background: linear-gradient(180deg, rgba(255, 107, 0, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-    transform: scale(1.05); /* Un peu plus grosse */
+    border-color: rgba(255, 107, 0, 0.4);
+    background: linear-gradient(180deg, rgba(255, 107, 0, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    transform: scale(1.05);
+    z-index: 10;
 }
-
 .solar-card.featured:hover {
     transform: scale(1.05) translateY(-10px);
 }
 
 .popular-tag {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 5px 0;
+    position: absolute; top: 0; left: 0; width: 100%;
+    background: var(--primary); color: white;
+    font-size: 0.7rem; font-weight: 800; padding: 5px 0;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-/* Texte de confiance sous les cartes */
 .trust-footer {
-    color: var(--text-gray);
+    margin-top: 40px;
     font-size: 0.9rem;
-    opacity: 0.7;
-    margin-top: 20px;
+    color: var(--text-gray);
+    opacity: 0.6;
 }
 
-/* Badge RGE dans le menu */
-.rge-badge {
-    color: #10B981; /* Vert Tech */
-    font-weight: 700;
-    border: 1px solid #10B981;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
+/* --- MODALE --- */
+.modal {
+    display: none; 
+    position: fixed; z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s;
 }
 
-/* --- STYLE DE LA MODALE SOLAIRE --- */
-.solar-modal {
-    text-align: center;
-    max-width: 500px; /* Plus étroit pour focus */
-    background: #0B1120;
+.modal-content {
+    background-color: #0F172A;
+    margin: 5% auto;
+    padding: 40px;
     border: 1px solid var(--primary);
+    width: 90%; max-width: 500px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 107, 0, 0.2);
 }
 
-.modal-title {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+.close-btn {
+    position: absolute; right: 20px; top: 15px;
+    color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;
 }
+.close-btn:hover { color: white; }
 
 .price-reveal {
-    background: rgba(255,255,255,0.03);
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 30px;
+    background: rgba(255,255,255,0.05);
+    padding: 20px; border-radius: 12px; margin: 20px 0;
+}
+.big-price { font-size: 2.5rem; font-weight: 800; color: white; margin: 5px 0; }
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #cbd5e1; }
+.form-group input { 
+    width: 100%; padding: 12px; 
+    background: #1e293b; border: 1px solid #334155; 
+    border-radius: 8px; color: white;
 }
 
-.big-price {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: white;
-    margin: 5px 0;
-}
+.full-width { width: 100%; padding: 15px; background: var(--primary); color: white; border:none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
 
-.sub-price {
-    font-size: 0.9rem;
-    color: #a0aec0;
-}
+/* ANIMATIONS */
+.anim { opacity: 0; transform: translateY(20px); animation: slideUp 0.8s forwards; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.4s; }
+.delay-4 { animation-delay: 0.6s; }
 
-.form-intro {
-    font-size: 1rem;
-    color: var(--text-gray);
-    margin-bottom: 20px;
-    line-height: 1.5;
-}
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* --- RESPONSIVE MOBILE --- */
+/* RESPONSIVE */
 @media (max-width: 968px) {
-    .solar-grid {
-        grid-template-columns: 1fr; /* Une seule colonne */
-        max-width: 340px; /* Largeur max d'un smartphone */
-    }
-    
-    .solar-card.featured {
-        transform: scale(1); /* On annule l'effet de zoom sur mobile pour aligner */
-    }
-    
-    .hero-header-text h1 {
-        font-size: 2rem;
-    }
+    .navbar { padding: 20px; }
+    .hero-container { padding-top: 20px; }
+    h1 { font-size: 2.2rem; }
+    .solar-grid { grid-template-columns: 1fr; max-width: 340px; margin: 20px auto; }
+    .solar-card.featured { transform: scale(1); }
 }
