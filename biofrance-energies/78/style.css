@@ -427,3 +427,32 @@ body {
         font-size: 1.3rem;
     }
 }
+/* --- INSTRUCTION AU DESSUS DU PANNEAU (CSS) --- */
+.instruction-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--primary); /* Le vert Biofrance */
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.pointing-hand {
+    animation: bounce 2s infinite; /* Animation continue */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-6px);}
+    60% {transform: translateY(-3px);}
+}
+
+@media (max-width: 968px) {
+    .instruction-container {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+}
