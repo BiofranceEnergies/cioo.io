@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solution Solaire Pro 78 | Estimez votre rentabilité</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,10 +24,9 @@
 
     <section class="hero-section">
         <div class="hero-overlay"></div>
-        
         <div class="solar-glow"></div>
 
-        <div class="hero-container solar-layout">
+        <div class="hero-container">
             
             <div class="hero-header-text anim delay-2">
                 <span class="badge">Yvelines (78) • Installation Premium</span>
@@ -36,35 +37,33 @@
             </div>
 
             <div class="solar-grid anim delay-3">
-                
                 <article class="solar-card" onclick="openSimulation('3kWc')">
                     <div class="card-icon">⚡</div>
                     <h3>Petite Conso</h3>
-                    <p class="power-label">Kit <strong>3 kWc</strong></p>
+                    <p class="power-label">Kit 3 kWc</p>
                     <hr class="card-sep">
                     <p class="target-audience">Facture < 100€ / mois</p>
-                    <button class="btn btn-primary btn-sm">Voir Tarif & Rentabilité ></button>
+                    <button class="btn-sm">Voir Tarif & Rentabilité ></button>
                 </article>
 
                 <article class="solar-card featured" onclick="openSimulation('6kWc')">
                     <div class="popular-tag">MEILLEUR CHOIX</div>
                     <div class="card-icon">🏠</div>
                     <h3>Familial / Confort</h3>
-                    <p class="power-label">Kit <strong>6 kWc</strong></p>
+                    <p class="power-label">Kit 6 kWc</p>
                     <hr class="card-sep">
                     <p class="target-audience">Facture 100€ - 200€ / mois</p>
-                    <button class="btn btn-primary btn-sm">Voir Tarif & Rentabilité ></button>
+                    <button class="btn-sm">Voir Tarif & Rentabilité ></button>
                 </article>
 
                 <article class="solar-card" onclick="openSimulation('9kWc')">
                     <div class="card-icon">🔋</div>
                     <h3>Tout Électrique</h3>
-                    <p class="power-label">Kit <strong>9 kWc</strong></p>
+                    <p class="power-label">Kit 9 kWc</p>
                     <hr class="card-sep">
                     <p class="target-audience">Facture > 200€ / mois</p>
-                    <button class="btn btn-primary btn-sm">Voir Tarif & Rentabilité ></button>
+                    <button class="btn-sm">Voir Tarif & Rentabilité ></button>
                 </article>
-
             </div>
             
             <p class="trust-footer anim delay-4">
@@ -75,34 +74,31 @@
     </section>
 
     <div id="sim-modal" class="modal">
-        <div class="modal-content solar-modal">
+        <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Kit <span id="selected-kit" class="highlight">...</span> Sélectionné</h2>
             
-            <div id="modal-dynamic-content">
-                <h2 class="modal-title">Kit <span id="selected-kit" class="highlight">...</span> Sélectionné</h2>
-                
-                <div class="price-reveal">
-                    <p>Tarif catalogue 2025 :</p>
-                    <div class="big-price">À partir de <span class="highlight">5 900 €</span> TTC</div>
-                    <p class="sub-price">Pose incluse • Matériel Premium</p>
-                </div>
-
-                <div class="modal-form-wrapper">
-                    <p class="form-intro">⚠️ <strong>Attention :</strong> Ce tarif dépend de votre toiture.<br>Vérifiez votre éligibilité en 3 clics :</p>
-                    
-                    <form class="clean-form">
-                        <div class="form-group">
-                            <label>Code Postal (Vérification Zone 78)</label>
-                            <input type="text" placeholder="Ex: 78000" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Montant Facture Mensuelle (€)</label>
-                            <input type="number" placeholder="Ex: 150" required>
-                        </div>
-                        <button type="button" class="btn btn-primary full-width" onclick="alert('Ici on lance la Step 2 (Calcul...) puis Step 3 (Téléphone)')">Vérifier mon éligibilité ></button>
-                    </form>
-                </div>
+            <div class="price-reveal">
+                <p style="color:#cbd5e1; font-size:0.9rem;">Tarif catalogue 2025 :</p>
+                <div class="big-price">À partir de <span class="highlight">5 900 €</span></div>
+                <p style="color:#94a3b8; font-size:0.8rem;">Pose incluse • Matériel Premium</p>
             </div>
+
+            <p style="margin-bottom:20px; color:#cbd5e1; line-height:1.5;">
+                ⚠️ <strong>Attention :</strong> Ce tarif dépend de votre toiture.<br>Vérifiez votre éligibilité en 3 clics :
+            </p>
+            
+            <form class="clean-form">
+                <div class="form-group">
+                    <label>Code Postal (Vérification Zone 78)</label>
+                    <input type="text" placeholder="Ex: 78000" required>
+                </div>
+                <div class="form-group">
+                    <label>Montant Facture Mensuelle (€)</label>
+                    <input type="number" placeholder="Ex: 150" required>
+                </div>
+                <button type="button" class="full-width" onclick="alert('Lancement étape suivante...')">Vérifier mon éligibilité ></button>
+            </form>
         </div>
     </div>
 
