@@ -179,93 +179,80 @@ body {
     margin-bottom: 10px;
 }
 
-/* --- COLONNE DROITE (Grille) --- */
+/* --- COLONNE DROITE (Grille Compacte) --- */
 .hero-right {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centre la grille dans la colonne droite */
+    justify-content: center;
 }
 
+/* La Grille plus serrée */
 .power-grid-6 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 15px; /* Espace réduit entre les cases (avant 20px) */
     width: 100%;
-    max-width: 480px;
+    max-width: 380px; /* Largeur totale réduite (avant 480px) */
 }
 
-/* Style des Mini-Cartes */
+/* Style des Mini-Cartes Compactes */
 .mini-card {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 20px 15px;
+    border-radius: 12px; /* Arrondi un peu plus petit */
+    padding: 15px 10px;  /* Padding réduit (avant 20px) */
     text-align: center;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 80px; /* On fixe une hauteur plus petite */
 }
 
-/* Effet au survol : Bordure Verte */
 .mini-card:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary); /* Devient Vert */
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(92, 184, 133, 0.15); /* Ombre Verte */
+    border-color: var(--primary);
+    transform: translateY(-3px); /* Mouvement plus subtil */
+    box-shadow: 0 5px 20px rgba(92, 184, 133, 0.15);
 }
 
+/* Texte Puissance (ex: 6 kWc) */
 .kw-val {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.8rem; /* Police réduite (avant 2rem) */
+    font-weight: 700;
     color: white;
     line-height: 1;
 }
 
 .kw-val small {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: #94a3b8;
-    margin-left: 2px;
+    margin-left: 4px;
 }
 
-.kw-desc {
-    margin-top: 8px;
-    font-size: 0.8rem;
-    color: var(--text-gray);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-}
-
-/* Carte "Featured" */
-.mini-card.featured {
-    border-color: rgba(92, 184, 133, 0.6);
-    background: linear-gradient(135deg, rgba(92, 184, 133, 0.1), rgba(255,255,255,0.02));
-    box-shadow: 0 0 20px rgba(92, 184, 133, 0.1);
-}
-
+/* Badge Top Vente ajusté */
 .pop-badge {
     position: absolute;
-    top: -10px;
-    background: var(--primary); /* Fond Vert */
+    top: -9px; /* Remonté légèrement */
+    background: var(--primary);
     color: white;
-    font-size: 0.65rem;
-    padding: 4px 10px;
+    font-size: 0.6rem;
+    padding: 3px 8px;
     border-radius: 20px;
     font-weight: 700;
     text-transform: uppercase;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 .grid-note {
-    margin-top: 25px;
-    font-size: 0.9rem;
+    margin-top: 20px;
+    font-size: 0.85rem;
     color: #64748b;
     font-style: italic;
     opacity: 0.8;
