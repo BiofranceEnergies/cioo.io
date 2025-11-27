@@ -1,67 +1,91 @@
-/* --- 1. VARIABLES & RESET --- */
+/* =========================================
+   1. VARIABLES & RESET (LES FONDATIONS)
+   ========================================= */
 :root {
-    --primary: #FF6B00;       /* Orange Solaire */
-    --primary-hover: #e65c00;
-    --dark-bg: #0a1128;       /* Bleu Nuit Profond */
-    --tech-blue: #1c3b70;     
+    /* Palette de couleurs "SaaS Solaire" */
+    --primary: #FF6B00;       /* Orange Solaire (Action) */
+    --primary-hover: #e65c00; /* Orange foncé (Survol) */
+    --dark-bg: #0a1128;       /* Bleu Nuit Profond (Fond) */
+    --tech-blue: #1c3b70;     /* Bleu Intermédiaire */
     --text-white: #ffffff;
-    --text-gray: #cbd5e1;
+    --text-gray: #cbd5e1;     /* Gris clair pour les sous-titres */
+    
+    /* Typographie */
     --font-main: 'Inter', sans-serif;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: var(--font-main);
     background-color: var(--dark-bg);
     color: var(--text-white);
-    overflow-x: hidden;
+    overflow-x: hidden; /* Empêche le scroll horizontal indésirable */
+    line-height: 1.5;
 }
 
-/* --- 2. NAVIGATION --- */
+/* =========================================
+   2. NAVIGATION (Haut de page)
+   ========================================= */
 .navbar {
     position: absolute;
-    top: 0; left: 0; width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 30px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 100; /* Toujours au-dessus */
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 800;
     color: var(--text-white);
     text-transform: uppercase;
+    letter-spacing: -0.5px;
 }
 
-.highlight { color: var(--primary); }
-.dot { color: var(--primary); }
+.highlight {
+    color: var(--primary);
+}
+
+.dot {
+    color: var(--primary);
+}
 
 .rge-badge {
-    border: 1px solid #10B981;
+    border: 1px solid #10B981; /* Vert Tech */
     color: #10B981;
-    padding: 5px 12px;
-    border-radius: 4px;
+    padding: 6px 14px;
+    border-radius: 6px;
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    background: rgba(16, 185, 129, 0.1);
 }
 
-/* --- 3. HERO SECTION --- */
+/* =========================================
+   3. HERO SECTION (L'écran divisé Gauche/Droite)
+   ========================================= */
 .hero-section {
     position: relative;
-    min-height: 100vh;
+    min-height: 100vh; /* Prend toute la hauteur de l'écran */
     display: flex;
-    align-items: center;
+    align-items: center; /* Centre verticalement */
     justify-content: center;
     background: linear-gradient(135deg, var(--dark-bg) 0%, #05081c 100%);
-    padding: 120px 20px 60px 20px;
+    padding: 100px 50px 40px 50px;
     overflow: hidden;
 }
 
+/* Fond Grille Technique */
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -72,210 +96,325 @@ body {
     z-index: 0;
 }
 
-.solar-glow {
+/* Lueur Orange derrière la grille à droite */
+.solar-glow-right {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px; height: 400px;
-    background: radial-gradient(circle, rgba(255, 107, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
+    top: 50%;
+    right: -10%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, rgba(0,0,0,0) 70%);
     pointer-events: none;
     z-index: 0;
 }
 
+/* Conteneur principal flexible */
 .hero-container {
+    width: 100%;
+    max-width: 1200px;
     position: relative;
     z-index: 2;
-    text-align: center;
-    max-width: 1100px;
-    width: 100%;
+}
+
+.split-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* --- COLONNE GAUCHE (Texte & Argumentaire) --- */
+.hero-left {
+    flex: 1;
+    text-align: left;
+    max-width: 550px;
 }
 
 .badge {
-    background: rgba(255, 107, 0, 0.15);
+    background: rgba(255, 107, 0, 0.1);
     color: var(--primary);
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: inline-block;
     margin-bottom: 25px;
-    border: 1px solid rgba(255, 107, 0, 0.3);
+    border: 1px solid rgba(255, 107, 0, 0.2);
 }
 
-h1 {
-    font-size: 3.5rem;
+.hero-left h1 {
+    font-size: 3.2rem;
     line-height: 1.1;
     font-weight: 800;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    color: white;
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: var(--text-gray);
     line-height: 1.6;
-    margin-bottom: 3rem;
+    margin-bottom: 30px;
 }
 
-/* GRILLE DES 3 VIGNETTES */
-.solar-grid {
+/* Espace réservé pour le futur simulateur/formulaire */
+.simulator-placeholder {
+    padding: 25px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    border: 1px dashed rgba(255,255,255,0.2);
+}
+
+.simulator-placeholder p {
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+/* --- COLONNE DROITE (Grille de Sélection) --- */
+.hero-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* La Grille 2 colonnes x 3 lignes */
+.power-grid-6 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 480px;
 }
 
-.solar-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
+/* Style des Mini-Cartes */
+.mini-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 30px 20px;
+    border-radius: 16px;
+    padding: 20px 15px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.solar-card:hover {
-    transform: translateY(-10px);
+/* Effet au survol */
+.mini-card:hover {
+    background: rgba(255, 255, 255, 0.08);
     border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.solar-card h3 {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-gray);
-    margin-bottom: 5px;
-}
-
-.power-label {
+/* Texte Puissance (ex: 6 kWc) */
+.kw-val {
     font-size: 2rem;
     font-weight: 800;
     color: white;
-    margin-bottom: 15px;
+    line-height: 1;
 }
 
-.card-sep {
-    border: 0; height: 1px;
-    background: rgba(255,255,255,0.1);
-    margin: 15px auto; width: 60%;
-}
-
-.target-audience {
-    font-size: 0.9rem;
+.kw-val small {
+    font-size: 1rem;
+    font-weight: 500;
     color: #94a3b8;
-    margin-bottom: 25px;
+    margin-left: 2px;
 }
 
-.btn-sm {
-    padding: 10px 0;
-    width: 100%;
+/* Description (ex: Familial) */
+.kw-desc {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Carte "Top Vente" (Featured) */
+.mini-card.featured {
+    border-color: rgba(255, 107, 0, 0.6);
+    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255,255,255,0.02));
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
+}
+
+.pop-badge {
+    position: absolute;
+    top: -10px;
     background: var(--primary);
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.btn-sm:hover { background: var(--primary-hover); }
-
-/* Carte Centrale (Featured) */
-.solar-card.featured {
-    border-color: rgba(255, 107, 0, 0.4);
-    background: linear-gradient(180deg, rgba(255, 107, 0, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-    transform: scale(1.05);
-    z-index: 10;
-}
-.solar-card.featured:hover {
-    transform: scale(1.05) translateY(-10px);
-}
-
-.popular-tag {
-    position: absolute; top: 0; left: 0; width: 100%;
-    background: var(--primary); color: white;
-    font-size: 0.7rem; font-weight: 800; padding: 5px 0;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 700;
     text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.trust-footer {
-    margin-top: 40px;
+.grid-note {
+    margin-top: 25px;
     font-size: 0.9rem;
-    color: var(--text-gray);
-    opacity: 0.6;
+    color: #64748b;
+    font-style: italic;
+    opacity: 0.8;
 }
 
-/* --- MODALE --- */
+/* =========================================
+   4. MODALE (Pop-up)
+   ========================================= */
 .modal {
-    display: none; 
-    position: fixed; z-index: 1000;
-    left: 0; top: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px); /* Effet flou derrière */
     animation: fadeIn 0.3s;
 }
 
 .modal-content {
-    background-color: #0F172A;
-    margin: 5% auto;
+    background-color: #0F172A; /* Fond Bleu Nuit */
+    margin: 10vh auto; /* Centré verticalement */
     padding: 40px;
     border: 1px solid var(--primary);
-    width: 90%; max-width: 500px;
+    width: 90%;
+    max-width: 500px;
     border-radius: 20px;
     text-align: center;
     position: relative;
-    box-shadow: 0 0 50px rgba(255, 107, 0, 0.2);
+    box-shadow: 0 0 60px rgba(255, 107, 0, 0.15);
 }
 
 .close-btn {
-    position: absolute; right: 20px; top: 15px;
-    color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #64748b;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
 }
-.close-btn:hover { color: white; }
+
+.close-btn:hover {
+    color: white;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 20px;
+}
 
 .price-reveal {
-    background: rgba(255,255,255,0.05);
-    padding: 20px; border-radius: 12px; margin: 20px 0;
-}
-.big-price { font-size: 2.5rem; font-weight: 800; color: white; margin: 5px 0; }
-.form-group { margin-bottom: 15px; text-align: left; }
-.form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #cbd5e1; }
-.form-group input { 
-    width: 100%; padding: 12px; 
-    background: #1e293b; border: 1px solid #334155; 
-    border-radius: 8px; color: white;
+    background: rgba(255,255,255,0.03);
+    padding: 30px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
 }
 
-.full-width { width: 100%; padding: 15px; background: var(--primary); color: white; border:none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+.big-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+}
 
-/* ANIMATIONS */
-.anim { opacity: 0; transform: translateY(20px); animation: slideUp 0.8s forwards; }
+.full-width {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+}
+
+.full-width:hover {
+    background: var(--primary-hover);
+}
+
+/* =========================================
+   5. ANIMATIONS
+   ========================================= */
+.anim {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.4s; }
-.delay-4 { animation-delay: 0.6s; }
 
-@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp {
+    to { opacity: 1; transform: translateY(0); }
+}
 
-/* RESPONSIVE */
+@keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+}
+
+/* =========================================
+   6. RESPONSIVE (Mobile & Tablette)
+   ========================================= */
 @media (max-width: 968px) {
-    .navbar { padding: 20px; }
-    .hero-container { padding-top: 20px; }
-    h1 { font-size: 2.2rem; }
-    .solar-grid { grid-template-columns: 1fr; max-width: 340px; margin: 20px auto; }
-    .solar-card.featured { transform: scale(1); }
+    .navbar {
+        padding: 20px;
+    }
+    
+    .hero-section {
+        padding: 80px 20px;
+        align-items: flex-start; /* Remonte le contenu sur mobile */
+    }
+
+    .split-layout {
+        flex-direction: column; /* Empile texte puis grille */
+        gap: 40px;
+        text-align: center;
+    }
+
+    .hero-left {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-left h1 {
+        font-size: 2.2rem; /* Titre plus petit sur mobile */
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Sur mobile, la grille prend toute la largeur */
+    .hero-right {
+        width: 100%;
+    }
+    
+    .power-grid-6 {
+        max-width: 100%;
+        gap: 15px;
+    }
+    
+    .mini-card {
+        padding: 15px 10px;
+    }
+    
+    .kw-val { font-size: 1.8rem; }
 }
