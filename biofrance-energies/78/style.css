@@ -468,9 +468,16 @@ body {
     60% {transform: translateY(-3px);}
 }
 
-@media (max-width: 968px) {
+/* Ajout de la règle de superposition sur mobile */
     .instruction-container {
+        position: absolute;
+        bottom: 20px; /* ⬅️ Valeur clé pour ne pas cacher les boutons sur téléphone */
+        left: 0;
+        width: 100%;
+        
+        /* On retire la marge basse qui n'a plus de sens en absolute */
+        margin-bottom: 0; 
+        
+        /* Tu peux laisser la font-size de 0.95rem si tu veux le texte plus petit */
         font-size: 0.95rem;
-        margin-bottom: 15px;
     }
-}
