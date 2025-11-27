@@ -63,18 +63,21 @@ body {
     color: var(--primary); /* Le point en Vert aussi */
 }
 
-.rge-badge {
-    border: 1px solid var(--primary);
-    color: var(--primary);
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: rgba(92, 184, 133, 0.1); /* Fond vert très léger */
+/* --- NOUVEAU CODE POUR LES LOGOS --- */
+
+.nav-trust {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espace entre les deux logos */
 }
 
+.trust-logo {
+    height: 45px;       /* Hauteur fixe sur PC */
+    width: auto;        /* Largeur automatique */
+    border-radius: 4px; 
+    background: white;  /* Fond blanc propre */
+    padding: 2px;       
+}
 /* =========================================
    3. HERO SECTION (Split Screen)
    ========================================= */
@@ -465,3 +468,10 @@ body {
         font-size: 1.3rem;
     }
 }
+/* À ajouter DANS le bloc @media existant */
+    .trust-logo {
+        height: 35px; /* Un peu plus petit sur mobile */
+    }
+    .nav-trust {
+        margin-top: 10px; /* Un peu d'espace sous le logo Biofrance */
+    }
