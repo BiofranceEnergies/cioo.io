@@ -355,7 +355,19 @@ body {
 }
 .close-btn:hover { color: white; }
 
-.modal-title { font-size: 1.8rem; color: white; margin-bottom: 20px; }
+.modal-title {
+    /* On réduit la taille (c'était 1.8rem) pour que "Rentabilité de l'Installation" passe mieux */
+    font-size: 1.4rem; 
+    font-weight: 800; /* On garde le gras pour l'impact */
+    color: white; 
+    margin-bottom: 20px;
+    
+    /* On améliore l'espacement entre les lignes si jamais ça passe sur 2 lignes */
+    line-height: 1.3; 
+    
+    /* On ajoute une petite marge interne pour éviter que le texte touche les bords sur mobile */
+    padding: 0 10px; 
+}
 
 .price-reveal {
     background: rgba(255,255,255,0.03);
