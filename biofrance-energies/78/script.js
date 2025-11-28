@@ -98,18 +98,32 @@ document.addEventListener('DOMContentLoaded', function() {
    5. SCROLL & HIGHLIGHT (Retour au totem)
    ========================================= */
 function scrollToTotem() {
-    // 1. On remonte doucement vers le haut
+    // 1. On remonte doucement
     const hero = document.querySelector('.hero-section');
     hero.scrollIntoView({ behavior: 'smooth' });
 
-    // 2. Petit effet visuel : après 800ms (le temps de remonter), on fait clignoter les boutons
+    // 2. Animation après la remontée
     setTimeout(() => {
+        // A. On fait flasher les BOUTONS
         const btns = document.querySelectorAll('.totem-btn');
         btns.forEach(btn => {
-            // On ajoute une classe temporaire 'flash' (à définir en CSS)
             btn.classList.add('highlight-pulse');
-            // On l'enlève après 1 seconde
-            setTimeout(() => btn.classList.remove('highlight-pulse'), 1000);
+            setTimeout(() => btn.classList.remove('highlight-pulse'), 1500); // On laisse un peu plus longtemps (1.5s)
         });
+
+        // B. On fait flasher le TEXTE d'instruction (La flèche du bas)
+        const instruction = document.querySelector('.instruction-container span');
+        if(instruction) {
+            instruction.style.color = 'var(--primary)'; // Devient vert
+            instruction.style.transition = 'color 0.3s';
+            instruction.style.fontWeight = '800'; // Devient très gras
+            
+            // On remet normal après 1.5s
+            setTimeout(() => {
+                instruction.style.color = ''; 
+                instruction.style.fontWeight = '';
+            }, 1500);
+        }
+        
     }, 800);
 }
