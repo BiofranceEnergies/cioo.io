@@ -149,23 +149,7 @@
             <div class="form-group">
                 <input type="tel" id="user-phone" placeholder="Votre numéro de mobile" required>
             </div>
-            ```
 
-### Et pour que tout rentre (CSS)
-
-C'est là que mon code **"Compact / Diet"** de tout à l'heure devient **obligatoire**.
-Si tu mets cette nouvelle phrase sans compacter les marges sur mobile, ton bouton sera caché.
-
-Donc, le plan d'action est :
-1.  **HTML :** Tu changes la phrase (comme ci-dessus).
-2.  **CSS :** Tu copies-colles le bloc `@media (max-width: 600px)` compact que je t'ai donné juste avant.
-
-Si tu fais ces deux choses, tu auras :
-* La phrase d'accroche "Et pour vous ?".
-* Le formulaire centré.
-* Le bouton vert **visible sans scroller**.
-
-On valide ce duo gagnant ?
             
             <button type="submit" class="full-width">Vérifier la compatibilité ></button>
             <p class="gdpr-text">🔒 Étude confidentielle. Réponse d'un technicien sous 24h.</p>
