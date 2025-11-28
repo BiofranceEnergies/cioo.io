@@ -71,3 +71,26 @@ function submitForm(event) {
         alert("Merci de vérifier votre numéro de téléphone.");
     }
 }
+
+/* =========================================
+   4. FORMATAGE TÉLÉPHONE (AUTO-ESPACE)
+   ========================================= */
+document.addEventListener('DOMContentLoaded', function() {
+    const phoneInput = document.getElementById('user-phone');
+    
+    if(phoneInput) {
+        phoneInput.addEventListener('input', function (e) {
+            // 1. On empêche d'écrire autre chose que des chiffres
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // 2. On limite à 10 chiffres (français)
+            if (value.length > 10) value = value.substring(0, 10);
+            
+            // 3. On ajoute les espaces tous les 2 chiffres
+            // Ex: 061234... devient 06 12 34...
+            const formatted = value.match(/.{1,2}/g)?.join(' ') || value;
+            
+            e.target.value = formatted;
+        });
+    }
+});
