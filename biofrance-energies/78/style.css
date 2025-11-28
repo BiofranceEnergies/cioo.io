@@ -921,3 +921,115 @@ body {
     }
     .section-title { font-size: 1.8rem; }
 }
+
+/* =========================================
+   11. SECTION RÉALISATIONS
+   ========================================= */
+.projects-section {
+    padding: 80px 20px;
+    background: #0B1221;
+    position: relative;
+}
+
+/* Petit badge au dessus du titre */
+.badge-small {
+    background: rgba(92, 184, 133, 0.15);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+/* Grille des projets */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte Projet */
+.project-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/3; /* Format photo standard */
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Effet Zoom au survol */
+.project-card:hover .project-img {
+    transform: scale(1.1);
+}
+
+/* L'overlay sombre en bas pour lire le texte */
+.project-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    padding: 30px 20px 20px 20px;
+    display: flex;
+    align-items: flex-end;
+    height: 50%;
+}
+
+.project-loc {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.project-spec {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 700;
+}
+
+/* Bouton Secondaire (Style "Outline") */
+.secondary-btn {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.secondary-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(92, 184, 133, 0.05);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes tablette */
+    }
+}
+
+@media (max-width: 600px) {
+    .projects-grid {
+        grid-template-columns: 1fr; /* 1 colonne mobile */
+    }
+}
