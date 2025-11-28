@@ -311,20 +311,32 @@ body {
 /* =========================================
    4. MODALE
    ========================================= */
+/* =========================================
+   4. MODALE (CORRECTIF SCROLL)
+   ========================================= */
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0; top: 0; width: 100%; height: 100%;
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
     animation: fadeIn 0.3s;
+    
+    /* AJOUT : Permet de scroller si l'écran est petit */
+    overflow-y: auto; 
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .modal-content {
     background-color: #0F172A;
-    margin: 10vh auto;
-    padding: 40px;
+    /* MODIFICATION : On réduit la marge du haut pour qu'elle commence plus haut */
+    margin: 20px auto; 
+    padding: 30px; /* Un peu moins de padding pour gagner de la place */
     border: 1px solid var(--primary);
     width: 90%;
     max-width: 500px;
@@ -332,8 +344,11 @@ body {
     text-align: center;
     position: relative;
     box-shadow: 0 0 60px rgba(92, 184, 133, 0.15);
-}
 
+    /* AJOUT : Si la modale dépasse la hauteur de l'écran, on scroll DEDANS */
+    max-height: 90vh; 
+    overflow-y: auto; 
+}
 .close-btn {
     position: absolute; right: 20px; top: 15px;
     color: #64748b; font-size: 28px; font-weight: bold; cursor: pointer;
