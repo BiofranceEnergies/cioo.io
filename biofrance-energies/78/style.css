@@ -702,3 +702,85 @@ body {
         font-size: 1.3rem;
     }
 }
+/* =========================================
+   9. SECTION CONFIANCE (VERSION SAAS 2025)
+   ========================================= */
+.trust-section {
+    position: relative;
+    /* Un fond très léger dégradé pour donner du volume */
+    background: linear-gradient(180deg, rgba(11, 18, 33, 0) 0%, rgba(11, 18, 33, 1) 100%);
+    
+    /* Les lignes fines typiques du style Tech */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    
+    padding: 50px 20px;
+    z-index: 5;
+    margin-top: -1px; /* Colle parfaitement au hero */
+}
+
+/* Petit effet de lueur verte diffuse derrière la barre (très subtil) */
+.trust-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.3;
+    filter: blur(5px);
+}
+
+.trust-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Espace max entre les éléments */
+    align-items: center;
+}
+
+.trust-item {
+    text-align: center;
+    position: relative;
+    padding: 0 20px;
+}
+
+.trust-number {
+    font-size: 3rem; /* TRES GROS pour l'impact */
+    font-weight: 800;
+    
+    /* Dégradé sur le texte (Le truc signature du SaaS) */
+    background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    line-height: 1;
+    margin-bottom: 10px;
+    letter-spacing: -1px; /* Resserre les chiffres pour faire moderne */
+}
+
+.trust-label {
+    font-size: 0.95rem;
+    color: #94a3b8; /* Gris bleuté technique */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem; /* Petit et large */
+}
+
+/* Séparateur plus subtil */
+.trust-separator {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    .trust-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        gap: 40px 10px;
+    }
+    .trust-separator { display: none; }
+    .trust-number { font-size: 2.2rem; }
+}
