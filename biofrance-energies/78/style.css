@@ -516,3 +516,93 @@ body {
         position: absolute !important; 
     }
 }
+
+/* =========================================
+   8. STYLE DE LA MODALE "DATA & LEAD"
+   ========================================= */
+
+/* Conteneur des résultats (Production & Gain) */
+.results-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.result-box {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px 10px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s;
+}
+
+.result-box:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Mise en avant de la boite "Gain" */
+.primary-border {
+    border-color: rgba(92, 184, 133, 0.5); 
+    background: linear-gradient(145deg, rgba(92, 184, 133, 0.1) 0%, rgba(255,255,255,0.05) 100%);
+    box-shadow: 0 4px 20px rgba(92, 184, 133, 0.15);
+}
+
+.result-box .icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+.result-box .label { font-size: 0.8rem; color: #cbd5e1; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.result-box .value { font-size: 1.5rem; font-weight: 800; color: white; margin-top: 5px; line-height: 1.2; }
+.highlight-text { color: var(--primary) !important; }
+.sub-note { font-size: 0.75rem; color: #94a3b8; margin-top: 6px; font-style: italic; }
+
+/* Zone de Conseil (Le "Warning" jaune/orange) */
+.advisory-message {
+    background: rgba(245, 158, 11, 0.1); /* Fond orange très léger */
+    border-left: 4px solid #F59E0B; /* Barre orange sur le côté */
+    padding: 15px;
+    text-align: left;
+    margin-bottom: 25px;
+    border-radius: 4px;
+}
+
+.advisory-message p {
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+.advisory-message p:last-child { margin-bottom: 0; }
+.advisory-message strong { color: #F59E0B; }
+
+/* Formulaire simplifié */
+.form-instruction {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.form-group input {
+    text-align: center;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+}
+.form-group input:focus {
+    border-color: var(--primary);
+    background: rgba(15, 23, 42, 0.9);
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+    .results-container { flex-direction: column; gap: 10px; }
+    .result-box { padding: 15px; display: flex; align-items: center; justify-content: space-between; text-align: left; }
+    .result-box .icon { margin-bottom: 0; font-size: 1.5rem; margin-right: 15px; }
+    .result-box div { flex: 1; }
+    .result-box .value { font-size: 1.3rem; text-align: right; }
+}
