@@ -600,19 +600,43 @@ body {
     font-size: 1rem;
 }
 
-.form-group input {
-    text-align: center;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid rgba(255,255,255,0.2);
-    color: white;
-}
-.form-group input:focus {
-    border-color: var(--primary);
-    background: rgba(15, 23, 42, 0.9);
+/* Espace autour du champ pour ne pas coller au bouton */
+.form-group {
+    margin-bottom: 20px; /* C'est ça qui repousse le bouton vers le bas */
+    position: relative;
 }
 
+/* Style du champ de saisie (Plus clair et plus visible) */
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2rem; /* Texte plus gros */
+    font-weight: 600;
+    letter-spacing: 1px;
+    
+    /* Nouveau look plus visible */
+    background: rgba(255, 255, 255, 0.08); 
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Quand on clique dedans, il s'allume en vert */
+.form-group input:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 15px rgba(92, 184, 133, 0.2);
+}
+
+/* Couleur du texte "placeholder" (Votre numéro...) */
+.form-group input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+    font-size: 1rem;
+}
 /* Responsive Mobile */
 @media (max-width: 600px) {
     .results-container { flex-direction: column; gap: 10px; }
