@@ -1046,3 +1046,125 @@ body {
     border-color: var(--primary) !important;
     background: rgba(92, 184, 133, 0.2) !important;
 }
+
+/* =========================================
+   12. SECTION AVIS CLIENTS
+   ========================================= */
+.reviews-section {
+    padding: 80px 20px;
+    background: #0F172A; /* Un fond légèrement différent (Bleu nuit très sombre) pour séparer visuellement */
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Badge note globale sous le titre */
+.google-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.google-rating .stars { font-size: 1rem; }
+.google-rating .rating-text { font-size: 0.9rem; font-weight: 600; color: white; }
+
+/* Grille des avis */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte Avis Style "Glass" */
+.review-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* En-tête de l'avis */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.review-stars { color: #F59E0B; font-size: 1.1rem; letter-spacing: 2px; }
+.review-date { color: #64748b; font-size: 0.8rem; }
+
+/* Texte de l'avis */
+.review-text {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-style: italic;
+    flex-grow: 1; /* Pousse le bas vers le bas */
+}
+
+/* Auteur et Localisation */
+.review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 15px;
+}
+
+/* Avatar (Initiale) */
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.author-name {
+    font-weight: 700;
+    color: white;
+    font-size: 0.95rem;
+}
+.author-loc {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* Petit logo G de Google */
+.google-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.8;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .reviews-grid { grid-template-columns: 1fr; } /* Une colonne sur mobile */
+    .review-card { margin-bottom: 10px; }
+}
