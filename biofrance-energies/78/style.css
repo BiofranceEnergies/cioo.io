@@ -668,19 +668,17 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.1); /* Petit trait de séparation discret */
     display: inline-block; /* Pour que le trait s'adapte au texte */
 }
+
 /* Style pour la mention "*Basé sur..." */
 .calc-basis {
-    font-size: 0.75rem;     /* Tout petit */
-    color: #64748b;         /* Gris discret pour ne pas voler la vedette au prix */
+    /* 1. On réduit encore un peu la taille pour que ça rentre large */
+    font-size: 0.65rem;     
+    
+    /* 2. On FORCE le texte à rester sur une seule ligne, quoi qu'il arrive */
+    white-space: nowrap;
+    
+    color: #64748b;         
     margin-top: 2px;
-    margin-bottom: 6px;     /* Espace avant le texte Batterie Virtuelle */
-    font-family: monospace; /* Petit effet "technique" sympa (optionnel) */
-}
-/* Style pour la mention "*Basé sur..." */
-.calc-basis {
-    font-size: 0.75rem;     /* Tout petit */
-    color: #64748b;         /* Gris discret pour ne pas voler la vedette au prix */
-    margin-top: 2px;
-    margin-bottom: 6px;     /* Espace avant le texte Batterie Virtuelle */
-    font-family: monospace; /* Petit effet "technique" sympa (optionnel) */
+    margin-bottom: 6px;     
+    font-family: monospace; 
 }
