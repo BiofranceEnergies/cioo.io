@@ -204,7 +204,34 @@ body {
 .solar-totem:hover .totem-img {
     transform: scale(1.05) rotate(1deg);
 }
+/* Logo de marque sur le panneau */
+.dualsun-brand-logo {
+    position: absolute;
+    /* Placement vertical : on le met un peu en dessous du bord haut */
+    top: 40px; 
+    /* Centrage horizontal */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Taille du logo (ajuste la largeur si tu le trouves trop petit/grand) */
+    width: 110px; 
+    height: auto;
+    
+    /* S'assure qu'il est posé SUR le panneau mais SOUS les boutons */
+    z-index: 2; 
+    
+    /* Optionnel : une légère transparence pour faire plus réaliste */
+    opacity: 0.9;
+}
 
+/* --- RESPONSIVE POUR LE LOGO --- */
+@media (max-width: 968px) {
+    .dualsun-brand-logo {
+        /* Sur mobile, le panneau est plus petit, on réduit le logo et on remonte */
+        width: 80px;
+        top: 30px;
+    }
+}
 .totem-actions {
     position: absolute;
     top: 50%;
