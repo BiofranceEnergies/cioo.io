@@ -848,13 +848,37 @@ body {
 
 /* Les Icônes */
 .feature-icon {
-    margin-bottom: 20px;
-    color: var(--primary); /* Couleur verte */
+    margin-bottom: 25px;
+    color: var(--primary);
+    
+    /* NOUVEAU : On crée une bulle autour de l'icône */
+    background: rgba(92, 184, 133, 0.1); /* Vert très transparent */
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; /* Cercle parfait */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Une petite bordure lumineuse */
+    border: 1px solid rgba(92, 184, 133, 0.2);
+    box-shadow: 0 0 20px rgba(92, 184, 133, 0.15); /* Lueur diffuse */
+    transition: all 0.3s ease;
 }
+
+/* Quand on survole la carte, l'icône s'allume */
+.feature-card:hover .feature-icon {
+    background: var(--primary);
+    color: white; /* L'icône devient blanche */
+    transform: scale(1.1) rotate(5deg); /* Petite animation fun */
+    box-shadow: 0 0 30px rgba(92, 184, 133, 0.4);
+}
+
 .feature-icon svg {
-    width: 40px;
-    height: 40px;
-    filter: drop-shadow(0 0 8px rgba(92, 184, 133, 0.4)); /* Petite lueur sur l'icône */
+    width: 32px;
+    height: 32px;
+    /* On enlève le drop-shadow ici car la boite brille déjà */
+    filter: none;
 }
 
 /* Titre et texte des cartes */
