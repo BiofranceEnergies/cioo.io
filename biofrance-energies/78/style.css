@@ -205,25 +205,26 @@ body {
     transform: scale(1.05) rotate(1deg);
 }
 /* Logo de marque sur le panneau */
+
 .dualsun-brand-logo {
     position: absolute;
-    /* Placement vertical : on le met un peu en dessous du bord haut */
-    top: 40px; 
-    /* Centrage horizontal */
-    left: 42%;
-    transform: translateX(-50%);
     
-    /* Taille du logo (ajuste la largeur si tu le trouves trop petit/grand) */
-    width: 110px; 
+    /* On garde la hauteur */
+    top: 8%; 
+    
+    /* AJUSTEMENT 1 : On décale encore un peu à gauche pour s'aligner pile sur la ligne centrale */
+    left: 40%;
+    
+    /* AJUSTEMENT 2 : On augmente la rotation (55deg) pour le "coucher" davantage sur le panneau */
+    transform: translateX(-50%) perspective(600px) rotateX(55deg) rotateZ(-1deg);
+    
+    width: 100px; 
     height: auto;
-    
-    /* S'assure qu'il est posé SUR le panneau mais SOUS les boutons */
     z-index: 2; 
     
-    /* Optionnel : une légère transparence pour faire plus réaliste */
-    opacity: 0.9;
+    /* Un peu de transparence pour qu'il fasse moins "autocollant" et plus "intégré" */
+    opacity: 0.85;
 }
-
 /* --- RESPONSIVE POUR LE LOGO --- */
 @media (max-width: 968px) {
     .dualsun-brand-logo {
