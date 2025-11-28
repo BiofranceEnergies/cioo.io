@@ -650,50 +650,54 @@ body {
     font-size: 1rem;
 }
 /* =========================================
-   FIX MOBILE (RESPONSIVE)
+   FIX MOBILE (VERSION EMPILÉE PROPRE)
    ========================================= */
 @media (max-width: 600px) {
     
-    /* 1. On empile les deux grosses boites l'une sur l'autre */
+    /* 1. On passe les conteneurs en colonne */
     .results-container { 
         flex-direction: column; 
         gap: 15px; 
     }
 
-    /* 2. On force le contenu à être centré et empilé (BLOCK) */
+    /* 2. On désactive le Flex "Gauche-Droite" pour revenir à un bloc normal "Haut-Bas" */
     .result-box { 
-        display: block;          /* Important : annule l'alignement horizontal */
-        text-align: center;      /* Tout centré */
-        padding: 20px 15px;      /* Un peu de marge interne */
-        width: 100%;             /* Pleine largeur */
+        display: block;          /* Vital : Casse l'alignement horizontal qui buggait */
+        text-align: center;      /* On centre tout proprement */
+        padding: 20px 15px;      
+        width: 100%;             
+        height: auto;            /* On laisse la hauteur s'adapter au contenu */
     }
 
-    /* 3. On ajuste les tailles pour le mobile */
+    /* 3. On centre l'icône et on lui donne de la place */
     .result-box .icon { 
-        margin-bottom: 10px; 
+        margin: 0 auto 10px auto; /* Centré horizontalement */
         font-size: 2rem; 
-        display: block;          /* L'icône prend sa propre ligne */
-        margin-right: 0; 
+        display: block;          
+        float: none;             /* Sécurité */
     }
     
     .result-box .label {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         margin-bottom: 5px;
     }
 
     .result-box .value { 
-        font-size: 1.6rem;       /* Gros chiffres bien lisibles */
-        margin: 10px 0;
-        text-align: center;
+        font-size: 1.8rem;       /* On grossit le prix pour qu'il soit bien lisible */
+        margin: 5px 0;
+        text-align: center;      /* Force le centrage */
+        width: 100%;
     }
     
-    /* On s'assure que les petits textes ne débordent pas */
+    /* On autorise le texte à revenir à la ligne si besoin */
     .sub-note, .calc-basis {
-        white-space: normal;     /* Autorise le retour à la ligne si besoin */
+        white-space: normal !important; /* L'important force le retour à la ligne */
         font-size: 0.8rem;
+        display: block;
     }
+}
     
-    /* Titre de la modale un poil plus petit sur mobile */
+   
     .modal-title {
         font-size: 1.3rem;
     }
