@@ -210,7 +210,7 @@ body {
     /* Placement vertical : on le met un peu en dessous du bord haut */
     top: 40px; 
     /* Centrage horizontal */
-    left: 50%;
+    left: 42%;
     transform: translateX(-50%);
     
     /* Taille du logo (ajuste la largeur si tu le trouves trop petit/grand) */
