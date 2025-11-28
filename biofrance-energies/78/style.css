@@ -621,3 +621,14 @@ body {
     .result-box div { flex: 1; }
     .result-box .value { font-size: 1.3rem; text-align: right; }
 }
+/* Style du nombre de panneaux */
+.panel-info {
+    color: #cbd5e1; /* Gris clair */
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: -5px; /* On le colle un peu au chiffre du dessous */
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.1); /* Petit trait de séparation discret */
+    display: inline-block; /* Pour que le trait s'adapte au texte */
+}
