@@ -45,7 +45,12 @@ function openSimulation(kitName) {
         alert("Une erreur est survenue lors de la récupération des données pour ce kit.");
     }
 }
-
+// Remplir le Titre
+        document.getElementById("sim-titre").textContent = data.Puissance;
+        
+        // NOUVEAU : Remplir le nombre de panneaux
+        // On récupère le nombre du JSON et on ajoute le texte "Panneaux (500W)"
+        document.getElementById("sim-panels").textContent = data.Panels + " Panneaux (500W)";
 function closeModal() {
     document.getElementById("sim-modal").style.display = "none";
 }
