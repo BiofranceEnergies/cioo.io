@@ -784,3 +784,101 @@ body {
     .trust-separator { display: none; }
     .trust-number { font-size: 2.2rem; }
 }
+/* =========================================
+   10. SECTION FEATURES (STOCKAGE VIRTUEL)
+   ========================================= */
+.features-section {
+    padding: 80px 20px;
+    background: #0B1221; /* On garde le fond sombre uniforme */
+    position: relative;
+}
+
+/* En-tête de section */
+.section-header {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+/* La Grille des 4 cartes */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur ordi */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Style des Cartes "SaaS 2025" */
+.feature-card {
+    background: rgba(255, 255, 255, 0.02); /* Fond quasi transparent */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure subtile */
+    padding: 30px 25px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet au survol : lueur verte et remontée */
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary); /* La bordure devient verte */
+    box-shadow: 0 10px 30px -10px rgba(92, 184, 133, 0.2); /* Lueur verte */
+    background: rgba(92, 184, 133, 0.03); /* Fond légèrement teinté */
+}
+
+/* Les Icônes */
+.feature-icon {
+    margin-bottom: 20px;
+    color: var(--primary); /* Couleur verte */
+}
+.feature-icon svg {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 8px rgba(92, 184, 133, 0.4)); /* Petite lueur sur l'icône */
+}
+
+/* Titre et texte des cartes */
+.feature-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.feature-text {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    /* Sur tablette : 2 colonnes sur 2 lignes */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .section-title { font-size: 2rem; }
+}
+
+@media (max-width: 600px) {
+    /* Sur mobile : 1 seule colonne */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .section-title { font-size: 1.8rem; }
+}
