@@ -216,7 +216,7 @@ body {
     left: 40%;
     
     /* AJUSTEMENT 2 : On augmente la rotation (55deg) pour le "coucher" davantage sur le panneau */
-    transform: translateX(-50%) perspective(600px) rotateX(55deg) rotateZ(-1deg);
+    transform: translateX(-50%) perspective(600px) rotateX(45deg) rotateZ(-1deg);
     
     width: 100px; 
     height: auto;
