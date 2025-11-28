@@ -100,16 +100,45 @@
         </div>
     </section>
 
-    <div id="sim-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 class="modal-title">Kit <span id="selected-kit" class="highlight">...</span></h2>
-            <div class="price-reveal">
-                <div class="big-price">Tarif 2025</div>
-                <button type="button" class="full-width" onclick="alert('Suite...')">Vérifier mon éligibilité ></button>
+  <div id="sim-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <h2 class="modal-title">Potentiel du kit <span id="sim-titre" class="highlight">...</span></h2>
+        
+        <div class="results-container">
+            <div class="result-box">
+                <div class="icon">⚡</div>
+                <div class="label">Production Estimée</div>
+                <div class="value" id="sim-prod">... kWh</div>
+                <div class="sub-note">Énergie verte / an</div>
+            </div>
+            
+            <div class="result-box primary-border">
+                <div class="icon">💰</div>
+                <div class="label">Gain Annuel Est.</div>
+                <div class="value highlight-text" id="sim-gain">... €</div>
+                <div class="sub-note">*Économie sur factures + Vente surplus</div>
             </div>
         </div>
+
+        <div class="advisory-message">
+            <p><strong>⚠️ Important :</strong> Ces performances sont calculées pour une exposition standard dans le 78.</p>
+            <p>Pour garantir cette rentabilité chez vous, nous devons vérifier l'orientation et l'absence d'ombrage sur votre toiture.</p>
+        </div>
+
+        <form id="lead-form" onsubmit="submitForm(event)">
+            <p class="form-instruction">Recevoir mon étude de faisabilité (Gratuit) :</p>
+            
+            <div class="form-group">
+                <input type="tel" id="user-phone" placeholder="Votre numéro de mobile" required>
+            </div>
+            
+            <button type="submit" class="full-width">Vérifier la compatibilité ></button>
+            <p class="gdpr-text">🔒 Étude confidentielle. Réponse d'un technicien sous 24h.</p>
+        </form>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
