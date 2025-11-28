@@ -127,3 +127,30 @@ function scrollToTotem() {
         
     }, 800);
 }
+/* =========================================
+   6. GESTION ACCORDÉON FAQ
+   ========================================= */
+function toggleFaq(element) {
+    // 1. Gestion de la classe active pour le style
+    element.classList.toggle('active');
+
+    // 2. Gestion de la hauteur (Slide down / Slide up)
+    const content = element.querySelector('.faq-content');
+    
+    if (element.classList.contains('active')) {
+        // Si ouvert, on met la hauteur réelle du contenu
+        content.style.maxHeight = content.scrollHeight + "px";
+    } else {
+        // Si fermé, hauteur 0
+        content.style.maxHeight = null;
+    }
+    
+    // 3. Optionnel : Fermer les autres quand on en ouvre un
+    const allFaqs = document.querySelectorAll('.faq-item');
+    allFaqs.forEach(item => {
+        if (item !== element && item.classList.contains('active')) {
+            item.classList.remove('active');
+            item.querySelector('.faq-content').style.maxHeight = null;
+        }
+    });
+}
