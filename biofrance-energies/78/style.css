@@ -649,36 +649,52 @@ body {
     font-weight: 400;
     font-size: 1rem;
 }
-/* Responsive Mobile */
+/* =========================================
+   FIX MOBILE (RESPONSIVE)
+   ========================================= */
 @media (max-width: 600px) {
-    .results-container { flex-direction: column; gap: 10px; }
-    .result-box { padding: 15px; display: flex; align-items: center; justify-content: space-between; text-align: left; }
-    .result-box .icon { margin-bottom: 0; font-size: 1.5rem; margin-right: 15px; }
-    .result-box div { flex: 1; }
-    .result-box .value { font-size: 1.3rem; text-align: right; }
-}
-/* Style du nombre de panneaux */
-.panel-info {
-    color: #cbd5e1; /* Gris clair */
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-top: 5px;
-    margin-bottom: -5px; /* On le colle un peu au chiffre du dessous */
-    padding-bottom: 5px;
-    border-bottom: 1px solid rgba(255,255,255,0.1); /* Petit trait de séparation discret */
-    display: inline-block; /* Pour que le trait s'adapte au texte */
-}
+    
+    /* 1. On empile les deux grosses boites l'une sur l'autre */
+    .results-container { 
+        flex-direction: column; 
+        gap: 15px; 
+    }
 
-/* Style pour la mention "*Basé sur..." */
-.calc-basis {
-    /* 1. On réduit encore un peu la taille pour que ça rentre large */
-    font-size: 0.65rem;     
+    /* 2. On force le contenu à être centré et empilé (BLOCK) */
+    .result-box { 
+        display: block;          /* Important : annule l'alignement horizontal */
+        text-align: center;      /* Tout centré */
+        padding: 20px 15px;      /* Un peu de marge interne */
+        width: 100%;             /* Pleine largeur */
+    }
+
+    /* 3. On ajuste les tailles pour le mobile */
+    .result-box .icon { 
+        margin-bottom: 10px; 
+        font-size: 2rem; 
+        display: block;          /* L'icône prend sa propre ligne */
+        margin-right: 0; 
+    }
     
-    /* 2. On FORCE le texte à rester sur une seule ligne, quoi qu'il arrive */
-    white-space: nowrap;
+    .result-box .label {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+    }
+
+    .result-box .value { 
+        font-size: 1.6rem;       /* Gros chiffres bien lisibles */
+        margin: 10px 0;
+        text-align: center;
+    }
     
-    color: #64748b;         
-    margin-top: 2px;
-    margin-bottom: 6px;     
-    font-family: monospace; 
+    /* On s'assure que les petits textes ne débordent pas */
+    .sub-note, .calc-basis {
+        white-space: normal;     /* Autorise le retour à la ligne si besoin */
+        font-size: 0.8rem;
+    }
+    
+    /* Titre de la modale un poil plus petit sur mobile */
+    .modal-title {
+        font-size: 1.3rem;
+    }
 }
