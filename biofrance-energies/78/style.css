@@ -802,7 +802,14 @@ body {
 /* En-tête de section */
 .section-header {
     max-width: 800px;
-    margin: 0 auto 60px auto;
+    /* Le 'auto' ici centre le bloc au milieu de la page */
+    margin: 0 auto 60px auto; 
+    
+    /* C'EST CETTE LIGNE QUI MANQUAIT : On force le texte à se centrer */
+    text-align: center; 
+    
+    position: relative;
+    z-index: 2;
 }
 
 .section-title {
