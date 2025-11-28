@@ -884,8 +884,10 @@ body {
 .feature-icon svg {
     width: 32px;
     height: 32px;
-    /* On enlève le drop-shadow ici car la boite brille déjà */
     filter: none;
+    
+    /* MODIFICATION : On rend le trait un tout petit peu plus gras pour qu'il soit bien blanc */
+    stroke-width: 2.5px; 
 }
 
 /* Titre et texte des cartes */
