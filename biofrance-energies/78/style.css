@@ -1399,6 +1399,7 @@ body {
 /* --- Liens & Contact --- */
 .footer-links { list-style: none; padding: 0; }
 .footer-links li { margin-bottom: 12px; }
+
 .footer-links a {
     color: #cbd5e1; text-decoration: none; font-size: 0.95rem;
     transition: all 0.3s ease; display: inline-block;
@@ -1409,12 +1410,42 @@ body {
     display: flex; align-items: flex-start; gap: 15px;
     color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;
 }
+
+/* LE FIX DES ICÔNES : Rend les émojis blancs et brillants */
+.contact-item .icon {
+    font-style: normal;
+    filter: grayscale(100%) brightness(200%); 
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
 .phone-link { font-weight: 700; color: white !important; }
 
-/* Labels certifications */
+/* --- FIX LOGOS (RGE/QualiPV) : Plus propre --- */
 .footer-labels { display: flex; align-items: center; gap: 15px; }
-.label-text { font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
-.label-icons { display: flex; gap: 10px; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 4px; }
+
+.label-text { 
+    font-size: 0.75rem; 
+    color: #64748b; 
+    text-transform: uppercase; 
+    font-weight: 600; 
+}
+
+.label-icons { 
+    display: flex; 
+    gap: 10px; 
+    /* Fond transparent pour enlever l'effet autocollant */
+    background: transparent; 
+    padding: 0; 
+}
+
+.label-icons img {
+    /* Arrondi doux directement sur l'image */
+    border-radius: 6px; 
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.label-icons img:hover { opacity: 1; }
 
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
