@@ -200,20 +200,20 @@ function submitForm(event) {
 }
 
 /* =========================================
-   7. GESTION DES TEXTES LÉGAUX (Biofrance)
+   7. GESTION DES TEXTES LÉGAUX (Mise à jour GitHub Pages)
    ========================================= */
 const LEGAL_CONTENT = {
     mentions: `
         <h3>1. Éditeur du site</h3>
         <p>Le site <strong>Biofrance Energies</strong> est édité par :<br>
-        Biofrance Energies SAS<br>
-        Adresse : 12 Rue de l'Exemple, 78000 Versailles<br>
-        SIRET : 000 000 000 00000<br>
-        Email : contact@biofrance.fr</p>
+        <strong>cioo.io</strong> Editeur Sylvain Matignon<br>
+        Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
+        SIRET : 422 231 928 00025<br>
+        Email : contact.cioo.io@gmail.com</p>
         
         <h3>2. Hébergement</h3>
-        <p>Hébergeur technique : <strong>Vercel Inc.</strong><br>
-        340 S Lemon Ave #4133 Walnut, CA 91789, USA.</p>
+        <p>Hébergeur technique : <strong>GitHub Pages</strong><br>
+        88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA</p>
     `,
 
     privacy: `
