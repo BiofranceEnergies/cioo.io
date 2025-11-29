@@ -250,3 +250,77 @@ function openLegalModal(type) {
 function closeLegalModal() {
     document.getElementById('legal-modal').style.display = "none";
 }
+/* =========================================
+   10. INTELLIGENCE COOKIES & TRACKING (Le Cerveau)
+   ========================================= */
+document.addEventListener("DOMContentLoaded", function() {
+
+    // --- A. GESTION DU BANDEAU COOKIES ---
+    const banner = document.getElementById('consent-banner');
+    const btnAccept = document.getElementById('consent-accept');
+    const btnReject = document.getElementById('consent-reject');
+    const STORAGE_KEY = 'consent_v2_biofrance';
+
+    // 1. Est-ce qu'on a déjà le choix du visiteur ?
+    const savedConsent = localStorage.getItem(STORAGE_KEY);
+
+    if (savedConsent) {
+        // Oui, on applique ce qu'il a choisi (pas besoin d'afficher le bandeau)
+        const consentState = JSON.parse(savedConsent);
+        updateGoogleConsent(consentState);
+    } else {
+        // Non, on affiche le bandeau
+        if(banner) banner.style.display = 'block';
+    }
+
+    // 2. Clic sur "Tout Accepter"
+    if(btnAccept) {
+        btnAccept.addEventListener('click', function() {
+            const state = { analytics: true, ads: true }; // On autorise tout
+            saveAndClose(state);
+        });
+    }
+
+    // 3. Clic sur "Refuser"
+    if(btnReject) {
+        btnReject.addEventListener('click', function() {
+            const state = { analytics: false, ads: false }; // On refuse tout
+            saveAndClose(state);
+        });
+    }
+
+    function saveAndClose(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); // On sauvegarde
+        updateGoogleConsent(state); // On prévient Google
+        if(banner) banner.style.display = 'none'; // On cache le bandeau
+    }
+
+    function updateGoogleConsent(state) {
+        // La fonction magique qui parle à Google Ads
+        if(typeof gtag === 'function') {
+            gtag('consent', 'update', {
+                'analytics_storage': state.analytics ? 'granted' : 'denied',
+                'ad_storage': state.ads ? 'granted' : 'denied',
+                'ad_user_data': state.ads ? 'granted' : 'denied',
+                'ad_personalization': state.ads ? 'granted' : 'denied'
+            });
+        }
+    }
+
+    // --- B. ESPION GOOGLE (CAPTURE GCLID) ---
+    // C'est ça qui permet de savoir quel mot-clé a converti
+    const urlParams = new URLSearchParams(window.location.search);
+    const gclid = urlParams.get('gclid'); // L'ID unique de Google Ads
+
+    if (gclid) {
+        // Si on trouve un GCLID, on le stocke pour plus tard (pour le formulaire)
+        localStorage.setItem('gclid_token', gclid);
+        
+        // On stocke aussi la date pour ne pas utiliser un vieux clic (expiration 30 jours)
+        const trackData = {
+            gclid: gclid,
+            timestamp: new Date().getTime()
+        };
+        localStorage.setItem('ads_tracking_data', JSON.stringify(trackData));
+    }
+});
