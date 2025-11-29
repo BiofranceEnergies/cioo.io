@@ -484,6 +484,81 @@
             </div>
         </div>
     </section>
+
+    <footer class="footer-section">
+    <div class="footer-overlay"></div>
+
+    <div class="container" style="position:relative; z-index:2;">
+        <div class="footer-grid">
+            
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    Biofrance <span class="highlight">Energies</span>
+                </div>
+                <p class="footer-tagline">
+                    L'alternative locale aux géants de l'énergie. 
+                    Installation de panneaux photovoltaïques premium dans les Yvelines (78) et l'Eure-et-Loir (28).
+                </p>
+                <div class="footer-labels">
+                    <span class="label-text">Entreprise Certifiée :</span>
+                    <div class="label-icons">
+                        <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/3a552a54688ffdbdba3ee202f4e911bfbd949ee7/rge.webp" alt="RGE" style="height:25px; opacity:0.6; filter:grayscale(100%);">
+                        <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/3a552a54688ffdbdba3ee202f4e911bfbd949ee7/qualipv.webp" alt="QualiPV" style="height:25px; opacity:0.6; filter:grayscale(100%);">
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Nous rencontrer</h4>
+                <ul class="footer-links contact-list">
+                    <li class="contact-item">
+                        <span class="icon">📍</span>
+                        <span>
+                            <strong>Siège Social</strong><br>
+                            12 Rue de l'Exemple<br>78000 Versailles
+                        </span>
+                    </li>
+                    <li class="contact-item">
+                        <span class="icon">📞</span>
+                        <a href="tel:0100000000" class="phone-link">01 00 00 00 00</a>
+                    </li>
+                    <li class="contact-item">
+                        <span class="icon">✉️</span>
+                        <a href="mailto:contact@biofrance.fr">contact@biofrance.fr</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-heading">Informations</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="openLegalModal('mentions')">Mentions Légales</a></li>
+                    <li><a href="#" onclick="openLegalModal('privacy')">Politique de Confidentialité</a></li>
+                    <li><a href="#" onclick="openLegalModal('conditions')">Conditions Générales</a></li>
+                    <li style="margin-top:15px; font-size:0.8rem; color:#64748b;">
+                        Site sécurisé SSL 🔒
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Biofrance Energies. Tous droits réservés. Fièrement propulsé dans les Yvelines.</p>
+        </div>
+    </div>
+</footer>
+
+<div id="legal-modal" class="modal">
+    <div class="modal-content legal-content-box">
+        <span class="close-btn" onclick="closeLegalModal()">&times;</span>
+        
+        <h2 id="legal-title" class="modal-title">...</h2>
+        
+        <div id="legal-body" class="legal-scroll-area">
+            </div>
+    </div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>
