@@ -202,14 +202,35 @@ function scrollToTotem() {
     }, 800);
 }
 
+/* =========================================
+   6. GESTION ACCORDÉON FAQ (+ TRACKING)
+   ========================================= */
 function toggleFaq(element) {
+    // 1. On ouvre/ferme visuellement
     element.classList.toggle('active');
     const content = element.querySelector('.faq-content');
+    
     if (element.classList.contains('active')) {
+        // Si on ouvre -> On déplie
         content.style.maxHeight = content.scrollHeight + "px";
+        
+        // --- SIGNAL GOOGLE : "Il est curieux !" ---
+        if(typeof gtag === 'function') {
+            // On récupère le titre de la question (h3) pour savoir ce qu'il a lu
+            const questionText = element.querySelector('h3').innerText;
+            
+            gtag('event', 'faq_open', {
+                'event_category': 'Engagement',
+                'event_label': questionText
+            });
+        }
+        
     } else {
+        // Si on ferme -> On replie
         content.style.maxHeight = null;
     }
+    
+    // 2. Gestion de l'accordéon (Fermer les autres)
     const allFaqs = document.querySelectorAll('.faq-item');
     allFaqs.forEach(item => {
         if (item !== element && item.classList.contains('active')) {
@@ -218,7 +239,6 @@ function toggleFaq(element) {
         }
     });
 }
-
 // Fermeture modale click extérieur (Gère Simu + Legal)
 window.onclick = function(event) {
     const simModal = document.getElementById("sim-modal");
