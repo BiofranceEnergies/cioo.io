@@ -1339,3 +1339,139 @@ body {
     .final-cta-content h2 { font-size: 1.8rem; }
     .primary-btn-large { width: 100%; padding: 15px 20px; }
 }
+/* =========================================
+   16. FOOTER STYLE "DARK MIRROR"
+   ========================================= */
+.footer-section {
+    position: relative;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, #02040a 100%);
+    padding: 80px 20px 30px 20px;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+/* Ligne lumineuse verte en haut du footer */
+.footer-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.5;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+/* Grille de fond subtile */
+.footer-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+}
+
+/* --- Typographie Footer --- */
+.footer-logo {
+    font-size: 1.4rem; font-weight: 800; color: white;
+    text-transform: uppercase; margin-bottom: 20px; letter-spacing: -0.5px;
+}
+.footer-tagline {
+    color: #94a3b8; font-size: 0.95rem; line-height: 1.6;
+    margin-bottom: 25px; max-width: 350px;
+}
+.footer-heading {
+    font-size: 0.9rem; color: white; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;
+    display: inline-block; border-bottom: 2px solid var(--primary); padding-bottom: 5px;
+}
+
+/* --- Liens & Contact --- */
+.footer-links { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a {
+    color: #cbd5e1; text-decoration: none; font-size: 0.95rem;
+    transition: all 0.3s ease; display: inline-block;
+}
+.footer-links a:hover { color: var(--primary); transform: translateX(5px); }
+
+.contact-item {
+    display: flex; align-items: flex-start; gap: 15px;
+    color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;
+}
+.phone-link { font-weight: 700; color: white !important; }
+
+/* Labels certifications */
+.footer-labels { display: flex; align-items: center; gap: 15px; }
+.label-text { font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+.label-icons { display: flex; gap: 10px; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 4px; }
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
+    text-align: center; font-size: 0.85rem; color: #475569;
+}
+
+/* =========================================
+   17. MODALE LÉGALE (Style Screenshot + Vert)
+   ========================================= */
+.legal-content-box {
+    background-color: #0B1221;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 0;
+    text-align: left;
+    max-width: 650px;
+    overflow: hidden;
+}
+
+.legal-content-box .modal-title {
+    font-size: 1.5rem; font-weight: 800; color: white;
+    padding: 25px 30px 20px 30px; margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Séparateur Titre */
+}
+
+.legal-scroll-area {
+    padding: 30px;
+    max-height: 60vh; overflow-y: auto;
+    color: #cbd5e1; font-size: 0.95rem; line-height: 1.7;
+}
+
+/* C'est ici qu'on met TON vert Biofrance */
+.legal-scroll-area h3 {
+    color: var(--primary); /* Le Vert #5CB885 */
+    font-size: 1.1rem; font-weight: 700;
+    margin-top: 25px; margin-bottom: 15px;
+}
+.legal-scroll-area h3:first-child { margin-top: 0; }
+.legal-scroll-area strong { color: white; font-weight: 700; }
+
+/* =========================================
+   18. ANIMATION SUCCÈS (Formulaire)
+   ========================================= */
+.success-animation { text-align: center; padding: 40px 20px; }
+.checkmark-circle {
+    width: 80px; height: 80px; margin: 0 auto 20px auto;
+    background: rgba(92, 184, 133, 0.15); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 30px rgba(92, 184, 133, 0.3);
+}
+.checkmark { font-size: 40px; color: var(--primary); }
+
+/* Responsive Footer */
+@media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .footer-heading { border-bottom: none; text-decoration: underline text-decoration-color: var(--primary); }
+    .contact-item { justify-content: center; }
+    .footer-labels { justify-content: center; }
+}
