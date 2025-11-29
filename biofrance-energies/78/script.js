@@ -22,14 +22,32 @@ let CURRENT_SELECTION = null;
 /* =========================================
    2. LOGIQUE MODALE SIMULATION
    ========================================= */
+/* =========================================
+   2. LOGIQUE MODALE SIMULATION (+ SIGNAL GOOGLE)
+   ========================================= */
 function openSimulation(kitName) {
     const data = SOLAR_DATA.find(item => item.Puissance === kitName && item.Departement === DEPARTEMENT_CIBLE);
 
     if (data) {
-        // ON MÉMORISE LA SÉLECTION POUR L'ENVOI PLUS TARD
+        // 1. ON MÉMORISE LA SÉLECTION
         CURRENT_SELECTION = data;
 
-        // Remplissage UI
+        // 2. ENVOI DU SIGNAL "INTÉRÊT" À GOOGLE ADS (Le mouchard)
+        // C'est ici que la magie opère pour ton Quality Score
+        if(typeof gtag === 'function') {
+            // Signal standard
+            gtag('event', 'select_content', {
+                'content_type': 'panneaux_solaires',
+                'item_id': kitName
+            });
+            // Signal personnalisé (plus facile à lire dans les rapports)
+            gtag('event', 'clic_simulation', {
+                'event_category': 'Engagement',
+                'event_label': kitName
+            });
+        }
+
+        // 3. REMPLISSAGE UI (Affichage des chiffres)
         document.getElementById("sim-titre").textContent = data.Puissance;
         document.getElementById("sim-panels").textContent = data.Panels + " Panneaux (500W)";
         document.getElementById("sim-prod").textContent = data.Prod.toLocaleString('fr-FR') + " kWh";
@@ -37,7 +55,7 @@ function openSimulation(kitName) {
         const gainAnnuel = Math.round(data.Prod * PRIX_KWH_BASE);
         document.getElementById("sim-gain").textContent = gainAnnuel.toLocaleString('fr-FR') + " € / an";
 
-        // Affichage
+        // 4. AFFICHAGE DE LA MODALE
         document.getElementById("sim-modal").style.display = "block";
     } else {
         console.error("Erreur : Pas de données pour " + kitName);
