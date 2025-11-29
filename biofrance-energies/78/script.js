@@ -320,4 +320,16 @@ document.addEventListener("DOMContentLoaded", function() {
     if (gclid) {
         localStorage.setItem('gclid_token', gclid);
     }
+   // --- C. TRACKING APPELS TÉLÉPHONIQUES (Mobile) ---
+    // Surveille tous les liens qui commencent par "tel:"
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', function() {
+            if(typeof gtag === 'function') {
+                gtag('event', 'click_telephone', {
+                    'event_category': 'Contact',
+                    'event_label': this.textContent.trim() // Envoie le numéro cliqué (ex: 06 48...)
+                });
+            }
+        });
+    });
 });
