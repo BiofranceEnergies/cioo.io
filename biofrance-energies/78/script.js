@@ -154,3 +154,99 @@ function toggleFaq(element) {
         }
     });
 }
+/* =========================================
+   3. ENVOI DU LEAD (Avec Success State)
+   ========================================= */
+function submitForm(event) {
+    event.preventDefault();
+    const phone = document.getElementById("user-phone").value;
+    const formContainer = document.querySelector('.modal-content'); // On cible le contenu de la modale
+    
+    // Nettoyage sommaire du numéro
+    const cleanPhone = phone.replace(/\s/g, '');
+
+    if(cleanPhone.length >= 10) {
+        
+        // 1. Simulation d'envoi (Ici tu mettras ton fetch webhook plus tard)
+        // console.log("Envoi du lead : " + phone);
+
+        // 2. Remplacement du contenu de la modale par le message de succès
+        formContainer.innerHTML = `
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <span class="checkmark">✓</span>
+                </div>
+                <h2 style="color:white; margin-bottom:10px; font-weight:800;">Demande Transmise !</h2>
+                <p style="color:#cbd5e1; font-size:1rem;">
+                    Votre simulation a bien été enregistrée.
+                </p>
+                <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; margin:20px 0;">
+                    <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:5px;">Un technicien Biofrance vous rappellera au :</p>
+                    <strong style="color:white; font-size:1.2rem;">${phone}</strong>
+                </div>
+                <p style="color:#cbd5e1; font-size:0.9rem;">Délai moyen de réponse : <span style="color:#F59E0B">Moins de 24h</span>.</p>
+                
+                <button class="full-width" onclick="closeModal()" style="margin-top:25px;">Retour au site</button>
+            </div>
+        `;
+
+        // 3. Tracking Google Ads (À décommenter plus tard)
+        // gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXX/Label'});
+
+    } else {
+        alert("Merci de vérifier votre numéro de téléphone (10 chiffres).");
+    }
+}
+
+/* =========================================
+   7. GESTION DES TEXTES LÉGAUX (Biofrance)
+   ========================================= */
+const LEGAL_CONTENT = {
+    mentions: `
+        <h3>1. Éditeur du site</h3>
+        <p>Le site <strong>Biofrance Energies</strong> est édité par :<br>
+        Biofrance Energies SAS<br>
+        Adresse : 12 Rue de l'Exemple, 78000 Versailles<br>
+        SIRET : 000 000 000 00000<br>
+        Email : contact@biofrance.fr</p>
+        
+        <h3>2. Hébergement</h3>
+        <p>Hébergeur technique : <strong>Vercel Inc.</strong><br>
+        340 S Lemon Ave #4133 Walnut, CA 91789, USA.</p>
+    `,
+
+    privacy: `
+        <h3>1. Données personnelles</h3>
+        <p>Les informations recueillies via le formulaire sont destinées uniquement à l'établissement de votre étude de faisabilité et au contact commercial. Elles ne sont ni vendues, ni stockées à des fins tierces.</p>
+
+        <h3>2. Cookies</h3>
+        <p>Ce site utilise des cookies Google Ads uniquement pour mesurer la performance des campagnes publicitaires, de manière anonyme.</p>
+    `,
+
+    conditions: `
+        <h3>Gratuité</h3>
+        <p style="font-size:1.05rem;">La demande d'étude et de simulation sur ce site est <strong>gratuite et sans engagement</strong>.</p>
+        <p>Les chiffres présentés dans le simulateur sont des estimations basées sur un ensoleillement moyen dans les Yvelines et peuvent varier selon l'orientation réelle de votre toiture.</p>
+    `
+};
+
+function openLegalModal(type) {
+    const modal = document.getElementById('legal-modal');
+    const title = document.getElementById('legal-title');
+    const body = document.getElementById('legal-body');
+
+    if (LEGAL_CONTENT[type]) {
+        if(type === 'mentions') title.textContent = "Mentions Légales";
+        if(type === 'privacy') title.textContent = "Politique de Confidentialité";
+        if(type === 'conditions') title.textContent = "Conditions Générales";
+        
+        body.innerHTML = LEGAL_CONTENT[type];
+        
+        modal.style.display = "block";
+    }
+}
+
+function closeLegalModal() {
+    document.getElementById('legal-modal').style.display = "none";
+}
