@@ -1506,3 +1506,71 @@ body {
     .contact-item { justify-content: center; }
     .footer-labels { justify-content: center; }
 }
+/* =========================================
+   19. BANDEAU COOKIES (Style Dark SaaS)
+   ========================================= */
+#consent-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 500px; /* Ne prend pas tout l'écran */
+    background: rgba(15, 23, 42, 0.95); /* Bleu nuit très sombre */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: slideUp 0.5s ease-out;
+}
+
+.consent-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.consent-text {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+.consent-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-cookie-accept {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+}
+
+.btn-cookie-refuse {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+}
+.btn-cookie-refuse:hover { border-color: white; color: white; }
+
+/* Mobile : Bandeau en bas toute largeur */
+@media (max-width: 600px) {
+    #consent-banner {
+        left: 0; right: 0; bottom: 0;
+        max-width: 100%;
+        border-radius: 12px 12px 0 0;
+        border-bottom: none;
+    }
+}
