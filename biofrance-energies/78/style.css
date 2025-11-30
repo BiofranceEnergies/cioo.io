@@ -834,29 +834,37 @@ body {
     margin: 0 auto;
 }
 
-/* Style des Cartes "SaaS 2025" */
-/* Style des Cartes "SaaS 2025" - MODIFIÉ GLASSMORPHISM */
+
+/* VERSION BOOSTÉE : PLUS VISIBLE */
 .feature-card {
-    background: rgba(255, 255, 255, 0.03); /* Fond transparent */
-    backdrop-filter: blur(12px); /* Effet de flou "Verre" */
+    /* On augmente l'opacité du fond blanc (de 0.03 à 0.07) pour que la carte se détache du fond */
+    background: rgba(255, 255, 255, 0.07) !important;
+    
+    /* On garde le flou */
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure fine */
+    
+    /* On rend la bordure beaucoup plus visible (de 0.08 à 0.25) */
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    
     padding: 30px 25px;
     border-radius: 16px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+    
+    /* On ajoute une petite ombre verte permanente pour donner du volume tout de suite */
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* Effet au survol : lueur verte et remontée */
+/* Effet au survol : on explose la lumière */
 .feature-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    border-color: var(--primary); 
-    background: rgba(255, 255, 255, 0.03); 
-    box-shadow: 0 0 30px rgba(92, 184, 133, 0.15), inset 0 0 20px rgba(92, 184, 133, 0.05);
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--primary) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    /* Grosse lueur verte */
+    box-shadow: 0 0 30px rgba(92, 184, 133, 0.3), inset 0 0 20px rgba(92, 184, 133, 0.1);
 }
-
 /* Les Icônes */
 .feature-icon {
     margin-bottom: 25px;
