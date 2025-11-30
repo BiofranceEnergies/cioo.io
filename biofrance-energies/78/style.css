@@ -1707,3 +1707,27 @@ body {
 @media (max-width: 968px) {
     .mobile-sticky-bar { display: block; }
 }
+/* =========================================
+   21. GESTION AFFICHAGE MOBILE/DESKTOP (BLOC FEATURES)
+   ========================================= */
+
+/* Par défaut (Ordi) : On cache la version mobile */
+.mobile-only {
+    display: none;
+}
+
+/* Sur Mobile (moins de 968px) */
+@media (max-width: 968px) {
+    /* On cache le bloc du haut qui gênait */
+    .desktop-only {
+        display: none !important;
+    }
+    
+    /* On affiche le bloc du bas (sous le totem) */
+    .mobile-only {
+        display: block !important;
+        width: 90%; /* Pour qu'il ne soit pas trop large */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
