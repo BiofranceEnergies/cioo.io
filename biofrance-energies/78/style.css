@@ -1792,7 +1792,7 @@ body {
     /* Le Texte */
     .instruction-container span {
         white-space: normal !important;
-        text-align: left !important; /* Texte aligné à gauche pour la lecture */
+        text-align: center !important; /* Texte aligné à gauche pour la lecture */
         font-size: 0.8rem !important; /* Taille fine et élégante */
         line-height: 1.2;
         max-width: none !important; /* On enlève la limite de largeur */
