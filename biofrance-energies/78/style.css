@@ -1759,52 +1759,53 @@ body {
     }
 }
 /* =======================================================
-   🔴 CODE FINAL : GESTION PARFAITE (ORDI & MOBILE)
+   🔴 MOBILE FINAL : FLÈCHE À GAUCHE (PLUS FIN)
    ======================================================= */
 
-/* 1. COMPORTEMENT MOBILE (Le plus important) */
 @media (max-width: 968px) {
     
     /* La Capsule Verte */
     .instruction-container {
-        /* On arrête de flotter, on se place dans le flux */
         position: relative !important;
         bottom: auto !important;
+        
+        /* Placement vertical */
+        margin-top: -30px !important;   
+        margin-bottom: 25px !important;
+        
         left: auto !important;
         transform: none !important;
-        
-        /* PLACEMENT VERTICAL */
-        /* On remonte pour coller aux boutons */
-        margin-top: -30px !important;   
-        /* On pousse le bloc du bas pour respirer */
-        margin-bottom: 30px !important;
-        
-        /* DESIGN */
         width: 90% !important;
         margin-left: auto !important;
         margin-right: auto !important;
         
-        /* EMPILEMENT (Flèche au-dessus du texte) */
+        /* C'EST ICI LE CHANGEMENT : Tout sur une ligne */
         display: flex !important;
-        flex-direction: column !important; 
-        align-items: center !important;
+        flex-direction: row !important; /* Flèche à gauche, Texte à droite */
+        align-items: center !important; /* Centré verticalement */
         justify-content: center !important;
-        padding: 10px !important;
-        gap: 5px;
+        
+        padding: 10px 20px !important; /* Un peu plus compact */
+        gap: 15px; /* Espace entre la flèche et le texte */
     }
 
-    /* Le Texte (On force la coupure ICI, pas en HTML) */
+    /* Le Texte */
     .instruction-container span {
         white-space: normal !important;
-        text-align: center !important;
-        font-size: 0.85rem !important;
-        line-height: 1.3;
-        /* Astuce pro : on limite la largeur pour forcer le texte à passer à la ligne */
-        max-width: 250px; 
-        display: block;
+        text-align: left !important; /* Texte aligné à gauche pour la lecture */
+        font-size: 0.8rem !important; /* Taille fine et élégante */
+        line-height: 1.2;
+        max-width: none !important; /* On enlève la limite de largeur */
     }
     
-    /* Le Bloc Info en dessous (Propre et sans pointillés) */
+    /* La flèche (on s'assure qu'elle ne s'écrase pas) */
+    .pointing-hand {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0; /* Empêche la flèche de réduire */
+    }
+    
+    /* Le Bloc Info en dessous */
     .mobile-only {
         display: block !important;
         width: 90%; 
@@ -1813,15 +1814,4 @@ body {
         margin-top: 0px !important; 
         margin-bottom: 40px; 
     }
-}
-
-/* 2. STYLE PROPRE DU BLOC INFO (Valable tout le temps) */
-.simulator-placeholder {
-    border-style: solid !important;
-    border-width: 1px !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px !important;
 }
