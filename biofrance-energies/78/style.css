@@ -1759,40 +1759,44 @@ body {
     }
 }
 /* =======================================================
-   🔴 CORRECTIF FINAL ULTIME : PACK COMPACT + TEXTE 2 LIGNES
+   🔴 FINAL : ESPACEMENT & STYLE (ANTI-PÂTÉ)
    ======================================================= */
 
+/* 1. Configuration Mobile (Placement & Espace) */
 @media (max-width: 968px) {
-    /* 1. Le conteneur de la capsule (Flèche + Texte) */
+    /* La Capsule Verte */
     .instruction-container {
         position: relative !important;
         bottom: auto !important;
-        margin-top: -30px !important; /* Hauteur ajustée (le -30px de tout à l'heure) */
-        margin-bottom: 10px !important; /* Un peu d'espace en dessous */
+        
+        /* On la remonte vers les boutons */
+        margin-top: -30px !important;   
+        
+        /* ON AJOUTE DE L'AIR EN DESSOUS (C'est ça qui corrige le pâté) */
+        margin-bottom: 25px !important;
+        
         left: auto !important;
         transform: none !important;
-        width: 90% !important; /* Largeur confortable */
+        width: 90% !important;
         margin-left: auto !important;
         margin-right: auto !important;
         
         display: flex !important;
-        /* C'EST NOUVEAU : On empile la flèche au-dessus du texte */
         flex-direction: column; 
         align-items: center !important;
         justify-content: center !important;
-        padding: 12px !important; /* Un peu plus de hauteur */
-        gap: 5px; /* Petit espace entre la flèche et le texte */
+        padding: 10px !important;
+        gap: 5px;
     }
 
-    /* 2. Le texte lui-même (C'EST ICI LE CHANGEMENT POUR LES 2 LIGNES) */
     .instruction-container span {
-        white-space: normal !important; /* AUTORISE le retour à la ligne */
-        text-align: center !important;  /* CENTRE le texte */
-        font-size: 0.85rem !important;  /* Taille de police adaptée */
-        line-height: 1.3; /* Espace entre les deux lignes */
+        white-space: normal !important;
+        text-align: center !important;
+        font-size: 0.8rem !important; /* Un poil plus petit pour l'élégance */
+        line-height: 1.3;
     }
     
-    /* 3. Le Bloc Info en dessous ("Votre étude inclut...") */
+    /* Le Bloc Info en dessous */
     .mobile-only {
         display: block !important;
         width: 90%; 
@@ -1801,4 +1805,15 @@ body {
         margin-top: 0px !important; 
         margin-bottom: 40px; 
     }
+}
+
+/* 2. Style de la Boîte Info (On enlève les pointillés !) */
+.simulator-placeholder {
+    border-style: solid !important; /* Ligne continue (plus propre) */
+    border-width: 1px !important;
+    border-color: rgba(255, 255, 255, 0.15) !important; /* Bordure très discrète */
+    background: rgba(255, 255, 255, 0.05) !important; /* Fond léger */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px !important;
 }
