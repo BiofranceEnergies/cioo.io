@@ -309,3 +309,35 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+/* =========================================
+   7. GESTION STICKY BAR MOBILE
+   ========================================= */
+document.addEventListener('scroll', function() {
+    const stickyBar = document.getElementById('mobile-sticky-cta');
+    const heroSection = document.querySelector('.hero-section');
+    const finalCta = document.querySelector('.final-cta-section'); // Le gros bouton du bas
+    
+    // Sécurité : si les éléments n'existent pas, on arrête
+    if (!stickyBar || !heroSection) return;
+
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+    
+    // 1. Logique d'apparition : Si on a dépassé le Hero
+    if (heroBottom < 0) {
+        stickyBar.classList.add('visible');
+    } else {
+        stickyBar.classList.remove('visible');
+    }
+
+    // 2. Logique de disparition (PRO) : Si on voit le gros bouton du bas
+    // On cache la petite barre pour éviter d'avoir 2 boutons l'un sur l'autre
+    if (finalCta && stickyBar.classList.contains('visible')) {
+        const ctaPosition = finalCta.getBoundingClientRect().top;
+        const screenHeight = window.innerHeight;
+        
+        // Si le gros bouton entre dans l'écran
+        if (ctaPosition < screenHeight) {
+            stickyBar.classList.remove('visible');
+        }
+    }
+});
