@@ -835,22 +835,26 @@ body {
 }
 
 /* Style des Cartes "SaaS 2025" */
+/* Style des Cartes "SaaS 2025" - MODIFIÉ GLASSMORPHISM */
 .feature-card {
-    background: rgba(255, 255, 255, 0.02); /* Fond quasi transparent */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure subtile */
+    background: rgba(255, 255, 255, 0.03); /* Fond transparent */
+    backdrop-filter: blur(12px); /* Effet de flou "Verre" */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure fine */
     padding: 30px 25px;
     border-radius: 16px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
 }
 
 /* Effet au survol : lueur verte et remontée */
 .feature-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary); /* La bordure devient verte */
-    box-shadow: 0 10px 30px -10px rgba(92, 184, 133, 0.2); /* Lueur verte */
-    background: rgba(92, 184, 133, 0.03); /* Fond légèrement teinté */
+    transform: translateY(-5px) scale(1.01);
+    border-color: var(--primary); 
+    background: rgba(255, 255, 255, 0.03); 
+    box-shadow: 0 0 30px rgba(92, 184, 133, 0.15), inset 0 0 20px rgba(92, 184, 133, 0.05);
 }
 
 /* Les Icônes */
