@@ -1758,3 +1758,33 @@ body {
         margin-bottom: 40px; 
     }
 }
+/* =======================================================
+   🔴 CORRECTIF FINAL FORCE (DESIGN & POSITION MOBILE)
+   ======================================================= */
+
+/* 1. On force la flèche à se mettre ENTRE les boutons et le texte */
+@media (max-width: 968px) {
+    .instruction-container {
+        position: relative !important; /* Très important : arrête de flotter ! */
+        bottom: auto !important;       /* Décolle du fond */
+        margin-top: 20px !important;   /* Espace avec les boutons du haut */
+        margin-bottom: 20px !important;/* Espace avec le texte du bas */
+        left: auto !important;
+        transform: none !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+}
+
+/* 2. On rend le bloc "Votre étude" joli (Effet Verre) */
+.simulator-placeholder {
+    border-style: solid !important; /* Adieu les pointillés */
+    border-width: 1px !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
