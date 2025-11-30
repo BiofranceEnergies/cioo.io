@@ -1731,3 +1731,30 @@ body {
         margin-right: auto;
     }
 }
+/* =========================================
+   21. GESTION AFFICHAGE INTELLIGENT (MOBILE/DESKTOP)
+   ========================================= */
+
+/* 1. Par défaut (sur Ordi), on cache le bloc mobile */
+.mobile-only {
+    display: none;
+}
+
+/* 2. Sur Mobile (moins de 968px) */
+@media (max-width: 968px) {
+    /* On cache le bloc de gauche (qui gênait) */
+    .desktop-only {
+        display: none !important;
+    }
+    
+    /* On affiche le bloc du bas (sous la flèche) */
+    .mobile-only {
+        display: block !important;
+        width: 90%; 
+        margin-left: auto;
+        margin-right: auto;
+        /* Un peu d'espace pour respirer */
+        margin-top: 20px; 
+        margin-bottom: 40px; 
+    }
+}
