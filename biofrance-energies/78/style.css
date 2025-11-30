@@ -1622,3 +1622,74 @@ body {
         border-bottom: none;
     }
 }
+/* =========================================
+   20. STICKY BAR MOBILE (CONVERSION)
+   ========================================= */
+.mobile-sticky-bar {
+    position: fixed;
+    bottom: 20px; /* Un peu décollé du bas (style iOS) */
+    left: 20px;
+    right: 20px;
+    background: rgba(15, 23, 42, 0.95); /* Fond sombre presque opaque */
+    backdrop-filter: blur(16px); /* Effet verre */
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 10px 20px;
+    z-index: 9999; /* Toujours au dessus */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    
+    /* Animation : Caché vers le bas par défaut */
+    transform: translateY(150%); 
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    /* Invisible sur PC */
+    display: none; 
+}
+
+/* Classe ajoutée par JS pour le faire apparaître */
+.mobile-sticky-bar.visible {
+    transform: translateY(0);
+}
+
+.sticky-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sticky-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.sticky-text span {
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.sticky-text small {
+    color: var(--primary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.sticky-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 0 0 15px rgba(92, 184, 133, 0.4);
+    cursor: pointer;
+}
+
+/* Affichage uniquement sur Mobile/Tablette */
+@media (max-width: 968px) {
+    .mobile-sticky-bar { display: block; }
+}
