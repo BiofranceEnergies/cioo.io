@@ -484,52 +484,68 @@ body {
 }
 /* --- INSTRUCTION EN DESSOUS DU PANNEAU --- */
 
+/* --- INSTRUCTION EN DESSOUS DU PANNEAU (VERSION BOOSTÉE) --- */
 .instruction-container {
-    /* 1. On le fait flotter par dessus */
+    /* POSITIONNEMENT (Inchangé) */
     position: absolute;
-    
-    /* 2. On le colle en bas du bloc (tu peux augmenter 0px si tu veux le monter) */
-    bottom: 130px; 
-    left: 0;
-    width: 100%;
-    
-    /* 3. On s'assure qu'il est devant l'image */
+    bottom: 120px; /* Légèrement ajusté */
+    left: 50%;
+    transform: translateX(-50%); /* On centre parfaitement */
+    width: auto; /* S'adapte au contenu */
     z-index: 10;
     
-    /* Mise en forme (centrage) */
+    /* MISE EN FORME (C'est là que ça change) */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 15px;
     
-    /* Dégradé pour que ce soit lisible sur le panneau sombre */
-    background: linear-gradient(to top, var(--dark-bg) 20%, transparent 100%);
-    padding-top: 50px;    
-    padding-bottom: 20px; 
-    
-    /* Typo */
+    /* STYLE CAPSULE LUMINEUSE */
+    background: rgba(92, 184, 133, 0.15); /* Fond vert transparent */
+    border: 1px solid rgba(92, 184, 133, 0.4); /* Bordure verte */
+    padding: 12px 25px; /* Espace autour du texte */
+    border-radius: 50px; /* Forme arrondie */
+    box-shadow: 0 0 30px rgba(92, 184, 133, 0.2); /* Lueur verte */
+    backdrop-filter: blur(5px); /* Petit effet flou derrière */
+
+    /* TYPOGRAPHIE */
     color: var(--primary);
-    font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-}
-.pointing-hand {
-    animation: bounce 2s infinite; /* Animation continue */
+    font-weight: 800; /* Très gras */
+    font-size: 1.1rem; /* Plus gros (était 1rem) */
+    text-transform: uppercase; /* MAJUSCULES */
+    letter-spacing: 1px; /* Espace entre les lettres */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
 }
 
+/* La flèche qui bouge */
+.pointing-hand {
+    animation: bounce 2s infinite;
+    /* On la grossit */
+    width: 32px;
+    height: 32px;
+    /* On épaissit le trait */
+    stroke-width: 2.5px;
+}
+
+/* Animation de rebond (Inchangée, mais rappel pour être sûr) */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
     40% {transform: translateY(-6px);}
     60% {transform: translateY(-3px);}
 }
 
+/* RESPONSIVE MOBILE */
 @media (max-width: 968px) {
     .instruction-container {
-        font-size: 0.95rem;
-        margin-bottom: 15px;
+        font-size: 0.9rem; /* Un peu plus petit sur mobile */
+        padding: 10px 20px;
+        bottom: 30px !important; /* Position mobile */
+        width: 90%; /* Prend presque toute la largeur */
+    }
+    .pointing-hand {
+        width: 24px; height: 24px; /* Flèche plus petite sur mobile */
     }
 }
-
 /* =========================================
    *** FIX MOBILE ISOLÉ (POSITION) ***
    Ceci écrase UNIQUEMENT le bottom du desktop sur les petits écrans
