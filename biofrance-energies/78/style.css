@@ -534,29 +534,27 @@ body {
     60% {transform: translateY(-3px);}
 }
 
-/* RESPONSIVE MOBILE */
+/* RESPONSIVE MOBILE (VERSION NETTOYÉE ET AFFINÉE) */
 @media (max-width: 968px) {
     .instruction-container {
-        font-size: 0.9rem; /* Un peu plus petit sur mobile */
-        padding: 10px 20px;
-        bottom: 30px !important; /* Position mobile */
-        width: 90%; /* Prend presque toute la largeur */
-    }
-    .pointing-hand {
-        width: 24px; height: 24px; /* Flèche plus petite sur mobile */
-    }
-}
-/* =========================================
-   *** FIX MOBILE ISOLÉ (POSITION) ***
-   Ceci écrase UNIQUEMENT le bottom du desktop sur les petits écrans
-   ========================================= */
-@media (max-width: 968px) {
-    .instruction-container {
-        /* On force la règle pour éviter de recouvrir les boutons */
-        bottom: 20px !important; 
+        /* 1. On réduit la taille pour que ce soit élégant */
+        font-size: 0.75rem; /* Texte plus fin (12px) */
+        padding: 8px 15px; /* Moins épais */
+        width: 85%; /* Ne touche pas les bords */
         
-        /* On s'assure qu'il est en position absolue (important si une règle globale le cassait) */
+        /* 2. Positionnement strict */
         position: absolute !important; 
+        bottom: 10px !important; /* On le colle un peu plus bas pour laisser de la place aux boutons */
+        
+        /* 3. Lecture */
+        white-space: normal; /* Autorise 2 lignes si l'écran est minuscule */
+        line-height: 1.3;
+    }
+
+    .pointing-hand {
+        width: 18px; 
+        height: 18px; /* Flèche proportionnée */
+        flex-shrink: 0;
     }
 }
 
