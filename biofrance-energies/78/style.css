@@ -1759,35 +1759,46 @@ body {
     }
 }
 /* =======================================================
-   🔴 CORRECTIF FINAL FORCE (DESIGN & POSITION MOBILE)
+   🔴 CORRECTIF FINAL ULTIME : PACK COMPACT + TEXTE 2 LIGNES
    ======================================================= */
 
-/* 1. On force la flèche à se mettre ENTRE les boutons et le texte */
 @media (max-width: 968px) {
+    /* 1. Le conteneur de la capsule (Flèche + Texte) */
     .instruction-container {
         position: relative !important;
         bottom: auto !important;
-        
-        /* C'EST ICI LE CHANGEMENT : -30px pour remonter vers le haut */
-        margin-top: -30px !important;   
-        
-        margin-bottom: 20px !important;
+        margin-top: -30px !important; /* Hauteur ajustée (le -30px de tout à l'heure) */
+        margin-bottom: 10px !important; /* Un peu d'espace en dessous */
         left: auto !important;
         transform: none !important;
-        width: 100% !important;
+        width: 90% !important; /* Largeur confortable */
+        margin-left: auto !important;
+        margin-right: auto !important;
+        
         display: flex !important;
+        /* C'EST NOUVEAU : On empile la flèche au-dessus du texte */
+        flex-direction: column; 
+        align-items: center !important;
         justify-content: center !important;
+        padding: 12px !important; /* Un peu plus de hauteur */
+        gap: 5px; /* Petit espace entre la flèche et le texte */
     }
-}
 
-/* 2. On rend le bloc "Votre étude" joli (Effet Verre) */
-.simulator-placeholder {
-    border-style: solid !important; /* Adieu les pointillés */
-    border-width: 1px !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    background: rgba(255, 255, 255, 0.07) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px !important;
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    /* 2. Le texte lui-même (C'EST ICI LE CHANGEMENT POUR LES 2 LIGNES) */
+    .instruction-container span {
+        white-space: normal !important; /* AUTORISE le retour à la ligne */
+        text-align: center !important;  /* CENTRE le texte */
+        font-size: 0.85rem !important;  /* Taille de police adaptée */
+        line-height: 1.3; /* Espace entre les deux lignes */
+    }
+    
+    /* 3. Le Bloc Info en dessous ("Votre étude inclut...") */
+    .mobile-only {
+        display: block !important;
+        width: 90%; 
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px !important; 
+        margin-bottom: 40px; 
+    }
 }
