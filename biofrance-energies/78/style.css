@@ -1317,25 +1317,32 @@ body {
 }
 
 /* Le Gros Bouton Final */
+/* Le gros bouton final (Mise à jour avec GLOW) */
 .primary-btn-large {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 18px 40px; /* Plus gros que les autres */
+    padding: 18px 40px; 
     font-size: 1.1rem;
     font-weight: 700;
-    border-radius: 50px; /* Bien arrondi */
+    border-radius: 50px; 
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(92, 184, 133, 0.4); /* Grosse ombre verte */
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* C'est ICI que ça change : Double ombre pour l'effet Néon/Glow */
+    box-shadow: 0 0 20px rgba(92, 184, 133, 0.4), 
+                0 0 60px rgba(92, 184, 133, 0.2);
+    
+    /* Animation un peu plus "élastique" */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .primary-btn-large:hover {
     transform: translateY(-5px) scale(1.05);
     background: #489c6e;
-    box-shadow: 0 20px 40px rgba(92, 184, 133, 0.6);
+    /* Au survol, on intensifie encore la lumière */
+    box-shadow: 0 0 30px rgba(92, 184, 133, 0.6),
+                0 0 80px rgba(92, 184, 133, 0.4);
 }
-
 .final-guarantee {
     margin-top: 25px;
     font-size: 0.85rem;
