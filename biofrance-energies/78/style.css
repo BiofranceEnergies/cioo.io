@@ -1759,7 +1759,7 @@ body {
     }
 }
 /* =======================================================
-   🔴 MOBILE FINAL : FLÈCHE À GAUCHE (PLUS FIN)
+   🔴 MOBILE FINAL : FLÈCHE GAUCHE + TEXTE CENTRÉ + AIR
    ======================================================= */
 
 @media (max-width: 968px) {
@@ -1769,9 +1769,10 @@ body {
         position: relative !important;
         bottom: auto !important;
         
-        /* Placement vertical */
         margin-top: -30px !important;   
-        margin-bottom: 25px !important;
+        
+        /* C'EST ICI : On passe de 25px à 50px pour donner de l'air */
+        margin-bottom: 50px !important;
         
         left: auto !important;
         transform: none !important;
@@ -1779,30 +1780,29 @@ body {
         margin-left: auto !important;
         margin-right: auto !important;
         
-        /* C'EST ICI LE CHANGEMENT : Tout sur une ligne */
         display: flex !important;
-        flex-direction: row !important; /* Flèche à gauche, Texte à droite */
-        align-items: center !important; /* Centré verticalement */
+        flex-direction: row !important; 
+        align-items: center !important; 
         justify-content: center !important;
         
-        padding: 10px 20px !important; /* Un peu plus compact */
-        gap: 15px; /* Espace entre la flèche et le texte */
+        padding: 10px 20px !important;
+        gap: 15px; 
     }
 
     /* Le Texte */
     .instruction-container span {
         white-space: normal !important;
-        text-align: center !important; /* Texte aligné à gauche pour la lecture */
-        font-size: 0.8rem !important; /* Taille fine et élégante */
+        text-align: center !important;
+        font-size: 0.8rem !important;
         line-height: 1.2;
-        max-width: none !important; /* On enlève la limite de largeur */
+        max-width: none !important;
     }
     
-    /* La flèche (on s'assure qu'elle ne s'écrase pas) */
+    /* La flèche */
     .pointing-hand {
         width: 20px;
         height: 20px;
-        flex-shrink: 0; /* Empêche la flèche de réduire */
+        flex-shrink: 0;
     }
     
     /* Le Bloc Info en dessous */
