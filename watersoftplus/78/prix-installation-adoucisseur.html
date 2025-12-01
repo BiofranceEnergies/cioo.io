@@ -99,30 +99,67 @@
         </div>
 
         <div id="step-2" style="display: none;">
-            <div class="model-box">
-                <div class="result-header">✅ Analyse terminée</div>
-                <p class="model-subtitle">Modèle recommandé :</p>
-                <h3 class="model-name" id="model-name-display">NOVAQUA 15L</h3>
-                <div class="model-tags">
-                    <span>TVA 10% Pose Incluse</span> • <span>Garantie 10 ans</span>
-                </div>
-            </div>
-
-            <div class="lead-form">
-                <p class="lead-text">Recevoir mon devis par SMS :</p>
-                <form id="final-form">
-                    <div class="sim-row">
-                        <input type="tel" class="sim-input" placeholder="Votre n° mobile" required>
-                        <button type="submit" class="btn-primary icon-only">OK</button>
-                    </div>
-                </form>
-                <div class="trust-mini" style="text-align:center;">Un expert vous répond sous 2h.</div>
-            </div>
-            
-            <div class="restart-link" onclick="restartSim()">Modifier mes choix</div>
+    
+    <div class="result-header-saas">
+        <div class="check-icon-saas">✔</div>
+        <div class="result-title-group">
+            <span class="sub-label">Configuration optimale trouvée</span>
+            <h3 class="model-name-saas" id="model-name-display">NOVAQUA 15L</h3>
         </div>
-
     </div>
+
+    <div class="saas-card data-card">
+        <div class="data-row">
+            <div class="data-label">⚡ Énergie & Eau</div>
+            <div class="data-value" id="disp-elec">0 €</div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">🧼 Produits Ménagers</div>
+            <div class="data-value" id="disp-prod">0 €</div>
+        </div>
+        <div class="data-row">
+            <div class="data-label">🛡️ Protection Matériel</div>
+            <div class="data-value">80 €</div>
+        </div>
+        <div class="separator-line"></div>
+        <div class="data-row total-row">
+            <div class="data-label">GAIN ANNUEL ESTIMÉ</div>
+            <div class="data-value highlight-green" id="disp-total">0 € / an</div>
+        </div>
+    </div>
+
+    <div class="saas-card comfort-card">
+        <div class="comfort-item">
+            <span class="comfort-icon">✨</span>
+            <div class="comfort-text">
+                <strong>Peau & Cheveux Doux</strong>
+                <span>Fini les tiraillements et la sécheresse.</span>
+            </div>
+        </div>
+        <div class="comfort-item">
+            <span class="comfort-icon">⏳</span>
+            <div class="comfort-text">
+                <strong>Zéro Ménage</strong>
+                <span>Adieu la corvée de récurage du calcaire.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="lead-form mt-4">
+        <p class="lead-text">Recevoir mon étude détaillée par SMS :</p>
+        <form id="final-form">
+            <div class="sim-row">
+                <input type="tel" class="sim-input" placeholder="Votre n° mobile" required>
+                <button type="submit" class="btn-primary icon-only">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+        </form>
+        <div class="trust-mini" style="text-align:center;">Analysé par un expert sous 2h.</div>
+    </div>
+    
+    <div class="restart-link" onclick="restartSim()">Modifier mes paramètres</div>
+</div>
     
     <div class="trust-bottom">
         <span class="stars">★★★★★</span> 4.5/5 (500+ avis vérifiés)
