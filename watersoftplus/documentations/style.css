@@ -1,1 +1,169 @@
+/* ------------------------------
+   GLOBAL
+--------------------------------*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.page {
+    width: 210mm;
+    height: 297mm;
+    padding: 20mm;
+    box-sizing: border-box;
+    background: #ffffff;
+    position: relative;
+}
+
+/* ------------------------------
+   HEADER + TITRES
+--------------------------------*/
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0a1f34;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background: #0097da;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin: 10px 0;
+    line-height: 1.1;
+}
+
+.highlight {
+    background: linear-gradient(90deg, #00c6ff, #0094ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sub {
+    font-size: 18px;
+    color: #3a3f4d;
+    max-width: 390px;
+    margin-bottom: 35px;
+}
+
+/* ------------------------------
+   PRODUCT + SPLASH CSS
+--------------------------------*/
+.product-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+    height: 320px;
+}
+
+.product {
+    width: 260px;
+    position: relative;
+    z-index: 3;
+}
+
+/* SPLASH PURE CSS */
+.splash {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 120px;
+    z-index: 1;
+
+    background: radial-gradient(ellipse at center,
+        rgba(0,150,255,0.55) 0%,
+        rgba(0,150,255,0.35) 40%,
+        rgba(255,255,255,0) 70%
+    );
+
+    filter: blur(8px) saturate(140%);
+    opacity: 0.9;
+}
+
+.splash::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 80px;
+
+    background: radial-gradient(circle,
+        rgba(0,150,255,0.4) 0%,
+        rgba(0,150,255,0.2) 40%,
+        transparent 70%
+    );
+
+    filter: blur(18px);
+    opacity: 0.75;
+}
+
+.splash::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 60px;
+
+    background: radial-gradient(circle,
+        rgba(0,150,255,0.45) 0%,
+        transparent 70%
+    );
+    filter: blur(10px);
+    opacity: 0.65;
+}
+
+/* ------------------------------
+   AVANTAGES
+--------------------------------*/
+.advantages {
+    margin-top: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.adv {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0a0f1c;
+}
+
+.adv small {
+    font-size: 14px;
+    font-weight: 400;
+    color: #4a4f59;
+    display: block;
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+.footer {
+    position: absolute;
+    bottom: 25mm;
+    font-size: 14px;
+    color: #3a3f4d;
+    width: calc(100% - 40mm);
+}
 
