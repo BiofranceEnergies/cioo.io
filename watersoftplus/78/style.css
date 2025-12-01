@@ -459,3 +459,72 @@ body {
     .footer-list li { justify-content: center; }
     .cookie-card { left: 10px; right: 10px; bottom: 10px; width: auto; }
 }
+/* =========================================
+   STYLE RESULTATS "SAAS PREMIUM"
+   ========================================= */
+
+/* En-tête du Résultat */
+.result-header-saas {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.check-icon-saas {
+    width: 36px;
+    height: 36px;
+    background: #10b981; /* Vert Succès */
+    color: #020408;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    flex-shrink: 0;
+}
+
+.result-title-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-label {
+    font-size: 0.7rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.model-name-saas {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+/* Cartes "SaaS" (Conteneurs) */
+.saas-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: 0.3s;
+}
+
+.saas-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* BLOC 1 : Lignes de données (Chiffres) */
+.data-row {
+    display: flex;
