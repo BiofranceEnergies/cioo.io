@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Commerciale - WATERSOFT+</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           CONFIG IMPRESSION GLOBALE
+           ========================================= */
+        @page { size: A4; margin: 0; }
+        @media print { 
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            .page-break { break-after: always; page-break-after: always; }
+        }
+
+        /* =========================================
+           VARIABLES & BASE
+           ========================================= */
+        :root {
+            --primary: #06b6d4;       /* Cyan */
+            --dark-bg: #0a1128;       /* Bleu Nuit */
+            --tech-blue: #1c3b70;     /* Dégradé fond */
+            --text-white: #ffffff;
+            --text-gray: #cbd5e1;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--dark-bg);
+            margin: 0; padding: 0;
+        }
+
+        /* Conteneur Page A4 Standard */
+        .page-a4 {
+            width: 210mm; height: 296mm; position: relative;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
+            color: var(--text-white);
+            display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Grille de fond commune */
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: 0; pointer-events: none;
+        }
+
+        /* =========================================
+           STYLES DU RECTO
+           ========================================= */
+        .content-wrapper-recto {
+            position: relative; z-index: 10; padding: 40px;
+            flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; 
+        }
+
+        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; z-index: 30; }
+        .logo-text { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
+        .logo-accent { color: var(--primary); }
+        .tagline { font-size: 0.8rem; font-weight: 600; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 50px; }
+
+        .main-titles { position: relative; z-index: 30; margin-bottom: 20px; }
+        .badge { background: var(--primary); color: #0a1128; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
+        h1 { font-size: 3.5rem; line-height: 1; font-weight: 900; margin-bottom: 15px; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .highlight { color: var(--primary); }
+        .subtitle { font-size: 1.2rem; color: #e2e8f0; line-height: 1.5; max-width: 90%; }
+
+        .visual-container {
+            position: absolute; bottom: 80px; left: 0; width: 100%; height: 75%;    
+            z-index: 1; display: flex; justify-content: center; align-items: flex-end; pointer-events: none;
+        }
+        .main-product-img {
+            width: 100%; max-width: 800px; height: auto; max-height: 100%;
+            object-fit: contain; filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.3));
+        }
+
+        .bottom-gradient {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 400px;
+            background: linear-gradient(to top, rgba(10, 17, 40, 1) 10%, rgba(10, 17, 40, 0.6) 60%, transparent 100%);
+            z-index: 5; pointer-events: none;
+        }
+
+        .bento-row {
+            display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;
+            margin-top: auto; margin-bottom: 60px; position: relative; z-index: 50;
+        }
+        .bento-item { flex: 1; text-align: left; }
+        .bento-number { font-size: 3.5rem; font-weight: 900; color: #ffffff; line-height: 1; margin-bottom: 5px; letter-spacing: -1px; text-shadow: 0 5px 20px rgba(0,0,0,0.8); }
+        .bento-title { font-size: 1rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,1); }
+        .bento-desc { font-size: 0.85rem; color: #e2e8f0; line-height: 1.4; font-weight: 500; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,1); }
+
+        /* =========================================
+           STYLES DU VERSO
+           ========================================= */
+        .page-verso {
+            background: linear-gradient(to bottom, #0a1128 0%, #0f172a 100%);
+        }
+        .bg-overlay-verso {
+            background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+
+        .content-wrapper-verso {
+            position: relative; z-index: 10; padding: 40px;
+            flex-grow: 1; display: flex; flex-direction: column;
+        }
+
+        .section-header { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .badge-verso {
+            background: rgba(6, 182, 212, 0.1); color: var(--primary);
+            padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; 
+            text-transform: uppercase; display: inline-block; margin-bottom: 5px; border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+        h2 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; line-height: 1.1; }
+        .subtitle-verso { font-size: 0.95rem; color: var(--text-gray); max-width: 90%; opacity: 0.8; }
+        .text-white { color: white !important; }
+
+        .tech-block-container {
+            display: flex; gap: 20px; align-items: flex-start; margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px; border-radius: 12px;
+        }
+
+        .tech-visual-col { flex: 0 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .tech-icon-wrapper {
+            width: 60px; height: 60px; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
+            border: 1px solid var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.1); margin-bottom: 8px;
+        }
+        .tech-svg { width: 30px; height: 30px; color: var(--primary); }
+        .tech-visual-label { font-size: 0.65rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .tech-content-col { flex: 1; }
+        h3 { font-size: 1.1rem; color: var(--primary); font-weight: 700; margin-bottom: 3px; text-transform: uppercase; }
+        .tech-intro { font-size: 0.85rem; color: #94a3b8; font-style: italic; margin-bottom: 12px; border-left: 2px solid var(--primary); padding-left: 10px; }
+
+        .tech-list { list-style: none; padding: 0; }
+        .tech-list li { margin-bottom: 8px; position: relative; padding-left: 18px; }
+        .tech-list li::before { content: '✓'; position: absolute; left: 0; top: 0px; color: var(--primary); font-weight: 900; font-size: 0.9rem; }
+        .tech-list strong { display: block; font-size: 0.9rem; color: white; margin-bottom: 1px; }
+        .tech-list p { font-size: 0.8rem; color: var(--text-gray); line-height: 1.3; margin: 0; }
+
+        /* Footer Dark */
+        .footer-verso-strip {
+            margin-top: auto; background: rgba(0, 0, 0, 0.4); 
+            border: 1px solid rgba(6, 182, 212, 0.3); border-left: 4px solid var(--primary);
+            padding: 20px 30px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .footer-label { font-size: 0.7rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .footer-tags { display: flex; gap: 20px; }
+        .tag-item { font-size: 0.9rem; font-weight: 600; color: white; display: flex; align-items: center; gap: 6px; }
+        .check { color: var(--primary); font-weight: 900; }
+        .footer-right { text-align: right; line-height: 1; }
+        .footer-phone { font-size: 2rem; font-weight: 900; color: var(--primary); letter-spacing: -1px; margin-bottom: 5px; text-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+        .footer-web { font-size: 0.85rem; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-a4">
+        <div class="bg-overlay"></div>
+        <div class="content-wrapper-recto">
+            <div class="header-row">
+                <div class="logo-text">WATERSOFT<span class="logo-accent">+</span></div>
+                <div class="tagline">🛡️ Expert Yvelines (78)</div>
+            </div>
+            <div class="main-titles">
+                <div class="badge">NOUVELLE TECHNOLOGIE 2025</div>
+                <h1>L'eau douce avec <br>Le <span class="highlight">NOVAQUA</span>.</h1>
+                <p class="subtitle"><strong>Fini le calcaire.</strong> Protégez votre maison et votre famille avec la solution la plus fiable du marché.</p>
+            </div>
+            <div class="visual-container">
+                 <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/2a661056b79cfdefb220b649ba4d5ed68051b6b5/novaqua%204%20lourde.png" class="main-product-img" alt="Adoucisseur Novaqua Splash">
+            </div>
+            <div class="bottom-gradient"></div>
+            <div class="bento-row">
+                <div class="bento-item">
+                    <div class="bento-number">-40%</div>
+                    <div class="bento-title">Produits ménagers</div>
+                    <div class="bento-desc">Réduction drastique des dépenses en détergents et savons.</div>
+                </div>
+                <div class="bento-item">
+                    <div class="bento-number">-18%</div>
+                    <div class="bento-title">Économies d'énergie</div>
+                    <div class="bento-desc">1mm de tartre = 10% de surconsommation électrique.</div>
+                </div>
+                <div class="bento-item">
+                    <div class="bento-number">x3</div>
+                    <div class="bento-title">Durée de vie</div>
+                    <div class="bento-desc">Vos appareils électroménagers durent 3 fois plus longtemps.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-a4 page-verso">
+        <div class="bg-overlay bg-overlay-verso"></div>
+        <div class="content-wrapper-verso">
+            
+            <div class="section-header">
+                <div class="badge-verso">INGÉNIERIE & PERFORMANCE</div>
+                <h2>Sous le capot du <span class="highlight">NOVAQUA</span>.</h2>
+                <p class="subtitle-verso">Une conception sans compromis pour 20 ans de tranquillité.</p>
+            </div>
+
+            <div class="tech-block-container">
+                <div class="tech-visual-col">
+                    <div class="tech-icon-wrapper">
+                        <svg class="tech-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="8" y="8" width="8" height="8" rx="2" stroke-width="1.5"/></svg>
+                    </div>
+                    <div class="tech-visual-label">Sécurité & SXT</div>
+                </div>
+                <div class="tech-content-col">
+                    <h3>PROTECTION & PILOTAGE : <span class="text-white">Filtre + Vanne FLECK</span></h3>
+                    <p class="tech-intro">Le duo gagnant : Filtration amont et pilotage Pentair intelligent.</p>
+                    <ul class="tech-list">
+                        <li><strong>Pré-Filtre 25µ (Bouclier Anti-Sable)</strong><p>Installé en amont. Bloque les boues et sédiments pour protéger la mécanique interne.</p></li>
+                        
+                        <li><strong>Gestion Volumétrique (Économiseur)</strong><p>Compte chaque litre. Ne régénère que si nécessaire. Jusqu'à 40% d'économies.</p></li>
+                        <li><strong>Mécanique "Increvable" (Piston Laiton)</strong><p>Pas d'électronique fragile. Corps insensible à la corrosion. Conçue pour 20 ans.</p></li>
+                        <li><strong>By-Pass de Série (Mode Jardin)</strong><p>Isole l'appareil en un geste pour arroser ou remplir une piscine à l'eau brute.</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tech-block-container">
+                <div class="tech-visual-col">
+                    <div class="tech-icon-wrapper">
+                        <svg class="tech-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="7" r="1" fill="currentColor"/><circle cx="12" cy="17" r="1" fill="currentColor"/><circle cx="7" cy="12" r="1" fill="currentColor"/><circle cx="17" cy="12" r="1" fill="currentColor"/></svg>
+                    </div>
+                    <div class="tech-visual-label">Monosphère</div>
+                </div>
+                <div class="tech-content-col">
+                    <h3>LE MOTEUR : <span class="text-white">Résine Haute Performance</span></h3>
+                    <p class="tech-intro">Performance pure. Plus de débit, zéro perte de pression.</p>
+                    <ul class="tech-list">
+                        <li><strong>Calibrage au Micron (Capture Max)</strong><p>Billes 100% identiques. Capture 20% de calcaire en plus pour le même volume.</p></li>
+                        <li><strong>Technologie "High Flow"</strong><p>Structure uniforme qui laisse passer l'eau sans freins (douche puissante).</p></li>
+                        <li><strong>Qualité Sanitaire Agréée</strong><p>Certifiée alimentaire sans solvant. Une eau pure, sans goût ni odeur.</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tech-block-container">
+                <div class="tech-visual-col">
+                    <div class="tech-icon-wrapper">
+                        <svg class="tech-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+                    </div>
+                    <div class="tech-visual-label">HDPE Blindé</div>
+                </div>
+                <div class="tech-content-col">
+                    <h3>LE STOCKAGE : <span class="text-white">Bac HDPE Alimentaire</span></h3>
+                    <p class="tech-intro">Sécurité totale. Un matériau noble, imputrescible et résistant.</p>
+                    <ul class="tech-list">
+                        <li><strong>Polyéthylène Haute Densité (HDPE)</strong><p>Matériau ultra-résistant aux chocs. Ne casse pas, ne se fend pas.</p></li>
+                        <li><strong>100% Qualité Alimentaire</strong><p>Aucun transfert de plastique. Garantit la pureté de la saumure.</p></li>
+                        <li><strong>Conception Monobloc Étanche</strong><p>Moulé d'une seule pièce. Risque de fuite inexistant.</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-verso-strip">
+                <div class="footer-left">
+                    <div class="footer-label">INCLUS DANS L'INSTALLATION :</div>
+                    <div class="footer-tags">
+                        <div class="tag-item"><span class="check">✔</span> Pose Complète</div>
+                        <div class="tag-item"><span class="check">✔</span> Mise en Service</div>
+                        <div class="tag-item"><span class="check">✔</span> Garantie 10 ans*</div>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-phone">06 48 89 34 80</div>
+                    <div class="footer-web">www.watersoftplus.fr</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
