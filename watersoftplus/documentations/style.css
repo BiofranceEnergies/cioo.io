@@ -1,29 +1,34 @@
 /* ------------------------------
-   GLOBAL 
+   BACKGROUND + LAYOUT
 --------------------------------*/
 body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    background: white;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    background: #f3f4f6; /* Fond gris léger autour */
+    -webkit-font-smoothing: antialiased;
 }
 
-.page {
-    width: 210mm;
-    height: 297mm;
-    padding: 20mm;
+.wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.container {
+    width: 1200px;
+    background: white;
+    padding: 40px 60px;
     box-sizing: border-box;
-    background: #ffffff;
-    position: relative;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
 /* ------------------------------
    HEADER + TITRES
 --------------------------------*/
 .logo {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 800;
     color: #0a1f34;
     margin-bottom: 10px;
@@ -37,13 +42,13 @@ body {
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 46px;
     font-weight: 800;
-    margin: 10px 0;
+    margin: 10px 0 10px;
     line-height: 1.1;
 }
 
@@ -54,10 +59,11 @@ h1 {
 }
 
 .sub {
-    font-size: 18px;
-    color: #3a3f4d;
-    max-width: 390px;
-    margin-bottom: 35px;
+    font-size: 20px;
+    color: #444b59;
+    max-width: 520px;
+    line-height: 1.45;
+    margin-bottom: 40px;
 }
 
 /* ------------------------------
@@ -66,104 +72,106 @@ h1 {
 .product-wrapper {
     width: 100%;
     text-align: center;
-    margin-top: 10px;
     position: relative;
-    height: 320px;
+    height: 360px;
+    margin-bottom: 50px;
 }
 
 .product {
-    width: 260px;
+    width: 280px;
     position: relative;
     z-index: 3;
 }
 
-/* SPLASH PURE CSS */
+/* SPLASH CSS DYNAMIQUE */
 .splash {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 320px;
-    height: 120px;
+    width: 380px;
+    height: 160px;
     z-index: 1;
 
     background: radial-gradient(ellipse at center,
         rgba(0,150,255,0.55) 0%,
-        rgba(0,150,255,0.35) 40%,
-        rgba(255,255,255,0) 70%
+        rgba(0,150,255,0.30) 40%,
+        rgba(255,255,255,0) 75%
     );
 
-    filter: blur(8px) saturate(140%);
-    opacity: 0.9;
+    filter: blur(14px) saturate(150%);
+    opacity: 0.95;
 }
 
+/* HALO + NUAGES D’EAU */
 .splash::before {
     content: "";
     position: absolute;
-    top: -20px;
+    top: -35px;
     left: 50%;
     transform: translateX(-50%);
-    width: 280px;
-    height: 80px;
+    width: 340px;
+    height: 110px;
 
     background: radial-gradient(circle,
-        rgba(0,150,255,0.4) 0%,
-        rgba(0,150,255,0.2) 40%,
-        transparent 70%
+        rgba(0,150,255,0.35) 0%,
+        rgba(0,150,255,0.15) 35%,
+        transparent 80%
     );
 
-    filter: blur(18px);
+    filter: blur(25px);
     opacity: 0.75;
 }
 
+/* Lumière sous l'adoucisseur */
 .splash::after {
     content: "";
     position: absolute;
-    top: -30px;
+    top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 60px;
+    width: 220px;
+    height: 70px;
 
     background: radial-gradient(circle,
-        rgba(0,150,255,0.45) 0%,
-        transparent 70%
+        rgba(0,150,255,0.4) 0%,
+        transparent 75%
     );
-    filter: blur(10px);
-    opacity: 0.65;
+    filter: blur(18px);
+    opacity: 0.75;
 }
 
 /* ------------------------------
    AVANTAGES
 --------------------------------*/
 .advantages {
-    margin-top: 35px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-bottom: 60px;
 }
 
 .adv {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     color: #0a0f1c;
+    text-align: center;
 }
 
 .adv small {
-    font-size: 14px;
+    margin-top: 4px;
+    display: block;
+    font-size: 15px;
     font-weight: 400;
     color: #4a4f59;
-    display: block;
 }
 
 /* ------------------------------
    FOOTER
 --------------------------------*/
 .footer {
-    position: absolute;
-    bottom: 25mm;
-    font-size: 14px;
+    font-size: 16px;
     color: #3a3f4d;
-    width: calc(100% - 40mm);
+    margin-top: 40px;
+    text-align: left;
 }
-
