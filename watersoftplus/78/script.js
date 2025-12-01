@@ -92,9 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const dispProd = document.getElementById('disp-prod');
             const dispTotal = document.getElementById('disp-total');
 
-            if(dispElec) dispElec.textContent = "+ " + ecoEnergie + " €";
-            if(dispProd) dispProd.textContent = "+ " + ecoProduits + " €";
-            if(dispTotal) dispTotal.textContent = estimatedSavings + " € / an";
+            // On affiche les montants bruts, sans le "+ " qui faisait "facture"
+if(dispElec) dispElec.textContent = ecoEnergie + " €";
+if(dispProd) dispProd.textContent = ecoProduits + " €";
+if(dispTotal) dispTotal.textContent = estimatedSavings + " € / an";
 
             // D. Affichage du résultat
             if(step1) step1.style.display = 'none';
