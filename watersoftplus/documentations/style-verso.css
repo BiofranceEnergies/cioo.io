@@ -1,13 +1,13 @@
 /* =========================================
-   CONFIG IMPRESSION & A4 (VERSO)
+   CONFIG IMPRESSION & A4 (VERSO) - MODE COMPACT
    ========================================= */
 @page { size: A4; margin: 0; }
 @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 
 :root {
-    --primary: #06b6d4;       /* Cyan */
-    --dark-bg: #0a1128;       /* Bleu Nuit */
-    --tech-blue: #1c3b70;     /* Dégradé fond */
+    --primary: #06b6d4;
+    --dark-bg: #0a1128;
+    --tech-blue: #1c3b70;
     --text-white: #ffffff;
     --text-gray: #cbd5e1;
     --font-main: 'Inter', sans-serif;
@@ -23,79 +23,82 @@ body {
 
 .page-a4-verso {
     width: 210mm; height: 296mm; position: relative;
-    /* Fond légèrement plus sombre que le recto pour le coté "Technique" */
     background: linear-gradient(to bottom, #0a1128 0%, #0f172a 100%);
     color: var(--text-white);
     display: flex; flex-direction: column;
 }
 
-/* Grille "Plan d'architecte" */
 .bg-overlay-verso {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
                       linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-    background-size: 25px 25px; /* Grille plus serrée */
+    background-size: 25px 25px;
     z-index: 0; pointer-events: none;
 }
 
+/* MARGES RÉDUITES ICI */
 .content-wrapper-verso {
-    position: relative; z-index: 10; padding: 60px 40px;
+    position: relative; z-index: 10; 
+    padding: 40px; /* Réduit de 60 à 40px */
     flex-grow: 1; display: flex; flex-direction: column;
 }
 
-/* --- HEADER DE SECTION --- */
-.section-header { margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+/* --- HEADER DE SECTION (COMPACTÉ) --- */
+.section-header { 
+    margin-bottom: 25px; /* Réduit de 50 à 25px */
+    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    padding-bottom: 15px; 
+}
 .badge-verso {
     background: rgba(6, 182, 212, 0.1); color: var(--primary);
     padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; 
-    text-transform: uppercase; display: inline-block; margin-bottom: 15px;
+    text-transform: uppercase; display: inline-block; margin-bottom: 5px;
     border: 1px solid rgba(6, 182, 212, 0.2);
 }
-h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
+h2 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; line-height: 1.1; }
 .highlight { color: var(--primary); }
-.subtitle-verso { font-size: 1rem; color: var(--text-gray); max-width: 80%; opacity: 0.8; }
+.subtitle-verso { font-size: 0.95rem; color: var(--text-gray); max-width: 90%; opacity: 0.8; }
 .text-white { color: white !important; }
 
-/* --- BLOC TECHNIQUE --- */
+/* --- BLOC TECHNIQUE (COMPACTÉ) --- */
 .tech-block-container {
     display: flex;
-    gap: 30px;
+    gap: 20px; /* Réduit le gap */
     align-items: flex-start;
-    margin-bottom: 30px;
-    background: rgba(255, 255, 255, 0.02); /* Fond très léger */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Bordure subtile */
-    padding: 30px;
-    border-radius: 16px;
-    transition: 0.3s;
+    margin-bottom: 15px; /* Réduit l'espace entre les blocs */
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px; /* Réduit le padding interne (30 -> 20) */
+    border-radius: 12px;
 }
 
-/* Colonne Visuelle (Icône) */
+/* Colonne Visuelle (Icône plus petite) */
 .tech-visual-col {
-    flex: 0 0 120px;
+    flex: 0 0 90px; /* Colonne moins large */
     display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .tech-icon-wrapper {
-    width: 80px; height: 80px;
+    width: 60px; height: 60px; /* Icône réduite (80 -> 60) */
     background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
     border: 1px solid var(--primary);
     border-radius: 50%;
     display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
-    margin-bottom: 10px;
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+    margin-bottom: 8px;
 }
-.tech-svg { width: 40px; height: 40px; color: var(--primary); }
-.tech-visual-label { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+.tech-svg { width: 30px; height: 30px; color: var(--primary); }
+.tech-visual-label { font-size: 0.65rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
 
 /* Colonne Contenu */
 .tech-content-col { flex: 1; }
-h3 { font-size: 1.2rem; color: var(--primary); font-weight: 700; margin-bottom: 5px; text-transform: uppercase; }
-.tech-intro { font-size: 0.9rem; color: #94a3b8; font-style: italic; margin-bottom: 20px; border-left: 2px solid var(--primary); padding-left: 10px; }
+h3 { font-size: 1.1rem; color: var(--primary); font-weight: 700; margin-bottom: 3px; text-transform: uppercase; }
+.tech-intro { font-size: 0.85rem; color: #94a3b8; font-style: italic; margin-bottom: 12px; border-left: 2px solid var(--primary); padding-left: 10px; }
 
 .tech-list { list-style: none; padding: 0; }
-.tech-list li { margin-bottom: 15px; position: relative; padding-left: 20px; }
-/* Petite coche devant chaque point */
+/* Liste plus serrée */
+.tech-list li { margin-bottom: 8px; position: relative; padding-left: 18px; }
 .tech-list li::before {
-    content: '✓'; position: absolute; left: 0; top: 0px; color: var(--primary); font-weight: 900;
+    content: '✓'; position: absolute; left: 0; top: 0px; color: var(--primary); font-weight: 900; font-size: 0.9rem;
 }
-.tech-list strong { display: block; font-size: 0.95rem; color: white; margin-bottom: 3px; }
-.tech-list p { font-size: 0.85rem; color: var(--text-gray); line-height: 1.4; margin: 0; }
+.tech-list strong { display: block; font-size: 0.9rem; color: white; margin-bottom: 1px; }
+.tech-list p { font-size: 0.8rem; color: var(--text-gray); line-height: 1.3; margin: 0; }
