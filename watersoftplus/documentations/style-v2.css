@@ -130,7 +130,7 @@ h1 {
     left: 50%;
     transform: translateX(-50%);
     /* GESTION DU ZOOM ICI : 140% = Déborde sur les côtés */
-    width: 140%; 
+    width: 90%; 
     max-width: none;
     height: auto;
     filter: drop-shadow(0 0 50px rgba(0,0,0,0.8)); 
