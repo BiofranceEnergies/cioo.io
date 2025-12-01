@@ -27,7 +27,7 @@ body {
     width: 210mm; height: 296mm; position: relative;
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
     color: var(--text-white);
-    display: flex; flex-direction: column; justify-content: space-between;
+    display: flex; flex-direction: column;
 }
 
 .bg-overlay {
@@ -40,108 +40,81 @@ body {
 }
 
 /* =========================================
-   CONTENU & LAYOUT
+   CONTENU
    ========================================= */
 .content-wrapper {
-    position: relative; z-index: 10; padding: 40px 40px 0 40px;
+    position: relative; z-index: 10; padding: 40px;
     flex-grow: 1; display: flex; flex-direction: column;
-    height: 100%; /* Occupe toute la hauteur */
+    /* Important : permet de pousser le contenu vers le bas */
+    justify-content: flex-start; 
 }
 
 /* HEADER */
 .header-row {
     display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 20px; z-index: 30; position: relative;
+    margin-bottom: 30px; z-index: 30;
 }
-.logo-text {
-    font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
+.logo-text { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
 .logo-accent { color: var(--primary); }
-.tagline {
-    font-size: 0.8rem; font-weight: 600; background: rgba(0,0,0,0.4); 
-    padding: 5px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-}
+.tagline { font-size: 0.8rem; font-weight: 600; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 50px; }
 
 /* TITRES */
-.main-titles { 
-    text-align: left; margin-bottom: 0; position: relative; z-index: 30;
-}
+.main-titles { position: relative; z-index: 30; margin-bottom: 20px; }
 .badge {
-    background: var(--primary); color: #0a1128;
-    padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 800;
-    text-transform: uppercase; display: inline-block; margin-bottom: 15px;
-    box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+    background: var(--primary); color: #0a1128; padding: 6px 12px; border-radius: 4px; 
+    font-size: 0.8rem; font-weight: 800; text-transform: uppercase; display: inline-block; margin-bottom: 15px;
 }
-h1 {
-    font-size: 3.5rem; line-height: 1; font-weight: 900; margin-bottom: 15px;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-}
+h1 { font-size: 3.5rem; line-height: 1; font-weight: 900; margin-bottom: 15px; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
 .highlight { color: var(--primary); }
-.subtitle {
-    font-size: 1.2rem; color: #e2e8f0; line-height: 1.5; max-width: 90%;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.9); font-weight: 500;
-}
+.subtitle { font-size: 1.2rem; color: #e2e8f0; line-height: 1.5; max-width: 90%; }
 
-/* --- LE NOUVEAU SYSTÈME D'IMAGES (LE HACK) --- */
-
-/* Conteneur générique pour les layers */
-.visual-layer {
+/* --- GESTION DE L'IMAGE UNIQUE --- */
+.visual-container {
     position: absolute;
-    left: 0; width: 100%;
-    overflow: visible; pointer-events: none;
+    bottom: 0;      /* Collé tout en bas */
+    left: 0;
+    width: 100%;    /* Prend toute la largeur */
+    height: 75%;    /* Occupe les 3/4 bas de la page */
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Aligne l'image en bas du bloc */
+    pointer-events: none;
 }
 
-/* LAYER 1 : LE FOND SPLASH GÉANT */
-.layer-splash-bg {
-    bottom: 0; height: 60%; z-index: 1; /* Tout au fond */
-    opacity: 0.7; /* Un peu transparent pour ne pas être trop agressif */
-    mix-blend-mode: screen; /* Incrustation lumineuse de l'eau */
-}
-.img-splash-huge {
-    position: absolute;
-    bottom: -100px; /* On le descend pour cacher l'appareil Godzilla */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200%; /* ENORME largeur pour le splash */
-    max-width: none;
-    filter: blur(2px); /* Léger flou pour l'effet d'arrière-plan */
-}
-
-/* LAYER 2 : L'APPAREIL NET DU DESSUS */
-.layer-product-fg {
-    bottom: 100px; /* Position verticale de l'appareil */
-    height: auto; z-index: 10; /* Devant le splash géant */
-}
-.img-product-small {
-    position: relative;
-    display: block;
-    margin: 0 auto;
-    width: 60%; /* TAILLE MAÎTRISÉE DE L'APPAREIL ICI */
+.main-product-img {
+    width: 100%;      /* Largeur max pour le SPLASH */
+    max-width: 800px; /* Limite pour ne pas être absurde sur grand écran */
     height: auto;
-    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
+    max-height: 100%;
+    object-fit: contain; /* Garde les proportions */
+    /* Petite ombre pour détacher l'image du fond si besoin */
+    filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.3));
 }
 
-/* --------------------------- */
-
-/* ARGUMENTS (Repositionnés tout en bas) */
+/* --- ARGUMENTS (Flottent par dessus le bas de l'image) --- */
 .features-row {
-    display: flex; justify-content: space-between; gap: 15px;
-    margin-top: auto; /* Pousse tout en bas */
-    margin-bottom: 30px; /* Marge du bas de page A4 */
-    position: relative;
-    z-index: 40; /* Au dessus de tout */
+    margin-top: auto; /* Pousse ce bloc vers le bas du content-wrapper */
+    margin-bottom: 60px; /* Marge du bas de page */
+    display: flex; gap: 15px;
+    position: relative; z-index: 40; /* Au dessus de l'image */
 }
 .feature-box {
-    background: rgba(10, 17, 40, 0.9); /* Plus opaque sans le footer */
+    background: rgba(10, 17, 40, 0.90); /* Assez opaque pour être lisible sur le splash */
     border: 1px solid rgba(6, 182, 212, 0.4);
-    backdrop-filter: blur(10px); padding: 15px 20px; border-radius: 12px;
-    flex: 1; display: flex; align-items: center; gap: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    padding: 15px 10px; border-radius: 12px;
+    flex: 1; display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
-.f-icon { font-size: 1.6rem; }
+.f-icon { font-size: 1.4rem; }
 .f-text { display: flex; flex-direction: column; }
-.f-big { font-size: 1.4rem; font-weight: 900; color: white; line-height: 1; margin-bottom: 3px; }
-.f-label { font-size: 0.7rem; color: var(--primary); text-transform: uppercase; font-weight: 700; }
+.f-big { font-size: 1.2rem; font-weight: 900; color: white; line-height: 1; margin-bottom: 3px; }
+.f-label { font-size: 0.6rem; color: var(--primary); text-transform: uppercase; font-weight: 700; }
 
-/* FOOTER SUPPRIMÉ */
+/* DÉGRADÉ DE FINITION EN BAS */
+.bottom-gradient {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
+    background: linear-gradient(to top, #0a1128 10%, transparent 100%);
+    z-index: 5; pointer-events: none;
+}
