@@ -45,7 +45,6 @@ body {
 .content-wrapper {
     position: relative; z-index: 10; padding: 40px;
     flex-grow: 1; display: flex; flex-direction: column;
-    /* Important : permet de pousser le contenu vers le bas */
     justify-content: flex-start; 
 }
 
@@ -68,53 +67,79 @@ h1 { font-size: 3.5rem; line-height: 1; font-weight: 900; margin-bottom: 15px; t
 .highlight { color: var(--primary); }
 .subtitle { font-size: 1.2rem; color: #e2e8f0; line-height: 1.5; max-width: 90%; }
 
-/* --- GESTION DE L'IMAGE UNIQUE --- */
+/* --- IMAGE UNIQUE OPTIMISÉE --- */
 .visual-container {
     position: absolute;
-    bottom: 0;      /* Collé tout en bas */
+    bottom: 0;      
     left: 0;
-    width: 100%;    /* Prend toute la largeur */
-    height: 75%;    /* Occupe les 3/4 bas de la page */
+    width: 100%;    
+    height: 75%;    
     z-index: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* Aligne l'image en bas du bloc */
+    align-items: flex-end; 
     pointer-events: none;
 }
 
 .main-product-img {
-    width: 100%;      /* Largeur max pour le SPLASH */
-    max-width: 800px; /* Limite pour ne pas être absurde sur grand écran */
+    width: 100%;      
+    max-width: 800px; 
     height: auto;
     max-height: 100%;
-    object-fit: contain; /* Garde les proportions */
-    /* Petite ombre pour détacher l'image du fond si besoin */
+    object-fit: contain; 
     filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.3));
 }
 
-/* --- ARGUMENTS (Flottent par dessus le bas de l'image) --- */
-.features-row {
-    margin-top: auto; /* Pousse ce bloc vers le bas du content-wrapper */
-    margin-bottom: 60px; /* Marge du bas de page */
-    display: flex; gap: 15px;
-    position: relative; z-index: 40; /* Au dessus de l'image */
+/* --- NOUVEAU STYLE BENTO FLOTTANT (V5) --- */
+.bento-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Aligne le haut des textes */
+    gap: 30px;
+    margin-top: auto; /* Pousse vers le bas */
+    margin-bottom: 50px; /* Remonte un peu du bord bas */
+    position: relative;
+    z-index: 50; /* Très important : au dessus de l'image */
 }
-.feature-box {
-    background: rgba(10, 17, 40, 0.90); /* Assez opaque pour être lisible sur le splash */
-    border: 1px solid rgba(6, 182, 212, 0.4);
-    backdrop-filter: blur(5px);
-    padding: 15px 10px; border-radius: 12px;
-    flex: 1; display: flex; align-items: center; gap: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+
+.bento-item {
+    flex: 1;
+    text-align: left; /* Alignement comme sur ta capture */
+    /* Pas de fond (transparent) pour laisser voir l'eau */
 }
-.f-icon { font-size: 1.4rem; }
-.f-text { display: flex; flex-direction: column; }
-.f-big { font-size: 1.2rem; font-weight: 900; color: white; line-height: 1; margin-bottom: 3px; }
-.f-label { font-size: 0.6rem; color: var(--primary); text-transform: uppercase; font-weight: 700; }
+
+.bento-number {
+    font-size: 3.5rem; /* C'est gros ! */
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+    /* Ombre portée pour que ça soit lisible sur l'eau */
+    text-shadow: 0 5px 20px rgba(0,0,0,0.6);
+}
+
+.bento-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary); /* Cyan pour le titre */
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.bento-desc {
+    font-size: 0.85rem;
+    color: #e2e8f0; /* Blanc cassé */
+    line-height: 1.4;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9); /* Ombre forte pour lisibilité max */
+}
 
 /* DÉGRADÉ DE FINITION EN BAS */
 .bottom-gradient {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 100px;
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 150px;
     background: linear-gradient(to top, #0a1128 10%, transparent 100%);
     z-index: 5; pointer-events: none;
 }
