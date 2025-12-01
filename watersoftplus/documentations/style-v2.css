@@ -126,14 +126,19 @@ h1 {
 
 .product-img-huge {
     position: absolute;
-    bottom: 80px; /* Collé au footer bleu */
+    /* On le descend un peu pour laisser respirer le titre */
+    bottom: 50px; 
     left: 50%;
     transform: translateX(-50%);
-    /* GESTION DU ZOOM ICI : 140% = Déborde sur les côtés */
-    width: 90%; 
-    max-width: none;
-    height: auto;
-    filter: drop-shadow(0 0 50px rgba(0,0,0,0.8)); 
+    
+    /* TAILLE MAÎTRISÉE */
+    width: 65%;  /* <--- Essaye 65% ou 70% max */
+    max-height: 60vh; /* Sécurité : empêche l'image de dépasser 60% de la hauteur de page */
+    
+    /* On garde l'ombre pour qu'il se détache du fond */
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); 
+    
+    z-index: 1;
 }
 
 /* 4. ARGUMENTS CLÉS (Layer 20) */
