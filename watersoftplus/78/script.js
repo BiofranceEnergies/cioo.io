@@ -54,9 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     
-    if(btnCalculate) {
+   if(btnCalculate) {
         btnCalculate.addEventListener('click', function() {
-            // Calcul Modèle
+            
+            // 1. DÉFINITION DU MODÈLE (Logique inchangée)
             let priceHT = 0;
             if (selectedPeople <= 2) {
                 selectedModelName = "NOVAQUA 10L"; priceHT = BASE_PRICES_HT["10L"];
@@ -66,22 +67,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedModelName = "NOVAQUA 15L"; priceHT = BASE_PRICES_HT["15L"];
             }
 
-            // Calculs
+            // 2. CALCULS PRÉCIS (Logique inchangée)
             finalPriceTTC = Math.round(priceHT * (1 + TVA_RATE));
-            const ecoEnergie = Math.round(selectedPeople * 800 * 0.27 * 0.1);
-            const ecoProduits = Math.round(selectedPeople * 220 * 0.40);
-            const ecoMateriel = 80;
+            
+            // Hypothèse : 800kWh/pers * 0.27€ * 10% gain
+            const ecoEnergie = Math.round(selectedPeople * 800 * 0.27 * 0.1); 
+            // Hypothèse : 220€/pers * 40% gain
+            const ecoProduits = Math.round(selectedPeople * 220 * 0.40);      
+            const ecoMateriel = 80; // Forfait fixe durée de vie
+            
             estimatedSavings = ecoEnergie + ecoProduits + ecoMateriel;
 
-            // Affichage
+            // 3. INJECTION DANS LE DESIGN SAAS (C'est la nouveauté !)
+            
+            // A. Le Nom du Modèle
             const displayEl = document.getElementById('model-name-display');
             if(displayEl) displayEl.textContent = selectedModelName;
-            
+
+            // B. Les Chiffres Détaillés (Rationnel)
+            const dispElec = document.getElementById('disp-elec');
+            const dispProd = document.getElementById('disp-prod');
+            const dispTotal = document.getElementById('disp-total');
+
+            if(dispElec) dispElec.textContent = "+ " + ecoEnergie + " €";
+            if(dispProd) dispProd.textContent = "+ " + ecoProduits + " €";
+            // On met le total en gros
+            if(dispTotal) dispTotal.textContent = estimatedSavings + " € / an";
+
+            // 4. TRANSITION D'ÉCRAN
             if(step1) step1.style.display = 'none';
             if(step2) step2.style.display = 'block';
         });
     }
-
     // --- 4. ENVOI DU FORMULAIRE ---
     const finalForm = document.getElementById('final-form');
     
