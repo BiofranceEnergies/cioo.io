@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CONFIGURATION ---
+    // --- 1. CONFIGURATION & DONNÉES ---
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHYz40LwNcC0lYeymn_93CLK-LBfObF6reZPSjWLH4QDlzUb4dnkfpIkg1lWCTtTwL/exec";
     
     // ID & LABEL GOOGLE ADS
@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "20L": 2600
     };
 
-    // Variables
-    let selectedPeople = 4;
+    // Variables globales
+    let selectedPeople = 4; // Valeur par défaut (3 à 4 pers)
     let selectedModelName = "NOVAQUA 15L";
     let finalPriceTTC = 0;
     let estimatedSavings = 0;
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('modal')) event.target.classList.remove('show');
     };
 
-    // --- 3. GESTION DU SIMULATEUR ---
+    // --- 3. GESTION DU SIMULATEUR (CHOIX PERSONNES) ---
     const peopleBtns = document.querySelectorAll('.option-btn');
     peopleBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -50,14 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- 4. CŒUR DU CALCULATEUR (LE CLICK "CALCULER") ---
     const btnCalculate = document.querySelector('#btn-calculate');
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     
-   if(btnCalculate) {
+    if(btnCalculate) {
         btnCalculate.addEventListener('click', function() {
             
-            // 1. DÉFINITION DU MODÈLE (Logique inchangée)
+            // A. Calcul du Modèle adapté
             let priceHT = 0;
             if (selectedPeople <= 2) {
                 selectedModelName = "NOVAQUA 10L"; priceHT = BASE_PRICES_HT["10L"];
@@ -67,39 +68,63 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedModelName = "NOVAQUA 15L"; priceHT = BASE_PRICES_HT["15L"];
             }
 
-            // 2. CALCULS PRÉCIS (Logique inchangée)
+            // B. Calculs Financiers
             finalPriceTTC = Math.round(priceHT * (1 + TVA_RATE));
-            
-            // Hypothèse : 800kWh/pers * 0.27€ * 10% gain
             const ecoEnergie = Math.round(selectedPeople * 800 * 0.27 * 0.1); 
-            // Hypothèse : 220€/pers * 40% gain
             const ecoProduits = Math.round(selectedPeople * 220 * 0.40);      
-            const ecoMateriel = 80; // Forfait fixe durée de vie
-            
+            const ecoMateriel = 80; 
             estimatedSavings = ecoEnergie + ecoProduits + ecoMateriel;
 
-            // 3. INJECTION DANS LE DESIGN SAAS (C'est la nouveauté !)
-            
-            // A. Le Nom du Modèle
+            // --- SIGNAL GOOGLE ADS 1 : SIMULATION ---
+            if(typeof gtag === 'function') {
+                gtag('event', 'simulation_click', {
+                    'event_category': 'Engagement',
+                    'event_label': 'Calcul : ' + selectedModelName
+                });
+                console.log("Signal envoyé : Simulation");
+            }
+
+            // C. Injection des données dans le HTML (Design SaaS)
             const displayEl = document.getElementById('model-name-display');
             if(displayEl) displayEl.textContent = selectedModelName;
 
-            // B. Les Chiffres Détaillés (Rationnel)
             const dispElec = document.getElementById('disp-elec');
             const dispProd = document.getElementById('disp-prod');
             const dispTotal = document.getElementById('disp-total');
 
             if(dispElec) dispElec.textContent = "+ " + ecoEnergie + " €";
             if(dispProd) dispProd.textContent = "+ " + ecoProduits + " €";
-            // On met le total en gros
             if(dispTotal) dispTotal.textContent = estimatedSavings + " € / an";
 
-            // 4. TRANSITION D'ÉCRAN
+            // D. Affichage du résultat
             if(step1) step1.style.display = 'none';
             if(step2) step2.style.display = 'block';
+            
+            step2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
     }
-    // --- 4. ENVOI DU FORMULAIRE ---
+
+    // --- 5. GESTION DU CTA BAS DE PAGE (NOUVEAU) ---
+    const btnBottom = document.getElementById('btn-bottom-cta');
+    if(btnBottom) {
+        btnBottom.addEventListener('click', function(e) {
+            e.preventDefault(); // Empêche le saut brusque
+
+            // --- SIGNAL GOOGLE ADS 2 : CTA BAS ---
+            if(typeof gtag === 'function') {
+                gtag('event', 'bottom_cta_click', {
+                    'event_category': 'Engagement',
+                    'event_label': 'Click CTA Bas de page'
+                });
+                console.log("Signal envoyé : CTA Bas");
+            }
+
+            // Remonter en haut en douceur
+            window.scrollTo({top:0, behavior:'smooth'});
+        });
+    }
+
+    // --- 6. ENVOI DU FORMULAIRE FINAL ---
     const finalForm = document.getElementById('final-form');
     
     if(finalForm) {
@@ -126,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if(submitBtn) {
-                submitBtn.innerHTML = "Envoi...";
+                submitBtn.innerHTML = "...";
                 submitBtn.disabled = true;
             }
 
@@ -146,10 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: formData, mode: "no-cors" })
             .then(() => {
                 if(submitBtn) {
-                    submitBtn.innerHTML = "✔ Reçu";
+                    submitBtn.innerHTML = "✔";
                     submitBtn.style.backgroundColor = "#22c55e";
                 }
                 
+                // --- SIGNAL GOOGLE ADS 3 : CONVERSION FINALE ---
                 if(typeof gtag === 'function') {
                     gtag('event', 'conversion', {
                         'send_to': ADS_ID + '/' + ADS_CONVERSION_LABEL,
@@ -170,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Fonction restart
     window.restartSim = function() {
         const s1 = document.getElementById('step-1');
         const s2 = document.getElementById('step-2');
@@ -177,18 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if(s1) s1.style.display = 'block';
     };
 
-
-    // --- 5. BANNIÈRE COOKIES (FORCE BRUTE & DEBUG) ---
+    // --- 7. BANNIÈRE COOKIES ---
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
-    // 1. Check HTML existence
-    if (!cookieBanner) {
-        console.log("Note: Bannière cookie introuvable dans le HTML");
-    }
-
-    // 2. Fonctions Cookies
     function getCookie(name) {
         var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         if (match) return match[2];
@@ -202,13 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    // 3. Logique Affichage
     if (getCookie('watersoft_consent') === null) {
         setTimeout(function() {
             if(cookieBanner) {
-                // Force display
                 cookieBanner.style.display = 'block';
-                // Force animation class
                 setTimeout(() => {
                     cookieBanner.classList.add('show-banner');
                 }, 50);
@@ -216,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
-    // 4. Actions Boutons
     if(btnAccept) {
         btnAccept.addEventListener('click', function() {
             setCookie('watersoft_consent', 'accepted', 365);
@@ -237,4 +253,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // FIN DU DOCUMENT READY
+}); // FIN DU SCRIPT
