@@ -1,177 +1,173 @@
-/* ------------------------------
-   BACKGROUND + LAYOUT
---------------------------------*/
-body {
+/* =========================================
+   CONFIG IMPRESSION & A4
+   ========================================= */
+@page {
+    size: A4;
     margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-    background: #f3f4f6; /* Fond gris léger autour */
-    -webkit-font-smoothing: antialiased;
 }
 
-.wrapper {
+@media print {
+    body { 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact; 
+    }
+}
+
+/* =========================================
+   VARIABLES & BASE
+   ========================================= */
+:root {
+    --primary: #06b6d4;       /* CYAN ÉLECTRIQUE */
+    --dark-bg: #0a1128;       /* Bleu Nuit Profond */
+    --tech-blue: #1c3b70;     /* Dégradé fond */
+    --text-white: #ffffff;
+    --text-gray: #cbd5e1;
+    --font-main: 'Inter', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--dark-bg);
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    overflow: hidden; /* Empêche de créer une 2ème page vide */
+}
+
+/* Conteneur principal A4 */
+.page-a4 {
+    width: 210mm;
+    height: 296mm; /* Petite marge de sécurité pour l'impression */
+    position: relative;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
+    color: var(--text-white);
     display: flex;
-    justify-content: center;
-    padding: 40px 0;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.container {
-    width: 1200px;
-    background: white;
-    padding: 40px 60px;
-    box-sizing: border-box;
-    border-radius: 18px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+/* Grille de fond */
+.bg-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    z-index: 0;
+    pointer-events: none;
 }
 
-/* ------------------------------
-   HEADER + TITRES
---------------------------------*/
-.logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: #0a1f34;
-    margin-bottom: 10px;
+/* =========================================
+   CONTENU & LAYOUT
+   ========================================= */
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    padding: 40px 40px 0 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.tag {
-    display: inline-block;
-    background: #0097da;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 20px;
+/* HEADER */
+.header-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+}
+.logo-text {
+    font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;
+}
+.logo-accent { color: var(--primary); }
+.tagline {
+    font-size: 0.8rem; color: var(--text-gray); font-weight: 600;
+    background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* TITRES */
+.main-titles { text-align: left; margin-bottom: 30px; }
+
+.badge {
+    background: rgba(6, 182, 212, 0.15); color: var(--primary);
+    padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; display: inline-block;
+    margin-bottom: 15px; border: 1px solid rgba(6, 182, 212, 0.3);
 }
 
 h1 {
-    font-size: 46px;
-    font-weight: 800;
-    margin: 10px 0 10px;
-    line-height: 1.1;
+    font-size: 3.2rem; line-height: 1.1; font-weight: 800; margin-bottom: 15px;
 }
+.highlight { color: var(--primary); }
 
-.highlight {
-    background: linear-gradient(90deg, #00c6ff, #0094ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.subtitle {
+    font-size: 1.1rem; color: var(--text-gray); line-height: 1.5; max-width: 80%;
 }
+.subtitle strong { color: white; }
 
-.sub {
-    font-size: 20px;
-    color: #444b59;
-    max-width: 520px;
-    line-height: 1.45;
-    margin-bottom: 40px;
-}
-
-/* ------------------------------
-   PRODUCT + SPLASH CSS
---------------------------------*/
-.product-wrapper {
-    width: 100%;
-    text-align: center;
+/* VISUEL CENTRAL */
+.visual-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    height: 360px;
-    margin-bottom: 50px;
+    margin: 20px 0;
+}
+.product-img {
+    height: 400px; /* Hauteur fixe pour garantir la mise en page */
+    width: auto;
+    filter: drop-shadow(0 30px 50px rgba(0,0,0,0.6));
+    z-index: 2;
 }
 
-.product {
-    width: 280px;
+/* ARGUMENTS CLÉS */
+.features-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: -40px;
     position: relative;
     z-index: 3;
+    margin-bottom: 30px;
 }
-
-/* SPLASH CSS DYNAMIQUE */
-.splash {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 380px;
-    height: 160px;
-    z-index: 1;
-
-    background: radial-gradient(ellipse at center,
-        rgba(0,150,255,0.55) 0%,
-        rgba(0,150,255,0.30) 40%,
-        rgba(255,255,255,0) 75%
-    );
-
-    filter: blur(14px) saturate(150%);
-    opacity: 0.95;
+.feature-box {
+    background: rgba(16, 23, 45, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 12px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
+.f-icon { font-size: 1.5rem; }
+.f-text { display: flex; flex-direction: column; }
+.f-big { font-size: 1.2rem; font-weight: 800; color: white; line-height: 1; margin-bottom: 3px; }
+.f-label { font-size: 0.65rem; color: var(--primary); text-transform: uppercase; font-weight: 700; }
 
-/* HALO + NUAGES D’EAU */
-.splash::before {
-    content: "";
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 340px;
-    height: 110px;
-
-    background: radial-gradient(circle,
-        rgba(0,150,255,0.35) 0%,
-        rgba(0,150,255,0.15) 35%,
-        transparent 80%
-    );
-
-    filter: blur(25px);
-    opacity: 0.75;
+/* FOOTER DE CONTACT */
+.footer-strip {
+    background: #06b6d4;
+    color: #0a1128;
+    padding: 25px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-/* Lumière sous l'adoucisseur */
-.splash::after {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 220px;
-    height: 70px;
-
-    background: radial-gradient(circle,
-        rgba(0,150,255,0.4) 0%,
-        transparent 75%
-    );
-    filter: blur(18px);
-    opacity: 0.75;
+.contact-cta h3 {
+    font-size: 1.2rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px;
 }
+.contact-cta p { font-size: 0.9rem; font-weight: 600; opacity: 0.9; }
 
-/* ------------------------------
-   AVANTAGES
---------------------------------*/
-.advantages {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
-    margin-bottom: 60px;
+.contact-info { text-align: right; }
+.phone-display {
+    font-size: 1.8rem; font-weight: 900; display: block; line-height: 1;
 }
-
-.adv {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0a0f1c;
-    text-align: center;
-}
-
-.adv small {
-    margin-top: 4px;
-    display: block;
-    font-size: 15px;
-    font-weight: 400;
-    color: #4a4f59;
-}
-
-/* ------------------------------
-   FOOTER
---------------------------------*/
-.footer {
-    font-size: 16px;
-    color: #3a3f4d;
-    margin-top: 40px;
-    text-align: left;
-}
+.web-display { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; margin-top: 5px; display: block;}
