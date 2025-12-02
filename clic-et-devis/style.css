@@ -928,3 +928,12 @@ h1 {
     color: var(--text-gray);
     font-weight: 600;
 }
+
+/* Assure que le lien remplit parfaitement le cadre du téléphone */
+.phone-frame a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none; /* Enlève tout soulignement éventuel */
+    cursor: pointer; /* Affiche la main au survol */
+}
