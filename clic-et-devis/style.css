@@ -1015,3 +1015,11 @@ h1 {
     .cookie-actions { width: 100%; justify-content: flex-end; }
     .cookie-banner.show { bottom: 10px; }
 }
+// Ajoute juste ça avec tes autres gestionnaires d'événements
+const linkCookies = document.getElementById('open-legal-cookies');
+if(linkCookies) {
+    linkCookies.onclick = function(e) {
+        e.preventDefault();
+        modal.style.display = "block";
+    }
+}
