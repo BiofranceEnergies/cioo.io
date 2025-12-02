@@ -49,3 +49,22 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+// --- FORMATAGE AUTOMATIQUE TÉLÉPHONE (00 00 00 00 00) ---
+const phoneInput = document.querySelector('input[name="telephone"]');
+
+if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+        // 1. On nettoie : on garde uniquement les chiffres (supprime lettres, espaces, tirets...)
+        let value = e.target.value.replace(/\D/g, '');
+
+        // 2. On limite à 10 chiffres (format français standard)
+        if (value.length > 10) value = value.substring(0, 10);
+
+        // 3. On ajoute un espace tous les 2 chiffres
+        // La regex cherche 2 chiffres suivis d'un autre chiffre, et insère un espace
+        const formattedValue = value.replace(/(\d{2})(?=\d)/g, '$1 ');
+
+        // 4. On met à jour le champ
+        e.target.value = formattedValue;
+    });
+}
