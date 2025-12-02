@@ -85,17 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // C. Injection des données dans le HTML (Design SaaS)
+          // C. Injection des données dans le HTML (Design SaaS)
+            
+            // 1. On met à jour le nom du modèle (Novaqua 15L, etc.)
             const displayEl = document.getElementById('model-name-display');
             if(displayEl) displayEl.textContent = selectedModelName;
 
-            const dispElec = document.getElementById('disp-elec');
-            const dispProd = document.getElementById('disp-prod');
+            // 2. On met à jour UNIQUEMENT le Total (les lignes intermédiaires sont maintenant du texte fixe)
             const dispTotal = document.getElementById('disp-total');
 
-            // On affiche les montants bruts, sans le "+ " qui faisait "facture"
-if(dispElec) dispElec.textContent = ecoEnergie + " €";
-if(dispProd) dispProd.textContent = ecoProduits + " €";
-if(dispTotal) dispTotal.textContent = estimatedSavings + " € / an";
+            if(dispTotal) {
+                // Le calcul dynamique (ex: 518 €) est injecté ici
+                dispTotal.textContent = estimatedSavings + " € / an"; 
+            }
 
             // D. Affichage du résultat
             if(step1) step1.style.display = 'none';
