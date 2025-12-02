@@ -188,9 +188,7 @@ h1 {
 
 .phone-frame {
     width: 300px;
-    height: auto;
     border-radius: 40px;
-    overflow: hidden;
     border: 8px solid #1a1a1a;
     background: #000;
     transform: rotateY(-15deg) rotateX(5deg);
@@ -198,6 +196,8 @@ h1 {
     position: relative;
     z-index: 2;
     transition: transform 0.5s ease;
+    height: 600px;       /* 1. On force une hauteur fixe standard */
+    overflow: hidden;    /* 2. (Déjà présent normalement) Coupe ce qui dépasse */
 }
 
 .phone-frame:hover {
