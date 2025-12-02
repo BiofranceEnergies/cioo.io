@@ -111,3 +111,14 @@ if (rejectBtn) {
         // On ne charge RIEN.
     });
 }
+
+// Ouvre la modale Mentions Légales depuis la bannière cookies
+const linkCookies = document.getElementById('open-legal-cookies');
+if(linkCookies) {
+    linkCookies.onclick = function(e) {
+        e.preventDefault();
+        // On vérifie que la modale existe avant de l'ouvrir
+        const modal = document.getElementById("legal-modal");
+        if(modal) modal.style.display = "block";
+    }
+}
