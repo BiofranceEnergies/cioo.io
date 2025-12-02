@@ -68,3 +68,46 @@ if (phoneInput) {
         e.target.value = formattedValue;
     });
 }
+// --- GESTION COOKIES RGPD ---
+const cookieBanner = document.getElementById('cookie-banner');
+const acceptBtn = document.getElementById('cookie-accept');
+const rejectBtn = document.getElementById('cookie-reject');
+
+// Fonction pour lancer les scripts de tracking (Google Ads, etc.)
+function loadTrackingScripts() {
+    console.log("Cookies acceptés : Chargement de Google Analytics / Ads...");
+    
+    // ICI : C'est là que tu colleras ton code Google (gtag.js) plus tard.
+    // Pour l'instant, c'est vide, donc compliant à 100%.
+}
+
+// Vérifier si l'utilisateur a déjà choisi
+const consent = localStorage.getItem('cookieConsent');
+
+if (!consent) {
+    // Si pas de choix, on affiche la bannière après 1 seconde (effet doux)
+    setTimeout(() => {
+        if(cookieBanner) cookieBanner.classList.add('show');
+    }, 1000);
+} else if (consent === 'accepted') {
+    // S'il a déjà accepté avant, on charge les scripts direct
+    loadTrackingScripts();
+}
+
+// Clic sur "Accepter"
+if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted'); // On mémorise
+        cookieBanner.classList.remove('show'); // On cache
+        loadTrackingScripts(); // On lance le tracking
+    });
+}
+
+// Clic sur "Continuer sans"
+if (rejectBtn) {
+    rejectBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'rejected'); // On mémorise le refus
+        cookieBanner.classList.remove('show'); // On cache
+        // On ne charge RIEN.
+    });
+}
