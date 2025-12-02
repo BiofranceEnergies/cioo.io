@@ -937,3 +937,81 @@ h1 {
     text-decoration: none; /* Enlève tout soulignement éventuel */
     cursor: pointer; /* Affiche la main au survol */
 }
+
+/* --- BANNIÈRE COOKIES --- */
+.cookie-banner {
+    position: fixed;
+    bottom: -200px; /* Caché par défaut en bas */
+    left: 20px;
+    right: 20px;
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    background: rgba(10, 17, 40, 0.95); /* Fond sombre semi-transparent */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    z-index: 9999; /* Toujours au-dessus */
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 0.9rem;
+}
+
+.cookie-banner.show {
+    bottom: 20px; /* Remonte pour s'afficher */
+}
+
+.cookie-content p {
+    color: var(--text-gray);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.cookie-content strong {
+    color: var(--text-white);
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Petits boutons spécifiques */
+.btn-primary-small {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-primary-small:hover { background: #e65c00; }
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #ccc;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+.btn-ghost:hover { border-color: white; color: white; }
+
+/* Mobile : On empile pour que ce soit lisible */
+@media (max-width: 768px) {
+    .cookie-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        left: 10px; right: 10px; bottom: -300px;
+    }
+    .cookie-actions { width: 100%; justify-content: flex-end; }
+    .cookie-banner.show { bottom: 10px; }
+}
