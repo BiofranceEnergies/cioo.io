@@ -938,88 +938,120 @@ h1 {
     cursor: pointer; /* Affiche la main au survol */
 }
 
-/* --- BANNIÈRE COOKIES --- */
+/* --- BANNIÈRE COOKIES ULTRA-PREMIUM --- */
 .cookie-banner {
     position: fixed;
-    bottom: -200px; /* Caché par défaut en bas */
-    left: 20px;
-    right: 20px;
-    max-width: 900px;
-    margin: 0 auto 20px auto;
-    background: rgba(10, 17, 40, 0.95); /* Fond sombre semi-transparent */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 12px;
+    bottom: -300px; /* Caché par défaut */
+    left: 50%;
+    transform: translateX(-50%); /* Centré parfaitement */
+    width: 90%;
+    max-width: 600px; /* Plus compact, plus élégant */
+    
+    /* L'EFFET WAOUH (Glassmorphism) */
+    background: rgba(5, 9, 20, 0.7); /* Fond très sombre mais transparent */
+    backdrop-filter: blur(20px);      /* Le flou d'arrière-plan puissant */
+    -webkit-backdrop-filter: blur(20px); /* Pour Safari */
+    
+    /* BORDURE SUBTILE & CLASSE */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Lumière venant du haut */
+    
+    border-radius: 20px;
+    padding: 24px;
+    
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     gap: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    z-index: 9999; /* Toujours au-dessus */
-    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    font-size: 0.9rem;
+    
+    /* OMBRE PROFONDE */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(0, 0, 0, 0.2); /* Contour noir fin */
+        
+    z-index: 9999;
+    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); /* Animation fluide type Apple */
 }
 
 .cookie-banner.show {
-    bottom: 20px; /* Remonte pour s'afficher */
+    bottom: 30px; /* Remonte avec élégance */
 }
 
 .cookie-content p {
-    color: var(--text-gray);
+    color: #a0aec0; /* Gris tech */
+    font-size: 0.95rem;
+    line-height: 1.6;
     margin: 0;
-    line-height: 1.4;
+    font-weight: 500;
 }
 
 .cookie-content strong {
-    color: var(--text-white);
+    color: #fff;
+    font-weight: 600;
 }
 
 .cookie-actions {
     display: flex;
-    gap: 10px;
-    flex-shrink: 0;
+    justify-content: flex-end; /* Boutons à droite */
+    gap: 12px;
 }
 
-/* Petits boutons spécifiques */
-.btn-primary-small {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-.btn-primary-small:hover { background: #e65c00; }
-
+/* BOUTON REJETER (Style Fantôme) */
 .btn-ghost {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #ccc;
-    padding: 10px 15px;
-    border-radius: 6px;
+    color: #94a3b8;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 0.85rem;
+    transition: all 0.2s;
 }
-.btn-ghost:hover { border-color: white; color: white; }
 
-/* Mobile : On empile pour que ce soit lisible */
-@media (max-width: 768px) {
+.btn-ghost:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* BOUTON ACCEPTER (Style Néon/Actif) */
+.btn-primary-small {
+    background: var(--primary); /* Ton Orange */
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    
+    /* Petite lueur orange sous le bouton */
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+}
+
+.btn-primary-small:hover {
+    background: #ff7b1a;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+}
+
+/* MOBILE : On garde le design flottant mais adapté */
+@media (max-width: 600px) {
     .cookie-banner {
-        flex-direction: column;
-        align-items: flex-start;
-        left: 10px; right: 10px; bottom: -300px;
+        width: 95%;
+        padding: 20px;
+        bottom: -400px;
     }
-    .cookie-actions { width: 100%; justify-content: flex-end; }
-    .cookie-banner.show { bottom: 10px; }
-}
-// Ajoute juste ça avec tes autres gestionnaires d'événements
-const linkCookies = document.getElementById('open-legal-cookies');
-if(linkCookies) {
-    linkCookies.onclick = function(e) {
-        e.preventDefault();
-        modal.style.display = "block";
+    .cookie-banner.show {
+        bottom: 15px;
+    }
+    .cookie-actions {
+        width: 100%;
+    }
+    .btn-ghost, .btn-primary-small {
+        flex: 1; /* Les boutons prennent toute la largeur */
+        text-align: center;
+        padding: 14px 0;
     }
 }
+
