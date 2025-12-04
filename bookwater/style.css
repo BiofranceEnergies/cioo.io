@@ -145,3 +145,85 @@ body {
     .app-wrapper { height: 100vh; padding: 15px; }
     .big-stat .value { font-size: 3.5rem; }
 }
+/* --- CALCULATEUR INTEGRÉ --- */
+.calculator-wrapper {
+    margin-top: auto; /* Pousse le bloc vers le bas */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.calc-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.inputs-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.input-group input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Effet Néon quand on clique dans la case */
+.input-group input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.result-box {
+    text-align: center;
+    background: rgba(244, 63, 94, 0.1); /* Fond rouge très léger */
+    border: 1px solid rgba(244, 63, 94, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.result-label {
+    font-size: 0.9rem;
+    color: var(--accent-red);
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.result-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+}
+
+.result-value .unit {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
