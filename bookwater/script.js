@@ -1,53 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. ANIMATION DES BARRES (Graphique de droite) ---
-    // On attend un tout petit peu que la page s'affiche
+    // --- 1. NAVIGATION ENTRE LES SLIDES ---
+    window.goToSlide = function(slideNumber) {
+        // Cacher toutes les slides
+        document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+        
+        // Montrer la bonne
+        const target = document.getElementById(`slide-${slideNumber}`);
+        if(target) target.classList.add('active');
+
+        // Mettre à jour le badge en haut
+        const badge = document.getElementById('step-indicator');
+        if(slideNumber === 1) badge.textContent = "Slide 1 / Le Constat";
+        if(slideNumber === 2) badge.textContent = "Slide 2 / Le Diagnostic";
+    };
+
+    // --- 2. ANIMATION DES BARRES (Graphique Slide 1) ---
     setTimeout(() => {
         const bars = document.querySelectorAll('.bar-fill');
         bars.forEach(bar => {
             const targetWidth = bar.style.width; 
-            // On met la largeur à 0 pour commencer
             bar.style.width = '0'; 
-            
-            // On lance l'animation vers la vraie largeur
             setTimeout(() => {
                 bar.style.width = targetWidth;
             }, 50);
         });
     }, 200);
 
-    // --- 2. CALCULATEUR INTERACTIF ---
+    // --- 3. CALCULATEUR (Slide 1) ---
     const thInput = document.getElementById('th-input');
     const volInput = document.getElementById('vol-input');
     const resultDisplay = document.getElementById('rock-result');
 
     function calculateRock() {
-        // Récupérer les valeurs (0 si vide)
+        if(!thInput || !volInput) return;
+        
         const th = parseFloat(thInput.value) || 0;
         const vol = parseFloat(volInput.value) || 0;
-
-        // Formule : (TH x 10g) x Volume = Grammes total
-        // On divise par 1000 pour avoir des Kilos
         const totalKg = (th * 10 * vol) / 1000;
 
-        // Affichage (si entier on affiche entier, sinon 1 chiffre après virgule)
         resultDisplay.textContent = Number.isInteger(totalKg) ? totalKg : totalKg.toFixed(1);
     }
 
-    // On écoute les changements sur les inputs
     if(thInput && volInput) {
         thInput.addEventListener('input', calculateRock);
         volInput.addEventListener('input', calculateRock);
-        // Calcul initial
         calculateRock();
     }
-
-    // --- 3. BOUTON SUIVANT ---
-    const btnNext = document.querySelector('.nav-btn.primary');
-    if(btnNext) {
-        btnNext.addEventListener('click', () => {
-            alert("La Slide 2 (Les Dégâts) sera prête dans la prochaine étape !");
-        });
-    }
-
 });
