@@ -3,149 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Interactif - Slide 2 : La Dureté de l'Eau</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- RESET ET STYLE GLOBAL --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; background: #000; }
-
-        /* --- FOND FLOUTÉ (Ambiance) --- */
-        .background-blur {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            /* Image d'ambiance (robinet entartré) */
-            background-image: url('https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            filter: blur(30px) brightness(0.5); /* Très flou et sombre pour faire ressortir le contenu */
-            z-index: 1;
-        }
-
-        /* --- CONTENEUR PRINCIPAL (NET) --- */
-        .main-container {
-            position: relative; z-index: 2;
-            width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; padding: 20px;
-        }
-
-        /* --- LE TITRE ET LE FAIT MARQUANT --- */
-        .header-content { text-align: center; margin-bottom: 40px; }
-        .header-title { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px; }
-        
-        /* Le "FAIT CHOC" en très gros */
-        .shock-fact {
-            font-size: 3rem; font-weight: 900; color: #ffeb3b; /* Jaune pour attirer l'œil */
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            line-height: 1.1;
-        }
-        .shock-fact span { display: block; font-size: 1.5rem; font-weight: 700; color: white; margin-top: 5px;}
-
-        /* --- LA SECTION DU CONTENU (Image + Échelle) --- */
-        .content-split {
-            display: flex; width: 100%; max-width: 1100px;
-            background: rgba(255,255,255,0.1); /* Fond léger transparent */
-            border-radius: 20px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px); /* Effet verre dépoli moderne */
-        }
-
-        /* Partie Gauche : L'Image du Problème */
-        .problem-image {
-            flex: 1; /* Prend 50% de la place */
-            min-height: 400px;
-            background-image: url('https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?q=80&w=600&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            position: relative;
-        }
-        .problem-label {
-             position: absolute; bottom: 20px; left: 20px;
-             background: rgba(0,0,0,0.7); padding: 10px 20px;
-             font-weight: bold; border-radius: 5px;
-        }
-
-        /* Partie Droite : L'Échelle Visuelle */
-        .scale-section {
-            flex: 1; /* Prend les autres 50% */
-            padding: 40px;
-            display: flex; flex-direction: column; justify-content: center;
-        }
-        .scale-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 30px; text-align: center; }
-
-        /* La Jauge Horizontale */
-        .scale-bar-container {
-            display: flex; height: 60px; width: 100%;
-            border-radius: 30px; overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-        }
-        /* Les segments de couleur (les largeurs sont proportionnelles aux plages de TH) */
-        .segment { display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 0.9rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); position: relative;}
-        .seg-1 { width: 17.5%; background: #4facfe; } /* Douce (0-7) */
-        .seg-2 { width: 12.5%; background: #00f2fe; color: #333; text-shadow: none;} /* Moyenne (7-12) */
-        .seg-3 { width: 15%; background: #fddb92; color: #333; text-shadow: none;} /* Dure (12-18) */
-        .seg-4 { width: 30%; background: #ff6b6b; } /* Très Dure (18-30) */
-        .seg-5 { width: 25%; background: #d70016; } /* Excessive (>30) */
-
-        /* Les étiquettes sous la barre */
-        .scale-labels {
-            display: flex; width: 100%; margin-top: 15px; text-align: center; font-size: 0.8rem; color: #ddd;
-        }
-        .label-box { padding: 0 5px; }
-
-        /* --- RESPONSIVE (Mobile) --- */
-        @media (max-width: 768px) {
-            .shock-fact { font-size: 2rem; }
-            .content-split { flex-direction: column; } /* Empile l'image et l'échelle */
-            .problem-image { min-height: 250px; }
-            .scale-section { padding: 20px; }
-            .scale-bar-container { height: 40px; }
-            .segment { font-size: 0.7rem; }
-             .scale-labels { font-size: 0.7rem; }
-        }
-    </style>
+    <title>Analyse Dureté - Expert Eau</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="background-blur"></div>
-
-    <div class="main-container">
+    <div class="app-wrapper">
         
-        <div class="header-content">
-            <div class="header-title">L'Exigence d'une eau de qualité</div>
-            <h1 class="shock-fact">
-                1° TH = 10g DE CALCAIRE
-                <span>PAR M³ D'EAU CONSOMMÉE</span>
-            </h1>
-        </div>
+        <header class="app-header">
+            <div class="brand">WATER<span class="text-blue">TECH</span></div>
+            <div class="step-badge">Analyse technique n°1</div>
+        </header>
 
-        <div class="content-split">
-            <div class="problem-image">
-                <div class="problem-label">Le résultat chez vous...</div>
-            </div>
+        <main class="dashboard-container">
             
-            <div class="scale-section">
-                <h2 class="scale-title">ÉCHELLE OFFICIELLE DE LA DURETÉ (TH)</h2>
+            <section class="card impact-card">
+                <div class="card-label">Le constat mathématique</div>
                 
-                <div class="scale-bar-container">
-                    <div class="segment seg-1">0-7°</div>
-                    <div class="segment seg-2">7-12°</div>
-                    <div class="segment seg-3">12-18°</div>
-                    <div class="segment seg-4">18-30°</div>
-                    <div class="segment seg-5">>30°</div>
+                <div class="big-stat">
+                    <span class="value">10g</span>
+                    <span class="unit">de calcaire</span>
                 </div>
                 
-                <div class="scale-labels">
-                    <div class="label-box" style="width: 17.5%">DOUCE</div>
-                    <div class="label-box" style="width: 12.5%">MOYENNE</div>
-                    <div class="label-box" style="width: 15%">DURE</div>
-                    <div class="label-box" style="width: 30%">TRÈS DURE</div>
-                    <div class="label-box" style="width: 25%">EXCESSIVE</div>
+                <h1 class="main-statement">
+                    Pour chaque degré (1° TH)<br>
+                    par m³ d'eau consommé.
+                </h1>
+
+                <p class="description">
+                    Votre fournisseur d'eau vous livre une eau potable, pas une eau technique. 
+                    Le calcaire est un minéral naturel, mais pour vos installations, 
+                    <strong>c'est de la pierre liquide.</strong>
+                </p>
+
+                <div class="alert-box">
+                    <div class="icon">⚠️</div>
+                    <div>
+                        <strong>Impact immédiat :</strong> 
+                        Un foyer moyen (120 m³/an) avec une eau dure "avale" 
+                        plus de <span class="text-red">30 à 40 kg de roche</span> par an.
+                    </div>
                 </div>
-            </div>
-        </div>
+            </section>
+
+            <section class="card chart-card">
+                <div class="card-header-row">
+                    <div class="card-label">Échelle officielle de dureté (TH)</div>
+                    <div class="live-indicator"><span class="dot"></span> Live Data</div>
+                </div>
+
+                <div class="chart-wrapper">
+                    
+                    <div class="chart-row">
+                        <div class="row-label">Douce</div>
+                        <div class="row-bar">
+                            <div class="bar-fill blue" style="width: 20%"></div>
+                        </div>
+                        <div class="row-value">0-7°</div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="row-label">Moyenne</div>
+                        <div class="row-bar">
+                            <div class="bar-fill green" style="width: 40%"></div>
+                        </div>
+                        <div class="row-value">7-12°</div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="row-label">Dure</div>
+                        <div class="row-bar">
+                            <div class="bar-fill yellow" style="width: 60%"></div>
+                        </div>
+                        <div class="row-value">12-18°</div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="row-label">Très Dure</div>
+                        <div class="row-bar">
+                            <div class="bar-fill orange" style="width: 80%"></div>
+                        </div>
+                        <div class="row-value">18-30°</div>
+                    </div>
+
+                    <div class="chart-row active-danger">
+                        <div class="row-label">Excessive</div>
+                        <div class="row-bar">
+                            <div class="bar-fill red" style="width: 100%"></div>
+                        </div>
+                        <div class="row-value">> 30°</div>
+                    </div>
+
+                </div>
+
+                <div class="simulation-box">
+                    <p>Où se situe votre commune ?</p>
+                    <button class="btn-action">Tester mon eau (Simulation)</button>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="app-footer">
+            <button class="nav-btn disabled">← Retour</button>
+            <div class="pagination">● ○ ○ ○</div>
+            <button class="nav-btn primary">Voir les dégâts (Slide 2) →</button>
+        </footer>
 
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
