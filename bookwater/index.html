@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Eau - Le Constat & La Solution</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
 
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Analyse de l'eau 2025</span>
+            <h1>Pourquoi votre eau vous coûte cher.</h1>
+            <p class="subtitle">Comprendre le cycle de l'eau pour mieux protéger votre maison et votre budget.</p>
+            <a href="#calculator" class="btn-primary">Calculer mes pertes &darr;</a>
+        </div>
+    </header>
+
+    <section class="timeline-section">
+        <div class="container">
+            <h2>Le voyage de l'eau</h2>
+            <div class="timeline">
+                
+                <div class="step reveal">
+                    <div class="step-icon">☁️</div>
+                    <div class="step-content">
+                        <h3>1. Dans les nuages</h3>
+                        <p>L'eau est pure, douce et légèrement acide.</p>
+                        <span class="tag">0% Calcaire</span>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-icon">🏭</div>
+                    <div class="step-content">
+                        <h3>2. L'Atmosphère</h3>
+                        <p>Elle se charge de polluants et gaz en tombant.</p>
+                        <span class="tag danger">Pollution</span>
+                    </div>
+                </div>
+
+                <div class="step reveal">
+                    <div class="step-icon">⛰️</div>
+                    <div class="step-content">
+                        <h3>3. Le Sous-sol (Le Piège)</h3>
+                        <p>En traversant la roche, l'eau dissout le Calcium et le Magnésium.</p>
+                        <span class="tag danger-border">CALCIUM + MAGNÉSIUM</span>
+                    </div>
+                </div>
+
+                <div class="step reveal final">
+                    <div class="step-icon">🏠</div>
+                    <div class="step-content">
+                        <h3>4. Votre Maison</h3>
+                        <p>L'eau dure arrive dans vos tuyaux. Le tartre commence à se former dès 60°C.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section reveal">
+        <div class="container">
+            <h2>L'Impact Visuel</h2>
+            <p>Glissez le curseur pour voir la différence dans vos tuyaux.</p>
+            
+            <div class="comparison-container">
+                <div class="img-after">
+                    <span class="label">AVEC ADOUCISSEUR</span>
+                </div>
+                
+                <div class="img-before" id="img-before">
+                    <span class="label">EAU DU RÉSEAU</span>
+                </div>
+                
+                <input type="range" min="0" max="100" value="50" class="slider" id="slider">
+                <div class="slider-line"></div>
+                <div class="slider-button">↔</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-section reveal" id="calculator">
+        <div class="container">
+            <h2>Combien perdez-vous par an ?</h2>
+            <div class="calculator-card">
+                <div class="input-group">
+                    <label>Nombre de personnes dans le foyer</label>
+                    <input type="number" id="nb-personnes" value="4" min="1">
+                </div>
+                
+                <div class="results">
+                    <div class="result-item">
+                        <span>Économie Produits (savons, lessive)</span>
+                        <strong id="eco-produits">0 €</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>Économie Énergie (chauffe-eau)</span>
+                        <strong id="eco-energie">0 €</strong>
+                    </div>
+                    <div class="total-box">
+                        <span>Total économisé / an</span>
+                        <strong id="eco-total">0 €</strong>
+                    </div>
+                    <p class="roi-text">Votre adoucisseur remboursé en <span id="roi-mois">0</span> mois environ.</p>
+                </div>
+                <button class="btn-primary full-width">Demander un devis gratuit</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 - Expert Traitement de l'Eau</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
