@@ -3,61 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Interactif - Slide 1</title>
-    <style>
-        /* RESET */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #000;
-        }
-
-        /* --- 1. LE FOND FLOUTÉ (AMBIANCE) --- */
-        .background-blur {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* On met l'image en fond */
-            background-image: url('https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp');
-            background-size: cover; /* Elle couvre tout l'écran */
-            background-position: center;
-            filter: blur(25px) brightness(0.6); /* Flou + un peu sombre pour faire ressortir le centre */
-            z-index: 1; /* Derrière */
-        }
-
-        /* --- 2. L'IMAGE NETTE (CONTENU) --- */
-        .main-container {
-            position: relative;
-            z-index: 2; /* Devant */
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px; /* Petite marge de sécurité pour ne pas coller aux bords */
-        }
-
-        .main-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Garde les proportions exactes */
-            box-shadow: 0 0 30px rgba(0,0,0,0.5); /* Ombre pour détacher l'image du fond */
-            border-radius: 8px; /* Coins légèrement arrondis c'est plus moderne */
-        }
-    </style>
+    <title>Book Expert - Traitement de l'Eau</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="background-blur"></div>
+    <div class="app-container">
+        
+        <nav class="top-bar">
+            <div class="logo">WATER<span class="highlight">TECH</span></div>
+            <div class="slide-indicator">Slide <span id="current-slide">1</span> / <span id="total-slides">1</span></div>
+        </nav>
 
-    <div class="main-container">
-        <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" alt="Cycle de l'eau">
+        <main class="slider-wrapper">
+
+            <section class="slide active" id="slide-1">
+                <div class="glass-card">
+                    <header class="card-header">
+                        <span class="badge">Le Constat</span>
+                        <h1>L'Exigence d'une eau de qualité</h1>
+                        <p class="subtitle">Le cycle naturel est rapide, mais il joue contre nous.</p>
+                    </header>
+
+                    <div class="visual-content">
+                        <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" 
+                             alt="Schéma du cycle de l'eau" class="main-image">
+                    </div>
+
+                    <footer class="card-footer alert-box">
+                        <div class="icon">⚠️</div>
+                        <div class="text">
+                            <strong>Conclusion :</strong> Il est naturellement inévitable d'avoir une eau chargée en minéraux.
+                        </div>
+                    </footer>
+                </div>
+            </section>
+
+            </main>
+
+        <div class="controls">
+            <button id="btn-prev" class="nav-btn" disabled>← Précédent</button>
+            <button id="btn-next" class="nav-btn primary">Suivant →</button>
+        </div>
+
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
