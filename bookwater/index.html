@@ -3,111 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Interactif - Le Cycle de l'Eau</title>
+    <title>Book Interactif - Plein Écran</title>
     <style>
-        /* --- 1. DESIGN GLOBAL --- */
-        body {
+        /* --- 1. RESET ET PLEIN ÉCRAN --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        body, html {
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
+            height: 100%; /* Force la hauteur à 100% de l'écran */
+            overflow: hidden; /* Empêche le défilement (scrolling) pour faire effet "Slide" */
             font-family: 'Arial', sans-serif;
+            background-color: white;
+        }
+
+        /* --- 2. LE CONTENEUR FLEXIBLE --- */
+        .slide-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* --- 2. LE CADRE (LA "SLIDE") --- */
-        .slide-card {
-            background: white;
+            flex-direction: column; /* Empile les éléments verticalement */
+            height: 100vh; /* 100% de la hauteur de vue (Viewport Height) */
             width: 100%;
-            max-width: 1000px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 20px;
         }
 
-        /* --- 3. L'EN-TÊTE --- */
+        /* --- 3. L'EN-TÊTE (FIXE EN HAUT) --- */
         .slide-header {
             background: linear-gradient(to right, #2E5C8A, #5885B5);
             color: white;
             text-align: center;
-            padding: 15px 10px;
+            padding: 10px;
             border-bottom: 4px solid #1B3A5A;
+            flex-shrink: 0; /* Empêche le header de rétrécir */
         }
 
         .top-text {
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 1px;
             opacity: 0.9;
-            margin-bottom: 5px;
         }
 
         .main-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem; /* Un peu plus petit pour laisser place à l'image */
             font-weight: 800;
             text-transform: uppercase;
-            margin: 0;
+            margin: 5px 0;
         }
 
         .sub-title {
-            font-size: 1rem;
-            margin-top: 8px;
+            font-size: 0.9rem;
             font-style: italic;
         }
 
-        /* --- 4. L'IMAGE --- */
+        /* --- 4. L'IMAGE (PREND TOUTE LA PLACE RESTANTE) --- */
         .image-container {
-            width: 100%;
+            flex-grow: 1; /* C'est la clé : force l'image à occuper tout l'espace vide */
+            display: flex;
+            justify-content: center; /* Centre horizontalement */
+            align-items: center;     /* Centre verticalement */
             background-color: #fff;
-            padding: 0;
-            text-align: center;
+            padding: 10px;
+            overflow: hidden;
         }
 
         .image-container img {
             max-width: 100%;
-            height: auto;
-            display: block;
+            max-height: 100%; /* L'image ne dépassera jamais la hauteur dispo */
+            object-fit: contain; /* Garde les proportions de l'image (pas déformée) */
         }
 
-        /* --- 5. LE PIED DE PAGE --- */
+        /* --- 5. LE PIED DE PAGE (FIXE EN BAS) --- */
         .slide-footer {
             background: #1B3A5A;
             color: white;
             text-align: center;
-            padding: 12px;
+            padding: 15px;
             font-weight: bold;
             font-size: 1rem;
+            flex-shrink: 0; /* Empêche le footer de rétrécir */
         }
 
-        /* Version Mobile */
+        /* --- MOBILE --- */
         @media (max-width: 600px) {
-            .main-title { font-size: 1.5rem; }
-            .slide-footer { font-size: 0.8rem; }
+            .main-title { font-size: 1.4rem; }
+            .slide-footer { font-size: 0.8rem; padding: 10px; }
+            .slide-header { padding: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="slide-card">
+    <div class="slide-container">
         
-        <div class="slide-header">
+        <header class="slide-header">
             <div class="top-text">L'exigence d'une eau de qualité</div>
             <h1 class="main-title">Le Cycle de l'Eau</h1>
             <div class="sub-title">
                 L'eau évolue très rapidement mais malheureusement pas dans le bon sens.
             </div>
-        </div>
+        </header>
 
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" alt="Cycle de l'eau et pollution">
-        </div>
+        <main class="image-container">
+            <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" alt="Cycle de l'eau">
+        </main>
 
-        <div class="slide-footer">
+        <footer class="slide-footer">
             Il est inévitable de manière naturelle d'avoir une eau de mauvaise qualité.
-        </div>
+        </footer>
 
     </div>
 
