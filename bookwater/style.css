@@ -208,3 +208,46 @@ body {
     .audit-calculator { flex-direction: column; text-align: center; }
     .audit-result-area { text-align: center; }
 }
+
+/* --- AJOUTER POUR LES LISTES DANS SLIDE 3 --- */
+.card-details {
+    text-align: left; /* On aligne le texte à gauche pour la lecture */
+    width: 100%;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.card-details p {
+    font-size: 0.85rem;
+    color: white; /* Titre du paragraphe en blanc */
+    margin-bottom: 8px;
+    text-align: center; /* La phrase d'accroche reste centrée */
+    font-weight: 600;
+}
+
+.card-details ul {
+    list-style: none; /* On retire les puces moches par défaut */
+    padding-left: 5px;
+}
+
+.card-details li {
+    position: relative;
+    padding-left: 15px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+/* Petite puce personnalisée devant chaque ligne */
+.card-details li::before {
+    content: "•";
+    color: var(--accent-blue); /* Couleur de la puce */
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Changement de couleur de puce selon la carte */
+.energy .card-details li::before { color: var(--accent-red); }
+.products .card-details li::before { color: #d946ef; }
