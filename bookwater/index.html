@@ -55,7 +55,7 @@
                 </div>
                 <footer class="app-footer">
                     <button class="nav-btn disabled">← Retour</button>
-                    <div class="pagination">● ○ ○</div>
+                    <div class="pagination">● ○ ○ ○</div>
                     <button class="nav-btn primary" onclick="goToSlide(2)">Voir les dégâts (Slide 2) →</button>
                 </footer>
             </div>
@@ -105,21 +105,18 @@
                 </div>
                 <footer class="app-footer">
                     <button class="nav-btn" onclick="goToSlide(1)">← Revenir au TH</button>
-                    <div class="pagination">○ ● ○</div>
+                    <div class="pagination">○ ● ○ ○</div>
                     <button class="nav-btn primary" onclick="goToSlide(3)">L'Audit Financier (Slide 3) →</button>
                 </footer>
             </div>
 
             <div id="slide-3" class="slide">
                 <div class="financial-container">
-                    
                     <div class="financial-header">
                         <h2>OÙ PART VOTRE ARGENT ?</h2>
                         <p>Le calcaire n'est pas qu'une gêne, c'est une taxe invisible sur votre budget mensuel.</p>
                     </div>
-
-                  <div class="financial-grid">
-                        
+                    <div class="financial-grid">
                         <div class="fin-card energy">
                             <div class="fin-icon">⚡</div>
                             <h3>Le "Mur" Thermique</h3>
@@ -136,7 +133,6 @@
                                 <span class="val red">~ 22 € / pers / an</span>
                             </div>
                         </div>
-
                         <div class="fin-card material">
                             <div class="fin-icon">🛠️</div>
                             <h3>Obsolescence Forcée</h3>
@@ -153,7 +149,6 @@
                                 <span class="val red">80 € / an</span>
                             </div>
                         </div>
-
                         <div class="fin-card products">
                             <div class="fin-icon">🧼</div>
                             <h3>La "Double Dose"</h3>
@@ -171,7 +166,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="audit-calculator">
                         <div class="audit-input-area">
                             <label>Nombre de personnes dans le foyer :</label>
@@ -181,7 +175,6 @@
                                 <button class="ctrl-btn" onclick="adjustPeople(1)">+</button>
                             </div>
                         </div>
-
                         <div class="audit-result-area">
                             <div class="audit-label">ESTIMATION DU GASPILLAGE ANNUEL :</div>
                             <div class="audit-total">
@@ -190,19 +183,15 @@
                             <div class="audit-projection">Soit plus de <strong>5 000 €</strong> sur 10 ans !</div>
                         </div>
                     </div>
-
                 </div>
-
                 <footer class="app-footer">
                     <button class="nav-btn" onclick="goToSlide(2)">← Revenir au Diagnostic</button>
-                    <div class="pagination">○ ○ ●</div>
-                    <button class="nav-btn primary finish" onclick="alert('Et maintenant... La Solution Novaqua !')">Voir la solution →</button>
+                    <div class="pagination">○ ○ ● ○</div>
+                    <button class="nav-btn primary" onclick="goToSlide(4)">La Solution (Slide 4) →</button>
                 </footer>
             </div>
 
-        </main>
-    </div>
-<div id="slide-4" class="slide">
+            <div id="slide-4" class="slide">
                 <div class="product-container">
                     
                     <div class="product-header">
@@ -284,6 +273,7 @@
                     <div class="pagination">● FIN</div>
                 </footer>
             </div>
-    <script src="script.js"></script>
+
+        </main> </div> <script src="script.js"></script>
 </body>
 </html>
