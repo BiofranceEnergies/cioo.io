@@ -3,118 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre Eau - Le Constat & La Solution</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Le Cycle de l'Eau - Book Visuel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET ET BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Montserrat', sans-serif; color: white; }
+
+        /* --- STYLE DES TABLEAUX GÉANTS (SECTIONS) --- */
+        .visual-section {
+            /* Chaque section prend 100% de la hauteur de l'écran */
+            height: 100vh; 
+            display: flex;
+            justify-content: center; /* Centre horizontalement */
+            align-items: center;     /* Centre verticalement */
+            text-align: center;
+            position: relative;
+            
+            /* Effet "Parallax" : L'image de fond reste fixe quand on scrolle */
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Le filtre sombre sur les images pour que le texte ressorte */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Noir à 50% d'opacité */
+            z-index: 1;
+        }
+
+        /* Le contenu texte par-dessus l'image */
+        .content {
+            position: relative;
+            z-index: 2; /* Au-dessus du filtre */
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        /* TYPOGRAPHIE */
+        h1 {
+            font-size: 4rem; /* Très gros titres */
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        h2 { font-size: 1.5rem; font-weight: 400; margin-bottom: 30px; color: #ddd; }
+        p.description { font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+
+        /* Mise en avant des mots clés (Calcium/Magnésium) */
+        .highlight-danger {
+            color: #ff6b6b; /* Rouge/Orange vif */
+            font-weight: 900;
+            font-size: 1.2em;
+        }
+
+        /* --- LES IMAGES DE FOND (C'est ICI que tu mettras tes photos) --- */
+        
+        /* TABLEAU 1 : LE CIEL */
+        #section-sky {
+            /* REMPLACE LE LIEN DANS url('...') PAR TA PHOTO DE CIEL/PLUIE */
+            background-image: url('https://images.unsplash.com/photo-1534274988757-9048952b4293?q=80&w=1920&auto=format&fit=crop');
+        }
+
+        /* TABLEAU 2 : LA SURFACE */
+        #section-surface {
+             /* REMPLACE LE LIEN PAR TA PHOTO DE CHAMPS/RUISSELLEMENT */
+            background-image: url('https://images.unsplash.com/photo-1625246333195-00f20c4d148c?q=80&w=1920&auto=format&fit=crop');
+        }
+
+        /* TABLEAU 3 : LE SOUS-SOL (IMPORTANT) */
+        #section-underground {
+             /* REMPLACE PAR UNE PHOTO DE ROCHE/GROTTE */
+            background-image: url('https://images.unsplash.com/photo-1506280093810-c36542929899?q=80&w=1920&auto=format&fit=crop');
+        }
+        
+        /* TABLEAU 4 : LA MAISON */
+        #section-house {
+             /* REMPLACE PAR TA PHOTO DE CALCAIRE/TUYAU */
+            background-image: url('https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?q=80&w=1920&auto=format&fit=crop');
+        }
+
+        /* Adaptations pour mobile pour que les textes ne soient pas trop gros */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            p.description { font-size: 1rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Analyse de l'eau 2025</span>
-            <h1>Pourquoi votre eau vous coûte cher.</h1>
-            <p class="subtitle">Comprendre le cycle de l'eau pour mieux protéger votre maison et votre budget.</p>
-            <a href="#calculator" class="btn-primary">Calculer mes pertes &darr;</a>
+    <section class="visual-section" id="section-sky">
+        <div class="overlay"></div> <div class="content">
+            <h2>Étape 1 : Le Cycle Commence</h2>
+            <h1>L'eau tombe du ciel</h1>
+            <p class="description">
+                Même là-haut, ce n'est plus parfait. En traversant l'atmosphère, la pluie se charge déjà en acidité et en polluants de l'air.
+            </p>
         </div>
-    </header>
+    </section>
 
-    <section class="timeline-section">
-        <div class="container">
-            <h2>Le voyage de l'eau</h2>
-            <div class="timeline">
-                
-                <div class="step reveal">
-                    <div class="step-icon">☁️</div>
-                    <div class="step-content">
-                        <h3>1. Dans les nuages</h3>
-                        <p>L'eau est pure, douce et légèrement acide.</p>
-                        <span class="tag">0% Calcaire</span>
-                    </div>
-                </div>
+    <section class="visual-section" id="section-surface">
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>Étape 2 : Le Contact au Sol</h2>
+            <h1>La collecte des polluants</h1>
+            <p class="description">
+                En ruisselant sur les terres agricoles et les routes, l'eau ramasse tout sur son passage : nitrates, pesticides, résidus...
+            </p>
+        </div>
+    </section>
 
-                <div class="step reveal">
-                    <div class="step-icon">🏭</div>
-                    <div class="step-content">
-                        <h3>2. L'Atmosphère</h3>
-                        <p>Elle se charge de polluants et gaz en tombant.</p>
-                        <span class="tag danger">Pollution</span>
-                    </div>
-                </div>
+    <section class="visual-section" id="section-underground">
+        <div class="overlay" style="background: rgba(50, 20, 0, 0.7);"></div>
+        <div class="content">
+            <h2>Étape 3 : L'Infiltration Fatale</h2>
+            <h1>La naissance du calcaire</h1>
+            <p class="description">
+                C'est le moment critique. Pour pénétrer les couches profondes, l'eau dissout littéralement la roche sur son passage. Elle se sature en <span class="highlight-danger">CALCIUM</span> et en <span class="highlight-danger">MAGNÉSIUM</span>.
+            </p>
+        </div>
+    </section>
 
-                <div class="step reveal">
-                    <div class="step-icon">⛰️</div>
-                    <div class="step-content">
-                        <h3>3. Le Sous-sol (Le Piège)</h3>
-                        <p>En traversant la roche, l'eau dissout le Calcium et le Magnésium.</p>
-                        <span class="tag danger-border">CALCIUM + MAGNÉSIUM</span>
-                    </div>
-                </div>
-
-                <div class="step reveal final">
-                    <div class="step-icon">🏠</div>
-                    <div class="step-content">
-                        <h3>4. Votre Maison</h3>
-                        <p>L'eau dure arrive dans vos tuyaux. Le tartre commence à se former dès 60°C.</p>
-                    </div>
-                </div>
+    <section class="visual-section" id="section-house">
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>Étape 4 : Chez Vous</h2>
+            <h1>L'ennemi est dans vos tuyaux</h1>
+            <p class="description">
+                Cette eau chargée, dure, arrive directement à votre robinet. Dès qu'elle chauffe, le calcaire reprend sa forme solide et s'attaque à votre maison.
+            </p>
+            <div style="margin-top: 40px;">
+                <span style="border: 2px solid white; padding: 15px 30px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                    La suite au prochain épisode...
+                </span>
             </div>
         </div>
     </section>
 
-    <section class="comparison-section reveal">
-        <div class="container">
-            <h2>L'Impact Visuel</h2>
-            <p>Glissez le curseur pour voir la différence dans vos tuyaux.</p>
-            
-            <div class="comparison-container">
-                <div class="img-after">
-                    <span class="label">AVEC ADOUCISSEUR</span>
-                </div>
-                
-                <div class="img-before" id="img-before">
-                    <span class="label">EAU DU RÉSEAU</span>
-                </div>
-                
-                <input type="range" min="0" max="100" value="50" class="slider" id="slider">
-                <div class="slider-line"></div>
-                <div class="slider-button">↔</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="calculator-section reveal" id="calculator">
-        <div class="container">
-            <h2>Combien perdez-vous par an ?</h2>
-            <div class="calculator-card">
-                <div class="input-group">
-                    <label>Nombre de personnes dans le foyer</label>
-                    <input type="number" id="nb-personnes" value="4" min="1">
-                </div>
-                
-                <div class="results">
-                    <div class="result-item">
-                        <span>Économie Produits (savons, lessive)</span>
-                        <strong id="eco-produits">0 €</strong>
-                    </div>
-                    <div class="result-item">
-                        <span>Économie Énergie (chauffe-eau)</span>
-                        <strong id="eco-energie">0 €</strong>
-                    </div>
-                    <div class="total-box">
-                        <span>Total économisé / an</span>
-                        <strong id="eco-total">0 €</strong>
-                    </div>
-                    <p class="roi-text">Votre adoucisseur remboursé en <span id="roi-mois">0</span> mois environ.</p>
-                </div>
-                <button class="btn-primary full-width">Demander un devis gratuit</button>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 - Expert Traitement de l'Eau</p>
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
