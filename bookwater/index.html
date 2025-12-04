@@ -37,15 +37,28 @@
                     <strong>c'est de la pierre liquide.</strong>
                 </p>
 
-                <div class="alert-box">
-                    <div class="icon">⚠️</div>
-                    <div>
-                        <strong>Impact immédiat :</strong> 
-                        Un foyer moyen (120 m³/an) avec une eau dure "avale" 
-                        plus de <span class="text-red">30 à 40 kg de roche</span> par an.
-                    </div>
-                </div>
-            </section>
+               <div class="calculator-wrapper">
+    <div class="calc-header">Testez votre charge minérale :</div>
+    
+    <div class="inputs-row">
+        <div class="input-group">
+            <label>Dureté mesurée (°f)</label>
+            <input type="number" id="th-input" placeholder="0" value="30">
+        </div>
+
+        <div class="input-group">
+            <label>Conso. eau (m³/an)</label>
+            <input type="number" id="vol-input" placeholder="0" value="120">
+        </div>
+    </div>
+
+    <div class="result-box">
+        <div class="result-label">Masse de pierre accumulée / an</div>
+        <div class="result-value">
+            <span id="rock-result">36</span> <span class="unit">KG</span>
+        </div>
+    </div>
+</div>
 
             <section class="card chart-card">
                 <div class="card-header-row">
