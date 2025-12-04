@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analyse Dureté - Expert Eau</title>
+    <title>Diagnostic - Expert Eau</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,112 +13,102 @@
         
         <header class="app-header">
             <div class="brand">WATER<span class="text-blue">TECH</span></div>
-            <div class="step-badge">Analyse technique n°1</div>
+            <div class="step-badge">Diagnostic Global (Slide 2)</div>
         </header>
 
-        <main class="dashboard-container">
+        <main class="dashboard-container split-view">
             
-            <section class="card impact-card">
-                <div class="card-label">Le constat mathématique</div>
-                
-                <div class="big-stat">
-                    <span class="value">10g</span>
-                    <span class="unit">de calcaire</span>
+            <section class="card visible-card">
+                <div class="card-header-icon">
+                    <span class="icon-bg blue-bg">👁️</span>
+                    <h2 class="card-title">CE QUI SE VOIT<br><span class="subtitle">Le confort & l'esthétique</span></h2>
                 </div>
-                
-                <h1 class="main-statement">
-                    Pour chaque degré (1° TH)<br>
-                    par m³ d'eau consommé.
-                </h1>
 
-                <p class="description">
-                    Votre fournisseur d'eau vous livre une eau potable, pas une eau technique. 
-                    Le calcaire est un minéral naturel, mais pour vos installations, 
-                    <strong>c'est de la pierre liquide.</strong>
-                </p>
-
-                <div class="alert-box">
-                    <div class="icon">⚠️</div>
-                    <div>
-                        <strong>Impact immédiat :</strong> 
-                        Un foyer moyen (120 m³/an) avec une eau dure 
-                        <strong>voit transiter</strong> naturellement plus de 
-                        <span class="text-red">30 à 40 kg de calcaire</span> par an.
+                <div class="list-container">
+                    
+                    <div class="list-item">
+                        <div class="item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <div class="item-content">
+                            <h3>L'Entretien & les Traces</h3>
+                            <p>Parois de douche, robinetterie ternie. La corvée de ménage est interminable.</p>
+                        </div>
                     </div>
+
+                    <div class="list-item">
+                        <div class="item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+                        </div>
+                        <div class="item-content">
+                            <h3>L'Agressivité Cutanée</h3>
+                            <p>Tiraillements, rougeurs, cheveux secs. Le calcaire agresse le film protecteur de la peau.</p>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.4a2 2 0 0 0-1.2-1.2a42 42 0 0 0-14.4 0a2 2 0 0 0-1.2 1.2l-2 9a2 2 0 0 0 1.2 2.3l2.8.7l.6 6.6a2 2 0 0 0 2 2h7.8a2 2 0 0 0 2-2l.6-6.6l2.8-.7a2 2 0 0 0 1.2-2.3z"></path></svg>
+                        </div>
+                        <div class="item-content">
+                            <h3>L'Usure du Linge</h3>
+                            <p>Fibres rêches, couleurs grisées. Le linge s'use 2x plus vite.</p>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
-            <section class="card chart-card">
-                
-                <div class="card-header-row">
-                    <div class="card-label">Échelle officielle de dureté (TH)</div>
-                    <div class="live-indicator"><span class="dot"></span> Live Data</div>
+            <section class="card invisible-card">
+                <div class="card-header-icon">
+                    <span class="icon-bg orange-bg">⚠️</span>
+                    <h2 class="card-title text-orange">CE QUI NE SE VOIT PAS<br><span class="subtitle">Le budget & la performance</span></h2>
                 </div>
 
-                <div class="chart-wrapper">
-                    <div class="chart-row">
-                        <div class="row-label">Douce</div>
-                        <div class="row-bar"><div class="bar-fill blue" style="width: 20%"></div></div>
-                        <div class="row-value">0-7°</div>
-                    </div>
-                    <div class="chart-row">
-                        <div class="row-label">Moyenne</div>
-                        <div class="row-bar"><div class="bar-fill green" style="width: 40%"></div></div>
-                        <div class="row-value">7-12°</div>
-                    </div>
-                    <div class="chart-row">
-                        <div class="row-label">Dure</div>
-                        <div class="row-bar"><div class="bar-fill yellow" style="width: 60%"></div></div>
-                        <div class="row-value">12-18°</div>
-                    </div>
-                    <div class="chart-row">
-                        <div class="row-label">Très Dure</div>
-                        <div class="row-bar"><div class="bar-fill orange" style="width: 80%"></div></div>
-                        <div class="row-value">18-30°</div>
-                    </div>
-                    <div class="chart-row active-danger">
-                        <div class="row-label">Excessive</div>
-                        <div class="row-bar"><div class="bar-fill red" style="width: 100%"></div></div>
-                        <div class="row-value">> 30°</div>
-                    </div>
-                </div>
-
-                <div class="calculator-wrapper" style="margin-top: 30px;">
-                    <div class="calc-header">Testez votre charge minérale :</div>
+                <div class="list-container">
                     
-                    <div class="inputs-row">
-                        <div class="input-group">
-                            <label>Dureté (°f)</label>
-                            <input type="number" id="th-input" placeholder="0" value="30">
+                    <div class="list-item warning">
+                        <div class="item-icon orange-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                         </div>
+                        <div class="item-content">
+                            <h3>Échangeurs & Résistances</h3>
+                            <p>
+                                <strong>Ballon Thermo, PAC, ECS :</strong> Le calcaire est un isolant. Il se fixe sur les échangeurs et résistances.
+                                <br><span class="highlight-warn">Conséquence : Chute du rendement & Surconsommation.</span>
+                            </p>
+                        </div>
+                    </div>
 
-                        <div class="input-group">
-                            <label>Conso (m³)</label>
-                            <input type="number" id="vol-input" placeholder="0" value="120">
+                    <div class="list-item warning">
+                        <div class="item-icon orange-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
+                        </div>
+                        <div class="item-content">
+                            <h3>Perte de Débit</h3>
+                            <p>Réduction du diamètre des canalisations ("l'artériosclérose" de la maison) et perte de pression aux robinets.</p>
                         </div>
                     </div>
 
-                    <div class="result-box">
-                        <div class="result-label">CHARGE CALCAIRE ANNUELLE</div>
-                        
-                        <div class="result-value">
-                            <span id="rock-result">36</span> <span class="unit">KG</span>
+                    <div class="list-item warning">
+                        <div class="item-icon orange-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                         </div>
-
-                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 5px;">
-                            *Volume traversant votre installation
+                        <div class="item-content">
+                            <h3>Pannes Prématurées</h3>
+                            <p>Électrovannes bloquées, pompes grippées. La durée de vie de l'électroménager est divisée par 2.</p>
                         </div>
                     </div>
+
                 </div>
-
             </section>
 
         </main>
         
         <footer class="app-footer">
-            <button class="nav-btn disabled">← Retour</button>
-            <div class="pagination">● ○ ○ ○</div>
-            <button class="nav-btn primary">Voir les dégâts (Slide 2) →</button>
+            <button class="nav-btn">← Revenir au TH</button>
+            <div class="pagination">○ ● ○ ○</div>
+            <button class="nav-btn primary">La Solution (Slide 3) →</button>
         </footer>
 
     </div>
