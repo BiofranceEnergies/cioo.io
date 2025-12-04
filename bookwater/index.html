@@ -3,149 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Cycle de l'Eau - Book Visuel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800;900&display=swap" rel="stylesheet">
-    
+    <title>Book Interactif - Le Cycle de l'Eau</title>
     <style>
-        /* --- RESET ET BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; font-family: 'Montserrat', sans-serif; color: white; }
-
-        /* --- STYLE DES TABLEAUX GÉANTS (SECTIONS) --- */
-        .visual-section {
-            /* Chaque section prend 100% de la hauteur de l'écran */
-            height: 100vh; 
+        /* --- 1. DESIGN GLOBAL --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            font-family: 'Arial', sans-serif;
             display: flex;
-            justify-content: center; /* Centre horizontalement */
-            align-items: center;     /* Centre verticalement */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- 2. LE CADRE (LA "SLIDE") --- */
+        .slide-card {
+            background: white;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 20px;
+        }
+
+        /* --- 3. L'EN-TÊTE --- */
+        .slide-header {
+            background: linear-gradient(to right, #2E5C8A, #5885B5);
+            color: white;
             text-align: center;
-            position: relative;
-            
-            /* Effet "Parallax" : L'image de fond reste fixe quand on scrolle */
-            background-attachment: fixed;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
+            padding: 15px 10px;
+            border-bottom: 4px solid #1B3A5A;
         }
 
-        /* Le filtre sombre sur les images pour que le texte ressorte */
-        .overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Noir à 50% d'opacité */
-            z-index: 1;
-        }
-
-        /* Le contenu texte par-dessus l'image */
-        .content {
-            position: relative;
-            z-index: 2; /* Au-dessus du filtre */
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        /* TYPOGRAPHIE */
-        h1 {
-            font-size: 4rem; /* Très gros titres */
-            font-weight: 900;
+        .top-text {
             text-transform: uppercase;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 5px;
         }
 
-        h2 { font-size: 1.5rem; font-weight: 400; margin-bottom: 30px; color: #ddd; }
-        p.description { font-size: 1.2rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
-
-        /* Mise en avant des mots clés (Calcium/Magnésium) */
-        .highlight-danger {
-            color: #ff6b6b; /* Rouge/Orange vif */
-            font-weight: 900;
-            font-size: 1.2em;
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0;
         }
 
-        /* --- LES IMAGES DE FOND (C'est ICI que tu mettras tes photos) --- */
-        
-        /* TABLEAU 1 : LE CIEL */
-        #section-sky {
-            /* REMPLACE LE LIEN DANS url('...') PAR TA PHOTO DE CIEL/PLUIE */
-            background-image: url('https://images.unsplash.com/photo-1534274988757-9048952b4293?q=80&w=1920&auto=format&fit=crop');
+        .sub-title {
+            font-size: 1rem;
+            margin-top: 8px;
+            font-style: italic;
         }
 
-        /* TABLEAU 2 : LA SURFACE */
-        #section-surface {
-             /* REMPLACE LE LIEN PAR TA PHOTO DE CHAMPS/RUISSELLEMENT */
-            background-image: url('https://images.unsplash.com/photo-1625246333195-00f20c4d148c?q=80&w=1920&auto=format&fit=crop');
+        /* --- 4. L'IMAGE --- */
+        .image-container {
+            width: 100%;
+            background-color: #fff;
+            padding: 0;
+            text-align: center;
         }
 
-        /* TABLEAU 3 : LE SOUS-SOL (IMPORTANT) */
-        #section-underground {
-             /* REMPLACE PAR UNE PHOTO DE ROCHE/GROTTE */
-            background-image: url('https://images.unsplash.com/photo-1506280093810-c36542929899?q=80&w=1920&auto=format&fit=crop');
-        }
-        
-        /* TABLEAU 4 : LA MAISON */
-        #section-house {
-             /* REMPLACE PAR TA PHOTO DE CALCAIRE/TUYAU */
-            background-image: url('https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?q=80&w=1920&auto=format&fit=crop');
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
-        /* Adaptations pour mobile pour que les textes ne soient pas trop gros */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            p.description { font-size: 1rem; }
+        /* --- 5. LE PIED DE PAGE --- */
+        .slide-footer {
+            background: #1B3A5A;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* Version Mobile */
+        @media (max-width: 600px) {
+            .main-title { font-size: 1.5rem; }
+            .slide-footer { font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <section class="visual-section" id="section-sky">
-        <div class="overlay"></div> <div class="content">
-            <h2>Étape 1 : Le Cycle Commence</h2>
-            <h1>L'eau tombe du ciel</h1>
-            <p class="description">
-                Même là-haut, ce n'est plus parfait. En traversant l'atmosphère, la pluie se charge déjà en acidité et en polluants de l'air.
-            </p>
-        </div>
-    </section>
-
-    <section class="visual-section" id="section-surface">
-        <div class="overlay"></div>
-        <div class="content">
-            <h2>Étape 2 : Le Contact au Sol</h2>
-            <h1>La collecte des polluants</h1>
-            <p class="description">
-                En ruisselant sur les terres agricoles et les routes, l'eau ramasse tout sur son passage : nitrates, pesticides, résidus...
-            </p>
-        </div>
-    </section>
-
-    <section class="visual-section" id="section-underground">
-        <div class="overlay" style="background: rgba(50, 20, 0, 0.7);"></div>
-        <div class="content">
-            <h2>Étape 3 : L'Infiltration Fatale</h2>
-            <h1>La naissance du calcaire</h1>
-            <p class="description">
-                C'est le moment critique. Pour pénétrer les couches profondes, l'eau dissout littéralement la roche sur son passage. Elle se sature en <span class="highlight-danger">CALCIUM</span> et en <span class="highlight-danger">MAGNÉSIUM</span>.
-            </p>
-        </div>
-    </section>
-
-    <section class="visual-section" id="section-house">
-        <div class="overlay"></div>
-        <div class="content">
-            <h2>Étape 4 : Chez Vous</h2>
-            <h1>L'ennemi est dans vos tuyaux</h1>
-            <p class="description">
-                Cette eau chargée, dure, arrive directement à votre robinet. Dès qu'elle chauffe, le calcaire reprend sa forme solide et s'attaque à votre maison.
-            </p>
-            <div style="margin-top: 40px;">
-                <span style="border: 2px solid white; padding: 15px 30px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
-                    La suite au prochain épisode...
-                </span>
+    <div class="slide-card">
+        
+        <div class="slide-header">
+            <div class="top-text">L'exigence d'une eau de qualité</div>
+            <h1 class="main-title">Le Cycle de l'Eau</h1>
+            <div class="sub-title">
+                L'eau évolue très rapidement mais malheureusement pas dans le bon sens.
             </div>
         </div>
-    </section>
+
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" alt="Cycle de l'eau et pollution">
+        </div>
+
+        <div class="slide-footer">
+            Il est inévitable de manière naturelle d'avoir une eau de mauvaise qualité.
+        </div>
+
+    </div>
 
 </body>
 </html>
