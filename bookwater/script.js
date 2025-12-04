@@ -75,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if(projectionEl) projectionEl.textContent = tenYearSavings.toLocaleString('fr-FR') + " €";
     }
 
+    // ...
+if(slideNumber === 3) badge.textContent = "Slide 3 / L'Audit Financier";
+if(slideNumber === 4) badge.textContent = "Slide 4 / La Solution Novaqua"; // C'est tout bon
+
     // Calcul initial au chargement
     calculateAudit();
 });
