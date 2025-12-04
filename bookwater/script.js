@@ -14,14 +14,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. LOGIQUE SLIDE 1 (Calculateur TH) ---
     // (Code identique à la version précédente pour l'animation barres et le calcul KG)
+   document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 1. ANIMATION DES BARRES (CORRIGÉE) ---
     setTimeout(() => {
         const bars = document.querySelectorAll('.bar-fill');
         bars.forEach(bar => {
-            const targetWidth = bar.style.width; 
-            bar.style.width = '0'; 
-            setTimeout(() => { bar.style.width = targetWidth; }, 50);
+            // On récupère la valeur cible stockée dans le HTML (ex: "20%")
+            const target = bar.getAttribute('data-width');
+            
+            // On applique la largeur. Comme le CSS a une "transition", 
+            // la barre va grandir tout doucement de 0% vers la cible.
+            if(target) {
+                bar.style.width = target;
+            }
         });
-    }, 200);
+    }, 300); // Petit délai pour laisser le temps à la page de s'afficher
+
+    // ... Le reste du code (Calculateur, etc.) reste inchangé ...
 
     const thInput = document.getElementById('th-input');
     const volInput = document.getElementById('vol-input');
