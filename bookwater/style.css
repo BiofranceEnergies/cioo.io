@@ -178,3 +178,108 @@ body {
     .app-wrapper { height: 100vh; padding: 15px; }
     .big-stat .value { font-size: 3.5rem; }
 }
+/* --- GARDER LE CSS PRÉCÉDENT ET AJOUTER CECI --- */
+
+/* SLIDE 2 : SPLIT VIEW */
+.split-view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: stretch; /* Les cartes ont la même hauteur */
+}
+
+/* HEADER DES CARTES */
+.card-header-icon {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.icon-bg {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+}
+.blue-bg { background: rgba(56, 189, 248, 0.2); }
+.orange-bg { background: rgba(249, 115, 22, 0.2); }
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+.card-title .subtitle {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-transform: none;
+}
+.text-orange { color: var(--accent-orange); }
+
+/* LISTE D'ARGUMENTS */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.list-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+/* Effet hover discret */
+.list-item:hover { background: rgba(255,255,255,0.02); }
+
+/* STYLE ALERTE POUR LA DROITE */
+.list-item.warning {
+    background: rgba(249, 115, 22, 0.05);
+    border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+.item-icon {
+    width: 40px; height: 40px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 10px;
+    padding: 8px;
+    color: var(--accent-blue);
+    flex-shrink: 0;
+}
+.item-icon.orange-icon {
+    background: rgba(249, 115, 22, 0.1);
+    color: var(--accent-orange);
+}
+
+.item-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.item-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Mise en avant du texte important */
+.highlight-warn {
+    color: var(--accent-orange);
+    font-weight: 600;
+    display: block;
+    margin-top: 4px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .split-view { grid-template-columns: 1fr; }
+    .card { min-height: auto; }
+}
