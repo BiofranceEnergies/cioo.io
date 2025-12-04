@@ -3,115 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Interactif - Plein Écran</title>
+    <title>Book Interactif - Slide 1</title>
     <style>
-        /* --- 1. RESET ET PLEIN ÉCRAN --- */
-        * {
-            box-sizing: border-box;
-        }
+        /* --- RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%; /* Force la hauteur à 100% de l'écran */
-            overflow: hidden; /* Empêche le défilement (scrolling) pour faire effet "Slide" */
-            font-family: 'Arial', sans-serif;
-            background-color: white;
-        }
-
-        /* --- 2. LE CONTENEUR FLEXIBLE --- */
-        .slide-container {
-            display: flex;
-            flex-direction: column; /* Empile les éléments verticalement */
-            height: 100vh; /* 100% de la hauteur de vue (Viewport Height) */
+            height: 100%;
             width: 100%;
-        }
-
-        /* --- 3. L'EN-TÊTE (FIXE EN HAUT) --- */
-        .slide-header {
-            background: linear-gradient(to right, #2E5C8A, #5885B5);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            border-bottom: 4px solid #1B3A5A;
-            flex-shrink: 0; /* Empêche le header de rétrécir */
-        }
-
-        .top-text {
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            opacity: 0.9;
-        }
-
-        .main-title {
-            font-size: 1.8rem; /* Un peu plus petit pour laisser place à l'image */
-            font-weight: 800;
-            text-transform: uppercase;
-            margin: 5px 0;
-        }
-
-        .sub-title {
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        /* --- 4. L'IMAGE (PREND TOUTE LA PLACE RESTANTE) --- */
-        .image-container {
-            flex-grow: 1; /* C'est la clé : force l'image à occuper tout l'espace vide */
+            background-color: #000; /* Fond noir pour effet "Cinéma/Présentation" */
+            overflow: hidden; /* Pas de barre de défilement */
             display: flex;
-            justify-content: center; /* Centre horizontalement */
-            align-items: center;     /* Centre verticalement */
-            background-color: #fff;
-            padding: 10px;
-            overflow: hidden;
+            justify-content: center;
+            align-items: center;
         }
 
-        .image-container img {
+        /* --- CONTENEUR D'IMAGE --- */
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- L'IMAGE ELLE-MÊME --- */
+        .slide-container img {
             max-width: 100%;
-            max-height: 100%; /* L'image ne dépassera jamais la hauteur dispo */
-            object-fit: contain; /* Garde les proportions de l'image (pas déformée) */
-        }
-
-        /* --- 5. LE PIED DE PAGE (FIXE EN BAS) --- */
-        .slide-footer {
-            background: #1B3A5A;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-weight: bold;
-            font-size: 1rem;
-            flex-shrink: 0; /* Empêche le footer de rétrécir */
-        }
-
-        /* --- MOBILE --- */
-        @media (max-width: 600px) {
-            .main-title { font-size: 1.4rem; }
-            .slide-footer { font-size: 0.8rem; padding: 10px; }
-            .slide-header { padding: 8px; }
+            max-height: 100%;
+            /* 'contain' garantit que TOUTE la diapositive est visible, 
+               sans être coupée, peu importe l'écran (mobile ou PC) */
+            object-fit: contain; 
+            
+            /* Optionnel : petite ombre pour le relief si l'écran est grand */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
 
     <div class="slide-container">
-        
-        <header class="slide-header">
-            <div class="top-text">L'exigence d'une eau de qualité</div>
-            <h1 class="main-title">Le Cycle de l'Eau</h1>
-            <div class="sub-title">
-                L'eau évolue très rapidement mais malheureusement pas dans le bon sens.
-            </div>
-        </header>
-
-        <main class="image-container">
-            <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" alt="Cycle de l'eau">
-        </main>
-
-        <footer class="slide-footer">
-            Il est inévitable de manière naturelle d'avoir une eau de mauvaise qualité.
-        </footer>
-
+        <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/92cdb316cae3938e99f2a67a5539d47d2a998bbc/bookwater/le%20cycle%20de%20l%27eau.webp" alt="Slide 1 - Cycle de l'eau">
     </div>
 
 </body>
