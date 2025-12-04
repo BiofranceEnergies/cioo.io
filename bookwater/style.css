@@ -131,3 +131,80 @@ body {
 
 @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .app-wrapper { height: 100vh; padding: 15px; } }
+
+/* --- AJOUTER À LA FIN DU FICHIER CSS --- */
+
+/* SLIDE 3 : FINANCIAL AUDIT */
+.financial-container {
+    height: 100%; display: flex; flex-direction: column; 
+    padding-bottom: 20px;
+}
+
+.financial-header { text-align: center; margin-bottom: 25px; }
+.financial-header h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 5px; letter-spacing: -1px; background: linear-gradient(to right, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.financial-header p { color: var(--text-muted); font-size: 0.9rem; }
+
+/* GRILLE 3 COLONNES */
+.financial-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+    margin-bottom: 20px;
+}
+
+.fin-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px; padding: 20px;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    transition: 0.3s;
+}
+.fin-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); }
+
+/* Couleurs spécifiques par carte */
+.fin-card.energy { border-top: 4px solid var(--accent-red); }
+.fin-card.material { border-top: 4px solid #94a3b8; }
+.fin-card.products { border-top: 4px solid #d946ef; }
+
+.fin-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.fin-card h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; }
+.fin-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; flex-grow: 1; }
+
+.stat-row { 
+    margin-top: 15px; background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 8px; width: 100%;
+    display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;
+}
+.stat-row .val { font-weight: 800; }
+.stat-row .val.red { color: var(--accent-red); }
+
+/* CALCULATEUR AUDIT BAS DE PAGE */
+.audit-calculator {
+    margin-top: auto; /* Colle au bas */
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+    border: 1px solid var(--accent-blue);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.1);
+    border-radius: 24px; padding: 25px;
+    display: flex; align-items: center; justify-content: space-between; gap: 30px;
+}
+
+.audit-input-area { display: flex; flex-direction: column; gap: 10px; }
+.audit-input-area label { font-size: 0.9rem; color: var(--text-muted); }
+
+.number-control { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+.ctrl-btn { 
+    width: 40px; height: 40px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; font-size: 1.5rem; cursor: pointer; transition: 0.2s; 
+    display: flex; align-items: center; justify-content: center;
+}
+.ctrl-btn:hover { background: var(--accent-blue); }
+#nb-people-display { font-size: 1.5rem; font-weight: 900; width: 30px; text-align: center; }
+
+.audit-result-area { flex-grow: 1; text-align: right; }
+.audit-label { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-red); margin-bottom: 5px; font-weight: 700; }
+.audit-total { font-size: 3.5rem; font-weight: 900; line-height: 1; color: white; text-shadow: 0 0 20px rgba(244, 63, 94, 0.4); }
+.audit-total .euro { font-size: 1.5rem; color: var(--text-muted); }
+.audit-projection { font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; }
+.audit-projection strong { color: white; text-decoration: underline; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .financial-grid { grid-template-columns: 1fr; }
+    .audit-calculator { flex-direction: column; text-align: center; }
+    .audit-result-area { text-align: center; }
+}
