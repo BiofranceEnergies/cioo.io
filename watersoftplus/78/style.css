@@ -504,3 +504,27 @@ body {
         font-size: 1rem;
     }
 }
+/* AJOUT DANS LA RÈGLE MOBILE EXISTANTE */
+@media (max-width: 968px) {
+    /* ... autres corrections ... */
+    
+    /* CIBLE LE H1 VISUEL QUI EST TROP GRAND */
+    .visual-h1 {
+        font-size: 2.5rem !important; /* Force la taille pour les mobiles */
+        letter-spacing: -1px; /* Réduit l'espacement pour que ça rentre */
+    }
+    
+    /* ... autres corrections ... */
+}
+
+/* LA RÈGLE CHIRURGICALE POUR LES TÉLÉPHONES ÉTROITS (380px) */
+@media (max-width: 380px) {
+    .visual-h1 {
+        font-size: 2.1rem !important; /* On s'assure qu'il rétrécit encore plus */
+        line-height: 1.05;
+    }
+    /* S'assurer que le reste du texte important n'est pas illisible */
+    .seo-h1-text {
+        font-size: 0.95rem !important; /* On réduit juste un peu le sous-titre */
+    }
+}
