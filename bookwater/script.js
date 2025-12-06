@@ -133,6 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fonction principale de calcul
 
+   // A METTRE JUSTE AVANT LA FONCTION calculateTech
+    const outRegen = document.getElementById('res-regen'); // <-- Déclaration de la variable
+
+    // Fonction principale de calcul
     function calculateTech() {
         if(!techThInput || !techConsoInput) return;
 
@@ -154,27 +158,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- 2. FREQUENCE REGENERATION ---
         const freqDays = autonomy / conso;
 
-        // --- 3. CONSOMMABLES ANNUELS ---
+        // --- 3. CALCULS ANNUELS ---
         const regensPerYear = 365 / freqDays;
         
-        // Sel
         const saltPerYear = regensPerYear * (techVolume * saltRatio);
-        
-        // Eau
         const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000;
 
-        // --- 4. ELECTRICITÉ (EN KWH MAINTENANT) ---
-        // Moyenne : 3.5 Watts x 24h x 365j / 1000 = ~30.6 kWh/an
+        // --- 4. ELECTRICITÉ (kWh) ---
+        // Moyenne : 3.5 Watts x 24h x 365j / 1000
         const wattsAvg = 3.5;
         const elecKwh = (wattsAvg * 24 * 365) / 1000;
 
         // --- AFFICHAGE ---
         if(outAutonomy) outAutonomy.textContent = Math.round(autonomy).toLocaleString();
         if(outFreq) outFreq.textContent = Math.round(freqDays);
+        
+        // Affichage Régénérations (Arrondi)
+        if(outRegen) outRegen.textContent = Math.round(regensPerYear);
+
         if(outSalt) outSalt.textContent = Math.round(saltPerYear);
         if(outWater) outWater.textContent = waterPerYear.toFixed(1);
-        
-        // Affichage Elec en kWh (avec 1 décimale)
         if(outElec) outElec.textContent = elecKwh.toFixed(1).replace('.', ',');
     }
 
