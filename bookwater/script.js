@@ -115,5 +115,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calcul initial au chargement pour le slide 3
     calculateAudit();
+// ============================================================
+    // 5. CALCULATEUR TECH (Slide 5 - Abaque)
+    // ============================================================
+    
+    // Variables d'état
+    let techVolume = 20; // Par défaut 20L
+    
+    // Sélection des éléments DOM
+    const techThInput = document.getElementById('tech-th');
+    const techConsoInput = document.getElementById('tech-conso');
+    
+    // Outputs
+    const outAutonomy = document.getElementById('res-autonomy');
+    const outFreq = document.getElementById('res-freq');
+    const outSalt = document.getElementById('res-salt');
+    const outWater = document.getElementById('res-water');
 
+    // Fonction de changement de volume (Boutons 10L / 20L / 30L)
+    window.setVolume = function(vol) {
+        techVolume = vol;
+        
+        // Gestion visuelle des boutons
+        document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById(`btn-${vol}l`);
+        if(activeBtn) activeBtn.classList.add('active');
+
+        // Recalcul immédiat
+        calculateTech();
+    };
+
+    // Fonction principale de calcul (L'Abaque)
+    function calculateTech() {
+        if(!techThInput || !techConsoInput) return;
+
+        let th = parseFloat(techThInput.value);
+        let conso = parseFloat(techConsoInput.value);
+
+        // Sécurités
+        if(isNaN(th) || th <= 0) th = 30; // Valeur par défaut si vide
+        if(isNaN(conso) || conso <= 0) conso = 130;
+
+        // --- CONSTANTES TECHNIQUES ---
+        const capacity = 5.5;    // °f.m3/L
+        const saltRatio = 0.15;  // kg de sel par Litre de résine
+        const waterRatio = 6;    // Litres d'eau par Litre de résine
+
+        // --- 1. CALCUL AUTONOMIE (V1) ---
+        // Formule : (Volume Résine * Capacité * 1000) / TH
+        // Ex pour 20L à 30°f : (20 * 5.5 * 1000) / 30 = 3666 Litres
+        const autonomy = (techVolume * capacity * 1000) / th;
+
+        // --- 2. FREQUENCE REGENERATION ---
+        // Autonomie / Conso Jour
+        const freqDays = autonomy / conso;
+
+        // --- 3. CONSOMMABLES ANNUELS ---
+        const regensPerYear = 365 / freqDays;
+        
+        // Sel : Nb Regen/an * (Volume Résine * 0.15)
+        const saltPerYear = regensPerYear * (techVolume * saltRatio);
+        
+        // Eau : Nb Regen/an * (Volume Résine * 6)
+        // On divise par 1000 pour avoir des m3
+        const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000;
+
+        // --- AFFICHAGE ---
+        if(outAutonomy) outAutonomy.textContent = Math.round(autonomy).toLocaleString();
+        if(outFreq) outFreq.textContent = Math.round(freqDays);
+        if(outSalt) outSalt.textContent = Math.round(saltPerYear);
+        if(outWater) outWater.textContent = waterPerYear.toFixed(1);
+    }
+
+    // Écouteurs d'événements
+    if(techThInput) techThInput.addEventListener('input', calculateTech);
+    if(techConsoInput) techConsoInput.addEventListener('input', calculateTech);
+
+    // PETIT BONUS UX : Synchronisation intelligente
+    // Quand on ouvre le slide 5, on va chercher le TH du Slide 1 si l'utilisateur l'a déjà rempli.
+    const originalGoToSlide = window.goToSlide;
+    window.goToSlide = function(slideNumber) {
+        // Appel de la fonction originale
+        originalGoToSlide(slideNumber);
+
+        // Si on va au slide 5
+        if(slideNumber === 5) {
+            // Récupérer la valeur du Slide 1
+            const thSlide1 = document.getElementById('th-input');
+            if(thSlide1 && techThInput) {
+                // On met à jour le slide 5 avec la valeur du slide 1
+                techThInput.value = thSlide1.value;
+                calculateTech(); // On lance le calcul
+            }
+            // Mettre à jour le badge titre
+            const badge = document.getElementById('step-indicator');
+            if(badge) badge.textContent = "Slide 5 / Dimensionnement";
+        }
+    };
 });
