@@ -419,7 +419,7 @@ body {
 /* Modifie cette ligne existante */
 .sub-metrics-grid { 
     display: grid; 
-    grid-template-columns: repeat(4, 1fr); /* AVANT c'était 1fr 1fr 1fr */
+    grid-template-columns: repeat(5, 1fr); /* AVANT c'était 1fr 1fr 1fr */
     gap: 10px; 
     margin-bottom: 25px; 
 }
