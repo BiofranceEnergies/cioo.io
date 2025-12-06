@@ -201,5 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+// ... tout ton code précédent ...
 
+    // AJOUTE CETTE LIGNE À LA FIN, JUSTE AVANT });
+    calculateTech(); // <--- Force le calcul du slide 5 immédiatement au chargement
+
+});
 });
