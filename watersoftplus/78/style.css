@@ -547,3 +547,30 @@ body {
         }
     }
 </style>
+<style>
+    /* --- RÈGLES EXISTANTES POUR PC --- */
+    .rating-row {
+        margin-bottom: 20px; 
+        font-weight: 500; 
+        color: #fff; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px;
+        justify-content: flex-start; /* Alignement gauche sur PC */
+    }
+
+    /* --- RÈGLES SPÉCIFIQUES MOBILE (à ajouter ou compléter) --- */
+    @media (max-width: 768px) {
+        /* 1. Centre les étoiles (tu l'as déjà normalement) */
+        .rating-row {
+            justify-content: center; 
+        }
+
+        /* 2. NOUVEAU : Centre le texte H1 "Installation... Haut de gamme..." */
+        .hero-text-col .seo-h1-text {
+             text-align: center !important;
+             margin-left: auto;
+             margin-right: auto;
+        }
+    }
+</style>
