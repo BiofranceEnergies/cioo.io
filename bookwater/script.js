@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Fonction principale de calcul
+
     function calculateTech() {
         if(!techThInput || !techConsoInput) return;
 
@@ -162,19 +163,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Eau
         const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000;
 
-        // --- 4. ELECTRICITÉ ---
-        // Moyenne : 3.5 Watts x 24h x 365j / 1000 = ~30 kWh/an
-        // Prix : 0.25€ / kWh
+        // --- 4. ELECTRICITÉ (EN KWH MAINTENANT) ---
+        // Moyenne : 3.5 Watts x 24h x 365j / 1000 = ~30.6 kWh/an
         const wattsAvg = 3.5;
-        const kwhPrice = 0.25;
-        const elecCost = (wattsAvg * 24 * 365 / 1000) * kwhPrice;
+        const elecKwh = (wattsAvg * 24 * 365) / 1000;
 
         // --- AFFICHAGE ---
         if(outAutonomy) outAutonomy.textContent = Math.round(autonomy).toLocaleString();
         if(outFreq) outFreq.textContent = Math.round(freqDays);
         if(outSalt) outSalt.textContent = Math.round(saltPerYear);
         if(outWater) outWater.textContent = waterPerYear.toFixed(1);
-        if(outElec) outElec.textContent = elecCost.toFixed(2).replace('.', ',');
+        
+        // Affichage Elec en kWh (avec 1 décimale)
+        if(outElec) outElec.textContent = elecKwh.toFixed(1).replace('.', ',');
     }
 
     // Écouteurs d'événements
