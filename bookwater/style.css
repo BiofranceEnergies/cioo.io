@@ -361,26 +361,58 @@ body {
 }
 
 /* --- MODE PDF PREMIUM (GÉNÉRATION GLOBALE) --- */
+/* --- MODE PDF PREMIUM (CORRIGÉ & OPTIMISÉ) --- */
 @media print {
+    
+    /* 1. COULEURS & MARGES */
     body {
         background-color: #0f172a !important;
         color: #f1f5f9 !important;
         -webkit-print-color-adjust: exact !important; 
         print-color-adjust: exact !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
-    .slides-container { display: block !important; overflow: visible !important; }
+
+    /* 2. FORCER LE PAYSAGE SANS MARGE BLANCHE */
+    @page {
+        size: landscape;
+        margin: 0mm; /* Zéro marge pour le plein écran */
+    }
+
+    .app-wrapper {
+        width: 100% !important; max-width: none !important;
+        padding: 0 !important; margin: 0 !important;
+        height: auto !important;
+    }
+
+    /* 3. GESTION DES SLIDES (1 Slide = 1 Page) */
+    .slides-container { display: block !important; }
+    
     .slide {
         display: block !important; opacity: 1 !important; position: relative !important;
-        height: 100vh !important; width: 100% !important;
-        page-break-after: always !important; margin-bottom: 0 !important; z-index: 1 !important;
+        /* On met 99vh au lieu de 100vh pour éviter le débordement qui crée la page vide */
+        height: 99vh !important; 
+        width: 100vw !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        margin: 0 !important; padding: 20px !important; /* Un peu de padding interne */
+        box-sizing: border-box !important;
     }
-    @page { size: landscape; margin: 0; }
-    .app-wrapper { width: 100% !important; max-width: none !important; padding: 20px !important; }
-    .app-footer, .print-btn, .step-badge, .device-selector button:not(.active) { display: none !important; }
+
+    /* 4. NETTOYAGE */
+    .app-footer, .print-btn, .step-badge, .device-selector button:not(.active), .nav-btn { 
+        display: none !important; 
+    }
+
+    /* 5. LOOK DES CARTES */
     .card, .tech-panel, .final-offer-bar, .audit-calculator {
-        background-color: #1e293b !important; border: 1px solid rgba(255,255,255,0.1) !important; box-shadow: none !important;
+        background-color: #1e293b !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        box-shadow: none !important;
     }
+    
+    /* 6. INPUTS & BOUTONS */
     input { color: white !important; font-weight: 900 !important; border: none !important; text-align: right; }
     .device-btn.active { background-color: #38bdf8 !important; color: #000 !important; border: none !important; }
 }
