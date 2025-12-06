@@ -361,58 +361,108 @@ body {
 }
 
 /* --- MODE PDF PREMIUM (GÉNÉRATION GLOBALE) --- */
-/* --- MODE PDF PREMIUM (CORRIGÉ & OPTIMISÉ) --- */
+/* --- ULTIME CONFIGURATION PDF (A4 PAYSAGE PERFECT) --- */
 @media print {
     
-    /* 1. COULEURS & MARGES */
+    /* 1. CONFIGURATION DE LA FEUILLE */
+    @page {
+        size: landscape; /* Force le format paysage */
+        margin: 0 !important; /* ZERO MARGE BLANCHE */
+    }
+
+    /* 2. CORPS DE PAGE */
     body {
-        background-color: #0f172a !important;
+        background-color: #0f172a !important; /* Force le bleu nuit */
         color: #f1f5f9 !important;
-        -webkit-print-color-adjust: exact !important; 
+        -webkit-print-color-adjust: exact !important; /* Force l'impression des couleurs */
         print-color-adjust: exact !important;
         margin: 0 !important;
         padding: 0 !important;
-    }
-
-    /* 2. FORCER LE PAYSAGE SANS MARGE BLANCHE */
-    @page {
-        size: landscape;
-        margin: 0mm; /* Zéro marge pour le plein écran */
-    }
-
-    .app-wrapper {
-        width: 100% !important; max-width: none !important;
-        padding: 0 !important; margin: 0 !important;
-        height: auto !important;
-    }
-
-    /* 3. GESTION DES SLIDES (1 Slide = 1 Page) */
-    .slides-container { display: block !important; }
-    
-    .slide {
-        display: block !important; opacity: 1 !important; position: relative !important;
-        /* On met 99vh au lieu de 100vh pour éviter le débordement qui crée la page vide */
-        height: 99vh !important; 
         width: 100vw !important;
-        page-break-after: always !important;
-        page-break-inside: avoid !important;
-        margin: 0 !important; padding: 20px !important; /* Un peu de padding interne */
-        box-sizing: border-box !important;
+        height: 100vh !important;
+        overflow: visible !important;
     }
 
-    /* 4. NETTOYAGE */
-    .app-footer, .print-btn, .step-badge, .device-selector button:not(.active), .nav-btn { 
+    /* 3. CONTENEUR PRINCIPAL */
+    .app-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        zoom: 90%; /* ASTUCE : Réduit légèrement pour tout faire rentrer sans débordement */
+    }
+
+    /* 4. GESTION DES SLIDES (1 SLIDE = 1 PAGE) */
+    .slides-container {
+        display: block !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .slide {
+        display: flex !important; /* Garde la mise en page flex */
+        flex-direction: column !important;
+        opacity: 1 !important;
+        position: relative !important;
+        height: 100vh !important; /* Prend toute la hauteur de la feuille */
+        width: 100% !important;
+        
+        /* COUPURE NETTE APRES CHAQUE SLIDE */
+        break-after: page !important;
+        page-break-after: always !important;
+        
+        /* Espacement interne pour que ce soit joli sur papier */
+        padding: 40px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        left: 0 !important;
+        top: 0 !important;
+    }
+
+    /* 5. ELEMENTS A CACHER */
+    .app-footer, 
+    .header-controls, 
+    .nav-btn, 
+    .pagination, 
+    .step-badge,
+    .device-selector button:not(.active) { 
         display: none !important; 
     }
 
-    /* 5. LOOK DES CARTES */
+    /* 6. FORCER LE LOOK "DARK MODE" SUR LES CARTES */
     .card, .tech-panel, .final-offer-bar, .audit-calculator {
         background-color: #1e293b !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        box-shadow: none !important;
+        break-inside: avoid !important; /* Interdit de couper une carte en deux */
+    }
+
+    /* 7. TEXTES ET VALEURS */
+    h1, h2, h3, p, span, div {
+        color: #f1f5f9 !important; /* Force le texte en blanc/gris clair */
+    }
+    .text-blue { color: var(--accent-blue) !important; }
+    .text-red { color: var(--accent-red) !important; }
+    
+    /* 8. INPUTS (Enlever le fond gris moche des champs) */
+    input {
+        background: transparent !important;
+        color: #fff !important;
+        border: none !important;
+        font-weight: 900 !important;
+        text-align: right;
         box-shadow: none !important;
     }
     
-    /* 6. INPUTS & BOUTONS */
-    input { color: white !important; font-weight: 900 !important; border: none !important; text-align: right; }
-    .device-btn.active { background-color: #38bdf8 !important; color: #000 !important; border: none !important; }
+    /* 9. BOUTONS ACTIFS */
+    .device-btn.active {
+        background-color: #38bdf8 !important;
+        color: #000 !important;
+        border: none !important;
+    }
+    
+    /* 10. GRAPHIQUES */
+    .bar-fill { -webkit-print-color-adjust: exact !important; }
+    .sub-metric-card { border: 1px solid rgba(255,255,255,0.1) !important; }
 }
