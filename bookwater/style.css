@@ -360,7 +360,6 @@ body {
     .sub-metrics-grid { grid-template-columns: 1fr 1fr; }
 }
 
-/* --- MODE PDF PREMIUM (GÉNÉRATION GLOBALE) --- */
 /* --- ULTIME CONFIGURATION PDF (A4 PAYSAGE PERFECT) --- */
 @media print {
     
