@@ -430,3 +430,17 @@ body {
         grid-template-columns: 1fr 1fr; /* 2 carrés par ligne sur mobile */
     }
 }
+/* Remplacement du bouton CTA par un badge statique */
+.offer-static-badge {
+    background: rgba(56, 189, 248, 0.1); /* Fond bleu très léger */
+    border: 1px solid var(--accent-blue); /* Bordure bleue */
+    color: var(--accent-blue);
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+    cursor: default; /* Pas de main qui clique */
+}
