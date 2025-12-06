@@ -416,20 +416,17 @@ body {
 .metric-value .unit { font-size: 1.5rem; color: var(--text-muted); }
 .metric-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; }
 
-.sub-metrics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-.sub-metric-card {
-    background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; text-align: center;
-    border: 1px solid rgba(255,255,255,0.05);
+/* Modifie cette ligne existante */
+.sub-metrics-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* AVANT c'était 1fr 1fr 1fr */
+    gap: 10px; 
+    margin-bottom: 25px; 
 }
-.sub-metric-card .icon-m { font-size: 1.2rem; margin-bottom: 5px; }
-.sub-metric-card .label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; }
-.sub-metric-card .val { font-size: 0.9rem; font-weight: 700; color: white; }
 
-.efficiency-bar { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--text-muted); }
-.eff-track { flex-grow: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
-.eff-fill { width: 100%; height: 100%; background: var(--accent-green); }
-
+/* Ajoute ceci pour que ça reste beau sur mobile */
 @media (max-width: 900px) {
-    .tech-grid { grid-template-columns: 1fr; }
-    .device-selector { flex-wrap: wrap; }
+    .sub-metrics-grid { 
+        grid-template-columns: 1fr 1fr; /* 2 carrés par ligne sur mobile */
+    }
 }
