@@ -346,3 +346,90 @@ body {
     .final-offer-bar { flex-direction: column; gap: 15px; text-align: center; }
     .inclusions { flex-wrap: wrap; justify-content: center; }
 }
+
+/* --- SLIDE 5 : TECH DASHBOARD --- */
+.tech-dashboard {
+    height: 100%; display: flex; flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.tech-header { text-align: center; margin-bottom: 25px; flex-shrink: 0; }
+.tech-badge { 
+    display: inline-block; background: rgba(34, 197, 94, 0.15); color: var(--accent-green); 
+    padding: 4px 10px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 2px; 
+    margin-bottom: 10px; border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.tech-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+    flex-grow: 1; margin-bottom: 10px;
+}
+
+.tech-panel {
+    background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px; padding: 25px; display: flex; flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.panel-title {
+    font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* GAUCHE : INPUTS */
+.tech-control-group { margin-bottom: 25px; }
+.tech-control-group label { display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 10px; font-weight: 600; }
+
+/* Sélecteur de volume */
+.device-selector {
+    display: flex; gap: 10px; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 12px;
+}
+.device-btn {
+    flex: 1; background: transparent; border: none; color: var(--text-muted);
+    padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s;
+    border: 1px solid transparent;
+}
+.device-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+.device-btn.active {
+    background: var(--accent-blue); color: #000; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* Inputs numériques stylés */
+.range-wrapper { position: relative; }
+.tech-input {
+    width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+    color: white; padding: 15px; border-radius: 10px; font-size: 1.2rem; font-weight: bold;
+    font-family: 'Inter', monospace; transition: 0.3s;
+}
+.tech-input:focus { border-color: var(--accent-green); outline: none; background: rgba(34, 197, 94, 0.05); }
+.unit-label {
+    position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+    color: var(--text-muted); font-weight: 600;
+}
+.hint-text { font-size: 0.7rem; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+
+/* DROITE : OUTPUTS */
+.output-panel { border: 1px solid rgba(56, 189, 248, 0.2); background: linear-gradient(180deg, rgba(15, 23, 42, 0.8) 0%, rgba(56, 189, 248, 0.05) 100%); }
+
+.main-metric { text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
+.metric-label { font-size: 0.8rem; color: var(--accent-blue); margin-bottom: 5px; letter-spacing: 1px; }
+.metric-value { font-size: 3.5rem; font-weight: 900; color: white; line-height: 1; text-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+.metric-value .unit { font-size: 1.5rem; color: var(--text-muted); }
+.metric-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; }
+
+.sub-metrics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+.sub-metric-card {
+    background: rgba(255,255,255,0.03); padding: 10px; border-radius: 10px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.sub-metric-card .icon-m { font-size: 1.2rem; margin-bottom: 5px; }
+.sub-metric-card .label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2px; }
+.sub-metric-card .val { font-size: 0.9rem; font-weight: 700; color: white; }
+
+.efficiency-bar { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--text-muted); }
+.eff-track { flex-grow: 1; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+.eff-fill { width: 100%; height: 100%; background: var(--accent-green); }
+
+@media (max-width: 900px) {
+    .tech-grid { grid-template-columns: 1fr; }
+    .device-selector { flex-wrap: wrap; }
+}
