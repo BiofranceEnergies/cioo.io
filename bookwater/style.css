@@ -460,3 +460,70 @@ body {
     justify-content: center; /* Centre le texte */
     line-height: 1.1;        /* Resserre un peu l'espace entre les lignes */
 }
+/* --- BOUTON D'IMPRESSION (Visible à l'écran) --- */
+.header-controls { display: flex; align-items: center; gap: 15px; }
+.print-btn {
+    background: rgba(34, 197, 94, 0.1); 
+    border: 1px solid var(--accent-green); 
+    color: var(--accent-green);
+    padding: 6px 15px; border-radius: 20px; 
+    font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+}
+.print-btn:hover { background: var(--accent-green); color: black; }
+
+/* --- MODE PDF DARK PREMIUM (Activé quand on clique) --- */
+@media print {
+    
+    /* 1. FORCER LE FOND SOMBRE ET LES COULEURS */
+    body {
+        background-color: #0f172a !important; /* Bleu nuit */
+        color: #f1f5f9 !important;            /* Texte clair */
+        -webkit-print-color-adjust: exact !important; /* INDISPENSABLE : Force Chrome à imprimer la couleur */
+        print-color-adjust: exact !important;
+        margin: 0 !important;
+    }
+
+    /* 2. CONFIGURATION DE LA PAGE */
+    @page {
+        size: landscape; /* Force le format paysage automatiquement */
+        margin: 0;       /* Enlève les marges blanches moches autour */
+    }
+
+    .app-wrapper {
+        width: 100% !important; max-width: none !important;
+        height: auto !important; padding: 20px !important;
+    }
+
+    /* 3. AFFICHER TOUS LES SLIDES À LA SUITE */
+    .slides-container { display: block !important; }
+    
+    .slide {
+        position: relative !important; opacity: 1 !important; display: block !important;
+        height: 100vh !important; /* 1 Slide = 1 Écran complet */
+        width: 100% !important;
+        page-break-after: always !important; /* Coupe la page après chaque slide */
+        page-break-inside: avoid !important;
+        z-index: 1 !important;
+    }
+
+    /* 4. GARDER LE LOOK "SAAS" DES CARTES */
+    .card, .tech-panel, .final-offer-bar, .audit-calculator {
+        background-color: #1e293b !important; /* Gris bleuté */
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        box-shadow: none !important;
+    }
+
+    /* 5. NETTOYAGE (On cache les boutons inutiles sur le PDF) */
+    .app-footer, .print-btn, .step-badge, .device-selector button:not(.active) { 
+        display: none !important; 
+    }
+
+    /* 6. INPUTS & BOUTONS ACTIFS */
+    input {
+        background: transparent !important; color: white !important;
+        border: none !important; font-weight: 900 !important; text-align: right;
+    }
+    .device-btn.active {
+        background-color: #38bdf8 !important; color: #000 !important; border: none !important;
+    }
+}
