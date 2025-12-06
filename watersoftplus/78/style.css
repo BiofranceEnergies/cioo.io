@@ -528,3 +528,22 @@ body {
         font-size: 0.95rem !important; /* On réduit juste un peu le sous-titre */
     }
 }
+<style>
+    .rating-row {
+        margin-bottom: 20px; 
+        font-weight: 500; 
+        color: #fff; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px;
+        /* Par défaut (PC) : aligné à gauche */
+        justify-content: flex-start;
+    }
+
+    /* Règle pour Mobile uniquement */
+    @media (max-width: 768px) {
+        .rating-row {
+            justify-content: center; /* Force le centrage sur mobile */
+        }
+    }
+</style>
