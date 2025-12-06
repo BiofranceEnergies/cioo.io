@@ -296,11 +296,96 @@
 
                <footer class="app-footer">
                     <button class="nav-btn" onclick="goToSlide(3)">← Revenir à l'Audit</button>
-                    <div class="pagination">● FIN</div>
+                    <div class="pagination">● ○</div>
+                    <button class="nav-btn primary" onclick="goToSlide(5)">Dimensionnement (Slide 5) →</button>
                 </footer>
-            </div> </main> </div> <script src="script.js"></script>
-</body>
-</html>
+
+                <div id="slide-5" class="slide">
+                <div class="tech-dashboard">
+                    
+                    <div class="tech-header">
+                        <div class="tech-badge">DATA CENTER</div>
+                        <h2>ABAQUE DE DIMENSIONNEMENT</h2>
+                        <p>Simulateur de performance hydraulique & consommables</p>
+                    </div>
+
+                    <div class="tech-grid">
+                        
+                        <div class="tech-panel input-panel">
+                            <h3 class="panel-title">1. PARAMÈTRES INSTALLATION</h3>
+                            
+                            <div class="tech-control-group">
+                                <label>Modèle Novaqua (Volume Résine)</label>
+                                <div class="device-selector">
+                                    <button class="device-btn" onclick="setVolume(10)" id="btn-10l">10 L</button>
+                                    <button class="device-btn active" onclick="setVolume(20)" id="btn-20l">20 L</button>
+                                    <button class="device-btn" onclick="setVolume(30)" id="btn-30l">30 L</button>
+                                </div>
+                            </div>
+
+                            <div class="tech-control-group">
+                                <label>Dureté de l'eau (°f)</label>
+                                <div class="range-wrapper">
+                                    <input type="number" id="tech-th" value="30" class="tech-input">
+                                    <span class="unit-label">°f</span>
+                                </div>
+                            </div>
+
+                            <div class="tech-control-group">
+                                <label>Consommation Foyer (L/jour)</label>
+                                <div class="range-wrapper">
+                                    <input type="number" id="tech-conso" value="130" class="tech-input">
+                                    <span class="unit-label">L/j</span>
+                                </div>
+                                <div class="hint-text">Moyenne FR : 130L / jour / installation</div>
+                            </div>
+
+                        </div>
+
+                        <div class="tech-panel output-panel">
+                            <h3 class="panel-title">2. PERFORMANCE SYSTÈME</h3>
+                            
+                            <div class="main-metric">
+                                <div class="metric-label">VOLUME D'EAU ADOUCIE (V1)</div>
+                                <div class="metric-value"><span id="res-autonomy">----</span> <span class="unit">L</span></div>
+                                <div class="metric-sub">Entre deux régénérations</div>
+                            </div>
+
+                            <div class="sub-metrics-grid">
+                                <div class="sub-metric-card">
+                                    <div class="icon-m">🔄</div>
+                                    <div class="label">Cycle</div>
+                                    <div class="val"><span id="res-freq">--</span> Jours</div>
+                                </div>
+                                <div class="sub-metric-card">
+                                    <div class="icon-m">🧂</div>
+                                    <div class="label">Conso Sel</div>
+                                    <div class="val"><span id="res-salt">--</span> kg/an</div>
+                                </div>
+                                <div class="sub-metric-card">
+                                    <div class="icon-m">💧</div>
+                                    <div class="label">Rejet Eau</div>
+                                    <div class="val"><span id="res-water">--</span> m³/an</div>
+                                </div>
+                            </div>
+                            
+                            <div class="efficiency-bar">
+                                <div class="eff-label">Efficacité Résine</div>
+                                <div class="eff-track"><div class="eff-fill"></div></div>
+                                <div class="eff-val">5.5 °f.m³/L</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <footer class="app-footer">
+                    <button class="nav-btn" onclick="goToSlide(4)">← Revenir au Produit</button>
+                    <div class="pagination">● FIN</div>
+                    <button class="nav-btn primary" onclick="alert('Configuration Sauvegardée !')">Valider le Dimensionnement ✓</button>
+                </footer>
+            </div>
 
         </main> </div> <script src="script.js"></script>
 </body>
