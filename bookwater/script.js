@@ -212,4 +212,99 @@ document.addEventListener('DOMContentLoaded', () => {
             if(badge) badge.textContent = "Slide 5 / Dimensionnement";
         }
     };
+    // ============================================================
+    // 5. CALCULATEUR TECH (Slide 5 - Abaque)
+    // ============================================================
+    
+    // Variables d'état
+    let techVolume = 20; // Par défaut 20L
+    
+    // Sélection des éléments DOM
+    const techThInput = document.getElementById('tech-th');
+    const techConsoInput = document.getElementById('tech-conso');
+    
+    // Outputs
+    const outAutonomy = document.getElementById('res-autonomy');
+    const outFreq = document.getElementById('res-freq');
+    const outSalt = document.getElementById('res-salt');
+    const outWater = document.getElementById('res-water');
+    const outElec = document.getElementById('res-elec'); // Nouveau
+
+    // Fonction de changement de volume (Boutons 10L / 20L / 30L)
+    window.setVolume = function(vol) {
+        techVolume = vol;
+        
+        // Gestion visuelle des boutons
+        document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById(`btn-${vol}l`);
+        if(activeBtn) activeBtn.classList.add('active');
+
+        // Recalcul immédiat
+        calculateTech();
+    };
+
+    // Fonction principale de calcul
+    function calculateTech() {
+        if(!techThInput || !techConsoInput) return;
+
+        let th = parseFloat(techThInput.value);
+        let conso = parseFloat(techConsoInput.value);
+
+        // Sécurités
+        if(isNaN(th) || th <= 0) th = 30;
+        if(isNaN(conso) || conso <= 0) conso = 130;
+
+        // --- CONSTANTES ---
+        const capacity = 5.5;    // °f.m3/L
+        const saltRatio = 0.15;  // kg de sel par Litre de résine
+        const waterRatio = 6;    // Litres d'eau par Litre de résine
+
+        // --- 1. CALCUL AUTONOMIE ---
+        const autonomy = (techVolume * capacity * 1000) / th;
+
+        // --- 2. FREQUENCE REGENERATION ---
+        const freqDays = autonomy / conso;
+
+        // --- 3. CONSOMMABLES ANNUELS ---
+        const regensPerYear = 365 / freqDays;
+        
+        // Sel
+        const saltPerYear = regensPerYear * (techVolume * saltRatio);
+        
+        // Eau
+        const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000;
+
+        // --- 4. ELECTRICITÉ ---
+        // Moyenne : 3.5 Watts x 24h x 365j / 1000 = ~30 kWh/an
+        // Prix : 0.25€ / kWh
+        const wattsAvg = 3.5;
+        const kwhPrice = 0.25;
+        const elecCost = (wattsAvg * 24 * 365 / 1000) * kwhPrice;
+
+        // --- AFFICHAGE ---
+        if(outAutonomy) outAutonomy.textContent = Math.round(autonomy).toLocaleString();
+        if(outFreq) outFreq.textContent = Math.round(freqDays);
+        if(outSalt) outSalt.textContent = Math.round(saltPerYear);
+        if(outWater) outWater.textContent = waterPerYear.toFixed(1);
+        if(outElec) outElec.textContent = elecCost.toFixed(2).replace('.', ',');
+    }
+
+    // Écouteurs d'événements
+    if(techThInput) techThInput.addEventListener('input', calculateTech);
+    if(techConsoInput) techConsoInput.addEventListener('input', calculateTech);
+
+    // Synchronisation intelligente (Slide 1 -> Slide 5)
+    const originalGoToSlide = window.goToSlide;
+    window.goToSlide = function(slideNumber) {
+        originalGoToSlide(slideNumber);
+        if(slideNumber === 5) {
+            const thSlide1 = document.getElementById('th-input');
+            if(thSlide1 && techThInput) {
+                techThInput.value = thSlide1.value;
+                calculateTech();
+            }
+            const badge = document.getElementById('step-indicator');
+            if(badge) badge.textContent = "Slide 5 / Dimensionnement";
+        }
+    };
 });
