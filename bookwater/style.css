@@ -444,3 +444,19 @@ body {
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
     cursor: default; /* Pas de main qui clique */
 }
+/* --- CORRECTIF ALIGNEMENT ABAQUE (Slide 5) --- */
+.sub-metric-card .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+    
+    /* Force une hauteur identique pour tous les titres */
+    min-height: 25px;       
+    
+    /* Active l'alignement flexible */
+    display: flex;          
+    align-items: flex-end;   /* Colle le texte en bas vers le chiffre */
+    justify-content: center; /* Centre le texte */
+    line-height: 1.1;        /* Resserre un peu l'espace entre les lignes */
+}
