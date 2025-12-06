@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if(slideNumber === 4) badge.textContent = "Slide 4 / La Solution Novaqua";
             if(slideNumber === 5) badge.textContent = "Slide 5 / Dimensionnement";
         }
+
+        // Si on arrive sur le Slide 5, on lance le calcul et la synchro
+        if(slideNumber === 5) {
+            const thSlide1 = document.getElementById('th-input');
+            const techThInput = document.getElementById('tech-th');
+            
+            // On récupère le TH du Slide 1 si dispo
+            if(thSlide1 && techThInput) {
+                techThInput.value = thSlide1.value;
+            }
+            // On force le calcul
+            if(typeof calculateTech === 'function') {
+                calculateTech();
+            }
+        }
     };
 
     // ============================================================
@@ -49,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!thInput || !volInput) return;
         const th = parseFloat(thInput.value) || 0;
         const vol = parseFloat(volInput.value) || 0;
+        
         // Formule : (TH x 10g) x Volume / 1000 = KG
         const totalKg = (th * 10 * vol) / 1000;
 
@@ -60,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(thInput && volInput) {
         thInput.addEventListener('input', calculateRock);
         volInput.addEventListener('input', calculateRock);
-        calculateRock();
+        calculateRock(); // Calcul initial
     }
 
     // ============================================================
@@ -80,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function calculateAudit() {
-        // Energie : ~22€/pers
+        // Energie : ~22€/pers/an
         const ecoEnergie = Math.round(peopleCount * 21.6);
-        // Produits : ~88€/pers
+        // Produits : ~88€/pers/an
         const ecoProduits = Math.round(peopleCount * 88);
         // Matériel : 80€ fixe
         const ecoMateriel = 80;
@@ -98,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             projectionEl.textContent = tenYearSavings.toLocaleString('fr-FR') + " €";
         }
     }
+    // Calcul initial
     calculateAudit();
 
     // ============================================================
@@ -107,16 +124,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Variables d'état
     let techVolume = 20; // Par défaut 20L
     
-    // Sélection des éléments DOM
+    // Sélection des éléments DOM (Inputs)
     const techThInput = document.getElementById('tech-th');
     const techConsoInput = document.getElementById('tech-conso');
     
-    // Outputs
+    // Sélection des éléments DOM (Outputs)
     const outAutonomy = document.getElementById('res-autonomy');
     const outFreq = document.getElementById('res-freq');
     const outSalt = document.getElementById('res-salt');
     const outWater = document.getElementById('res-water');
     const outElec = document.getElementById('res-elec');
+    const outRegen = document.getElementById('res-regen');
 
     // Fonction de changement de volume (Boutons 10L / 20L / 30L)
     window.setVolume = function(vol) {
@@ -132,18 +150,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Fonction principale de calcul
-
-   // A METTRE JUSTE AVANT LA FONCTION calculateTech
-    const outRegen = document.getElementById('res-regen'); // <-- Déclaration de la variable
-
-    // Fonction principale de calcul
-    function calculateTech() {
+    window.calculateTech = function() {
+        // Sécurité : si les champs n'existent pas dans le DOM, on arrête
         if(!techThInput || !techConsoInput) return;
 
         let th = parseFloat(techThInput.value);
         let conso = parseFloat(techConsoInput.value);
 
-        // Sécurités
+        // Valeurs par défaut si vide ou invalide
         if(isNaN(th) || th <= 0) th = 30;
         if(isNaN(conso) || conso <= 0) conso = 130;
 
@@ -153,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const waterRatio = 6;    // Litres d'eau par Litre de résine
 
         // --- 1. CALCUL AUTONOMIE ---
+        // (Litrage * Capacité * 1000) / TH
         const autonomy = (techVolume * capacity * 1000) / th;
 
         // --- 2. FREQUENCE REGENERATION ---
@@ -162,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const regensPerYear = 365 / freqDays;
         
         const saltPerYear = regensPerYear * (techVolume * saltRatio);
-        const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000;
+        const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000; // En m3
 
         // --- 4. ELECTRICITÉ (kWh) ---
         // Moyenne : 3.5 Watts x 24h x 365j / 1000
@@ -172,12 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- AFFICHAGE ---
         if(outAutonomy) outAutonomy.textContent = Math.round(autonomy).toLocaleString();
         if(outFreq) outFreq.textContent = Math.round(freqDays);
-        
-        // Affichage Régénérations (Arrondi)
         if(outRegen) outRegen.textContent = Math.round(regensPerYear);
-
         if(outSalt) outSalt.textContent = Math.round(saltPerYear);
         if(outWater) outWater.textContent = waterPerYear.toFixed(1);
+        
+        // Affichage Elec (avec virgule pour le français)
         if(outElec) outElec.textContent = elecKwh.toFixed(1).replace('.', ',');
     }
 
@@ -185,26 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(techThInput) techThInput.addEventListener('input', calculateTech);
     if(techConsoInput) techConsoInput.addEventListener('input', calculateTech);
 
-    // Synchronisation intelligente (Slide 1 -> Slide 5)
-    // On "surcharge" la fonction goToSlide pour ajouter la logique du slide 5
-    const originalGoToSlide = window.goToSlide;
-    window.goToSlide = function(slideNumber) {
-        // Appelle la fonction originale pour changer de page
-        originalGoToSlide(slideNumber);
-        
-        // Si on va sur le Slide 5, on récupère le TH du Slide 1
-        if(slideNumber === 5) {
-            const thSlide1 = document.getElementById('th-input');
-            if(thSlide1 && techThInput) {
-                techThInput.value = thSlide1.value;
-                calculateTech();
-            }
-        }
-    };
-// ... tout ton code précédent ...
+    // Lancement du calcul initial pour le Slide 5
+    calculateTech();
 
-    // AJOUTE CETTE LIGNE À LA FIN, JUSTE AVANT });
-    calculateTech(); // <--- Force le calcul du slide 5 immédiatement au chargement
-
-});
 });
