@@ -1,6 +1,5 @@
-
 /* =========================================================
-   WATERSOFT 2025 - SCRIPT FINAL (VERSION COMPLETE)
+   WATERSOFT 2025 - SCRIPT FINAL (VERSION COMPLETE & CORRIGÉE)
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -84,18 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Signal envoyé : Simulation");
             }
 
-            // C. Injection des données dans le HTML (Design SaaS)
-          // C. Injection des données dans le HTML (Design SaaS)
-            
-            // 1. On met à jour le nom du modèle (Novaqua 15L, etc.)
+            // C. Injection des données dans le HTML
             const displayEl = document.getElementById('model-name-display');
             if(displayEl) displayEl.textContent = selectedModelName;
 
-            // 2. On met à jour UNIQUEMENT le Total (les lignes intermédiaires sont maintenant du texte fixe)
             const dispTotal = document.getElementById('disp-total');
-
             if(dispTotal) {
-                // Le calcul dynamique (ex: 518 €) est injecté ici
                 dispTotal.textContent = estimatedSavings + " € / an"; 
             }
 
@@ -107,22 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. GESTION DU CTA BAS DE PAGE (NOUVEAU) ---
+    // --- 5. GESTION DU CTA BAS DE PAGE ---
     const btnBottom = document.getElementById('btn-bottom-cta');
     if(btnBottom) {
         btnBottom.addEventListener('click', function(e) {
-            e.preventDefault(); // Empêche le saut brusque
-
+            e.preventDefault(); 
             // --- SIGNAL GOOGLE ADS 2 : CTA BAS ---
             if(typeof gtag === 'function') {
                 gtag('event', 'bottom_cta_click', {
                     'event_category': 'Engagement',
                     'event_label': 'Click CTA Bas de page'
                 });
-                console.log("Signal envoyé : CTA Bas");
             }
-
-            // Remonter en haut en douceur
             window.scrollTo({top:0, behavior:'smooth'});
         });
     }
@@ -207,8 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if(s1) s1.style.display = 'block';
     };
 
-// --- 7. BANNIÈRE COOKIES & CONSENT MODE V2 (CORRIGÉ) ---
-    const cookieBanner = document.getElementById('cookie-banner');
+    // --- 7. BANNIÈRE COOKIES & CONSENT MODE V2 (CORRIGÉ & SÉCURISÉ) ---
+    // Note: L'ID a été changé en 'consent-ui-box' pour éviter les AdBlockers
+    const cookieBanner = document.getElementById('consent-ui-box');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
 
@@ -225,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    // Fonction pour dire OUI à Google
+    // Fonction pour dire OUI à Google (Consent Mode V2)
     function grantGoogleConsent() {
         if(typeof gtag === 'function') {
             gtag('consent', 'update', {
@@ -238,36 +228,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 1. Au chargement : Vérifier si l'utilisateur a DÉJÀ accepté avant
+    // A. Au chargement : Vérifier si l'utilisateur a DÉJÀ accepté
     const currentConsent = getCookie('watersoft_consent');
     
     if (currentConsent === 'accepted') {
-        // S'il a déjà dit oui hier, on réactive Google tout de suite
+        // S'il a déjà dit oui (ex: hier), on réactive Google tout de suite sans bannière
         grantGoogleConsent();
     } else if (currentConsent === null) {
         // Si aucun choix n'a été fait, on affiche la bannière après 1s
         setTimeout(function() {
             if(cookieBanner) {
                 cookieBanner.style.display = 'block';
-                // Petit délai pour l'animation CSS si besoin
                 setTimeout(() => {
                     cookieBanner.classList.add('show-banner');
                 }, 50);
             }
         }, 1000);
     }
-    // Si 'refused', on ne fait rien (le default est déjà 'denied' dans le HTML)
+    // Si 'refused', on ne fait rien. Google reste en 'denied' (config par défaut dans le HTML).
 
-    // 2. Clic sur ACCEPTER
+    // B. Clic sur ACCEPTER
     if(btnAccept) {
         btnAccept.addEventListener('click', function() {
-            // A. On stocke le choix pour la prochaine visite
-            setCookie('watersoft_consent', 'accepted', 365);
+            setCookie('watersoft_consent', 'accepted', 365); // On retient le choix 1 an
+            grantGoogleConsent(); // On prévient Google
             
-            // B. On prévient Google IMMÉDIATEMENT
-            grantGoogleConsent();
-
-            // C. On ferme la bannière
             if(cookieBanner) {
                 cookieBanner.style.display = 'none';
                 cookieBanner.classList.remove('show-banner');
@@ -275,17 +260,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Clic sur REFUSER (ou Continuer sans accepter)
+    // C. Clic sur REFUSER (ou Continuer sans accepter)
     if(btnRefuse) {
         btnRefuse.addEventListener('click', function() {
-            // A. On stocke le refus pour ne plus l'embêter pendant 30 jours
-            setCookie('watersoft_consent', 'refused', 30);
+            setCookie('watersoft_consent', 'refused', 30); // On retient le refus 30 jours
+            // On ne lance PAS grantGoogleConsent()
             
-            // B. On ne change PAS le consentement Google (qui reste à 'denied' par défaut)
-            // C. On ferme la bannière
             if(cookieBanner) {
                 cookieBanner.style.display = 'none';
                 cookieBanner.classList.remove('show-banner');
             }
         });
-    }// FIN DU SCRIPT
+    }
+
+}); // FIN DU SCRIPT
