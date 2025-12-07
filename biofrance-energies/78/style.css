@@ -1809,51 +1809,52 @@ body {
 }
 
 /* =========================================
-   MODE ULTRA-COMPACT POUR MOBILE
-   (Pour éviter que les résultats mangent tout l'écran)
+   COMPACTAGE MOBILE (VERSION FINALE AVEC TEXTE)
    ========================================= */
 
 @media (max-width: 600px) {
     
-    /* 1. On réduit l'espace entre les deux blocs */
+    /* 1. On réduit l'espace entre les deux boîtes */
     .results-container {
         gap: 8px !important;
-        margin-bottom: 15px !important;
+        margin-bottom: 10px !important;
     }
 
-    /* 2. On met les boîtes au régime sec */
+    /* 2. On réduit le rembourrage interne (le vide autour du texte) */
     .result-box {
-        padding: 10px 5px !important; /* Beaucoup moins d'espace interne */
-        min-height: auto !important; /* On enlève la hauteur minimale */
+        padding: 8px 2px !important; /* Très compact sur les côtés */
+        min-height: auto !important;
     }
 
-    /* 3. On réduit la taille des icônes (Éclair / Sac d'argent) */
-    .result-box .icon {
-        font-size: 1.2rem !important; /* Plus petit */
-        margin-bottom: 2px !important;
-        display: inline-block !important; /* Pour gagner de la place */
+    /* 3. On réduit un peu l'icône et le titre */
+    .result-box .icon { 
+        font-size: 1.3rem !important; 
+        margin-bottom: 2px !important; 
+    }
+    .result-box .label { 
+        font-size: 0.7rem !important; 
+        margin-bottom: 0px !important; 
     }
 
-    /* 4. On réduit le titre (Production / Gain) */
-    .result-box .label {
-        font-size: 0.75rem !important;
-        margin-bottom: 2px !important;
-        display: inline-block !important;
-    }
-
-    /* 5. On garde le CHIFFRE bien visible, mais moins énorme */
-    .result-box .value {
-        font-size: 1.4rem !important; /* Était souvent à 1.8rem ou + */
-        margin-top: 2px !important;
+    /* 4. Le Chiffre principal reste visible mais moins haut */
+    .result-box .value { 
+        font-size: 1.2rem !important; 
+        margin: 2px 0 !important; 
         line-height: 1.1 !important;
     }
 
-    /* 6. LE SECRET : ON CACHE LE SUPERFLU SUR MOBILE */
-    /* On cache "12 panneaux", "Energie verte/an", "Basé sur..." */
-    /* On ne garde que l'essentiel pour que ça tienne ! */
+    /* 5. On garde tes textes (Panneaux, Batterie, etc.) mais on les tasse au max */
     .panel-info, 
     .sub-note, 
     .calc-basis {
-        display: none !important; 
+        font-size: 0.65rem !important; /* Texte petit mais lisible */
+        line-height: 1.1 !important;   /* Lignes serrées */
+        margin-top: 2px !important;
+        display: block !important;     /* ON AFFICHE TOUT */
+    }
+    
+    /* Petite sécurité pour éviter que ça bave */
+    .sub-note br {
+        display: none; 
     }
 }
