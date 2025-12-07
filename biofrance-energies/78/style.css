@@ -1807,3 +1807,53 @@ body {
         margin-bottom: 40px; 
     }
 }
+
+/* =========================================
+   MODE ULTRA-COMPACT POUR MOBILE
+   (Pour éviter que les résultats mangent tout l'écran)
+   ========================================= */
+
+@media (max-width: 600px) {
+    
+    /* 1. On réduit l'espace entre les deux blocs */
+    .results-container {
+        gap: 8px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* 2. On met les boîtes au régime sec */
+    .result-box {
+        padding: 10px 5px !important; /* Beaucoup moins d'espace interne */
+        min-height: auto !important; /* On enlève la hauteur minimale */
+    }
+
+    /* 3. On réduit la taille des icônes (Éclair / Sac d'argent) */
+    .result-box .icon {
+        font-size: 1.2rem !important; /* Plus petit */
+        margin-bottom: 2px !important;
+        display: inline-block !important; /* Pour gagner de la place */
+    }
+
+    /* 4. On réduit le titre (Production / Gain) */
+    .result-box .label {
+        font-size: 0.75rem !important;
+        margin-bottom: 2px !important;
+        display: inline-block !important;
+    }
+
+    /* 5. On garde le CHIFFRE bien visible, mais moins énorme */
+    .result-box .value {
+        font-size: 1.4rem !important; /* Était souvent à 1.8rem ou + */
+        margin-top: 2px !important;
+        line-height: 1.1 !important;
+    }
+
+    /* 6. LE SECRET : ON CACHE LE SUPERFLU SUR MOBILE */
+    /* On cache "12 panneaux", "Energie verte/an", "Basé sur..." */
+    /* On ne garde que l'essentiel pour que ça tienne ! */
+    .panel-info, 
+    .sub-note, 
+    .calc-basis {
+        display: none !important; 
+    }
+}
