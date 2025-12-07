@@ -236,7 +236,7 @@
         </div>
     </section>
 
-    <div id="sim-modal" class="modal">
+   <div id="sim-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             
@@ -260,31 +260,20 @@
                 </div>
             </div>
 
-            <div class="advisory-message">
-                <p><strong>⚠️ Information Rentabilité :</strong></p>
-                <p style="margin-top:5px; margin-bottom:10px; font-size:0.85rem;">
-                    La revente du surplus a chuté à <strong>0,04 €</strong>. C'est une perte sèche.
-                </p>
-                <p>
-                    Avec notre système de <strong>Batterie Virtuelle</strong>, votre surplus est stocké pour être restitué la nuit ou l'hiver.
-                    <br><span style="color:#F59E0B; font-weight:700;">Résultat : Vous profitez de 100% de votre production solaire.</span>
-                </p>
-            </div>
-
             <form id="lead-form" onsubmit="submitForm(event)">
-                <p class="form-instruction">
-                    <span style="color:#cbd5e1; font-weight:400;">Et pour vous ?</span><br>
-                    Quelle est la configuration idéale ?
+                <p class="form-instruction" style="margin-top: 20px;">
+                    <span style="color:#cbd5e1; font-weight:400;">Recevez votre étude détaillée :</span>
                 </p>
+
                 <div class="form-group">
-                    <input type="tel" id="user-phone" placeholder="Votre numéro de mobile" required>
-                </div>
-                <button type="submit" class="full-width">Vérifier la compatibilité ></button>
-                <p class="gdpr-text">🔒 Étude confidentielle. Réponse d'un technicien sous 24h.</p>
+                    <input type="email" id="user-email" placeholder="Votre adresse email" required>
+                    </div>
+
+                <button type="submit" class="full-width">Recevoir mon étude ></button>
+                <p class="gdpr-text">🔒 Promis : Pas de spam, pas de revente.</p>
             </form>
         </div>
     </div>
-
     <section class="features-section anim delay-1">
         <div class="container">
             <div class="section-header text-center">
