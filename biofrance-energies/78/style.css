@@ -608,14 +608,6 @@ body {
     border-radius: 4px;
 }
 
-.advisory-message p {
-    font-size: 0.9rem;
-    color: #e2e8f0;
-    margin-bottom: 4px;
-    line-height: 1.5;
-}
-.advisory-message p:last-child { margin-bottom: 0; }
-.advisory-message strong { color: #F59E0B; }
 
 /* Formulaire simplifié */
 .form-instruction {
