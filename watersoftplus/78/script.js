@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(s1) s1.style.display = 'block';
     };
 
-    // --- 7. BANNIÈRE COOKIES ---
+// --- 7. BANNIÈRE COOKIES & CONSENT MODE V2 (CORRIGÉ) ---
     const cookieBanner = document.getElementById('cookie-banner');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
@@ -225,20 +225,49 @@ document.addEventListener('DOMContentLoaded', () => {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    if (getCookie('watersoft_consent') === null) {
+    // Fonction pour dire OUI à Google
+    function grantGoogleConsent() {
+        if(typeof gtag === 'function') {
+            gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted',
+                'analytics_storage': 'granted'
+            });
+            console.log("Consentement Google : ACCORDÉ ✅");
+        }
+    }
+
+    // 1. Au chargement : Vérifier si l'utilisateur a DÉJÀ accepté avant
+    const currentConsent = getCookie('watersoft_consent');
+    
+    if (currentConsent === 'accepted') {
+        // S'il a déjà dit oui hier, on réactive Google tout de suite
+        grantGoogleConsent();
+    } else if (currentConsent === null) {
+        // Si aucun choix n'a été fait, on affiche la bannière après 1s
         setTimeout(function() {
             if(cookieBanner) {
                 cookieBanner.style.display = 'block';
+                // Petit délai pour l'animation CSS si besoin
                 setTimeout(() => {
                     cookieBanner.classList.add('show-banner');
                 }, 50);
             }
         }, 1000);
     }
+    // Si 'refused', on ne fait rien (le default est déjà 'denied' dans le HTML)
 
+    // 2. Clic sur ACCEPTER
     if(btnAccept) {
         btnAccept.addEventListener('click', function() {
+            // A. On stocke le choix pour la prochaine visite
             setCookie('watersoft_consent', 'accepted', 365);
+            
+            // B. On prévient Google IMMÉDIATEMENT
+            grantGoogleConsent();
+
+            // C. On ferme la bannière
             if(cookieBanner) {
                 cookieBanner.style.display = 'none';
                 cookieBanner.classList.remove('show-banner');
@@ -246,14 +275,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 3. Clic sur REFUSER (ou Continuer sans accepter)
     if(btnRefuse) {
         btnRefuse.addEventListener('click', function() {
+            // A. On stocke le refus pour ne plus l'embêter pendant 30 jours
             setCookie('watersoft_consent', 'refused', 30);
+            
+            // B. On ne change PAS le consentement Google (qui reste à 'denied' par défaut)
+            // C. On ferme la bannière
             if(cookieBanner) {
                 cookieBanner.style.display = 'none';
                 cookieBanner.classList.remove('show-banner');
             }
         });
-    }
-
-}); // FIN DU SCRIPT
+    }// FIN DU SCRIPT
