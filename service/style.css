@@ -112,11 +112,11 @@ body {
 }
 
 h1 {
-    font-size: 3.5rem;
-    line-height: 1.1;
+    font-size: 2.8rem;  /* Beaucoup plus élégant */
+    line-height: 1.2;   /* Un peu plus d'air entre les lignes */
     font-weight: 800;
     margin-bottom: 1.5rem;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
 }
 
 .highlight {
