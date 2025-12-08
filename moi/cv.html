@@ -3,304 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Agent Commercial - Sylvain MATIGNON</title>
+    <title>CV Sylvain MATIGNON - Agent Commercial</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* =========================================
-           CONFIG IMPRESSION GLOBALE
-           ========================================= */
         @page { size: A4; margin: 0; }
         @media print { 
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
-            .page-break { break-after: always; page-break-after: always; }
         }
 
-        /* =========================================
-           VARIABLES & BASE
-           ========================================= */
         :root {
-            --primary: #06b6d4;       /* Cyan Tech */
-            --dark-bg: #0a1128;       /* Bleu Nuit Profond */
-            --tech-blue: #1c3b70;     /* Dégradé fond */
-            --text-white: #ffffff;
-            --text-gray: #cbd5e1;
-            --font-main: 'Inter', sans-serif;
+            --bg-color: #0f172a;       /* Fond Bleu Nuit sobre */
+            --text-color: #f1f5f9;     /* Blanc cassé pour le texte */
+            --accent: #22d3ee;         /* Cyan pour les titres */
+            --muted: #94a3b8;          /* Gris pour les dates/détails */
+            --border: rgba(255,255,255,0.1);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--font-main);
-            background-color: var(--dark-bg);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0; padding: 0;
+            font-size: 11pt; /* Taille standard CV */
+            line-height: 1.5;
         }
 
-        /* Conteneur Page A4 Standard */
         .page-a4 {
-            width: 210mm; height: 297mm; position: relative;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
-            color: var(--text-white);
-            display: flex; flex-direction: column;
-            overflow: hidden;
+            width: 210mm; min-height: 297mm; 
+            padding: 15mm; /* Marges classiques */
+            position: relative;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            margin: 0 auto;
+            box-sizing: border-box;
         }
 
-        /* Grille de fond commune */
-        .bg-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px; z-index: 0; pointer-events: none;
+        /* --- HEADER --- */
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        /* =========================================
-           STYLES DU RECTO
-           ========================================= */
-        .content-wrapper-recto {
-            position: relative; z-index: 10; padding: 40px;
-            flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; 
+        .identity h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 1px;
+            color: #fff;
         }
 
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; z-index: 30; }
-        .logo-text { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase; }
-        .logo-accent { color: var(--primary); }
-        .tagline { font-size: 0.8rem; font-weight: 600; background: rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2); }
-
-        .main-titles { position: relative; z-index: 30; margin-bottom: 20px; }
-        .badge { background: var(--primary); color: #0a1128; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
-        h1 { font-size: 3.2rem; line-height: 1; font-weight: 900; margin-bottom: 15px; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .highlight { color: var(--primary); }
-        .subtitle { font-size: 1.1rem; color: #e2e8f0; line-height: 1.5; max-width: 90%; font-weight: 300; }
-
-        .visual-container {
-            position: absolute; bottom: 80px; left: 0; width: 100%; height: 60%;    
-            z-index: 1; display: flex; justify-content: center; align-items: flex-end; pointer-events: none;
-        }
-        /* Style pour ta photo - Met une photo détourée (sans fond) pour un max d'effet */
-        .main-product-img {
-            height: 100%; width: auto; max-width: 100%;
-            object-fit: contain; filter: drop-shadow(0 -10px 40px rgba(0,0,0,0.5));
-            /* Masque en bas pour fondre l'image si elle n'est pas détourée parfaitement */
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        .identity h2 {
+            font-size: 14pt;
+            color: var(--accent);
+            margin: 5px 0 0 0;
+            font-weight: 600;
         }
 
-        .bottom-gradient {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 400px;
-            background: linear-gradient(to top, rgba(10, 17, 40, 1) 10%, rgba(10, 17, 40, 0.6) 60%, transparent 100%);
-            z-index: 5; pointer-events: none;
+        .identity .tagline {
+            font-size: 10pt;
+            color: var(--muted);
+            margin-top: 5px;
+            font-style: italic;
         }
 
-        .bento-row {
-            display: flex; justify-content: space-between; align-items: flex-start; gap: 30px;
-            margin-top: auto; margin-bottom: 60px; position: relative; z-index: 50;
+        .contact-info {
+            text-align: right;
+            font-size: 9pt;
+            color: var(--muted);
+            line-height: 1.6;
         }
-        .bento-item { flex: 1; text-align: left; }
-        .bento-number { font-size: 3rem; font-weight: 900; color: #ffffff; line-height: 1; margin-bottom: 5px; letter-spacing: -1px; text-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-        .bento-title { font-size: 0.9rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; text-shadow: 0 2px 10px rgba(0,0,0,1); }
-        .bento-desc { font-size: 0.8rem; color: #e2e8f0; line-height: 1.4; font-weight: 500; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,1); }
+        
+        .contact-info strong { color: #fff; }
 
-        /* =========================================
-           STYLES DU VERSO
-           ========================================= */
-        .page-verso {
-            background: linear-gradient(to bottom, #0a1128 0%, #0f172a 100%);
-        }
-        .bg-overlay-verso {
-            background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-            background-size: 25px 25px;
-        }
+        /* --- SECTIONS --- */
+        section { margin-bottom: 25px; }
 
-        .content-wrapper-verso {
-            position: relative; z-index: 10; padding: 40px;
-            flex-grow: 1; display: flex; flex-direction: column;
+        h3 {
+            font-size: 12pt;
+            text-transform: uppercase;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
-        .section-header { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
-        .badge-verso {
-            background: rgba(6, 182, 212, 0.1); color: var(--primary);
-            padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; 
-            text-transform: uppercase; display: inline-block; margin-bottom: 5px; border: 1px solid rgba(6, 182, 212, 0.2);
-        }
-        h2 { font-size: 2rem; font-weight: 800; margin-bottom: 5px; line-height: 1.1; }
-        .subtitle-verso { font-size: 0.95rem; color: var(--text-gray); max-width: 90%; opacity: 0.8; }
-        .text-white { color: white !important; }
-
-        .tech-block-container {
-            display: flex; gap: 20px; align-items: flex-start; margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px; border-radius: 12px;
+        /* --- EXPERIENCE (Standard) --- */
+        .job-block {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
         }
 
-        .tech-visual-col { flex: 0 0 90px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .tech-icon-wrapper {
-            width: 60px; height: 60px; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, transparent 100%);
-            border: 1px solid var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.1); margin-bottom: 8px;
-        }
-        .tech-svg { width: 30px; height: 30px; color: var(--primary); }
-        .tech-visual-label { font-size: 0.65rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
-
-        .tech-content-col { flex: 1; }
-        h3 { font-size: 1.1rem; color: var(--primary); font-weight: 700; margin-bottom: 3px; text-transform: uppercase; }
-        .tech-intro { font-size: 0.85rem; color: #94a3b8; font-style: italic; margin-bottom: 12px; border-left: 2px solid var(--primary); padding-left: 10px; }
-
-        .tech-list { list-style: none; padding: 0; }
-        .tech-list li { margin-bottom: 8px; position: relative; padding-left: 18px; }
-        .tech-list li::before { content: '✓'; position: absolute; left: 0; top: 0px; color: var(--primary); font-weight: 900; font-size: 0.9rem; }
-        .tech-list strong { display: block; font-size: 0.9rem; color: white; margin-bottom: 1px; }
-        .tech-list p { font-size: 0.8rem; color: var(--text-gray); line-height: 1.3; margin: 0; }
-
-        /* --- FOOTER VERSO --- */
-        .footer-verso-strip {
-            margin-top: auto; 
-            background: rgba(0, 0, 0, 0.4); 
-            border: 1px solid rgba(6, 182, 212, 0.3); 
-            border-left: 4px solid var(--primary);
-            padding: 15px 30px; 
-            border-radius: 8px; 
-            display: flex; justify-content: space-between; align-items: center; 
-            gap: 30px; backdrop-filter: blur(5px);
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
         }
 
-        .footer-left { flex: 1; min-width: 0; }
-        .footer-label { font-size: 0.7rem; color: var(--text-gray); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }
-        .footer-tags { display: flex; gap: 15px; white-space: nowrap; }
-        .tag-item { font-size: 0.85rem; font-weight: 600; color: white; display: flex; align-items: center; gap: 6px; }
-        .check { color: var(--primary); font-weight: 900; }
+        .job-title { font-size: 12pt; font-weight: 700; color: #fff; }
+        .company { color: var(--accent); font-weight: 600; }
+        .date { font-size: 9pt; color: var(--muted); font-weight: 400; }
 
-        .footer-right { text-align: right; line-height: 1; flex-shrink: 0; }
-        .footer-phone { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin-bottom: 4px; text-shadow: 0 0 20px rgba(6, 182, 212, 0.2); white-space: nowrap; }
-        .footer-web { font-size: 0.8rem; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; display: block; }
+        .job-desc {
+            font-size: 10.5pt;
+            color: #cbd5e1;
+            padding-left: 0;
+        }
+
+        ul { margin: 5px 0 0 20px; padding: 0; }
+        li { margin-bottom: 4px; padding-left: 5px; }
+
+        /* --- COMPETENCES (2 Colonnes) --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .skill-col h4 {
+            color: #fff;
+            font-size: 11pt;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        /* --- FOOTER --- */
+        .footer-note {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            font-size: 9pt;
+            color: var(--muted);
+            text-align: center;
+        }
+        
+        .highlight-digital {
+            color: #a5f3fc; /* Cyan très clair */
+            font-weight: 500;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="page-a4">
-        <div class="bg-overlay"></div>
-        <div class="content-wrapper-recto">
-            <div class="header-row">
-                <div class="logo-text">SYLVAIN MATIGNON<span class="logo-accent">.</span></div>
-                <div class="tagline">🎯 Expert Vente & Stratégie Digitale</div>
+        
+        <header>
+            <div class="identity">
+                <h1>Sylvain MATIGNON</h1>
+                <h2>AGENT COMMERCIAL INDÉPENDANT</h2>
+                <div class="tagline">Expert Vente Habitat & Énergies Renouvelables (30 ans d'expérience)</div>
             </div>
-            <div class="main-titles">
-                <div class="badge">OFFRE DE SERVICE EXCLUSIVE</div>
-                <h1>L'EXPERT VENTE QUI <br>GÉNÈRE <span class="highlight">SES PROPRES LEADS</span></h1>
-                <p class="subtitle"><strong>Autonomie Totale.</strong> Ne payez plus des leads inexploitables. Je construis mon acquisition et je signe mes ventes. Partenariat basé sur le résultat.</p>
+            <div class="contact-info">
+                <strong>Tél :</strong> 06 48 89 34 80<br>
+                <strong>Email :</strong> sylvain.matignon@gmail.com<br>
+                <strong>Mobilité :</strong> [Votre Département]
             </div>
-            
-            <div class="visual-container">
-                 <img src="https://placehold.co/600x800/1c3b70/ffffff?text=PHOTO+DE+SYLVAIN" class="main-product-img" alt="Sylvain Matignon">
-            </div>
-            
-            <div class="bottom-gradient"></div>
-            
-            <div class="bento-row">
-                <div class="bento-item">
-                    <div class="bento-number">30 ANS</div>
-                    <div class="bento-title">Expérience Terrain</div>
-                    <div class="bento-desc">Expertise BtoC Habitat : Eau, PAC, Solaire. Ex-COFNOR.</div>
+        </header>
+
+        <section>
+            <h3>Profil Professionnel</h3>
+            <p style="text-align: justify; color: #cbd5e1;">
+                Commercial confirmé spécialisé dans la vente aux particuliers (BtoC). Mon parcours m'a permis de maîtriser parfaitement les cycles de vente courts (R1/R2) sur des produits techniques. 
+                Je suis autonome dans ma prospection et je possède une double compétence : la vente terrain et la maîtrise des outils digitaux pour optimiser la prise de rendez-vous.
+            </p>
+        </section>
+
+        <section>
+            <h3>Expérience Professionnelle</h3>
+
+            <div class="job-block">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">AGENT COMMERCIAL INDÉPENDANT</span> 
+                        <span class="company">- Secteur Habitat & Énergies</span>
+                    </div>
+                    <span class="date">2021 – Aujourd'hui</span>
                 </div>
-                <div class="bento-item">
-                    <div class="bento-number">100%</div>
-                    <div class="bento-title">Autonomie Digitale</div>
-                    <div class="bento-desc">Je crée mes Landing Pages et mes campagnes Ads.</div>
-                </div>
-                <div class="bento-item">
-                    <div class="bento-number">R1/R2</div>
-                    <div class="bento-title">Cycle Court</div>
-                    <div class="bento-desc">Méthode de closing rodée en 1 ou 2 RDV max.</div>
+                <div class="job-desc">
+                    <strong>Activité :</strong> Vente directe de Pompes à Chaleur (PAC), Photovoltaïque et Poêles à granulés.
+                    <ul>
+                        <li>Gestion complète du cycle de vente : Découverte, Étude technique, Closing, Financement.</li>
+                        <li><strong>Valeur Ajoutée Digitale :</strong> Création autonome de campagnes d'acquisition (Google/Meta Ads) et de pages de présentation pour générer des leads qualifiés.</li>
+                        <li>Gestion de la relation client en totale autonomie.</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="job-block">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">COMMERCIAL EXCLUSIF</span> 
+                        <span class="company">- COFNOR DIFFUSION (Traitement de l'eau)</span>
+                    </div>
+                    <span class="date">2014 – 2021</span>
+                </div>
+                <div class="job-desc">
+                    <ul>
+                        <li>Développement et saturation d'un secteur géographique dédié.</li>
+                        <li>Expertise technique sur l'adoucissement et la filtration de l'eau.</li>
+                        <li>Fidélisation du portefeuille client (SAV, Contrats d'entretien, Parrainage).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job-block">
+                <div class="job-header">
+                    <div>
+                        <span class="job-title">COMMERCIAL / TECHNICO-COMMERCIAL</span> 
+                        <span class="company">- COFNOR SERVICES</span>
+                    </div>
+                    <span class="date">2002 – 2014</span>
+                </div>
+                <div class="job-desc">
+                    <ul>
+                        <li>Commercialisation de solutions multi-énergies : Chauffage bois, PAC, Eau.</li>
+                        <li><strong>L'École du Terrain :</strong> 12 ans de pratique incluant la prospection directe (Porte-à-Porte) et l'animation de foires/salons.</li>
+                        <li>Maîtrise des techniques de vente en "One-Shot" et cycles courts.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Domaines d'Expertise</h3>
+            <div class="skills-grid">
+                
+                <div class="skill-col">
+                    <h4>Vente & Closing (Expertise Principale)</h4>
+                    <ul>
+                        <li>Techniques de vente BtoC (R1 / R2).</li>
+                        <li>Négociation et traitement des objections.</li>
+                        <li>Produits : PAC, Solaire, Eau, Chauffage.</li>
+                        <li>Montage des dossiers de financement.</li>
+                    </ul>
+                </div>
+
+                <div class="skill-col">
+                    <h4>Acquisition & Outils (Le "Plus")</h4>
+                    <ul>
+                        <li><strong>Création de Landing Pages :</strong> Conception de pages produits pour crédibiliser l'offre.</li>
+                        <li><strong>Traffic Management :</strong> Capacité à paramétrer et gérer vos campagnes publicitaires (Google Ads / Facebook Ads).</li>
+                        <li class="highlight-digital"><em>*Configuration technique par mes soins (budget publicitaire à la charge de l'entreprise).</em></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="footer-note">
+            Statut : Agent Commercial / Indépendant — Disponible pour missions ou partenariats techniques.
         </div>
-    </div>
 
-    <div class="page-break"></div>
-
-    <div class="page-a4 page-verso">
-        <div class="bg-overlay bg-overlay-verso"></div>
-        <div class="content-wrapper-verso">
-            
-            <div class="section-header">
-                <div class="badge-verso">MON SAVOIR-FAIRE UNIQUE</div>
-                <h2>MA MÉTHODE : <span class="highlight">LE FULL STACK COMMERCIAL</span></h2>
-                <p class="subtitle-verso">Je ne suis pas juste un vendeur. Je suis une agence d'acquisition et une force de vente en une seule personne.</p>
-            </div>
-
-            <div class="tech-block-container">
-                <div class="tech-visual-col">
-                    <div class="tech-icon-wrapper">
-                        <svg class="tech-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                    </div>
-                    <div class="tech-visual-label">Acquisition</div>
-                </div>
-                <div class="tech-content-col">
-                    <h3>JE GÉNÈRE : <span class="text-white">Traffic & Leads Qualifiés</span></h3>
-                    <p class="tech-intro">Fini la guerre Marketing/Vente. Je fabrique le lead que je vais signer.</p>
-                    <ul class="tech-list">
-                        <li><strong>Création de Landing Pages (LP)</strong><p>Conception de pages de vente qui pré-qualifient le prospect avant l'appel.</p></li>
-                        <li><strong>Traffic Management (Ads)</strong><p>Gestion autonome de campagnes Google & Meta Ads pour alimenter le pipeline.</p></li>
-                        <li><strong>Copywriting Terrain</strong><p>Je rédige mes pubs avec les arguments qui font mouche en clientèle.</p></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tech-block-container">
-                <div class="tech-visual-col">
-                    <div class="tech-icon-wrapper">
-                        <svg class="tech-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    </div>
-                    <div class="tech-visual-label">Ingénierie</div>
-                </div>
-                <div class="tech-content-col">
-                    <h3>JE STRUCTURE : <span class="text-white">Outils d'Aide à la Vente</span></h3>
-                    <p class="tech-intro">Je ne vends pas à l'improvisation. Je vends avec des outils pros.</p>
-                    <ul class="tech-list">
-                        <li><strong>Books de Présentation Interactifs</strong><p>Création de supports visuels pour crédibiliser l'offre et rassurer le client.</p></li>
-                        <li><strong>Scénarisation de Vente</strong><p>Méthode précise : Découverte > Diagnostic > Solution > Financement.</p></li>
-                        <li><strong>Adaptabilité Produit</strong><p>Capable de vendre du Photovoltaïque, de la PAC ou du Traitement de l'eau.</p></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tech-block-container">
-                <div class="tech-visual-col">
-                    <div class="tech-icon-wrapper">
-                        <svg class="tech-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    </div>
-                    <div class="tech-visual-label">Closing</div>
-                </div>
-                <div class="tech-content-col">
-                    <h3>JE TRANSFORME : <span class="text-white">Vente & Signature</span></h3>
-                    <p class="tech-intro">30 ans de terrain. De la résilience du porte-à-porte à la stratégie moderne.</p>
-                    <ul class="tech-list">
-                        <li><strong>Expertise COFNOR (19 ans)</strong><p>Fidélité, saturation de secteur et recommandation client.</p></li>
-                        <li><strong>Indépendant (Depuis 2021)</strong><p>Gestion d'activité en autonomie complète (Prospection + Vente).</p></li>
-                        <li><strong>Philosophie "Résultat"</strong><p>Je ne vends pas mes heures. Je vends du Chiffre d'Affaires signé.</p></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-verso-strip">
-                <div class="footer-left">
-                    <div class="footer-label">MODALITÉS DE COLLABORATION :</div>
-                    <div class="footer-tags">
-                        <div class="tag-item"><span class="check">✔</span> Agent Commercial</div>
-                        <div class="tag-item"><span class="check">✔</span> Apporteur d'Affaires</div>
-                        <div class="tag-item"><span class="check">✔</span> Consultant</div>
-                    </div>
-                </div>
-                <div class="footer-right">
-                    <div class="footer-phone">06 48 89 34 80</div>
-                    <div class="footer-web">sylvain.matignon@gmail.com</div>
-                </div>
-            </div>
-
-        </div>
     </div>
 
 </body>
