@@ -28,14 +28,13 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0; padding: 0;
-            /* Augmentation de l'interligne pour aérer la lecture */
             line-height: 1.6; 
-            font-size: 10.5pt;   
+            /* On passe à 11pt pour mieux remplir la page et augmenter la lisibilité */
+            font-size: 11pt;   
         }
 
         .page-a4 {
             width: 210mm; height: 296mm; 
-            /* Augmentation des marges intérieures (padding) */
             padding: 20mm 20mm; 
             position: relative;
             background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
@@ -47,16 +46,16 @@
         /* --- HEADER --- */
         header {
             border-bottom: 2px solid var(--accent);
-            /* Plus d'espace sous la ligne du header */
             padding-bottom: 25px; 
-            margin-bottom: 40px; 
+            /* On pousse un peu plus le contenu vers le bas */
+            margin-bottom: 45px; 
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
 
         .identity h1 {
-            font-size: 24pt; 
+            font-size: 26pt; 
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
@@ -67,7 +66,7 @@
         }
 
         .identity h2 {
-            font-size: 13pt;
+            font-size: 13.5pt;
             color: var(--accent);
             margin: 8px 0 0 0;
             font-weight: 700;
@@ -75,7 +74,7 @@
         }
 
         .identity .tagline {
-            font-size: 10pt;
+            font-size: 10.5pt;
             color: var(--muted);
             margin-top: 8px;
             font-style: italic;
@@ -83,23 +82,23 @@
 
         .contact-info {
             text-align: right;
-            font-size: 10pt;
+            font-size: 10.5pt;
             color: var(--text-color);
-            line-height: 1.8; /* Coordonnées plus aérées */
+            line-height: 1.8; 
         }
         
         .contact-info strong { color: var(--accent); }
 
         /* --- SECTIONS --- */
-        /* Plus d'espace entre les grandes parties */
-        section { margin-bottom: 45px; } 
+        /* Plus d'espace entre les grandes parties pour équilibrer le vide du bas */
+        section { margin-bottom: 50px; } 
 
         h3 {
-            font-size: 11.5pt;
+            font-size: 12pt;
             text-transform: uppercase;
             color: var(--accent);
             border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
+            padding-bottom: 10px;
             margin-bottom: 25px;
             font-weight: 700;
             letter-spacing: 1px;
@@ -109,35 +108,34 @@
         .profil-text {
             color: #cbd5e1;
             text-align: justify;
-            font-size: 10.5pt;
+            font-size: 11pt;
             margin-bottom: 0;
-            line-height: 1.7; /* Texte de profil très lisible */
+            line-height: 1.7; 
         }
 
         /* --- EXPERIENCE --- */
         .job-block {
-            /* Plus d'espace entre chaque poste */
-            margin-bottom: 30px; 
+            /* On écarte bien les expériences */
+            margin-bottom: 35px; 
         }
 
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
-        .job-title { font-size: 11.5pt; font-weight: 700; color: #fff; text-transform: uppercase; }
-        .company { color: var(--accent); font-weight: 600; font-size: 11pt; }
-        .date { font-size: 9.5pt; color: var(--muted); }
+        .job-title { font-size: 12pt; font-weight: 700; color: #fff; text-transform: uppercase; }
+        .company { color: var(--accent); font-weight: 600; font-size: 11.5pt; }
+        .date { font-size: 10pt; color: var(--muted); }
 
         .job-desc {
-            font-size: 10.5pt;
+            font-size: 11pt;
             color: #cbd5e1;
         }
 
         ul { margin: 10px 0 0 18px; padding: 0; }
-        /* Plus d'espace entre les puces */
         li { margin-bottom: 6px; padding-left: 5px; }
         
         strong.highlight { color: #fff; font-weight: 600; }
@@ -146,28 +144,28 @@
         .skills-container {
             display: flex;
             gap: 30px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .skill-col {
             flex: 1;
             background: rgba(255,255,255,0.03);
-            /* Padding interne des blocs compétences augmenté */
-            padding: 20px; 
+            /* On donne du volume aux boîtes */
+            padding: 25px; 
             border-radius: 8px;
             border: 1px solid var(--border);
         }
 
         .skill-col h4 {
             color: #fff;
-            font-size: 11pt;
+            font-size: 11.5pt;
             margin: 0 0 15px 0;
             padding-left: 10px;
-            border-left: 3px solid var(--accent);
+            border-left: 4px solid var(--accent); /* Bordure un peu plus épaisse */
         }
         
         .skill-col ul { margin: 0 0 0 12px; }
-        .skill-col li { margin-bottom: 8px; font-size: 10pt; }
+        .skill-col li { margin-bottom: 8px; font-size: 10.5pt; }
 
         /* --- FOOTER --- */
         .footer-note {
@@ -176,7 +174,7 @@
             left: 0;
             right: 0;
             text-align: center;
-            font-size: 9pt;
+            font-size: 9.5pt;
             color: var(--muted);
             border-top: 1px solid var(--border);
             padding-top: 15px;
