@@ -6,7 +6,7 @@
     <title>CV Sylvain MATIGNON - Agent Commercial</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* Force la taille A4 et supprime les marges navigateur */
@@ -28,151 +28,160 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0; padding: 0;
-            line-height: 1.35; /* Interligne légèrement réduit */
-            font-size: 10pt;   /* Taille optimisée pour tout faire tenir */
+            /* Augmentation de l'interligne pour aérer la lecture */
+            line-height: 1.6; 
+            font-size: 10.5pt;   
         }
 
         .page-a4 {
-            /* Hauteur fixée légèrement sous A4 pour éviter le débordement */
             width: 210mm; height: 296mm; 
-            padding: 12mm 15mm; 
+            /* Augmentation des marges intérieures (padding) */
+            padding: 20mm 20mm; 
             position: relative;
             background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
             margin: 0 auto;
             box-sizing: border-box;
-            overflow: hidden; /* Coupe ce qui dépasse au cas où */
+            overflow: hidden; 
         }
 
         /* --- HEADER --- */
         header {
             border-bottom: 2px solid var(--accent);
-            padding-bottom: 10px;
-            margin-bottom: 15px; /* Espace réduit */
+            /* Plus d'espace sous la ligne du header */
+            padding-bottom: 25px; 
+            margin-bottom: 40px; 
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
 
         .identity h1 {
-            font-size: 22pt; /* Titre un peu plus compact */
+            font-size: 24pt; 
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
             color: #fff;
             letter-spacing: -0.5px;
-            line-height: 1;
+            line-height: 1.1;
+            margin-bottom: 5px;
         }
 
         .identity h2 {
-            font-size: 12pt;
+            font-size: 13pt;
             color: var(--accent);
-            margin: 4px 0 0 0;
+            margin: 8px 0 0 0;
             font-weight: 700;
             text-transform: uppercase;
         }
 
         .identity .tagline {
-            font-size: 9pt;
+            font-size: 10pt;
             color: var(--muted);
-            margin-top: 3px;
+            margin-top: 8px;
             font-style: italic;
         }
 
         .contact-info {
             text-align: right;
-            font-size: 9pt;
+            font-size: 10pt;
             color: var(--text-color);
-            line-height: 1.4;
+            line-height: 1.8; /* Coordonnées plus aérées */
         }
         
         .contact-info strong { color: var(--accent); }
 
         /* --- SECTIONS --- */
-        section { margin-bottom: 18px; } /* Marges entre sections réduites */
+        /* Plus d'espace entre les grandes parties */
+        section { margin-bottom: 45px; } 
 
         h3 {
-            font-size: 10.5pt;
+            font-size: 11.5pt;
             text-transform: uppercase;
             color: var(--accent);
             border-bottom: 1px solid var(--border);
-            padding-bottom: 4px;
-            margin-bottom: 10px;
+            padding-bottom: 8px;
+            margin-bottom: 25px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
         /* --- PROFIL --- */
         .profil-text {
             color: #cbd5e1;
             text-align: justify;
-            font-size: 9.5pt;
+            font-size: 10.5pt;
             margin-bottom: 0;
+            line-height: 1.7; /* Texte de profil très lisible */
         }
 
         /* --- EXPERIENCE --- */
         .job-block {
-            margin-bottom: 12px; /* Bloc compact */
+            /* Plus d'espace entre chaque poste */
+            margin-bottom: 30px; 
         }
 
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 3px;
+            margin-bottom: 6px;
         }
 
-        .job-title { font-size: 10.5pt; font-weight: 700; color: #fff; text-transform: uppercase; }
-        .company { color: var(--accent); font-weight: 600; font-size: 10pt; }
-        .date { font-size: 8.5pt; color: var(--muted); }
+        .job-title { font-size: 11.5pt; font-weight: 700; color: #fff; text-transform: uppercase; }
+        .company { color: var(--accent); font-weight: 600; font-size: 11pt; }
+        .date { font-size: 9.5pt; color: var(--muted); }
 
         .job-desc {
-            font-size: 9.5pt;
+            font-size: 10.5pt;
             color: #cbd5e1;
         }
 
-        ul { margin: 3px 0 0 18px; padding: 0; }
-        li { margin-bottom: 2px; padding-left: 3px; }
+        ul { margin: 10px 0 0 18px; padding: 0; }
+        /* Plus d'espace entre les puces */
+        li { margin-bottom: 6px; padding-left: 5px; }
         
         strong.highlight { color: #fff; font-weight: 600; }
 
         /* --- COMPETENCES --- */
         .skills-container {
             display: flex;
-            gap: 25px;
-            margin-top: 5px;
+            gap: 30px;
+            margin-top: 15px;
         }
 
         .skill-col {
             flex: 1;
             background: rgba(255,255,255,0.03);
-            padding: 10px 12px;
-            border-radius: 6px;
+            /* Padding interne des blocs compétences augmenté */
+            padding: 20px; 
+            border-radius: 8px;
             border: 1px solid var(--border);
         }
 
         .skill-col h4 {
             color: #fff;
-            font-size: 10pt;
-            margin: 0 0 8px 0;
-            padding-left: 8px;
+            font-size: 11pt;
+            margin: 0 0 15px 0;
+            padding-left: 10px;
             border-left: 3px solid var(--accent);
         }
         
         .skill-col ul { margin: 0 0 0 12px; }
-        .skill-col li { margin-bottom: 3px; font-size: 9pt; }
+        .skill-col li { margin-bottom: 8px; font-size: 10pt; }
 
         /* --- FOOTER --- */
         .footer-note {
             position: absolute;
-            bottom: 10mm; /* Remonté légèrement */
+            bottom: 15mm; 
             left: 0;
             right: 0;
             text-align: center;
-            font-size: 8pt;
+            font-size: 9pt;
             color: var(--muted);
             border-top: 1px solid var(--border);
-            padding-top: 10px;
-            margin: 0 15mm;
+            padding-top: 15px;
+            margin: 0 20mm;
+            opacity: 0.8;
         }
 
     </style>
