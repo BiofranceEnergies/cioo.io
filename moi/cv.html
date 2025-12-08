@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Sylvain MATIGNON - Agent Commercial</title>
+    <title>CV Sylvain MATIGNON - Agent Commercial Expert</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
         @page { size: A4; margin: 0; }
@@ -15,10 +15,10 @@
         }
 
         :root {
-            --bg-color: #0f172a;       /* Fond Bleu Nuit sobre */
-            --text-color: #f1f5f9;     /* Blanc cassé pour le texte */
-            --accent: #22d3ee;         /* Cyan pour les titres */
-            --muted: #94a3b8;          /* Gris pour les dates/détails */
+            --bg-color: #0f172a;       /* Fond Bleu Nuit */
+            --text-color: #f1f5f9;     /* Blanc cassé */
+            --accent: #06b6d4;         /* Cyan Tech */
+            --muted: #94a3b8;          /* Gris clair */
             --border: rgba(255,255,255,0.1);
         }
 
@@ -27,13 +27,12 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0; padding: 0;
-            font-size: 11pt; /* Taille standard CV */
             line-height: 1.5;
         }
 
         .page-a4 {
             width: 210mm; min-height: 297mm; 
-            padding: 15mm; /* Marges classiques */
+            padding: 15mm; 
             position: relative;
             background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
             margin: 0 auto;
@@ -44,26 +43,27 @@
         header {
             border-bottom: 2px solid var(--accent);
             padding-bottom: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
 
         .identity h1 {
-            font-size: 24pt;
-            font-weight: 700;
+            font-size: 26pt;
+            font-weight: 800;
             text-transform: uppercase;
             margin: 0;
-            letter-spacing: 1px;
             color: #fff;
+            letter-spacing: -1px;
         }
 
         .identity h2 {
             font-size: 14pt;
             color: var(--accent);
             margin: 5px 0 0 0;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .identity .tagline {
@@ -76,29 +76,36 @@
         .contact-info {
             text-align: right;
             font-size: 9pt;
-            color: var(--muted);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
-        .contact-info strong { color: #fff; }
+        .contact-info strong { color: var(--accent); }
 
         /* --- SECTIONS --- */
-        section { margin-bottom: 25px; }
+        section { margin-bottom: 30px; }
 
         h3 {
-            font-size: 12pt;
+            font-size: 11pt;
             text-transform: uppercase;
             color: var(--accent);
             border-bottom: 1px solid var(--border);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            font-weight: 700;
             letter-spacing: 1px;
         }
 
-        /* --- EXPERIENCE (Standard) --- */
+        /* --- PROFIL --- */
+        .profil-text {
+            color: #cbd5e1;
+            text-align: justify;
+            font-size: 10.5pt;
+        }
+
+        /* --- EXPERIENCE --- */
         .job-block {
-            margin-bottom: 20px;
-            page-break-inside: avoid;
+            margin-bottom: 25px;
         }
 
         .job-header {
@@ -108,47 +115,56 @@
             margin-bottom: 8px;
         }
 
-        .job-title { font-size: 12pt; font-weight: 700; color: #fff; }
+        .job-title { font-size: 12pt; font-weight: 700; color: #fff; text-transform: uppercase; }
         .company { color: var(--accent); font-weight: 600; }
-        .date { font-size: 9pt; color: var(--muted); font-weight: 400; }
+        .date { font-size: 9pt; color: var(--muted); }
 
         .job-desc {
             font-size: 10.5pt;
             color: #cbd5e1;
-            padding-left: 0;
         }
 
-        ul { margin: 5px 0 0 20px; padding: 0; }
-        li { margin-bottom: 4px; padding-left: 5px; }
+        ul { margin: 8px 0 0 20px; padding: 0; }
+        li { margin-bottom: 5px; padding-left: 5px; }
+        
+        strong.highlight { color: #fff; font-weight: 600; }
 
-        /* --- COMPETENCES (2 Colonnes) --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        /* --- COMPETENCES --- */
+        .skills-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 10px;
+        }
+
+        .skill-col {
+            flex: 1;
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
         }
 
         .skill-col h4 {
             color: #fff;
             font-size: 11pt;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--accent);
+            margin: 0 0 15px 0;
             padding-left: 10px;
+            border-left: 3px solid var(--accent);
         }
+        
+        .skill-col ul { margin: 0 0 0 15px; }
 
         /* --- FOOTER --- */
         .footer-note {
-            margin-top: 40px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-            font-size: 9pt;
-            color: var(--muted);
+            position: absolute;
+            bottom: 15mm;
+            left: 15mm;
+            right: 15mm;
             text-align: center;
-        }
-        
-        .highlight-digital {
-            color: #a5f3fc; /* Cyan très clair */
-            font-weight: 500;
+            font-size: 8pt;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
         }
 
     </style>
@@ -160,7 +176,7 @@
         <header>
             <div class="identity">
                 <h1>Sylvain MATIGNON</h1>
-                <h2>AGENT COMMERCIAL INDÉPENDANT</h2>
+                <h2>Agent Commercial Indépendant</h2>
                 <div class="tagline">Expert Vente Habitat & Énergies Renouvelables (30 ans d'expérience)</div>
             </div>
             <div class="contact-info">
@@ -172,9 +188,8 @@
 
         <section>
             <h3>Profil Professionnel</h3>
-            <p style="text-align: justify; color: #cbd5e1;">
-                Commercial confirmé spécialisé dans la vente aux particuliers (BtoC). Mon parcours m'a permis de maîtriser parfaitement les cycles de vente courts (R1/R2) sur des produits techniques. 
-                Je suis autonome dans ma prospection et je possède une double compétence : la vente terrain et la maîtrise des outils digitaux pour optimiser la prise de rendez-vous.
+            <p class="profil-text">
+                Commercial confirmé spécialisé dans la vente aux particuliers (BtoC). Au-delà de mes résultats en cycle court (R1/R2), j'apporte une expertise sur la <strong>méthodologie de vente</strong>. Je sais auditer ce qui se passe sur le terrain pour remplacer l'improvisation par des outils visuels et structurés qui convertissent.
             </p>
         </section>
 
@@ -193,8 +208,8 @@
                     <strong>Activité :</strong> Vente directe de Pompes à Chaleur (PAC), Photovoltaïque et Poêles à granulés.
                     <ul>
                         <li>Gestion complète du cycle de vente : Découverte, Étude technique, Closing, Financement.</li>
-                        <li><strong>Valeur Ajoutée Digitale :</strong> Création autonome de campagnes d'acquisition (Google/Meta Ads) et de pages de présentation pour générer des leads qualifiés.</li>
-                        <li>Gestion de la relation client en totale autonomie.</li>
+                        <li><strong>Valeur Ajoutée Digitale :</strong> Pilotage technique de campagnes d'acquisition (Google/Meta Ads) pour générer des leads qualifiés <em>(Budget publicitaire à la charge du mandant)</em>.</li>
+                        <li>Gestion autonome de la relation client.</li>
                     </ul>
                 </div>
             </div>
@@ -236,24 +251,23 @@
 
         <section>
             <h3>Domaines d'Expertise</h3>
-            <div class="skills-grid">
+            <div class="skills-container">
                 
                 <div class="skill-col">
-                    <h4>Vente & Closing (Expertise Principale)</h4>
+                    <h4>Vente & Diagnostic Terrain</h4>
                     <ul>
-                        <li>Techniques de vente BtoC (R1 / R2).</li>
-                        <li>Négociation et traitement des objections.</li>
-                        <li>Produits : PAC, Solaire, Eau, Chauffage.</li>
-                        <li>Montage des dossiers de financement.</li>
+                        <li><strong>Closing :</strong> Maîtrise des cycles courts (R1 / R2).</li>
+                        <li><strong>Audit des Méthodes :</strong> Analyse in situ des outils utilisés par le commercial (Tablette, Book, Discours) pour identifier pourquoi ça ne vend pas.</li>
+                        <li><strong>Structuration :</strong> Remplacer le "bagou" aléatoire par une méthode visuelle et replicable.</li>
                     </ul>
                 </div>
 
                 <div class="skill-col">
-                    <h4>Acquisition & Outils (Le "Plus")</h4>
+                    <h4>Création d'Outils & Acquisition</h4>
                     <ul>
-                        <li><strong>Création de Landing Pages :</strong> Conception de pages produits pour crédibiliser l'offre.</li>
-                        <li><strong>Traffic Management :</strong> Capacité à paramétrer et gérer vos campagnes publicitaires (Google Ads / Facebook Ads).</li>
-                        <li class="highlight-digital"><em>*Configuration technique par mes soins (budget publicitaire à la charge de l'entreprise).</em></li>
+                        <li><strong>Supports de Vente :</strong> Création de Books et présentations visuelles pour crédibiliser l'offre en RDV.</li>
+                        <li><strong>Acquisition Digitale :</strong> Configuration technique des campagnes (Google Ads / Meta) pour alimenter les vendeurs.</li>
+                        <li><em>*Synergie totale entre le message publicitaire (Lead) et le discours terrain (Vente).</em></li>
                     </ul>
                 </div>
 
