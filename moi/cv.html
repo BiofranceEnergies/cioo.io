@@ -6,12 +6,13 @@
     <title>CV Sylvain MATIGNON - Agent Commercial</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        @page { size: A4; margin: 0; }
+        /* Force la taille A4 et supprime les marges navigateur */
+        @page { size: A4; margin: 0mm; }
         @media print { 
-            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
+            body { margin: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; } 
         }
 
         :root {
@@ -19,7 +20,7 @@
             --text-color: #f1f5f9;     /* Blanc cassé */
             --accent: #06b6d4;         /* Cyan Tech */
             --muted: #94a3b8;          /* Gris clair */
-            --border: rgba(255,255,255,0.1);
+            --border: rgba(255,255,255,0.15);
         }
 
         body {
@@ -27,49 +28,53 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0; padding: 0;
-            line-height: 1.5;
+            line-height: 1.35; /* Interligne légèrement réduit */
+            font-size: 10pt;   /* Taille optimisée pour tout faire tenir */
         }
 
         .page-a4 {
-            width: 210mm; min-height: 297mm; 
-            padding: 15mm; 
+            /* Hauteur fixée légèrement sous A4 pour éviter le débordement */
+            width: 210mm; height: 296mm; 
+            padding: 12mm 15mm; 
             position: relative;
             background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
             margin: 0 auto;
             box-sizing: border-box;
+            overflow: hidden; /* Coupe ce qui dépasse au cas où */
         }
 
         /* --- HEADER --- */
         header {
             border-bottom: 2px solid var(--accent);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            padding-bottom: 10px;
+            margin-bottom: 15px; /* Espace réduit */
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
 
         .identity h1 {
-            font-size: 26pt;
+            font-size: 22pt; /* Titre un peu plus compact */
             font-weight: 800;
             text-transform: uppercase;
             margin: 0;
             color: #fff;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
+            line-height: 1;
         }
 
         .identity h2 {
-            font-size: 14pt;
+            font-size: 12pt;
             color: var(--accent);
-            margin: 5px 0 0 0;
+            margin: 4px 0 0 0;
             font-weight: 700;
             text-transform: uppercase;
         }
 
         .identity .tagline {
-            font-size: 10pt;
+            font-size: 9pt;
             color: var(--muted);
-            margin-top: 5px;
+            margin-top: 3px;
             font-style: italic;
         }
 
@@ -77,94 +82,97 @@
             text-align: right;
             font-size: 9pt;
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.4;
         }
         
         .contact-info strong { color: var(--accent); }
 
         /* --- SECTIONS --- */
-        section { margin-bottom: 30px; }
+        section { margin-bottom: 18px; } /* Marges entre sections réduites */
 
         h3 {
-            font-size: 11pt;
+            font-size: 10.5pt;
             text-transform: uppercase;
             color: var(--accent);
             border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         /* --- PROFIL --- */
         .profil-text {
             color: #cbd5e1;
             text-align: justify;
-            font-size: 10.5pt;
+            font-size: 9.5pt;
+            margin-bottom: 0;
         }
 
         /* --- EXPERIENCE --- */
         .job-block {
-            margin-bottom: 25px;
+            margin-bottom: 12px; /* Bloc compact */
         }
 
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 8px;
+            margin-bottom: 3px;
         }
 
-        .job-title { font-size: 12pt; font-weight: 700; color: #fff; text-transform: uppercase; }
-        .company { color: var(--accent); font-weight: 600; }
-        .date { font-size: 9pt; color: var(--muted); }
+        .job-title { font-size: 10.5pt; font-weight: 700; color: #fff; text-transform: uppercase; }
+        .company { color: var(--accent); font-weight: 600; font-size: 10pt; }
+        .date { font-size: 8.5pt; color: var(--muted); }
 
         .job-desc {
-            font-size: 10.5pt;
+            font-size: 9.5pt;
             color: #cbd5e1;
         }
 
-        ul { margin: 8px 0 0 20px; padding: 0; }
-        li { margin-bottom: 5px; padding-left: 5px; }
+        ul { margin: 3px 0 0 18px; padding: 0; }
+        li { margin-bottom: 2px; padding-left: 3px; }
         
         strong.highlight { color: #fff; font-weight: 600; }
 
         /* --- COMPETENCES --- */
         .skills-container {
             display: flex;
-            gap: 40px;
-            margin-top: 10px;
+            gap: 25px;
+            margin-top: 5px;
         }
 
         .skill-col {
             flex: 1;
             background: rgba(255,255,255,0.03);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 10px 12px;
+            border-radius: 6px;
             border: 1px solid var(--border);
         }
 
         .skill-col h4 {
             color: #fff;
-            font-size: 11pt;
-            margin: 0 0 15px 0;
-            padding-left: 10px;
+            font-size: 10pt;
+            margin: 0 0 8px 0;
+            padding-left: 8px;
             border-left: 3px solid var(--accent);
         }
         
-        .skill-col ul { margin: 0 0 0 15px; }
+        .skill-col ul { margin: 0 0 0 12px; }
+        .skill-col li { margin-bottom: 3px; font-size: 9pt; }
 
         /* --- FOOTER --- */
         .footer-note {
             position: absolute;
-            bottom: 15mm;
-            left: 15mm;
-            right: 15mm;
+            bottom: 10mm; /* Remonté légèrement */
+            left: 0;
+            right: 0;
             text-align: center;
             font-size: 8pt;
             color: var(--muted);
             border-top: 1px solid var(--border);
-            padding-top: 15px;
+            padding-top: 10px;
+            margin: 0 15mm;
         }
 
     </style>
@@ -254,22 +262,22 @@
             <h3>Domaines d'Expertise</h3>
             <div class="skills-container">
                 
-               <div class="skill-col">
-                    <h4>Outils & Acquisition (Leviers)</h4>
+                <div class="skill-col">
+                    <h4>Vente & Terrain</h4>
                     <ul>
-                        <li><strong>Web & Landing Pages :</strong> Création technique (HTML) de pages de vente pour transformer le clic en prospect.</li>
-                        <li><strong>Digital :</strong> Configuration des campagnes d'acquisition (Google Ads / Meta) pour alimenter le pipeline.</li>
-                        <li><strong>Supports Terrain :</strong> Conception de Books et visuels d'aide à la vente.</li>
-                        <li><em>*Capacité à générer et traiter mes propres leads de A à Z.</em></li>
+                        <li><strong>Closing :</strong> Maîtrise des cycles courts (R1 / R2).</li>
+                        <li><strong>Optimisation :</strong> Analyse des retours clients pour affiner l'argumentaire et les supports de vente.</li>
+                        <li><strong>Méthodologie :</strong> Approche structurée et visuelle pour rassurer le client.</li>
                     </ul>
                 </div>
 
                 <div class="skill-col">
                     <h4>Outils & Acquisition (Leviers)</h4>
                     <ul>
-                        <li><strong>Supports de Vente :</strong> Création de Books et présentations visuelles pour crédibiliser l'offre.</li>
-                        <li><strong>Digital :</strong> Compétence technique pour configurer des campagnes d'acquisition (Google Ads / Meta) si besoin.</li>
-                        <li><em>*Capacité à générer mes propres leads en autonomie.</em></li>
+                        <li><strong>Web & Landing Pages :</strong> Création technique (HTML) de pages de vente pour transformer le clic en prospect.</li>
+                        <li><strong>Digital :</strong> Configuration des campagnes d'acquisition (Google Ads / Meta) pour alimenter le pipeline.</li>
+                        <li><strong>Supports Terrain :</strong> Conception de Books et visuels d'aide à la vente.</li>
+                        <li><em>*Capacité à générer et traiter mes propres leads de A à Z.</em></li>
                     </ul>
                 </div>
 
