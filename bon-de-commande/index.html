@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bon de Commande - WaterSoft+</title>
+    <style>
+        body { font-family: 'Helvetica', sans-serif; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 40px; border-bottom: 2px solid #0056b3; padding-bottom: 20px; }
+        .logo { color: #0056b3; font-size: 24px; font-weight: bold; }
+        .infos-pro { font-size: 14px; line-height: 1.4; }
+        
+        .client-box { background: #f4f4f4; padding: 15px; border-radius: 5px; margin-bottom: 30px; }
+        .client-box h3 { margin-top: 0; color: #0056b3; }
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th { background: #0056b3; color: white; text-align: left; padding: 10px; }
+        td { border-bottom: 1px solid #ddd; padding: 10px; }
+        .total-row td { font-weight: bold; font-size: 16px; background: #eef; }
+        
+        .conditions { font-size: 11px; color: #666; margin-top: 40px; border-top: 1px solid #ccc; padding-top: 10px; }
+        .legal { font-size: 10px; margin-top: 20px; text-align: center; }
+        
+        /* Force le saut de page pour l'impression PDF si besoin */
+        .page-break { page-break-before: always; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="infos-pro">
+            <div class="logo">WATERSOFT +</div>
+            <p>
+                Expert Traitement de l'Eau<br>
+                12 Rue de la République, 27XXX Évreux<br>
+                SIRET : 123 456 789 00012<br>
+                Tél : 06 XX XX XX XX
+            </p>
+        </div>
+        <div class="infos-commande">
+            <h2>BON DE COMMANDE</h2>
+            <p><strong>N° :</strong> BC-2025-001</p>
+            <p><strong>Date :</strong> 09/12/2025</p>
+        </div>
+    </div>
+
+    <div class="client-box">
+        <h3>Informations Client</h3>
+        <p>
+            <strong>Nom :</strong> M. DURAND Pierre<br>
+            <strong>Adresse :</strong> 5 Impasse des Lilas, 27000 Évreux<br>
+            <strong>Téléphone :</strong> 06 XX XX XX XX (Pour signature SMS)<br>
+            <strong>Email :</strong> pierre.durand@email.com
+        </p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Désignation</th>
+                <th>Qté</th>
+                <th>Prix Unitaire HT</th>
+                <th>Total HT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <strong>Adoucisseur d'eau NOVAQUA - Modèle 2025</strong><br>
+                    <small>Inclus : Fourniture, Pose, Raccordement, Mise en service.</small>
+                </td>
+                <td>1</td>
+                <td>1 600,00 €</td>
+                <td>1 600,00 €</td>
+            </tr>
+            </tbody>
+        <tfoot class="total-row">
+            <tr>
+                <td colspan="2"></td>
+                <td>Total HT</td>
+                <td>1 600,00 €</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td>TVA (10%)</td>
+                <td>160,00 €</td>
+            </tr>
+            <tr style="font-size: 18px; color: #0056b3;">
+                <td colspan="2"></td>
+                <td><strong>TOTAL TTC</strong></td>
+                <td><strong>1 760,00 €</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div style="margin-bottom: 30px;">
+        <p><strong>Conditions de règlement :</strong></p>
+        <ul>
+            <li>Acompte de 30% à la commande (528,00 €) par virement/chèque.</li>
+            <li>Solde à la mise en service.</li>
+        </ul>
+    </div>
+
+    <div class="conditions">
+        <p><strong>Délai d'intervention :</strong> Installation prévue sous 3 semaines maximum.</p>
+        <p><strong>Rétractation :</strong> Conformément à l'article L221-18 du Code de la consommation, vous disposez d'un délai de 14 jours pour exercer votre droit de rétractation.</p>
+        <p><strong>Garantie :</strong> Matériel garanti 10 ans (selon conditions constructeur). Installation garantie par Assurance Décennale [Nom Assureur].</p>
+    </div>
+
+    <div class="page-break"></div>
+    
+    <h3>BORDEREAU DE RÉTRACTATION</h3>
+    <p>Veuillez compléter et renvoyer le présent formulaire uniquement si vous souhaitez vous rétracter du contrat.</p>
+    <div style="border: 1px dashed #333; padding: 20px; margin-top: 20px;">
+        <p>À l'attention de WaterSoft+...</p>
+        <p>Je vous notifie par la présente ma rétractation du contrat portant sur la vente du bien ci-dessous :</p>
+        <p>Commandé le : ....................................................</p>
+        <p>Nom du consommateur : ....................................................</p>
+        <p>Adresse du consommateur : ....................................................</p>
+        <p>Date : .......................</p>
+        <p>Signature :</p>
+    </div>
+
+</body>
+</html>
