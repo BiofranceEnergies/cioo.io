@@ -492,3 +492,67 @@ body {
     .footer-list li { justify-content: center; }
     .cookie-card { left: 10px; right: 10px; bottom: 10px; width: auto; }
 }
+/* --- NOUVEAU STYLE "SOUS LE CAPOT" (ADAPTÉ LP) --- */
+
+.tech-showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+/* Image Produit avec effet Glow */
+.tech-visual-col { position: relative; display: flex; justify-content: center; }
+.product-glow-wrapper { position: relative; width: 100%; max-width: 400px; }
+.tech-product-img { width: 100%; height: auto; filter: drop-shadow(0 0 30px rgba(6,182,212,0.2)); }
+
+.tech-float-badge {
+    position: absolute;
+    background: rgba(15, 23, 42, 0.9); border: 1px solid var(--primary);
+    padding: 8px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.badge-top-right { top: 10%; right: -10px; }
+.badge-bottom-left { bottom: 15%; left: -10px; }
+
+/* Cartes Techniques */
+.tech-specs-col { display: flex; flex-direction: column; gap: 15px; }
+.tech-spec-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 20px; display: flex; gap: 15px; transition: 0.3s;
+}
+.tech-spec-card:hover { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+
+.spec-icon {
+    width: 40px; height: 40px; background: rgba(6,182,212,0.15); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0;
+}
+.spec-icon svg { width: 24px; height: 24px; }
+
+.spec-content h3 { font-size: 1rem; color: var(--primary); margin-bottom: 8px; font-weight: 800; text-transform: uppercase; }
+.spec-subtitle { color: white; font-weight: 400; opacity: 0.8; font-size: 0.9rem; margin-left: 5px; text-transform: none; }
+.spec-content ul { list-style: none; padding: 0; margin: 0; }
+.spec-content li { font-size: 0.85rem; color: #cbd5e1; margin-bottom: 4px; padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1); }
+.spec-content strong { color: white; font-weight: 600; }
+
+/* Bandeau Offre */
+.final-offer-bar {
+    background: linear-gradient(90deg, rgba(6,182,212,0.1) 0%, rgba(6,182,212,0.05) 100%);
+    border: 1px solid rgba(6,182,212,0.3); border-radius: 12px; padding: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.offer-features { display: flex; gap: 20px; font-weight: 700; color: white; font-size: 1rem; }
+.offer-badge {
+    background: var(--primary); color: #0a1128; padding: 8px 16px; border-radius: 6px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1px;
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+    .tech-showcase-grid { grid-template-columns: 1fr; gap: 30px; }
+    .tech-visual-col { order: -1; } /* Image en premier */
+    .final-offer-bar { flex-direction: column; gap: 15px; text-align: center; }
+    .offer-features { flex-direction: column; gap: 10px; }
+    .tech-spec-card { padding: 15px; }
+    .spec-subtitle { display: block; margin-left: 0; margin-top: 2px; }
+}
