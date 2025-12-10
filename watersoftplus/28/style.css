@@ -492,3 +492,31 @@ body {
     .footer-list li { justify-content: center; }
     .cookie-card { left: 10px; right: 10px; bottom: 10px; width: auto; }
 }
+/* 1. CORRECTION DU BADGE "CLÉ EN MAIN" (Pour qu'il ne ressemble pas à un bouton) */
+.offer-badge {
+    background: transparent; /* On enlève le fond plein */
+    border: 1px solid var(--primary); /* Juste un bord fin */
+    color: var(--primary);
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    cursor: default; /* Le curseur ne change pas en main */
+    box-shadow: none; /* Pas d'ombre */
+    opacity: 0.9;
+}
+
+/* 2. AÉRATION DU TEXTE TECHNIQUE */
+.spec-content li {
+    margin-bottom: 8px; /* On passe de 4px à 8px pour aérer */
+    line-height: 1.5;   /* Meilleure lecture */
+}
+
+/* 3. RECALAGE DES BADGES IMAGES */
+.badge-bottom-left { 
+    bottom: 25px; /* On remonte un peu (était à 15%) */
+    left: 0px; 
+}
+.badge-top-right {
+    top: 20px;
+    right: 0px;
+}
