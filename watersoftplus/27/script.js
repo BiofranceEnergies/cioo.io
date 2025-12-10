@@ -1,7 +1,3 @@
-/* =========================================================
-   WATERSOFT 2025 - SCRIPT FINAL (VERSION COMPLETE & CORRIGÉE)
-   ========================================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. CONFIGURATION & DONNÉES ---
@@ -50,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 4. CŒUR DU CALCULATEUR (LE CLICK "CALCULER") ---
+    // C'EST ICI QUE J'AI AJOUTÉ L'ENVOI AU TABLEUR
     const btnCalculate = document.querySelector('#btn-calculate');
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
@@ -70,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // B. Calculs Financiers
             finalPriceTTC = Math.round(priceHT * (1 + TVA_RATE));
             const ecoEnergie = Math.round(selectedPeople * 800 * 0.27 * 0.1); 
-            const ecoProduits = Math.round(selectedPeople * 220 * 0.40);      
+            const ecoProduits = Math.round(selectedPeople * 220 * 0.40);       
             const ecoMateriel = 80; 
             estimatedSavings = ecoEnergie + ecoProduits + ecoMateriel;
 
@@ -80,8 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     'event_category': 'Engagement',
                     'event_label': 'Calcul : ' + selectedModelName
                 });
-                console.log("Signal envoyé : Simulation");
+                console.log("Signal Ads envoyé : Simulation");
             }
+
+            // --- NOUVEAU : ENVOI SILENCIEUX AU TABLEUR ---
+            // Cela enregistre la simulation même sans numéro de téléphone
+            const simData = new FormData();
+            simData.append("phase", "Simulation (Sans N°)"); // Sera visible dans la colonne Phase
+            simData.append("source", "Watersoft LP");
+            simData.append("phone", "Non renseigné"); // En attente du formulaire final
+            simData.append("foyer", selectedPeople + " personnes");
+            simData.append("model_recommande", selectedModelName);
+            simData.append("prix_ttc_estime", finalPriceTTC + " €");
+            simData.append("economie_annuelle", estimatedSavings + " €/an");
+            
+            // Envoi des données (ne bloque pas la navigation)
+            fetch(GOOGLE_SCRIPT_URL, { method: "POST", body: simData, mode: "no-cors" })
+            .then(() => console.log("Données simulation envoyées au Sheet"))
+            .catch(e => console.error("Erreur envoi sheet", e));
 
             // C. Injection des données dans le HTML
             const displayEl = document.getElementById('model-name-display');
@@ -116,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 6. ENVOI DU FORMULAIRE FINAL ---
+    // --- 6. ENVOI DU FORMULAIRE FINAL (LEAD) ---
     const finalForm = document.getElementById('final-form');
     
     if(finalForm) {
@@ -148,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const formData = new FormData();
-            formData.append("phase", "Lead Qualifié"); 
+            formData.append("phase", "Lead Qualifié"); // Met à jour le statut dans le sheet (nouvelle ligne)
             formData.append("source", "Watersoft LP");
             formData.append("phone", rawPhone);
             formData.append("foyer", selectedPeople + " personnes");
@@ -196,8 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(s1) s1.style.display = 'block';
     };
 
-    // --- 7. BANNIÈRE COOKIES & CONSENT MODE V2 (CORRIGÉ & SÉCURISÉ) ---
-    // Note: L'ID a été changé en 'consent-ui-box' pour éviter les AdBlockers
+    // --- 7. BANNIÈRE COOKIES & CONSENT MODE V2 ---
     const cookieBanner = document.getElementById('consent-ui-box');
     const btnAccept = document.getElementById('cookie-accept');
     const btnRefuse = document.getElementById('cookie-refuse');
@@ -215,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
-    // Fonction pour dire OUI à Google (Consent Mode V2)
     function grantGoogleConsent() {
         if(typeof gtag === 'function') {
             gtag('consent', 'update', {
@@ -228,14 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // A. Au chargement : Vérifier si l'utilisateur a DÉJÀ accepté
     const currentConsent = getCookie('watersoft_consent');
     
     if (currentConsent === 'accepted') {
-        // S'il a déjà dit oui (ex: hier), on réactive Google tout de suite sans bannière
         grantGoogleConsent();
     } else if (currentConsent === null) {
-        // Si aucun choix n'a été fait, on affiche la bannière après 1s
         setTimeout(function() {
             if(cookieBanner) {
                 cookieBanner.style.display = 'block';
@@ -245,13 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000);
     }
-    // Si 'refused', on ne fait rien. Google reste en 'denied' (config par défaut dans le HTML).
 
-    // B. Clic sur ACCEPTER
     if(btnAccept) {
         btnAccept.addEventListener('click', function() {
-            setCookie('watersoft_consent', 'accepted', 365); // On retient le choix 1 an
-            grantGoogleConsent(); // On prévient Google
+            setCookie('watersoft_consent', 'accepted', 365); 
+            grantGoogleConsent(); 
             
             if(cookieBanner) {
                 cookieBanner.style.display = 'none';
@@ -260,11 +266,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // C. Clic sur REFUSER (ou Continuer sans accepter)
     if(btnRefuse) {
         btnRefuse.addEventListener('click', function() {
-            setCookie('watersoft_consent', 'refused', 30); // On retient le refus 30 jours
-            // On ne lance PAS grantGoogleConsent()
+            setCookie('watersoft_consent', 'refused', 30); 
             
             if(cookieBanner) {
                 cookieBanner.style.display = 'none';
@@ -273,4 +277,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // FIN DU SCRIPT
+});
