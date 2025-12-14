@@ -480,3 +480,56 @@ body {
     margin-top: 4px;
     letter-spacing: 0.5px;
 }
+/* --- FIX COMPACT POUR SLIDE 3 (AUDIT) --- */
+/* Ce code force le Slide 3 à prendre moins de place en hauteur */
+
+#slide-3 .financial-header {
+    margin-bottom: 10px; /* Réduit l'espace sous le titre */
+}
+
+#slide-3 .financial-header h2 {
+    font-size: 1.5rem; /* Titre un peu plus petit */
+}
+
+#slide-3 .financial-grid {
+    gap: 15px;
+    margin-bottom: 15px; /* Réduit l'espace avant la barre bleue */
+}
+
+#slide-3 .fin-card {
+    padding: 15px; /* Moins de marge interne dans les cartes */
+}
+
+#slide-3 .fin-icon {
+    font-size: 1.8rem; /* Icônes plus petites */
+    margin-bottom: 5px;
+}
+
+#slide-3 .fin-card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+#slide-3 .card-details {
+    margin-bottom: 5px;
+}
+
+#slide-3 .card-details ul li {
+    margin-bottom: 2px; /* Liste plus serrée */
+    font-size: 0.75rem;
+}
+
+#slide-3 .stat-row {
+    margin-top: 5px;
+    padding: 5px 10px; /* Barre rouge plus fine */
+}
+
+/* La barre bleue du bas plus compacte */
+#slide-3 .audit-calculator {
+    padding: 15px; /* Moins épaisse */
+    margin-top: 0;
+}
+
+#slide-3 .audit-total {
+    font-size: 2.5rem; /* Prix un peu plus petit */
+}
