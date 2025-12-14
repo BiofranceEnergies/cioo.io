@@ -396,124 +396,144 @@ Ce qui change :
 }
 
 /* ============================================================ */
-/* IMPRESSION PDF (Correction "Force Desktop Mode")           */
+/* IMPRESSION PDF : VERSION "CHIRURGICALE" (Fix A4)           */
 /* ============================================================ */
 @media print {
-    /* 1. CONFIGURATION DE LA PAGE */
+    /* 1. FORCE LE FORMAT A4 PAYSAGE */
     @page {
-        size: landscape;
+        size: 297mm 210mm; /* Taille exacte A4 */
         margin: 0 !important;
     }
 
+    /* 2. FIGER LE BODY */
     body {
+        width: 297mm !important;
+        height: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
         background-color: #0f172a !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: visible !important;
+        overflow: hidden !important; /* Coupe ce qui dépasse */
     }
 
-    /* 2. ÉCHELLE ET CONTENEUR */
+    /* 3. LE CONTENEUR PRINCIPAL */
     .app-wrapper {
-        width: 100% !important;
-        max-width: none !important;
+        width: 297mm !important;
+        height: auto !important;
         margin: 0 !important;
         padding: 0 !important;
-        zoom: 0.75; /* On réduit un peu plus pour être sûr que les colonnes rentrent */
+        display: block !important;
     }
 
+    /* 4. CONFIGURATION DES SLIDES (1 Slide = 1 Page A4) */
     .slides-container {
         display: block !important;
-        overflow: visible !important;
     }
 
-    /* 3. FORCER L'AFFICHAGE SLIDE PAR SLIDE */
     .slide {
+        /* On fige la taille de chaque "page" */
+        width: 297mm !important;
+        height: 210mm !important;
+        
+        /* Positionnement absolu pour éviter les sauts de page erratiques */
+        position: relative !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: space-between !important;
-        position: relative !important;
-        opacity: 1 !important;
-        z-index: 1 !important;
-        width: 100% !important;
-        height: 100vh !important;
-        padding: 40px 60px !important; /* Marges confortables */
+        justify-content: center !important; /* Centre verticalement */
+        
+        padding: 10mm 15mm !important; /* Marges de sécurité imprimante */
+        box-sizing: border-box !important;
+        
         page-break-after: always !important;
         break-after: page !important;
-        top: 0 !important; left: 0 !important;
+        
+        opacity: 1 !important;
+        z-index: 10 !important;
+        
+        /* ASTUCE ULTIME : On réduit légèrement l'échelle pour que tout rentre */
+        transform: scale(0.85) !important; 
+        transform-origin: center center !important;
+        left: 0 !important; top: 0 !important;
+        margin: 0 !important;
     }
 
-    /* --- C'EST ICI LA CORRECTION MAJEURE --- */
-    /* On INTERDIT le passage en mode "colonne unique" (Mobile) */
+    /* 5. FORÇAGE DES GRILLES (Mode Bureau Obligatoire) */
     
     /* Grilles 2 colonnes (Slide 1, 2, 5) */
     .dashboard-grid, .tech-grid {
         display: grid !important;
-        grid-template-columns: 1fr 1fr !important; /* Force le côte-à-côte */
-        gap: 40px !important;
+        grid-template-columns: 48% 48% !important; /* 2 colonnes distinctes */
+        gap: 4% !important;
+        height: 100% !important;
+        align-content: center !important;
     }
 
     /* Grille Produit (Slide 4) */
     .product-grid {
         display: grid !important;
-        grid-template-columns: 45% 55% !important; /* Force le ratio image/texte */
-        gap: 40px !important;
+        grid-template-columns: 40% 55% !important;
+        gap: 5% !important;
         align-items: center !important;
+        height: 80% !important; /* Laisse de la place au header/footer */
     }
 
     /* Grille Audit (Slide 3) */
     .financial-grid {
         display: flex !important;
-        flex-direction: row !important; /* Force l'horizontal */
+        flex-direction: row !important;
         gap: 20px !important;
+        height: 60% !important;
     }
 
-    /* Barres du bas (Calculateurs et Offres) */
-    .audit-calculator, .final-offer-bar {
-        display: flex !important;
-        flex-direction: row !important; /* Force l'horizontal */
-        justify-content: space-between !important;
-        text-align: left !important;
-    }
-    .audit-result-area { text-align: right !important; }
-    
-    /* Abaque (Slide 5 - Petites cartes) */
-    .sub-metrics-grid {
-        display: grid !important;
-        grid-template-columns: repeat(5, 1fr) !important; /* Force les 5 colonnes */
-    }
-
-    /* 4. NETTOYAGE VISUEL */
-    .app-footer, .header-controls, .nav-btn, .pagination, .step-badge, .device-selector button:not(.active) {
+    /* 6. NETTOYAGE DES ÉLÉMENTS INUTILES */
+    .app-footer, .header-controls, .nav-btn, .pagination, .step-badge, 
+    .device-selector button:not(.active), .hint-text {
         display: none !important;
     }
-    
-    .card, .fin-card, .tech-panel, .spec-card-container {
+
+    /* 7. STABILISATION DES CARTES ET TEXTES */
+    .card, .fin-card, .tech-panel {
         background-color: #1e293b !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        border: 1px solid rgba(255,255,255,0.3) !important;
         box-shadow: none !important;
-        break-inside: avoid !important;
+        color: #fff !important;
+        height: auto !important;
+        min-height: 0 !important;
     }
 
-    /* Correction Graphiques Slide 1 (Largeur forcée) */
-    .chart-row:nth-child(1) .bar-fill { width: 20% !important; }
-    .chart-row:nth-child(2) .bar-fill { width: 40% !important; }
-    .chart-row:nth-child(3) .bar-fill { width: 60% !important; }
-    .chart-row:nth-child(4) .bar-fill { width: 80% !important; }
-    .chart-row:nth-child(5) .bar-fill { width: 100% !important; }
-    
-    /* Textes et Couleurs */
-    h1, h2, h3, p, span, div, label { color: #f1f5f9 !important; }
+    /* Textes plus lisibles à l'impression */
+    h1, h2, h3, .big-stat .value { color: #fff !important; text-shadow: none !important; }
+    p, li, label, span { color: #cbd5e1 !important; }
     .text-blue { color: #38bdf8 !important; }
     .text-red { color: #f43f5e !important; }
-    
-    /* Bouton actif propre (Slide 5) */
+
+    /* 8. CORRECTION GRAPHIQUE SLIDE 1 (Barres fixes) */
+    .bar-fill { -webkit-print-color-adjust: exact !important; min-height: 8px !important; display: block !important; }
+    .chart-row:nth-child(1) .bar-fill { width: 20% !important; background: #38bdf8 !important; }
+    .chart-row:nth-child(2) .bar-fill { width: 40% !important; background: #22c55e !important; }
+    .chart-row:nth-child(3) .bar-fill { width: 60% !important; background: #eab308 !important; }
+    .chart-row:nth-child(4) .bar-fill { width: 80% !important; background: #f97316 !important; }
+    .chart-row:nth-child(5) .bar-fill { width: 100% !important; background: #f43f5e !important; }
+
+    /* 9. CORRECTION SLIDE 5 (Bouton et Inputs) */
     .device-btn.active {
         background-color: #38bdf8 !important;
         color: #000 !important;
         border: 2px solid #fff !important;
+    }
+    input {
+        background: transparent !important;
+        border: none !important;
+        color: #fff !important;
+        font-weight: 900 !important;
+        text-align: right;
+        font-size: 1.2rem !important;
+    }
+    
+    /* 10. CORRECTION IMAGE SLIDE 4 */
+    .hero-product-img {
+        max-height: 400px !important; /* Limite la hauteur pour éviter le débordement */
+        width: auto !important;
     }
 }
