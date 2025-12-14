@@ -149,9 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateTech();
     };
 
-    // Fonction principale de calcul
+   
+ // Fonction principale de calcul (Mise à jour avec valeurs unitaires)
     window.calculateTech = function() {
-        // Sécurité : si les champs n'existent pas dans le DOM, on arrête
+        // Sécurité : si les champs n'existent pas, on arrête
         if(!techThInput || !techConsoInput) return;
 
         let th = parseFloat(techThInput.value);
@@ -179,8 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const saltPerYear = regensPerYear * (techVolume * saltRatio);
         const waterPerYear = (regensPerYear * (techVolume * waterRatio)) / 1000; // En m3
 
-        // --- 4. ELECTRICITÉ (kWh) ---
-        // Moyenne : 3.5 Watts x 24h x 365j / 1000
+        // --- 4. CALCULS UNITAIRES (NOUVEAU) ---
+        const saltPerRegen = techVolume * saltRatio; // ex: 3kg
+        const waterPerRegen = techVolume * waterRatio; // ex: 120L
+
+        // --- 5. ELECTRICITÉ (kWh) ---
         const wattsAvg = 3.5;
         const elecKwh = (wattsAvg * 24 * 365) / 1000;
 
@@ -188,10 +192,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if(outAutonomy) outAutonomy.textContent = Math.round(autonomy).toLocaleString();
         if(outFreq) outFreq.textContent = Math.round(freqDays);
         if(outRegen) outRegen.textContent = Math.round(regensPerYear);
-        if(outSalt) outSalt.textContent = Math.round(saltPerYear);
-        if(outWater) outWater.textContent = waterPerYear.toFixed(1);
         
-        // Affichage Elec (avec virgule pour le français)
+        // Affichage SEL (Annuel + Unitaire)
+        if(outSalt) outSalt.textContent = Math.round(saltPerYear);
+        const outSaltUnit = document.getElementById('res-salt-unit');
+        if(outSaltUnit) outSaltUnit.textContent = saltPerRegen.toFixed(1) + " kg / régé";
+
+        // Affichage EAU (Annuel + Unitaire)
+        if(outWater) outWater.textContent = waterPerYear.toFixed(1);
+        const outWaterUnit = document.getElementById('res-water-unit');
+        if(outWaterUnit) outWaterUnit.textContent = Math.round(waterPerRegen) + " L / régé";
+        
+        // Affichage Elec
         if(outElec) outElec.textContent = elecKwh.toFixed(1).replace('.', ',');
     }
 
