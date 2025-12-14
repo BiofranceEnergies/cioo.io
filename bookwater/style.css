@@ -396,132 +396,122 @@ Ce qui change :
 }
 
 /* ============================================================ */
-/* IMPRESSION PDF : VERSION "CHIRURGICALE" (Fix A4)           */
+/* IMPRESSION PDF : VERSION "STABLE & SECURE"                 */
 /* ============================================================ */
 @media print {
-    /* 1. FORCE LE FORMAT A4 PAYSAGE */
+    /* 1. CONFIGURATION PAGE */
     @page {
-        size: 297mm 210mm; /* Taille exacte A4 */
-        margin: 0 !important;
+        size: landscape;
+        margin: 0 !important; /* On laisse le navigateur gérer le minimum */
     }
 
-    /* 2. FIGER LE BODY */
+    /* 2. BODY & FOND */
     body {
-        width: 297mm !important;
-        height: 210mm !important;
+        background-color: #0f172a !important; /* Fond Bleu Nuit */
+        -webkit-print-color-adjust: exact !important; /* Force la couleur */
+        print-color-adjust: exact !important;
         margin: 0 !important;
         padding: 0 !important;
-        background-color: #0f172a !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        overflow: hidden !important; /* Coupe ce qui dépasse */
+        min-width: 100vw !important;
+        min-height: 100vh !important;
+        overflow: visible !important;
     }
 
-    /* 3. LE CONTENEUR PRINCIPAL */
+    /* 3. CONTENEUR PRINCIPAL (Gestion du Zoom) */
     .app-wrapper {
-        width: 297mm !important;
+        width: 100% !important;
         height: auto !important;
         margin: 0 !important;
         padding: 0 !important;
         display: block !important;
+        /* C'est ici le secret : on dézoome tout le contenu d'un coup */
+        zoom: 0.75 !important; 
     }
 
-    /* 4. CONFIGURATION DES SLIDES (1 Slide = 1 Page A4) */
+    /* 4. GESTION DES SLIDES (Flux normal) */
     .slides-container {
         display: block !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
     .slide {
-        /* On fige la taille de chaque "page" */
-        width: 297mm !important;
-        height: 210mm !important;
-        
-        /* Positionnement absolu pour éviter les sauts de page erratiques */
-        position: relative !important;
+        /* On force la visibilité de TOUS les slides */
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important; /* Centre verticalement */
+        justify-content: space-between !important;
         
-        padding: 10mm 15mm !important; /* Marges de sécurité imprimante */
+        /* Positionnement naturel (Flux) pour éviter les bugs de Page 1 */
+        position: static !important; 
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: auto !important;
+        
+        /* Dimensions Pleine Page */
+        width: 100% !important;
+        height: 100vh !important;
+        padding: 40px 50px !important;
         box-sizing: border-box !important;
         
-        page-break-after: always !important;
+        /* Coupure propre */
         break-after: page !important;
-        
-        opacity: 1 !important;
-        z-index: 10 !important;
-        
-        /* ASTUCE ULTIME : On réduit légèrement l'échelle pour que tout rentre */
-        transform: scale(0.85) !important; 
-        transform-origin: center center !important;
-        left: 0 !important; top: 0 !important;
-        margin: 0 !important;
+        page-break-after: always !important;
     }
 
-    /* 5. FORÇAGE DES GRILLES (Mode Bureau Obligatoire) */
-    
-    /* Grilles 2 colonnes (Slide 1, 2, 5) */
+    /* 5. FORCER LES GRILLES (Mode Bureau) */
+    /* On rétablit les colonnes qui avaient disparu en mode mobile */
     .dashboard-grid, .tech-grid {
         display: grid !important;
-        grid-template-columns: 48% 48% !important; /* 2 colonnes distinctes */
-        gap: 4% !important;
-        height: 100% !important;
-        align-content: center !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 40px !important;
+        align-content: stretch !important;
     }
-
-    /* Grille Produit (Slide 4) */
+    
     .product-grid {
         display: grid !important;
         grid-template-columns: 40% 55% !important;
-        gap: 5% !important;
+        gap: 50px !important;
         align-items: center !important;
-        height: 80% !important; /* Laisse de la place au header/footer */
     }
 
-    /* Grille Audit (Slide 3) */
     .financial-grid {
         display: flex !important;
-        flex-direction: row !important;
         gap: 20px !important;
-        height: 60% !important;
     }
 
-    /* 6. NETTOYAGE DES ÉLÉMENTS INUTILES */
+    /* 6. NETTOYAGE DES ÉLÉMENTS INTERFACE */
     .app-footer, .header-controls, .nav-btn, .pagination, .step-badge, 
     .device-selector button:not(.active), .hint-text {
         display: none !important;
     }
 
-    /* 7. STABILISATION DES CARTES ET TEXTES */
+    /* 7. ELEMENTS GRAPHIQUES */
     .card, .fin-card, .tech-panel {
         background-color: #1e293b !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
         box-shadow: none !important;
         color: #fff !important;
-        height: auto !important;
-        min-height: 0 !important;
+        break-inside: avoid !important;
     }
 
-    /* Textes plus lisibles à l'impression */
-    h1, h2, h3, .big-stat .value { color: #fff !important; text-shadow: none !important; }
-    p, li, label, span { color: #cbd5e1 !important; }
+    /* Textes */
+    h1, h2, h3, p, span, label, .value { 
+        color: #fff !important; 
+        text-shadow: none !important; 
+    }
+    .text-muted { color: #cbd5e1 !important; }
     .text-blue { color: #38bdf8 !important; }
     .text-red { color: #f43f5e !important; }
 
-    /* 8. CORRECTION GRAPHIQUE SLIDE 1 (Barres fixes) */
-    .bar-fill { -webkit-print-color-adjust: exact !important; min-height: 8px !important; display: block !important; }
+    /* 8. GRAPHIQUE SLIDE 1 (Barres forcées) */
+    .bar-fill { -webkit-print-color-adjust: exact !important; display: block !important; min-height: 10px !important; }
     .chart-row:nth-child(1) .bar-fill { width: 20% !important; background: #38bdf8 !important; }
     .chart-row:nth-child(2) .bar-fill { width: 40% !important; background: #22c55e !important; }
     .chart-row:nth-child(3) .bar-fill { width: 60% !important; background: #eab308 !important; }
     .chart-row:nth-child(4) .bar-fill { width: 80% !important; background: #f97316 !important; }
     .chart-row:nth-child(5) .bar-fill { width: 100% !important; background: #f43f5e !important; }
 
-    /* 9. CORRECTION SLIDE 5 (Bouton et Inputs) */
-    .device-btn.active {
-        background-color: #38bdf8 !important;
-        color: #000 !important;
-        border: 2px solid #fff !important;
-    }
+    /* 9. INPUTS & BOUTONS PROPRES */
     input {
         background: transparent !important;
         border: none !important;
@@ -529,11 +519,19 @@ Ce qui change :
         font-weight: 900 !important;
         text-align: right;
         font-size: 1.2rem !important;
+        width: auto !important;
+    }
+    .device-btn.active {
+        background-color: #38bdf8 !important;
+        color: #000 !important;
+        border: 2px solid #fff !important;
     }
     
-    /* 10. CORRECTION IMAGE SLIDE 4 */
+    /* 10. IMAGE SLIDE 4 (Contrainte) */
     .hero-product-img {
-        max-height: 400px !important; /* Limite la hauteur pour éviter le débordement */
+        max-height: 50vh !important;
         width: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 }
