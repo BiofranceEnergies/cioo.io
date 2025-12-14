@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. CALCULATEUR TECH & ABAQUE (Slide 5)
     // ============================================================
     
-    // Variables d'état
-    let techVolume = 20; // Par défaut 20L
+// Variables d'état (On met 15L par défaut pour correspondre au HTML)
+    let techVolume = 15; 
     
     // Sélection des éléments DOM (Inputs)
     const techThInput = document.getElementById('tech-th');
@@ -136,12 +136,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const outElec = document.getElementById('res-elec');
     const outRegen = document.getElementById('res-regen');
 
-    // Fonction de changement de volume (Boutons 10L / 20L / 30L)
+    // Fonction de changement de volume (Mise à jour pour 10, 15, 20)
     window.setVolume = function(vol) {
         techVolume = vol;
         
         // Gestion visuelle des boutons
         document.querySelectorAll('.device-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // L'ID se construit dynamiquement : btn-10l, btn-15l, btn-20l
         const activeBtn = document.getElementById(`btn-${vol}l`);
         if(activeBtn) activeBtn.classList.add('active');
 
