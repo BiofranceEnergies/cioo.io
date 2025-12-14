@@ -396,126 +396,124 @@ Ce qui change :
 }
 
 /* ============================================================ */
-/* IMPRESSION PDF (Correction "Catastrophe")                  */
+/* IMPRESSION PDF (Correction "Force Desktop Mode")           */
 /* ============================================================ */
 @media print {
-    /* 1. CONFIGURATION DE LA FEUILLE */
+    /* 1. CONFIGURATION DE LA PAGE */
     @page {
-        size: landscape;    /* Force A4 Paysage */
-        margin: 0 !important; /* Zéro marge blanche forcée */
+        size: landscape;
+        margin: 0 !important;
     }
 
-    /* 2. NETTOYAGE DU BODY */
     body {
-        background-color: #0f172a !important; /* Le fond bleu nuit IMPÉRATIF */
-        -webkit-print-color-adjust: exact !important; /* Force l'impression des couleurs de fond */
+        background-color: #0f172a !important;
+        -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+        width: 100vw !important;
+        height: 100vh !important;
         margin: 0 !important;
         padding: 0 !important;
-        width: 100vw !important; /* Largeur feuille */
-        height: auto !important; /* Hauteur libre */
         overflow: visible !important;
-        display: block !important; /* Casse le flex du body centré */
     }
 
-    /* 3. LE CONTENEUR PRINCIPAL */
+    /* 2. ÉCHELLE ET CONTENEUR */
     .app-wrapper {
         width: 100% !important;
         max-width: none !important;
-        height: auto !important;
         margin: 0 !important;
         padding: 0 !important;
-        display: block !important; /* Plus de flex ici */
-        zoom: 0.85; /* ASTUCE : On réduit à 85% pour que tout rentre large dans les marges */
+        zoom: 0.75; /* On réduit un peu plus pour être sûr que les colonnes rentrent */
     }
 
-    /* 4. DÉPLIAGE DES SLIDES (C'est ici que ça coinçait pour le Slide 1) */
     .slides-container {
         display: block !important;
-        height: auto !important;
         overflow: visible !important;
-        position: static !important; /* Annule le positionnement relatif */
     }
 
+    /* 3. FORCER L'AFFICHAGE SLIDE PAR SLIDE */
     .slide {
-        /* On force l'affichage de TOUS les slides */
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        
-        /* On annule la superposition */
         position: relative !important;
-        top: auto !important; 
-        left: auto !important;
-        opacity: 1 !important; 
+        opacity: 1 !important;
         z-index: 1 !important;
-        visibility: visible !important;
-        
-        /* 1 Slide = 1 Page */
         width: 100% !important;
-        height: 100vh !important; /* Prend toute la hauteur de la feuille */
-        padding: 30px 50px !important; /* Marges internes propres pour le papier */
-        box-sizing: border-box !important;
-        
-        /* Coupure nette */
-        break-after: page !important;
+        height: 100vh !important;
+        padding: 40px 60px !important; /* Marges confortables */
         page-break-after: always !important;
-        margin-bottom: 0 !important;
+        break-after: page !important;
+        top: 0 !important; left: 0 !important;
     }
 
-    /* 5. ÉLÉMENTS À CACHER (Navigation, boutons...) */
-    .app-footer, 
-    .header-controls, 
-    .nav-btn, 
-    .pagination, 
-    .step-badge, 
-    .device-selector button:not(.active) { /* On cache les boutons non sélectionnés */
+    /* --- C'EST ICI LA CORRECTION MAJEURE --- */
+    /* On INTERDIT le passage en mode "colonne unique" (Mobile) */
+    
+    /* Grilles 2 colonnes (Slide 1, 2, 5) */
+    .dashboard-grid, .tech-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* Force le côte-à-côte */
+        gap: 40px !important;
+    }
+
+    /* Grille Produit (Slide 4) */
+    .product-grid {
+        display: grid !important;
+        grid-template-columns: 45% 55% !important; /* Force le ratio image/texte */
+        gap: 40px !important;
+        align-items: center !important;
+    }
+
+    /* Grille Audit (Slide 3) */
+    .financial-grid {
+        display: flex !important;
+        flex-direction: row !important; /* Force l'horizontal */
+        gap: 20px !important;
+    }
+
+    /* Barres du bas (Calculateurs et Offres) */
+    .audit-calculator, .final-offer-bar {
+        display: flex !important;
+        flex-direction: row !important; /* Force l'horizontal */
+        justify-content: space-between !important;
+        text-align: left !important;
+    }
+    .audit-result-area { text-align: right !important; }
+    
+    /* Abaque (Slide 5 - Petites cartes) */
+    .sub-metrics-grid {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important; /* Force les 5 colonnes */
+    }
+
+    /* 4. NETTOYAGE VISUEL */
+    .app-footer, .header-controls, .nav-btn, .pagination, .step-badge, .device-selector button:not(.active) {
         display: none !important;
     }
-
-    /* 6. CORRECTIONS VISUELLES SPÉCIFIQUES PAPIER */
     
-    /* On enlève les ombres portées qui bavent à l'impression */
-    .card, .fin-card, .tech-panel, .spec-card-container, .product-visual img {
-        box-shadow: none !important;
+    .card, .fin-card, .tech-panel, .spec-card-container {
+        background-color: #1e293b !important;
         border: 1px solid rgba(255,255,255,0.2) !important;
-        break-inside: avoid !important; /* Interdit de couper une carte en deux */
+        box-shadow: none !important;
+        break-inside: avoid !important;
     }
-    
-    /* Slide 1 : On force les barres du graphique à s'afficher (sinon width=0) */
-    .bar-fill {
-        width: attr(data-width) !important; /* Fallback si supporté */
-        min-width: 50px !important;
-        print-color-adjust: exact !important;
-        -webkit-print-color-adjust: exact !important;
-    }
-    /* On triche : on force les couleurs manuellement si le JS n'a pas mis la width */
+
+    /* Correction Graphiques Slide 1 (Largeur forcée) */
     .chart-row:nth-child(1) .bar-fill { width: 20% !important; }
     .chart-row:nth-child(2) .bar-fill { width: 40% !important; }
     .chart-row:nth-child(3) .bar-fill { width: 60% !important; }
     .chart-row:nth-child(4) .bar-fill { width: 80% !important; }
     .chart-row:nth-child(5) .bar-fill { width: 100% !important; }
-
-    /* Inputs : On les transforme en "Texte" propre */
-    input {
-        background: transparent !important;
-        border: none !important;
-        color: #fff !important;
-        font-weight: 900 !important;
-        text-align: right;
-        padding: 0 !important;
-    }
     
-    /* Slide 5 : Bouton actif propre */
+    /* Textes et Couleurs */
+    h1, h2, h3, p, span, div, label { color: #f1f5f9 !important; }
+    .text-blue { color: #38bdf8 !important; }
+    .text-red { color: #f43f5e !important; }
+    
+    /* Bouton actif propre (Slide 5) */
     .device-btn.active {
         background-color: #38bdf8 !important;
         color: #000 !important;
         border: 2px solid #fff !important;
     }
-
-    /* Textes */
-    h1, h2, h3, p, span, div, label { color: #f1f5f9 !important; }
-    .text-blue { color: #38bdf8 !important; }
-    .text-red { color: #f43f5e !important; }
-    .text-orange { color: #f97316 !important; }
 }
