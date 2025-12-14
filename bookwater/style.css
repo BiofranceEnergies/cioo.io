@@ -395,114 +395,125 @@ Ce qui change :
     .audit-result-area { text-align: center; }
 }
 /* ============================================================ */
-/* IMPRESSION PDF : VERSION "BUREAU FORCÉ" (Ultimate Fix)     */
+/* IMPRESSION PDF : MÉTHODE "POSTER 1300px" (Anti-Chevauchement) */
 /* ============================================================ */
 @media print {
-    /* 1. CONFIGURATION PAPIER */
     @page {
         size: landscape;
-        margin: 0 !important; /* ZÉRO marge, on gère ça en CSS */
+        margin: 0 !important;
     }
 
-    /* 2. LE ZOOM MAGIQUE */
-    /* C'est ça qui fait rentrer ton design "Large" sur une feuille A4 */
     body {
-        zoom: 65% !important; /* On dézoome tout pour simuler un grand écran */
+        /* On simule un écran d'ordinateur large */
+        width: 1300px !important; 
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
         background-color: #0f172a !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
+        overflow: visible !important;
     }
 
+    /* Le Wrapper sert de cadre pour réduire la taille globale */
     .app-wrapper {
-        width: 100% !important;
+        width: 1300px !important; /* Force la largeur Desktop */
         max-width: none !important;
         margin: 0 !important;
         padding: 0 !important;
         display: block !important;
+        
+        /* C'est ICI la magie : on réduit tout de 25% pour que les 1300px rentrent sur du A4 */
+        transform: scale(0.75);
+        transform-origin: top left; /* On ancre en haut à gauche */
     }
 
-    /* 3. GESTION DES SLIDES (Séquentiel) */
     .slides-container {
         display: block !important;
         overflow: visible !important;
     }
 
     .slide {
-        /* On rétablit le comportement normal */
-        position: relative !important; 
-        opacity: 1 !important;
+        /* On fige les dimensions comme sur un écran */
+        width: 1300px !important;
+        height: 900px !important; /* Hauteur fixe pour éviter les coupures */
+        
+        position: relative !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
         
-        /* Dimensions forcées pour remplir la feuille */
-        width: 100% !important;
-        height: 100vh !important; /* Une page complète */
-        padding: 20px 40px !important;
+        padding: 40px !important;
         box-sizing: border-box !important;
         
-        /* Coupure nette entre chaque slide */
         page-break-after: always !important;
         break-after: page !important;
-        top: 0 !important; left: 0 !important;
+        
+        opacity: 1 !important;
+        visibility: visible !important;
+        left: 0 !important; top: 0 !important;
     }
 
-    /* 4. ANTI-MOBILE (C'est là que tout se joue !) */
-    /* On interdit formellement au navigateur d'empiler les blocs */
-    
+    /* --- CORRECTIONS LAYOUT (On garde le design Desktop) --- */
+
+    /* Slide 1, 2, 5 : Grilles larges */
     .dashboard-grid, .tech-grid {
         display: grid !important;
-        grid-template-columns: 1fr 1fr !important; /* On OBLIGE les 2 colonnes */
-        gap: 40px !important;
-        height: auto !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 50px !important;
+        height: 100% !important;
+        align-content: stretch !important;
     }
 
-    .product-grid {
-        display: grid !important;
-        grid-template-columns: 40% 55% !important; /* On OBLIGE l'image à gauche */
-        gap: 40px !important;
-        align-items: center !important;
-    }
-
+    /* Slide 3 : On force la largeur des cartes pour qu'elles ne s'écrasent pas */
     .financial-grid {
         display: flex !important;
-        flex-direction: row !important; /* On OBLIGE l'alignement horizontal */
-        gap: 20px !important;
-    }
-
-    .audit-calculator, .final-offer-bar {
-        display: flex !important;
         flex-direction: row !important;
-        justify-content: space-between !important;
+        gap: 30px !important;
+        align-items: stretch !important;
     }
+    .fin-card {
+        flex: 1 !important;
+        width: 30% !important; /* Force la largeur */
+    }
+    /* Correction spécifique Slide 3 pour éviter le chevauchement de texte */
+    .card-details li { font-size: 1rem !important; margin-bottom: 5px !important; }
+    .fin-card h3 { font-size: 1.2rem !important; white-space: nowrap !important; }
 
-    .sub-metrics-grid {
+    /* Slide 4 */
+    .product-grid {
         display: grid !important;
-        grid-template-columns: repeat(5, 1fr) !important; /* On OBLIGE les 5 colonnes */
+        grid-template-columns: 40% 55% !important;
+        gap: 50px !important;
+        align-items: center !important;
     }
+    .hero-product-img { max-height: 500px !important; margin: 0 auto; }
 
-    /* 5. NETTOYAGE */
+    /* NETTOYAGE */
     .app-footer, .header-controls, .nav-btn, .pagination, .step-badge, 
     .device-selector button:not(.active), .hint-text {
         display: none !important;
     }
 
-    /* 6. ESTHÉTIQUE PAPIER */
+    /* ESTHÉTIQUE */
     .card, .fin-card, .tech-panel {
         background-color: #1e293b !important;
         border: 1px solid rgba(255,255,255,0.2) !important;
         box-shadow: none !important;
-        break-inside: avoid !important;
     }
     
-    /* Textes forcés en blanc/gris */
-    h1, h2, h3, p, span, label, div { color: #f1f5f9 !important; text-shadow: none !important; }
+    /* Textes et Couleurs */
+    h1, h2, h3, p, span, label, div { color: #fff !important; text-shadow: none !important; }
     .text-blue { color: #38bdf8 !important; }
     .text-red { color: #f43f5e !important; }
+    
+    /* Barres Graphiques (Slide 1) - Dessinées en CSS */
+    .bar-fill { display: block !important; height: 15px !important; -webkit-print-color-adjust: exact !important; }
+    .chart-row:nth-child(1) .bar-fill { width: 20% !important; background: #38bdf8 !important; }
+    .chart-row:nth-child(2) .bar-fill { width: 40% !important; background: #22c55e !important; }
+    .chart-row:nth-child(3) .bar-fill { width: 60% !important; background: #eab308 !important; }
+    .chart-row:nth-child(4) .bar-fill { width: 80% !important; background: #f97316 !important; }
+    .chart-row:nth-child(5) .bar-fill { width: 100% !important; background: #f43f5e !important; }
     
     /* Inputs */
     input {
@@ -511,21 +522,11 @@ Ce qui change :
         color: #fff !important;
         text-align: right;
         font-weight: 800 !important;
-    }
-
-    /* 7. PATCH POUR LE SLIDE 1 (Barres Graphiques) */
-    /* Le JS ne tourne pas à l'impression, donc on dessine les barres en CSS */
-    .bar-fill { display: block !important; height: 10px !important; -webkit-print-color-adjust: exact !important; }
-    .chart-row:nth-child(1) .bar-fill { width: 20% !important; background: #38bdf8 !important; }
-    .chart-row:nth-child(2) .bar-fill { width: 40% !important; background: #22c55e !important; }
-    .chart-row:nth-child(3) .bar-fill { width: 60% !important; background: #eab308 !important; }
-    .chart-row:nth-child(4) .bar-fill { width: 80% !important; background: #f97316 !important; }
-    .chart-row:nth-child(5) .bar-fill { width: 100% !important; background: #f43f5e !important; }
-
-    /* 8. PATCH POUR L'IMAGE (Slide 4) */
-    .hero-product-img {
-        max-height: 400px !important; /* On évite qu'elle prenne toute la page */
         width: auto !important;
-        margin: 0 auto;
+    }
+    .device-btn.active {
+        background-color: #38bdf8 !important;
+        color: #000 !important;
+        border: 2px solid #fff !important;
     }
 }
