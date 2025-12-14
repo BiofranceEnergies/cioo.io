@@ -396,21 +396,126 @@ Ce qui change :
 }
 
 /* ============================================================ */
-/* IMPRESSION PDF                                             */
+/* IMPRESSION PDF (Correction "Catastrophe")                  */
 /* ============================================================ */
 @media print {
-    @page { size: landscape; margin: 0 !important; }
-    body { background-color: #0f172a !important; color: #f1f5f9 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; margin: 0 !important; padding: 0 !important; width: 100vw !important; height: 100vh !important; overflow: visible !important; }
-    .app-wrapper { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; height: auto !important; zoom: 90%; }
-    .slides-container { display: block !important; height: auto !important; overflow: visible !important; }
-    .slide { display: flex !important; flex-direction: column !important; opacity: 1 !important; position: relative !important; height: 100vh !important; width: 100% !important; break-after: page !important; page-break-after: always !important; padding: 40px !important; box-sizing: border-box !important; left: 0 !important; top: 0 !important; }
-    .app-footer, .header-controls, .nav-btn, .pagination, .step-badge, .device-selector button:not(.active) { display: none !important; }
-    .card, .tech-panel, .final-offer-bar, .audit-calculator { background-color: #1e293b !important; border: 1px solid rgba(255,255,255,0.2) !important; box-shadow: none !important; break-inside: avoid !important; }
-    h1, h2, h3, p, span, div { color: #f1f5f9 !important; }
-    .text-blue { color: var(--accent-blue) !important; }
-    .text-red { color: var(--accent-red) !important; }
-    input { background: transparent !important; color: #fff !important; border: none !important; font-weight: 900 !important; text-align: right; box-shadow: none !important; }
-    .device-btn.active { background-color: #38bdf8 !important; color: #000 !important; border: none !important; }
-    .bar-fill { -webkit-print-color-adjust: exact !important; }
-    .sub-metric-card { border: 1px solid rgba(255,255,255,0.1) !important; }
+    /* 1. CONFIGURATION DE LA FEUILLE */
+    @page {
+        size: landscape;    /* Force A4 Paysage */
+        margin: 0 !important; /* Zéro marge blanche forcée */
+    }
+
+    /* 2. NETTOYAGE DU BODY */
+    body {
+        background-color: #0f172a !important; /* Le fond bleu nuit IMPÉRATIF */
+        -webkit-print-color-adjust: exact !important; /* Force l'impression des couleurs de fond */
+        print-color-adjust: exact !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100vw !important; /* Largeur feuille */
+        height: auto !important; /* Hauteur libre */
+        overflow: visible !important;
+        display: block !important; /* Casse le flex du body centré */
+    }
+
+    /* 3. LE CONTENEUR PRINCIPAL */
+    .app-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important; /* Plus de flex ici */
+        zoom: 0.85; /* ASTUCE : On réduit à 85% pour que tout rentre large dans les marges */
+    }
+
+    /* 4. DÉPLIAGE DES SLIDES (C'est ici que ça coinçait pour le Slide 1) */
+    .slides-container {
+        display: block !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: static !important; /* Annule le positionnement relatif */
+    }
+
+    .slide {
+        /* On force l'affichage de TOUS les slides */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        
+        /* On annule la superposition */
+        position: relative !important;
+        top: auto !important; 
+        left: auto !important;
+        opacity: 1 !important; 
+        z-index: 1 !important;
+        visibility: visible !important;
+        
+        /* 1 Slide = 1 Page */
+        width: 100% !important;
+        height: 100vh !important; /* Prend toute la hauteur de la feuille */
+        padding: 30px 50px !important; /* Marges internes propres pour le papier */
+        box-sizing: border-box !important;
+        
+        /* Coupure nette */
+        break-after: page !important;
+        page-break-after: always !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* 5. ÉLÉMENTS À CACHER (Navigation, boutons...) */
+    .app-footer, 
+    .header-controls, 
+    .nav-btn, 
+    .pagination, 
+    .step-badge, 
+    .device-selector button:not(.active) { /* On cache les boutons non sélectionnés */
+        display: none !important;
+    }
+
+    /* 6. CORRECTIONS VISUELLES SPÉCIFIQUES PAPIER */
+    
+    /* On enlève les ombres portées qui bavent à l'impression */
+    .card, .fin-card, .tech-panel, .spec-card-container, .product-visual img {
+        box-shadow: none !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        break-inside: avoid !important; /* Interdit de couper une carte en deux */
+    }
+    
+    /* Slide 1 : On force les barres du graphique à s'afficher (sinon width=0) */
+    .bar-fill {
+        width: attr(data-width) !important; /* Fallback si supporté */
+        min-width: 50px !important;
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+    /* On triche : on force les couleurs manuellement si le JS n'a pas mis la width */
+    .chart-row:nth-child(1) .bar-fill { width: 20% !important; }
+    .chart-row:nth-child(2) .bar-fill { width: 40% !important; }
+    .chart-row:nth-child(3) .bar-fill { width: 60% !important; }
+    .chart-row:nth-child(4) .bar-fill { width: 80% !important; }
+    .chart-row:nth-child(5) .bar-fill { width: 100% !important; }
+
+    /* Inputs : On les transforme en "Texte" propre */
+    input {
+        background: transparent !important;
+        border: none !important;
+        color: #fff !important;
+        font-weight: 900 !important;
+        text-align: right;
+        padding: 0 !important;
+    }
+    
+    /* Slide 5 : Bouton actif propre */
+    .device-btn.active {
+        background-color: #38bdf8 !important;
+        color: #000 !important;
+        border: 2px solid #fff !important;
+    }
+
+    /* Textes */
+    h1, h2, h3, p, span, div, label { color: #f1f5f9 !important; }
+    .text-blue { color: #38bdf8 !important; }
+    .text-red { color: #f43f5e !important; }
+    .text-orange { color: #f97316 !important; }
 }
