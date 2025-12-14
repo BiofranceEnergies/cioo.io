@@ -174,26 +174,54 @@ body {
 
 
 /* ============================================================ */
-/* SLIDE 3 : AUDIT FINANCIER                                  */
+/* SLIDE 3 : AUDIT FINANCIER (Version Centrée & Groupée)      */
 /* ============================================================ */
-.financial-container { display: flex; flex-direction: column; justify-content: space-between; }
+.financial-container { 
+    display: flex; flex-direction: column; justify-content: space-between; 
+    height: 100%;
+}
 .financial-header { text-align: center; margin-bottom: 2vh; flex: 0 0 auto; }
 .financial-header h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 5px; background: linear-gradient(to right, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .financial-header p { color: var(--text-muted); font-size: 0.9rem; }
 
-.financial-grid { display: flex; gap: 20px; flex: 1; align-items: stretch; }
+.financial-grid { 
+    display: flex; gap: 20px; 
+    flex: 1; /* Prend l'espace disponible */
+    align-items: stretch; /* Force les 3 cartes à avoir la même hauteur */
+    min-height: 0;
+}
 
-/* La .fin-card hérite déjà du style .card centré, on ajuste juste les spécificités */
-.fin-card { padding: 2vh 20px; transition: 0.3s; }
+/* LA CARTE : On centre tout le contenu au milieu */
+.fin-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px; padding: 2vh 20px;
+    
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center;
+    
+    /* LE SECRET DU CENTRAGE : */
+    justify-content: center; /* Tout le monde au milieu */
+    gap: 2vh; /* Espace régulier entre icône, titre, texte et prix */
+    
+    flex: 1; 
+    transition: 0.3s;
+}
 .fin-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); }
 .fin-card.energy { border-top: 4px solid var(--accent-red); }
 .fin-card.material { border-top: 4px solid #94a3b8; }
 .fin-card.products { border-top: 4px solid #d946ef; }
 
-.fin-icon { font-size: 2.2rem; }
-.fin-card h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; }
+.fin-icon { font-size: 2.2rem; margin: 0; /* Reset marge */ }
+.fin-card h3 { font-size: 0.95rem; font-weight: 800; text-transform: uppercase; margin: 0; }
 
-.card-details { text-align: left; width: 100%; display: flex; flex-direction: column; gap: 5px; }
+.card-details { 
+    text-align: left; width: 100%; 
+    display: flex; flex-direction: column; 
+    justify-content: center; /* Centre la liste verticalement aussi */
+    gap: 5px; 
+}
 .card-details p { font-size: 0.85rem; color: white; text-align: center; font-weight: 600; }
 .card-details ul { list-style: none; padding-left: 5px; }
 .card-details li { position: relative; padding-left: 15px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; line-height: 1.3; }
@@ -204,7 +232,7 @@ body {
 .stat-row { 
     background: rgba(0,0,0,0.3); padding: 8px 15px; border-radius: 8px; width: 100%;
     display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;
-    margin-top: auto; /* Pousse le prix vers le bas de la zone groupée si besoin */
+    margin-top: 0; /* On ne le pousse plus en bas */
 }
 .stat-row .val { font-weight: 800; }
 .stat-row .val.red { color: var(--accent-red); }
