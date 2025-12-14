@@ -465,3 +465,18 @@ body {
     .bar-fill { -webkit-print-color-adjust: exact !important; }
     .sub-metric-card { border: 1px solid rgba(255,255,255,0.1) !important; }
 }
+/* Style pour la sous-valeur (par régénération) */
+.sub-metric-card .val {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+}
+
+.sub-val {
+    font-size: 0.65rem; /* Petit texte */
+    color: #64748b;     /* Gris plus sombre pour ne pas voler la vedette */
+    font-weight: 400;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+}
