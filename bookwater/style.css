@@ -231,9 +231,12 @@ body {
 
 
 /* ============================================================ */
-/* SLIDE 4 : PRODUCT                                          */
+SLIDE 4 : PRODUCT (Version "Centrée & Stabilisée")           */
 /* ============================================================ */
-.product-container { display: flex; flex-direction: column; justify-content: space-between; }
+.product-container { 
+    display: flex; flex-direction: column; justify-content: space-between; 
+    height: 100%;
+}
 .product-header { text-align: center; margin-bottom: 2vh; flex: 0 0 auto; }
 .badge-tech { 
     display: inline-block; background: rgba(6, 182, 212, 0.15); color: var(--accent-blue); 
@@ -242,21 +245,53 @@ body {
 .product-header h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 5px; }
 .product-header p { color: var(--text-muted); font-size: 0.9rem; }
 
-.product-visual { position: relative; display: flex; justify-content: center; align-items: center; height: 100%; }
-.hero-product-img { max-width: 100%; max-height: 100%; object-fit: contain; z-index: 2; position: relative; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); animation: float 6s ease-in-out infinite; }
+/* LA GRILLE : On centre tout verticalement au lieu d'étirer */
+.product-grid { 
+    display: grid; grid-template-columns: 45% 55%; gap: 30px; 
+    align-content: center; /* Centre le bloc global verticalement */
+    align-items: center;   /* Centre l'image par rapport au texte */
+    flex: 1; margin-bottom: 2vh; min-height: 0;
+}
+
+.product-visual { 
+    position: relative; 
+    display: flex; justify-content: center; align-items: center; 
+    height: auto; /* Laisse la hauteur s'adapter à l'image */
+    width: 100%;
+}
+
+/* L'IMAGE : On la bride pour qu'elle ne casse pas l'écran */
+.hero-product-img { 
+    max-width: 100%; 
+    max-height: 55vh; /* SECURITÉ : Jamais plus de 55% de la hauteur écran */
+    object-fit: contain; 
+    z-index: 2; position: relative; 
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6)); 
+    animation: float 6s ease-in-out infinite; 
+}
+
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-.glow-effect { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; background: var(--accent-blue); filter: blur(90px); opacity: 0.25; z-index: 1; border-radius: 50%; }
+
+.glow-effect { 
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+    width: 300px; height: 300px; background: var(--accent-blue); filter: blur(90px); opacity: 0.25; z-index: 1; border-radius: 50%; 
+}
 .float-badge { position: absolute; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--accent-blue); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; backdrop-filter: blur(5px); z-index: 3; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 .top-right { top: 10%; right: 0; }
 .bottom-left { bottom: 15%; left: 0; }
 
-.product-specs { display: flex; flex-direction: column; gap: 2vh; height: 100%; justify-content: center; }
+/* LA LISTE A DROITE : Regroupée au centre */
+.product-specs { 
+    display: flex; flex-direction: column; 
+    gap: 20px; /* Ecart fixe et propre */
+    justify-content: center; 
+    height: auto; /* Ne force plus la hauteur max */
+}
 
 .spec-card {
-    /* Style local pour les petites cartes specs */
     display: flex; gap: 15px; background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 100%);
     padding: 15px; border-radius: 12px; border-left: 3px solid var(--accent-blue); transition: 0.3s;
-    align-items: center; /* Centrage vertical de l'icône et du texte */
+    align-items: center; 
 }
 .spec-card:hover { background: rgba(255,255,255,0.05); transform: translateX(5px); }
 .spec-icon-box { width: 45px; height: 45px; background: rgba(6, 182, 212, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(6, 182, 212, 0.3); color: var(--accent-blue); flex-shrink: 0; }
@@ -275,7 +310,7 @@ body {
 .inclusions { display: flex; gap: 20px; font-size: 0.85rem; font-weight: 600; color: #fff; }
 .inclusions span { display: flex; align-items: center; gap: 5px; }
 .offer-static-badge { background: rgba(56, 189, 248, 0.1); border: 1px solid var(--accent-blue); color: var(--accent-blue); padding: 10px 25px; border-radius: 8px; font-weight: 900; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); cursor: default; }
-
+Ce qui change :
 
 /* ============================================================ */
 /* SLIDE 5 : TECH DASHBOARD (STABILISÉ)                       */
