@@ -21,48 +21,56 @@
     </div>
 
     <div class="card">
-        <h2>🔧 Technique</h2>
+        <h2>🔧 Technique & DPE</h2>
         
-        <label>Type de Chauffage (Coche tout ce qui s'applique)</label>
+        <label>Note DPE Actuelle (Diagnostic)</label>
+        <select id="dpeNote" style="font-weight:bold; color:#2c3e50;">
+            <option value="Inconnu">-- Note --</option>
+            <option value="A">A (Excellent)</option>
+            <option value="B">B (Très bon)</option>
+            <option value="C">C (Standard)</option>
+            <option value="D">D (Moyen)</option>
+            <option value="E">E (Médiocre)</option>
+            <option value="F">F (Passoire thermique)</option>
+            <option value="G">G (Passoire critique)</option>
+        </select>
+
+        <label>Type de Chauffage</label>
         <div class="checkbox-group">
             <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Eau"> PAC Air/Eau</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Air (Clim)"> PAC Air/Air (Clim)</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Air"> PAC Air/Air (Clim)</label>
             <label class="check-label"><input type="checkbox" name="chauffage" value="Électrique"> Électrique</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Gaz de ville"> Gaz de ville</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Gaz"> Gaz</label>
             <label class="check-label"><input type="checkbox" name="chauffage" value="Fioul"> Fioul</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Poêle à Bois"> Poêle à Bois</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Poêle à Granulés"> Poêle à Granulés</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Cheminée / Insert"> Cheminée / Insert</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Bois/Granulés"> Bois/Granulés</label>
         </div>
 
-        <label>Toiture & Couverture</label>
+        <label>Toiture</label>
         <select id="typeToiture">
-            <option value="Non renseigné">-- Type de toit --</option>
-            <option value="Tuiles Mécaniques">Tuiles Mécaniques (Classique)</option>
-            <option value="Tuiles Plates">Tuiles Plates (Ancien)</option>
+            <option value="Non renseigné">-- Type --</option>
+            <option value="Tuiles">Tuiles</option>
             <option value="Ardoises">Ardoises</option>
-            <option value="Zinc / Bac Acier">Zinc / Bac Acier</option>
-            <option value="Toit Terrasse">Toit Terrasse (Plat)</option>
+            <option value="Zinc/Bac">Zinc / Bac Acier</option>
+            <option value="Plat">Toit Terrasse</option>
         </select>
-        
         <select id="etatToiture" style="margin-top: 5px;">
-            <option value="Bon état apparent">État : Bon état apparent</option>
-            <option value="À vérifier">État : À vérifier</option>
-            <option value="À refaire">État : À refaire</option>
+            <option value="Bon état">Bon état apparent</option>
+            <option value="À vérifier">À vérifier</option>
         </select>
-
         <div class="checkbox-group" style="margin-top: 10px;">
             <label class="check-label" style="color: #e67e22; font-weight:bold;">
                 <input type="checkbox" id="droneCheck"> 🚁 Inspecté au Drone
             </label>
         </div>
 
-        <label>Huisseries (Fenêtres)</label>
-        <select id="fenetres">
-            <option value="Double Vitrage PVC">Double Vitrage PVC</option>
-            <option value="Simple Vitrage Bois">Simple Vitrage Bois</option>
-            <option value="Mixte">Mixte</option>
-            <option value="Alu Récent">Alu Récent</option>
+        <label>Volets & Confort</label>
+        <select id="volets">
+            <option value="Non renseigné">-- Type de volets --</option>
+            <option value="Roulants Électriques">✅ Roulants Électriques (Le top)</option>
+            <option value="Roulants Manuels">Roulants Manuels</option>
+            <option value="Battants Bois/PVC">Battants Bois / PVC</option>
+            <option value="Persiennes">Persiennes (Ancien)</option>
+            <option value="Sans volets">Pas de volets</option>
         </select>
     </div>
 
