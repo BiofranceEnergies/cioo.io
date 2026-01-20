@@ -22,15 +22,18 @@
 
     <div class="card">
         <h2>🔧 Technique</h2>
-        <label>Type de Chauffage</label>
-        <select id="chauffage">
-            <option value="Non renseigné">-- Choisir --</option>
-            <option value="Électrique">Électrique (Radiateurs)</option>
-            <option value="Gaz de ville">Gaz de ville</option>
-            <option value="Fioul">Fioul</option>
-            <option value="Pompe à Chaleur">Pompe à Chaleur</option>
-            <option value="Bois/Granulés">Bois / Granulés</option>
-        </select>
+        
+        <label>Type de Chauffage (Coche tout ce qui s'applique)</label>
+        <div class="checkbox-group">
+            <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Eau"> PAC Air/Eau</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Air (Clim)"> PAC Air/Air (Clim)</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Électrique"> Électrique</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Gaz de ville"> Gaz de ville</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Fioul"> Fioul</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Poêle à Bois"> Poêle à Bois</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Poêle à Granulés"> Poêle à Granulés</label>
+            <label class="check-label"><input type="checkbox" name="chauffage" value="Cheminée / Insert"> Cheminée / Insert</label>
+        </div>
 
         <label>État Toiture</label>
         <select id="toiture">
@@ -50,8 +53,7 @@
 
     <div class="card">
         <h2>📐 Pièces & Surfaces</h2>
-        <div id="roomsContainer">
-            </div>
+        <div id="roomsContainer"></div>
         <button class="add" onclick="addRoom()">+ Ajouter une pièce</button>
         
         <div class="total-container">
