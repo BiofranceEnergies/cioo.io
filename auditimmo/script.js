@@ -1,18 +1,17 @@
-// Fonction pour ajouter une ligne de pièce AVEC PHOTO
+// Fonction pour ajouter une ligne de pièce AVEC PHOTO (Version Galerie + Caméra)
 function addRoom() {
     const container = document.getElementById('roomsContainer');
     const div = document.createElement('div');
-    div.className = 'room-block'; // On utilise une classe pour grouper le tout
+    div.className = 'room-block'; 
     
-    // On injecte le HTML : Ligne inputs + Ligne photo
     div.innerHTML = `
         <div class="room-row">
             <input type="text" placeholder="Nom (ex: Salon)" class="room-name" style="flex:2;">
             <input type="number" placeholder="m²" class="room-area" style="flex:1;" oninput="calculateTotal()">
         </div>
         <div class="room-photo-container">
-            <label>📸 Photo de la pièce :</label>
-            <input type="file" accept="image/*" capture="environment" onchange="previewRoomImage(this)">
+            <label>📸 Photo (Caméra ou Galerie) :</label>
+            <input type="file" accept="image/*" onchange="previewRoomImage(this)">
             <img class="room-preview" src="" alt="Aperçu">
         </div>
     `;
@@ -20,21 +19,20 @@ function addRoom() {
     container.appendChild(div);
 }
 
-// Fonction pour afficher la photo JUSTE SOUS la bonne pièce
+// Fonction pour afficher la photo (inchangée)
 function previewRoomImage(input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            // On cherche l'image qui est dans le même bloc que le bouton cliqué
             const img = input.parentElement.querySelector('.room-preview');
             img.src = e.target.result;
-            img.style.display = 'block'; // On l'affiche
+            img.style.display = 'block';
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-// Fonction pour calculer le total
+// Fonction pour calculer le total (inchangée)
 function calculateTotal() {
     let total = 0;
     const areas = document.querySelectorAll('.room-area');
@@ -44,33 +42,25 @@ function calculateTotal() {
     document.getElementById('totalArea').innerText = total + " m²";
 }
 
-// Fonction pour générer le rapport final
+// Fonction Rapport (inchangée)
 function generateReport() {
     const vendeurName = document.getElementById('vendeurName').value;
     const adresse = document.getElementById('adresseBien').value;
     const projet = document.getElementById('projetVendeur').value;
-    
-    // DPE
     const dpeEnergie = document.getElementById('dpeEnergie').value;
     const dpeClimat = document.getElementById('dpeClimat').value;
 
-    // Chauffage
     const checkedChauffage = document.querySelectorAll('input[name="chauffage"]:checked');
     let chauffageList = [];
-    checkedChauffage.forEach((checkbox) => {
-        chauffageList.push(checkbox.value);
-    });
+    checkedChauffage.forEach((checkbox) => { chauffageList.push(checkbox.value); });
     const chauffage = chauffageList.length > 0 ? chauffageList.join(', ') : "Non renseigné";
 
-    // Toiture
     const typeToiture = document.getElementById('typeToiture').value;
     const etatToiture = document.getElementById('etatToiture').value;
     const isDrone = document.getElementById('droneCheck').checked;
     const droneText = isDrone ? " (✅ Inspecté au Drone)" : "";
 
-    // Volets
     const volets = document.getElementById('volets').value;
-
     const plus = document.getElementById('plus').value;
     const moins = document.getElementById('moins').value;
     const totalArea = document.getElementById('totalArea').innerText;
