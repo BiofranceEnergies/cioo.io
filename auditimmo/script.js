@@ -1,11 +1,9 @@
-// Fonction pour ajouter une pièce (Galerie ou Photo)
+// Fonction pour ajouter une pièce
 function addRoom() {
     const container = document.getElementById('roomsContainer');
     const div = document.createElement('div');
     div.className = 'room-block'; 
-    
-    // On met un ID unique à l'image pour pouvoir la récupérer facilement
-    const uniqueId = 'img-' + Date.now();
+    const uniqueId = 'img-' + Date.now(); // ID unique pour chaque photo
 
     div.innerHTML = `
         <div class="room-row">
@@ -15,7 +13,7 @@ function addRoom() {
         <div class="room-photo-container">
             <label>📸 Photo :</label>
             <input type="file" accept="image/*" onchange="previewRoomImage(this, '${uniqueId}')">
-            <img id="${uniqueId}" class="room-preview" src="" alt="" style="display:none;">
+            <img id="${uniqueId}" class="room-preview" src="" style="display:none;">
         </div>
     `;
     container.appendChild(div);
@@ -36,26 +34,21 @@ function previewRoomImage(input, imgId) {
 function calculateTotal() {
     let total = 0;
     const areas = document.querySelectorAll('.room-area');
-    areas.forEach(input => {
-        total += Number(input.value);
-    });
+    areas.forEach(input => { total += Number(input.value); });
     document.getElementById('totalArea').innerText = total + " m²";
 }
 
-// === NOUVELLE FONCTION PDF PUISSANTE ===
+// === FONCTION PDF INFAILLIBLE ===
 function generatePDF() {
-    alert("Génération du PDF... Patientez.");
-
-    // 1. On remplit le modèle caché avec les données
+    // 1. Remplir le modèle caché avec les données
     document.getElementById('pdf-nom').innerText = document.getElementById('vendeurName').value || "Non renseigné";
     document.getElementById('pdf-adresse').innerText = document.getElementById('adresseBien').value || "";
     document.getElementById('pdf-projet').innerText = document.getElementById('projetVendeur').value || "";
 
-    // DPE
     const dpe = document.getElementById('dpeEnergie').value + " / GES: " + document.getElementById('dpeClimat').value;
     document.getElementById('pdf-dpe').innerText = dpe;
 
-    // Chauffage (Liste propre)
+    // Chauffage
     const checkedChauffage = document.querySelectorAll('input[name="chauffage"]:checked');
     let chauffageList = [];
     checkedChauffage.forEach((checkbox) => { chauffageList.push(checkbox.value); });
@@ -65,14 +58,11 @@ function generatePDF() {
     const toitInfos = document.getElementById('typeToiture').value + " - " + document.getElementById('etatToiture').value;
     const isDrone = document.getElementById('droneCheck').checked ? " (✅ VÉRIFIÉ DRONE)" : "";
     document.getElementById('pdf-toiture').innerText = toitInfos + isDrone;
-
     document.getElementById('pdf-volets').innerText = document.getElementById('volets').value;
 
-    // 2. On gère les pièces et les photos
+    // Pièces et Photos (Copie propre)
     const pdfRoomsContainer = document.getElementById('pdf-rooms-list');
-    pdfRoomsContainer.innerHTML = ""; // On vide avant de remplir
-
-    // On récupère tous les blocs de pièces de l'appli
+    pdfRoomsContainer.innerHTML = ""; // Vider
     const roomBlocks = document.querySelectorAll('.room-block');
 
     roomBlocks.forEach(block => {
@@ -81,15 +71,12 @@ function generatePDF() {
         const img = block.querySelector('.room-preview');
 
         if(name || area) {
-            // Création d'une ligne propre pour le PDF
-            let roomHtml = `<div style="margin-bottom: 15px; page-break-inside: avoid;">`;
-            roomHtml += `<p style="font-weight:bold; font-size:1.1rem; margin:5px 0; border-bottom:1px solid #ddd;">${name} (${area} m²)</p>`;
+            let roomHtml = `<div style="margin-bottom: 20px; border-bottom:1px solid #eee; padding-bottom:10px;">`;
+            roomHtml += `<p style="font-weight:bold; font-size:1.1rem; margin:0;">${name} (${area} m²)</p>`;
             
-            // Si il y a une image affichée, on l'ajoute en grand
+            // Si une image existe et est affichée
             if(img && img.src && img.style.display !== 'none') {
-                roomHtml += `<img src="${img.src}" style="width:100%; max-height:300px; object-fit:contain; border-radius:5px; margin-top:5px;">`;
-            } else {
-                roomHtml += `<p style="color:#999; font-style:italic; font-size:0.8rem;">Pas de photo</p>`;
+                roomHtml += `<img src="${img.src}" style="width:100%; max-height:400px; object-fit:contain; margin-top:10px; border-radius:5px;">`;
             }
             roomHtml += `</div>`;
             pdfRoomsContainer.innerHTML += roomHtml;
@@ -100,23 +87,32 @@ function generatePDF() {
     document.getElementById('pdf-plus').innerText = document.getElementById('plus').value;
     document.getElementById('pdf-moins').innerText = document.getElementById('moins').value;
 
-    // 3. On affiche temporairement le modèle pour le PDF
-    const element = document.getElementById('printTemplate');
-    element.style.display = 'block'; // On le rend visible pour le moteur PDF
+    // 2. AFFICHER LE MODÈLE (C'est le secret pour éviter la page blanche)
+    const template = document.getElementById('printTemplate');
+    const app = document.getElementById('appInterface');
+    
+    // On cache l'appli et on montre le PDF en plein écran
+    app.style.display = 'none';
+    template.style.display = 'block';
 
-    // 4. Paramètres PDF optimisés pour A4
-    const opt = {
-        margin:       10, // Marges blanches
-        filename:     `Audit_${document.getElementById('vendeurName').value}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true }, // Meilleure qualité
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
+    alert("Génération du PDF... Patientez 2 secondes...");
 
-    // 5. Génération et remise à zéro
-    html2pdf().set(opt).from(element).save().then(() => {
-        element.style.display = 'none'; // On recache le modèle après
-    });
+    // 3. ATTENDRE UN PEU (500ms) pour que les images chargent
+    setTimeout(() => {
+        const opt = {
+            margin: 10,
+            filename: `Audit_${document.getElementById('vendeurName').value}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(template).save().then(() => {
+            // 4. Une fois fini, on remet tout comme avant
+            template.style.display = 'none';
+            app.style.display = 'block';
+        });
+    }, 500); // Pause de 500 millisecondes
 }
 
 addRoom();
