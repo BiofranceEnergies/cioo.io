@@ -23,17 +23,35 @@
     <div class="card">
         <h2>🔧 Technique & DPE</h2>
         
-        <label>Note DPE Actuelle (Diagnostic)</label>
-        <select id="dpeNote" style="font-weight:bold; color:#2c3e50;">
-            <option value="Inconnu">-- Note --</option>
-            <option value="A">A (Excellent)</option>
-            <option value="B">B (Très bon)</option>
-            <option value="C">C (Standard)</option>
-            <option value="D">D (Moyen)</option>
-            <option value="E">E (Médiocre)</option>
-            <option value="F">F (Passoire thermique)</option>
-            <option value="G">G (Passoire critique)</option>
-        </select>
+        <label>Scores DPE (Diagnostic)</label>
+        <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+                <span style="font-size: 0.85rem; color: #555;">Énergie (Conso)</span>
+                <select id="dpeEnergie" style="font-weight:bold; color:#2c3e50; margin-top:2px;">
+                    <option value="?">--</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                </select>
+            </div>
+            <div style="flex: 1;">
+                <span style="font-size: 0.85rem; color: #555;">GES (Climat)</span>
+                <select id="dpeClimat" style="font-weight:bold; color:#2c3e50; margin-top:2px;">
+                    <option value="?">--</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                </select>
+            </div>
+        </div>
 
         <label>Type de Chauffage</label>
         <div class="checkbox-group">
