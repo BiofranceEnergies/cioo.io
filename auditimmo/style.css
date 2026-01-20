@@ -1,0 +1,105 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+    max-width: 600px;
+    margin: 0 auto; /* Pour centrer sur grand écran */
+}
+
+.main-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button.add {
+    background-color: #27ae60;
+}
+
+button.copy {
+    background-color: #e67e22;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.room-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.room-row input {
+    margin-top: 0;
+}
+
+.total-container {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+#totalArea {
+    font-size: 2rem;
+    color: #27ae60;
+    font-weight: bold;
+    margin-top: 5px;
+}
