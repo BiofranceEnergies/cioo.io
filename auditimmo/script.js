@@ -23,8 +23,9 @@ function generateReport() {
     const adresse = document.getElementById('adresseBien').value;
     const projet = document.getElementById('projetVendeur').value;
     
-    // DPE
-    const dpeNote = document.getElementById('dpeNote').value;
+    // Récupération des DEUX notes DPE
+    const dpeEnergie = document.getElementById('dpeEnergie').value;
+    const dpeClimat = document.getElementById('dpeClimat').value;
 
     // Chauffage
     const checkedChauffage = document.querySelectorAll('input[name="chauffage"]:checked');
@@ -53,7 +54,8 @@ function generateReport() {
     text += `🎯 Projet : ${projet}\n\n`;
     
     text += "🔧 TECHNIQUE & CONFORT :\n";
-    text += `📊 Note DPE : ${dpeNote}\n`;
+    // Affichage double note
+    text += `📊 DPE : ${dpeEnergie} / GES : ${dpeClimat}\n`;
     text += `- Chauffage : ${chauffage}\n`;
     text += `- Toiture : ${typeToiture} / ${etatToiture}${droneText}\n`;
     text += `- Volets : ${volets}\n\n`;
