@@ -20,22 +20,27 @@ function calculateTotal() {
     document.getElementById('totalArea').innerText = total + " m²";
 }
 
-// Fonction pour générer le rapport final (MODIFIÉE)
+// Fonction pour générer le rapport final
 function generateReport() {
     const vendeurName = document.getElementById('vendeurName').value;
     const adresse = document.getElementById('adresseBien').value;
     const projet = document.getElementById('projetVendeur').value;
     
-    // NOUVEAU : Récupération des chauffages multiples
+    // Chauffage
     const checkedChauffage = document.querySelectorAll('input[name="chauffage"]:checked');
     let chauffageList = [];
     checkedChauffage.forEach((checkbox) => {
         chauffageList.push(checkbox.value);
     });
-    // Si rien n'est coché, on met "Non renseigné", sinon on joint par des virgules
     const chauffage = chauffageList.length > 0 ? chauffageList.join(', ') : "Non renseigné";
 
-    const toiture = document.getElementById('toiture').value;
+    // Toiture (Nouveau)
+    const typeToiture = document.getElementById('typeToiture').value;
+    const etatToiture = document.getElementById('etatToiture').value;
+    // Vérification si la case drone est cochée
+    const isDrone = document.getElementById('droneCheck').checked;
+    const droneText = isDrone ? " (✅ Inspecté au Drone)" : "";
+
     const fenetres = document.getElementById('fenetres').value;
     const plus = document.getElementById('plus').value;
     const moins = document.getElementById('moins').value;
@@ -47,8 +52,9 @@ function generateReport() {
     text += `🎯 Projet : ${projet}\n\n`;
     
     text += "🔧 TECHNIQUE :\n";
-    text += `- Chauffage : ${chauffage}\n`; // Affiche la liste complète
-    text += `- Toiture : ${toiture}\n`;
+    text += `- Chauffage : ${chauffage}\n`;
+    // On affiche le type, l'état et le check drone
+    text += `- Toiture : ${typeToiture} / ${etatToiture}${droneText}\n`;
     text += `- Fenêtres : ${fenetres}\n\n`;
 
     text += "📐 SURFACES :\n";
