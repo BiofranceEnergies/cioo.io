@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Vendeur Immo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <h1 class="main-title">🕵️‍♂️ Mon Audit Immo</h1>
+
+    <div class="card">
+        <h2>👤 Propriétaire</h2>
+        <label>Nom du vendeur</label>
+        <input type="text" id="vendeurName" placeholder="Ex: M. Dupont">
+        <label>Adresse du bien</label>
+        <input type="text" id="adresseBien" placeholder="Adresse complète">
+        <label>Urgence / Projet</label>
+        <textarea id="projetVendeur" rows="3" placeholder="Pourquoi vend-il ? Urgence ?"></textarea>
+    </div>
+
+    <div class="card">
+        <h2>🔧 Technique</h2>
+        <label>Type de Chauffage</label>
+        <select id="chauffage">
+            <option value="Non renseigné">-- Choisir --</option>
+            <option value="Électrique">Électrique (Radiateurs)</option>
+            <option value="Gaz de ville">Gaz de ville</option>
+            <option value="Fioul">Fioul</option>
+            <option value="Pompe à Chaleur">Pompe à Chaleur</option>
+            <option value="Bois/Granulés">Bois / Granulés</option>
+        </select>
+
+        <label>État Toiture</label>
+        <select id="toiture">
+            <option value="Bon état">Bon état apparent</option>
+            <option value="À vérifier">À vérifier</option>
+            <option value="À refaire">À refaire</option>
+        </select>
+
+        <label>Huisseries (Fenêtres)</label>
+        <select id="fenetres">
+            <option value="Double Vitrage PVC">Double Vitrage PVC</option>
+            <option value="Simple Vitrage Bois">Simple Vitrage Bois</option>
+            <option value="Mixte">Mixte</option>
+            <option value="Alu Récent">Alu Récent</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <h2>📐 Pièces & Surfaces</h2>
+        <div id="roomsContainer">
+            </div>
+        <button class="add" onclick="addRoom()">+ Ajouter une pièce</button>
+        
+        <div class="total-container">
+            Surface Totale (Carrez approx.) :
+            <div id="totalArea">0 m²</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📝 Bilan Rapide</h2>
+        <label>Points Forts (+)</label>
+        <input type="text" id="plus" placeholder="Ex: Vue, Calme, Beau volume">
+        <label>Points Faibles (-)</label>
+        <input type="text" id="moins" placeholder="Ex: Travaux, Route bruyante">
+    </div>
+
+    <button class="copy" onclick="generateReport()">📋 Copier le rapport complet</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
