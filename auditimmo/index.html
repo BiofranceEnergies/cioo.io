@@ -35,12 +35,27 @@
             <label class="check-label"><input type="checkbox" name="chauffage" value="Cheminée / Insert"> Cheminée / Insert</label>
         </div>
 
-        <label>État Toiture</label>
-        <select id="toiture">
-            <option value="Bon état">Bon état apparent</option>
-            <option value="À vérifier">À vérifier</option>
-            <option value="À refaire">À refaire</option>
+        <label>Toiture & Couverture</label>
+        <select id="typeToiture">
+            <option value="Non renseigné">-- Type de toit --</option>
+            <option value="Tuiles Mécaniques">Tuiles Mécaniques (Classique)</option>
+            <option value="Tuiles Plates">Tuiles Plates (Ancien)</option>
+            <option value="Ardoises">Ardoises</option>
+            <option value="Zinc / Bac Acier">Zinc / Bac Acier</option>
+            <option value="Toit Terrasse">Toit Terrasse (Plat)</option>
         </select>
+        
+        <select id="etatToiture" style="margin-top: 5px;">
+            <option value="Bon état apparent">État : Bon état apparent</option>
+            <option value="À vérifier">État : À vérifier</option>
+            <option value="À refaire">État : À refaire</option>
+        </select>
+
+        <div class="checkbox-group" style="margin-top: 10px;">
+            <label class="check-label" style="color: #e67e22; font-weight:bold;">
+                <input type="checkbox" id="droneCheck"> 🚁 Inspecté au Drone
+            </label>
+        </div>
 
         <label>Huisseries (Fenêtres)</label>
         <select id="fenetres">
