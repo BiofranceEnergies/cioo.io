@@ -34,7 +34,7 @@ function previewRoomImage(input) {
     }
 }
 
-// Fonction pour calculer le total (inchangée)
+// Fonction pour calculer le total
 function calculateTotal() {
     let total = 0;
     const areas = document.querySelectorAll('.room-area');
@@ -44,18 +44,22 @@ function calculateTotal() {
     document.getElementById('totalArea').innerText = total + " m²";
 }
 
-// Fonction Rapport (inchangée, mais je te la remets pour être sûr)
+// Fonction pour générer le rapport final
 function generateReport() {
     const vendeurName = document.getElementById('vendeurName').value;
     const adresse = document.getElementById('adresseBien').value;
     const projet = document.getElementById('projetVendeur').value;
+    
+    // DPE
     const dpeEnergie = document.getElementById('dpeEnergie').value;
     const dpeClimat = document.getElementById('dpeClimat').value;
 
     // Chauffage
     const checkedChauffage = document.querySelectorAll('input[name="chauffage"]:checked');
     let chauffageList = [];
-    checkedChauffage.forEach((checkbox) => { chauffageList.push(checkbox.value); });
+    checkedChauffage.forEach((checkbox) => {
+        chauffageList.push(checkbox.value);
+    });
     const chauffage = chauffageList.length > 0 ? chauffageList.join(', ') : "Non renseigné";
 
     // Toiture
@@ -66,6 +70,7 @@ function generateReport() {
 
     // Volets
     const volets = document.getElementById('volets').value;
+
     const plus = document.getElementById('plus').value;
     const moins = document.getElementById('moins').value;
     const totalArea = document.getElementById('totalArea').innerText;
@@ -102,5 +107,5 @@ function generateReport() {
     });
 }
 
-// On ajoute une première pièce vide au démarrage
+// Ajout d'une première pièce
 addRoom();
