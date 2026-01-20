@@ -5,113 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audit Vendeur Immo</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <h1 class="main-title">🕵️‍♂️ Mon Audit Immo</h1>
+    <div id="contentToPrint">
+        <h1 class="main-title">🕵️‍♂️ Mon Audit Immo</h1>
 
-    <div class="card">
-        <h2>👤 Propriétaire</h2>
-        <label>Nom du vendeur</label>
-        <input type="text" id="vendeurName" placeholder="Ex: M. Dupont">
-        <label>Adresse du bien</label>
-        <input type="text" id="adresseBien" placeholder="Adresse complète">
-        <label>Urgence / Projet</label>
-        <textarea id="projetVendeur" rows="3" placeholder="Pourquoi vend-il ? Urgence ?"></textarea>
-    </div>
+        <div class="card">
+            <h2>👤 Propriétaire</h2>
+            <label>Nom du vendeur</label>
+            <input type="text" id="vendeurName" placeholder="Ex: M. Dupont">
+            <label>Adresse du bien</label>
+            <input type="text" id="adresseBien" placeholder="Adresse complète">
+            <label>Urgence / Projet</label>
+            <textarea id="projetVendeur" rows="3" placeholder="Pourquoi vend-il ? Urgence ?"></textarea>
+        </div>
 
-    <div class="card">
-        <h2>🔧 Technique & DPE</h2>
-        
-        <label>Scores DPE (Diagnostic)</label>
-        <div style="display: flex; gap: 10px;">
-            <div style="flex: 1;">
-                <span style="font-size: 0.85rem; color: #555;">Énergie (Conso)</span>
-                <select id="dpeEnergie" style="font-weight:bold; color:#2c3e50; margin-top:2px;">
-                    <option value="?">--</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                </select>
+        <div class="card">
+            <h2>🔧 Technique & DPE</h2>
+            
+            <label>Scores DPE (Diagnostic)</label>
+            <div style="display: flex; gap: 10px;">
+                <div style="flex: 1;">
+                    <span style="font-size: 0.85rem; color: #555;">Énergie (Conso)</span>
+                    <select id="dpeEnergie" style="font-weight:bold; color:#2c3e50; margin-top:2px;">
+                        <option value="?">--</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <span style="font-size: 0.85rem; color: #555;">GES (Climat)</span>
+                    <select id="dpeClimat" style="font-weight:bold; color:#2c3e50; margin-top:2px;">
+                        <option value="?">--</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                    </select>
+                </div>
             </div>
-            <div style="flex: 1;">
-                <span style="font-size: 0.85rem; color: #555;">GES (Climat)</span>
-                <select id="dpeClimat" style="font-weight:bold; color:#2c3e50; margin-top:2px;">
-                    <option value="?">--</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                </select>
+
+            <label>Type de Chauffage</label>
+            <div class="checkbox-group">
+                <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Eau"> PAC Air/Eau</label>
+                <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Air"> PAC Air/Air (Clim)</label>
+                <label class="check-label"><input type="checkbox" name="chauffage" value="Électrique"> Électrique</label>
+                <label class="check-label"><input type="checkbox" name="chauffage" value="Gaz"> Gaz</label>
+                <label class="check-label"><input type="checkbox" name="chauffage" value="Fioul"> Fioul</label>
+                <label class="check-label"><input type="checkbox" name="chauffage" value="Bois/Granulés"> Bois/Granulés</label>
+            </div>
+
+            <label>Toiture</label>
+            <select id="typeToiture">
+                <option value="Non renseigné">-- Type --</option>
+                <option value="Tuiles">Tuiles</option>
+                <option value="Ardoises">Ardoises</option>
+                <option value="Zinc/Bac">Zinc / Bac Acier</option>
+                <option value="Plat">Toit Terrasse</option>
+            </select>
+            <select id="etatToiture" style="margin-top: 5px;">
+                <option value="Bon état">Bon état apparent</option>
+                <option value="À vérifier">À vérifier</option>
+            </select>
+            <div class="checkbox-group" style="margin-top: 10px;">
+                <label class="check-label" style="color: #e67e22; font-weight:bold;">
+                    <input type="checkbox" id="droneCheck"> 🚁 Inspecté au Drone
+                </label>
+            </div>
+
+            <label>Volets & Confort</label>
+            <select id="volets">
+                <option value="Non renseigné">-- Type de volets --</option>
+                <option value="Roulants Électriques">✅ Roulants Électriques (Le top)</option>
+                <option value="Roulants Manuels">Roulants Manuels</option>
+                <option value="Battants Bois/PVC">Battants Bois / PVC</option>
+                <option value="Persiennes">Persiennes (Ancien)</option>
+                <option value="Sans volets">Pas de volets</option>
+            </select>
+        </div>
+
+        <div class="card">
+            <h2>📐 Pièces & Surfaces</h2>
+            <div id="roomsContainer"></div>
+            
+            <button class="add no-print" onclick="addRoom()">+ Ajouter une pièce</button>
+            
+            <div class="total-container">
+                Surface Totale (Carrez approx.) :
+                <div id="totalArea">0 m²</div>
             </div>
         </div>
 
-        <label>Type de Chauffage</label>
-        <div class="checkbox-group">
-            <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Eau"> PAC Air/Eau</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="PAC Air/Air"> PAC Air/Air (Clim)</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Électrique"> Électrique</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Gaz"> Gaz</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Fioul"> Fioul</label>
-            <label class="check-label"><input type="checkbox" name="chauffage" value="Bois/Granulés"> Bois/Granulés</label>
+        <div class="card">
+            <h2>📝 Bilan Rapide</h2>
+            <label>Points Forts (+)</label>
+            <input type="text" id="plus" placeholder="Ex: Vue, Calme, Beau volume">
+            <label>Points Faibles (-)</label>
+            <input type="text" id="moins" placeholder="Ex: Travaux, Route bruyante">
         </div>
-
-        <label>Toiture</label>
-        <select id="typeToiture">
-            <option value="Non renseigné">-- Type --</option>
-            <option value="Tuiles">Tuiles</option>
-            <option value="Ardoises">Ardoises</option>
-            <option value="Zinc/Bac">Zinc / Bac Acier</option>
-            <option value="Plat">Toit Terrasse</option>
-        </select>
-        <select id="etatToiture" style="margin-top: 5px;">
-            <option value="Bon état">Bon état apparent</option>
-            <option value="À vérifier">À vérifier</option>
-        </select>
-        <div class="checkbox-group" style="margin-top: 10px;">
-            <label class="check-label" style="color: #e67e22; font-weight:bold;">
-                <input type="checkbox" id="droneCheck"> 🚁 Inspecté au Drone
-            </label>
-        </div>
-
-        <label>Volets & Confort</label>
-        <select id="volets">
-            <option value="Non renseigné">-- Type de volets --</option>
-            <option value="Roulants Électriques">✅ Roulants Électriques (Le top)</option>
-            <option value="Roulants Manuels">Roulants Manuels</option>
-            <option value="Battants Bois/PVC">Battants Bois / PVC</option>
-            <option value="Persiennes">Persiennes (Ancien)</option>
-            <option value="Sans volets">Pas de volets</option>
-        </select>
-    </div>
-
-    <div class="card">
-        <h2>📐 Pièces & Surfaces</h2>
-        <div id="roomsContainer"></div>
-        <button class="add" onclick="addRoom()">+ Ajouter une pièce</button>
-        
-        <div class="total-container">
-            Surface Totale (Carrez approx.) :
-            <div id="totalArea">0 m²</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>📝 Bilan Rapide</h2>
-        <label>Points Forts (+)</label>
-        <input type="text" id="plus" placeholder="Ex: Vue, Calme, Beau volume">
-        <label>Points Faibles (-)</label>
-        <input type="text" id="moins" placeholder="Ex: Travaux, Route bruyante">
-    </div>
-
-    <button class="copy" onclick="generateReport()">📋 Copier le rapport complet</button>
+    </div> <button class="pdf-btn no-print" onclick="downloadPDF()">📄 TÉLÉCHARGER LE PDF (AVEC PHOTOS)</button>
 
     <script src="script.js"></script>
 </body>
