@@ -4,7 +4,7 @@ body {
     background-color: #f4f4f9;
     color: #333;
     max-width: 600px;
-    margin: 0 auto; /* Pour centrer sur grand écran */
+    margin: 0 auto;
 }
 
 .main-title {
@@ -37,7 +37,32 @@ label {
     color: #555;
 }
 
-input, select, textarea {
+/* NOUVEAU STYLE POUR LES CHECKBOXES */
+.checkbox-group {
+    margin-top: 10px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.check-label {
+    display: flex; /* Aligner la case et le texte */
+    align-items: center;
+    margin-top: 8px;
+    font-weight: normal; /* Texte moins gras */
+    cursor: pointer;
+}
+
+.check-label input {
+    width: auto; /* Taille normale pour la case */
+    margin-top: 0;
+    margin-right: 10px;
+    transform: scale(1.2); /* Grossir un peu la case pour le doigt */
+}
+/* FIN NOUVEAU STYLE */
+
+input[type="text"], input[type="number"], select, textarea {
     width: 100%;
     padding: 12px;
     margin-top: 5px;
@@ -67,39 +92,12 @@ button {
     transition: background-color 0.2s;
 }
 
-button:hover {
-    opacity: 0.9;
-}
+button:hover { opacity: 0.9; }
+button.add { background-color: #27ae60; }
+button.copy { background-color: #e67e22; margin-top: 20px; margin-bottom: 40px; }
 
-button.add {
-    background-color: #27ae60;
-}
+.room-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.room-row input { margin-top: 0; }
 
-button.copy {
-    background-color: #e67e22;
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-
-.room-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.room-row input {
-    margin-top: 0;
-}
-
-.total-container {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-#totalArea {
-    font-size: 2rem;
-    color: #27ae60;
-    font-weight: bold;
-    margin-top: 5px;
-}
+.total-container { margin-top: 20px; text-align: center; font-size: 1rem; }
+#totalArea { font-size: 2rem; color: #27ae60; font-weight: bold; margin-top: 5px; }
