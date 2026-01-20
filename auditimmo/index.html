@@ -11,6 +11,16 @@
     <h1 class="main-title">🕵️‍♂️ Mon Audit Immo</h1>
 
     <div class="card">
+        <h2>📸 Photo Mémo</h2>
+        <label>Prendre une photo (Façade ou Mémo)</label>
+        <input type="file" id="photoInput" accept="image/*" capture="environment">
+        
+        <div id="previewContainer" style="display:none; margin-top:15px; text-align:center;">
+            <img id="photoPreview" src="" alt="Aperçu" style="max-width:100%; border-radius:10px; border: 2px solid #ddd;">
+        </div>
+    </div>
+
+    <div class="card">
         <h2>👤 Propriétaire</h2>
         <label>Nom du vendeur</label>
         <input type="text" id="vendeurName" placeholder="Ex: M. Dupont">
