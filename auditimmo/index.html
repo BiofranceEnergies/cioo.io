@@ -111,41 +111,43 @@
             <input type="text" id="moins">
         </div>
 
-        <button class="pdf-btn" onclick="generatePDF()">📄 TÉLÉCHARGER LE PDF PRO</button>
+        <button class="pdf-btn" onclick="generatePDF()">📄 TÉLÉCHARGER LE PDF</button>
     </div>
 
-    <div id="printTemplate" style="display:none;">
-        <div class="pdf-header">
-            <h1>AUDIT DE VISITE</h1>
-            <p class="date">Généré par votre expert immobilier</p>
-        </div>
-        
-        <div class="pdf-section">
-            <h3>👤 PROPRIÉTAIRE</h3>
-            <p><strong>Nom :</strong> <span id="pdf-nom"></span></p>
-            <p><strong>Adresse :</strong> <span id="pdf-adresse"></span></p>
-            <p><strong>Projet :</strong> <span id="pdf-projet"></span></p>
-        </div>
+    <div id="printTemplate">
+        <div class="pdf-container">
+            <div class="pdf-header">
+                <h1>AUDIT DE VISITE</h1>
+                <p class="date">Généré par votre expert immobilier</p>
+            </div>
+            
+            <div class="pdf-section">
+                <h3>👤 PROPRIÉTAIRE</h3>
+                <p><strong>Nom :</strong> <span id="pdf-nom"></span></p>
+                <p><strong>Adresse :</strong> <span id="pdf-adresse"></span></p>
+                <p><strong>Projet :</strong> <span id="pdf-projet"></span></p>
+            </div>
 
-        <div class="pdf-section">
-            <h3>🔧 TECHNIQUE</h3>
-            <p><strong>DPE :</strong> <span id="pdf-dpe"></span></p>
-            <p><strong>Chauffage :</strong> <span id="pdf-chauffage"></span></p>
-            <p><strong>Toiture :</strong> <span id="pdf-toiture"></span></p>
-            <p><strong>Volets :</strong> <span id="pdf-volets"></span></p>
-        </div>
+            <div class="pdf-section">
+                <h3>🔧 TECHNIQUE</h3>
+                <p><strong>DPE :</strong> <span id="pdf-dpe"></span></p>
+                <p><strong>Chauffage :</strong> <span id="pdf-chauffage"></span></p>
+                <p><strong>Toiture :</strong> <span id="pdf-toiture"></span></p>
+                <p><strong>Volets :</strong> <span id="pdf-volets"></span></p>
+            </div>
 
-        <div class="pdf-section">
-            <h3>📐 PIÈCES & PHOTOS</h3>
-            <div id="pdf-rooms-list">
-                </div>
-            <p class="total-row">Surface Totale Estimée : <span id="pdf-total"></span></p>
-        </div>
+            <div class="pdf-section">
+                <h3>📐 PIÈCES & PHOTOS</h3>
+                <div id="pdf-rooms-list">
+                    </div>
+                <p class="total-row">Surface Totale Estimée : <span id="pdf-total"></span></p>
+            </div>
 
-        <div class="pdf-section">
-            <h3>📝 BILAN</h3>
-            <p class="plus"><strong>✅ Les + :</strong> <span id="pdf-plus"></span></p>
-            <p class="moins"><strong>⚠️ Les - :</strong> <span id="pdf-moins"></span></p>
+            <div class="pdf-section">
+                <h3>📝 BILAN</h3>
+                <p><strong>✅ Les + :</strong> <span id="pdf-plus"></span></p>
+                <p><strong>⚠️ Les - :</strong> <span id="pdf-moins"></span></p>
+            </div>
         </div>
     </div>
 
