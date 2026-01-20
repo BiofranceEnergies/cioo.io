@@ -23,7 +23,7 @@ function generateReport() {
     const adresse = document.getElementById('adresseBien').value;
     const projet = document.getElementById('projetVendeur').value;
     
-    // Récupération des DEUX notes DPE
+    // DPE
     const dpeEnergie = document.getElementById('dpeEnergie').value;
     const dpeClimat = document.getElementById('dpeClimat').value;
 
@@ -54,7 +54,6 @@ function generateReport() {
     text += `🎯 Projet : ${projet}\n\n`;
     
     text += "🔧 TECHNIQUE & CONFORT :\n";
-    // Affichage double note
     text += `📊 DPE : ${dpeEnergie} / GES : ${dpeClimat}\n`;
     text += `- Chauffage : ${chauffage}\n`;
     text += `- Toiture : ${typeToiture} / ${etatToiture}${droneText}\n`;
@@ -80,5 +79,22 @@ function generateReport() {
         alert("Erreur : " + err);
     });
 }
+
+// --- NOUVEAU CODE POUR LA PHOTO ---
+document.getElementById('photoInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        // Quand l'image est chargée, on l'affiche
+        reader.onload = function(e) {
+            const img = document.getElementById('photoPreview');
+            img.src = e.target.result;
+            // On rend le conteneur visible
+            document.getElementById('previewContainer').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+// ----------------------------------
 
 addRoom();
