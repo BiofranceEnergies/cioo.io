@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audit Vendeur Immo</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-    <div id="appInterface">
+    <div id="appForm" class="no-print">
         <h1 class="main-title">🕵️‍♂️ Mon Audit Immo</h1>
 
         <div class="card">
@@ -19,38 +18,27 @@
             <label>Adresse du bien</label>
             <input type="text" id="adresseBien" placeholder="Adresse complète">
             <label>Urgence / Projet</label>
-            <textarea id="projetVendeur" rows="3" placeholder="Pourquoi vend-il ? Urgence ?"></textarea>
+            <textarea id="projetVendeur" rows="3" placeholder="Pourquoi vend-il ?"></textarea>
         </div>
 
         <div class="card">
             <h2>🔧 Technique & DPE</h2>
-            
             <label>Scores DPE</label>
             <div style="display: flex; gap: 10px;">
                 <div style="flex: 1;">
                     <span style="font-size: 0.8rem; color: #555;">Énergie</span>
-                    <select id="dpeEnergie" style="font-weight:bold;">
-                        <option value="Non renseigné">--</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
+                    <select id="dpeEnergie">
+                        <option value="-">--</option>
+                        <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+                        <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
                     </select>
                 </div>
                 <div style="flex: 1;">
                     <span style="font-size: 0.8rem; color: #555;">GES</span>
-                    <select id="dpeClimat" style="font-weight:bold;">
-                        <option value="Non renseigné">--</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
+                    <select id="dpeClimat">
+                        <option value="-">--</option>
+                        <option value="A">A</option><option value="B">B</option><option value="C">C</option>
+                        <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
                     </select>
                 </div>
             </div>
@@ -62,20 +50,17 @@
                 <label class="check-label"><input type="checkbox" name="chauffage" value="Électrique"> Électrique</label>
                 <label class="check-label"><input type="checkbox" name="chauffage" value="Gaz"> Gaz</label>
                 <label class="check-label"><input type="checkbox" name="chauffage" value="Fioul"> Fioul</label>
-                <label class="check-label"><input type="checkbox" name="chauffage" value="Bois/Granulés"> Bois</label>
+                <label class="check-label"><input type="checkbox" name="chauffage" value="Bois"> Bois</label>
             </div>
 
             <label>Toiture</label>
             <select id="typeToiture">
                 <option value="Non renseigné">-- Type --</option>
-                <option value="Tuiles">Tuiles</option>
-                <option value="Ardoises">Ardoises</option>
-                <option value="Zinc/Bac">Zinc / Bac Acier</option>
-                <option value="Plat">Toit Terrasse</option>
+                <option value="Tuiles">Tuiles</option><option value="Ardoises">Ardoises</option>
+                <option value="Zinc">Zinc</option><option value="Plat">Plat</option>
             </select>
             <select id="etatToiture" style="margin-top: 5px;">
-                <option value="Bon état">Bon état apparent</option>
-                <option value="À vérifier">À vérifier</option>
+                <option value="Bon état">Bon état</option><option value="À vérifier">À vérifier</option>
             </select>
             <div class="checkbox-group" style="margin-top: 10px;">
                 <label class="check-label" style="color: #e67e22; font-weight:bold;">
@@ -86,11 +71,10 @@
             <label>Volets</label>
             <select id="volets">
                 <option value="Non renseigné">-- Type --</option>
-                <option value="Roulants Électriques">✅ Électriques</option>
-                <option value="Roulants Manuels">Manuels</option>
-                <option value="Battants Bois/PVC">Battants</option>
-                <option value="Persiennes">Persiennes</option>
-                <option value="Sans volets">Aucun</option>
+                <option value="Électriques">✅ Électriques</option>
+                <option value="Manuels">Manuels</option>
+                <option value="Battants">Battants</option>
+                <option value="Aucun">Aucun</option>
             </select>
         </div>
 
@@ -98,9 +82,7 @@
             <h2>📐 Pièces & Surfaces</h2>
             <div id="roomsContainer"></div>
             <button class="add" onclick="addRoom()">+ Ajouter une pièce</button>
-            <div class="total-container">
-                Total : <span id="totalArea">0 m²</span>
-            </div>
+            <div class="total-container">Total : <span id="totalArea">0 m²</span></div>
         </div>
 
         <div class="card">
@@ -111,43 +93,42 @@
             <input type="text" id="moins">
         </div>
 
-        <button class="pdf-btn" onclick="generatePDF()">📄 TÉLÉCHARGER LE PDF</button>
+        <button class="print-btn" onclick="printReport()">🖨️ GÉNÉRER LE PDF (PRINT)</button>
     </div>
 
-    <div id="printTemplate">
-        <div class="pdf-container">
-            <div class="pdf-header">
-                <h1>AUDIT DE VISITE</h1>
-                <p class="date">Généré par votre expert immobilier</p>
-            </div>
-            
-            <div class="pdf-section">
-                <h3>👤 PROPRIÉTAIRE</h3>
-                <p><strong>Nom :</strong> <span id="pdf-nom"></span></p>
-                <p><strong>Adresse :</strong> <span id="pdf-adresse"></span></p>
-                <p><strong>Projet :</strong> <span id="pdf-projet"></span></p>
-            </div>
 
-            <div class="pdf-section">
-                <h3>🔧 TECHNIQUE</h3>
-                <p><strong>DPE :</strong> <span id="pdf-dpe"></span></p>
-                <p><strong>Chauffage :</strong> <span id="pdf-chauffage"></span></p>
-                <p><strong>Toiture :</strong> <span id="pdf-toiture"></span></p>
-                <p><strong>Volets :</strong> <span id="pdf-volets"></span></p>
-            </div>
+    <div id="printableArea" class="only-print">
+        <div class="report-header">
+            <h1>AUDIT DE VALORISATION</h1>
+            <p>Réalisé par votre Expert Immobilier</p>
+        </div>
 
-            <div class="pdf-section">
-                <h3>📐 PIÈCES & PHOTOS</h3>
-                <div id="pdf-rooms-list">
-                    </div>
-                <p class="total-row">Surface Totale Estimée : <span id="pdf-total"></span></p>
-            </div>
+        <div class="report-section">
+            <h3>👤 PROPRIÉTAIRE & PROJET</h3>
+            <p><strong>Vendeur :</strong> <span id="p-nom"></span></p>
+            <p><strong>Adresse :</strong> <span id="p-adresse"></span></p>
+            <p><strong>Projet :</strong> <span id="p-projet"></span></p>
+        </div>
 
-            <div class="pdf-section">
-                <h3>📝 BILAN</h3>
-                <p><strong>✅ Les + :</strong> <span id="pdf-plus"></span></p>
-                <p><strong>⚠️ Les - :</strong> <span id="pdf-moins"></span></p>
-            </div>
+        <div class="report-section">
+            <h3>🔧 ÉTAT TECHNIQUE</h3>
+            <p><strong>DPE :</strong> <span id="p-dpe"></span></p>
+            <p><strong>Chauffage :</strong> <span id="p-chauffage"></span></p>
+            <p><strong>Toiture :</strong> <span id="p-toiture"></span></p>
+            <p><strong>Volets :</strong> <span id="p-volets"></span></p>
+        </div>
+
+        <div class="report-section">
+            <h3>📐 DÉTAIL DES PIÈCES</h3>
+            <div id="p-rooms-list">
+                </div>
+            <div class="report-total">Surface Totale Estimée : <span id="p-total"></span></div>
+        </div>
+
+        <div class="report-section">
+            <h3>📝 BILAN</h3>
+            <p><strong>✅ Points Forts :</strong> <span id="p-plus"></span></p>
+            <p><strong>⚠️ Points de vigilance :</strong> <span id="p-moins"></span></p>
         </div>
     </div>
 
