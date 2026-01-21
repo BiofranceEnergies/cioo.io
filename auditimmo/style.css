@@ -1,65 +1,68 @@
-/* --- STYLE APP (SUR TELEPHONE) --- */
+/* --- STYLE GÉNÉRAL (Ecran) --- */
 body {
-    font-family: sans-serif;
-    padding: 20px;
-    background-color: #f4f4f9;
-    color: #333;
-    max-width: 600px;
-    margin: 0 auto;
+    font-family: sans-serif; background-color: #f4f4f9; color: #333;
+    max-width: 600px; margin: 0 auto; padding: 20px;
 }
-.main-title { text-align: center; color: #2c3e50; }
 .card {
     background: white; padding: 20px; border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px;
 }
-h2 { color: #2c3e50; font-size: 1.2rem; border-bottom: 2px solid #3498db; }
-label { display: block; margin-top: 15px; font-weight: 600; font-size: 0.9rem; }
+h2 { color: #2c3e50; border-bottom: 2px solid #3498db; }
 input, select, textarea {
-    width: 100%; padding: 12px; margin-top: 5px;
-    border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;
+    width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd;
+    border-radius: 5px; font-size: 1rem;
 }
+button {
+    background: #3498db; color: white; border: none; padding: 12px;
+    border-radius: 5px; width: 100%; margin-top: 10px; font-size: 1rem; cursor: pointer;
+}
+button.add { background: #27ae60; }
+button.print-btn { background: #e67e22; margin-top: 30px; font-weight: bold; }
+
+/* Styles des pièces (Ecran) */
 .room-block {
-    background: #f8f9fa; border: 1px solid #e9ecef;
-    border-radius: 8px; padding: 10px; margin-bottom: 15px;
+    background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px;
+    border-radius: 5px; margin-bottom: 10px;
 }
 .room-row { display: flex; gap: 10px; }
-.room-photo-container { margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 5px; }
-.room-preview { width: 100%; margin-top: 10px; border-radius: 8px; border: 2px solid #3498db; }
-button {
-    background-color: #3498db; color: white; border: none; padding: 14px;
-    border-radius: 8px; width: 100%; font-size: 1rem; margin-top: 10px; font-weight: bold;
-}
-button.add { background-color: #27ae60; }
-button.pdf-btn { background-color: #e74c3c; margin-top: 30px; margin-bottom: 50px; }
+.room-preview { width: 100%; margin-top: 5px; border-radius: 5px; display: none; }
 
-/* --- STYLE SPÉCIAL POUR LE PDF --- */
-#printTemplate {
-    display: none; /* Caché par défaut */
-    background: white;
-    position: absolute; /* On le sort du flux */
-    top: 0; left: 0;
-    width: 100%;
-    z-index: 9999; /* Au dessus de tout */
-}
+/* --- STYLE D'IMPRESSION (Le secret est ici) --- */
 
-/* Quand on imprime, on applique ce style propre */
-.pdf-container {
-    padding: 20px;
-    background: white;
-    color: black;
-    font-family: 'Helvetica', sans-serif;
-}
+/* Par défaut, on cache le rapport propre sur l'écran */
+.only-print { display: none; }
 
-.pdf-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 10px; }
-.pdf-header h1 { color: #2c3e50; margin: 0; }
+@media print {
+    /* 1. On cache toute l'interface de l'application */
+    .no-print { display: none !important; }
+    body { background: white; padding: 0; margin: 0; max-width: 100%; }
 
-.pdf-section { margin-bottom: 25px; page-break-inside: avoid; }
-.pdf-section h3 {
-    background-color: #eee;
-    padding: 8px;
-    border-left: 5px solid #2c3e50;
-    margin-bottom: 10px;
-    color: #000;
+    /* 2. On affiche le rapport propre */
+    .only-print { display: block !important; }
+
+    /* 3. Mise en page du rapport papier */
+    #printableArea {
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        color: black;
+        width: 100%;
+    }
+    .report-header {
+        text-align: center; border-bottom: 3px solid #333; margin-bottom: 20px; padding-bottom: 10px;
+    }
+    .report-section {
+        margin-bottom: 20px; page-break-inside: avoid; /* Évite de couper un bloc au milieu */
+    }
+    .report-section h3 {
+        background: #eee; padding: 5px 10px; border-left: 5px solid #333; margin-bottom: 10px;
+    }
+    .p-room-item {
+        margin-bottom: 15px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;
+        page-break-inside: avoid;
+    }
+    .p-room-img {
+        max-width: 90%; max-height: 400px; display: block; margin: 10px auto; border-radius: 4px;
+    }
+    .report-total {
+        font-size: 1.2rem; font-weight: bold; text-align: right; color: #27ae60; margin-top: 10px;
+    }
 }
-.pdf-section p { margin: 5px 0; font-size: 14px; }
-.total-row { font-size: 18px; font-weight: bold; color: #27ae60; text-align: right; margin-top: 10px; border-top: 1px solid #ddd; padding-top:5px; }
