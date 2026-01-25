@@ -1,21 +1,236 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cioo.io – Site en préparation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone Lupin - Recherche DPE</title>
+    <style>
+        :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f6f7; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--primary); padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: var(--primary); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .full-width { grid-column: span 2; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9em; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background-color: var(--accent); color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #2980b9; }
+        
+        /* Table des résultats */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: var(--primary); color: white; }
+        tr:hover { background-color: #f1f1f1; }
+        
+        /* Badges */
+        .badge { padding: 3px 8px; border-radius: 4px; color: white; font-weight: bold; font-size: 0.8em; }
+        .badge-A { background: #009c3d; } .badge-B { background: #52b153; }
+        .badge-C { background: #78bd76; } .badge-D { background: #f4e70f; color: black; }
+        .badge-E { background: #f0b50f; } .badge-F { background: #eb8235; } .badge-G { background: #d7221f; }
+        
+        .source-new { background: #3498db; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; }
+        .source-old { background: #7f8c8d; color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; }
 
-  <!-- Google tag (gtag.js) - Compte Ads adoucisseur -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'AW-11242044118');
-  </script>
+        .loader { text-align: center; display: none; margin: 20px; }
+    </style>
 </head>
-<body style="font-family:Arial;text-align:center;padding:40px;">
-  <h1>🚧 Site Cioo.io en préparation 🚧</h1>
-  <p>Cette page sera bientôt remplacée par la version complète.</p>
+<body>
+
+<div class="container">
+    <h1>🕵️‍♂️ Recherche DPE (Style Lupin)</h1>
+    
+    <div class="grid">
+        <div class="full-width">
+            <label>Code Postal (Obligatoire)</label>
+            <input type="number" id="cp" placeholder="ex: 24360">
+        </div>
+
+        <div>
+            <label>Conso (kWh/m²)</label>
+            <input type="number" id="conso" placeholder="ex: 154">
+        </div>
+        <div>
+            <label>GES (kgCO2)</label>
+            <input type="number" id="ges" placeholder="ex: 33">
+        </div>
+
+        <div class="full-width">
+            <label>Surface Habitable (Optionnel - Laisser vide si incertain)</label>
+            <input type="number" id="surface" placeholder="ex: 120">
+        </div>
+        
+        <div class="full-width">
+            <label>Date du DPE (Optionnel)</label>
+            <input type="date" id="date">
+        </div>
+    </div>
+
+    <button onclick="lancerRecherche()">Rechercher le bien</button>
+
+    <div id="loader" class="loader">⏳ Recherche dans les 2 bases ADEME en cours...</div>
+    <div id="resultats"></div>
+</div>
+
+<script>
+async function lancerRecherche() {
+    const cp = document.getElementById('cp').value.trim();
+    const consoVal = parseFloat(document.getElementById('conso').value);
+    const gesVal = parseFloat(document.getElementById('ges').value);
+    const surfVal = parseFloat(document.getElementById('surface').value);
+    const dateVal = document.getElementById('date').value;
+    const divRes = document.getElementById('resultats');
+    const loader = document.getElementById('loader');
+
+    if (!cp) { alert("Le Code Postal est obligatoire !"); return; }
+
+    divRes.innerHTML = "";
+    loader.style.display = "block";
+
+    // --- STRATÉGIE LUPIN : ON CHERCHE PARTOUT ---
+    const p1 = searchNewDPE(cp, dateVal);
+    const p2 = searchOldDPE(cp, dateVal);
+
+    try {
+        const [resNew, resOld] = await Promise.all([p1, p2]);
+        let all = [...resNew, ...resOld];
+
+        // --- FILTRAGE INTELLIGENT ---
+        // On calcule un score de pertinence pour chaque ligne
+        all = all.map(item => {
+            let score = 0;
+            
+            // 1. CONSO (Critère Roi)
+            if (consoVal) {
+                const diff = Math.abs(item.conso - consoVal);
+                if (diff < 1) score += 100;       // Exact
+                else if (diff < 5) score += 80;   // Très proche
+                else if (diff < 15) score += 40;  // Assez proche
+                else score -= diff; // Pénalité si trop loin
+            }
+
+            // 2. GES
+            if (gesVal) {
+                const diff = Math.abs(item.ges - gesVal);
+                if (diff < 1) score += 50;
+                else if (diff < 5) score += 30;
+            }
+
+            // 3. SURFACE (Bonus uniquement, pas de filtre bloquant)
+            if (surfVal && item.surface > 0) {
+                const diff = Math.abs(item.surface - surfVal);
+                if (diff < 5) score += 60;        // Exact
+                else if (diff < 20) score += 30;  // Proche
+                else if (diff > 50) score -= 10;  // Très différent
+            }
+
+            // 4. DATE
+            if (dateVal && item.date === dateVal) score += 150;
+
+            item.score = score;
+            return item;
+        });
+
+        // On ne garde que les scores positifs et on trie
+        all = all.filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+        const top = all.slice(0, 50); // Top 50
+
+        loader.style.display = "none";
+
+        if (top.length === 0) {
+            divRes.innerHTML = "<p style='text-align:center'>❌ Aucun résultat proche trouvé.</p>";
+            return;
+        }
+
+        // Affichage
+        let html = `<h3>✅ ${top.length} résultats pertinents trouvés</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Adresse</th>
+                                <th>Surface (DPE)</th>
+                                <th>Conso</th>
+                                <th>GES</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+        
+        top.forEach(r => {
+            // Couleur de fond selon le score
+            let bg = r.score > 100 ? "#d4efdf" : "white";
+            
+            html += `<tr style="background:${bg}">
+                        <td>
+                            ${r.adresse}<br>
+                            <span class="${r.source === 'Nouveau' ? 'source-new' : 'source-old'}">${r.source}</span>
+                            <small>${r.ville}</small>
+                        </td>
+                        <td><strong>${r.surface} m²</strong></td>
+                        <td>${r.conso.toFixed(1)} <span class="badge badge-${r.dpe}">${r.dpe}</span></td>
+                        <td>${r.ges.toFixed(1)} <span class="badge badge-${r.gesLet}" style="background:#aaa">${r.gesLet}</span></td>
+                        <td>${r.date.split('-').reverse().join('/')}</td>
+                     </tr>`;
+        });
+        html += "</tbody></table>";
+        divRes.innerHTML = html;
+
+    } catch (e) {
+        loader.style.display = "none";
+        divRes.innerHTML = "Erreur technique : " + e.message;
+    }
+}
+
+// --- MOTEUR API ADEME (NOUVEAUX DPE) ---
+async function searchNewDPE(cp, date) {
+    let url = `https://data.ademe.fr/data-fair/api/v1/datasets/dpe03existant/lines?page=1&size=3000&q=${cp}`;
+    if(date) url += " " + date;
+    
+    try {
+        const req = await fetch(url);
+        const json = await req.json();
+        return (json.results || []).map(r => {
+            // Filtre CP strict
+            if(!String(r.code_postal_brut).includes(cp)) return null;
+            return {
+                source: "Nouveau",
+                adresse: r.adresse_brut || r.nom_rue || "Rue inconnue",
+                ville: r.nom_commune_brut || "",
+                surface: r.surface_habitable_logement || r.surface_habitable || 0,
+                conso: r.conso_5_usages_par_m2_ep || 0,
+                ges: r.emission_ges_5_usages_par_m2 || 0,
+                dpe: r.etiquette_dpe || "?",
+                gesLet: r.etiquette_ges || "?",
+                date: (r.date_visite_diagnostiqueur || "").substring(0, 10)
+            };
+        }).filter(x => x);
+    } catch (e) { return []; }
+}
+
+// --- MOTEUR API ADEME (ANCIENS DPE) ---
+async function searchOldDPE(cp, date) {
+    // Note: l'ancienne base ne gère pas bien la recherche par date via "q", on filtre après
+    let url = `https://data.ademe.fr/data-fair/api/v1/datasets/dpe-v2-logements-existants/lines?page=1&size=3000&q=${cp}`;
+    
+    try {
+        const req = await fetch(url);
+        const json = await req.json();
+        return (json.results || []).map(r => {
+            if(!String(r.code_postal_brut).includes(cp)) return null;
+            return {
+                source: "Ancien",
+                adresse: r.adresse_brut || r.nom_rue || "Rue inconnue",
+                ville: r.nom_commune_brut || "",
+                surface: r.surface_habitable || 0,
+                conso: r.consommation_energie || 0,
+                ges: r.estimation_ges || 0,
+                dpe: r.classe_consommation_energie || "?",
+                gesLet: r.classe_estimation_ges || "?",
+                date: (r.date_etablissement_dpe || "").substring(0, 10)
+            };
+        }).filter(x => x);
+    } catch (e) { return []; }
+}
+</script>
+
 </body>
 </html>
