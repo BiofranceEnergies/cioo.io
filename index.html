@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clone Lupin - Recherche DPE</title>
+    <title>Détective DPE - Lupin Edition</title>
     <style>
         :root { --primary: #2c3e50; --accent: #3498db; --bg: #f4f6f7; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--primary); padding: 20px; }
@@ -40,7 +40,7 @@
 
 <div class="container">
     <h1>🕵️‍♂️ Détective DPE</h1>
-    <p class="subtitle">Recherche simultanée dans les bases ADEME (Anciennes & Nouvelles)</p>
+    <p class="subtitle">Recherche simultanée (Anciennes & Nouvelles bases ADEME)</p>
     
     <div class="grid">
         <div class="full-width">
@@ -59,7 +59,7 @@
 
         <div class="full-width">
             <label>Surface Habitable (m² - Optionnel)</label>
-            <input type="number" id="surface" placeholder="Mets la surface du DPE, pas du terrain !">
+            <input type="number" id="surface" placeholder="Surface du logement (pas du terrain)">
         </div>
         
         <div class="full-width">
@@ -70,13 +70,13 @@
 
     <button onclick="lancerRecherche()">Lancer la recherche</button>
 
-    <div id="loader" class="loader">⏳ Enquête en cours dans les archives de l'ADEME...</div>
+    <div id="loader" class="loader">⏳ Scan des archives ADEME en cours...</div>
     <div id="resultats"></div>
 </div>
 
 <script>
 async function lancerRecherche() {
-    const cp = document.getElementById('cp').value.trim();
+    const cpValue = document.getElementById('cp').value.trim();
     const consoVal = parseFloat(document.getElementById('conso').value);
     const gesVal = parseFloat(document.getElementById('ges').value);
     const surfVal = parseFloat(document.getElementById('surface').value);
@@ -84,13 +84,13 @@ async function lancerRecherche() {
     const divRes = document.getElementById('resultats');
     const loader = document.getElementById('loader');
 
-    if (!cp) { alert("Le Code Postal est obligatoire !"); return; }
+    if (!cpValue) { alert("Le Code Postal est obligatoire !"); return; }
 
     divRes.innerHTML = "";
     loader.style.display = "block";
 
-    const p1 = searchNewDPE(cp, dateVal);
-    const p2 = searchOldDPE(cp, dateVal);
+    const p1 = searchNewDPE(cpValue, dateVal);
+    const p2 = searchOldDPE(cpValue, dateVal);
 
     try {
         const [resNew, resOld] = await Promise.all([p1, p2]);
@@ -120,12 +120,12 @@ async function lancerRecherche() {
         });
 
         all = all.filter(x => x.score > 0).sort((a, b) => b.score - a.score);
-        const top = all.slice(0, 60);
+        const top = all.slice(0, 100);
 
         loader.style.display = "none";
 
         if (top.length === 0) {
-            divRes.innerHTML = "<p style='text-align:center; padding:20px;'>❌ Aucun bien ne correspond à ces critères dans cette ville.</p>";
+            divRes.innerHTML = "<p style='text-align:center; padding:20px;'>❌ Aucun bien ne correspond à ces critères dans cette zone.</p>";
             return;
         }
 
@@ -134,7 +134,7 @@ async function lancerRecherche() {
                         <thead>
                             <tr>
                                 <th>Type</th>
-                                <th>Adresse (Copier pour Maps)</th>
+                                <th>Adresse (Prête pour Maps)</th>
                                 <th>Surface</th>
                                 <th>Conso/GES</th>
                                 <th>Date</th>
@@ -148,7 +148,7 @@ async function lancerRecherche() {
             
             html += `<tr style="background:${bg}">
                         <td><span class="source-tag ${r.source === 'Nouveau' ? 'source-new' : 'source-old'}">${r.source}</span></td>
-                        <td class="addr-cell"><strong>${r.adresse}</strong><br>${r.ville}</td>
+                        <td class="addr-cell"><strong>${r.adresse}</strong><br>${cpValue} ${r.ville}</td>
                         <td><strong>${r.surface} m²</strong></td>
                         <td>
                             <span class="badge badge-${r.dpe}">${r.dpe}</span> ${r.conso.toFixed(0)}<br>
