@@ -3,49 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détective DPE - Version Chirurgien</title>
+    <title>Détective DPE - Version Fiable</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #e74c3c; --bg: #f4f6f7; } /* Accent rouge pour le mode précision */
+        :root { --primary: #2c3e50; --accent: #e74c3c; --bg: #f4f6f7; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--primary); padding: 20px; }
         .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: var(--primary); margin-bottom: 5px; }
-        p.subtitle { text-align: center; color: #666; margin-bottom: 25px; font-style: italic; }
         
         .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
         .col-span-2 { grid-column: span 2; }
         .col-span-4 { grid-column: span 4; }
 
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85em; color: #555; }
-        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 1em; }
-        input:focus { border-color: var(--accent); outline: none; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
         
-        button { width: 100%; padding: 15px; background-color: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button { width: 100%; padding: 15px; background-color: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; margin-top: 10px; }
         button:hover { background-color: var(--accent); }
         
-        /* Table */
         table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 0.85em; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; vertical-align: middle; }
-        th { background-color: var(--primary); color: white; font-weight: 600; }
-        tr:hover { background-color: #fff8e1; } /* Jaune pâle au survol */
-
-        .badge { padding: 3px 6px; border-radius: 4px; color: white; font-weight: bold; font-size: 0.9em; }
-        .badge-A { background: #009c3d; } .badge-B { background: #52b153; }
-        .badge-C { background: #78bd76; } .badge-D { background: #f4e70f; color: black; }
-        .badge-E { background: #f0b50f; } .badge-F { background: #eb8235; } .badge-G { background: #d7221f; }
+        th { background-color: var(--primary); color: white; }
         
-        .tag { padding: 2px 6px; border-radius: 4px; font-size: 0.75em; background: #eee; color: #444; border: 1px solid #ccc; margin-right: 4px; }
+        .badge { padding: 3px 6px; border-radius: 4px; color: white; font-weight: bold; font-size: 0.9em; }
+        .badge-A { background: #009c3d; } .badge-B { background: #52b153; } .badge-C { background: #78bd76; }
+        .badge-D { background: #f4e70f; color: black; } .badge-E { background: #f0b50f; } .badge-F { background: #eb8235; } .badge-G { background: #d7221f; }
         
         .source-tag { font-weight: bold; text-transform: uppercase; font-size: 0.7em; padding: 3px 6px; border-radius: 3px; color: white; }
         .source-new { background: #3498db; } .source-old { background: #95a5a6; }
-
+        
         .loader { text-align: center; display: none; margin: 20px; font-weight: bold; color: var(--accent); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🎯 Détective DPE : Mode Chirurgien</h1>
-    <p class="subtitle">Filtres stricts pour éliminer le bruit (Année, Chauffage, Surface)</p>
+    <h1>🎯 Détective DPE (Fiable)</h1>
     
     <div class="grid">
         <div class="col-span-4">
@@ -63,18 +55,17 @@
         </div>
 
         <div class="col-span-2">
-            <label>🏗️ Année Construction (Important !)</label>
-            <input type="number" id="annee" placeholder="ex: 1948 (ou approchant)">
+            <label>🏗️ Année Construction (Optionnel)</label>
+            <input type="number" id="annee" placeholder="ex: 1948">
         </div>
         <div class="col-span-2">
-            <label>🔥 Énergie Chauffage</label>
+            <label>🔥 Énergie Chauffage (Optionnel)</label>
             <select id="energie">
-                <option value="">-- Peu importe --</option>
+                <option value="">-- Tout afficher --</option>
                 <option value="électricité">Électricité</option>
-                <option value="gaz">Gaz (Naturel ou Propane)</option>
+                <option value="gaz">Gaz</option>
                 <option value="fioul">Fioul</option>
                 <option value="bois">Bois / Granulés</option>
-                <option value="réseau">Réseau de chaleur</option>
             </select>
         </div>
 
@@ -83,217 +74,17 @@
             <input type="number" id="surface" placeholder="ex: 479">
         </div>
         <div class="col-span-2">
-            <label>📅 Date du DPE (Si connue)</label>
+            <label>📅 Date du DPE</label>
             <input type="date" id="date">
         </div>
     </div>
 
-    <button onclick="lancerRecherche()">🔍 Lancer la recherche ciblée</button>
+    <button onclick="lancerRecherche()">🔍 Lancer la recherche</button>
 
-    <div id="loader" class="loader">⏳ Analyse approfondie des bases de données...</div>
+    <div id="loader" class="loader">⏳ Récupération des données...</div>
     <div id="resultats"></div>
 </div>
 
 <script>
 async function lancerRecherche() {
-    // Récupération des valeurs
-    const cp = document.getElementById('cp').value.trim();
-    const consoVal = parseFloat(document.getElementById('conso').value);
-    const gesVal = parseFloat(document.getElementById('ges').value);
-    const anneeVal = parseInt(document.getElementById('annee').value);
-    const energieVal = document.getElementById('energie').value.toLowerCase();
-    const surfVal = parseFloat(document.getElementById('surface').value);
-    const dateVal = document.getElementById('date').value;
-
-    const divRes = document.getElementById('resultats');
-    const loader = document.getElementById('loader');
-
-    if (!cp) { alert("Le Code Postal est obligatoire !"); return; }
-
-    divRes.innerHTML = "";
-    loader.style.display = "block";
-
-    // Lancement des 2 requêtes parallèles
-    const p1 = searchNewDPE(cp);
-    const p2 = searchOldDPE(cp);
-
-    try {
-        const [resNew, resOld] = await Promise.all([p1, p2]);
-        let all = [...resNew, ...resOld];
-
-        // --- FILTRAGE CHIRURGICAL ---
-        all = all.map(item => {
-            let score = 0;
-            let penalite = 0; // Points négatifs pour éliminer les intrus
-
-            // 1. CONSO (Critère Principal)
-            if (consoVal) {
-                const diff = Math.abs(item.conso - consoVal);
-                if (diff < 1) score += 100;
-                else if (diff < 5) score += 60;
-                else if (diff < 15) score += 20;
-                else penalite += diff * 2; // Si trop loin, on pénalise fort
-            }
-
-            // 2. GES
-            if (gesVal) {
-                const diff = Math.abs(item.ges - gesVal);
-                if (diff < 2) score += 50;
-                else if (diff > 10) penalite += 20;
-            }
-
-            // 3. ANNÉE DE CONSTRUCTION (Critère "Tueur de Bruit")
-            if (anneeVal && item.annee > 0) {
-                const diffAnnee = Math.abs(item.annee - anneeVal);
-                if (diffAnnee === 0) score += 100;      // Bingo
-                else if (diffAnnee <= 2) score += 80;   // Très proche
-                else if (diffAnnee <= 10) score += 10;  // Même époque
-                else penalite += 200;                   // Si 1980 vs 1948 -> Ouste !
-            }
-
-            // 4. ÉNERGIE (Le filtre "Fioul vs Elec")
-            if (energieVal && item.chauffage) {
-                const chauf = item.chauffage.toLowerCase();
-                if (chauf.includes(energieVal)) score += 80;
-                else if (energieVal === 'gaz' && (chauf.includes('butane') || chauf.includes('propane'))) score += 80;
-                else penalite += 100; // Mauvaise énergie = grosse pénalité
-            }
-
-            // 5. DATE DPE
-            if (dateVal && item.date === dateVal) score += 500; // Jackpot absolu
-
-            // 6. SURFACE
-            if (surfVal && item.surface > 0) {
-                 const diffSurf = Math.abs(item.surface - surfVal);
-                 if (diffSurf < 5) score += 50;
-                 else if (diffSurf > 100) penalite += 50;
-            }
-
-            item.score = score - penalite;
-            return item;
-        });
-
-        // On ne garde que les scores positifs (les pertinents)
-        // et on trie du plus gros score au plus petit
-        all = all.filter(x => x.score > 0).sort((a, b) => b.score - a.score);
-        
-        // On limite l'affichage aux 30 meilleurs
-        const top = all.slice(0, 30);
-
-        loader.style.display = "none";
-
-        if (top.length === 0) {
-            divRes.innerHTML = "<div style='text-align:center; padding:30px; background:#ffebee; border-radius:8px; color:#c0392b'><strong>❌ Aucun résultat précis.</strong><br>Vos critères (Année/Énergie) sont peut-être trop stricts, ou l'agence a menti sur l'année.</div>";
-            return;
-        }
-
-        // Construction du tableau
-        let html = `<h3>🎯 ${top.length} Résultats filtrés (Triés par pertinence)</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th style="width:50px">Source</th>
-                                <th>Adresse (Maps)</th>
-                                <th>Caractéristiques</th>
-                                <th>DPE / GES</th>
-                                <th>Date & Année</th>
-                            </tr>
-                        </thead>
-                        <tbody>`;
-        
-        top.forEach(r => {
-            // Couleur verte si c'est un très bon match
-            let styleRow = r.score > 100 ? "background:#d4efdf; border-left: 5px solid #27ae60;" : "";
-            
-            html += `<tr style="${styleRow}">
-                        <td><span class="source-tag ${r.source === 'Nouveau' ? 'source-new' : 'source-old'}">${r.source}</span></td>
-                        <td>
-                            <strong>${r.adresse}</strong><br>
-                            ${cp} ${r.ville}
-                        </td>
-                        <td>
-                            <strong>${r.surface} m²</strong><br>
-                            <span class="tag">🏗️ ${r.annee || '?'}</span>
-                            <span class="tag">🔥 ${r.chauffage ? r.chauffage.substring(0,15) : '?'}...</span>
-                        </td>
-                        <td>
-                            <div style="margin-bottom:4px">
-                                <span class="badge badge-${r.dpe}">${r.dpe}</span> <strong>${r.conso.toFixed(0)}</strong>
-                            </div>
-                            <div>
-                                <span class="badge badge-${r.gesLet}" style="background:#7f8c8d">${r.gesLet}</span> <strong>${r.ges.toFixed(0)}</strong>
-                            </div>
-                        </td>
-                        <td>
-                            📅 ${r.date.split('-').reverse().join('/')}
-                        </td>
-                     </tr>`;
-        });
-        html += "</tbody></table>";
-        divRes.innerHTML = html;
-
-    } catch (e) {
-        loader.style.display = "none";
-        divRes.innerHTML = "Erreur : " + e.message;
-    }
-}
-
-// --- API NOUVEAUX DPE ---
-async function searchNewDPE(cp) {
-    let url = `https://data.ademe.fr/data-fair/api/v1/datasets/dpe03existant/lines?page=1&size=5000&q=${cp}`;
-    // Champs demandés pour optimiser
-    url += "&select=adresse_brut,nom_rue,nom_commune_brut,code_postal_brut,surface_habitable_logement,annee_construction,type_energie_chauffage_principal,conso_5_usages_par_m2_ep,emission_ges_5_usages_par_m2,etiquette_dpe,etiquette_ges,date_visite_diagnostiqueur";
-    
-    try {
-        const req = await fetch(url);
-        const json = await req.json();
-        return (json.results || []).map(r => {
-            if(!String(r.code_postal_brut).includes(cp)) return null;
-            return {
-                source: "Nouveau",
-                adresse: r.adresse_brut || r.nom_rue || "Rue inconnue",
-                ville: r.nom_commune_brut || "",
-                surface: r.surface_habitable_logement || 0,
-                annee: r.annee_construction || 0,
-                chauffage: r.type_energie_chauffage_principal || "Inconnu",
-                conso: r.conso_5_usages_par_m2_ep || 0,
-                ges: r.emission_ges_5_usages_par_m2 || 0,
-                dpe: r.etiquette_dpe || "?",
-                gesLet: r.etiquette_ges || "?",
-                date: (r.date_visite_diagnostiqueur || "").substring(0, 10)
-            };
-        }).filter(x => x);
-    } catch (e) { return []; }
-}
-
-// --- API ANCIENS DPE ---
-async function searchOldDPE(cp) {
-    let url = `https://data.ademe.fr/data-fair/api/v1/datasets/dpe-v2-logements-existants/lines?page=1&size=5000&q=${cp}`;
-    // Champs demandés
-    url += "&select=adresse_brut,nom_rue,nom_commune_brut,code_postal_brut,surface_habitable,annee_construction,type_energie_chauffage,consommation_energie,estimation_ges,classe_consommation_energie,classe_estimation_ges,date_etablissement_dpe";
-
-    try {
-        const req = await fetch(url);
-        const json = await req.json();
-        return (json.results || []).map(r => {
-            if(!String(r.code_postal_brut).includes(cp)) return null;
-            return {
-                source: "Ancien",
-                adresse: r.adresse_brut || r.nom_rue || "Rue inconnue",
-                ville: r.nom_commune_brut || "",
-                surface: r.surface_habitable || 0,
-                annee: r.annee_construction || 0,
-                chauffage: r.type_energie_chauffage || "Inconnu",
-                conso: r.consommation_energie || 0,
-                ges: r.estimation_ges || 0,
-                dpe: r.classe_consommation_energie || "?",
-                gesLet: r.classe_estimation_ges || "?",
-                date: (r.date_etablissement_dpe || "").substring(0, 10)
-            };
-        }).filter(x => x);
-    } catch (e) { return []; }
-}
-</script>
-
-</body>
-</html>
+    const cp =
