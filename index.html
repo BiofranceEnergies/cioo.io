@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détective DPE - Version Fiable</title>
+    <title>Détective DPE - Version Corrigée</title>
     <style>
-        :root { --primary: #2c3e50; --accent: #e74c3c; --bg: #f4f6f7; }
+        :root { --primary: #2c3e50; --accent: #27ae60; --bg: #f4f6f7; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--primary); padding: 20px; }
         .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: var(--primary); margin-bottom: 5px; }
@@ -17,8 +17,8 @@
         label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85em; color: #555; }
         input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
         
-        button { width: 100%; padding: 15px; background-color: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; margin-top: 10px; }
-        button:hover { background-color: var(--accent); }
+        button { width: 100%; padding: 15px; background-color: var(--primary); color: white; border: none; border-radius: 6px; font-size: 1.1em; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        button:hover { background-color: #34495e; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 0.85em; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; vertical-align: middle; }
@@ -37,7 +37,7 @@
 <body>
 
 <div class="container">
-    <h1>🎯 Détective DPE (Fiable)</h1>
+    <h1>🎯 Détective DPE (Aligné Fichier XLS)</h1>
     
     <div class="grid">
         <div class="col-span-4">
@@ -55,11 +55,11 @@
         </div>
 
         <div class="col-span-2">
-            <label>🏗️ Année Construction (Optionnel)</label>
+            <label>🏗️ Année Construction (Tolérance ±2 ans)</label>
             <input type="number" id="annee" placeholder="ex: 1948">
         </div>
         <div class="col-span-2">
-            <label>🔥 Énergie Chauffage (Optionnel)</label>
+            <label>🔥 Énergie Chauffage</label>
             <select id="energie">
                 <option value="">-- Tout afficher --</option>
                 <option value="électricité">Électricité</option>
@@ -81,10 +81,189 @@
 
     <button onclick="lancerRecherche()">🔍 Lancer la recherche</button>
 
-    <div id="loader" class="loader">⏳ Récupération des données...</div>
+    <div id="loader" class="loader">⏳ Recherche avec les noms de colonnes corrigés...</div>
     <div id="resultats"></div>
 </div>
 
 <script>
 async function lancerRecherche() {
-    const cp =
+    const cp = document.getElementById('cp').value.trim();
+    const consoVal = parseFloat(document.getElementById('conso').value);
+    const gesVal = parseFloat(document.getElementById('ges').value);
+    const anneeVal = parseInt(document.getElementById('annee').value);
+    const energieVal = document.getElementById('energie').value.toLowerCase();
+    const surfVal = parseFloat(document.getElementById('surface').value);
+    const dateVal = document.getElementById('date').value;
+
+    const divRes = document.getElementById('resultats');
+    const loader = document.getElementById('loader');
+
+    if (!cp) { alert("Code Postal obligatoire !"); return; }
+
+    divRes.innerHTML = "";
+    loader.style.display = "block";
+
+    const p1 = searchNewDPE(cp);
+    const p2 = searchOldDPE(cp);
+
+    try {
+        const [resNew, resOld] = await Promise.all([p1, p2]);
+        let all = [...resNew, ...resOld];
+
+        // --- FILTRAGE JAVASCRIPT ---
+        all = all.map(item => {
+            let score = 0;
+            let penalite = 0;
+
+            // 1. CONSO
+            if (consoVal) {
+                const diff = Math.abs(item.conso - consoVal);
+                if (diff < 1) score += 100;
+                else if (diff < 5) score += 60;
+                else if (diff < 15) score += 20;
+                else penalite += 50;
+            }
+
+            // 2. GES
+            if (gesVal) {
+                const diff = Math.abs(item.ges - gesVal);
+                if (diff < 2) score += 50;
+            }
+
+            // 3. ANNÉE (Correction : On utilise item.annee qui vient de la bonne colonne)
+            if (anneeVal && item.annee > 0) {
+                const diffAnnee = Math.abs(item.annee - anneeVal);
+                if (diffAnnee <= 1) score += 100;
+                else if (diffAnnee <= 5) score += 50;
+                else if (diffAnnee > 20) penalite += 100;
+            }
+
+            // 4. ÉNERGIE (Correction : On filtre sur item.chauffage qui est maintenant correct)
+            if (energieVal && item.chauffage) {
+                const chauf = item.chauffage.toLowerCase();
+                if (chauf.includes(energieVal)) score += 80;
+                else if (energieVal === 'gaz' && (chauf.includes('butane') || chauf.includes('propane'))) score += 80;
+                else penalite += 100; // Si c'est pas la bonne énergie, on pénalise fort
+            }
+
+            // 5. DATE & SURFACE
+            if (dateVal && item.date === dateVal) score += 500;
+            if (surfVal && item.surface > 0) {
+                 const diffSurf = Math.abs(item.surface - surfVal);
+                 if (diffSurf < 5) score += 50;
+                 else if (diffSurf > 100) penalite += 50;
+            }
+
+            item.score = score - penalite;
+            return item;
+        });
+
+        // TRIER
+        all = all.filter(x => x.score > -50).sort((a, b) => b.score - a.score);
+        const top = all.slice(0, 40);
+
+        loader.style.display = "none";
+
+        if (top.length === 0) {
+            divRes.innerHTML = "<p style='text-align:center'>❌ Aucun résultat trouvé avec ces critères.</p>";
+            return;
+        }
+
+        // AFFICHAGE
+        let html = `<h3>✅ ${top.length} Résultats trouvés</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Adresse</th>
+                                <th>Infos Clés</th>
+                                <th>DPE</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+        
+        top.forEach(r => {
+            let styleRow = r.score > 100 ? "background:#d4efdf" : "";
+            
+            html += `<tr style="${styleRow}">
+                        <td><span class="source-tag ${r.source === 'Nouveau' ? 'source-new' : 'source-old'}">${r.source}</span></td>
+                        <td>
+                            <strong>${r.adresse}</strong><br>
+                            ${cp} ${r.ville}
+                        </td>
+                        <td>
+                            🏠 <strong>${r.surface} m²</strong><br>
+                            🏗️ ${r.annee || 'Inconnue'}<br>
+                            🔥 ${r.chauffage}
+                        </td>
+                        <td>
+                            <span class="badge badge-${r.dpe}">${r.dpe}</span> <strong>${r.conso.toFixed(0)}</strong><br>
+                            <span class="badge" style="background:#7f8c8d">${r.gesLet}</span> ${r.ges.toFixed(0)}
+                        </td>
+                     </tr>`;
+        });
+        html += "</tbody></table>";
+        divRes.innerHTML = html;
+
+    } catch (e) {
+        loader.style.display = "none";
+        divRes.innerHTML = "Erreur : " + e.message;
+    }
+}
+
+// --- FONCTIONS API ---
+
+async function searchNewDPE(cp) {
+    // ICI, on récupère les colonnes avec les VRAIS noms de ton fichier CSV
+    let url = `https://data.ademe.fr/data-fair/api/v1/datasets/dpe03existant/lines?page=1&size=5000&q=${cp}`;
+    try {
+        const req = await fetch(url);
+        const json = await req.json();
+        return (json.results || []).map(r => {
+            if(!String(r.code_postal_brut).includes(cp)) return null;
+            return {
+                source: "Nouveau",
+                adresse: r.adresse_brut || r.nom_rue || "Rue inconnue",
+                ville: r.nom_commune_brut || "",
+                surface: r.surface_habitable_logement || 0,
+                annee: r.annee_construction || 0,
+                // CORRECTION MAJEURE ICI : On utilise le nom exact de ton fichier
+                chauffage: r.type_energie_principale_chauffage || "Inconnu",
+                conso: r.conso_5_usages_par_m2_ep || 0,
+                ges: r.emission_ges_5_usages_par_m2 || 0,
+                dpe: r.etiquette_dpe || "?",
+                gesLet: r.etiquette_ges || "?",
+                date: (r.date_visite_diagnostiqueur || "").substring(0, 10)
+            };
+        }).filter(x => x);
+    } catch (e) { return []; }
+}
+
+async function searchOldDPE(cp) {
+    // Pour les vieux DPE (dpe-v2), les noms sont différents (c'est normal, c'est une autre base)
+    let url = `https://data.ademe.fr/data-fair/api/v1/datasets/dpe-v2-logements-existants/lines?page=1&size=5000&q=${cp}`;
+    try {
+        const req = await fetch(url);
+        const json = await req.json();
+        return (json.results || []).map(r => {
+            if(!String(r.code_postal_brut).includes(cp)) return null;
+            return {
+                source: "Ancien",
+                adresse: r.adresse_brut || r.nom_rue || "Rue inconnue",
+                ville: r.nom_commune_brut || "",
+                surface: r.surface_habitable || 0,
+                annee: r.annee_construction || 0,
+                chauffage: r.type_energie_chauffage || "Inconnu",
+                conso: r.consommation_energie || 0,
+                ges: r.estimation_ges || 0,
+                dpe: r.classe_consommation_energie || "?",
+                gesLet: r.classe_estimation_ges || "?",
+                date: (r.date_etablissement_dpe || "").substring(0, 10)
+            };
+        }).filter(x => x);
+    } catch (e) { return []; }
+}
+</script>
+
+</body>
+</html>
