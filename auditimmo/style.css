@@ -1,136 +1,96 @@
-/* --- STYLE GÉNÉRAL (Ecran) --- */
+/* --- BASE & FORMULAIRE --- */
 body {
-    font-family: sans-serif; background-color: #f4f4f9; color: #333;
-    max-width: 600px; margin: 0 auto; padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
 }
+
 .card {
-    background: white; padding: 20px; border-radius: 12px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
 }
-h2 { color: #2c3e50; border-bottom: 2px solid #3498db; }
+
+h1.main-title { text-align: center; color: #2c3e50; margin-bottom: 30px; }
+h2 { font-size: 1.1rem; color: #3498db; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 15px; }
+label { font-size: 0.85rem; font-weight: 600; color: #7f8c8d; }
+
 input, select, textarea {
-    width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd;
-    border-radius: 5px; font-size: 1rem;
+    width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 10px;
+    border: 1px solid #dfe6e9; border-radius: 6px; box-sizing: border-box; font-size: 0.95rem;
 }
-button {
-    background: #3498db; color: white; border: none; padding: 12px;
-    border-radius: 5px; width: 100%; margin-top: 10px; font-size: 1rem; cursor: pointer;
-}
-button.add { background: #27ae60; }
-button.print-btn { background: #e67e22; margin-top: 30px; font-weight: bold; }
 
-/* Styles des pièces (Ecran) */
+.grid-2 { display: flex; gap: 15px; }
+.grid-2 > div { flex: 1; }
+
+/* --- BLOCS PIÈCES --- */
 .room-block {
-    background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px;
-    border-radius: 5px; margin-bottom: 10px;
+    background: #fdfdfd; border: 1px solid #edf2f7;
+    padding: 15px; border-radius: 10px; margin-bottom: 20px;
 }
-.room-row { display: flex; gap: 10px; }
-.room-preview { width: 100%; margin-top: 5px; border-radius: 5px; display: none; }
+.room-header { display: flex; gap: 10px; align-items: center; }
+.delete-btn { background: #ff7675; color: white; border: none; border-radius: 6px; padding: 10px; cursor: pointer; }
 
-/* --- STYLE D'IMPRESSION (Le secret est ici) --- */
+/* --- PHOTOS --- */
+.photo-zone { margin-top: 15px; }
+.photo-input-label {
+    display: block; background: #f8f9fa; border: 2px dashed #cbd5e0;
+    padding: 15px; text-align: center; border-radius: 8px;
+    cursor: pointer; color: #4a5568; font-weight: bold; transition: 0.2s;
+}
+.photo-input-label:hover { background: #edf2f7; }
+.photo-input-label input { display: none; }
 
-/* Par défaut, on cache le rapport propre sur l'écran */
+.photo-preview-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.img-wrapper { position: relative; width: 80px; height: 80px; }
+.img-wrapper img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid #eee; }
+.remove-img {
+    position: absolute; top: -5px; right: -5px; background: #2d3436;
+    color: white; border-radius: 50%; width: 20px; height: 20px;
+    text-align: center; font-size: 14px; cursor: pointer; line-height: 20px;
+}
+
+/* --- BOUTONS --- */
+.add-btn {
+    background: #27ae60; color: white; border: none; padding: 12px;
+    width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer;
+}
+.print-btn {
+    background: #2c3e50; color: white; border: none; padding: 18px;
+    width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer;
+    font-size: 1.1rem; margin-top: 20px;
+}
+.total-display { text-align: right; margin-top: 15px; font-size: 1.1rem; }
+
+/* --- STYLE IMPRESSION --- */
 .only-print { display: none; }
 
 @media print {
-    /* 1. On cache toute l'interface de l'application */
     .no-print { display: none !important; }
+    .only-print { display: block !important; background: white; }
     body { background: white; padding: 0; margin: 0; max-width: 100%; }
-
-    /* 2. On affiche le rapport propre */
-    .only-print { display: block !important; }
-
-    /* 3. Mise en page du rapport papier */
-    #printableArea {
-        font-family: 'Helvetica', 'Arial', sans-serif;
-        color: black;
-        width: 100%;
+    
+    .report-header { text-align: center; border-bottom: 3px solid #333; margin-bottom: 30px; }
+    .report-section { margin-bottom: 25px; page-break-inside: avoid; }
+    .report-section h3 { background: #f4f4f4; padding: 8px; border-left: 5px solid #333; }
+    
+    .p-room-item { 
+        border: 1px solid #eee; padding: 15px; margin-bottom: 15px; page-break-inside: avoid; 
     }
-    .report-header {
-        text-align: center; border-bottom: 3px solid #333; margin-bottom: 20px; padding-bottom: 10px;
+    .p-room-header { display: flex; justify-content: space-between; font-size: 1.2rem; margin-bottom: 10px; }
+    .p-room-details { font-size: 0.9rem; color: #555; margin-bottom: 8px; }
+    .p-room-notes { font-size: 0.85rem; background: #fafafa; padding: 5px; }
+    
+    .p-room-gallery { 
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; 
     }
-    .report-section {
-        margin-bottom: 20px; page-break-inside: avoid; /* Évite de couper un bloc au milieu */
-    }
-    .report-section h3 {
-        background: #eee; padding: 5px 10px; border-left: 5px solid #333; margin-bottom: 10px;
-    }
-    .p-room-item {
-        margin-bottom: 15px; border-bottom: 1px dotted #ccc; padding-bottom: 10px;
-        page-break-inside: avoid;
-    }
-    .p-room-img {
-        max-width: 90%; max-height: 400px; display: block; margin: 10px auto; border-radius: 4px;
-    }
-    .report-total {
-        font-size: 1.2rem; font-weight: bold; text-align: right; color: #27ae60; margin-top: 10px;
-    }
-}
-/* Grille de détails dans le formulaire */
-.room-details-grid {
-    display: flex;
-    gap: 10px;
-    margin: 10px 0;
-}
-.room-details-grid div { flex: 1; }
-.room-details-grid label { font-size: 0.8rem; font-weight: bold; }
-
-/* Zone photos */
-.photo-upload-label {
-    display: block;
-    background: #ecf0f1;
-    border: 2px dashed #bdc3c7;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-.photo-upload-label input { display: none; }
-
-.photo-preview-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
-}
-.img-wrapper {
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-.room-preview-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-}
-.remove-img {
-    position: absolute;
-    top: -5px; right: -5px;
-    background: red; color: white;
-    border-radius: 50%; width: 18px; height: 18px;
-    text-align: center; font-size: 14px; cursor: pointer;
-}
-
-/* Suppression de pièce */
-.room-header { display: flex; align-items: center; gap: 5px; }
-.delete-btn {
-    background: #e74c3c; width: 35px; margin-top: 5px;
-}
-
-/* Style pour le PDF */
-@media print {
-    .p-room-gallery {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 photos par ligne sur le PDF */
-        gap: 10px;
-        margin-top: 10px;
-    }
-    .p-room-img-mini {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 5px;
-    }
+    .p-room-gallery img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+    
+    .report-total { text-align: right; font-size: 1.4rem; font-weight: bold; color: #27ae60; border-top: 2px solid #eee; padding-top: 10px; }
+    .report-footer { text-align: center; font-size: 0.8rem; color: #999; margin-top: 40px; }
 }
