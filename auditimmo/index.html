@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expertise Immobilière</title>
+    <title>Expertise Immo - Propriété Privée</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="appForm" class="no-print">
-        <h1 class="main-title">🕵️‍♂️ Mon Audit Immo</h1>
+        <div class="header-app">
+            <img src="https://raw.githubusercontent.com/BiofranceEnergies/directproprio/ecc7b2a5ba7b93ed696c8a0301c41d8bcbd2b23a/assets/video/logo%202%20ppcom.webp" alt="Logo Propriété Privée" class="logo-main">
+            <h1 class="main-title">Audit de Valorisation</h1>
+        </div>
 
         <div class="card">
             <h2>👤 Propriétaire & Projet</h2>
             <input type="text" id="vendeurName" placeholder="Nom du vendeur" oninput="saveData()">
             <input type="text" id="adresseBien" placeholder="Adresse du bien" oninput="saveData()">
-            <textarea id="projetVendeur" rows="2" placeholder="Projet de vente..." oninput="saveData()"></textarea>
+            <textarea id="projetVendeur" rows="2" placeholder="Projet de vente (ex: Mutation, Succession...)" oninput="saveData()"></textarea>
         </div>
 
         <div class="card">
             <h2>🔧 Technique & DPE</h2>
             <div class="grid-2">
-                <select id="dpeEnergie" onchange="saveData()"><option value="-">DPE</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+                <select id="dpeEnergie" onchange="saveData()"><option value="-">Énergie</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
                 <select id="dpeClimat" onchange="saveData()"><option value="-">GES</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
             </div>
-            <textarea id="notesTechniquesGales" rows="2" placeholder="Notes techniques (chauffage, toiture...)" oninput="saveData()"></textarea>
+            <textarea id="notesTechniquesGales" rows="2" placeholder="Notes techniques générales (chauffage, électricité, toiture...)" oninput="saveData()"></textarea>
         </div>
 
         <div class="card module-habitable">
@@ -47,14 +50,18 @@
 
     <div id="printableArea" class="only-print">
         <div class="report-header">
-            <h1>RAPPORT D'EXPERTISE IMMOBILIÈRE</h1>
-            <p id="p-date"></p>
+            <img src="https://raw.githubusercontent.com/BiofranceEnergies/directproprio/ecc7b2a5ba7b93ed696c8a0301c41d8bcbd2b23a/assets/video/logo%202%20ppcom.webp" alt="Logo" class="logo-print">
+            <div class="header-text">
+                <h1>AUDIT DE VALORISATION IMMOBILIÈRE</h1>
+                <p id="p-date"></p>
+            </div>
         </div>
         <div id="p-content"></div>
         <div class="print-totals">
-            <p>Surface Habitable : <strong id="p-total-hab"></strong></p>
-            <p>Surface Annexes : <strong id="p-total-annex"></strong></p>
+            <p>Surface Habitable Totale : <strong id="p-total-hab"></strong></p>
+            <p>Surface Annexes Totale : <strong id="p-total-annex"></strong></p>
         </div>
+        <div class="footer-print">Document réalisé par votre conseiller indépendant Propriété Privée</div>
     </div>
 
     <script src="script.js"></script>
