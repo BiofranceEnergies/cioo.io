@@ -1,5 +1,7 @@
+// Chargement automatique au démarrage
 window.onload = () => { loadData(); };
 
+// Ajouter une pièce ou une annexe
 function addRoom(type, data = null) {
     const container = document.getElementById(type === 'habitable' ? 'habitableList' : 'annexList');
     const roomId = 'id-' + Date.now() + Math.random();
@@ -8,7 +10,6 @@ function addRoom(type, data = null) {
     div.id = roomId;
     div.dataset.type = type;
 
-    // Construction HTML différenciée
     let fieldsHtml = '';
     if (type === 'habitable') {
         fieldsHtml = `
@@ -31,12 +32,12 @@ function addRoom(type, data = null) {
 
     div.innerHTML = `
         <div class="room-header">
-            <input type="text" placeholder="Nom (ex: ${type==='habitable'?'Salon':'Garage'})" class="room-name" value="${data ? data.name : ''}" oninput="saveData()">
+            <input type="text" placeholder="Nom" class="room-name" value="${data ? data.name : ''}" oninput="saveData()">
             <input type="number" placeholder="m²" class="room-area" value="${data ? data.area : ''}" oninput="calculateTotals(); saveData();">
             <button class="delete-btn" onclick="removeRoom('${roomId}')">✕</button>
         </div>
         ${fieldsHtml}
-        <textarea class="room-notes" placeholder="Observations..." rows="1" oninput="saveData()">${data ? data.notes : ''}</textarea>
+        <textarea class="room-notes" placeholder="Observations spécifiques..." rows="1" oninput="saveData()">${data ? data.notes : ''}</textarea>
         <div class="photo-zone">
             <input type="file" accept="image/*" multiple onchange="previewImages(this, '${roomId}-photos')">
             <div id="${roomId}-photos" class="photo-preview-container"></div>
@@ -60,6 +61,7 @@ function calculateTotals() {
     document.getElementById('totalAnnex').innerText = ann + " m²";
 }
 
+// Sauvegarde automatique dans le navigateur
 function saveData() {
     const auditData = {
         vendeur: document.getElementById('vendeurName').value,
@@ -80,11 +82,11 @@ function saveData() {
             notes: block.querySelector('.room-notes').value
         });
     });
-    localStorage.setItem('monAuditSave', JSON.stringify(auditData));
+    localStorage.setItem('auditProprietePrivee', JSON.stringify(auditData));
 }
 
 function loadData() {
-    const saved = localStorage.getItem('monAuditSave');
+    const saved = localStorage.getItem('auditProprietePrivee');
     if (!saved) { addRoom('habitable'); return; }
     const data = JSON.parse(saved);
     document.getElementById('vendeurName').value = data.vendeur || '';
@@ -97,8 +99,8 @@ function loadData() {
 }
 
 function resetForm() {
-    if(confirm("Effacer tout l'audit ?")) {
-        localStorage.removeItem('monAuditSave');
+    if(confirm("Attention : cela effacera tout l'audit en cours. Continuer ?")) {
+        localStorage.removeItem('auditProprietePrivee');
         location.reload();
     }
 }
@@ -117,18 +119,18 @@ function previewImages(input, containerId) {
 }
 
 function printReport() {
-    document.getElementById('p-date').innerText = "Expertise du " + new Date().toLocaleDateString();
+    document.getElementById('p-date').innerText = "Fait le " + new Date().toLocaleDateString('fr-FR');
     document.getElementById('p-total-hab').innerText = document.getElementById('totalHabitable').innerText;
     document.getElementById('p-total-annex').innerText = document.getElementById('totalAnnex').innerText;
     
-    let content = `<h3>👤 CLIENT</h3><p>${document.getElementById('vendeurName').value} - ${document.getElementById('adresseBien').value}</p>`;
-    content += `<h3>🔧 TECHNIQUE</h3><p>DPE : ${document.getElementById('dpeEnergie').value} | GES : ${document.getElementById('dpeClimat').value}</p>`;
-    content += `<p style="font-size:0.9rem"><em>${document.getElementById('notesTechniquesGales').value}</em></p>`;
+    let content = `<div class="p-section"><h3>👤 INFOS DOSSIER</h3><p><strong>Vendeur :</strong> ${document.getElementById('vendeurName').value}<br><strong>Bien :</strong> ${document.getElementById('adresseBien').value}</p></div>`;
+    content += `<div class="p-section"><h3>🔧 ÉTAT TECHNIQUE</h3><p><strong>DPE :</strong> ${document.getElementById('dpeEnergie').value} | <strong>GES :</strong> ${document.getElementById('dpeClimat').value}</p>`;
+    content += `<p><em>Notes : ${document.getElementById('notesTechniquesGales').value}</em></p></div>`;
     
-    content += `<h3 style="color:#2980b9">🏠 HABITABLE</h3>`;
+    content += `<h3 class="blue-title">🏠 SURFACES HABITABLES</h3>`;
     document.querySelectorAll('#habitableList .room-block').forEach(el => content += getRoomHtml(el, true));
     
-    content += `<h3 style="color:#d35400">📦 ANNEXES</h3>`;
+    content += `<h3 class="orange-title">📦 SURFACES ANNEXES</h3>`;
     document.querySelectorAll('#annexList .room-block').forEach(el => content += getRoomHtml(el, false));
 
     document.getElementById('p-content').innerHTML = content;
@@ -141,11 +143,11 @@ function getRoomHtml(el, isHab) {
     if(!name) return "";
     let tech = "";
     if(isHab) {
-        tech = `<br><span style="font-size:0.8rem">Ouvrant : ${el.querySelector('.room-ouvrants').value} | Volet : ${el.querySelector('.room-volets').value}</span>`;
+        tech = `<br><span class="p-mini">Ouvrant : ${el.querySelector('.room-ouvrants').value} | Volet : ${el.querySelector('.room-volets').value}</span>`;
     }
-    let h = `<div class="p-item"><strong>${name}</strong> : ${area} m² ${tech}`;
     const notes = el.querySelector('.room-notes').value;
-    if(notes) h += `<br><span style="font-size:0.8rem; color:#666">Note : ${notes}</span>`;
+    let h = `<div class="p-item"><strong>${name}</strong> : ${area} m² ${tech}`;
+    if(notes) h += `<br><span class="p-mini" style="color:#666">Observations : ${notes}</span>`;
     h += `<div class="p-gallery">`;
     el.querySelectorAll('.stored-img').forEach(img => h += `<img src="${img.src}">`);
     h += `</div></div>`;
