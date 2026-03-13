@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit Immobilier Pro</title>
+    <title>Expertise Immobilière</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,92 +13,47 @@
 
         <div class="card">
             <h2>👤 Propriétaire & Projet</h2>
-            <label>Nom du vendeur</label>
-            <input type="text" id="vendeurName" placeholder="Ex: M. et Mme Martin">
-            <label>Adresse du bien</label>
-            <input type="text" id="adresseBien" placeholder="Adresse complète">
-            <label>Urgence / Projet</label>
-            <textarea id="projetVendeur" rows="2" placeholder="Ex: Succession, mutation..."></textarea>
+            <input type="text" id="vendeurName" placeholder="Nom du vendeur" oninput="saveData()">
+            <input type="text" id="adresseBien" placeholder="Adresse du bien" oninput="saveData()">
+            <textarea id="projetVendeur" rows="2" placeholder="Projet de vente..." oninput="saveData()"></textarea>
         </div>
 
         <div class="card">
             <h2>🔧 Technique & DPE</h2>
             <div class="grid-2">
-                <div>
-                    <label>DPE Énergie</label>
-                    <select id="dpeEnergie">
-                        <option value="-">--</option>
-                        <option value="A">A</option><option value="B">B</option><option value="C">C</option>
-                        <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
-                    </select>
-                </div>
-                <div>
-                    <label>GES</label>
-                    <select id="dpeClimat">
-                        <option value="-">--</option>
-                        <option value="A">A</option><option value="B">B</option><option value="C">C</option>
-                        <option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
-                    </select>
-                </div>
+                <select id="dpeEnergie" onchange="saveData()"><option value="-">DPE</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
+                <select id="dpeClimat" onchange="saveData()"><option value="-">GES</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option></select>
             </div>
-
-            <label style="margin-top:15px; display:block;">Toiture</label>
-            <div class="grid-2">
-                <select id="typeToiture">
-                    <option value="Non renseigné">Type de toit</option>
-                    <option value="Tuiles">Tuiles</option>
-                    <option value="Ardoises">Ardoises</option>
-                    <option value="Zinc/Bacacier">Zinc / Bacacier</option>
-                    <option value="Toit plat">Toit plat</option>
-                </select>
-                <select id="etatToiture">
-                    <option value="Bon état">Bon état général</option>
-                    <option value="À vérifier">À vérifier</option>
-                    <option value="À rénover">À rénover</option>
-                </select>
-            </div>
-
-            <label style="margin-top:15px; display:block;">Notes techniques complémentaires</label>
-            <textarea id="notesTechniquesGales" rows="3" placeholder="Infos chauffage, électricité, assainissement..."></textarea>
+            <textarea id="notesTechniquesGales" rows="2" placeholder="Notes techniques (chauffage, toiture...)" oninput="saveData()"></textarea>
         </div>
 
-        <div class="card">
-            <h2>📐 Pièces, Ouvrants & Photos</h2>
-            <div id="roomsContainer"></div>
-            <button class="add-btn" onclick="addRoom()">+ Ajouter une pièce</button>
-            <div class="total-display">Surface totale estimée : <strong id="totalArea">0 m²</strong></div>
+        <div class="card module-habitable">
+            <h2 class="blue-title">🏠 Surfaces Habitables</h2>
+            <div id="habitableList"></div>
+            <button class="add-btn blue" onclick="addRoom('habitable')">+ Ajouter une pièce de vie</button>
+            <div class="subtotal">Total Habitable : <strong id="totalHabitable">0 m²</strong></div>
         </div>
 
-        <button class="print-btn" onclick="printReport()">🖨️ GÉNÉRER LE RAPPORT PDF</button>
+        <div class="card module-annexe">
+            <h2 class="orange-title">📦 Surfaces Annexes / Stockage</h2>
+            <div id="annexList"></div>
+            <button class="add-btn orange" onclick="addRoom('annexe')">+ Ajouter une zone annexe</button>
+            <div class="subtotal">Total Annexes : <strong id="totalAnnex">0 m²</strong></div>
+        </div>
+
+        <button class="print-btn" onclick="printReport()">🖨️ GÉNÉRER LE RAPPORT FINAL</button>
+        <button class="reset-btn" onclick="resetForm()">🗑️ Effacer tout l'audit</button>
     </div>
 
     <div id="printableArea" class="only-print">
         <div class="report-header">
-            <h1>RAPPORT D'AUDIT TECHNIQUE IMMOBILIER</h1>
+            <h1>RAPPORT D'EXPERTISE IMMOBILIÈRE</h1>
             <p id="p-date"></p>
         </div>
-
-        <div class="report-section">
-            <h3>👤 INFORMATIONS CLIENT & BIEN</h3>
-            <p><strong>Vendeur :</strong> <span id="p-nom"></span></p>
-            <p><strong>Adresse :</strong> <span id="p-adresse"></span></p>
-            <p><strong>Projet :</strong> <span id="p-projet"></span></p>
-        </div>
-
-        <div class="report-section">
-            <h3>🔧 ÉLÉMENTS TECHNIQUES GÉNÉRAUX</h3>
-            <p><strong>DPE :</strong> <span id="p-dpe"></span></p>
-            <p><strong>Toiture :</strong> <span id="p-toiture"></span></p>
-            <p id="p-notes-tech-wrapper" style="margin-top:10px;">
-                <strong>Notes techniques :</strong> <br>
-                <span id="p-notes-tech" style="font-style: italic; white-space: pre-wrap;"></span>
-            </p>
-        </div>
-
-        <div class="report-section">
-            <h3>📐 ANALYSE DÉTAILLÉE PAR PIÈCE</h3>
-            <div id="p-rooms-list"></div>
-            <div class="report-total">Surface Totale : <span id="p-total"></span></div>
+        <div id="p-content"></div>
+        <div class="print-totals">
+            <p>Surface Habitable : <strong id="p-total-hab"></strong></p>
+            <p>Surface Annexes : <strong id="p-total-annex"></strong></p>
         </div>
     </div>
 
