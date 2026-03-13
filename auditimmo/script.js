@@ -1,95 +1,107 @@
-// Fonction pour ajouter une pièce
+// Fonction pour ajouter une pièce complète
 function addRoom() {
     const container = document.getElementById('roomsContainer');
+    const roomId = 'room-' + Date.now();
     const div = document.createElement('div');
     div.className = 'room-block';
-    // ID unique pour lier l'image
-    const imgId = 'img-' + Date.now();
+    div.id = roomId;
 
     div.innerHTML = `
-        <div class="room-row">
-            <input type="text" placeholder="Salon, Cuisine..." class="room-name" style="flex:2;">
+        <div class="room-header">
+            <input type="text" placeholder="Nom (ex: Salon)" class="room-name" style="flex:2;">
             <input type="number" placeholder="m²" class="room-area" style="flex:1;" oninput="calculateTotal()">
+            <button class="delete-btn" onclick="document.getElementById('${roomId}').remove(); calculateTotal();">✕</button>
         </div>
-        <div style="margin-top:5px;">
-            <input type="file" accept="image/*" onchange="previewImage(this, '${imgId}')">
-            <img id="${imgId}" class="room-preview" src="">
+
+        <div class="room-details-grid">
+            <div>
+                <label>Ouvrants</label>
+                <select class="room-ouvrants">
+                    <option value="Aucun">Aucun</option>
+                    <option value="Fénêtre">Fenêtre</option>
+                    <option value="Porte-Fenêtre">Porte-Fenêtre</option>
+                    <option value="Coulissant">Coulissant</option>
+                    <option value="Vélux">Vélux</option>
+                </select>
+            </div>
+            <div>
+                <label>Volets</label>
+                <select class="room-volets">
+                    <option value="N/A">N/A</option>
+                    <option value="Roulant Élec.">Roulant Élec.</option>
+                    <option value="Roulant Manuel">Roulant Manuel</option>
+                    <option value="Battant">Battant</option>
+                </select>
+            </div>
+        </div>
+
+        <textarea class="room-notes" placeholder="Notes (état des murs, prises, etc...)" rows="2"></textarea>
+
+        <div class="photo-section">
+            <label class="photo-upload-label">
+                📷 Ajouter des photos
+                <input type="file" accept="image/*" multiple onchange="previewImages(this, '${roomId}-photos')">
+            </label>
+            <div id="${roomId}-photos" class="photo-preview-container"></div>
         </div>
     `;
     container.appendChild(div);
 }
 
-// Afficher l'image quand on la sélectionne
-function previewImage(input, imgId) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = document.getElementById(imgId);
-            img.src = e.target.result;
-            img.style.display = 'block';
-        }
-        reader.readAsDataURL(input.files[0]);
+// Gérer plusieurs images
+function previewImages(input, containerId) {
+    const container = document.getElementById(containerId);
+    if (input.files) {
+        Array.from(input.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgWrapper = document.createElement('div');
+                imgWrapper.className = 'img-wrapper';
+                imgWrapper.innerHTML = `
+                    <img src="${e.target.result}" class="room-preview-img">
+                    <span class="remove-img" onclick="this.parentElement.remove()">×</span>
+                `;
+                container.appendChild(imgWrapper);
+            }
+            reader.readAsDataURL(file);
+        });
     }
 }
 
-// Calcul du total
-function calculateTotal() {
-    let total = 0;
-    document.querySelectorAll('.room-area').forEach(input => {
-        total += Number(input.value);
-    });
-    document.getElementById('totalArea').innerText = total + " m²";
-}
-
-// === FONCTION D'IMPRESSION (NATIVE CHROME) ===
+// Mise à jour de la fonction d'impression pour inclure les nouveaux champs
 function printReport() {
-    // 1. COPIE DES TEXTES SIMPLES
-    document.getElementById('p-nom').innerText = document.getElementById('vendeurName').value;
-    document.getElementById('p-adresse').innerText = document.getElementById('adresseBien').value;
-    document.getElementById('p-projet').innerText = document.getElementById('projetVendeur').value;
+    // ... (garder le début de ta fonction pour les infos vendeurs) ...
     
-    document.getElementById('p-dpe').innerText = document.getElementById('dpeEnergie').value + " / GES: " + document.getElementById('dpeClimat').value;
-    
-    // Copie Chauffage (Liste)
-    let chauffages = [];
-    document.querySelectorAll('input[name="chauffage"]:checked').forEach(c => chauffages.push(c.value));
-    document.getElementById('p-chauffage').innerText = chauffages.join(', ') || "Non renseigné";
-
-    // Copie Toiture / Volets
-    let toit = document.getElementById('typeToiture').value + " - " + document.getElementById('etatToiture').value;
-    if(document.getElementById('droneCheck').checked) toit += " (✅ Vu au drone)";
-    document.getElementById('p-toiture').innerText = toit;
-    document.getElementById('p-volets').innerText = document.getElementById('volets').value;
-
-    document.getElementById('p-total').innerText = document.getElementById('totalArea').innerText;
-    document.getElementById('p-plus').innerText = document.getElementById('plus').value;
-    document.getElementById('p-moins').innerText = document.getElementById('moins').value;
-
-    // 2. COPIE DES PIÈCES ET DES PHOTOS
+    // Copie des pièces
     const printContainer = document.getElementById('p-rooms-list');
-    printContainer.innerHTML = ""; // On vide
+    printContainer.innerHTML = ""; 
 
-    const blocks = document.querySelectorAll('.room-block');
-    blocks.forEach(block => {
+    document.querySelectorAll('.room-block').forEach(block => {
         const name = block.querySelector('.room-name').value;
         const area = block.querySelector('.room-area').value;
-        const img = block.querySelector('.room-preview');
+        const ouvrant = block.querySelector('.room-ouvrants').value;
+        const volet = block.querySelector('.room-volets').value;
+        const notes = block.querySelector('.room-notes').value;
+        const images = block.querySelectorAll('.room-preview-img');
 
         if (name || area) {
-            let html = `<div class="p-room-item">`;
-            html += `<strong>${name}</strong> (${area} m²)`;
+            let html = `<div class="p-room-item">
+                <div class="p-room-main">
+                    <strong>${name}</strong> — ${area} m²
+                </div>
+                <div class="p-room-details">
+                    <span>Ouvrant: ${ouvrant}</span> | <span>Volet: ${volet}</span>
+                </div>
+                ${notes ? `<p class="p-room-notes"><em>Note: ${notes}</em></p>` : ''}
+                <div class="p-room-gallery">`;
             
-            // Si l'image a une source (src), on l'ajoute au rapport
-            if (img.src && img.style.display !== 'none') {
-                html += `<img src="${img.src}" class="p-room-img">`;
-            }
-            html += `</div>`;
+            images.forEach(img => {
+                html += `<img src="${img.src}" class="p-room-img-mini">`;
+            });
+
+            html += `</div></div>`;
             printContainer.innerHTML += html;
         }
     });
-
-    // 3. LANCER L'IMPRESSION
     window.print();
 }
-
-addRoom();
