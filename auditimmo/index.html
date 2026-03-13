@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit Immobilier Expert</title>
+    <title>Audit Immobilier Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
             <label>Adresse du bien</label>
             <input type="text" id="adresseBien" placeholder="Adresse complète">
             <label>Urgence / Projet</label>
-            <textarea id="projetVendeur" rows="2" placeholder="Ex: Mutation, agrandissement..."></textarea>
+            <textarea id="projetVendeur" rows="2" placeholder="Ex: Succession, mutation..."></textarea>
         </div>
 
         <div class="card">
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <label style="margin-top:15px; display:block;">Toiture & Couverture</label>
+            <label style="margin-top:15px; display:block;">Toiture</label>
             <div class="grid-2">
                 <select id="typeToiture">
                     <option value="Non renseigné">Type de toit</option>
@@ -53,10 +53,13 @@
                 </select>
                 <select id="etatToiture">
                     <option value="Bon état">Bon état général</option>
-                    <option value="À vérifier">À vérifier (entretien)</option>
+                    <option value="À vérifier">À vérifier</option>
                     <option value="À rénover">À rénover</option>
                 </select>
             </div>
+
+            <label style="margin-top:15px; display:block;">Notes techniques complémentaires</label>
+            <textarea id="notesTechniquesGales" rows="3" placeholder="Infos chauffage, électricité, assainissement..."></textarea>
         </div>
 
         <div class="card">
@@ -84,18 +87,18 @@
 
         <div class="report-section">
             <h3>🔧 ÉLÉMENTS TECHNIQUES GÉNÉRAUX</h3>
-            <p><strong>Diagnostic Performance Énergétique :</strong> <span id="p-dpe"></span></p>
+            <p><strong>DPE :</strong> <span id="p-dpe"></span></p>
             <p><strong>Toiture :</strong> <span id="p-toiture"></span></p>
+            <p id="p-notes-tech-wrapper" style="margin-top:10px;">
+                <strong>Notes techniques :</strong> <br>
+                <span id="p-notes-tech" style="font-style: italic; white-space: pre-wrap;"></span>
+            </p>
         </div>
 
         <div class="report-section">
             <h3>📐 ANALYSE DÉTAILLÉE PAR PIÈCE</h3>
             <div id="p-rooms-list"></div>
             <div class="report-total">Surface Totale : <span id="p-total"></span></div>
-        </div>
-
-        <div class="report-footer">
-            <p>Document réalisé par votre conseiller immobilier expert.</p>
         </div>
     </div>
 
