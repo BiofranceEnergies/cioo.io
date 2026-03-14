@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fiche RDV Vendeur - Propriétés Privées</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="no-print actions">
+        <button onclick="window.print()">Générer le PDF / Imprimer</button>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <div class="logo-box">Proprietes-privees.com<br><small>www.proprietes-privees.com</small></div>
+            <h1>FICHE RDV VENDEUR DESCRIPTION BIEN</h1>
+            <div class="fnaim">FNAIM</div>
+        </div>
+
+        <div class="section row">
+            <label><input type="checkbox"> Maison</label>
+            <label><input type="checkbox"> Appartement</label>
+            <label><input type="checkbox"> Terrain</label>
+            <label><input type="checkbox"> Immeuble</label>
+        </div>
+
+        <div class="section">
+            <div class="input-group"><strong>Adresse :</strong> <input type="text" class="line"></div>
+            <div class="input-group"><strong>Coordonnées du propriétaire :</strong> <input type="text" class="line"></div>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <div class="input-group">Surface habitable : <input type="text" class="line"></div>
+                <div class="input-group">Surface du terrain : <input type="text" class="line"></div>
+                <div class="input-group">Style : Ancien <input type="checkbox"> Trad <input type="checkbox"> Contemp <input type="checkbox"></div>
+                <div class="input-group">Année construction : <input type="text" class="line"></div>
+                <div class="input-group">Nbre pièces : <input type="text" class="line"></div>
+            </div>
+            <div>
+                <div class="input-group">Extension : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+                <div class="input-group">Permis en date du : <input type="text" class="line"></div>
+                <div class="input-group">Année réalisation extension : <input type="text" class="line"></div>
+                <div class="input-group">Contenance parcelle cadastrale : <input type="text" class="line"></div>
+            </div>
+        </div>
+
+        <div class="grid-2 mt">
+            <div>
+                <div class="input-group">Exposition : <input type="text" class="line"></div>
+                <div class="input-group">Vis-à-vis : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+                <div class="input-group">Zone inondable : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+                <div class="input-group">Terrasse : Oui <input type="checkbox"> Non <input type="checkbox"> Surface : <input type="text" class="line"></div>
+            </div>
+            <div>
+                <div class="input-group">Dépendance <input type="checkbox"> Abris jardin <input type="checkbox"></div>
+                <div class="input-group">Autres : <input type="text" class="line"></div>
+            </div>
+        </div>
+
+        <div class="section-title">ASSAINISSEMENT</div>
+        <div class="row">
+            <label><input type="checkbox"> Tout-à-l'égout</label>
+            <label><input type="checkbox"> Fosse septique</label>
+            <label><input type="checkbox"> Autre</label>
+        </div>
+        <div class="input-group">Diagnostic assainissement / État fosse : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+
+        <div class="section-title">CONSTRUCTION & MATÉRIAUX</div>
+        <div class="grid-2">
+            <div>
+                <div class="row">État : Neuf <input type="checkbox"> Rénover <input type="checkbox"> Rafraîchir <input type="checkbox"></div>
+                <div class="row">Murs : Parpaings <input type="checkbox"> Briques <input type="checkbox"> Pierres <input type="checkbox"> Autre <input type="text" class="line"></div>
+                <div class="row">Toiture : Ardoise <input type="checkbox"> Tuiles <input type="checkbox"> Synthétique <input type="checkbox"> Autre <input type="text" class="line"></div>
+            </div>
+            <div>
+                <div class="input-group">Grenier : <input type="checkbox"> État charpente : <input type="text" class="line"></div>
+                <div class="input-group">Isolation : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+                <div class="input-group">Arrivées eau/élec : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+            </div>
+        </div>
+        
+        <div class="grid-2 mt">
+            <div>
+                <div class="input-group">Façade/mur État : <input type="text" class="line"></div>
+                <div class="input-group">Vide-sanitaire : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+            </div>
+            <div>
+                <div class="input-group">Sous-sol/cave : Oui <input type="checkbox"> Non <input type="checkbox"></div>
+                <div class="input-group">Total <input type="checkbox"> Partiel <input type="checkbox"> Enterré <input type="checkbox"> Semi-enterré <input type="checkbox"></div>
+            </div>
+        </div>
+        <div class="input-group">Garage : Oui <input type="checkbox"> Non <input type="checkbox"> Indépendant <input type="checkbox"> Annexé <input type="checkbox"> Surface : <input type="text" class="line"></div>
+    </div>
+
+    <div class="page">
+        <div class="section-title black">L'ISOLATION ET LE CHAUFFAGE</div>
+        <div class="grid-2">
+            <div>
+                <div class="input-group">Note DPE : <input type="text" class="line"></div>
+                <div class="input-group">Chauffage : Gaz <input type="checkbox"> Elec <input type="checkbox"> Fioul <input type="checkbox"> Autre : <input type="text" class="line"></div>
+                <div class="input-group">Date installation : <input type="text" class="line"></div>
+            </div>
+            <div>
+                <div class="input-group">Consommation annuelle : <input type="text" class="line"></div>
+                <div class="input-group">Diagnostic gaz/élec (>15 ans) : <input type="checkbox"></div>
+            </div>
+        </div>
+
+        <div class="mt">
+            <strong>Fenêtres :</strong> Bois <input type="checkbox"> PVC <input type="checkbox"> Alu <input type="checkbox">
+            Simple <input type="checkbox"> Double <input type="checkbox"> Triple <input type="checkbox"> Phonique <input type="checkbox">
+            <div class="input-group">Observations : <input type="text" class="line"></div>
+        </div>
+
+        <div class="section-title black">DIAGNOSTICS & ENVIRONNEMENT</div>
+        <div class="row">
+            <label><input type="checkbox"> Amiante</label>
+            <label><input type="checkbox"> Plomb</label>
+            <label><input type="checkbox"> Termites</label>
+            <label><input type="checkbox"> Gaz</label>
+            <label><input type="checkbox"> Électricité</label>
+            <label><input type="checkbox"> Carrez</label>
+            <label><input type="checkbox"> ERNT</label>
+        </div>
+
+        <div class="grid-2 mt">
+            <div>
+                <strong>Proximité :</strong>
+                <div><input type="checkbox"> Écoles / Collèges / Lycées</div>
+                <div><input type="checkbox"> Transports</div>
+            </div>
+            <div>
+                <div class="input-group">Projet urbanisme : <input type="text" class="line"></div>
+            </div>
+        </div>
+
+        <div class="section-title black">FRAIS ANNEXES & CO-PROPRIÉTÉ</div>
+        <div class="grid-2">
+            <div>
+                <div class="input-group">Taxe foncière : <input type="text" class="line"></div>
+                <div class="input-group">EDF/GDF : <input type="text" class="line"></div>
+            </div>
+            <div>
+                <div class="input-group">Charges co-pro : <input type="text" class="line"></div>
+                <div class="input-group">Travaux prévus : <input type="text" class="line"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <div class="section-title">DESCRIPTIF (points +/-, revêtements, rangements)</div>
+        <table id="roomsTable">
+            <thead>
+                <tr>
+                    <th>PIÈCE</th>
+                    <th>MURS</th>
+                    <th>SOLS</th>
+                    <th>ÉTAT</th>
+                    <th>ÉTAGE</th>
+                    <th>SURFACE</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
