@@ -1,0 +1,29 @@
+body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; background: #555; }
+.page { 
+    width: 210mm; height: 296mm; 
+    padding: 15mm; margin: 10mm auto; 
+    background: white; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    position: relative;
+}
+.header { border-bottom: 2px solid #ed1c24; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+h1 { font-size: 16px; font-weight: bold; }
+.section-title { background: #eee; padding: 5px; font-weight: bold; border-left: 5px solid #ed1c24; margin: 15px 0 10px 0; }
+.section-title.black { border-left-color: #333; }
+.row { display: flex; gap: 15px; margin-bottom: 10px; flex-wrap: wrap; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.input-group { margin-bottom: 8px; display: flex; align-items: baseline; gap: 5px; }
+.line { flex: 1; border: none; border-bottom: 1px solid #ccc; outline: none; }
+.mt { margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #999; padding: 5px; text-align: left; }
+th { background: #f2f2f2; font-size: 11px; }
+td input { width: 100%; border: none; outline: none; background: transparent; }
+.no-print { position: fixed; top: 10px; right: 10px; z-index: 100; }
+button { background: #ed1c24; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 4px; }
+
+@media print {
+    body { background: none; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+    .no-print { display: none; }
+}
