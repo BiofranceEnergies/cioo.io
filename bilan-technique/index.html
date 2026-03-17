@@ -6,162 +6,156 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<form id="bilanForm">
-    <header class="page" id="page1">
-        <div class="logo-container">
-            <span class="brand">PROPRIÉTÉS-PRIVÉES</span>
-        </div>
-        <h1>BILAN TECHNIQUE</h1>
-        <div class="agency-box">
-            <input type="text" placeholder="Nom de l'agence">
-            <input type="text" placeholder="Adresse / Ville">
-            <input type="text" placeholder="Nom du conseiller" [cite: 6]>
-            <input type="text" placeholder="Tél: 01 02 03 04 05" [cite: 7]>
-        </div>
-    </header>
-
-    <section class="page">
-        <h2>IDENTIFICATION DES VENDEURS</h2>
-        <div class="vendeurs-grid">
-            <div class="vendeur-card">
-                <h3>Vendeur 1</h3>
-                <div class="row">
-                    <select name="qualite_v1">
-                        <option>Pleine propriété</option>
-                        <option>Indivision</option>
-                        <option>Succession</option>
-                        <option>Nue propriété</option>
-                        <option>Usufruitier</option>
-                    </select>
-                </div>
-                <input type="text" placeholder="Nom" name="nom_v1" [cite: 30]>
-                <input type="text" placeholder="Prénoms" name="prenoms_v1" [cite: 31]>
-                <div class="row">
-                    <input type="text" placeholder="Date de naissance" name="dob_v1">
-                    <input type="text" placeholder="Lieu" name="lieu_v1">
-                </div>
-                <input type="email" placeholder="E-mail" name="email_v1">
-                <select name="etat_civil_v1">
-                    <option>Célibataire</option>
-                    <option>Marié(e)</option>
-                    <option>Pacsé(e)</option>
-                    <option>Divorcé(e)</option>
-                    <option>Veuf(ve)</option>
-                </select>
+    <form id="bilanForm">
+        <header class="pdf-page">
+            <div class="logo">PROPRIÉTÉS-PRIVÉES</div>
+            <h1>BILAN TECHNIQUE</h1>
+            <div class="agency-info">
+                <input type="text" placeholder="Nom de l'agence">
+                <input type="text" placeholder="Adresse / Ville">
+                <input type="text" placeholder="Nom du conseiller">
+                <input type="text" placeholder="Tél">
             </div>
-            </div>
-        <div class="memo-box">
-            <strong>Mémo Domicile Conjugal :</strong> Si mariage et résidence de famille, signature des deux époux obligatoire[cite: 139].
-        </div>
-    </section>
+        </header>
 
-    <section class="page">
-        <h2>VOTRE PROJET & SITUATION FINANCIÈRE</h2>
-        <div class="grid-2">
-            <div class="box">
-                <label>Date d'acquisition :</label> <input type="text"> [cite: 280]
-                <label>Prix d'acquisition :</label> <input type="text"> [cite: 283]
-                <label>Origine :</label>
-                <div class="checkboxes">
-                    <label><input type="checkbox"> Achat</label>
-                    <label><input type="checkbox"> Succession</label>
-                    <label><input type="checkbox"> Donation</label>
-                </div>
+        <section class="pdf-page">
+            <h2>IDENTIFICATION DU VENDEUR</h2>
+            <div id="vendeurs-container">
+                <fieldset class="vendeur-block">
+                    <legend>Vendeur n°1</legend>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> Pleine propriété</label>
+                        <label><input type="checkbox"> Indivision</label>
+                        <label><input type="checkbox"> Succession</label>
+                        <label><input type="checkbox"> Nue propriété</label>
+                        <label><input type="checkbox"> Usufruitier</label>
+                    </div>
+                    <div class="grid-3">
+                        <input type="text" placeholder="Nom">
+                        <input type="text" placeholder="Prénoms">
+                        <input type="text" placeholder="Date de naissance (JJ/MM/AAAA)">
+                    </div>
+                    <div class="grid-3">
+                        <input type="text" placeholder="Lieu de naissance">
+                        <input type="text" placeholder="Nationalité">
+                        <input type="text" placeholder="Profession">
+                    </div>
+                    <div class="grid-civil">
+                        <label><input type="checkbox"> Célibataire</label>
+                        <label><input type="checkbox"> Marié(e) le...</label> <input type="text" placeholder="Date/Lieu">
+                        <label><input type="checkbox"> Pacsé(e)</label>
+                        <label><input type="checkbox"> Divorcé(e) le...</label>
+                    </div>
+                </fieldset>
             </div>
-            <div class="box">
-                <label>Utilisation :</label>
-                <label><input type="radio" name="usage"> Résidence Principale</label> [cite: 320]
-                <label><input type="radio" name="usage"> Bien locatif</label>
-                <div class="finance-status">
-                    <label>Crédit en cours ? <input type="checkbox"></label> [cite: 371]
-                    <input type="text" placeholder="Capital restant dû">
-                    <label>Hypothèque ? <input type="checkbox"></label> [cite: 381]
-                </div>
+            <fieldset>
+                <legend>Personne Morale / SCI</legend>
+                <input type="text" placeholder="Dénomination / SIRET">
+                <input type="text" placeholder="Gérant (Nom/Prénom)">
+            </fieldset>
+            <div class="memo">
+                <strong>Mémo :</strong> Si mariage et résidence de famille = signature des deux époux obligatoire[cite: 139].
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="page">
-        <h2>DESCRIPTION TECHNIQUE ET SURFACES</h2>
-        <div class="cadastre">
-            <table>
+        <section class="pdf-page">
+            <h2>VOTRE PROJET DE VENTE</h2>
+            <div class="grid-2">
+                <label>Date d'acquisition : <input type="text"></label>
+                <label>Prix d'acquisition : <input type="text"> €</label>
+            </div>
+            <textarea placeholder="Pourquoi avez-vous acheté ce bien ?"></textarea>
+            <textarea placeholder="Ce que vous auriez aimé avoir en plus ?"></textarea>
+            <div class="origin">
+                <span>Origine de propriété :</span>
+                <label><input type="checkbox"> Achat</label>
+                <label><input type="checkbox"> Succession</label>
+                <label><input type="checkbox"> Donation</label>
+                <label><input type="checkbox"> Partage</label>
+            </div>
+        </section>
+
+        <section class="pdf-page">
+            <h2>SITUATION DU BIEN</h2>
+            <div class="grid-usage">
+                <label><input type="checkbox"> Résidence principale</label>
+                <label><input type="checkbox"> Résidence secondaire</label>
+                <label><input type="checkbox"> Bien locatif</label>
+            </div>
+            <div class="finance">
+                <label>Plus-value concerné ? <input type="checkbox"></label>
+                <label>Crédit en cours ? <input type="checkbox"> Montant restant : <input type="text"></label>
+                <label>Hypothèque ? <input type="checkbox"></label>
+            </div>
+        </section>
+
+        <section class="pdf-page">
+            <h2>IDENTITÉ DU BIEN & SURFACES</h2>
+            <table class="cadastre">
                 <tr><th>Section</th><th>N°</th><th>Contenance</th><th>Lot</th></tr>
                 <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            </table> [cite: 416]
-        </div>
-        <div class="surfaces-grid">
-            <input type="text" placeholder="Nb de pièces">
-            <input type="text" placeholder="Surface Habitable"> [cite: 487]
-            <input type="text" placeholder="Surface Loi Carrez"> [cite: 499]
-            <input type="text" placeholder="Terrain / Jardin"> [cite: 505]
-        </div>
-        <table class="detail-pieces">
-            <thead>
-                <tr><th>Niveau</th><th>Pièces</th><th>Surface</th><th>Orientation</th><th>Observations</th></tr>
-            </thead>
-            <tbody>
+            </table>
+            <div class="surfaces-summary">
+                <input type="text" placeholder="Surface Habitable">
+                <input type="text" placeholder="Surface Loi Carrez">
+                <input type="text" placeholder="Terrain / Jardin">
+            </div>
+            <table class="surfaces-detail">
+                <tr><th>Niveau</th><th>Pièces</th><th>Surface hab.</th><th>Orientation</th><th>Observations</th></tr>
                 <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            </tbody>
-        </table> [cite: 512]
-    </section>
+            </table>
+        </section>
 
-    <section class="page">
-        <h2>ÉQUIPEMENTS ET TRAVAUX</h2>
-        <div class="equip-list">
-            <label>Cuisine : <select><option>Ouverte</option><option>Indépendante</option><option>Équipée</option></select></label> [cite: 520]
-            <label>Piscine : <input type="checkbox"> Dimensions : <input type="text"></label> [cite: 665]
-            <label>Assainissement : <select><option>Tout-à-l'égout</option><option>Fosse Septique</option></select></label> [cite: 709]
-        </div>
-        <h3>Historique des travaux</h3>
-        <table>
-            <tr><th>Nature</th><th>Date</th><th>Décennale</th><th>Pro ?</th><th>Facture</th></tr>
-            <tr><td>Toiture</td><td><input type="text"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-            <tr><td>Électricité</td><td><input type="text"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-            <tr><td>Isolation</td><td><input type="text"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
-        </table> [cite: 707]
-    </section>
-
-    <section class="page">
-        <h2>CHAUFFAGE & COPROPRIÉTÉ</h2>
-        <div class="grid-2">
-            <div class="heating">
-                <label>Énergie :</label>
-                <select>
-                    <option>Électricité</option><option>Gaz</option><option>Fioul</option><option>Bois</option>
-                </select> [cite: 749]
-                <label>Consommation annuelle (€) : <input type="text"></label> [cite: 766]
+        <section class="pdf-page">
+            <h2>ÉQUIPEMENTS & TECHNIQUE</h2>
+            <div class="equip-grid">
+                <div class="item">Cuisine : <input type="text" placeholder="Équipée / Meublée / Ouverte"></div>
+                <div class="item">Chauffage : <input type="text" placeholder="Élec / Gaz / Fioul / Bois"></div>
+                <div class="item">Piscine : <input type="checkbox"> Dim : <input type="text"></div>
+                <div class="item">Assainissement : <input type="text" placeholder="Tout à l'égout / Fosse"></div>
             </div>
-            <div class="copro">
-                <input type="text" placeholder="Nom du Syndic"> [cite: 996]
-                <input type="text" placeholder="Charges mensuelles"> [cite: 990]
-                <label>Ascenseur ? <input type="checkbox"></label> [cite: 962]
+            <h3>Travaux effectués </h3>
+            <table class="works">
+                <tr><th>Travaux</th><th>Date</th><th>Décennale</th><th>Pro</th><th>Vendeur</th><th>Facture</th></tr>
+                <tr><td>Toiture</td><td><input type="text"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                <tr><td>Électricité</td><td><input type="text"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+            </table>
+        </section>
+
+        <section class="pdf-page">
+            <h2>COPROPRIÉTÉ / LOTISSEMENT</h2>
+            <div class="grid-3">
+                <input type="text" placeholder="Nom du Syndic">
+                <input type="text" placeholder="Charges mensuelles">
+                <input type="text" placeholder="Taxe Foncière">
             </div>
-        </div>
-    </section>
+            <table class="tantiemes">
+                <tr><th>N° Lot</th><th>Tantièmes</th><th>Nature</th></tr>
+                <tr><td><input type="text"></td><td><input type="text"></td><td>Appartement</td></tr>
+            </table>
+        </section>
 
-    <section class="page">
-        <h2>DOSSIER DE DIAGNOSTICS TECHNIQUES</h2>
-        <div class="diag-grid">
-            <div class="diag-item"><span>Termites</span> <input type="checkbox"> Fait <input type="checkbox"> À faire</div> [cite: 1097]
-            <div class="diag-item"><span>Gaz / Élec</span> <input type="checkbox"> Fait <input type="checkbox"> À faire</div> [cite: 1105]
-            <div class="diag-item"><span>DPE</span> <input type="checkbox"> Fait <input type="checkbox"> À faire</div> [cite: 1123]
-            <div class="diag-item"><span>Amiante</span> <input type="checkbox"> Fait <input type="checkbox"> À faire</div> [cite: 1149]
-            <div class="diag-item"><span>Plomb (CREP)</span> <input type="checkbox"> Fait <input type="checkbox"> À faire</div> [cite: 1125]
-        </div>
-    </section>
+        <section class="pdf-page">
+            <h2>DIAGNOSTICS TECHNIQUES</h2>
+            <div class="diag-list">
+                <div class="diag-row"><span>DPE</span> <label><input type="checkbox"> Fait</label> <label><input type="checkbox"> À faire</label> Date: <input type="text"></div>
+                <div class="diag-row"><span>Amiante</span> <label><input type="checkbox"> Fait</label> <label><input type="checkbox"> À faire</label></div>
+                <div class="diag-row"><span>Plomb</span> <label><input type="checkbox"> Fait</label> <label><input type="checkbox"> À faire</label></div>
+                <div class="diag-row"><span>Termites</span> <label><input type="checkbox"> Fait</label> <label><input type="checkbox"> À faire</label></div>
+                <div class="diag-row"><span>Électricité / Gaz</span> <label><input type="checkbox"> Fait</label> <label><input type="checkbox"> À faire</label></div>
+                <div class="diag-row"><span>Assainissement (SPANC)</span> <label><input type="checkbox"> Fait</label> <label><input type="checkbox"> À faire</label></div>
+            </div>
+        </section>
 
-    <footer class="page">
-        <h2>SUIVI ET CONFIDENTIALITÉ</h2>
-        <textarea placeholder="Consignes de visite..."></textarea> [cite: 1264]
-        <div class="legal-notice">
-            <p><strong>Propriétés-Privées</strong> est responsable du traitement de vos données personnelles... [cite: 1268, 1274]</p>
-        </div>
-        <button type="button" class="print-btn" onclick="window.print()">Générer le PDF Final</button>
-    </footer>
-
-</form>
-
-<script src="script.js"></script>
+        <footer class="pdf-page">
+            <h2>RENDEZ-VOUS & MENTIONS LÉGALES</h2>
+            <div class="rgpd-text">
+                <p><strong>Propriétés-Privées</strong> et l'agence sont responsables conjoints du traitement de vos données personnelles... [cite: 1268-1270]</p>
+                <p>Conformément à la loi, vous bénéficiez d'un droit d'accès, de rectification et d'effacement... [cite: 1276]</p>
+            </div>
+            <button type="button" onclick="window.print()">Imprimer le Bilan Complet</button>
+        </footer>
+    </form>
+    <script src="script.js"></script>
 </body>
 </html>
