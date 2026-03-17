@@ -1,50 +1,68 @@
 :root {
-    --primary: #8B0000; /* Rouge Propriétés-Privées */
-    --grey: #333;
-    --light-bg: #f9f9f9;
+    --pp-red: #A10000; /* Rouge Propriétés-Privées */
+    --border-color: #555;
+    --bg-grey: #f0f0f0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #555;
-    margin: 0;
-    font-size: 12px;
+body { font-family: 'Helvetica', 'Arial', sans-serif; background: #555; margin: 0; padding: 0; }
+
+#bilanForm { width: 210mm; margin: 20px auto; background: white; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+
+.page { 
+    width: 210mm; 
+    height: 297mm; 
+    padding: 15mm; 
+    box-sizing: border-box; 
+    border-bottom: 2px dashed #ccc; 
+    page-break-after: always; 
+    position: relative;
+    font-size: 10pt;
 }
 
-#bilanForm {
-    width: 210mm; /* Largeur A4 */
-    margin: 20px auto;
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+h1.main-title { color: var(--pp-red); text-align: center; border-bottom: 3pt solid var(--pp-red); font-size: 24pt; margin: 0 0 10mm 0; }
+h2.section-title { background: var(--pp-red); color: white; padding: 3pt 10pt; text-transform: uppercase; font-size: 12pt; margin: 5mm 0; }
+
+.header-logo { font-weight: bold; font-size: 26pt; color: var(--pp-red); text-align: right; margin-bottom: 5mm; }
+
+input[type="text"], textarea { 
+    border: 0.5pt solid var(--border-color); 
+    padding: 3pt; 
+    width: 100%; 
+    box-sizing: border-box; 
+    margin: 2pt 0;
+    font-size: 9pt;
 }
 
-.pdf-page {
-    padding: 20px 40px;
-    border-bottom: 1px solid #ddd;
-    page-break-after: always;
-    min-height: 297mm;
+table { width: 100%; border-collapse: collapse; margin: 5mm 0; }
+th, td { border: 0.5pt solid black; padding: 4pt; text-align: left; }
+th { background: var(--bg-grey); font-size: 8pt; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+
+.memo-box { 
+    background: #fffbe6; 
+    border-left: 4pt solid #ffc107; 
+    padding: 8pt; 
+    margin: 5mm 0; 
+    font-size: 8.5pt; 
+    font-style: italic; 
 }
 
-h1 { color: var(--primary); text-align: center; border-bottom: 3px solid var(--primary); }
-h2 { background: var(--primary); color: white; padding: 5px 10px; margin-top: 20px; }
-
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-
-input[type="text"], textarea {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+.print-btn { 
+    display: block; 
+    width: 100%; 
+    padding: 15pt; 
+    background: var(--pp-red); 
+    color: white; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
 }
-
-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-th, td { border: 1px solid #ccc; padding: 5px; text-align: left; }
-
-.memo { background: #fffde7; border-left: 5px solid #fbc02d; padding: 10px; margin: 10px 0; }
 
 @media print {
-    body { background: none; }
+    body { background: white; }
     #bilanForm { margin: 0; box-shadow: none; width: 100%; }
-    button { display: none; }
+    .print-btn { display: none; }
+    .page { border: none; }
 }
