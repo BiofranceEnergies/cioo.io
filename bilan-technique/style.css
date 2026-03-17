@@ -1,91 +1,103 @@
 :root {
-    --brand-color: #8B0000; /* Rouge foncé type Propriétés-Privées */
-    --bg-light: #f9f9f9;
-    --border: #ccc;
+    --pp-red: #A30006; /* Couleur bordeaux Propriétés-Privées */
+    --pp-grey: #4A4A4A;
+    --light-grey: #f4f4f4;
 }
 
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: #e0e0e0;
+    font-family: Arial, sans-serif;
+    background-color: #999;
+    margin: 0;
     padding: 20px;
-    font-size: 13px;
 }
 
 #bilanForm {
-    max-width: 1100px;
+    max-width: 900px;
     margin: auto;
     background: white;
+    padding: 0;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.page {
     padding: 40px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    border-top: 15px solid var(--brand-color);
+    border-bottom: 2px dashed #ccc;
+    page-break-after: always;
 }
 
-header {
+h1 {
+    color: var(--pp-red);
     text-align: center;
-    border-bottom: 2px solid var(--brand-color);
-    margin-bottom: 30px;
-}
-
-.brand {
-    font-size: 28px;
-    font-weight: bold;
-    color: var(--brand-color);
-    text-transform: uppercase;
+    border-bottom: 4px solid var(--pp-red);
+    padding-bottom: 10px;
 }
 
 h2 {
-    background: var(--brand-color);
+    background: var(--pp-red);
     color: white;
-    padding: 8px 15px;
+    padding: 10px;
     font-size: 1.1em;
     text-transform: uppercase;
 }
 
-.section { margin-bottom: 30px; }
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 15px;
+.brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--pp-red);
 }
 
-input, select, textarea {
-    padding: 8px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
+.vendeurs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.vendeur-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background: var(--light-grey);
+}
+
+input[type="text"], input[type="email"], select, textarea {
     width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+    border: 1px solid #ccc;
     box-sizing: border-box;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 15px 0;
+    margin: 20px 0;
 }
 
 th, td {
-    border: 1px solid var(--border);
+    border: 1px solid #ccc;
     padding: 8px;
-    text-align: left;
+    font-size: 0.9em;
 }
 
-.memo {
+.memo-box {
     background: #fff8e1;
-    border-left: 5px solid #ffa000;
-    padding: 10px;
-    font-size: 0.85em;
+    border-left: 5px solid #ffc107;
+    padding: 15px;
+    margin-top: 20px;
 }
 
-.diag-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    border-bottom: 1px solid #eee;
+.print-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: var(--pp-red);
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
 @media print {
     body { background: white; padding: 0; }
-    #bilanForm { box-shadow: none; border: none; }
-    button { display: none; }
+    .print-btn { display: none; }
+    #bilanForm { box-shadow: none; }
 }
