@@ -1,11 +1,17 @@
-// Remplace bien par ton URL /exec si elle change
+// 1. CONFIGURATION : Ton URL de script Google
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
 
+// Sélections des éléments
 const form = document.getElementById('ppForm');
 const addrInput = document.getElementById('adresse_input');
 const suggestionsBox = document.getElementById('suggestions');
+const surfH = document.getElementById('surf_h');
+const prixV = document.getElementById('prix');
+const prixM2 = document.getElementById('prix_m2');
+const btn = document.getElementById('submitBtn');
+const status = document.getElementById('status');
 
-// 1. AUTOCOMPLETION
+// --- 2. LOGIQUE : AUTOCOMPLÉTION (API GOUV) ---
 addrInput.addEventListener('input', function() {
     let val = this.value;
     if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
@@ -16,14 +22,14 @@ addrInput.addEventListener('input', function() {
             suggestionsBox.innerHTML = '';
             if (data.features.length > 0) {
                 suggestionsBox.style.display = 'block';
-                data.features.forEach(f => {
+                data.features.forEach(feature => {
                     let div = document.createElement('div');
                     div.className = 'suggestion-item';
-                    div.innerText = f.properties.label;
-                    div.onclick = () => {
-                        addrInput.value = f.properties.name;
-                        document.getElementById('cp').value = f.properties.postcode;
-                        document.getElementById('ville').value = f.properties.city;
+                    div.innerText = feature.properties.label;
+                    div.onclick = function() {
+                        addrInput.value = feature.properties.name; // La rue
+                        document.getElementById('cp').value = feature.properties.postcode;
+                        document.getElementById('ville').value = feature.properties.city;
                         suggestionsBox.style.display = 'none';
                     };
                     suggestionsBox.appendChild(div);
@@ -32,52 +38,78 @@ addrInput.addEventListener('input', function() {
         });
 });
 
-// 2. CALCUL PRIX M2
-function calc() {
-    const s = parseFloat(document.getElementById('surf_h').value);
-    const p = parseFloat(document.getElementById('prix').value);
-    document.getElementById('prix_m2').value = (s > 0 && p > 0) ? Math.round(p / s) + " €/m²" : "";
-}
-document.getElementById('surf_h').addEventListener('input', calc);
-document.getElementById('prix').addEventListener('input', calc);
+// Fermer les suggestions si on clique ailleurs sur l'écran
+document.addEventListener('click', (e) => {
+    if (e.target !== addrInput) suggestionsBox.style.display = 'none';
+});
 
-// 3. ENVOI
+// --- 3. LOGIQUE : CALCUL DU PRIX AU M² ---
+function updateM2() {
+    let s = parseFloat(surfH.value);
+    let p = parseFloat(prixV.value);
+    if (s > 0 && p > 0) {
+        prixM2.value = Math.round(p / s) + " € / m²";
+    } else {
+        prixM2.value = "";
+    }
+}
+surfH.addEventListener('input', updateM2);
+prixV.addEventListener('input', updateM2);
+
+// --- 4. LOGIQUE : ENVOI DES DONNÉES ET PHOTO ---
 form.addEventListener('submit', e => {
     e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true; btn.innerText = "Envoi...";
     
-    const file = document.getElementById('photo_file').files[0];
-    const formData = new FormData(form);
-    const params = new URLSearchParams();
+    btn.disabled = true;
+    btn.innerText = "Envoi en cours...";
+    status.innerText = "Connexion au tableau BIENS...";
 
-    for (const pair of formData.entries()) { params.append(pair[0], pair[1]); }
+    const fileInput = document.getElementById('photo_file');
+    const file = fileInput.files[0];
+    const formData = new FormData(form);
+    
+    // On prépare les paramètres pour Google Apps Script
+    const params = new URLSearchParams();
+    for (const pair of formData.entries()) {
+        params.append(pair[0], pair[1]);
+    }
 
     if (file) {
+        // S'il y a une photo, on la convertit avant d'envoyer
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
             params.append('fileData', reader.result.split(',')[1]);
             params.append('mimeType', file.type);
             params.append('fileName', file.name);
-            send(params);
+            sendFinal(params);
         };
     } else {
-        send(params);
+        // Sinon, on envoie les données texte seules
+        sendFinal(params);
     }
 });
 
-function send(params) {
-    fetch(scriptURL, { 
-        method: 'POST', 
-        mode: 'no-cors', 
+function sendFinal(params) {
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // CRITIQUE pour éviter les erreurs de sécurité Google
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString() 
+        body: params.toString()
     })
     .then(() => {
-        document.getElementById('status').innerText = "✅ Bien enregistré !";
+        status.innerText = "✅ Enregistré avec succès !";
+        status.style.color = "green";
         form.reset();
-        document.getElementById('prix_m2').value = "";
-        btn.disabled = false; btn.innerText = "ENREGISTRER AU TABLEAU";
+        prixM2.value = "";
+        btn.disabled = false;
+        btn.innerText = "ENREGISTRER AU TABLEAU";
+    })
+    .catch(err => {
+        console.error(err);
+        status.innerText = "❌ Erreur de connexion.";
+        status.style.color = "red";
+        btn.disabled = false;
+        btn.innerText = "RÉESSAYER";
     });
 }
