@@ -3,169 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Prospection - Propriété-Privée</title>
-    <style>
-        :root { --pp-orange: #f16529; --pp-dark: #2d2d2d; --white: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 10px; margin: 0; }
-        .card { max-width: 500px; margin: 10px auto; background: var(--white); padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 8px solid var(--pp-orange); }
-        h2 { text-align: center; color: var(--pp-dark); margin: 0 0 20px 0; }
-        .step-title { display: block; background: #fff3ed; color: var(--pp-orange); padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; margin: 15px 0 10px 0; text-transform: uppercase; }
-        label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px; }
-        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
-        .row { display: flex; gap: 10px; }
-        .row div { flex: 1; }
-        /* Style Autocomplétion */
-        .autocomplete-wrapper { position: relative; }
-        .autocomplete-res { border: 1px solid #ddd; background: var(--white); position: absolute; width: 100%; max-height: 200px; overflow-y: auto; z-index: 9999; border-radius: 0 0 8px 8px; display: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .suggestion-item { padding: 12px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
-        .suggestion-item:hover { background-color: #f8f8f8; }
-        .price-box { background: #fdf2ed; padding: 15px; border-radius: 10px; margin-top: 15px; border: 1px dashed var(--pp-orange); }
-        button { background: var(--pp-orange); color: var(--white); border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        button:disabled { background: #ccc; cursor: not-allowed; }
-        #status { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; }
-    </style>
+    <title>Prospection BIENS - Propriété-Privée</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="card">
-    <h2>Fiche "BIENS" PP</h2>
+    <h2>Fiche BIENS - Propriété-Privée</h2>
+    
     <form id="ppForm">
-        <section>
-            <span class="step-title">1. Contact</span>
-            <input type="text" name="nom" placeholder="Nom & Prénom" required>
-            <div class="row">
-                <input type="tel" name="telephone" placeholder="Téléphone" required>
-                <input type="email" name="email" placeholder="Email">
-            </div>
-        </section>
+        <div class="section-title">CONTACT</div>
+        <input type="text" name="nom" placeholder="Nom du prospect" required>
+        <div class="row">
+            <input type="tel" name="telephone" placeholder="Téléphone" required>
+            <input type="email" name="email" placeholder="Email">
+        </div>
 
-        <section>
-            <span class="step-title">2. Adresse du Bien</span>
-            <div class="autocomplete-wrapper">
-                <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Tapez l'adresse..." required>
-                <div id="suggestions" class="autocomplete-res"></div>
-            </div>
-            <div class="row">
-                <input type="text" id="cp" name="cp" placeholder="CP" required>
-                <input type="text" id="ville" name="ville" placeholder="Ville" required>
-            </div>
-        </section>
+        <div class="section-title">ADRESSE DU BIEN</div>
+        <div class="autocomplete-wrapper">
+            <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Commencez à taper l'adresse..." required>
+            <div id="suggestions" class="autocomplete-res"></div>
+        </div>
+        <div class="row">
+            <input type="text" id="cp" name="cp" placeholder="Code Postal" required>
+            <input type="text" id="ville" name="ville" placeholder="Ville" required>
+        </div>
 
-        <section>
-            <span class="step-title">3. Infos & Prix</span>
-            <div class="row">
-                <select name="type_bien">
-                    <option value="Maison">Maison</option>
-                    <option value="Appartement">Appartement</option>
-                </select>
-                <select name="projet">
-                    <option value="Estimation">Estimation</option>
-                    <option value="Vente">Mandat</option>
-                </select>
-            </div>
-            <div class="row">
-                <input type="number" id="surf_h" name="surface_habitable" step="0.01" placeholder="m² habitable" required>
-                <input type="number" name="surface_terrain" step="0.01" placeholder="Terrain m²">
-            </div>
-            <div class="price-box">
-                <input type="number" id="prix" name="prix_vente" placeholder="Prix de vente €">
-                <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Prix au m²" style="background:#eee; margin-top:10px; font-weight:bold; color:var(--pp-orange);">
-            </div>
-        </section>
+        <div class="section-title">DÉTAILS & PRIX</div>
+        <div class="row">
+            <select name="type_bien">
+                <option value="Maison">Maison</option>
+                <option value="Appartement">Appartement</option>
+            </select>
+            <select name="projet">
+                <option value="Estimation">Estimation</option>
+                <option value="Vente">Mandat</option>
+            </select>
+        </div>
+        <div class="row">
+            <input type="number" id="surf_h" name="surface_habitable" step="0.01" placeholder="Surface Hab. (m²)" required>
+            <input type="number" name="surface_terrain" step="0.01" placeholder="Terrain (m²)">
+        </div>
 
-        <section>
-            <span class="step-title">4. Photo & Notes</span>
-            <input type="file" id="photo_file" accept="image/*" capture="environment">
-            <textarea name="commentaires" rows="3" placeholder="Notes (DPE, travaux...)"></textarea>
-        </section>
+        <div class="price-box">
+            <input type="number" id="prix" name="prix_vente" placeholder="Prix de vente souhaité (€)">
+            <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Prix au m² (Auto)">
+        </div>
+
+        <div class="section-title">PHOTO & NOTES</div>
+        <input type="file" id="photo_file" accept="image/*" capture="environment">
+        <textarea name="commentaires" rows="3" placeholder="Notes (DPE, état, travaux...)"></textarea>
 
         <button type="submit" id="submitBtn">ENREGISTRER AU TABLEAU</button>
     </form>
     <div id="status"></div>
 </div>
 
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
-    const form = document.getElementById('ppForm');
-    const addrInput = document.getElementById('adresse_input');
-    const suggestionsBox = document.getElementById('suggestions');
-
-    // --- AUTOCOMPLETION ---
-    addrInput.addEventListener('input', function() {
-        if (this.value.length < 5) { suggestionsBox.style.display = 'none'; return; }
-        fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(this.value)}&limit=5`)
-            .then(res => res.json())
-            .then(data => {
-                suggestionsBox.innerHTML = '';
-                if (data.features.length > 0) {
-                    suggestionsBox.style.display = 'block';
-                    data.features.forEach(f => {
-                        let div = document.createElement('div');
-                        div.className = 'suggestion-item';
-                        div.innerText = f.properties.label;
-                        div.onclick = () => {
-                            addrInput.value = f.properties.name;
-                            document.getElementById('cp').value = f.properties.postcode;
-                            document.getElementById('ville').value = f.properties.city;
-                            suggestionsBox.style.display = 'none';
-                        };
-                        suggestionsBox.appendChild(div);
-                    });
-                }
-            });
-    });
-
-    // --- CALCUL PRIX M2 ---
-    const calcM2 = () => {
-        const s = parseFloat(document.getElementById('surf_h').value);
-        const p = parseFloat(document.getElementById('prix').value);
-        document.getElementById('prix_m2').value = (s > 0 && p > 0) ? Math.round(p / s) + " €/m²" : "";
-    };
-    document.getElementById('surf_h').addEventListener('input', calcM2);
-    document.getElementById('prix').addEventListener('input', calcM2);
-
-    // --- ENVOI DES DONNÉES ---
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const status = document.getElementById('status');
-        btn.disabled = true;
-        btn.innerText = "Envoi en cours...";
-        
-        const file = document.getElementById('photo_file').files[0];
-        const formData = new FormData(form);
-        const params = new URLSearchParams();
-
-        for (const pair of formData.entries()) { params.append(pair[0], pair[1]); }
-
-        if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                params.append('fileData', reader.result.split(',')[1]);
-                params.append('mimeType', file.type);
-                params.append('fileName', file.name);
-                sendData(params);
-            };
-        } else {
-            sendData(params);
-        }
-    });
-
-    function sendData(params) {
-        fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: params.toString(), headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-        .then(() => {
-            document.getElementById('status').innerText = "✅ Bien enregistré !";
-            document.getElementById('status').style.color = "green";
-            form.reset();
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('submitBtn').innerText = "ENREGISTRER AU TABLEAU";
-        })
-        .catch(err => {
-            document.getElementById('status').innerText = "❌ Erreur de connexion.";
-            document.getElementById('submitBtn').disabled = false;
-        });
-    }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
