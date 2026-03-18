@@ -1,0 +1,133 @@
+:root {
+    --pp-orange: #f16529;
+    --pp-dark: #2d2d2d;
+    --pp-bg: #f0f2f5;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', Helvetica, sans-serif;
+    background-color: var(--pp-bg);
+    margin: 0;
+    padding: 10px;
+    color: var(--pp-dark);
+}
+
+.card {
+    max-width: 550px;
+    margin: 20px auto;
+    background: var(--white);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-top: 10px solid var(--pp-orange);
+}
+
+.header h2 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.step-title {
+    display: block;
+    background: #fff3ed;
+    color: var(--pp-orange);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: var(--pp-orange);
+    outline: none;
+    background: #fffcfb;
+}
+
+.row {
+    display: flex;
+    gap: 12px;
+}
+
+.row div { flex: 1; }
+.flex-2 { flex: 2 !important; }
+
+.price-box {
+    background: #fdf2ed;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+    border: 1px dashed var(--pp-orange);
+}
+
+.readonly-input {
+    background: #eeeeee;
+    font-weight: bold;
+    color: var(--pp-orange);
+}
+
+.autocomplete-res {
+    border: 1px solid #ddd;
+    background: var(--white);
+    position: absolute;
+    width: 100%;
+    max-height: 180px;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 0 0 8px 8px;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.suggestion-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.suggestion-item:hover { background-color: #f8f8f8; }
+
+button {
+    background: var(--pp-orange);
+    color: var(--white);
+    border: none;
+    padding: 18px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.3s;
+}
+
+button:hover { background: #d45620; transform: translateY(-2px); }
+
+#status {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
