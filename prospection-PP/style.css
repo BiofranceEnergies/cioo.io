@@ -1,20 +1,69 @@
-:root { --pp-orange: #f16529; --pp-dark: #333; }
-body { font-family: sans-serif; background: #f4f4f4; padding: 10px; }
-.card { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; border-top: 8px solid var(--pp-orange); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-h2 { text-align: center; color: var(--pp-dark); }
-.section-title { font-size: 11px; font-weight: bold; color: var(--pp-orange); margin: 15px 0 5px; text-transform: uppercase; }
-input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-.row { display: flex; gap: 10px; }
-.row input, .row select { flex: 1; }
-/* AUTOCOMPLETION CSS */
-.autocomplete-wrapper { position: relative; }
-.autocomplete-res { 
-    position: absolute; width: 100%; background: #fff; border: 1px solid #ddd; 
-    max-height: 200px; overflow-y: auto; z-index: 1000; display: none; border-radius: 0 0 6px 6px; 
+:root {
+    --pp-orange: #f16529;
+    --pp-dark: #2d2d2d;
+    --pp-bg: #f4f4f9;
 }
-.suggestion-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
-.suggestion-item:hover { background: #f0f0f0; }
-.price-box { background: #fff8f5; padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px dashed var(--pp-orange); }
-#prix_m2 { background: #eee; font-weight: bold; color: var(--pp-orange); }
-button { background: var(--pp-orange); color: #fff; border: none; padding: 15px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-#status { text-align: center; margin-top: 10px; font-weight: bold; }
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--pp-bg);
+    margin: 0; padding: 10px;
+}
+
+.card {
+    max-width: 500px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-top: 8px solid var(--pp-orange);
+}
+
+.step-title {
+    display: block;
+    background: #fff3ed;
+    color: var(--pp-orange);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 15px 0 5px 0;
+    text-transform: uppercase;
+}
+
+label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px; }
+
+input, select, textarea {
+    width: 100%; padding: 12px; margin-top: 5px;
+    border: 1px solid #ccc; border-radius: 6px;
+    box-sizing: border-box; font-size: 16px;
+}
+
+.row { display: flex; gap: 10px; }
+.row div { flex: 1; }
+.flex-2 { flex: 2; }
+
+/* AUTOCOMPLETION */
+.autocomplete-wrapper { position: relative; }
+.autocomplete-res {
+    position: absolute; width: 100%; background: white;
+    border: 1px solid #ddd; z-index: 1000;
+    max-height: 200px; overflow-y: auto; display: none;
+    border-radius: 0 0 6px 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.suggestion-item { padding: 12px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
+.suggestion-item:hover { background: #f8f8f8; }
+
+.price-box {
+    background: #fdf2ed; padding: 15px; border-radius: 8px;
+    margin-top: 15px; border: 1px dashed var(--pp-orange);
+}
+.readonly-input { background: #eee; font-weight: bold; color: var(--pp-orange); }
+
+button {
+    background: var(--pp-orange); color: white; border: none;
+    padding: 16px; width: 100%; border-radius: 6px;
+    font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 25px;
+}
+#status { text-align: center; margin-top: 15px; font-weight: bold; }
