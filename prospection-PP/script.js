@@ -1,10 +1,11 @@
+// Remplace bien par ton URL /exec si elle change
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
 
 const form = document.getElementById('ppForm');
 const addrInput = document.getElementById('adresse_input');
 const suggestionsBox = document.getElementById('suggestions');
 
-// --- 1. AUTOCOMPLETION (API GOUV) ---
+// 1. AUTOCOMPLETION
 addrInput.addEventListener('input', function() {
     let val = this.value;
     if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
@@ -31,31 +32,26 @@ addrInput.addEventListener('input', function() {
         });
 });
 
-// --- 2. CALCUL PRIX M2 ---
-function updateM2() {
+// 2. CALCUL PRIX M2
+function calc() {
     const s = parseFloat(document.getElementById('surf_h').value);
     const p = parseFloat(document.getElementById('prix').value);
-    const res = document.getElementById('prix_m2');
-    if (s > 0 && p > 0) res.value = Math.round(p / s) + " €/m²";
-    else res.value = "";
+    document.getElementById('prix_m2').value = (s > 0 && p > 0) ? Math.round(p / s) + " €/m²" : "";
 }
-document.getElementById('surf_h').addEventListener('input', updateM2);
-document.getElementById('prix').addEventListener('input', updateM2);
+document.getElementById('surf_h').addEventListener('input', calc);
+document.getElementById('prix').addEventListener('input', calc);
 
-// --- 3. ENVOI DES DONNEES ---
+// 3. ENVOI
 form.addEventListener('submit', e => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true; btn.innerText = "Enregistrement...";
-
+    btn.disabled = true; btn.innerText = "Envoi...";
+    
     const file = document.getElementById('photo_file').files[0];
     const formData = new FormData(form);
     const params = new URLSearchParams();
 
-    // On prépare les données texte
-    for (const pair of formData.entries()) {
-        params.append(pair[0], pair[1]);
-    }
+    for (const pair of formData.entries()) { params.append(pair[0], pair[1]); }
 
     if (file) {
         const reader = new FileReader();
@@ -64,29 +60,24 @@ form.addEventListener('submit', e => {
             params.append('fileData', reader.result.split(',')[1]);
             params.append('mimeType', file.type);
             params.append('fileName', file.name);
-            sendFinal(params);
+            send(params);
         };
     } else {
-        sendFinal(params);
+        send(params);
     }
 });
 
-function sendFinal(params) {
-    fetch(scriptURL, {
-        method: 'POST',
+function send(params) {
+    fetch(scriptURL, { 
+        method: 'POST', 
         mode: 'no-cors', 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
+        body: params.toString() 
     })
     .then(() => {
-        document.getElementById('status').innerText = "✅ Bien enregistré dans 'BIENS' !";
+        document.getElementById('status').innerText = "✅ Bien enregistré !";
         form.reset();
         document.getElementById('prix_m2').value = "";
-        document.getElementById('submitBtn').disabled = false;
-        document.getElementById('submitBtn').innerText = "ENREGISTRER AU TABLEAU";
-    })
-    .catch(err => {
-        document.getElementById('status').innerText = "❌ Erreur de connexion.";
-        document.getElementById('submitBtn').disabled = false;
+        btn.disabled = false; btn.innerText = "ENREGISTRER AU TABLEAU";
     });
 }
