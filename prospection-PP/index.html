@@ -3,56 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prospection BIENS - Propriété-Privée</title>
+    <title>CRM Prospection - Propriété-Privée</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="card">
-    <h2>Fiche BIENS - Propriété-Privée</h2>
-    
+    <h2>Fiche Prospection "BIENS"</h2>
+
     <form id="ppForm">
-        <div class="section-title">CONTACT</div>
-        <input type="text" name="nom" placeholder="Nom du prospect" required>
-        <div class="row">
-            <input type="tel" name="telephone" placeholder="Téléphone" required>
-            <input type="email" name="email" placeholder="Email">
-        </div>
+        <section>
+            <span class="step-title">1. Contact Propriétaire</span>
+            <label>Nom & Prénom</label>
+            <input type="text" name="nom" placeholder="Ex: Jean Dupont" required>
+            <div class="row">
+                <div>
+                    <label>Téléphone</label>
+                    <input type="tel" name="telephone" placeholder="06..." required>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="email">
+                </div>
+            </div>
+        </section>
 
-        <div class="section-title">ADRESSE DU BIEN</div>
-        <div class="autocomplete-wrapper">
-            <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Commencez à taper l'adresse..." required>
-            <div id="suggestions" class="autocomplete-res"></div>
-        </div>
-        <div class="row">
-            <input type="text" id="cp" name="cp" placeholder="Code Postal" required>
-            <input type="text" id="ville" name="ville" placeholder="Ville" required>
-        </div>
+        <section>
+            <span class="step-title">2. Adresse du Bien</span>
+            <div class="autocomplete-wrapper">
+                <label>Adresse (Saisie assistée)</label>
+                <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Tapez l'adresse..." required>
+                <div id="suggestions" class="autocomplete-res"></div>
+            </div>
+            <div class="row">
+                <div style="flex: 2;">
+                    <label>Ville</label>
+                    <input type="text" id="ville" name="ville" required>
+                </div>
+                <div style="flex: 1;">
+                    <label>CP</label>
+                    <input type="text" id="cp" name="cp" required>
+                </div>
+            </div>
+        </section>
 
-        <div class="section-title">DÉTAILS & PRIX</div>
-        <div class="row">
-            <select name="type_bien">
-                <option value="Maison">Maison</option>
-                <option value="Appartement">Appartement</option>
-            </select>
-            <select name="projet">
-                <option value="Estimation">Estimation</option>
-                <option value="Vente">Mandat</option>
-            </select>
-        </div>
-        <div class="row">
-            <input type="number" id="surf_h" name="surface_habitable" step="0.01" placeholder="Surface Hab. (m²)" required>
-            <input type="number" name="surface_terrain" step="0.01" placeholder="Terrain (m²)">
-        </div>
+        <section>
+            <span class="step-title">3. Caractéristiques & Prix</span>
+            <div class="row">
+                <div>
+                    <label>Type de bien</label>
+                    <select name="type_bien">
+                        <option value="Maison">Maison</option>
+                        <option value="Appartement">Appartement</option>
+                        <option value="Terrain">Terrain</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Projet</label>
+                    <select name="projet">
+                        <option value="Estimation">Estimation</option>
+                        <option value="Vente">Mandat</option>
+                    </select>
+                </div>
+            </div>
 
-        <div class="price-box">
-            <input type="number" id="prix" name="prix_vente" placeholder="Prix de vente souhaité (€)">
-            <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Prix au m² (Auto)">
-        </div>
+            <div class="row">
+                <div>
+                    <label>Surface Maison (m²)</label>
+                    <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
+                </div>
+                <div>
+                    <label>Surface Terrain (m²)</label>
+                    <input type="number" name="surface_terrain" step="0.01">
+                </div>
+            </div>
 
-        <div class="section-title">PHOTO & NOTES</div>
-        <input type="file" id="photo_file" accept="image/*" capture="environment">
-        <textarea name="commentaires" rows="3" placeholder="Notes (DPE, état, travaux...)"></textarea>
+            <div class="price-box">
+                <label>Prix de vente souhaité (€)</label>
+                <input type="number" id="prix" name="prix_vente">
+                <label>Prix au m² habitable</label>
+                <input type="text" id="prix_m2" name="prix_m2" readonly class="readonly-input">
+            </div>
+        </section>
+
+        <section>
+            <span class="step-title">4. Photo & Notes</span>
+            <input type="file" id="photo_file" accept="image/*" capture="environment">
+            <textarea name="commentaires" rows="3" placeholder="Notes particulières..."></textarea>
+        </section>
 
         <button type="submit" id="submitBtn">ENREGISTRER AU TABLEAU</button>
     </form>
