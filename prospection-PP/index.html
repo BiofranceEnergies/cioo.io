@@ -3,24 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRM Prospection - Propriété-Privée</title>
+  <title>Saisie BIENS - Propriété-Privée</title>
   <style>
     :root { --pp-orange: #f16529; --pp-dark: #333; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f4; padding: 15px; }
-    .card { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-top: 8px solid var(--pp-orange); }
-    h2 { text-align: center; color: var(--pp-dark); margin-bottom: 20px; }
-    
-    label { display: block; margin-top: 15px; font-weight: bold; font-size: 14px; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; margin: 0; padding: 15px; }
+    .card { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 12px; border-top: 8px solid var(--pp-orange); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: var(--pp-dark); margin-top: 0; }
+    label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; }
     input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-    
-    /* Style pour les suggestions d'adresse */
-    .autocomplete-res { border: 1px solid #ddd; background: white; position: absolute; width: 91%; max-height: 200px; overflow-y: auto; z-index: 1000; border-radius: 0 0 6px 6px; display: none; }
-    .suggestion-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
-    .suggestion-item:hover { background-color: #f1f1f1; }
-
     .row { display: flex; gap: 10px; }
     .row div { flex: 1; }
-    .highlight { background: #fff8f5; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0d1; }
+    .autocomplete-res { border: 1px solid #ddd; background: white; position: absolute; width: 92%; max-height: 150px; overflow-y: auto; z-index: 1000; display: none; }
+    .suggestion-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
+    .suggestion-item:hover { background-color: #f8f8f8; }
     button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
     #status { text-align: center; margin-top: 15px; font-weight: bold; }
   </style>
@@ -28,10 +23,9 @@
 <body>
 
 <div class="card">
-  <h2>Fiche "BIENS" Propriété-Privée</h2>
-  
+  <h2>Nouveau Bien PP</h2>
   <form id="ppForm">
-    <label>Nom du Prospect</label>
+    <label>Nom Prospect</label>
     <input type="text" name="nom" required>
     
     <div class="row">
@@ -40,8 +34,8 @@
     </div>
 
     <div style="position: relative;">
-      <label>Adresse du bien</label>
-      <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Tapez l'adresse..." required>
+      <label>Adresse du bien (Auto-complétion)</label>
+      <input type="text" id="adresse_input" name="adresse" autocomplete="off" required>
       <div id="suggestions" class="autocomplete-res"></div>
     </div>
     
@@ -52,107 +46,96 @@
 
     <div class="row">
       <div>
-        <label>Type de bien</label>
-        <select name="type_bien">
-          <option value="Maison">Maison</option>
-          <option value="Appartement">Appartement</option>
-          <option value="Terrain">Terrain</option>
-        </select>
+        <label>Surf. Habitable (m²)</label>
+        <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
       </div>
       <div>
-        <label>Projet</label>
-        <select name="projet">
-          <option value="Estimation">Estimation</option>
-          <option value="Vente">Mandat</option>
-        </select>
+        <label>Prix de vente (€)</label>
+        <input type="number" id="prix" name="prix_vente">
       </div>
     </div>
 
-    <div class="row">
-      <div><label>Habitable (m²)</label><input type="number" id="surf_h" name="surface_habitable" step="0.01" required></div>
-      <div><label>Terrain (m²)</label><input type="number" name="surface_terrain" step="0.01"></div>
-    </div>
+    <label>Prix au m² (calculé)</label>
+    <input type="text" id="prix_m2" name="prix_m2" readonly style="background:#f9f9f9; color:var(--pp-orange); font-weight:bold;">
 
-    <div class="highlight">
-      <label>Prix de vente souhaité (€)</label>
-      <input type="number" id="prix" name="prix_vente">
-      <label>Prix au m² habitable</label>
-      <input type="text" id="prix_m2" name="prix_m2" readonly style="background:#eee;">
-    </div>
+    <label>Photo du bien</label>
+    <input type="file" id="photo_file" accept="image/*" capture="environment">
 
-    <label>Commentaires</label>
-    <textarea name="commentaires" rows="3"></textarea>
+    <label>Notes</label>
+    <textarea name="commentaires" rows="2"></textarea>
 
-    <button type="submit">ENREGISTRER DANS LE TABLEAU</button>
+    <button type="submit" id="submitBtn">ENREGISTRER AU CRM</button>
   </form>
   <div id="status"></div>
 </div>
 
 <script>
-  // --- 1. AUTOCOMPLETION SANS GOOGLE (API GOUV) ---
+  // 1. GESTION ADRESSE (API GOUV)
   const addrInput = document.getElementById('adresse_input');
   const suggestionsBox = document.getElementById('suggestions');
-
   addrInput.addEventListener('input', function() {
-    let val = this.value;
-    if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
-
-    fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(val)}&limit=5`)
-      .then(res => res.json())
-      .then(data => {
-        suggestionsBox.innerHTML = '';
-        if (data.features.length > 0) {
-          suggestionsBox.style.display = 'block';
-          data.features.forEach(feature => {
-            let div = document.createElement('div');
-            div.className = 'suggestion-item';
-            div.innerText = feature.properties.label;
-            div.onclick = function() {
-              addrInput.value = feature.properties.name; // Rue seule
-              document.getElementById('cp').value = feature.properties.postcode;
-              document.getElementById('ville').value = feature.properties.city;
-              suggestionsBox.style.display = 'none';
-            };
-            suggestionsBox.appendChild(div);
-          });
-        }
+    if (this.value.length < 5) { suggestionsBox.style.display = 'none'; return; }
+    fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(this.value)}&limit=4`)
+      .then(res => res.json()).then(data => {
+        suggestionsBox.innerHTML = ''; suggestionsBox.style.display = 'block';
+        data.features.forEach(f => {
+          let d = document.createElement('div'); d.className = 'suggestion-item'; d.innerText = f.properties.label;
+          d.onclick = () => {
+            addrInput.value = f.properties.name;
+            document.getElementById('cp').value = f.properties.postcode;
+            document.getElementById('ville').value = f.properties.city;
+            suggestionsBox.style.display = 'none';
+          };
+          suggestionsBox.appendChild(d);
+        });
       });
   });
 
-  // Fermer les suggestions si on clique ailleurs
-  document.addEventListener('click', (e) => { if (e.target !== addrInput) suggestionsBox.style.display = 'none'; });
-
-  // --- 2. CALCUL PRIX AU M2 ---
+  // 2. CALCUL PRIX M2
   const surfH = document.getElementById('surf_h');
   const prixV = document.getElementById('prix');
   const prixM2 = document.getElementById('prix_m2');
-
-  function updateM2() {
-    let s = parseFloat(surfH.value); let p = parseFloat(prixV.value);
-    if (s > 0 && p > 0) prixM2.value = Math.round(p / s) + " € / m²";
+  function calc() {
+    if (surfH.value > 0 && prixV.value > 0) prixM2.value = Math.round(prixV.value / surfH.value) + " €/m²";
     else prixM2.value = "";
   }
-  surfH.addEventListener('input', updateM2);
-  prixV.addEventListener('input', updateM2);
+  surfH.addEventListener('input', calc); prixV.addEventListener('input', calc);
 
-  // --- 3. ENVOI VERS GOOGLE SHEETS ---
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
+  // 3. ENVOI DES DONNÉES
+  const scriptURL = 'TON_URL_SCRIPT_ICI'; // <-- COLLER TON LIEN ICI
   const form = document.getElementById('ppForm');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    document.getElementById('status').innerHTML = "⏳ Envoi en cours...";
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(res => {
-        document.getElementById('status').innerHTML = "✅ Enregistré avec succès !";
-        form.reset();
-        prixM2.value = "";
-      })
-      .catch(err => {
-        document.getElementById('status').innerHTML = "❌ Erreur de connexion.";
-      });
-  });
-</script>
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.innerText = "Envoi en cours...";
+    
+    const file = document.getElementById('photo_file').files[0];
+    const formData = new FormData(form);
 
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        formData.append('fileData', reader.result.split(',')[1]);
+        formData.append('mimeType', file.type);
+        formData.append('fileName', file.name);
+        send(formData);
+      };
+    } else {
+      send(formData);
+    }
+  });
+
+  function send(formData) {
+    fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
+      .then(() => {
+        document.getElementById('status').innerText = "✅ Bien enregistré !";
+        form.reset(); prixM2.value = "";
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').innerText = "ENREGISTRER AU CRM";
+      });
+  }
+</script>
 </body>
 </html>
