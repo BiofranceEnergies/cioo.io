@@ -3,138 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Propriété-Privée - Saisie BIENS</title>
+  <title>Prospection BIENS - Propriété-Privée</title>
   <style>
-    :root { --pp-orange: #f16529; --pp-dark: #222; --pp-bg: #f8f9fa; }
-    body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--pp-bg); margin: 0; padding: 15px; color: var(--pp-dark); }
-    .card { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-top: 8px solid var(--pp-orange); }
-    h2 { text-align: center; margin-top: 0; font-size: 22px; color: var(--pp-dark); text-transform: uppercase; letter-spacing: 1px; }
+    :root { --pp-orange: #f16529; --pp-dark: #333; }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 15px; }
+    .card { max-width: 550px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 6px solid var(--pp-orange); }
+    h2 { text-align: center; color: var(--pp-dark); margin-bottom: 20px; }
     
-    .section-label { font-size: 11px; font-weight: bold; color: var(--pp-orange); text-transform: uppercase; margin: 20px 0 10px; display: block; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    label { display: block; margin-top: 15px; font-weight: bold; font-size: 14px; }
+    input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
     
-    label { display: block; margin-top: 10px; font-size: 14px; font-weight: 600; }
-    input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; }
-    input:focus { border-color: var(--pp-orange); background: #fffcfb; }
-    
-    .row { display: flex; gap: 12px; }
+    .row { display: flex; gap: 10px; }
     .row div { flex: 1; }
     
-    .highlight-box { background: #fff8f5; border: 1px solid #ffe0d1; padding: 15px; border-radius: 10px; margin-top: 15px; }
+    .calc-box { background: #fff8f5; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0d1; }
     
-    button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: all 0.2s; }
-    button:hover { background: #d45620; transform: translateY(-1px); }
+    button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    button:hover { background: #d45620; }
     
-    #status { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; }
-    .success { color: #28a745; }
-    .error { color: #dc3545; }
-    
-    /* Pour éviter que les suggestions Google soient cachées sur mobile */
-    .pac-container { border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: none; z-index: 9999 !important; }
+    #status { text-align: center; margin-top: 15px; font-weight: bold; }
+    .pac-container { z-index: 10000 !important; } /* Pour que l'autocomplétion s'affiche bien */
   </style>
 </head>
 <body>
 
 <div class="card">
-  <h2>Prospection "BIENS"</h2>
+  <h2>Fiche "BIENS" Propriété-Privée</h2>
   
   <form id="ppForm">
-    <span class="section-label">Propriétaire / Contact</span>
-    <input type="text" name="nom" placeholder="Nom & Prénom du prospect" required>
-    <div class="row">
-      <input type="tel" name="telephone" placeholder="Téléphone" required>
-      <input type="email" name="email" placeholder="Email (facultatif)">
-    </div>
-
-    <span class="section-label">Localisation (Auto-complétion)</span>
-    <input type="text" id="adresse_autocomplete" name="adresse" placeholder="Commencez à taper l'adresse..." required>
-    <div class="row">
-      <input type="text" id="cp" name="cp" placeholder="Code Postal" required>
-      <input type="text" id="ville" name="ville" placeholder="Ville" required>
-    </div>
-
-    <span class="section-label">Détails Techniques</span>
-    <div class="row">
-      <select name="type_bien">
-        <option value="Maison">Maison</option>
-        <option value="Appartement">Appartement</option>
-        <option value="Terrain">Terrain</option>
-      </select>
-      <select name="projet">
-        <option value="Estimation">Estimation</option>
-        <option value="Vente">Mandat de vente</option>
-      </select>
-    </div>
+    <label>Nom du Prospect</label>
+    <input type="text" name="nom" required>
     
-    <div class="row" style="margin-top:10px;">
+    <div class="row">
       <div>
-        <label>Habitable (m²)</label>
+        <label>Téléphone</label>
+        <input type="tel" name="telephone" required>
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" name="email">
+      </div>
+    </div>
+
+    <label>Adresse du bien (Autocomplete)</label>
+    <input type="text" id="adresse_actuelle" name="adresse" placeholder="Saisissez l'adresse..." required>
+    
+    <div class="row">
+      <div>
+        <label>Code Postal</label>
+        <input type="text" id="cp_actuel" name="cp" required>
+      </div>
+      <div>
+        <label>Ville</label>
+        <input type="text" id="ville_actuelle" name="ville" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Type de bien</label>
+        <select name="type_bien">
+          <option value="Maison">Maison</option>
+          <option value="Appartement">Appartement</option>
+          <option value="Terrain">Terrain</option>
+        </select>
+      </div>
+      <div>
+        <label>Projet</label>
+        <select name="projet">
+          <option value="Estimation">Estimation</option>
+          <option value="Vente">Mandat de vente</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Surf. Habitable (m²)</label>
         <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
       </div>
       <div>
-        <label>Terrain (m²)</label>
+        <label>Surf. Terrain (m²)</label>
         <input type="number" name="surface_terrain" step="0.01">
       </div>
     </div>
 
-    <div class="highlight-box">
-      <span class="section-label" style="margin-top:0;">Finances</span>
-      <label>Prix de vente (€)</label>
-      <input type="number" id="prix" name="prix_vente" placeholder="Ex: 250000">
+    <div class="calc-box">
+      <label>Prix de vente souhaité (€)</label>
+      <input type="number" id="prix" name="prix_vente">
       
-      <label style="margin-top:10px;">Prix au m²</label>
-      <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Calcul auto..." style="background:#eee;">
+      <label style="margin-top:10px;">Prix au m² habitable</label>
+      <input type="text" id="prix_m2" name="prix_m2" readonly style="background:#eee; font-weight:bold; color:var(--pp-orange);">
     </div>
 
-    <label>Commentaires</label>
-    <textarea name="commentaires" placeholder="Urgence, travaux..."></textarea>
+    <label>Commentaires / Notes</label>
+    <textarea name="commentaires" rows="3"></textarea>
 
-    <button type="submit" id="submitBtn">ENREGISTRER DANS LE CRM</button>
+    <button type="submit" id="btnEnvoi">ENREGISTRER AU TABLEAU</button>
   </form>
   
   <div id="status"></div>
 </div>
 
 <script>
-  // 1. Initialisation de l'autocomplétion Google Maps
+  // FONCTION AUTOCOMPLETE (Copie conforme de ton code 1 qui marchait)
   function initAutocomplete() {
-    const input = document.getElementById('adresse_autocomplete');
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-      types: ['address'],
-      componentRestrictions: { country: 'fr' },
-      fields: ['address_components', 'formatted_address']
+    let adresseInput = document.getElementById("adresse_actuelle");
+    let autocomplete = new google.maps.places.Autocomplete(adresseInput, { 
+      types: ["address"], 
+      componentRestrictions: { country: "fr" } 
     });
-
-    autocomplete.addListener('place_changed', () => {
-      const place = autocomplete.getPlace();
-      let streetNumber = '', route = '', zip = '', city = '';
-
+    
+    autocomplete.addListener("place_changed", function () {
+      let place = autocomplete.getPlace();
       if (!place.address_components) return;
 
-      place.address_components.forEach(c => {
-        const type = c.types[0];
-        if (type === 'street_number') streetNumber = c.long_name;
-        if (type === 'route') route = c.long_name;
-        if (type === 'postal_code') zip = c.long_name;
-        if (type === 'locality') city = c.long_name;
+      let rue = "", numero = "", cp = "", ville = "";
+      place.address_components.forEach(component => {
+        if (component.types.includes("street_number")) numero = component.long_name;
+        else if (component.types.includes("route")) rue = component.long_name;
+        else if (component.types.includes("postal_code")) cp = component.long_name;
+        else if (component.types.includes("locality")) ville = component.long_name;
       });
 
-      // On remplit les champs
-      document.getElementById('adresse_autocomplete').value = (streetNumber ? streetNumber + " " : "") + route;
-      document.getElementById('cp').value = zip;
-      document.getElementById('ville').value = city;
+      document.getElementById("adresse_actuelle").value = (numero ? numero + " " : "") + rue;
+      document.getElementById("cp_actuel").value = cp;
+      document.getElementById("ville_actuelle").value = ville;
     });
   }
 
-  // 2. Logique de calcul automatique du prix au m2
+  // CALCUL PRIX AU M2
   const surfH = document.getElementById('surf_h');
   const prixV = document.getElementById('prix');
   const prixM2 = document.getElementById('prix_m2');
 
   function updateM2() {
-    const s = parseFloat(surfH.value);
-    const p = parseFloat(prixV.value);
+    let s = parseFloat(surfH.value);
+    let p = parseFloat(prixV.value);
     if (s > 0 && p > 0) {
-      prixM2.value = (p / s).toFixed(0) + " € / m²";
+      prixM2.value = Math.round(p / s) + " € / m²";
     } else {
       prixM2.value = "";
     }
@@ -142,24 +149,21 @@
   surfH.addEventListener('input', updateM2);
   prixV.addEventListener('input', updateM2);
 
-  // 3. Envoi vers ton Google Apps Script
+  // ENVOI VERS GOOGLE SHEETS
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
   const form = document.getElementById('ppForm');
-  const status = document.getElementById('status');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    status.innerHTML = "⏳ Envoi en cours...";
+    document.getElementById('status').innerHTML = "⏳ Envoi en cours...";
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(res => {
-        status.innerHTML = "✅ Bien ajouté dans l'onglet BIENS !";
-        status.className = "success";
+        document.getElementById('status').innerHTML = "✅ Enregistré avec succès !";
         form.reset();
         prixM2.value = "";
       })
       .catch(err => {
-        status.innerHTML = "❌ Erreur d'envoi.";
-        status.className = "error";
+        document.getElementById('status').innerHTML = "❌ Erreur d'envoi.";
       });
   });
 </script>
