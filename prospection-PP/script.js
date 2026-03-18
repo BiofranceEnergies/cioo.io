@@ -1,3 +1,4 @@
+// 1. TA CONFIGURATION
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
 
 const form = document.getElementById('ppForm');
@@ -9,7 +10,7 @@ const prixM2 = document.getElementById('prix_m2');
 const btn = document.getElementById('submitBtn');
 const status = document.getElementById('status');
 
-// --- 1. AUTOCOMPLÉTION ---
+// --- 2. AUTOCOMPLÉTION ---
 addrInput.addEventListener('input', function() {
     let val = this.value;
     if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
@@ -35,7 +36,7 @@ addrInput.addEventListener('input', function() {
         });
 });
 
-// --- 2. CALCUL PRIX M2 ---
+// --- 3. CALCUL PRIX M2 ---
 function updateM2() {
     let s = parseFloat(surfH.value), p = parseFloat(prixV.value);
     prixM2.value = (s > 0 && p > 0) ? Math.round(p / s) + " € / m²" : "";
@@ -43,60 +44,26 @@ function updateM2() {
 surfH.addEventListener('input', updateM2);
 prixV.addEventListener('input', updateM2);
 
-// --- 3. ENVOI ET COMPRESSION ---
+// --- 4. ENVOI SIMPLE (TEXTE UNIQUEMENT) ---
 form.addEventListener('submit', e => {
     e.preventDefault();
     btn.disabled = true;
-    btn.innerText = "Compression & Envoi...";
-    status.innerText = "Traitement de l'image...";
+    btn.innerText = "Envoi...";
 
-    const file = document.getElementById('photo_file').files[0];
-    const formData = new FormData(form);
-    let payload = Object.fromEntries(formData.entries());
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const img = new Image();
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                const MAX = 1000; // Taille optimale
-                let w = img.width, h = img.height;
-                if (w > h && w > MAX) { h *= MAX / w; w = MAX; }
-                else if (h > MAX) { w *= MAX / h; h = MAX; }
-                canvas.width = w; canvas.height = h;
-                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-
-                payload.fileData = canvas.toDataURL('image/jpeg', 0.6).split(',')[1];
-                payload.mimeType = 'image/jpeg';
-                payload.fileName = 'photo_' + Date.now() + '.jpg';
-                sendToServer(payload);
-            };
-            img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-    } else {
-        sendToServer(payload);
-    }
-});
-
-function sendToServer(data) {
-    status.innerText = "Envoi au tableur...";
-    fetch(scriptURL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(data)
+    fetch(scriptURL, { 
+        method: 'POST', 
+        mode: 'no-cors', 
+        body: new URLSearchParams(new FormData(form)) 
     })
     .then(() => {
-        status.innerText = "✅ Enregistré avec succès !";
-        status.style.color = "green";
+        status.innerText = "✅ Enregistré !";
         form.reset();
         prixM2.value = "";
         btn.disabled = false;
         btn.innerText = "ENREGISTRER AU TABLEAU";
     })
-    .catch(err => {
-        status.innerText = "❌ Erreur réseau.";
+    .catch(() => {
+        status.innerText = "❌ Erreur.";
         btn.disabled = false;
     });
-}
+});
