@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propriété-Privée - Saisie BIENS</title>
+  <style>
+    :root { --pp-orange: #f16529; --pp-dark: #222; --pp-bg: #f8f9fa; }
+    body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--pp-bg); margin: 0; padding: 15px; color: var(--pp-dark); }
+    .card { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-top: 8px solid var(--pp-orange); }
+    h2 { text-align: center; margin-top: 0; font-size: 22px; color: var(--pp-dark); text-transform: uppercase; letter-spacing: 1px; }
+    
+    .section-label { font-size: 11px; font-weight: bold; color: var(--pp-orange); text-transform: uppercase; margin: 20px 0 10px; display: block; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    
+    label { display: block; margin-top: 10px; font-size: 14px; font-weight: 600; }
+    input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; }
+    input:focus { border-color: var(--pp-orange); background: #fffcfb; }
+    
+    .row { display: flex; gap: 12px; }
+    .row div { flex: 1; }
+    
+    .highlight-box { background: #fff8f5; border: 1px solid #ffe0d1; padding: 15px; border-radius: 10px; margin-top: 15px; }
+    
+    button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: all 0.2s; }
+    button:hover { background: #d45620; transform: translateY(-1px); box-shadow: 0 5px 10px rgba(241, 101, 41, 0.2); }
+    button:active { transform: translateY(0); }
+    
+    #status { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; }
+    .success { color: #28a745; }
+    .error { color: #dc3545; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Prospection "BIENS"</h2>
+  
+  <form id="ppForm">
+    <span class="section-label">Propriétaire / Contact</span>
+    <input type="text" name="nom" placeholder="Nom & Prénom du prospect" required>
+    <div class="row">
+      <input type="tel" name="telephone" placeholder="Téléphone" required>
+      <input type="email" name="email" placeholder="Email (facultatif)">
+    </div>
+
+    <span class="section-label">Localisation du projet</span>
+    <input type="text" name="adresse" placeholder="Adresse complète du bien" required>
+    <div class="row">
+      <input type="text" name="cp" placeholder="Code Postal" required>
+      <input type="text" name="ville" placeholder="Ville" required>
+    </div>
+
+    <span class="section-label">Détails Techniques</span>
+    <div class="row">
+      <select name="type_bien">
+        <option value="Maison">Maison</option>
+        <option value="Appartement">Appartement</option>
+        <option value="Terrain">Terrain</option>
+        <option value="Local Pro">Local Pro</option>
+      </select>
+      <select name="projet">
+        <option value="Estimation">Estimation</option>
+        <option value="Vente">Mandat de vente</option>
+      </select>
+    </div>
+    
+    <div class="row" style="margin-top:10px;">
+      <div>
+        <label>Habitable (m²)</label>
+        <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
+      </div>
+      <div>
+        <label>Terrain (m²)</label>
+        <input type="number" name="surface_terrain" step="0.01" placeholder="Si maison">
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <span class="section-label" style="margin-top:0;">Finances</span>
+      <label>Prix de vente souhaité / estimé (€)</label>
+      <input type="number" id="prix" name="prix_vente" placeholder="Ex: 250000">
+      
+      <label style="margin-top:15px;">Prix au m² habitable</label>
+      <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Calcul automatique..." style="background:#eee; color:var(--pp-orange); font-weight:bold;">
+    </div>
+
+    <label style="margin-top:15px;">Commentaires / Notes de pige</label>
+    <textarea name="commentaires" placeholder="Urgence, travaux à prévoir, état général..."></textarea>
+
+    <button type="submit" id="submitBtn">ENREGISTRER DANS LE CRM</button>
+  </form>
+  
+  <div id="status"></div>
+</div>
+
+<script>
+  // Logique de calcul automatique du prix au m2
+  const surfH = document.getElementById('surf_h');
+  const prixV = document.getElementById('prix');
+  const prixM2 = document.getElementById('prix_m2');
+
+  function updateM2() {
+    const s = parseFloat(surfH.value);
+    const p = parseFloat(prixV.value);
+    if (s > 0 && p > 0) {
+      const calcul = (p / s).toFixed(0); // Arrondi à l'euro près
+      prixM2.value = calcul + " € / m²";
+    } else {
+      prixM2.value = "";
+    }
+  }
+
+  surfH.addEventListener('input', updateM2);
+  prixV.addEventListener('input', updateM2);
+
+  // Envoi vers ton Google Apps Script
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
+  const form = document.getElementById('ppForm');
+  const status = document.getElementById('status');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.innerHTML = "Enregistrement...";
+    status.innerHTML = "Connexion au tableau en cours...";
+    status.className = "";
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(res => {
+        status.innerHTML = "✅ Bien ajouté avec succès dans l'onglet BIENS !";
+        status.className = "success";
+        form.reset();
+        prixM2.value = "";
+        btn.disabled = false;
+        btn.innerHTML = "ENREGISTRER DANS LE CRM";
+      })
+      .catch(err => {
+        status.innerHTML = "❌ Erreur de connexion au serveur.";
+        status.className = "error";
+        btn.disabled = false;
+        btn.innerHTML = "RÉESSAYER L'ENVOI";
+      });
+  });
+</script>
+
+</body>
+</html>
