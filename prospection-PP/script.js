@@ -1,111 +1,92 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Immobilier - Propriété-Privée</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
 
-<div class="card">
-    <div class="header">
-        <h2>Fiche Prospection "BIENS"</h2>
-    </div>
+const form = document.getElementById('ppForm');
+const addrInput = document.getElementById('adresse_input');
+const suggestionsBox = document.getElementById('suggestions');
 
-    <form id="ppForm">
-        <section>
-            <span class="step-title">1. Contact Propriétaire</span>
-            <label>Nom & Prénom</label>
-            <input type="text" name="nom" placeholder="Ex: Jean Dupont" required>
-            
-            <div class="row">
-                <div>
-                    <label>Téléphone</label>
-                    <input type="tel" name="telephone" placeholder="06..." required>
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="client@mail.com">
-                </div>
-            </div>
-        </section>
+// --- 1. AUTOCOMPLETION (API GOUV) ---
+addrInput.addEventListener('input', function() {
+    let val = this.value;
+    if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
 
-        <section>
-            <span class="step-title">2. Adresse du Bien</span>
-            <div class="autocomplete-wrapper">
-                <label>Saisie assistée (API Gouv)</label>
-                <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Tapez l'adresse..." required>
-                <div id="suggestions" class="autocomplete-res"></div>
-            </div>
-            
-            <div class="row">
-                <div class="flex-2">
-                    <label>Ville</label>
-                    <input type="text" id="ville" name="ville" required>
-                </div>
-                <div class="flex-1">
-                    <label>CP</label>
-                    <input type="text" id="cp" name="cp" required>
-                </div>
-            </div>
-        </section>
+    fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(val)}&limit=5`)
+        .then(res => res.json())
+        .then(data => {
+            suggestionsBox.innerHTML = '';
+            if (data.features.length > 0) {
+                suggestionsBox.style.display = 'block';
+                data.features.forEach(f => {
+                    let div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.innerText = f.properties.label;
+                    div.onclick = () => {
+                        addrInput.value = f.properties.name;
+                        document.getElementById('cp').value = f.properties.postcode;
+                        document.getElementById('ville').value = f.properties.city;
+                        suggestionsBox.style.display = 'none';
+                    };
+                    suggestionsBox.appendChild(div);
+                });
+            }
+        });
+});
 
-        <section>
-            <span class="step-title">3. Caractéristiques & Prix</span>
-            <div class="row">
-                <div>
-                    <label>Type de bien</label>
-                    <select name="type_bien">
-                        <option value="Maison">Maison</option>
-                        <option value="Appartement">Appartement</option>
-                        <option value="Terrain">Terrain</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Projet</label>
-                    <select name="projet">
-                        <option value="Estimation">Estimation</option>
-                        <option value="Vente">Mandat de vente</option>
-                    </select>
-                </div>
-            </div>
+// --- 2. CALCUL PRIX M2 ---
+function updateM2() {
+    const s = parseFloat(document.getElementById('surf_h').value);
+    const p = parseFloat(document.getElementById('prix').value);
+    const res = document.getElementById('prix_m2');
+    if (s > 0 && p > 0) res.value = Math.round(p / s) + " €/m²";
+    else res.value = "";
+}
+document.getElementById('surf_h').addEventListener('input', updateM2);
+document.getElementById('prix').addEventListener('input', updateM2);
 
-            <div class="row">
-                <div>
-                    <label>Habitable (m²)</label>
-                    <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
-                </div>
-                <div>
-                    <label>Terrain (m²)</label>
-                    <input type="number" name="surface_terrain" step="0.01">
-                </div>
-            </div>
+// --- 3. ENVOI DES DONNEES ---
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.innerText = "Enregistrement...";
 
-            <div class="price-box">
-                <label>Prix de vente souhaité (€)</label>
-                <input type="number" id="prix" name="prix_vente">
-                
-                <label>Prix au m² (Calculé)</label>
-                <input type="text" id="prix_m2" name="prix_m2" readonly class="readonly-input">
-            </div>
-        </section>
+    const file = document.getElementById('photo_file').files[0];
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
 
-        <section>
-            <span class="step-title">4. Photos & Notes</span>
-            <label>Ajouter une photo</label>
-            <input type="file" id="photo_file" accept="image/*" capture="environment">
-            
-            <label>Notes (DPE, travaux, urgence...)</label>
-            <textarea name="commentaires" rows="3"></textarea>
-        </section>
+    // On prépare les données texte
+    for (const pair of formData.entries()) {
+        params.append(pair[0], pair[1]);
+    }
 
-        <button type="submit" id="submitBtn">ENREGISTRER AU TABLEAU</button>
-    </form>
-    
-    <div id="status"></div>
-</div>
+    if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            params.append('fileData', reader.result.split(',')[1]);
+            params.append('mimeType', file.type);
+            params.append('fileName', file.name);
+            sendFinal(params);
+        };
+    } else {
+        sendFinal(params);
+    }
+});
 
-<script src="script.js"></script>
-</body>
-</html>
+function sendFinal(params) {
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', 
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+    })
+    .then(() => {
+        document.getElementById('status').innerText = "✅ Bien enregistré dans 'BIENS' !";
+        form.reset();
+        document.getElementById('prix_m2').value = "";
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').innerText = "ENREGISTRER AU TABLEAU";
+    })
+    .catch(err => {
+        document.getElementById('status').innerText = "❌ Erreur de connexion.";
+        document.getElementById('submitBtn').disabled = false;
+    });
+}
