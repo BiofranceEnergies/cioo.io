@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Prospection - Propriété-Privée</title>
+    <title>CRM PROSPEC</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,17 +13,18 @@
 
     <form id="ppForm">
         <section>
-            <span class="step-title">1. Contact Propriétaire</span>
+            <span class="step-title">1. Contact (Optionnel)</span>
             <label>Nom & Prénom</label>
-            <input type="text" name="nom" placeholder="Ex: Jean Dupont" required>
+            <input type="text" name="nom" placeholder="Nom du propriétaire">
+            
             <div class="row">
                 <div>
                     <label>Téléphone</label>
-                    <input type="tel" name="telephone" placeholder="06..." required>
+                    <input type="tel" name="telephone" placeholder="06...">
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="email" name="email">
+                    <input type="email" name="email" placeholder="mail@Exemple.com">
                 </div>
             </div>
         </section>
@@ -38,11 +39,11 @@
             <div class="row">
                 <div style="flex: 2;">
                     <label>Ville</label>
-                    <input type="text" id="ville" name="ville" required>
+                    <input type="text" id="ville" name="ville">
                 </div>
                 <div style="flex: 1;">
                     <label>CP</label>
-                    <input type="text" id="cp" name="cp" required>
+                    <input type="text" id="cp" name="cp">
                 </div>
             </div>
         </section>
@@ -70,7 +71,7 @@
             <div class="row">
                 <div>
                     <label>Surface Habitable (m²)</label>
-                    <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
+                    <input type="number" id="surf_h" name="surface_habitable" step="0.01">
                 </div>
                 <div>
                     <label>Surface Terrain (m²)</label>
@@ -81,14 +82,13 @@
             <div class="price-box">
                 <label>Prix de vente souhaité (€)</label>
                 <input type="number" id="prix" name="prix_vente">
-                <label>Prix au m² habitable</label>
+                <label>Prix au m²</label>
                 <input type="text" id="prix_m2" name="prix_m2" readonly class="readonly-input">
             </div>
         </section>
 
         <section>
-            <span class="step-title">4. Photo & Notes</span>
-            <input type="file" id="photo_file" accept="image/*" capture="environment">
+            <span class="step-title">4. Notes</span>
             <textarea name="commentaires" rows="3" placeholder="Notes particulières..."></textarea>
         </section>
 
