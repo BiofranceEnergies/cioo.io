@@ -63,19 +63,50 @@ form.addEventListener('submit', e => {
         params.append(pair[0], pair[1]);
     }
 
+// --- 4. ENVOI DES DONNÉES ET PHOTO COMPRESSÉE ---
     if (file) {
         const reader = new FileReader();
-        reader.onload = () => {
-            params.append('fileData', reader.result.split(',')[1]);
-            params.append('mimeType', file.type);
-            params.append('fileName', file.name);
-            sendFinal(params);
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                // Création d'un canvas pour redimensionner l'image
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                const MAX_SIZE = 1200; // Largeur ou hauteur max de 1200px
+
+                if (width > height && width > MAX_SIZE) {
+                    height *= MAX_SIZE / width;
+                    width = MAX_SIZE;
+                } else if (height > MAX_SIZE) {
+                    width *= MAX_SIZE / height;
+                    height = MAX_SIZE;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // Compression en JPEG (qualité 0.7 = excellent rapport poids/visuel)
+                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                
+                params.append('fileData', compressedBase64.split(',')[1]);
+                params.append('mimeType', 'image/jpeg');
+                // On s'assure que le nom finit par .jpg
+                const cleanName = file.name.replace(/\.[^/.]+$/, "") + ".jpg";
+                params.append('fileName', cleanName);
+                
+                sendFinal(params);
+            };
+            img.src = e.target.result;
         };
         reader.readAsDataURL(file);
     } else {
+        // S'il n'y a pas de photo, on envoie les données texte seules
         sendFinal(params);
     }
-});
+}); // Fin de l'event listener submit
 
 function sendFinal(params) {
     fetch(scriptURL, {
