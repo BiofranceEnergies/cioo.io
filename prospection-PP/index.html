@@ -22,12 +22,14 @@
     .highlight-box { background: #fff8f5; border: 1px solid #ffe0d1; padding: 15px; border-radius: 10px; margin-top: 15px; }
     
     button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: all 0.2s; }
-    button:hover { background: #d45620; transform: translateY(-1px); box-shadow: 0 5px 10px rgba(241, 101, 41, 0.2); }
-    button:active { transform: translateY(0); }
+    button:hover { background: #d45620; transform: translateY(-1px); }
     
     #status { text-align: center; margin-top: 15px; font-weight: bold; font-size: 14px; }
     .success { color: #28a745; }
     .error { color: #dc3545; }
+    
+    /* Pour éviter que les suggestions Google soient cachées sur mobile */
+    .pac-container { border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: none; z-index: 9999 !important; }
   </style>
 </head>
 <body>
@@ -43,11 +45,11 @@
       <input type="email" name="email" placeholder="Email (facultatif)">
     </div>
 
-    <span class="section-label">Localisation du projet</span>
-    <input type="text" name="adresse" placeholder="Adresse complète du bien" required>
+    <span class="section-label">Localisation (Auto-complétion)</span>
+    <input type="text" id="adresse_autocomplete" name="adresse" placeholder="Commencez à taper l'adresse..." required>
     <div class="row">
-      <input type="text" name="cp" placeholder="Code Postal" required>
-      <input type="text" name="ville" placeholder="Ville" required>
+      <input type="text" id="cp" name="cp" placeholder="Code Postal" required>
+      <input type="text" id="ville" name="ville" placeholder="Ville" required>
     </div>
 
     <span class="section-label">Détails Techniques</span>
@@ -56,7 +58,6 @@
         <option value="Maison">Maison</option>
         <option value="Appartement">Appartement</option>
         <option value="Terrain">Terrain</option>
-        <option value="Local Pro">Local Pro</option>
       </select>
       <select name="projet">
         <option value="Estimation">Estimation</option>
@@ -71,21 +72,21 @@
       </div>
       <div>
         <label>Terrain (m²)</label>
-        <input type="number" name="surface_terrain" step="0.01" placeholder="Si maison">
+        <input type="number" name="surface_terrain" step="0.01">
       </div>
     </div>
 
     <div class="highlight-box">
       <span class="section-label" style="margin-top:0;">Finances</span>
-      <label>Prix de vente souhaité / estimé (€)</label>
+      <label>Prix de vente (€)</label>
       <input type="number" id="prix" name="prix_vente" placeholder="Ex: 250000">
       
-      <label style="margin-top:15px;">Prix au m² habitable</label>
-      <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Calcul automatique..." style="background:#eee; color:var(--pp-orange); font-weight:bold;">
+      <label style="margin-top:10px;">Prix au m²</label>
+      <input type="text" id="prix_m2" name="prix_m2" readonly placeholder="Calcul auto..." style="background:#eee;">
     </div>
 
-    <label style="margin-top:15px;">Commentaires / Notes de pige</label>
-    <textarea name="commentaires" placeholder="Urgence, travaux à prévoir, état général..."></textarea>
+    <label>Commentaires</label>
+    <textarea name="commentaires" placeholder="Urgence, travaux..."></textarea>
 
     <button type="submit" id="submitBtn">ENREGISTRER DANS LE CRM</button>
   </form>
@@ -94,7 +95,37 @@
 </div>
 
 <script>
-  // Logique de calcul automatique du prix au m2
+  // 1. Initialisation de l'autocomplétion Google Maps
+  function initAutocomplete() {
+    const input = document.getElementById('adresse_autocomplete');
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      types: ['address'],
+      componentRestrictions: { country: 'fr' },
+      fields: ['address_components', 'formatted_address']
+    });
+
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      let streetNumber = '', route = '', zip = '', city = '';
+
+      if (!place.address_components) return;
+
+      place.address_components.forEach(c => {
+        const type = c.types[0];
+        if (type === 'street_number') streetNumber = c.long_name;
+        if (type === 'route') route = c.long_name;
+        if (type === 'postal_code') zip = c.long_name;
+        if (type === 'locality') city = c.long_name;
+      });
+
+      // On remplit les champs
+      document.getElementById('adresse_autocomplete').value = (streetNumber ? streetNumber + " " : "") + route;
+      document.getElementById('cp').value = zip;
+      document.getElementById('ville').value = city;
+    });
+  }
+
+  // 2. Logique de calcul automatique du prix au m2
   const surfH = document.getElementById('surf_h');
   const prixV = document.getElementById('prix');
   const prixM2 = document.getElementById('prix_m2');
@@ -103,46 +134,37 @@
     const s = parseFloat(surfH.value);
     const p = parseFloat(prixV.value);
     if (s > 0 && p > 0) {
-      const calcul = (p / s).toFixed(0); // Arrondi à l'euro près
-      prixM2.value = calcul + " € / m²";
+      prixM2.value = (p / s).toFixed(0) + " € / m²";
     } else {
       prixM2.value = "";
     }
   }
-
   surfH.addEventListener('input', updateM2);
   prixV.addEventListener('input', updateM2);
 
-  // Envoi vers ton Google Apps Script
+  // 3. Envoi vers ton Google Apps Script
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
   const form = document.getElementById('ppForm');
   const status = document.getElementById('status');
-  const btn = document.getElementById('submitBtn');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    btn.disabled = true;
-    btn.innerHTML = "Enregistrement...";
-    status.innerHTML = "Connexion au tableau en cours...";
-    status.className = "";
-
+    status.innerHTML = "⏳ Envoi en cours...";
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
       .then(res => {
-        status.innerHTML = "✅ Bien ajouté avec succès dans l'onglet BIENS !";
+        status.innerHTML = "✅ Bien ajouté dans l'onglet BIENS !";
         status.className = "success";
         form.reset();
         prixM2.value = "";
-        btn.disabled = false;
-        btn.innerHTML = "ENREGISTRER DANS LE CRM";
       })
       .catch(err => {
-        status.innerHTML = "❌ Erreur de connexion au serveur.";
+        status.innerHTML = "❌ Erreur d'envoi.";
         status.className = "error";
-        btn.disabled = false;
-        btn.innerHTML = "RÉESSAYER L'ENVOI";
       });
   });
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPz59eSA-UkT2AzlQzXslwzt8V5uftFzM&libraries=places&callback=initAutocomplete" async defer></script>
 
 </body>
 </html>
