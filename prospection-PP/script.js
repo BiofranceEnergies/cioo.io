@@ -1,5 +1,5 @@
 // 1. TA CONFIGURATION
-const scriptURL = 'TON_URL_SCRIPT_ICI'; // Remplace par ta nouvelle URL de déploiement
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
 
 const form = document.getElementById('ppForm');
 const addrInput = document.getElementById('adresse_input');
