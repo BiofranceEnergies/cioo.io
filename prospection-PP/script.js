@@ -1,7 +1,6 @@
-// 1. CONFIGURATION : Ton URL de script Google
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
+// 1. TA CONFIGURATION
+const scriptURL = 'TON_URL_SCRIPT_ICI'; // Remplace par ta nouvelle URL de déploiement
 
-// Sélections des éléments
 const form = document.getElementById('ppForm');
 const addrInput = document.getElementById('adresse_input');
 const suggestionsBox = document.getElementById('suggestions');
@@ -11,7 +10,7 @@ const prixM2 = document.getElementById('prix_m2');
 const btn = document.getElementById('submitBtn');
 const status = document.getElementById('status');
 
-// --- 2. LOGIQUE : AUTOCOMPLÉTION (API GOUV) ---
+// --- 2. AUTOCOMPLÉTION (API GOUV) ---
 addrInput.addEventListener('input', function() {
     let val = this.value;
     if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
@@ -27,7 +26,7 @@ addrInput.addEventListener('input', function() {
                     div.className = 'suggestion-item';
                     div.innerText = feature.properties.label;
                     div.onclick = function() {
-                        addrInput.value = feature.properties.name; // La rue
+                        addrInput.value = feature.properties.name;
                         document.getElementById('cp').value = feature.properties.postcode;
                         document.getElementById('ville').value = feature.properties.city;
                         suggestionsBox.style.display = 'none';
@@ -38,54 +37,42 @@ addrInput.addEventListener('input', function() {
         });
 });
 
-// Fermer les suggestions si on clique ailleurs sur l'écran
-document.addEventListener('click', (e) => {
-    if (e.target !== addrInput) suggestionsBox.style.display = 'none';
-});
+document.addEventListener('click', (e) => { if (e.target !== addrInput) suggestionsBox.style.display = 'none'; });
 
-// --- 3. LOGIQUE : CALCUL DU PRIX AU M² ---
+// --- 3. CALCUL PRIX M² ---
 function updateM2() {
     let s = parseFloat(surfH.value);
     let p = parseFloat(prixV.value);
-    if (s > 0 && p > 0) {
-        prixM2.value = Math.round(p / s) + " € / m²";
-    } else {
-        prixM2.value = "";
-    }
+    prixM2.value = (s > 0 && p > 0) ? Math.round(p / s) + " € / m²" : "";
 }
 surfH.addEventListener('input', updateM2);
 prixV.addEventListener('input', updateM2);
 
-// --- 4. LOGIQUE : ENVOI DES DONNÉES ET PHOTO ---
+// --- 4. ENVOI DES DONNÉES ---
 form.addEventListener('submit', e => {
     e.preventDefault();
-    
     btn.disabled = true;
     btn.innerText = "Envoi en cours...";
-    status.innerText = "Connexion au tableau BIENS...";
-
+    
     const fileInput = document.getElementById('photo_file');
     const file = fileInput.files[0];
     const formData = new FormData(form);
-    
-    // On prépare les paramètres pour Google Apps Script
     const params = new URLSearchParams();
+
     for (const pair of formData.entries()) {
         params.append(pair[0], pair[1]);
     }
 
     if (file) {
-        // S'il y a une photo, on la convertit avant d'envoyer
         const reader = new FileReader();
-        reader.readAsDataURL(file);
         reader.onload = () => {
             params.append('fileData', reader.result.split(',')[1]);
             params.append('mimeType', file.type);
             params.append('fileName', file.name);
             sendFinal(params);
         };
+        reader.readAsDataURL(file);
     } else {
-        // Sinon, on envoie les données texte seules
         sendFinal(params);
     }
 });
@@ -93,12 +80,13 @@ form.addEventListener('submit', e => {
 function sendFinal(params) {
     fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors', // CRITIQUE pour éviter les erreurs de sécurité Google
+        mode: 'no-cors', // On garde ton choix
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString()
     })
     .then(() => {
-        status.innerText = "✅ Enregistré avec succès !";
+        // Note : avec no-cors, on passe ici même si Google a une erreur interne
+        status.innerText = "✅ Commande envoyée au serveur !";
         status.style.color = "green";
         form.reset();
         prixM2.value = "";
@@ -106,10 +94,7 @@ function sendFinal(params) {
         btn.innerText = "ENREGISTRER AU TABLEAU";
     })
     .catch(err => {
-        console.error(err);
-        status.innerText = "❌ Erreur de connexion.";
-        status.style.color = "red";
+        status.innerText = "❌ Erreur réseau.";
         btn.disabled = false;
-        btn.innerText = "RÉESSAYER";
     });
 }
