@@ -5,63 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prospection BIENS - Propriété-Privée</title>
   <style>
-    :root { --pp-orange: #f16529; --pp-dark: #333; }
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 15px; }
-    .card { max-width: 550px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 6px solid var(--pp-orange); }
-    h2 { text-align: center; color: var(--pp-dark); margin-bottom: 20px; }
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #f16529; }
     
-    label { display: block; margin-top: 15px; font-weight: bold; font-size: 14px; }
-    input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 16px; }
+    label { display: block; margin: 15px 0 5px; font-weight: bold; }
+    input, select, textarea { padding: 10px; width: 100%; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
     
     .row { display: flex; gap: 10px; }
     .row div { flex: 1; }
     
-    .calc-box { background: #fff8f5; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px solid #ffe0d1; }
-    
-    button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 5px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    button { padding: 15px; margin-top: 20px; width: 100%; background: #f16529; color: white; border: none; cursor: pointer; font-size: 18px; font-weight: bold; border-radius: 4px; }
     button:hover { background: #d45620; }
-    
-    #status { text-align: center; margin-top: 15px; font-weight: bold; }
-    .pac-container { z-index: 10000 !important; } /* Pour que l'autocomplétion s'affiche bien */
+
+    /* Sécurité pour l'affichage de l'autocomplétion Google */
+    .pac-container { z-index: 10000 !important; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+    #resultat { text-align: center; margin-top: 15px; font-weight: bold; }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h2>Fiche "BIENS" Propriété-Privée</h2>
+<div class="container">
+  <h1>Saisie Prospection PP</h1>
   
   <form id="ppForm">
-    <label>Nom du Prospect</label>
-    <input type="text" name="nom" required>
-    
+    <label for="nom">Nom du Prospect :</label>
+    <input type="text" id="nom" name="nom" required>
+
     <div class="row">
       <div>
-        <label>Téléphone</label>
-        <input type="tel" name="telephone" required>
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" name="telephone" required>
       </div>
       <div>
-        <label>Email</label>
-        <input type="email" name="email">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email">
       </div>
     </div>
 
-    <label>Adresse du bien (Autocomplete)</label>
-    <input type="text" id="adresse_actuelle" name="adresse" placeholder="Saisissez l'adresse..." required>
-    
+    <label for="adresse_actuelle">Adresse du bien (Autocomplete) :</label>
+    <input type="text" id="adresse_actuelle" name="adresse" required placeholder="Saisissez l'adresse ici...">
+
     <div class="row">
       <div>
-        <label>Code Postal</label>
+        <label for="cp_actuel">CP :</label>
         <input type="text" id="cp_actuel" name="cp" required>
       </div>
       <div>
-        <label>Ville</label>
+        <label for="ville_actuelle">Ville :</label>
         <input type="text" id="ville_actuelle" name="ville" required>
       </div>
     </div>
 
     <div class="row">
       <div>
-        <label>Type de bien</label>
+        <label>Type de bien :</label>
         <select name="type_bien">
           <option value="Maison">Maison</option>
           <option value="Appartement">Appartement</option>
@@ -69,44 +67,44 @@
         </select>
       </div>
       <div>
-        <label>Projet</label>
+        <label>Projet :</label>
         <select name="projet">
           <option value="Estimation">Estimation</option>
-          <option value="Vente">Mandat de vente</option>
+          <option value="Vente">Vente</option>
         </select>
       </div>
     </div>
 
     <div class="row">
       <div>
-        <label>Surf. Habitable (m²)</label>
+        <label>Surface Hab. (m²) :</label>
         <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
       </div>
       <div>
-        <label>Surf. Terrain (m²)</label>
+        <label>Terrain (m²) :</label>
         <input type="number" name="surface_terrain" step="0.01">
       </div>
     </div>
 
-    <div class="calc-box">
-      <label>Prix de vente souhaité (€)</label>
+    <div style="background: #fff8f5; padding: 10px; border-radius: 5px; margin-top: 10px;">
+      <label>Prix de vente souhaité (€) :</label>
       <input type="number" id="prix" name="prix_vente">
       
-      <label style="margin-top:10px;">Prix au m² habitable</label>
-      <input type="text" id="prix_m2" name="prix_m2" readonly style="background:#eee; font-weight:bold; color:var(--pp-orange);">
+      <label>Prix au m² :</label>
+      <input type="text" id="prix_m2" name="prix_m2" readonly style="background:#eee; font-weight:bold;">
     </div>
 
-    <label>Commentaires / Notes</label>
+    <label>Commentaires :</label>
     <textarea name="commentaires" rows="3"></textarea>
 
-    <button type="submit" id="btnEnvoi">ENREGISTRER AU TABLEAU</button>
+    <button type="submit">ENREGISTRER AU TABLEAU</button>
   </form>
-  
-  <div id="status"></div>
+
+  <div id="resultat"></div>
 </div>
 
 <script>
-  // FONCTION AUTOCOMPLETE (Copie conforme de ton code 1 qui marchait)
+  // 1. FONCTION AUTOCOMPLETE : Reprise mot pour mot de ton code initial
   function initAutocomplete() {
     let adresseInput = document.getElementById("adresse_actuelle");
     let autocomplete = new google.maps.places.Autocomplete(adresseInput, { 
@@ -132,7 +130,7 @@
     });
   }
 
-  // CALCUL PRIX AU M2
+  // 2. CALCUL PRIX AU M2
   const surfH = document.getElementById('surf_h');
   const prixV = document.getElementById('prix');
   const prixM2 = document.getElementById('prix_m2');
@@ -141,7 +139,7 @@
     let s = parseFloat(surfH.value);
     let p = parseFloat(prixV.value);
     if (s > 0 && p > 0) {
-      prixM2.value = Math.round(p / s) + " € / m²";
+      prixM2.value = Math.round(p / s) + " €/m²";
     } else {
       prixM2.value = "";
     }
@@ -149,22 +147,25 @@
   surfH.addEventListener('input', updateM2);
   prixV.addEventListener('input', updateM2);
 
-  // ENVOI VERS GOOGLE SHEETS
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
-  const form = document.getElementById('ppForm');
-
-  form.addEventListener('submit', e => {
+  // 3. ENVOI VERS GOOGLE SHEETS
+  document.getElementById("ppForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    document.getElementById('status').innerHTML = "⏳ Envoi en cours...";
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(res => {
-        document.getElementById('status').innerHTML = "✅ Enregistré avec succès !";
-        form.reset();
-        prixM2.value = "";
-      })
-      .catch(err => {
-        document.getElementById('status').innerHTML = "❌ Erreur d'envoi.";
-      });
+    document.getElementById("resultat").innerHTML = "Envoi en cours...";
+    let formData = new FormData(this);
+
+    fetch("https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec", {
+      method: "POST",
+      mode: "no-cors", 
+      body: formData
+    })
+    .then(() => {
+      document.getElementById("resultat").innerHTML = "✅ Données envoyées avec succès !";
+      document.getElementById("ppForm").reset();
+      prixM2.value = "";
+    })
+    .catch(error => {
+      document.getElementById("resultat").innerHTML = "❌ Erreur : " + error;
+    });
   });
 </script>
 
