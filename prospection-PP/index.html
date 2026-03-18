@@ -1,141 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Saisie BIENS - Propriété-Privée</title>
-  <style>
-    :root { --pp-orange: #f16529; --pp-dark: #333; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; margin: 0; padding: 15px; }
-    .card { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 12px; border-top: 8px solid var(--pp-orange); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: var(--pp-dark); margin-top: 0; }
-    label { display: block; margin-top: 15px; font-weight: bold; font-size: 13px; }
-    input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-    .row { display: flex; gap: 10px; }
-    .row div { flex: 1; }
-    .autocomplete-res { border: 1px solid #ddd; background: white; position: absolute; width: 92%; max-height: 150px; overflow-y: auto; z-index: 1000; display: none; }
-    .suggestion-item { padding: 10px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 14px; }
-    .suggestion-item:hover { background-color: #f8f8f8; }
-    button { background: var(--pp-orange); color: white; border: none; padding: 16px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-    #status { text-align: center; margin-top: 15px; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Pro - Propriété-Privée</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="card">
-  <h2>Nouveau Bien PP</h2>
-  <form id="ppForm">
-    <label>Nom Prospect</label>
-    <input type="text" name="nom" required>
+    <div class="header">
+        <h2>Fiche Prospection "BIENS"</h2>
+    </div>
+
+    <form id="ppForm">
+        <section>
+            <span class="step-title">1. Contact Propriétaire</span>
+            <label>Nom & Prénom</label>
+            <input type="text" name="nom" placeholder="Ex: Jean Dupont" required>
+            
+            <div class="row">
+                <div>
+                    <label>Téléphone</label>
+                    <input type="tel" name="telephone" placeholder="06..." required>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="client@mail.com">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <span class="step-title">2. Localisation du Bien</span>
+            <div class="autocomplete-wrapper">
+                <label>Adresse (Saisie assistée)</label>
+                <input type="text" id="adresse_input" name="adresse" autocomplete="off" placeholder="Tapez l'adresse du bien..." required>
+                <div id="suggestions" class="autocomplete-res"></div>
+            </div>
+            
+            <div class="row">
+                <div class="flex-2">
+                    <label>Ville</label>
+                    <input type="text" id="ville" name="ville" required>
+                </div>
+                <div class="flex-1">
+                    <label>CP</label>
+                    <input type="text" id="cp" name="cp" required>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <span class="step-title">3. Caractéristiques & Prix</span>
+            <div class="row">
+                <div>
+                    <label>Type de bien</label>
+                    <select name="type_bien">
+                        <option value="Maison">Maison</option>
+                        <option value="Appartement">Appartement</option>
+                        <option value="Terrain">Terrain</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Projet</label>
+                    <select name="projet">
+                        <option value="Estimation">Estimation</option>
+                        <option value="Vente">Mandat de vente</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Habitable (m²)</label>
+                    <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
+                </div>
+                <div>
+                    <label>Terrain (m²)</label>
+                    <input type="number" name="surface_terrain" step="0.01">
+                </div>
+            </div>
+
+            <div class="price-box">
+                <label>Prix de vente souhaité (€)</label>
+                <input type="number" id="prix" name="prix_vente" placeholder="Montant net vendeur">
+                
+                <label>Prix au m² habitable</label>
+                <input type="text" id="prix_m2" name="prix_m2" readonly class="readonly-input">
+            </div>
+        </section>
+
+        <section>
+            <span class="step-title">4. Médias & Notes</span>
+            <label>Prendre une photo</label>
+            <input type="file" id="photo_file" accept="image/*" capture="environment" class="file-input">
+            
+            <label>Notes de pige</label>
+            <textarea name="commentaires" rows="3" placeholder="Points forts, points faibles, travaux..."></textarea>
+        </section>
+
+        <button type="submit" id="submitBtn">ENREGISTRER AU TABLEAU</button>
+    </form>
     
-    <div class="row">
-      <div><label>Téléphone</label><input type="tel" name="telephone" required></div>
-      <div><label>Email</label><input type="email" name="email"></div>
-    </div>
-
-    <div style="position: relative;">
-      <label>Adresse du bien (Auto-complétion)</label>
-      <input type="text" id="adresse_input" name="adresse" autocomplete="off" required>
-      <div id="suggestions" class="autocomplete-res"></div>
-    </div>
-    
-    <div class="row">
-      <div><label>CP</label><input type="text" id="cp" name="cp" required></div>
-      <div><label>Ville</label><input type="text" id="ville" name="ville" required></div>
-    </div>
-
-    <div class="row">
-      <div>
-        <label>Surf. Habitable (m²)</label>
-        <input type="number" id="surf_h" name="surface_habitable" step="0.01" required>
-      </div>
-      <div>
-        <label>Prix de vente (€)</label>
-        <input type="number" id="prix" name="prix_vente">
-      </div>
-    </div>
-
-    <label>Prix au m² (calculé)</label>
-    <input type="text" id="prix_m2" name="prix_m2" readonly style="background:#f9f9f9; color:var(--pp-orange); font-weight:bold;">
-
-    <label>Photo du bien</label>
-    <input type="file" id="photo_file" accept="image/*" capture="environment">
-
-    <label>Notes</label>
-    <textarea name="commentaires" rows="2"></textarea>
-
-    <button type="submit" id="submitBtn">ENREGISTRER AU CRM</button>
-  </form>
-  <div id="status"></div>
+    <div id="status"></div>
 </div>
 
-<script>
-  // 1. GESTION ADRESSE (API GOUV)
-  const addrInput = document.getElementById('adresse_input');
-  const suggestionsBox = document.getElementById('suggestions');
-  addrInput.addEventListener('input', function() {
-    if (this.value.length < 5) { suggestionsBox.style.display = 'none'; return; }
-    fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(this.value)}&limit=4`)
-      .then(res => res.json()).then(data => {
-        suggestionsBox.innerHTML = ''; suggestionsBox.style.display = 'block';
-        data.features.forEach(f => {
-          let d = document.createElement('div'); d.className = 'suggestion-item'; d.innerText = f.properties.label;
-          d.onclick = () => {
-            addrInput.value = f.properties.name;
-            document.getElementById('cp').value = f.properties.postcode;
-            document.getElementById('ville').value = f.properties.city;
-            suggestionsBox.style.display = 'none';
-          };
-          suggestionsBox.appendChild(d);
-        });
-      });
-  });
-
-  // 2. CALCUL PRIX M2
-  const surfH = document.getElementById('surf_h');
-  const prixV = document.getElementById('prix');
-  const prixM2 = document.getElementById('prix_m2');
-  function calc() {
-    if (surfH.value > 0 && prixV.value > 0) prixM2.value = Math.round(prixV.value / surfH.value) + " €/m²";
-    else prixM2.value = "";
-  }
-  surfH.addEventListener('input', calc); prixV.addEventListener('input', calc);
-
-  // 3. ENVOI DES DONNÉES
-  const scriptURL = 'TON_URL_SCRIPT_ICI'; // <-- COLLER TON LIEN ICI
-  const form = document.getElementById('ppForm');
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true; btn.innerText = "Envoi en cours...";
-    
-    const file = document.getElementById('photo_file').files[0];
-    const formData = new FormData(form);
-
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        formData.append('fileData', reader.result.split(',')[1]);
-        formData.append('mimeType', file.type);
-        formData.append('fileName', file.name);
-        send(formData);
-      };
-    } else {
-      send(formData);
-    }
-  });
-
-  function send(formData) {
-    fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' })
-      .then(() => {
-        document.getElementById('status').innerText = "✅ Bien enregistré !";
-        form.reset(); prixM2.value = "";
-        document.getElementById('submitBtn').disabled = false;
-        document.getElementById('submitBtn').innerText = "ENREGISTRER AU CRM";
-      });
-  }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
