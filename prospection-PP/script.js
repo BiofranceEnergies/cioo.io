@@ -109,15 +109,16 @@ form.addEventListener('submit', e => {
 }); // Fin de l'event listener submit
 
 function sendFinal(params) {
+    // On transforme les paramètres en un objet simple
+    const data = Object.fromEntries(params.entries());
+
     fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors', // On garde ton choix
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
+        mode: 'no-cors', // On garde no-cors
+        body: JSON.stringify(data) // On envoie du JSON, c'est bien plus fiable pour les images
     })
     .then(() => {
-        // Note : avec no-cors, on passe ici même si Google a une erreur interne
-        status.innerText = "✅ Commande envoyée au serveur !";
+        status.innerText = "✅ Enregistré avec succès (photo incluse) !";
         status.style.color = "green";
         form.reset();
         prixM2.value = "";
@@ -125,7 +126,8 @@ function sendFinal(params) {
         btn.innerText = "ENREGISTRER AU TABLEAU";
     })
     .catch(err => {
-        status.innerText = "❌ Erreur réseau.";
+        console.error(err);
+        status.innerText = "❌ Erreur de connexion.";
         btn.disabled = false;
     });
 }
