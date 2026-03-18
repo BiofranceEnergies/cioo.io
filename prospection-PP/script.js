@@ -1,7 +1,5 @@
-// 1. TA CONFIGURATION
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzuWqH_Yco59DG8orfiQIJg0vfxzqY2zRXoejgZH8mpYQfaBPxEWkQx1_DRoJHFVzkh/exec';
 
-// Sélection des éléments
 const form = document.getElementById('ppForm');
 const addrInput = document.getElementById('adresse_input');
 const suggestionsBox = document.getElementById('suggestions');
@@ -11,11 +9,10 @@ const prixM2 = document.getElementById('prix_m2');
 const btn = document.getElementById('submitBtn');
 const status = document.getElementById('status');
 
-// --- 2. LOGIQUE : AUTOCOMPLÉTION (API GOUV) ---
+// --- 1. AUTOCOMPLÉTION ---
 addrInput.addEventListener('input', function() {
     let val = this.value;
     if (val.length < 5) { suggestionsBox.style.display = 'none'; return; }
-
     fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(val)}&limit=5`)
         .then(res => res.json())
         .then(data => {
@@ -27,7 +24,7 @@ addrInput.addEventListener('input', function() {
                     div.className = 'suggestion-item';
                     div.innerText = feature.properties.label;
                     div.onclick = function() {
-                        addrInput.value = feature.properties.name; // La rue
+                        addrInput.value = feature.properties.name;
                         document.getElementById('cp').value = feature.properties.postcode;
                         document.getElementById('ville').value = feature.properties.city;
                         suggestionsBox.style.display = 'none';
@@ -38,36 +35,23 @@ addrInput.addEventListener('input', function() {
         });
 });
 
-document.addEventListener('click', (e) => {
-    if (e.target !== addrInput) suggestionsBox.style.display = 'none';
-});
-
-// --- 3. LOGIQUE : CALCUL DU PRIX AU M² ---
+// --- 2. CALCUL PRIX M2 ---
 function updateM2() {
-    let s = parseFloat(surfH.value);
-    let p = parseFloat(prixV.value);
-    if (s > 0 && p > 0) {
-        prixM2.value = Math.round(p / s) + " € / m²";
-    } else {
-        prixM2.value = "";
-    }
+    let s = parseFloat(surfH.value), p = parseFloat(prixV.value);
+    prixM2.value = (s > 0 && p > 0) ? Math.round(p / s) + " € / m²" : "";
 }
 surfH.addEventListener('input', updateM2);
 prixV.addEventListener('input', updateM2);
 
-// --- 4. LOGIQUE : ENVOI ET COMPRESSION ---
+// --- 3. ENVOI ET COMPRESSION ---
 form.addEventListener('submit', e => {
     e.preventDefault();
-    
     btn.disabled = true;
-    btn.innerText = "Traitement & Envoi...";
-    status.innerText = "Préparation des données...";
+    btn.innerText = "Compression & Envoi...";
+    status.innerText = "Traitement de l'image...";
 
-    const fileInput = document.getElementById('photo_file');
-    const file = fileInput.files[0];
+    const file = document.getElementById('photo_file').files[0];
     const formData = new FormData(form);
-    
-    // On prépare l'objet final (JSON)
     let payload = Object.fromEntries(formData.entries());
 
     if (file) {
@@ -75,41 +59,32 @@ form.addEventListener('submit', e => {
         reader.onload = (event) => {
             const img = new Image();
             img.onload = () => {
-                // Compression de l'image
                 const canvas = document.createElement('canvas');
-                let width = img.width;
-                let height = img.height;
-                const MAX = 1200; // Qualité HD mais légère
+                const MAX = 1000; // Taille optimale
+                let w = img.width, h = img.height;
+                if (w > h && w > MAX) { h *= MAX / w; w = MAX; }
+                else if (h > MAX) { w *= MAX / h; h = MAX; }
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
 
-                if (width > height && width > MAX) { height *= MAX / width; width = MAX; }
-                else if (height > MAX) { width *= MAX / height; height = MAX; }
-
-                canvas.width = width;
-                canvas.height = height;
-                canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-
-                // Conversion en Base64 léger
-                payload.fileData = canvas.toDataURL('image/jpeg', 0.7).split(',')[1];
+                payload.fileData = canvas.toDataURL('image/jpeg', 0.6).split(',')[1];
                 payload.mimeType = 'image/jpeg';
                 payload.fileName = 'photo_' + Date.now() + '.jpg';
-
-                sendFinal(payload);
+                sendToServer(payload);
             };
             img.src = event.target.result;
         };
         reader.readAsDataURL(file);
     } else {
-        sendFinal(payload);
+        sendToServer(payload);
     }
 });
 
-function sendFinal(data) {
-    status.innerText = "Connexion au tableur...";
-    
+function sendToServer(data) {
+    status.innerText = "Envoi au tableur...";
     fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
     })
     .then(() => {
@@ -121,9 +96,7 @@ function sendFinal(data) {
         btn.innerText = "ENREGISTRER AU TABLEAU";
     })
     .catch(err => {
-        console.error(err);
-        status.innerText = "❌ Erreur d'envoi.";
+        status.innerText = "❌ Erreur réseau.";
         btn.disabled = false;
-        btn.innerText = "RÉESSAYER";
     });
 }
