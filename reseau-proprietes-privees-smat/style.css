@@ -40,7 +40,12 @@ body {
     text-transform: uppercase;
     cursor: default;
 }
-
+/* TU AJOUTES ÇA JUSTE ICI : */
+.logo img {
+    height: 55px !important;
+    width: auto;
+    display: block;
+}
 .dot {
     color: var(--primary);
 }
