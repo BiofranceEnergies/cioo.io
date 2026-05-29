@@ -104,18 +104,9 @@ body {
 
 .brand-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.03); /* Un fond ultra-léger pour détacher subtilement */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 16px;
-    border-radius: 8px;
     margin-bottom: 25px;
-    max-width: 320px; /* Aligne le badge sur une largeur élégante */
-    transition: all 0.3s ease;
-}
-
-.brand-badge:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(237, 22, 81, 0.3); /* Lueur rouge au survol */
+    max-width: 380px; /* Largeur idéale pour que ton logo officiel double respire */
+    width: 100%;
 }
 
 .brand-badge img {
