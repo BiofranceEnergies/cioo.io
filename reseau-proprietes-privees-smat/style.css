@@ -1,7 +1,7 @@
 /* --- 1. VARIABLES --- */
 :root {
-    --primary: #FF6B00;      /* Ton Orange Action */
-    --primary-hover: #e65c00;
+    --primary: #ed1651;       /* Ton Rouge Propriétés Privées exact */
+    --primary-hover: #d01146;
     --dark-bg: #0a1128;      /* Bleu Nuit Profond */
     --tech-blue: #1c3b70;    /* Bleu plus clair pour le dégradé */
     --text-white: #ffffff;
