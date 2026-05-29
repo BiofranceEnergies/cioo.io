@@ -70,7 +70,7 @@ body {
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
-    padding: 100px 20px;
+    padding: 120px 20px 80px 20px;
     overflow: hidden;
 }
 
@@ -196,7 +196,7 @@ h1 {
     width: 300px;
     border-radius: 40px;
     border: 8px solid #1a1a1a;
-    background: #000;
+    background: #060b18;
     transform: rotateY(-15deg) rotateX(5deg);
     box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
     position: relative;
@@ -208,12 +208,6 @@ h1 {
 
 .phone-frame:hover {
     transform: rotateY(0deg) rotateX(0deg); 
-}
-
-.phone-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
 }
 
 .glow-effect {
@@ -249,7 +243,6 @@ h1 {
 
 /* --- 5. RESPONSIVE / MOBILE (Tout à la fin) --- */
 @media (max-width: 968px) {
-    /* Ajustements NAV */
     .navbar {
         padding: 20px;
     }
@@ -257,7 +250,6 @@ h1 {
         font-size: 1.5rem;
     }
 
-    /* Ajustements HERO */
     .hero-container {
         flex-direction: column;
         text-align: center;
@@ -273,6 +265,7 @@ h1 {
     .phone-frame {
         width: 260px;
         transform: rotateY(-5deg);
+        height: 520px;
     }
 }
 
@@ -323,10 +316,9 @@ h1 {
 .project-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(237, 22, 81, 0.3); /* Rouge au survol */
+    border-color: rgba(237, 22, 81, 0.3);
 }
 
-/* Image de la carte */
 .card-image {
     height: 250px;
     overflow: hidden;
@@ -357,7 +349,6 @@ h1 {
     text-transform: uppercase;
 }
 
-/* Contenu de la carte */
 .card-content {
     padding: 30px;
 }
@@ -376,7 +367,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Les petits tags techniques */
 .tech-tags {
     display: flex;
     flex-wrap: wrap;
@@ -392,7 +382,6 @@ h1 {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive spécifique */
 @media (max-width: 768px) {
     .section-header h2 { font-size: 2rem; }
     .projects-grid { gap: 30px; }
@@ -651,7 +640,6 @@ h1 {
     font-size: 0.9rem;
 }
 
-/* Responsive Final */
 @media (max-width: 968px) {
     .contact-wrapper {
         flex-direction: column;
@@ -1048,6 +1036,7 @@ h1 {
     .cookie-actions { width: 100%; }
     .btn-ghost, .btn-primary-small { flex: 1; text-align: center; padding: 14px 0; }
 }
+
 /* --- INTERIEUR DU SMARTPHONE : ANNONCE IMMO --- */
 .phone-screen-immo {
     background: #060b18;
@@ -1059,10 +1048,9 @@ h1 {
     color: var(--text-white);
 }
 
-/* Image simulée en haut du tel */
 .phone-immo-header {
     height: 200px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(6, 11, 24, 1)), 
+    background: linear-gradient(to bottom, rgba(6, 11, 24, 0.1), rgba(6, 11, 24, 1)), 
                 url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80');
     background-size: cover;
     background-position: center;
@@ -1086,7 +1074,7 @@ h1 {
 }
 
 .immo-status-tag {
-    background: #00b074; /* Vert DPE B */
+    background: #00b074;
     color: white;
     font-size: 0.7rem;
     font-weight: 800;
@@ -1095,7 +1083,6 @@ h1 {
     align-self: flex-end;
 }
 
-/* Corps de l'annonce */
 .phone-immo-body {
     padding: 0 15px 15px 15px;
     display: flex;
@@ -1128,7 +1115,6 @@ h1 {
     margin-bottom: 5px;
 }
 
-/* Caractéristiques de la maison */
 .immo-specs-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1146,7 +1132,6 @@ h1 {
     font-weight: 500;
 }
 
-/* Encadré Stratégie marketing */
 .immo-marketing-card {
     background: linear-gradient(145deg, rgba(237, 22, 81, 0.06) 0%, rgba(0, 0, 0, 0) 100%);
     border: 1px solid rgba(237, 22, 81, 0.2);
@@ -1183,7 +1168,6 @@ h1 {
     font-weight: bold;
 }
 
-/* Bouton du bas */
 .phone-immo-footer {
     padding: 0 15px;
     margin-top: auto;
