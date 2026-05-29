@@ -1203,3 +1203,88 @@ h1 {
     border-color: var(--primary);
     box-shadow: 0 4px 15px rgba(237, 22, 81, 0.4);
 }
+/* --- ADAPTATION STRUCTURE SAAS APP POUR LES BLOCS COMPARATIFS --- */
+
+.zone.jungle {
+    opacity: 1 !important; /* On force la visibilité totale pour votre nouvelle analyse */
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 35px 25px;
+    border-radius: 16px;
+}
+
+.saas-title {
+    color: #94A3B8;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.saas-icon {
+    opacity: 0.7;
+}
+
+.saas-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: left;
+}
+
+.saas-badge-gray {
+    display: inline-block;
+    background: rgba(241, 245, 249, 0.08);
+    color: var(--text-gray);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.saas-feature-desc {
+    color: #94A3B8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 !important;
+}
+
+.saas-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 25px 0;
+}
+
+/* Bloc Alerte Négatif (Gauche) */
+.saas-alert-box.alert-danger {
+    background: rgba(239, 68, 68, 0.06);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.saas-alert-title {
+    color: #EF4444;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.saas-alert-text {
+    color: #F8FAFC;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0 !important;
+    font-weight: 500;
+}
