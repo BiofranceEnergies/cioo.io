@@ -19,13 +19,13 @@ body {
     overflow-x: hidden; /* Évite le scroll horizontal sur mobile */
 }
 
-/* --- 3. NAVIGATION (Clic & Devis) --- */
+/* --- 3. NAVIGATION --- */
 .navbar {
     position: absolute; /* Flotte au-dessus du fond */
     top: 0;
     left: 0;
     width: 100%;
-    padding: 30px 50px; /* Espace aéré */
+    padding: 40px 50px; /* Espace aéré pour le grand logo */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,18 +34,19 @@ body {
 
 .logo {
     font-size: 1.8rem;
-    font-weight: 800; /* Très gras */
+    font-weight: 800;
     color: var(--text-white);
     letter-spacing: -1px;
     text-transform: uppercase;
     cursor: default;
 }
-/* TU AJOUTES ÇA JUSTE ICI : */
+
 .logo img {
-    height: 55px !important;
+    height: 55px !important; /* Logo agrandi pour plus d'impact */
     width: auto;
     display: block;
 }
+
 .dot {
     color: var(--primary);
 }
@@ -90,19 +91,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 4rem;
+    gap: 2rem; /* Réduit l'espace mort entre les blocs */
     position: relative;
     z-index: 1;
 }
 
 /* --- TEXTE (GAUCHE) --- */
 .hero-text-col {
-    flex: 1;
-    max-width: 600px;
+    flex: 0 0 60%; /* Prend strictement 60% de la largeur pour laisser respirer la droite */
+    max-width: 700px;
 }
 
 .badge {
-    background: rgba(255, 107, 0, 0.15);
+    background: rgba(237, 22, 81, 0.15); /* Rouge Propriétés Privées translucide */
     color: var(--primary);
     padding: 6px 12px;
     border-radius: 50px;
@@ -112,7 +113,7 @@ body {
     letter-spacing: 1px;
     display: inline-block;
     margin-bottom: 20px;
-    border: 1px solid rgba(255, 107, 0, 0.3);
+    border: 1px solid rgba(237, 22, 81, 0.3);
 }
 
 h1 {
@@ -133,7 +134,7 @@ h1 {
     color: var(--text-gray);
     line-height: 1.6;
     margin-bottom: 2.5rem;
-    max-width: 90%;
+    max-width: 95%;
 }
 
 /* --- BOUTONS --- */
@@ -157,13 +158,13 @@ h1 {
 .btn-primary {
     background-color: var(--primary);
     color: white;
-    box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(237, 22, 81, 0.4);
 }
 
 .btn-primary:hover {
     background-color: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 15px 30px -5px rgba(255, 107, 0, 0.5);
+    box-shadow: 0 15px 30px -5px rgba(237, 22, 81, 0.5);
 }
 
 .btn-secondary {
@@ -180,7 +181,7 @@ h1 {
 
 /* --- VISUEL (DROITE) --- */
 .hero-visual-col {
-    flex: 1;
+    flex: 0 0 35%; /* Contraint le téléphone sur 35% de la page sans déborder */
     display: flex;
     justify-content: center;
     position: relative;
@@ -201,8 +202,8 @@ h1 {
     position: relative;
     z-index: 2;
     transition: transform 0.5s ease;
-    height: 600px;       /* 1. On force une hauteur fixe standard */
-    overflow: hidden;    /* 2. (Déjà présent normalement) Coupe ce qui dépasse */
+    height: 600px;       /* Force une hauteur fixe standard */
+    overflow: hidden;    /* Coupe ce qui dépasse */
 }
 
 .phone-frame:hover {
@@ -264,7 +265,7 @@ h1 {
         gap: 3rem;
     }
     
-    .hero-text-col { max-width: 100%; }
+    .hero-text-col { flex: 1; max-width: 100%; }
     h1 { font-size: 2.5rem; }
     .hero-subtitle { margin: 0 auto 2rem auto; }
     .hero-ctas { justify-content: center; }
@@ -274,10 +275,11 @@ h1 {
         transform: rotateY(-5deg);
     }
 }
+
 /* --- SECTION RÉALISATIONS --- */
 .projects-section {
     padding: 100px 20px;
-    background-color: var(--dark-bg); /* On garde le fond sombre */
+    background-color: var(--dark-bg);
 }
 
 .container {
@@ -306,12 +308,12 @@ h1 {
 /* --- GRILLE PROJETS --- */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive auto */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
 }
 
 .project-card {
-    background: rgba(255, 255, 255, 0.03); /* Fond très léger */
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     overflow: hidden;
@@ -319,9 +321,9 @@ h1 {
 }
 
 .project-card:hover {
-    transform: translateY(-10px); /* La carte monte au survol */
+    transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 107, 0, 0.3); /* Bordure orange au survol */
+    border-color: rgba(237, 22, 81, 0.3); /* Rouge au survol */
 }
 
 /* Image de la carte */
@@ -334,12 +336,12 @@ h1 {
 .card-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Remplit bien le cadre */
+    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
 .project-card:hover .card-image img {
-    transform: scale(1.05); /* Zoom léger sur l'image */
+    transform: scale(1.05);
 }
 
 .overlay-tag {
@@ -395,6 +397,7 @@ h1 {
     .section-header h2 { font-size: 2rem; }
     .projects-grid { gap: 30px; }
 }
+
 /* --- SECTION AVANTAGES --- */
 .features-section {
     padding: 80px 20px;
@@ -419,14 +422,14 @@ h1 {
 
 .feature-item:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 107, 0, 0.2);
+    border-color: rgba(237, 22, 81, 0.2);
     transform: translateY(-5px);
 }
 
 .feature-icon {
     font-size: 3rem;
     margin-bottom: 20px;
-    text-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
+    text-shadow: 0 0 30px rgba(237, 22, 81, 0.3);
 }
 
 .feature-item h3 {
@@ -452,30 +455,31 @@ h1 {
     max-width: 700px;
     margin: 0 auto;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-    border: 2px solid var(--primary); /* Bordure Orange */
+    border: 2px solid var(--primary);
     border-radius: 24px;
     position: relative;
-    box-shadow: 0 0 40px rgba(255, 107, 0, 0.15);
+    box-shadow: 0 0 40px rgba(237, 22, 81, 0.15);
     overflow: hidden;
 }
 
 .offer-badge {
     position: absolute;
-    top: 42px;            /* On le descend un peu */
-    right: -75px;         /* On le décale pour bien le centrer */
-    width: 280px;         /* Largeur fixe pour que le texte tienne */
-    text-align: center;   /* On centre le texte parfaitement */
+    top: 42px;
+    right: -75px;
+    width: 280px;
+    text-align: center;
     background: var(--primary);
     color: white;
-    padding: 8px 0;       /* Padding haut/bas seulement */
+    padding: 8px 0;
     font-weight: 800;
-    font-size: 0.75rem;   /* Légèrement plus petit pour être sûr que tout rentre */
+    font-size: 0.75rem;
     text-transform: uppercase;
     transform: rotate(45deg);
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
     z-index: 2;
-    pointer-events: none; /* Pour qu'on ne puisse pas cliquer dessus par erreur */
+    pointer-events: none;
 }
+
 .offer-content {
     padding: 50px 40px;
     text-align: center;
@@ -636,7 +640,7 @@ h1 {
     width: 100%;
     margin-top: 10px;
     cursor: pointer;
-    border: none; /* Important pour le bouton du form */
+    border: none;
 }
 
 .main-footer {
@@ -664,7 +668,7 @@ h1 {
 
 .budget-note {
     font-size: 0.9rem;
-    color: #a0aec0; /* Gris clair */
+    color: #a0aec0;
     margin-top: -10px;
     margin-bottom: 20px;
     line-height: 1.4;
@@ -678,7 +682,7 @@ h1 {
 /* --- SECTION PROCESSUS --- */
 .process-section {
     padding: 80px 20px;
-    background-color: #050914; /* Un poil plus sombre pour détacher */
+    background-color: #050914;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -711,8 +715,8 @@ h1 {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 800;
-    margin: 0 auto 20px auto; /* Centré */
-    box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
+    margin: 0 auto 20px auto;
+    box-shadow: 0 0 15px rgba(237, 22, 81, 0.4);
 }
 
 .process-step h3 {
@@ -727,28 +731,27 @@ h1 {
     line-height: 1.5;
 }
 
-/* La petite flèche entre les étapes */
 .step-arrow {
     font-size: 2rem;
     color: var(--text-gray);
-    padding-top: 100px; /* Pour l'aligner visuellement */
+    padding-top: 100px;
     opacity: 0.3;
 }
 
-/* Mobile : On passe les étapes les unes sous les autres */
 @media (max-width: 968px) {
     .process-grid {
         flex-direction: column;
         gap: 40px;
     }
     .step-arrow {
-        display: none; /* On cache les flèches sur mobile */
+        display: none;
     }
 }
-/* --- SECTION RÉALITÉ (Carré VIP) --- */
+
+/* --- SECTION RÉALITÉ --- */
 .reality-section {
     padding: 80px 20px;
-    background-color: #02040a; /* Presque noir */
+    background-color: #02040a;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
 }
@@ -776,7 +779,6 @@ h1 {
     margin: 0 auto 40px auto;
 }
 
-/* Zone Jungle (Triste) */
 .zone.jungle {
     flex: 1;
     padding: 30px;
@@ -788,14 +790,13 @@ h1 {
 
 .zone.jungle h3 { color: #a0aec0; margin-bottom: 15px; }
 
-/* Zone VIP (Brillante) */
 .zone.vip {
     flex: 1;
     padding: 40px 30px;
-    background: linear-gradient(145deg, rgba(255, 107, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(145deg, rgba(237, 22, 81, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
     border: 2px solid var(--primary);
     border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 107, 0, 0.2);
+    box-shadow: 0 0 30px rgba(237, 22, 81, 0.2);
     transform: scale(1.05);
     position: relative;
     z-index: 10;
@@ -842,21 +843,22 @@ h1 {
     .vip-comparison { flex-direction: column; gap: 30px; }
     .zone.vip { transform: scale(1); }
 }
+
 /* --- MODALE MENTIONS LÉGALES --- */
 .modal {
-    display: none; /* Caché par défaut */
+    display: none;
     position: fixed;
-    z-index: 1000; /* Tout en haut */
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fond noir transparent */
+    background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #0f1936; /* Bleu nuit */
+    background-color: #0f1936;
     margin: 5% auto;
     padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -905,7 +907,7 @@ h1 {
 
 .old-price-strikethrough {
     text-decoration: line-through;
-    color: #a0aec0; /* Gris */
+    color: #a0aec0;
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0;
@@ -915,15 +917,18 @@ h1 {
 .old-price-strikethrough .tax-small {
     font-size: 0.9rem;
     font-weight: normal;
-    /* On force la suppression de toute décoration (barré ou souligné) */
     text-decoration: none !important;
-    display: inline-block; /* Aide parfois à nettoyer les styles hérités */
+    display: inline-block;
+}
+
+.new-price-block {
+    text-align: center;
 }
 
 .new-offer-price {
-    font-size: 3.5rem; /* Très gros */
+    font-size: 3.5rem;
     font-weight: 800;
-    color: var(--primary); /* Orange */
+    color: var(--primary);
     line-height: 1.1;
     margin-top: 5px;
 }
@@ -934,55 +939,42 @@ h1 {
     font-weight: 600;
 }
 
-/* Assure que le lien remplit parfaitement le cadre du téléphone */
 .phone-frame a {
     display: block;
     width: 100%;
     height: 100%;
-    text-decoration: none; /* Enlève tout soulignement éventuel */
-    cursor: pointer; /* Affiche la main au survol */
+    text-decoration: none;
+    cursor: pointer;
 }
 
-/* --- BANNIÈRE COOKIES : SLIDE LATÉRAL GAUCHE --- */
+/* --- BANNIÈRE COOKIES --- */
 .cookie-banner {
     position: fixed;
-    bottom: 20px;        /* Fixe en bas */
-    left: -100%;         /* CACHÉ : On le sort complètement de l'écran à GAUCHE */
-    
+    bottom: 20px;
+    left: -100%;
     width: 90%;
-    max-width: 450px;    /* Un peu plus compact pour le côté */
-    
-    /* GLASSMORPHISM (Toujours le même style premium) */
+    max-width: 450px;
     background: rgba(5, 9, 20, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 20px;
     padding: 24px;
-    
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.6),
         0 0 0 1px rgba(0, 0, 0, 0.2);
-        
     z-index: 9999;
-    
-    /* L'ANIMATION MAGIQUE */
-    /* On anime la propriété "left" pour créer le glissement latéral */
     transition: left 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
 }
 
-/* QUAND LA CLASSE .show EST AJOUTÉE */
 .cookie-banner.show {
-    left: 20px; /* Il glisse et s'arrête calé à gauche */
+    left: 20px;
 }
 
-/* Le reste du style (textes et boutons) ne change pas */
 .cookie-content p {
     color: #a0aec0;
     font-size: 0.95rem;
@@ -1029,29 +1021,28 @@ h1 {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(237, 22, 81, 0.3);
 }
 
 .btn-primary-small:hover {
     background: #ff7b1a;
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(237, 22, 81, 0.4);
 }
 
-/* MOBILE : Sur téléphone, on garde l'apparition par le bas (plus ergonomique pour le pouce) */
 @media (max-width: 600px) {
     .cookie-banner {
-        left: 50%; /* On recentre pour le mobile */
+        left: 50%;
         transform: translateX(-50%);
-        bottom: -400px; /* Caché en bas */
+        bottom: -400px;
         width: 95%;
         max-width: none;
-        transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1); /* Animation verticale sur mobile */
+        transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     }
     
     .cookie-banner.show {
         left: 50%;
-        bottom: 15px; /* Monte du bas */
+        bottom: 15px;
     }
     
     .cookie-actions { width: 100%; }
