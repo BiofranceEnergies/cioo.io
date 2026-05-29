@@ -1205,55 +1205,144 @@ h1 {
 }
 /* --- ADAPTATION STRUCTURE SAAS APP POUR LES BLOCS COMPARATIFS --- */
 
-.zone.jungle {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Aligne le footer pile en bas */
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 30px 25px;
-    border-radius: 12px;
-    min-height: 380px; /* On force une hauteur minimale pour la symétrie future */
+/* --- SECTION RÉALITÉ (LOOK SAAS UNIFIÉ) --- */
+.reality-section {
+    padding: 80px 20px;
+    background-color: #02040a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
 }
 
-.saas-title {
-    color: var(--text-white, #ffffff);
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+.reality-content h2 {
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    text-align: left;
+    color: var(--text-white);
+}
+
+.reality-intro {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    line-height: 1.6;
+}
+
+/* Grille comparative SaaS */
+.vip-comparison {
+    display: flex;
+    gap: 30px;
+    align-items: stretch; /* Force l'égalisation parfaite de la hauteur des deux blocs */
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+}
+
+/* Cartes Communes (Gauche & Droite) */
+.zone.jungle, 
+.zone.vip {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Aligne le footer pile en bas de chaque carte */
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: 35px 30px !important;
+    border-radius: 16px !important;
+    transform: none !important; /* Supprime l'ancien grossissement asymétrique */
+    box-shadow: none !important; /* Supprime les ombres lumineuses agressives */
+    transition: all 0.3s ease;
+}
+
+/* Focus élégant sur ta méthode à droite */
+.zone.vip {
+    border: 1px solid rgba(52, 211, 153, 0.15) !important; /* Bordure émeraude ultra fine */
+    background: rgba(52, 211, 153, 0.01) !important; /* Reflet de fond très discret */
+}
+
+/* Éléments internes de l'interface SaaS */
+.saas-title {
+    color: var(--text-white) !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    margin: 0 0 25px 0 !important;
+    text-align: left !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .saas-content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     text-align: left;
+    flex-grow: 1; /* Remplit l'espace vide pour équilibrer la hauteur */
 }
 
 .saas-text {
-    color: #94A3B8;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    color: #94A3B8 !important; /* Gris bleuté SaaS pour une lecture agréable */
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
     margin: 0 !important;
 }
 
 .saas-text.text-highlight {
-    color: #CBD5E1;
+    color: var(--text-gray) !important;
+}
+
+.saas-text.text-highlight-success {
+    color: #34D399 !important; /* Vert émeraude signature SaaS */
     font-weight: 500;
 }
 
-/* Le bandeau de résultat épuré (sans grosse boîte) */
+/* Pieds de page des cartes */
 .saas-footer-result {
-    margin-top: 25px;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    margin-top: 30px;
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
     text-align: left;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .saas-footer-result.result-danger {
-    color: #FCA5A5; /* Rouge pastel très SaaS */
+    color: #FCA5A5 !important; /* Rouge/rose pastel */
+}
+
+.saas-footer-result.result-success {
+    color: #A7F3D0 !important; /* Vert pastel */
+}
+
+/* Badge central VS */
+.vs-badge {
+    background: var(--text-white);
+    color: var(--dark-bg);
+    font-weight: 900;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    align-self: center; /* Centre verticalement par rapport aux blocs */
+    z-index: 20;
+}
+
+.reality-conclusion {
+    font-size: 1.2rem;
+    color: var(--text-white);
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* Gestion Mobile */
+@media (max-width: 968px) {
+    .vip-comparison { 
+        flex-direction: column; 
+        gap: 30px; 
+    }
+    .zone.jungle, .zone.vip {
+        width: 100%;
+    }
 }
