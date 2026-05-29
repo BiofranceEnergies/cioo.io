@@ -1206,85 +1206,54 @@ h1 {
 /* --- ADAPTATION STRUCTURE SAAS APP POUR LES BLOCS COMPARATIFS --- */
 
 .zone.jungle {
-    opacity: 1 !important; /* On force la visibilité totale pour votre nouvelle analyse */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Aligne le footer pile en bas */
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 35px 25px;
-    border-radius: 16px;
+    padding: 30px 25px;
+    border-radius: 12px;
+    min-height: 380px; /* On force une hauteur minimale pour la symétrie future */
 }
 
 .saas-title {
-    color: #94A3B8;
-    font-size: 1.1rem;
+    color: var(--text-white, #ffffff);
+    font-size: 1.15rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.saas-icon {
-    opacity: 0.7;
-}
-
-.saas-features-list {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
     text-align: left;
 }
 
-.saas-badge-gray {
-    display: inline-block;
-    background: rgba(241, 245, 249, 0.08);
-    color: var(--text-gray);
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
+.saas-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
 }
 
-.saas-feature-desc {
+.saas-text {
     color: #94A3B8;
     font-size: 0.95rem;
     line-height: 1.5;
     margin: 0 !important;
 }
 
-.saas-divider {
-    border: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    margin: 25px 0;
+.saas-text.text-highlight {
+    color: #CBD5E1;
+    font-weight: 500;
 }
 
-/* Bloc Alerte Négatif (Gauche) */
-.saas-alert-box.alert-danger {
-    background: rgba(239, 68, 68, 0.06);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    padding: 15px;
-    border-radius: 8px;
-    text-align: left;
-}
-
-.saas-alert-title {
-    color: #EF4444;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.saas-alert-text {
-    color: #F8FAFC;
+/* Le bandeau de résultat épuré (sans grosse boîte) */
+.saas-footer-result {
+    margin-top: 25px;
     font-size: 0.9rem;
     line-height: 1.4;
-    margin: 0 !important;
-    font-weight: 500;
+    text-align: left;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.saas-footer-result.result-danger {
+    color: #FCA5A5; /* Rouge pastel très SaaS */
 }
