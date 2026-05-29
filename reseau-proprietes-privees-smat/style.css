@@ -1346,3 +1346,59 @@ h1 {
         width: 100%;
     }
 }
+/* --- COMPOSANTS DE L'INTERFACE SAAS (BADGE & BOUTON) --- */
+
+/* Positionnement de la carte VIP pour accueillir le badge */
+.zone.vip {
+    position: relative;
+    padding-top: 45px !important; /* Laisse de la place pour le badge du haut */
+}
+
+/* Le badge "STRATÉGIE ACTIVE" */
+.saas-status-badge {
+    position: absolute;
+    top: -12px;
+    right: 25px;
+    background: #10B981; /* Vert application */
+    color: #041128; /* Ton fond sombre pour un super contraste */
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+/* Les petits points alignés */
+.saas-bullet {
+    color: #64748B;
+    margin-right: 10px;
+    font-size: 0.8rem;
+    vertical-align: middle;
+}
+.saas-bullet.bullet-success {
+    color: #34D399;
+}
+
+/* Le bouton d'action intégré en bas de la carte droite */
+.saas-card-btn {
+    display: block;
+    text-align: center;
+    background: #34D399; /* Vert SaaS */
+    color: #0a1128;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(52, 211, 153, 0.15);
+}
+
+.saas-card-btn:hover {
+    background: #059669; /* Vert plus soutenu au survol */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 211, 153, 0.3);
+}
