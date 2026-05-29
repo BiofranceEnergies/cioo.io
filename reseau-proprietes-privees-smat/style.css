@@ -108,7 +108,7 @@ body {
     gap: 8px;
     background: rgba(237, 22, 81, 0.1); /* Fond bordeaux/rouge très léger */
     color: #ffffff;                     /* Texte en blanc pur pour la lisibilité */
-    padding: 8px 20px;
+    padding: 6px 20px;
     border-radius: 50px;                /* Profil arrondi identique à ton modèle */
     font-size: 0.85rem;
     font-weight: 600;
@@ -119,10 +119,12 @@ body {
 }
 
 .badge-fnaim-icon {
-    height: 16px;                       /* Ajusté pour s'aligner parfaitement sur le texte */
+    height: 28px;              /* On augmente la hauteur pour que le cube grandisse */
     width: auto;
     display: inline-block;
     vertical-align: middle;
+    margin-left: 4px;          /* Petit espace propre après le mot AFFILIÉ */
+    transform: scale(1.3);     /* Zoom ciblé pour rendre le cube parfaitement lisible */
 }
 
 h1 {
