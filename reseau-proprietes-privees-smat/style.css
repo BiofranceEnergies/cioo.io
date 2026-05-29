@@ -102,18 +102,27 @@ body {
     max-width: 700px;
 }
 
-.brand-badge {
-    display: inline-block;
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(237, 22, 81, 0.1); /* Fond bordeaux/rouge très léger */
+    color: #ffffff;                     /* Texte en blanc pur pour la lisibilité */
+    padding: 8px 20px;
+    border-radius: 50px;                /* Profil arrondi identique à ton modèle */
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 25px;
-    max-width: 380px; /* Largeur idéale pour le logo FNAIM officiel */
-    width: 100%;
+    border: 1px solid rgba(237, 22, 81, 0.4); /* Contour fin rouge/bordeaux */
 }
 
-.brand-badge img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
+.badge-fnaim-icon {
+    height: 16px;                       /* Ajusté pour s'aligner parfaitement sur le texte */
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 h1 {
