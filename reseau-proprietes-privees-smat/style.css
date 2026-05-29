@@ -1192,6 +1192,11 @@ h1 {
     text-transform: uppercase;
     transition: all 0.3s ease;
 }
+/* --- AJUSTEMENT TEXTE MARCHÉ LP IMMO --- */
+.highlight-changed {
+    color: var(--primary);
+    font-weight: 800;
+}
 
 .phone-frame:hover .immo-btn {
     background: var(--primary);
