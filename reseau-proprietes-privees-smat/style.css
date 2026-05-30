@@ -312,8 +312,8 @@ h1 {
 /* --- GRILLE PROJETS --- */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr); /* Aligne tes 3 étapes côte à côte */
+    gap: 30px;
 }
 
 .project-card {
