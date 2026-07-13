@@ -485,7 +485,7 @@ h1 {
     padding: 100px 20px;
     /* On enlève le fond noir opaque et on le met en transparent ou semi-transparent */
     background: rgba(10, 15, 30, 0.4); 
-    backdrop-filter: blur(10px); /* Ajoute un léger effet de flou super moderne si le fond bouge */
+    backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -497,32 +497,6 @@ h1 {
     max-width: 1200px;
     margin: 0 auto;
 }
-
-.contact-info {
-    flex: 1;
-}
-
-.contact-info h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.contact-intro-text {
-    color: var(--text-gray);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 35px;
-    text-align: left;
-}
-
-.contact-intro-text strong {
-    color: var(--primary);
-    font-size: 1.15rem;
-}
-
 /* --- Nouvelle Carte de Profil (Avatar Réparé) --- */
 /* --- Nouvelle Carte de Profil épurée (Visuel Unique) --- */
 .profile-card {
