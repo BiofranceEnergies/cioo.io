@@ -535,16 +535,16 @@ h1 {
 }
 
 .avatar-wrapper {
-    width: 75px;
-    height: 75px;
-    min-width: 75px;
-    border-radius: 50%;
-    border: 2px solid var(--primary);
+    width: 120px;          /* On élargit pour laisser le logo respirer */
+    height: 65px;          /* Hauteur fixe proportionnelle */
+    border-radius: 6px;    /* Coins légèrement arrondis au lieu du cercle */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
     background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .avatar-wrapper img {
