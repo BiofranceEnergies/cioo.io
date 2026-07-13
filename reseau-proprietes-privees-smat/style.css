@@ -375,31 +375,30 @@ h1 {
 
 /* Badges de fin */
 /* --- Transformation des Badges de Conclusion (Plus Gros et Impactants) --- */
+/* --- Version Finale Forcée pour les Badges --- */
 .vs-footer-badge {
-    margin-top: auto;
-    font-size: 1.1rem !important; /* Nettement plus grand */
-    font-weight: 700 !important;  /* Écrit en gras */
-    text-align: center !important; /* Centré pour faire "bouton/badge" */
-    padding: 15px 20px !important; /* Un vrai rembourrage pour donner du volume */
-    border-radius: 10px;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    display: block;
-    width: 100%;
+    margin-top: 30px !important;
+    font-size: 1.15rem !important;      /* Écrit bien plus gros */
+    font-weight: 700 !important;        /* En gras épais */
+    text-align: center !important;
+    padding: 16px 20px !important;      /* Donne de la hauteur au badge */
+    border-radius: 10px !important;
+    display: block !important;
+    width: 100% !important;
 }
 
-/* Version Alerte Rouge pour le Traditionnel */
+/* Alerte Rouge - Traditionnel */
 .vs-footer-badge.warning { 
     background: rgba(239, 68, 68, 0.15) !important; 
-    color: #ef4444 !important; 
+    color: #ff4a4a !important;          /* Rouge vif qui ressort sur le noir */
     border: 1px solid rgba(239, 68, 68, 0.4) !important;
 }
 
-/* Version Succès Vert pour Ta Stratégie */
+/* Succès Vert - Ta Stratégie (60 jours) */
 .vs-footer-badge.success { 
     background: rgba(16, 185, 129, 0.15) !important; 
-    color: #10b981 !important; 
-    border: 1px solid rgba(16, 185, 129, 0.4) !important;
+    color: #34d399 !important;          /* Vert menthe flashy super visible */
+    border: 1px solid rgba(16, 185, 129, 0.5) !important;
 }
 /* ==========================================================================
    5. INTERIEUR DU SMARTPHONE
