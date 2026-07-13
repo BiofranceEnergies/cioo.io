@@ -711,20 +711,35 @@ h1 {
    Nouveau Style pour la Section Comparaison (Intégration Flyer)
    ========================================================================== */
 
-.comparison-section {
-    padding: 100px 20px;
-    background-color: #02040a;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    text-align: center;
+/* --- Ajustement de la taille de l'introduction --- */
+
+.comparison-section .section-title {
+    font-size: 3rem; /* On augmente significativement le titre principal */
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
 }
 
+.comparison-section .section-subtitle {
+    font-size: 1.3rem; /* Nettement plus grand et lisible */
+    color: var(--text-gray);
+    max-width: 850px; /* On élargit un peu pour éviter que ce soit trop étriqué */
+    margin: 0 auto 60px auto; /* Plus d'espace sous le texte avant les cartes */
+    line-height: 1.7; /* Plus d'espace entre les lignes pour respirer */
+}
+
+/* --- Petit bonus pour l'équilibre des cartes --- */
 .vs-container {
-    display: flex;
-    gap: 30px;
-    align-items: stretch;
-    justify-content: center;
-    max-width: 1100px;
-    margin: 50px auto 40px auto;
+    margin-top: 20px; /* On recolle un peu après avoir agrandi l'espace */
+}
+
+.vs-card-header h3 {
+    font-size: 1.4rem; /* Légèrement plus grand pour les titres des cartes */
+}
+
+.vs-list p, .flyer-text p {
+    font-size: 0.95rem; /* Un poil plus grand à l'intérieur des listes pour le confort de lecture */
+    line-height: 1.6;
 }
 
 .vs-card {
