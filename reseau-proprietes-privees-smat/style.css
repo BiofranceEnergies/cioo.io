@@ -707,3 +707,186 @@ h1 {
     font-size: 0.85rem;
     line-height: 1.4;
 }
+/* ==========================================================================
+   Nouveau Style pour la Section Comparaison (Intégration Flyer)
+   ========================================================================== */
+
+.comparison-section {
+    padding: 100px 20px;
+    background-color: #02040a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.vs-container {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 50px auto 40px auto;
+}
+
+.vs-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 35px 30px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Style spécifique pour ta stratégie active (colonne droite) */
+.vs-card.active-strategy {
+    border: 1px solid rgba(237, 22, 81, 0.3); /* Bordure subtile rouge PP */
+    background: linear-gradient(145deg, rgba(237, 22, 81, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.vs-card-header h3 {
+    color: var(--text-white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.vs-card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Liste Colonne Gauche (Traditionnel) */
+.vs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.vs-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.vs-list .bullet {
+    color: #64748B;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.vs-list p {
+    color: #94A3B8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Liste de droite avec tes icônes de Flyer */
+.vs-list-flyer {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.flyer-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.icon-badge {
+    background: #ffffff;
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.icon-badge img {
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+}
+
+.flyer-text h4 {
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.flyer-text p {
+    color: var(--text-gray);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Les Badges du bas (Avertissement vs Objectif) */
+.vs-footer-badge {
+    margin-top: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-weight: 500;
+}
+
+.vs-footer-badge.warning { color: #FCA5A5; }
+.vs-footer-badge.success { color: #34D399; font-weight: 600; }
+
+/* Le Séparateur VS au milieu */
+.vs-divider {
+    background: var(--text-white);
+    color: var(--dark-bg);
+    font-weight: 900;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    align-self: center;
+    z-index: 20;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 968px) {
+    .vs-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .vs-card {
+        width: 100%;
+    }
+    .vs-divider {
+        margin: 10px auto;
+    }
+    .flyer-item {
+        gap: 15px;
+    }
+    .icon-badge {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+    }
+}
