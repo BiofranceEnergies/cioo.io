@@ -19,9 +19,26 @@
 
 body {
     font-family: var(--font-main);
-    background-color: var(--dark-bg);
     color: var(--text-white);
     overflow-x: hidden;
+    position: relative;
+    
+    /* 1. Dégradé de fond continu et fluide sur tout le site */
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
+    background-attachment: scroll;
+}
+
+/* 2. Trame de grille unique générée pour toute la hauteur de la page */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none; /* Laisse passer les clics utilisateur */
 }
 
 /* ==========================================================================
@@ -36,6 +53,8 @@ body {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .btn-primary {
@@ -109,19 +128,10 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
+    background: transparent; /* Transparant pour utiliser le fond global du body */
     padding: 120px 20px 80px 20px;
     overflow: hidden;
-}
-
-.hero-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image: 
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: 0;
+    z-index: 1;
 }
 
 .hero-container {
@@ -232,11 +242,11 @@ h1 {
 }
 
 /* ==========================================================================
-   4. SECTION COMPARAISON (FOND UNI & PROPRE SANS DOUBLON)
+   4. SECTION COMPARAISON (TRANSPARENTE POUR PRESERVER LA GRILLE)
    ========================================================================== */
 .comparison-section {
     padding: 100px 20px;
-    background: #060b18; /* Fond sombre uni et propre pour éviter les superpositions */
+    background: transparent; /* Totalement transparent pour laisser passer le fond du body */
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
     position: relative;
@@ -477,11 +487,11 @@ h1 {
 }
 
 /* ==========================================================================
-   6. CONTACT, MODALE & COOKIES (NETTOYAGE DU BLOC)
+   6. CONTACT, MODALE & COOKIES (SANS CACHE NOIR)
    ========================================================================== */
 .contact-section {
     padding: 100px 20px;
-    background: #060b18; /* On utilise le même fond sombre propre que la section 2 */
+    background: transparent; /* Totalement transparent pour fusionner avec la grille du body */
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
     z-index: 1;
