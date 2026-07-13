@@ -699,3 +699,18 @@ h1 {
     .cookie-actions { width: 100%; }
     .btn-ghost, .btn-primary-small { flex: 1; text-align: center; padding: 14px 0; }
 }
+/* --- Version Force Maximale pour le Bouton de Validation --- */
+.contact-form-col .btn-primary {
+    padding: 20px 30px !important;       /* On augmente généreusement la hauteur */
+    font-size: 1.15rem !important;       /* Écrit bien plus gros */
+    font-weight: 800 !important;         /* Un gras ultra-épais */
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important; /* Forcé en MAJUSCULES pour l'impact */
+    border-radius: 12px !important;      /* Des coins un poil plus doux */
+    box-shadow: 0 12px 30px -5px rgba(237, 22, 81, 0.5) !important; /* Un halo plus prononcé */
+}
+
+.contact-form-col .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 18px 35px -5px rgba(237, 22, 81, 0.7) !important;
+}
