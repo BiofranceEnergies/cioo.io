@@ -481,12 +481,27 @@ h1 {
 /* ==========================================================================
    SECTION CONTACT & FORMULAIRE (VERSION CORRIGÉE & PREMIUM)
    ========================================================================== */
+/* ==========================================================================
+   6. CONTACT, MODALE & COOKIES (AVEC GRILLE TECH INTEGRÉE)
+   ========================================================================== */
 .contact-section {
     padding: 100px 20px;
-    /* On enlève le fond noir opaque et on le met en transparent ou semi-transparent */
-    background: rgba(10, 15, 30, 0.4); 
-    backdrop-filter: blur(10px);
+    position: relative; /* Indispensable pour l'overlay */
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+/* Application automatique de la grille identique au Hero */
+.contact-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
 }
 
 .contact-wrapper {
@@ -496,9 +511,36 @@ h1 {
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1; /* Force le contenu à passer au-dessus de la grille */
 }
-/* --- Nouvelle Carte de Profil (Avatar Réparé) --- */
-/* --- Nouvelle Carte de Profil épurée (Visuel Unique) --- */
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.contact-intro-text {
+    color: var(--text-gray);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.contact-intro-text strong {
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+/* --- Carte de Profil épurée --- */
 .profile-card {
     background: rgba(255, 255, 255, 0.01);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -508,7 +550,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 320px; /* Aligné sur la largeur classique des colonnes */
+    max-width: 320px;
 }
 
 .profile-logo-only {
@@ -517,18 +559,6 @@ h1 {
     object-fit: contain;
     border-radius: 8px;
     display: block;
-}
-
-.profile-details .role {
-    color: var(--primary);
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 2px;
-}
-
-.profile-details .sector {
-    color: #94a3b8;
-    font-size: 0.85rem;
 }
 
 /* --- Liste des coordonnées stylisée --- */
@@ -565,7 +595,7 @@ h1 {
     margin: 0;
 }
 
-/* --- Formulaire Réaligné et Nettoyé --- */
+/* --- Formulaire --- */
 .contact-form-col {
     flex: 1;
     max-width: 550px;
@@ -615,7 +645,7 @@ h1 {
     border: none;
 }
 
-.main-footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #555; font-size: 0.9rem; }
+.main-footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #555; font-size: 0.9rem; position: relative; z-index: 1; }
 
 /* Cookies Banner */
 .cookie-banner {
@@ -675,15 +705,16 @@ h1 {
     .cookie-actions { width: 100%; }
     .btn-ghost, .btn-primary-small { flex: 1; text-align: center; padding: 14px 0; }
 }
+
 /* --- Version Force Maximale pour le Bouton de Validation --- */
 .contact-form-col .btn-primary {
-    padding: 20px 30px !important;       /* On augmente généreusement la hauteur */
-    font-size: 1.15rem !important;       /* Écrit bien plus gros */
-    font-weight: 800 !important;         /* Un gras ultra-épais */
+    padding: 20px 30px !important;
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
     letter-spacing: 0.5px !important;
-    text-transform: uppercase !important; /* Forcé en MAJUSCULES pour l'impact */
-    border-radius: 12px !important;      /* Des coins un poil plus doux */
-    box-shadow: 0 12px 30px -5px rgba(237, 22, 81, 0.5) !important; /* Un halo plus prononcé */
+    text-transform: uppercase !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 30px -5px rgba(237, 22, 81, 0.5) !important;
 }
 
 .contact-form-col .btn-primary:hover {
