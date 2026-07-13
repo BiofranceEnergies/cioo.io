@@ -559,9 +559,15 @@ h1 {
 
 .phone-immo-header {
     height: 200px;
+    background: linear-gradient(to bottom, rgba(6, 11, 24, 0.1), rgba(6, 11, 24, 1)), 
+                url('https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/c7ec2689363d8c1be5c3204f6cd2d88ff2a0709a/reseau-proprietes-privees-smat/paysage%20perigourdin.png');
+    background-size: cover;
+    background-position: center 65%; /* Ajusté pour centrer pile sur la maison en pierre */
     padding: 15px;
-    display: flex; flex-direction: column;
-    justify-content: space-between; align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     position: relative;
 }
 
