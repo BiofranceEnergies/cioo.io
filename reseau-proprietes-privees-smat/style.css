@@ -232,16 +232,38 @@ h1 {
 }
 
 /* ==========================================================================
-   4. SECTION COMPARAISON (VISUELS DU FLYER) - MODIFIÉ POUR LA TAILLE
+   4. SECTION COMPARAISON (VERSION GRILLE UNIQUE & PREMIUM)
    ========================================================================== */
 .comparison-section {
     padding: 100px 20px;
-    background-color: #02040a;
+    position: relative; /* Indispensable pour l'overlay de la grille */
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
+    overflow: hidden;
 }
 
-/* Titre Introduction : Agrandit et donne de l'impact */
+/* Grille tech harmonisée sur tout le site */
+.comparison-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+}
+
+/* On force les textes et le conteneur des cartes à passer au-dessus de la grille */
+.comparison-section .section-title,
+.comparison-section .section-subtitle,
+.vs-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Titre Introduction */
 .comparison-section .section-title {
     font-size: 3rem !important;
     font-weight: 800;
@@ -250,7 +272,7 @@ h1 {
     line-height: 1.2;
 }
 
-/* Sous-titre Introduction : Plus grand, aéré et lisible */
+/* Sous-titre Introduction */
 .comparison-section .section-subtitle {
     font-size: 1.35rem !important;
     color: var(--text-gray);
@@ -374,8 +396,6 @@ h1 {
 }
 
 /* Badges de fin */
-/* --- Transformation des Badges de Conclusion (Plus Gros et Impactants) --- */
-/* --- Version Finale Forcée pour les Badges --- */
 .vs-footer-badge {
     margin-top: 30px !important;
     font-size: 1.15rem !important;      /* Écrit bien plus gros */
@@ -400,6 +420,7 @@ h1 {
     color: #34d399 !important;          /* Vert menthe flashy super visible */
     border: 1px solid rgba(16, 185, 129, 0.5) !important;
 }
+
 /* ==========================================================================
    5. INTERIEUR DU SMARTPHONE
    ========================================================================== */
@@ -475,12 +496,6 @@ h1 {
     box-shadow: 0 4px 15px rgba(237, 22, 81, 0.4);
 }
 
-/* ==========================================================================
-   6. CONTACT, MODALE & COOKIES
-   ========================================================================== */
-/* ==========================================================================
-   SECTION CONTACT & FORMULAIRE (VERSION CORRIGÉE & PREMIUM)
-   ========================================================================== */
 /* ==========================================================================
    6. CONTACT, MODALE & COOKIES (AVEC GRILLE TECH INTEGRÉE)
    ========================================================================== */
