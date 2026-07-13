@@ -668,3 +668,42 @@ h1 {
     .cookie-actions { width: 100%; }
     .btn-ghost, .btn-primary-small { flex: 1; text-align: center; padding: 14px 0; }
 }
+.flyer-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.icon-badge {
+    background: #ffffff;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.icon-badge img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+}
+
+.flyer-text h4 {
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.flyer-text p {
+    color: var(--text-gray);
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
