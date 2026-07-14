@@ -45,13 +45,9 @@
                 <h2>Demande de contact rapide</h2>
                 <p class="form-intro">Remplissez ce court formulaire, je vous recontacte dans les plus brefs délais.</p>
                 
-                <!-- Utilisation de ton nouvel identifiant Formspree -->
+                <!-- On garde l'action pour la sécurité, mais le script JS va prendre le relais -->
                 <form id="contact-form" action="https://formspree.io/f/mrenbadp" method="POST">
                     
-                    <!-- Ligne de redirection gratuite standard -->
-                    <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-je-visite/merci.html">
-
-                    <!-- Champ invisible capturé par le script.js -->
                     <input type="hidden" id="champ-mandat" name="numero_mandat" value="Non spécifié">
 
                     <div class="form-group">
@@ -79,7 +75,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-submit">
+                    <button type="submit" class="btn-submit" id="submit-button">
                         <span>Valider ma demande</span> <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </form>
