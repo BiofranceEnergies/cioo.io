@@ -11,6 +11,7 @@
 
     <header class="header">
         <div class="logo-container">
+            <!-- TON LOGO AVEC TA PHOTO, NOM ET TELEPHONE -->
             <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/main/reseau-proprietes-privees-smat/LOGO%20VIDEO%20police%20blanc.png" alt="Sylvain Matignon - Propriétés Privées" class="logo-main">
         </div>
     </header>
@@ -20,6 +21,7 @@
             <h1 class="main-title">La visite vidéo vous a plu ?</h1>
             <p class="subtitle">Passez à l'étape suivante pour concrétiser votre projet.</p>
             
+            <!-- Le badge qui affiche dynamiquement la référence mandat passée dans l'URL (masqué par défaut si pas de mandat) -->
             <div class="mandat-badge" id="id-mandat-affiche" style="display: none;">Référence Mandat : En attente</div>
 
             <div class="features-list">
@@ -45,12 +47,13 @@
                 <h2>Demande de contact rapide</h2>
                 <p class="form-intro">Remplissez ce court formulaire, je vous recontacte dans les plus brefs délais.</p>
                 
-                <form id="contact-form" action="https://formsubmit.co/sylvain.matignon@gmail.com" method="POST">
+                <!-- Envoi des leads ultra-fiable via Formspree -->
+                <form id="contact-form" action="https://formspree.io/f/xwvgpqdq" method="POST">
                     
-                    <input type="hidden" name="_subject" value="🏠 Nouvelle demande de visite / dossier acquéreur !">
-                    <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-je-visite/merci.html">
-                    <input type="hidden" name="_captcha" value="false">
+                    <!-- Redirection native Formspree par code -->
+                    <input type="text" name="_next" value="https://cioo.io/reseau-proprietes-privees-je-visite/merci.html" style="display:none;">
 
+                    <!-- Champ invisible capturé par le script.js -->
                     <input type="hidden" id="champ-mandat" name="numero_mandat" value="Non spécifié">
 
                     <div class="form-group">
