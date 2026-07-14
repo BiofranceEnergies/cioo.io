@@ -28,3 +28,30 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+const form = document.getElementById("contact-form");
+const button = document.getElementById("submit-button");
+
+if (form) {
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Bloque la page grise de Formspree
+        
+        button.disabled = true;
+        button.innerHTML = "<span>Envoi en cours...</span>";
+
+        const data = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            // Redirection forcée vers TA page merci
+            window.location.href = "https://cioo.io/reseau-proprietes-privees-je-visite/merci.html";
+        }).catch(error => {
+            // En cas de bug réseau, on redirige quand même pour ne pas bloquer le client
+            window.location.href = "https://cioo.io/reseau-proprietes-privees-je-visite/merci.html";
+        });
+    });
+}
