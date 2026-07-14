@@ -1,19 +1,90 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. On analyse l'adresse (URL) de la page pour trouver le paramètre "?mandat="
-    const urlParams = new URLSearchParams(window.location.search);
-    const numeroMandat = urlParams.get('mandat');
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planifiez votre visite - Propriétés Privées</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
-    // 2. Si un numéro de mandat est trouvé dans le lien, on l'injecte dans le formulaire
-    if (numeroMandat) {
-        const inputMandat = document.getElementById('champ-mandat');
-        if (inputMandat) {
-            inputMandat.value = numeroMandat;
-        }
-        
-        // Optionnel : On peut aussi l'afficher discrètement à l'écran pour rassurer l'acheteur
-        const affichageMandat = document.getElementById('id-mandat-affiche');
-        if (affichageMandat) {
-            affichageMandat.textContent = "Référence Mandat : " + numeroMandat;
-        }
-    }
-});
+    <header class="header">
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/biofranceenergies/cioo.io/main/reseau-proprietes-privees-smat/logo-pp.png" alt="Propriétés Privées Sylvain Matignon" class="logo-main">
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="info-section">
+            <h1 class="main-title">La visite vidéo vous a plu ?</h1>
+            <p class="subtitle">Passez à l'étape suivante pour concrétiser votre projet.</p>
+            
+            <div class="mandat-badge" id="id-mandat-affiche">Réf. Mandat : En attente</div>
+
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div class="feature-text">
+                        <h3>Planifiez une visite</h3>
+                        <p>Sélectionnez un créneau pour visiter le bien en réel ou en visio-visite accompagnée.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div class="feature-text">
+                        <h3>Dossier technique complet</h3>
+                        <p>Recevez instantanément les diagnostics complets, les plans et les informations d'urbanisme.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="form-card">
+                <h2>Demande de contact rapide</h2>
+                <p class="form-intro">Remplissez ce court formulaire, je vous recontacte dans l'heure.</p>
+                
+                <form id="contact-form">
+                    <input type="hidden" id="champ-mandat" name="numero_mandat" value="Non spécifié">
+
+                    <div class="form-group">
+                        <label for="nom"><i class="fa-solid fa-user"></i> Nom & Prénom *</label>
+                        <input type="text" id="nom" name="nom" required placeholder="Ex : Jean Dupont">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel"><i class="fa-solid fa-phone"></i> Téléphone *</label>
+                        <input type="tel" id="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Adresse Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="Ex : jean.dupont@gmail.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="option-visite"><i class="fa-solid fa-circle-question"></i> Que souhaitez-vous faire ? *</label>
+                        <select id="option-visite" name="option_visite" required>
+                            <option value="" disabled selected>Choisissez une option...</option>
+                            <option value="visite_physique">Planifier une visite sur place</option>
+                            <option value="visio_visite">Faire une visio-visite à distance</option>
+                            <option value="dossier_technique">Recevoir le dossier technique complet</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span>Valider ma demande</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Sylvain Matignon - Conseiller Immobilier Propriétés Privées. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
