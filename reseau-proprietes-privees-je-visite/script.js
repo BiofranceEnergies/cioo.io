@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // 1. On récupère les paramètres situés dans l'adresse URL
     const urlParams = new URLSearchParams(window.location.search);
-    const numeroMandat = urlParams.get('mandat');
+    let numeroMandat = urlParams.get('mandat');
 
     // 2. Éléments HTML à cibler
     const inputMandat = document.getElementById('champ-mandat');
@@ -9,21 +9,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 3. Si un numéro de mandat est détecté dans le lien
     if (numeroMandat && numeroMandat.trim() !== "") {
-        // On remplit le champ caché du formulaire
+        // Nettoyage de sécurité : si l'URL a capturé des résidus ou des parenthèses, on ne garde que l'essentiel
+        numeroMandat = numeroMandat.split(/[() ]+/)[0].trim();
+
+        // On remplit le champ caché du formulaire pour FormSubmit
         if (inputMandat) {
             inputMandat.value = numeroMandat;
         }
-        // On met à jour l'affichage visuel sur la page
+        // On met à jour l'affichage visuel sur la page de façon propre
         if (affichageMandat) {
             affichageMandat.textContent = "Référence Mandat : " + numeroMandat;
-            affichageMandat.style.display = "inline-block"; // S'assure qu'il est bien visible
+            affichageMandat.style.display = "inline-block";
         }
     } else {
         // Si aucun mandat n'est précisé dans l'URL
         if (affichageMandat) {
             affichageMandat.textContent = "Sélectionnez un bien depuis nos vidéos";
-            // Optionnel : on peut aussi simplement masquer le badge si pas de mandat
-            // affichageMandat.style.display = "none";
         }
     }
 });
