@@ -112,3 +112,32 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+const form = document.getElementById("contact-form");
+const button = document.getElementById("submit-button");
+
+if (form) {
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // On bloque la redirection par défaut de Formspree vers sa page grise
+        
+        if (button) {
+            button.disabled = true;
+            button.innerHTML = "<span>Envoi en cours...</span>";
+        }
+
+        const data = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            // On force la redirection vers TA page de remerciement Mandat
+            window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
+        }).catch(error => {
+            // En cas de coupure ou problème, on redirige quand même pour ne pas perdre le client
+            window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
+        });
+    });
+}
