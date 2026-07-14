@@ -1,0 +1,715 @@
+/* ==========================================================================
+   1. VARIABLES & CONFIGURATION
+   ========================================================================== */
+:root {
+    --primary: #ed1651;        /* Rouge Propriétés Privées exact */
+    --primary-hover: #d01146;
+    --dark-bg: #0a1128;       /* Bleu Nuit Profond */
+    --tech-blue: #1c3b70;    /* Bleu plus clair pour le dégradé */
+    --text-white: #ffffff;
+    --text-gray: #cbd5e1;
+    --font-main: 'Inter', sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-white);
+    overflow-x: hidden;
+    position: relative;
+    
+    /* 1. Dégradé de fond continu et fluide sur tout le site */
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
+    background-attachment: scroll;
+}
+
+/* 2. Trame de grille unique générée pour toute la hauteur de la page */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none; /* Laisse passer les clics utilisateur */
+}
+
+/* ==========================================================================
+   2. COMPOSANTS GENERIQUES (BOUTONS, ANIMATIONS)
+   ========================================================================== */
+.btn {
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 10px 25px -5px rgba(237, 22, 81, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(237, 22, 81, 0.5);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: white;
+    transform: translateY(-2px);
+}
+
+.highlight {
+    color: var(--primary);
+    position: relative; 
+}
+
+/* Animations */
+.anim {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+.anim.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.6s; }
+
+/* ==========================================================================
+   3. NAVIGATION & HERO SECTION
+   ========================================================================== */
+.navbar {
+    position: absolute;
+    top: 0; left: 0; width: 100%;
+    padding: 40px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo img {
+    height: 55px !important;
+    width: auto;
+    display: block;
+}
+
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: transparent; /* Transparant pour utiliser le fond global du body */
+    padding: 120px 20px 80px 20px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-text-col {
+    flex: 0 0 60%;
+    max-width: 700px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(237, 22, 81, 0.1);
+    color: #ffffff;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(237, 22, 81, 0.4);
+}
+
+.badge-fnaim-icon {
+    height: 28px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+    transform: scale(1.3);
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1.5px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 95%;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.hero-visual-col {
+    flex: 0 0 35%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.mockup-wrapper {
+    position: relative;
+    perspective: 1000px;
+}
+
+.phone-frame {
+    width: 300px;
+    border-radius: 40px;
+    border: 8px solid #1a1a1a;
+    background: #060b18;
+    transform: rotateY(-15deg) rotateX(5deg);
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s ease;
+    height: 600px;
+    overflow: hidden;
+}
+
+.phone-frame:hover {
+    transform: rotateY(0deg) rotateX(0deg); 
+}
+
+.glow-effect {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    opacity: 0.2;
+    filter: blur(80px);
+    z-index: 1;
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   4. SECTION COMPARAISON (TRANSPARENTE POUR PRESERVER LA GRILLE)
+   ========================================================================== */
+.comparison-section {
+    padding: 100px 20px;
+    background: transparent; /* Totalement transparent pour laisser passer le fond du body */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Titre Introduction */
+.comparison-section .section-title {
+    font-size: 3rem !important;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+/* Sous-titre Introduction */
+.comparison-section .section-subtitle {
+    font-size: 1.35rem !important;
+    color: var(--text-gray);
+    max-width: 850px;
+    margin: 0 auto 60px auto;
+    line-height: 1.7;
+}
+
+.vs-container {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 20px auto 40px auto;
+}
+
+.vs-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 35px 30px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.vs-card.active-strategy {
+    border: 1px solid rgba(237, 22, 81, 0.3);
+    background: linear-gradient(145deg, rgba(237, 22, 81, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.vs-card-header h3 {
+    color: var(--text-white);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.vs-card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+/* Liste de Gauche (Traditionnelle) */
+.vs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.vs-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.vs-list .bullet {
+    color: #64748B;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+.vs-list p {
+    color: #94A3B8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Liste de Droite (Flyer) */
+.vs-list-flyer {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.flyer-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.icon-badge {
+    background: #ffffff;
+    width: 55px; height: 55px; min-width: 55px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.icon-badge img {
+    width: 65%; height: 65%;
+    object-fit: contain;
+}
+
+.flyer-text h4 {
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.flyer-text p {
+    color: var(--text-gray);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Badges de fin */
+.vs-footer-badge {
+    margin-top: 30px !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    padding: 16px 20px !important;
+    border-radius: 10px !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Alerte Rouge - Traditionnel */
+.vs-footer-badge.warning { 
+    background: rgba(239, 68, 68, 0.15) !important; 
+    color: #ff4a4a !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Succès Vert - Ta Stratégie (60 jours) */
+.vs-footer-badge.success { 
+    background: rgba(16, 185, 129, 0.15) !important; 
+    color: #34d399 !important;
+    border: 1px solid rgba(16, 185, 129, 0.5) !important;
+}
+
+/* ==========================================================================
+   5. INTERIEUR DU SMARTPHONE
+   ========================================================================== */
+.phone-screen-immo {
+    background: #060b18;
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    color: var(--text-white);
+}
+
+.phone-immo-header {
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(6, 11, 24, 0.1), rgba(6, 11, 24, 1)), 
+                url('https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/c7ec2689363d8c1be5c3204f6cd2d88ff2a0709a/reseau-proprietes-privees-smat/paysage%20perigourdin.png');
+    background-size: cover;
+    background-position: center 65%;
+    padding: 15px;
+    display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+    position: relative;
+}
+
+.immo-status-tag {
+    background: #00b074;
+    color: white; font-size: 0.7rem; font-weight: 800;
+    padding: 3px 8px; border-radius: 4px;
+    align-self: flex-end; z-index: 2;
+}
+
+.phone-immo-body {
+    padding: 0 15px 15px 15px;
+    display: flex; flex-direction: column; gap: 8px;
+}
+
+.immo-price { font-size: 1.6rem; font-weight: 800; }
+.immo-hai { font-size: 0.75rem; color: var(--text-gray); }
+.immo-title { font-size: 1rem; font-weight: 700; line-height: 1.3; }
+.immo-location { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 5px; }
+
+.immo-specs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 8px; margin-bottom: 5px;
+}
+
+.spec-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 6px; border-radius: 6px;
+    font-size: 0.75rem; text-align: center;
+}
+
+.immo-marketing-card {
+    background: linear-gradient(145deg, rgba(237, 22, 81, 0.06) 0%, rgba(0, 0, 0, 0) 100%);
+    border: 1px solid rgba(237, 22, 81, 0.2);
+    border-radius: 10px; padding: 12px; margin-top: 5px;
+}
+
+.immo-marketing-card h5 { font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
+.immo-marketing-card ul { list-style: none; }
+.immo-marketing-card li { font-size: 0.7rem; color: var(--text-gray); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+.immo-marketing-card li::before { content: "•"; color: var(--primary); }
+
+.phone-immo-footer { padding: 0 15px; margin-top: auto; margin-bottom: 15px; }
+
+.immo-btn {
+    display: block; background: transparent; color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2); text-align: center;
+    padding: 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; transition: all 0.3s ease;
+}
+
+.phone-frame:hover .immo-btn {
+    background: var(--primary); border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(237, 22, 81, 0.4);
+}
+
+/* ==========================================================================
+   6. CONTACT, MODALE & COOKIES (SANS CACHE NOIR)
+   ========================================================================== */
+.contact-section {
+    padding: 100px 20px;
+    background: transparent; /* Totalement transparent pour fusionner avec la grille du body */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.contact-intro-text {
+    color: var(--text-gray);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.contact-intro-text strong {
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+/* --- Carte de Profil épurée --- */
+.profile-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 320px;
+}
+
+.profile-logo-only {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+/* --- Liste des coordonnées stylisée --- */
+.contact-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detail-card-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.detail-card-item .icon {
+    font-size: 1.2rem;
+}
+
+.detail-card-item a {
+    color: var(--text-white);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.detail-card-item a:hover {
+    color: var(--primary);
+}
+
+.detail-card-item p {
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* --- Formulaire --- */
+.contact-form-col {
+    flex: 1;
+    max-width: 550px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.clean-form .form-group {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.clean-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.clean-form input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: white;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.clean-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 3px rgba(237, 22, 81, 0.15);
+}
+
+.full-width {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.main-footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #555; font-size: 0.9rem; position: relative; z-index: 1; }
+
+/* Cookies Banner */
+.cookie-banner {
+    position: fixed; bottom: 20px; left: -100%; width: 90%; max-width: 450px;
+    background: rgba(5, 9, 20, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); z-index: 9999;
+    transition: left 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
+}
+.cookie-banner.show { left: 20px; }
+.cookie-content p { color: #a0aec0; font-size: 0.95rem; line-height: 1.6; margin: 0; }
+.cookie-content strong { color: #fff; }
+.cookie-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.btn-ghost { background: transparent; color: #94a3b8; border: none; padding: 10px 18px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-ghost:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+.btn-primary-small { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(237, 22, 81, 0.3); }
+.btn-primary-small:hover { background: #ff7b1a; transform: translateY(-1px); }
+
+/* Modale */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); }
+.modal-content { background-color: #0f1936; margin: 5% auto; padding: 40px; border: 1px solid rgba(255, 255, 255, 0.1); width: 90%; max-width: 600px; border-radius: 20px; color: var(--text-gray); max-height: 80vh; overflow-y: auto; position: relative; }
+.modal-content h2 { color: var(--text-white); margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+.legal-text h3 { color: var(--primary); font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px; }
+.close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; position: absolute; right: 20px; top: 15px; }
+.close-btn:hover { color: var(--primary); }
+
+/* ==========================================================================
+   7. RESPONSIVE / MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 968px) {
+    .navbar { padding: 20px; }
+    .hero-container { flex-direction: column; text-align: center; padding-top: 40px; gap: 3rem; }
+    .hero-text-col { flex: 1; max-width: 100%; }
+    h1 { font-size: 2.5rem; }
+    .hero-subtitle { margin: 0 auto 2rem auto; }
+    .hero-ctas { justify-content: center; }
+    .phone-frame { width: 260px; transform: rotateY(-5deg); height: 520px; }
+    
+    .vs-container { flex-direction: column; gap: 30px; }
+    .vs-card { width: 100%; }
+    .vs-divider { margin: 10px auto; }
+    .flyer-item { gap: 15px; }
+    .icon-badge { width: 50px; height: 50px; min-width: 50px; }
+    
+    .comparison-section .section-title { font-size: 2.2rem !important; }
+    .comparison-section .section-subtitle { font-size: 1.1rem !important; }
+
+    .contact-wrapper { flex-direction: column; gap: 40px; }
+    .contact-info { text-align: center; }
+    .contact-info p { margin: 0 auto 30px auto; }
+    .detail-item { justify-content: center; }
+    .contact-form-col { width: 100%; padding: 25px; }
+    
+    .cookie-banner { left: 50%; transform: translateX(-50%); bottom: -400px; width: 95%; max-width: none; }
+    .cookie-banner.show { left: 50%; bottom: 15px; }
+    .cookie-actions { width: 100%; }
+    .btn-ghost, .btn-primary-small { flex: 1; text-align: center; padding: 14px 0; }
+}
+
+/* --- Version Force Maximale pour le Bouton de Validation --- */
+.contact-form-col .btn-primary {
+    padding: 20px 30px !important;
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 30px -5px rgba(237, 22, 81, 0.5) !important;
+}
+
+.contact-form-col .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 18px 35px -5px rgba(237, 22, 81, 0.7) !important;
+}
