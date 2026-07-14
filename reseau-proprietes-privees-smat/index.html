@@ -124,7 +124,7 @@
         <h2 class="section-title">Qu'on le veuille ou non, <span class="highlight">le marché a changé.</span></h2>
         <p class="section-subtitle">
             Soyons réalistes : 95% des futurs acheteurs commencent leur recherche sur Internet.<br>
-            Mais avez-vous remarqué comment sont présentées les propriétés ?
+            But avez-vous remarqué comment sont présentées les propriétés ?
         </p>
 
         <div class="vs-container">
@@ -198,6 +198,8 @@
             </div>
         </div>
     </div>
+</section>
+
 <!-- SECTION ESTIMATION & CONTACT -->
 <section id="contact" class="contact-section">
     <div class="container contact-wrapper">
@@ -233,15 +235,14 @@
         </div>
 
         <!-- COLONNE DROITE : FORMULAIRE PRO -->
-      <div class="contact-form-col anim delay-2">
-    <form class="clean-form" action="https://formspree.io/f/xbdqklqb" method="POST">
-        <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 20px; border-left: 3px solid #ed1651; padding-left: 12px;">
-            Cette étude de valeur approfondie est <strong>totalement offerte</strong>. Elle me permet de vous présenter ma stratégie active sans que vous n'ayez à dépenser un seul centime, et sans aucune obligation de votre part.
-        </p>
-        <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-smat/merci.html">
-        
-        
-
+        <div class="contact-form-col anim delay-2">
+            <!-- Modification ici : ID rajouté pour intercepter la soumission -->
+            <form class="clean-form" id="contact-form" action="https://formspree.io/f/xbdqklqb" method="POST">
+                <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 20px; border-left: 3px solid #ed1651; padding-left: 12px;">
+                    Cette étude de valeur approfondie est <strong>totalement offerte</strong>. Elle me permet de vous présenter ma stratégie active sans que vous n'ayez à dépenser un seul centime, et sans aucune obligation de votre part.
+                </p>
+                <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-smat/merci.html">
+                
                 <div class="form-group">
                     <label for="nom">Votre Nom complet</label>
                     <input type="text" id="nom" name="nom" placeholder="Ex: Jean Durant" required>
@@ -262,10 +263,11 @@
                     <input type="text" id="localisation_bien" name="localisation_bien" placeholder="Ex: Ville ou Code Postal (ex: 24300)" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary full-width">DEMANDER MON ÉTUDE DE VALEUR PRO ✨</button>
-<p style="text-align: center; font-size: 0.85rem; color: #cbd5e1; margin-top: 12px; opacity: 0.9;">
-    🔒 Service <strong>100% gratuit</strong> & <strong>sans aucun engagement</strong>
-</p>
+                <!-- Modification ici : ID rajouté pour contrôler l'état d'envoi -->
+                <button type="submit" class="btn btn-primary full-width" id="submit-button">DEMANDER MON ÉTUDE DE VALEUR PRO ✨</button>
+                <p style="text-align: center; font-size: 0.85rem; color: #cbd5e1; margin-top: 12px; opacity: 0.9;">
+                    🔒 Service <strong>100% gratuit</strong> & <strong>sans aucun engagement</strong>
+                </p>
             </form>
         </div>
     </div> 
