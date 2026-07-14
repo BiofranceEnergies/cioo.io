@@ -9,19 +9,17 @@
 </head>
 <body>
 
-   <header class="header">
+    <header class="header">
         <div class="logo-container">
             <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/main/reseau-proprietes-privees-smat/pp_logo_quadri_seul%20propriete%20blanc.png" alt="Propriétés Privées Sylvain Matignon" class="logo-main">
         </div>
     </header>
 
     <main class="main-container">
-        <!-- Section d'accroche à gauche -->
         <section class="info-section">
             <h1 class="main-title">La visite vidéo vous a plu ?</h1>
             <p class="subtitle">Passez à l'étape suivante pour concrétiser votre projet.</p>
             
-            <!-- Petit badge dynamique qui affichera le numéro de mandat si détecté -->
             <div class="mandat-badge" id="id-mandat-affiche">Sélectionnez un bien depuis nos vidéos</div>
 
             <div class="features-list">
@@ -42,17 +40,55 @@
             </div>
         </section>
 
-        <!-- Section Formulaire à droite -->
         <section class="form-section">
             <div class="form-card">
                 <h2>Demande de contact rapide</h2>
                 <p class="form-intro">Remplissez ce court formulaire, je vous recontacte dans les plus brefs délais.</p>
                 
                 <form id="contact-form" action="https://formsubmit.co/sylvain.matignon@gmail.com" method="POST">
-                    <!-- Configuration FormSubmit -->
                     <input type="hidden" name="_subject" value="🏠 Nouvelle demande de visite / dossier acquéreur !">
                     <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-smat/merci.html">
                     <input type="hidden" name="_captcha" value="false">
 
-                    <!-- CHAMP MASQUÉ MAGIQUE POUR LE NUMÉRO DE MANDAT -->
                     <input type="hidden" id="champ-mandat" name="numero_mandat" value="Non spécifié">
+
+                    <div class="form-group">
+                        <label for="nom"><i class="fa-solid fa-user"></i> Nom & Prénom *</label>
+                        <input type="text" id="nom" name="nom" required placeholder="Ex : Jean Dupont">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel"><i class="fa-solid fa-phone"></i> Téléphone *</label>
+                        <input type="tel" id="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email"><i class="fa-solid fa-envelope"></i> Adresse Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="Ex : jean.dupont@gmail.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="option-visite"><i class="fa-solid fa-circle-question"></i> Que souhaitez-vous faire ? *</label>
+                        <select id="option-visite" name="option_visite" required>
+                            <option value="" disabled selected>Choisissez une option...</option>
+                            <option value="visite_physique">Planifier une visite sur place</option>
+                            <option value="visio_visite">Faire une visio-visite à distance</option>
+                            <option value="dossier_technique">Recevoir le dossier technique complet</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <span>Valider ma demande</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Sylvain Matignon - Conseiller Immobilier Propriétés Privées. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
