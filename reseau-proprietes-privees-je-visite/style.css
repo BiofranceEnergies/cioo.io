@@ -1,94 +1,308 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planifiez votre visite - Propriétés Privées</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+/* ==========================================================================
+   1. VARIABLES & CONFIGURATION GENERALE
+   ========================================================================== */
+:root {
+    --primary: #ed1651;         /* Rouge Propriétés Privées */
+    --primary-hover: #d01146;
+    --dark-bg: #0a1128;         /* Bleu Nuit Profond */
+    --tech-blue: #1c3b70;       /* Bleu clair pour dégradé */
+    --text-white: #ffffff;
+    --text-gray: #cbd5e1;
+    --font-main: 'Inter', sans-serif;
+}
 
-    <header class="header">
-        <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/main/reseau-proprietes-privees-smat/logo-smat.png" alt="Sylvain Matignon - Propriétés Privées" class="logo-main">
-        </div>
-    </header>
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
 
-    <main class="main-container">
-        <section class="info-section">
-            <h1 class="main-title">La visite vidéo vous a plu ?</h1>
-            <p class="subtitle">Passez à l'étape suivante pour concrétiser votre projet.</p>
-            
-            <div class="mandat-badge" id="id-mandat-affiche">Sélectionnez un bien depuis nos vidéos</div>
+body {
+    font-family: var(--font-main);
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(180deg, var(--dark-bg) 0%, var(--tech-blue) 100%);
+    overflow-x: hidden;
+}
 
-            <div class="features-list">
-                <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                    <div class="feature-text">
-                        <h3>Planifiez une visite</h3>
-                        <p>Sélectionnez un créneau pour visiter le bien en réel ou en visio-visite accompagnée.</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
-                    <div class="feature-text">
-                        <h3>Dossier technique complet</h3>
-                        <p>Recevez instantanément les diagnostics complets, les plans et les informations d'urbanisme.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* Grille en arrière-plan */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none;
+}
 
-        <section class="form-section">
-            <div class="form-card">
-                <h2>Demande de contact rapide</h2>
-                <p class="form-intro">Remplissez ce court formulaire, je vous recontacte dans les plus brefs délais.</p>
-                
-                <form id="contact-form" action="https://formsubmit.co/sylvain.matignon@gmail.com" method="POST">
-                    <input type="hidden" name="_subject" value="🏠 Nouvelle demande de visite / dossier acquéreur !">
-                    <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-smat/merci.html">
-                    <input type="hidden" name="_captcha" value="false">
+/* ==========================================================================
+   2. HEADER & LOGO (ADAPTÉ POUR TON BADGE PHOTO)
+   ========================================================================== */
+.header {
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 10;
+}
 
-                    <input type="hidden" id="champ-mandat" name="numero_mandat" value="Non spécifié">
+.logo-main {
+    height: 100px; /* Augmenté à 100px pour la lisibilité de ta photo et de tes infos */
+    width: auto;
+    display: block;
+}
 
-                    <div class="form-group">
-                        <label for="nom"><i class="fa-solid fa-user"></i> Nom & Prénom *</label>
-                        <input type="text" id="nom" name="nom" required placeholder="Ex : Jean Dupont">
-                    </div>
+/* ==========================================================================
+   3. STRUCTURE DU CONTENU
+   ========================================================================== */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 80px 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    flex-grow: 1;
+    z-index: 5;
+}
 
-                    <div class="form-group">
-                        <label for="tel"><i class="fa-solid fa-phone"></i> Téléphone *</label>
-                        <input type="tel" id="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78">
-                    </div>
+/* Section d'information (Gauche) */
+.info-section {
+    flex: 1;
+    max-width: 550px;
+}
 
-                    <div class="form-group">
-                        <label for="email"><i class="fa-solid fa-envelope"></i> Adresse Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="Ex : jean.dupont@gmail.com">
-                    </div>
+.main-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
 
-                    <div class="form-group">
-                        <label for="option-visite"><i class="fa-solid fa-circle-question"></i> Que souhaitez-vous faire ? *</label>
-                        <select id="option-visite" name="option_visite" required>
-                            <option value="" disabled selected>Choisissez une option...</option>
-                            <option value="visite_physique">Planifier une visite sur place</option>
-                            <option value="visio_visite">Faire une visio-visite à distance</option>
-                            <option value="dossier_technique">Recevoir le dossier technique complet</option>
-                        </select>
-                    </div>
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
 
-                    <button type="submit" class="btn-submit">
-                        <span>Valider ma demande</span> <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </form>
-            </div>
-        </section>
-    </main>
+/* Badge du Mandat */
+.mandat-badge {
+    display: inline-block;
+    background: rgba(237, 22, 81, 0.1);
+    color: var(--text-white);
+    border: 1px solid rgba(237, 22, 81, 0.4);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-    <footer class="footer">
-        <p>© 2026 Sylvain Matignon - Conseiller Immobilier Propriétés Privées. Tous droits réservés.</p>
-    </footer>
+/* Liste des éléments descriptifs */
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
 
-    <script src="script.js"></script>
-</body>
-</html>
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.feature-icon {
+    background: var(--primary);
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: white;
+    box-shadow: 0 8px 20px rgba(237, 22, 81, 0.3);
+}
+
+.feature-text h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.feature-text p {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   4. CARTE DU FORMULAIRE (Droite)
+   ========================================================================== */
+.form-section {
+    flex: 1;
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.form-card h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.form-intro {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+}
+
+/* Champs du formulaire */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+.form-group label i {
+    margin-right: 5px;
+    color: var(--primary);
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: white;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(237, 22, 81, 0.15);
+}
+
+.form-group select option {
+    background: #0f1936;
+    color: white;
+}
+
+/* Bouton envoyer */
+.btn-submit {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px -5px rgba(237, 22, 81, 0.4);
+    margin-top: 25px;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(237, 22, 81, 0.6);
+}
+
+/* ==========================================================================
+   5. FOOTER & COMPATIBILITE MOBILES
+   ========================================================================== */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #555;
+    font-size: 0.85rem;
+    z-index: 10;
+}
+
+@media (max-width: 968px) {
+    .header {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-main {
+        height: 80px; /* Légèrement plus petit sur mobile pour gagner de la place */
+    }
+
+    .main-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding-top: 10px;
+    }
+
+    .info-section {
+        max-width: 100%;
+    }
+
+    .main-title {
+        font-size: 2.2rem;
+    }
+
+    .mandat-badge {
+        margin-bottom: 30px;
+    }
+
+    .features-list {
+        text-align: left;
+    }
+
+    .form-section {
+        max-width: 100%;
+    }
+
+    .form-card {
+        padding: 25px;
+    }
+}
