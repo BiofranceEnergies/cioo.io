@@ -27,7 +27,27 @@ document.addEventListener("DOMContentLoaded", function() {
             affichageMandat.textContent = "Sélectionnez un bien depuis nos vidéos";
         }
     }
+
+    // --- AJOUT : Formatage automatique du numéro de téléphone ---
+    const phoneInput = document.querySelector('input[type="tel"]') || document.getElementById('telephone');
+    
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            // On ne garde que les chiffres
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // On limite à 10 chiffres maximum
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            // On sépare par blocs de 2 chiffres avec un espace
+            const formattedValue = value.match(/.{1,2}/g);
+            e.target.value = formattedValue ? formattedValue.join(' ') : '';
+        });
+    }
 });
+
 const form = document.getElementById("contact-form");
 const button = document.getElementById("submit-button");
 
