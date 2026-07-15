@@ -65,10 +65,10 @@ body::before {
 .main-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 20px 80px 20px;
+    padding: 60px 20px 80px 20px; /* J'ai augmenté le padding-top à 60px */
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* MODIFIÉ : Aligne les blocs en haut */
     justify-content: space-between;
     gap: 50px;
     flex-grow: 1;
