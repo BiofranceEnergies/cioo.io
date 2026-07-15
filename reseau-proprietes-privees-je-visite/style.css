@@ -54,7 +54,7 @@ body::before {
 }
 
 .logo-main {
-    height: 100px;
+    height: 60px; /* Réduit pour plus de légèreté et d'équilibre */
     width: auto;
     display: block;
 }
