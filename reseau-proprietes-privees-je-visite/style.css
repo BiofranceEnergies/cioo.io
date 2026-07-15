@@ -42,7 +42,7 @@ body::before {
 }
 
 /* ==========================================================================
-   2. HEADER & LOGO (ADAPTÉ POUR TON BADGE PHOTO)
+   2. HEADER & LOGO
    ========================================================================== */
 .header {
     width: 100%;
@@ -54,7 +54,7 @@ body::before {
 }
 
 .logo-main {
-    height: 100px; /* Augmenté à 100px pour la lisibilité de ta photo et de tes infos */
+    height: 100px;
     width: auto;
     display: block;
 }
@@ -65,10 +65,10 @@ body::before {
 .main-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px 80px 20px; /* J'ai augmenté le padding-top à 60px */
+    padding: 60px 20px 80px 20px;
     width: 100%;
     display: flex;
-    align-items: flex-start; /* MODIFIÉ : Aligne les blocs en haut */
+    align-items: flex-start; /* Aligne les blocs en haut */
     justify-content: space-between;
     gap: 50px;
     flex-grow: 1;
@@ -82,9 +82,9 @@ body::before {
 }
 
 .main-title {
-    font-size: 3rem;
+    font-size: 2.8rem; /* Ajusté pour un équilibre parfait */
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.2;
     margin-bottom: 15px;
     letter-spacing: -1px;
 }
@@ -151,7 +151,70 @@ body::before {
 }
 
 /* ==========================================================================
-   4. CARTE DU FORMULAIRE (Droite)
+   4. BLOC PROFIL CONSEILLER (Nouveau)
+   ========================================================================== */
+.profile-card {
+    margin-top: 45px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-badge {
+    max-width: 320px;
+}
+
+.profile-badge-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.profile-details {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+}
+
+.profile-details li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    color: var(--text-gray);
+}
+
+.profile-details a {
+    color: var(--text-white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.profile-details a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   5. CARTE DU FORMULAIRE (Droite)
    ========================================================================== */
 .form-section {
     flex: 1;
@@ -253,7 +316,7 @@ body::before {
 }
 
 /* ==========================================================================
-   5. FOOTER & COMPATIBILITE MOBILES
+   6. FOOTER & COMPATIBILITE MOBILES
    ========================================================================== */
 .footer {
     text-align: center;
@@ -272,7 +335,7 @@ body::before {
     }
 
     .logo-main {
-        height: 80px; /* Légèrement plus petit sur mobile pour gagner de la place */
+        height: 80px;
     }
 
     .main-container {
@@ -296,6 +359,14 @@ body::before {
 
     .features-list {
         text-align: left;
+    }
+
+    .profile-card {
+        align-items: center;
+    }
+
+    .profile-details li {
+        justify-content: center;
     }
 
     .form-section {
