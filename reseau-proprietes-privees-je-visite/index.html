@@ -39,7 +39,6 @@
                 </div>
             </div>
 
-            <!-- BLOC PROFIL CONSEILLER RE-PARAMÉTRÉ -->
             <div class="profile-card">
                 <div class="profile-badge">
                     <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/2a7f3548030562a9c3aef904a1e2b4a8590917a7/reseau-proprietes-privees-smat/LOGO%20propriete%20blanc-%20PHOTO-coord%20blanc.png" alt="Sylvain Matignon - Propriétés Privées" class="profile-badge-img">
@@ -66,7 +65,6 @@
                 <h2>Demande de contact rapide</h2>
                 <p class="form-intro">Remplissez ce court formulaire, je vous recontacte dans les plus brefs délais.</p>
                 
-                <!-- On garde l'action pour la sécurité, mais le script JS va prendre le relais -->
                 <form id="contact-form" action="https://formspree.io/f/mrenbadp" method="POST">
                     
                     <input type="hidden" id="champ-mandat" name="numero_mandat" value="Non spécifié">
@@ -76,9 +74,9 @@
                         <input type="text" id="nom" name="nom" required placeholder="Ex : Jean Dupont">
                     </div>
 
-                   <div class="form-group">
-                        <label for="tel"><i class="fa-solid fa-phone"></i> Téléphone *</label>
-                        <input type="tel" id="tel" name="telephone" required placeholder="Ex : 06 12 34 56 78">
+                    <div class="form-group">
+                        <label for="telephone"><i class="fa-solid fa-phone"></i> Téléphone *</label>
+                        <input type="tel" id="telephone" name="telephone" required placeholder="Ex : 06 12 34 56 78">
                     </div>
 
                     <div class="form-group">
