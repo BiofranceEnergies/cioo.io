@@ -104,7 +104,7 @@
       text-align: justify;
     }
 
-    /* Cartes d'arguments aérées */
+    /* Cartes d'arguments */
     .highlight-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
@@ -212,7 +212,7 @@
       margin-top: 3px;
     }
 
-    /* Carte QR Code */
+    /* Carte QR Code - ALIGNEMENT PARFAIT LOGO + TEXTE */
     .qr-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
@@ -228,13 +228,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       margin-bottom: 6px;
+      line-height: 1;
     }
     .yt-logo-img {
-      height: 15px;
+      height: 16px;
       width: auto;
-      display: inline-block;
+      display: block;
     }
     .qr-img {
       width: 75px;
@@ -366,7 +367,7 @@
           <div class="qr-card">
             <div class="qr-title">
               <img src="logo%20youtube.png" alt="YouTube" class="yt-logo-img">
-              Exemple de visite immersive
+              <span>Exemple de visite immersive</span>
             </div>
             <img src="qr-code%20bien%20maison%20ann%C3%A9e%2030.png" alt="QR Code Visite Virtuelle" class="qr-img">
             <div class="qr-caption">Scannez ce code pour voir une visite vidéo en action.</div>
