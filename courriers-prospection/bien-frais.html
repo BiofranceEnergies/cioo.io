@@ -77,7 +77,7 @@
       font-style: italic;
     }
 
-    /* Bannière d'accroche ROUGE PP (Plus de noir) */
+    /* Bannière d'accroche ROUGE PP */
     .hero-banner {
       background-color: #e61653;
       color: #ffffff;
@@ -206,7 +206,7 @@
       margin-top: 2px;
     }
 
-    /* Carte QR Code Douce (Fond Rose/Gris Clair) */
+    /* Carte QR Code avec vrai Logo YouTube */
     .qr-card {
       border: 1px solid #f8d7da;
       border-radius: 5px;
@@ -222,24 +222,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      gap: 6px;
       margin-bottom: 4px;
     }
-    .youtube-badge {
-      width: 14px;
-      height: 10px;
-      background-color: #e61653;
-      border-radius: 2px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .youtube-play {
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 2.5px 0 2.5px 5px;
-      border-color: transparent transparent transparent #ffffff;
+    .yt-logo-img {
+      height: 14px;
+      width: auto;
+      display: inline-block;
     }
     .qr-placeholder {
       width: 62px;
@@ -288,7 +277,7 @@
             <div class="sender-info">
               Conseiller Immobilier – Réseau Propriétés Privées<br>
               06 48 89 34 80 &nbsp;|&nbsp; s.matignon@proprietes-privees.com<br>
-              RSAC Évreux n° 422 231 928[cite: 3]
+              RSAC Évreux n° 422 231 928
             </div>
           </td>
           <td style="text-align: right; width: 165px;">
@@ -303,7 +292,7 @@
         <div class="recipient-address">Bien situé au : [Adresse du bien]</div>
       </div>
 
-      <!-- BANNIÈRE D'ACCROCHE (ROUGE PP) -->
+      <!-- BANNIÈRE D'ACCROCHE -->
       <div class="hero-banner">
         <div class="hero-title">Votre maison mérite plus que de simples photos fixes.</div>
         <div class="hero-subtitle">Comment la vidéo YouTube qualifie vos acheteurs et booste votre visibilité dès le 1er jour.</div>
@@ -366,10 +355,10 @@
           </div>
         </td>
         <td style="width: 42%;">
-          <!-- Carte QR Code Clair -->
+          <!-- Carte QR Code avec Logo YouTube Officiel -->
           <div class="qr-card">
             <div class="qr-title">
-              <span class="youtube-badge"><span class="youtube-play"></span></span>
+              <img src="logo%20youtube.png" alt="YouTube" class="yt-logo-img">
               Découvrez la méthode (1 min 30)
             </div>
             <div class="qr-placeholder">[ QR CODE ]</div>
