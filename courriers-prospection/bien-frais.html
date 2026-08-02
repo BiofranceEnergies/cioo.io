@@ -2,15 +2,15 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Courrier Prospection - Bien Frais / Valorisation Vidéo</title>
+  <title>Courrier Prospection - Bien Frais</title>
   <style>
     body {
       background-color: #525659;
       margin: 0;
       padding: 20px 0;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10pt;
-      line-height: 1.45;
+      font-size: 10.5pt;
+      line-height: 1.5;
       color: #1a1a1a;
     }
 
@@ -20,9 +20,10 @@
       height: 297mm;
       margin: 0 auto;
       background-color: #ffffff;
-      padding: 12mm 18mm 14mm 18mm;
+      padding: 14mm 20mm 18mm 20mm;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
       box-sizing: border-box;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -33,29 +34,23 @@
       width: 100%;
       border-collapse: collapse;
       border-bottom: 2px solid #e61653;
-      padding-bottom: 8px;
-      margin-bottom: 14px;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
     }
     .sender-name {
-      font-size: 13pt;
+      font-size: 13.5pt;
       font-weight: bold;
       color: #e61653;
       letter-spacing: 0.3px;
     }
     .sender-info {
-      font-size: 9pt;
+      font-size: 9.5pt;
       color: #444444;
       line-height: 1.35;
-      margin-top: 2px;
-    }
-    .sender-tagline {
-      font-size: 8.8pt;
-      font-weight: bold;
-      color: #e61653;
-      margin-top: 2px;
+      margin-top: 3px;
     }
     .logo-img {
-      max-width: 160px;
+      max-width: 170px;
       height: auto;
       display: block;
       margin-left: auto;
@@ -67,42 +62,47 @@
       margin-left: auto;
       background-color: #fdf2f4;
       border-left: 4px solid #e61653;
-      padding: 8px 12px;
-      margin-bottom: 14px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
       border-radius: 0 4px 4px 0;
     }
     .recipient-title {
       font-weight: bold;
       color: #e61653;
-      font-size: 9.5pt;
+      font-size: 10pt;
       outline: none;
     }
     .recipient-address {
-      font-size: 8.5pt;
+      font-size: 9pt;
       color: #555555;
       font-style: italic;
       outline: none;
     }
 
-    /* BANNIÈRE D'ACCROCHE ROUGE PP */
+    /* Bannière d'accroche ROUGE PP */
     .hero-banner {
       background-color: #e61653;
       color: #ffffff;
       padding: 12px 16px;
       border-radius: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       box-shadow: 0 2px 5px rgba(230, 22, 83, 0.15);
     }
     .hero-title {
       font-size: 11.5pt;
       font-weight: bold;
       color: #ffffff;
-      outline: none;
+      margin-bottom: 4px;
+    }
+    .hero-subtitle {
+      font-size: 9pt;
+      color: #ffffff;
+      opacity: 0.95;
     }
 
     /* Corps du texte */
     .content p {
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
       text-align: justify;
     }
 
@@ -110,28 +110,28 @@
     .highlight-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
-      padding: 10px 14px;
-      margin: 12px 0;
+      padding: 11px 14px;
+      margin: 14px 0;
       background-color: #ffffff;
     }
     .card-header {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       border-bottom: 1px solid #f8d7da;
-      padding-bottom: 4px;
-      margin-bottom: 6px;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
     }
     .card-icon {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
       fill: #e61653;
       flex-shrink: 0;
     }
     .card-title {
       margin: 0;
       color: #e61653;
-      font-size: 9.5pt;
+      font-size: 10pt;
       font-weight: bold;
     }
 
@@ -141,10 +141,10 @@
       list-style: none;
     }
     .highlight-card li {
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       position: relative;
-      padding-left: 16px;
-      font-size: 9pt;
+      padding-left: 18px;
+      font-size: 9.5pt;
     }
     .highlight-card li::before {
       content: "✓";
@@ -158,7 +158,7 @@
     .badge-highlight {
       background-color: #fdf2f4;
       color: #e61653;
-      padding: 1px 4px;
+      padding: 2px 5px;
       border-radius: 3px;
       font-weight: bold;
     }
@@ -166,21 +166,7 @@
     .cta-text {
       font-weight: bold;
       color: #1a1a1a;
-      margin-top: 12px !important;
-      margin-bottom: 0 !important;
-      font-size: 9.5pt;
-    }
-
-    /* P.S. Mis en valeur */
-    .ps-text {
-      font-size: 8.8pt;
-      font-weight: bold;
-      color: #e61653;
-      background-color: #fdf2f4;
-      border-left: 3px solid #e61653;
-      padding: 6px 10px;
-      border-radius: 0 4px 4px 0;
-      margin-top: 8px !important;
+      margin-top: 16px !important;
       margin-bottom: 0 !important;
     }
 
@@ -188,7 +174,7 @@
     .footer-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
+      margin-top: 25px;
     }
     .footer-table td {
       vertical-align: bottom;
@@ -196,63 +182,63 @@
     .signature-container {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .profile-img {
-      width: 58px;
-      height: 58px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #e61653;
     }
     .signature-title {
-      font-size: 10pt;
+      font-size: 11pt;
       font-weight: bold;
       color: #e61653;
     }
     .signature-role {
-      font-size: 8.5pt;
+      font-size: 9pt;
       font-weight: bold;
       color: #333333;
       margin-top: 1px;
     }
     .signature-contact {
-      font-size: 8pt;
+      font-size: 8.5pt;
       color: #444444;
-      margin-top: 2px;
-      line-height: 1.25;
+      margin-top: 3px;
+      line-height: 1.35;
     }
     .signature-tagline {
       font-style: italic;
       color: #666666;
-      font-size: 7.5pt;
-      margin-top: 2px;
+      font-size: 8pt;
+      margin-top: 3px;
     }
 
     /* Carte QR Code */
     .qr-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
-      padding: 6px 8px;
+      padding: 8px 10px;
       text-align: center;
       background-color: #fdf2f4;
       color: #1a1a1a;
     }
     .yt-logo-img {
-      height: 14px;
+      height: 16px;
       width: auto;
       display: block;
-      margin: 0 auto 2px auto;
+      margin: 0 auto 3px auto;
     }
     .qr-subtitle {
-      font-size: 8pt;
+      font-size: 8.5pt;
       font-weight: bold;
       color: #e61653;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .qr-img {
-      width: 62px;
-      height: 62px;
+      width: 72px;
+      height: 72px;
       display: block;
       margin: 0 auto;
       border: 1px solid #e61653;
@@ -261,10 +247,10 @@
       padding: 2px;
     }
     .qr-caption {
-      font-size: 7pt;
+      font-size: 7.5pt;
       color: #555555;
-      line-height: 1.15;
-      margin-top: 3px;
+      line-height: 1.2;
+      margin-top: 4px;
     }
 
     @media print {
@@ -276,7 +262,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 12mm 18mm 14mm 18mm;
+        padding: 14mm 20mm 18mm 20mm;
         box-shadow: none;
       }
       @page {
@@ -290,21 +276,23 @@
 
   <div class="page-a4">
     <div>
-      <!-- EN-TÊTE LOCAL ÉPURÉ -->
+      <!-- EN-TÊTE ÉPURÉ -->
       <table class="header-table">
         <tr>
           <td>
             <div class="sender-name">Sylvain MATIGNON</div>
-            <div class="sender-info">Conseiller Immobilier – Saint-Martial-de-Valette – Réseau Propriétés Privées</div>
-            <div class="sender-tagline">Votre conseiller dans le Périgord Vert</div>
+            <div class="sender-info">
+              Conseiller Immobilier – Réseau Propriétés Privées<br>
+              RSAC Évreux n° 422 231 928
+            </div>
           </td>
-          <td style="text-align: right; width: 160px;">
+          <td style="text-align: right; width: 170px;">
             <img src="pp_logo_quadri_seul.png" alt="Propriétés Privées" class="logo-img">
           </td>
         </tr>
       </table>
 
-      <!-- DESTINATAIRE ÉDITABLE -->
+      <!-- DESTINATAIRE ÉDITABLE DIRECTEMENT DANS LE NAVIGATEUR -->
       <div class="recipient-box">
         <div class="recipient-title" contenteditable="true">À l’attention de M. / Mme [Nom du propriétaire]</div>
         <div class="recipient-address" contenteditable="true">Bien situé au : [Adresse du bien]</div>
@@ -312,46 +300,45 @@
 
       <!-- BANNIÈRE D'ACCROCHE -->
       <div class="hero-banner">
-        <div class="hero-title" contenteditable="true">Félicitations pour le lancement de la vente de votre bien !</div>
+        <div class="hero-title">Votre maison mérite plus que de simples photos fixes.</div>
+        <div class="hero-subtitle">Comment la vidéo YouTube qualifie vos acheteurs et booste votre visibilité dès le 1er jour.</div>
       </div>
 
       <!-- CORPS DU TEXTE -->
       <div class="content">
         <p>Madame, Monsieur,</p>
 
-        <p>J'ai remarqué la mise en vente récente de votre propriété. La mise sur le marché d'un bien est une étape importante, et les premières semaines sont déterminantes pour capter l'attention des meilleurs acheteurs.</p>
+        <p>J'ai constaté que vous veniez tout juste de commercialiser votre propriété. C'est un moment charnière, et au vu de votre bien, vous avez parfaitement raison d'être ambitieux pour cette vente.</p>
 
-        <p>Aujourd'hui, une simple série de photos ne suffit plus pour sortir du lot face à la multitude d'annonces. Pour susciter un véritable coup de cœur à distance et déclencher des offres qualifiées, il faut offrir une expérience immersive dès le premier clic.</p>
+        <p>En phase de lancement, votre annonce bénéficie d'un effet "nouveauté". Cependant, les annonces traditionnelles sur simples photos génèrent souvent deux écueils : des acheteurs passifs et une multiplication de "visites touristiques" non qualifiées.</p>
 
-        <!-- CARTE 1 : VALORISATION YOUTUBE -->
+        <!-- CARTE 1 : VIDEO & RESEAU -->
         <div class="highlight-card">
           <div class="card-header">
             <svg class="card-icon" viewBox="0 0 24 24">
               <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
             </svg>
-            <h3 class="card-title">1. Sublimer votre bien grâce au Booster Vidéo YouTube</h3>
+            <h3 class="card-title">1. La Puissance Réseau + Le Booster Vidéo YouTube</h3>
           </div>
-          <p style="margin: 0; text-align: justify; font-size: 9pt;">Rattaché à la puissance de diffusion du réseau <strong>Propriétés Privées</strong> (plus de 100 portails), je réalise une <strong class="badge-highlight">visite vidéo YouTube immersive</strong> de votre maison. Ce format capte l'attention, valorise les volumes et déclenche l'enthousiasme des acheteurs sérieux.</p>
+          <p style="margin: 0; text-align: justify; font-size: 9.5pt;">Rattaché au réseau <strong>Propriétés Privées</strong>, je diffuse votre bien sur plus de 100 portails immobiliers. Pour faire sortir votre annonce du lot, j'y associe une <strong class="badge-highlight">visite vidéo YouTube immersive</strong>. Ce format capte l'attention immédiatement et démultiplie le taux de clic des acheteurs actifs.</p>
         </div>
 
-        <!-- CARTE 2 : AVANTAGES -->
+        <!-- CARTE 2 : QUALIFICATION & SUIVI -->
         <div class="highlight-card">
           <div class="card-header">
             <svg class="card-icon" viewBox="0 0 24 24">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
             </svg>
-            <h3 class="card-title">2. Une commercialisation optimale dès le départ</h3>
+            <h3 class="card-title">2. Une pré-qualification &amp; un suivi rigoureux</h3>
           </div>
           <ul>
-            <li><strong>Filtre anti-curieux :</strong> La vidéo permet aux acheteurs de se projeter et valide leur intérêt avant même de déplacer qui que ce soit.</li>
-            <li><strong>Transparence &amp; Suivi :</strong> Un retour régulier sur les statistiques de visionnage pour ajuster si besoin votre stratégie.</li>
-            <li><strong>Liberté de tester :</strong> Bénéficiez de cette mise en valeur <strong class="badge-highlight">dans le cadre d'un simple mandat</strong>, sans contrainte.</li>
+            <li><strong>Filtrage amont :</strong> L'acheteur visite le bien depuis son écran et valide les volumes avant de m'appeler.</li>
+            <li><strong>Suivi toutes les 2 semaines :</strong> Un point régulier sur vos statistiques (vues, clics) pour ajuster la stratégie et garder l'annonce active.</li>
+            <li><strong>Liberté totale :</strong> Je déploie cette méthode <strong class="badge-highlight">dans le cadre d'un simple mandat</strong>, sans engagement d'exclusivité.</li>
           </ul>
         </div>
 
-        <p class="cta-text">Donnons à votre vente la visibilité qu'elle mérite : échangeons 15 minutes pour étudier ensemble la meilleure stratégie d'affichage.</p>
-        
-        <p class="ps-text">P.S. : Si vous avez déjà trouvé vos acheteurs ou si votre stratégie actuelle porte pleinement ses fruits, ne tenez pas compte de ce courrier et je vous souhaite une excellente réussite.</p>
+        <p class="cta-text">Si vous souhaitez donner une visibilité maximale à votre bien et ne recevoir que des visites qualifiées, échangeons 15 minutes ensemble.</p>
       </div>
     </div>
 
@@ -359,7 +346,7 @@
     <table class="footer-table">
       <tr>
         <td style="width: 58%;">
-          <p style="margin: 0 0 4px 0; font-size: 8.5pt;">Bien cordialement,</p>
+          <p style="margin: 0 0 8px 0; font-size: 9.5pt;">Bien cordialement,</p>
           <div class="signature-container">
             <img src="photo%20moi%20ronde.png" alt="Sylvain Matignon" class="profile-img">
             <div>
