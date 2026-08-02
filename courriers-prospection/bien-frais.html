@@ -14,7 +14,7 @@
       color: #1a1a1a;
     }
 
-    /* Conteneur Feuille A4 - Padding bas ajusté */
+    /* Conteneur Feuille A4 */
     .page-a4 {
       width: 210mm;
       height: 297mm;
@@ -56,7 +56,7 @@
       margin-left: auto;
     }
 
-    /* Destinataire & Accroche */
+    /* Destinataire Éditable */
     .recipient-box {
       width: 60%;
       margin-left: auto;
@@ -70,11 +70,13 @@
       font-weight: bold;
       color: #e61653;
       font-size: 10pt;
+      outline: none;
     }
     .recipient-address {
       font-size: 9pt;
       color: #555555;
       font-style: italic;
+      outline: none;
     }
 
     /* Bannière d'accroche ROUGE PP */
@@ -168,7 +170,7 @@
       margin-bottom: 0 !important;
     }
 
-    /* Pied de page remonté */
+    /* Pied de page */
     .footer-table {
       width: 100%;
       border-collapse: collapse;
@@ -290,10 +292,10 @@
         </tr>
       </table>
 
-      <!-- DESTINATAIRE -->
+      <!-- DESTINATAIRE ÉDITABLE DIRECTEMENT DANS LE NAVIGATEUR -->
       <div class="recipient-box">
-        <div class="recipient-title">À l’attention de M. / Mme [Nom du propriétaire]</div>
-        <div class="recipient-address">Bien situé au : [Adresse du bien]</div>
+        <div class="recipient-title" contenteditable="true">À l’attention de M. / Mme [Nom du propriétaire]</div>
+        <div class="recipient-address" contenteditable="true">Bien situé au : [Adresse du bien]</div>
       </div>
 
       <!-- BANNIÈRE D'ACCROCHE -->
