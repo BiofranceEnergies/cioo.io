@@ -9,8 +9,8 @@
       margin: 0;
       padding: 20px 0;
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 10.5pt;
-      line-height: 1.5;
+      font-size: 10pt;
+      line-height: 1.45;
       color: #1a1a1a;
     }
 
@@ -20,10 +20,9 @@
       height: 297mm;
       margin: 0 auto;
       background-color: #ffffff;
-      padding: 14mm 20mm 16mm 20mm;
+      padding: 10mm 18mm 12mm 18mm;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
       box-sizing: border-box;
-      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -34,23 +33,23 @@
       width: 100%;
       border-collapse: collapse;
       border-bottom: 2px solid #e61653;
-      padding-bottom: 12px;
-      margin-bottom: 16px;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
     }
     .sender-name {
-      font-size: 13.5pt;
+      font-size: 13pt;
       font-weight: bold;
       color: #e61653;
       letter-spacing: 0.3px;
     }
     .sender-info {
-      font-size: 9.5pt;
+      font-size: 9pt;
       color: #444444;
-      line-height: 1.35;
-      margin-top: 3px;
+      line-height: 1.3;
+      margin-top: 2px;
     }
     .logo-img {
-      max-width: 170px;
+      max-width: 160px;
       height: auto;
       display: block;
       margin-left: auto;
@@ -62,56 +61,60 @@
       margin-left: auto;
       background-color: #fdf2f4;
       border-left: 4px solid #e61653;
-      padding: 10px 14px;
-      margin-bottom: 16px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
       border-radius: 0 4px 4px 0;
     }
     .recipient-title {
       font-weight: bold;
       color: #e61653;
-      font-size: 10pt;
+      font-size: 9.5pt;
       outline: none;
     }
     .recipient-address {
-      font-size: 9pt;
+      font-size: 8.5pt;
       color: #555555;
       font-style: italic;
       outline: none;
     }
 
-    /* BANNIÈRE D'ACCROCHE ROUGE PP - ALERTE INTÉGRÉE */
+    /* BANNIÈRE D'ACCROCHE ROUGE PP */
     .hero-banner {
       background-color: #e61653;
       color: #ffffff;
-      padding: 12px 16px;
+      padding: 10px 14px;
       border-radius: 6px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       box-shadow: 0 2px 5px rgba(230, 22, 83, 0.15);
     }
     .alert-header {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 15pt;
-      font-weight: 900;
-      color: #ffffff;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-      line-height: 1.1;
-    }
-    .hero-title {
-      font-size: 11.5pt;
       font-weight: bold;
       color: #ffffff;
-      margin-bottom: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      line-height: 1.1;
+      outline: none;
+    }
+    .hero-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 2px;
+      outline: none;
     }
     .hero-subtitle {
-      font-size: 8.8pt;
+      font-size: 8.5pt;
       color: #ffffff;
       opacity: 0.95;
+      outline: none;
     }
 
     /* Corps du texte */
     .content p {
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       text-align: justify;
     }
 
@@ -119,28 +122,28 @@
     .highlight-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
-      padding: 10px 14px;
-      margin: 12px 0;
+      padding: 8px 12px;
+      margin: 10px 0;
       background-color: #ffffff;
     }
     .card-header {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       border-bottom: 1px solid #f8d7da;
-      padding-bottom: 5px;
-      margin-bottom: 7px;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
     }
     .card-icon {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       fill: #e61653;
       flex-shrink: 0;
     }
     .card-title {
       margin: 0;
       color: #e61653;
-      font-size: 10pt;
+      font-size: 9.5pt;
       font-weight: bold;
     }
 
@@ -150,10 +153,10 @@
       list-style: none;
     }
     .highlight-card li {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       position: relative;
-      padding-left: 18px;
-      font-size: 9.3pt;
+      padding-left: 16px;
+      font-size: 9pt;
     }
     .highlight-card li::before {
       content: "✓";
@@ -167,7 +170,7 @@
     .badge-highlight {
       background-color: #fdf2f4;
       color: #e61653;
-      padding: 2px 5px;
+      padding: 1px 4px;
       border-radius: 3px;
       font-weight: bold;
     }
@@ -175,20 +178,21 @@
     .cta-text {
       font-weight: bold;
       color: #1a1a1a;
-      margin-top: 12px !important;
+      margin-top: 10px !important;
       margin-bottom: 0 !important;
+      font-size: 9.5pt;
     }
 
-    /* P.S. Mmis en valeur */
+    /* P.S. Mis en valeur */
     .ps-text {
-      font-size: 9pt;
+      font-size: 8.8pt;
       font-weight: bold;
       color: #e61653;
       background-color: #fdf2f4;
       border-left: 3px solid #e61653;
-      padding: 6px 10px;
+      padding: 5px 8px;
       border-radius: 0 4px 4px 0;
-      margin-top: 8px !important;
+      margin-top: 6px !important;
       margin-bottom: 0 !important;
     }
 
@@ -196,7 +200,7 @@
     .footer-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin-top: 10px;
     }
     .footer-table td {
       vertical-align: bottom;
@@ -204,36 +208,36 @@
     .signature-container {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .profile-img {
-      width: 64px;
-      height: 64px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #e61653;
     }
     .signature-title {
-      font-size: 10.5pt;
+      font-size: 10pt;
       font-weight: bold;
       color: #e61653;
     }
     .signature-role {
-      font-size: 8.8pt;
+      font-size: 8.5pt;
       font-weight: bold;
       color: #333333;
       margin-top: 1px;
     }
     .signature-contact {
-      font-size: 8.3pt;
+      font-size: 8pt;
       color: #444444;
       margin-top: 2px;
-      line-height: 1.3;
+      line-height: 1.25;
     }
     .signature-tagline {
       font-style: italic;
       color: #666666;
-      font-size: 7.8pt;
+      font-size: 7.5pt;
       margin-top: 2px;
     }
 
@@ -241,26 +245,26 @@
     .qr-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 6px 8px;
       text-align: center;
       background-color: #fdf2f4;
       color: #1a1a1a;
     }
     .yt-logo-img {
-      height: 15px;
+      height: 14px;
       width: auto;
       display: block;
-      margin: 0 auto 3px auto;
+      margin: 0 auto 2px auto;
     }
     .qr-subtitle {
-      font-size: 8.2pt;
+      font-size: 8pt;
       font-weight: bold;
       color: #e61653;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .qr-img {
-      width: 68px;
-      height: 68px;
+      width: 62px;
+      height: 62px;
       display: block;
       margin: 0 auto;
       border: 1px solid #e61653;
@@ -269,10 +273,10 @@
       padding: 2px;
     }
     .qr-caption {
-      font-size: 7.2pt;
+      font-size: 7pt;
       color: #555555;
-      line-height: 1.2;
-      margin-top: 4px;
+      line-height: 1.15;
+      margin-top: 3px;
     }
 
     @media print {
@@ -284,7 +288,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 14mm 20mm 16mm 20mm;
+        padding: 10mm 18mm 12mm 18mm;
         box-shadow: none;
       }
       @page {
@@ -308,7 +312,7 @@
               RSAC Évreux n° 422 231 928
             </div>
           </td>
-          <td style="text-align: right; width: 170px;">
+          <td style="text-align: right; width: 160px;">
             <img src="pp_logo_quadri_seul.png" alt="Propriétés Privées" class="logo-img">
           </td>
         </tr>
@@ -320,11 +324,11 @@
         <div class="recipient-address" contenteditable="true">Bien situé au : [Adresse du bien]</div>
       </div>
 
-      <!-- BANNIÈRE D'ACCROCHE CHOC -->
+      <!-- BANNIÈRE D'ACCROCHE -->
       <div class="hero-banner">
-        <div class="alert-header">ALERTE !</div>
-        <div class="hero-title">Toujours pas de visite ou d'offre sur votre bien ?</div>
-        <div class="hero-subtitle">Sur le Web, une annonce à simples photos s'épuise vite. Ne laissez pas votre maison s'user.</div>
+        <div class="alert-header" contenteditable="true">ALERTE !</div>
+        <div class="hero-title" contenteditable="true">Toujours pas de visite ou d'offre sur votre bien ?</div>
+        <div class="hero-subtitle" contenteditable="true">Sur le Web, une annonce à simples photos s'épuise vite. Ne laissez pas votre maison s'user.</div>
       </div>
 
       <!-- CORPS DU TEXTE -->
@@ -343,7 +347,7 @@
             </svg>
             <h3 class="card-title">1. Réinjecter de l'attractivité avec le Booster Vidéo YouTube</h3>
           </div>
-          <p style="margin: 0; text-align: justify; font-size: 9.3pt;">Appuyé par la puissance de diffusion du réseau <strong>Propriétés Privées</strong> (plus de 100 portails), je remets votre bien sous le feu des projecteurs avec une <strong class="badge-highlight">visite vidéo YouTube immersive</strong>. Ce format redonne une dynamique immédiate et relance les clics des acheteurs actifs.</p>
+          <p style="margin: 0; text-align: justify; font-size: 9pt;">Appuyé par la puissance de diffusion du réseau <strong>Propriétés Privées</strong> (plus de 100 portails), je remets votre bien sous le feu des projecteurs avec une <strong class="badge-highlight">visite vidéo YouTube immersive</strong>. Ce format redonne une dynamique immédiate et relance les clics des acheteurs actifs.</p>
         </div>
 
         <!-- CARTE 2 : QUALIFICATION & SUIVI -->
@@ -371,7 +375,7 @@
     <table class="footer-table">
       <tr>
         <td style="width: 58%;">
-          <p style="margin: 0 0 6px 0; font-size: 9pt;">Bien cordialement,</p>
+          <p style="margin: 0 0 4px 0; font-size: 8.5pt;">Bien cordialement,</p>
           <div class="signature-container">
             <img src="photo%20moi%20ronde.png" alt="Sylvain Matignon" class="profile-img">
             <div>
