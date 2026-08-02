@@ -212,36 +212,32 @@
       margin-top: 3px;
     }
 
-    /* Carte QR Code - ALIGNEMENT PARFAIT LOGO + TEXTE */
+    /* Carte QR Code - DISPOSITION VERTICALE ÉPURÉE */
     .qr-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
-      padding: 9px;
+      padding: 8px 10px;
       text-align: center;
       background-color: #fdf2f4;
       color: #1a1a1a;
-    }
-    .qr-title {
-      font-size: 8.5pt;
-      font-weight: bold;
-      color: #e61653;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 6px;
-      line-height: 1;
     }
     .yt-logo-img {
       height: 16px;
       width: auto;
       display: block;
+      margin: 0 auto 3px auto;
+    }
+    .qr-subtitle {
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #e61653;
+      margin-bottom: 4px;
     }
     .qr-img {
-      width: 75px;
-      height: 75px;
+      width: 72px;
+      height: 72px;
       display: block;
-      margin: 4px auto;
+      margin: 0 auto;
       border: 1px solid #e61653;
       border-radius: 4px;
       background-color: #ffffff;
@@ -363,12 +359,10 @@
           </div>
         </td>
         <td style="width: 42%;">
-          <!-- Carte QR Code -->
+          <!-- Carte QR Code Centrée -->
           <div class="qr-card">
-            <div class="qr-title">
-              <img src="logo%20youtube.png" alt="YouTube" class="yt-logo-img">
-              <span>Exemple de visite immersive</span>
-            </div>
+            <img src="logo%20youtube.png" alt="YouTube" class="yt-logo-img">
+            <div class="qr-subtitle">Exemple de visite immersive</div>
             <img src="qr-code%20bien%20maison%20ann%C3%A9e%2030.png" alt="QR Code Visite Virtuelle" class="qr-img">
             <div class="qr-caption">Scannez ce code pour voir une visite vidéo en action.</div>
           </div>
