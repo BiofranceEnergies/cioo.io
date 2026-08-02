@@ -9,8 +9,8 @@
       margin: 0;
       padding: 20px 0;
       font-family: Arial, Helvetica, sans-serif;
-      font-size: 11pt;
-      line-height: 1.5;
+      font-size: 10.5pt;
+      line-height: 1.4;
       color: #1a1a1a;
     }
 
@@ -19,7 +19,7 @@
       height: 297mm;
       margin: 0 auto;
       background-color: #ffffff;
-      padding: 20mm 20mm 15mm 20mm;
+      padding: 12mm 18mm 10mm 18mm;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
       box-sizing: border-box;
       position: relative;
@@ -33,128 +33,140 @@
       width: 100%;
       border-collapse: collapse;
       border-bottom: 2px solid #003366;
-      padding-bottom: 12px;
-      margin-bottom: 25px;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
     }
     .sender-name {
-      font-size: 13pt;
+      font-size: 12.5pt;
       font-weight: bold;
       color: #003366;
     }
     .sender-info {
-      font-size: 9.5pt;
+      font-size: 9pt;
       color: #444444;
-      line-height: 1.4;
+      line-height: 1.35;
     }
     .logo-box {
-      width: 160px;
-      height: 50px;
+      width: 150px;
+      height: 45px;
       border: 1px dashed #cccccc;
       text-align: center;
-      line-height: 50px;
-      font-size: 8.5pt;
+      line-height: 45px;
+      font-size: 8pt;
       color: #888888;
     }
 
     /* Destinataire & Objet */
     .recipient-box {
-      width: 60%;
+      width: 58%;
       margin-left: auto;
       background-color: #f4f6f8;
       border-left: 4px solid #003366;
-      padding: 10px 14px;
-      margin-bottom: 25px;
+      padding: 8px 12px;
+      margin-bottom: 15px;
     }
     .recipient-title {
       font-weight: bold;
       color: #003366;
-      font-size: 10.5pt;
+      font-size: 10pt;
     }
     .recipient-address {
-      font-size: 9.5pt;
+      font-size: 9pt;
       color: #555555;
       font-style: italic;
     }
 
     .subject-line {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: bold;
       color: #003366;
       background-color: #e8eef4;
-      padding: 8px 12px;
+      padding: 7px 10px;
       border-radius: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     /* Corps du texte */
     .content p {
-      margin: 0 0 14px 0;
+      margin: 0 0 10px 0;
       text-align: justify;
     }
 
     .highlight-card {
       border: 1px solid #d0d7de;
-      border-radius: 5px;
-      padding: 12px 15px;
-      margin: 16px 0;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
       background-color: #ffffff;
     }
     .highlight-card h3 {
-      margin: 0 0 6px 0;
+      margin: 0 0 4px 0;
       color: #003366;
-      font-size: 11pt;
+      font-size: 10pt;
       border-bottom: 1px solid #e1e4e8;
-      padding-bottom: 4px;
+      padding-bottom: 3px;
     }
     .highlight-card ul {
       margin: 0;
-      padding-left: 18px;
+      padding-left: 16px;
     }
     .highlight-card li {
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     /* Pied de page */
     .footer-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin-top: 10px;
     }
     .footer-table td {
       vertical-align: bottom;
     }
+    .signature-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .profile-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #003366;
+    }
     .signature-title {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: bold;
       color: #003366;
     }
     .signature-tagline {
       font-style: italic;
       color: #555555;
-      font-size: 9.5pt;
+      font-size: 9pt;
     }
 
     .qr-card {
       border: 1px solid #d0d7de;
-      border-radius: 5px;
-      padding: 8px;
+      border-radius: 4px;
+      padding: 6px;
       text-align: center;
       background-color: #ffffff;
     }
     .qr-placeholder {
-      width: 75px;
-      height: 75px;
+      width: 65px;
+      height: 65px;
       border: 1px dashed #aaaaaa;
-      margin: 6px auto;
-      line-height: 75px;
-      font-size: 8pt;
+      margin: 4px auto;
+      line-height: 65px;
+      font-size: 7.5pt;
       color: #666666;
       background-color: #f9f9f9;
     }
     .qr-caption {
-      font-size: 8pt;
+      font-size: 7.5pt;
       color: #444444;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     @media print {
@@ -166,7 +178,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 15mm 18mm;
+        padding: 12mm 18mm 10mm 18mm;
         box-shadow: none;
       }
       @page {
@@ -191,7 +203,7 @@
               RSAC Évreux n° 422 231 928
             </div>
           </td>
-          <td style="text-align: right; width: 160px;">
+          <td style="text-align: right; width: 150px;">
             <div class="logo-box">[ Logo Propriétés Privées ]</div>
           </td>
         </tr>
@@ -218,7 +230,7 @@
 
         <div class="highlight-card">
           <h3>1. La Puissance Réseau + Le Booster Vidéo YouTube</h3>
-          <p style="margin: 0; text-align: justify;">Rattaché au réseau <strong>Propriétés Privées</strong>, je diffuse votre bien sur plus de 100 portails immobiliers. Pour faire sortir votre annonce du lot face à la concurrence, j'y associe une <strong>visite vidéo YouTube immersive</strong>. Ce format capte l'attention immédiatement et démultiplie le taux de clic des acheteurs actifs.</p>
+          <p style="margin: 0; text-align: justify;">Rattaché au réseau <strong>Propriétés Privées</strong>, je diffuse votre bien sur plus de 100 portails immobiliers. Pour faire sortir votre annonce du lot, j'y associe une <strong>visite vidéo YouTube immersive</strong>. Ce format capte l'attention immédiatement et démultiplie le taux de clic des acheteurs actifs.</p>
         </div>
 
         <div class="highlight-card">
@@ -238,13 +250,18 @@
     <table class="footer-table">
       <tr>
         <td style="width: 58%;">
-          Bien cordialement,<br><br>
-          <div class="signature-title">Sylvain MATIGNON</div>
-          <div class="signature-tagline">L'Immobilier d'ici, la Visibilité d'ailleurs.</div>
+          <p style="margin: 0 0 8px 0;">Bien cordialement,</p>
+          <div class="signature-container">
+            <img src="photo%20moi%20ronde.png" alt="Sylvain Matignon" class="profile-img">
+            <div>
+              <div class="signature-title">Sylvain MATIGNON</div>
+              <div class="signature-tagline">L'Immobilier d'ici, la Visibilité d'ailleurs.</div>
+            </div>
+          </div>
         </td>
         <td style="width: 42%;">
           <div class="qr-card">
-            <div style="font-size: 8.5pt; font-weight: bold; color: #003366;">Découvrez la méthode en 1 min 30 :</div>
+            <div style="font-size: 8pt; font-weight: bold; color: #003366;">Découvrez la méthode en 1 min 30 :</div>
             <div class="qr-placeholder">[ QR CODE ]</div>
             <div class="qr-caption">Scannez ce code pour voir l'impact de la visite vidéo.</div>
           </div>
