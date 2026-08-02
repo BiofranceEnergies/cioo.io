@@ -2,125 +2,161 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Courrier A4 - Sylvain Matignon</title>
+  <title>Courrier Prospection - Bien Frais</title>
   <style>
-    /* 1. CONFIGURATION DU RENDU ÉCRAN (Simulation Feuille A4) */
     body {
-      background-color: #525659; /* Fond gris type lecteur PDF */
+      background-color: #525659;
       margin: 0;
-      padding: 30px 0;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 9.5pt;
-      line-height: 1.35;
-      color: #2c3e50;
+      padding: 20px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      color: #1a1a1a;
     }
 
-    /* La feuille A4 stricte */
     .page-a4 {
       width: 210mm;
-      min-height: 297mm;
-      height: 297mm; /* Blocage strict de la hauteur */
+      height: 297mm;
       margin: 0 auto;
       background-color: #ffffff;
-      padding: 15mm 18mm;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ombre portée */
+      padding: 20mm 20mm 15mm 20mm;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
       box-sizing: border-box;
       position: relative;
-      overflow: hidden; /* Empêche tout débordement sur une page 2 */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    /* 2. STYLE DES ÉLÉMENTS DU COURRIER */
+    /* En-tête */
     .header-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 12px;
       border-bottom: 2px solid #003366;
-      padding-bottom: 8px;
+      padding-bottom: 12px;
+      margin-bottom: 25px;
     }
-    .header-table td { vertical-align: top; }
-    .sender-name { font-size: 12pt; font-weight: bold; color: #003366; }
-    .sender-info { font-size: 8.5pt; color: #555555; }
-    .logo-box {
-      width: 150px;
-      height: 45px;
-      border: 1px dashed #cbd5e1;
-      text-align: center;
-      line-height: 45px;
-      font-size: 8pt;
-      color: #94a3b8;
-    }
-
-    .recipient-box {
-      width: 55%;
-      margin-left: auto;
-      background-color: #f8fafc;
-      border-left: 3px solid #003366;
-      padding: 8px 12px;
-      margin-bottom: 14px;
-    }
-    .recipient-title { font-weight: bold; color: #003366; font-size: 9.5pt; }
-
-    .subject-line {
-      font-size: 10pt;
+    .sender-name {
+      font-size: 13pt;
       font-weight: bold;
       color: #003366;
-      background-color: #edf2f7;
-      padding: 6px 10px;
-      border-radius: 3px;
-      margin-bottom: 14px;
+    }
+    .sender-info {
+      font-size: 9.5pt;
+      color: #444444;
+      line-height: 1.4;
+    }
+    .logo-box {
+      width: 160px;
+      height: 50px;
+      border: 1px dashed #cccccc;
+      text-align: center;
+      line-height: 50px;
+      font-size: 8.5pt;
+      color: #888888;
     }
 
+    /* Destinataire & Objet */
+    .recipient-box {
+      width: 60%;
+      margin-left: auto;
+      background-color: #f4f6f8;
+      border-left: 4px solid #003366;
+      padding: 10px 14px;
+      margin-bottom: 25px;
+    }
+    .recipient-title {
+      font-weight: bold;
+      color: #003366;
+      font-size: 10.5pt;
+    }
+    .recipient-address {
+      font-size: 9.5pt;
+      color: #555555;
+      font-style: italic;
+    }
+
+    .subject-line {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #003366;
+      background-color: #e8eef4;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    /* Corps du texte */
     .content p {
-      margin: 0 0 8px 0;
+      margin: 0 0 14px 0;
       text-align: justify;
     }
 
     .highlight-card {
-      border: 1px solid #cbd5e1;
-      border-radius: 4px;
-      padding: 8px 12px;
-      margin: 10px 0;
+      border: 1px solid #d0d7de;
+      border-radius: 5px;
+      padding: 12px 15px;
+      margin: 16px 0;
       background-color: #ffffff;
     }
     .highlight-card h3 {
-      margin: 0 0 4px 0;
+      margin: 0 0 6px 0;
       color: #003366;
-      font-size: 9.5pt;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 3px;
+      font-size: 11pt;
+      border-bottom: 1px solid #e1e4e8;
+      padding-bottom: 4px;
     }
-    .highlight-card ul { margin: 0; padding-left: 16px; }
-    .highlight-card li { margin-bottom: 3px; }
+    .highlight-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .highlight-card li {
+      margin-bottom: 6px;
+    }
 
+    /* Pied de page */
     .footer-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 14px;
+      margin-top: 15px;
     }
-    .footer-table td { vertical-align: bottom; }
-    .signature-title { font-size: 10pt; font-weight: bold; color: #003366; }
-    .signature-tagline { font-style: italic; color: #64748b; font-size: 8.5pt; }
+    .footer-table td {
+      vertical-align: bottom;
+    }
+    .signature-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #003366;
+    }
+    .signature-tagline {
+      font-style: italic;
+      color: #555555;
+      font-size: 9.5pt;
+    }
 
     .qr-card {
-      border: 1px solid #cbd5e1;
-      border-radius: 4px;
-      padding: 6px;
+      border: 1px solid #d0d7de;
+      border-radius: 5px;
+      padding: 8px;
       text-align: center;
       background-color: #ffffff;
     }
     .qr-placeholder {
-      width: 65px;
-      height: 65px;
-      border: 1px dashed #94a3b8;
-      margin: 4px auto;
-      line-height: 65px;
-      font-size: 7.5pt;
-      color: #64748b;
-      background-color: #f8fafc;
+      width: 75px;
+      height: 75px;
+      border: 1px dashed #aaaaaa;
+      margin: 6px auto;
+      line-height: 75px;
+      font-size: 8pt;
+      color: #666666;
+      background-color: #f9f9f9;
     }
-    .qr-caption { font-size: 7.5pt; color: #475569; line-height: 1.15; }
+    .qr-caption {
+      font-size: 8pt;
+      color: #444444;
+      line-height: 1.2;
+    }
 
-    /* 3. REGLES STRICTES POUR L'IMPRESSION ET LE PDF */
     @media print {
       body {
         background-color: #ffffff;
@@ -130,87 +166,87 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 0;
+        padding: 15mm 18mm;
         box-shadow: none;
       }
       @page {
         size: A4 portrait;
-        margin: 12mm 15mm;
+        margin: 0;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- CONTENEUR PAGE A4 -->
   <div class="page-a4">
+    <div>
+      <!-- EN-TÊTE -->
+      <table class="header-table">
+        <tr>
+          <td>
+            <div class="sender-name">Sylvain MATIGNON</div>
+            <div class="sender-info">
+              Conseiller Immobilier – Réseau Propriétés Privées<br>
+              06 48 89 34 80 &nbsp;|&nbsp; s.matignon@proprietes-privees.com<br>
+              RSAC Évreux n° 422 231 928
+            </div>
+          </td>
+          <td style="text-align: right; width: 160px;">
+            <div class="logo-box">[ Logo Propriétés Privées ]</div>
+          </td>
+        </tr>
+      </table>
 
-    <!-- EN-TÊTE -->
-    <table class="header-table">
-      <tr>
-        <td>
-          <div class="sender-name">Sylvain MATIGNON</div>
-          <div class="sender-info">
-            Conseiller Immobilier – Réseau Propriétés Privées<br>
-            06 48 89 34 80 &nbsp;|&nbsp; s.matignon@proprietes-privees.com<br>
-            RSAC Évreux n° 422 231 928
-          </div>
-        </td>
-        <td style="text-align: right; width: 150px;">
-          <div class="logo-box">[ Logo Propriétés Privées ]</div>
-        </td>
-      </tr>
-    </table>
-
-    <!-- DESTINATAIRE -->
-    <div class="recipient-box">
-      <div class="recipient-title">À l’attention de M. / Mme [Nom du propriétaire]</div>
-      <div style="font-size: 8.5pt; color: #475569; font-style: italic;">Bien situé au : [Adresse du bien]</div>
-    </div>
-
-    <!-- OBJET -->
-    <div class="subject-line">
-      Objet : Votre récente mise en vente &amp; l'impact de la visite vidéo YouTube
-    </div>
-
-    <!-- CORPS DU TEXTE -->
-    <div class="content">
-      <p>Madame, Monsieur,</p>
-
-      <p>J'ai constaté que vous veniez de commercialiser votre propriété. C'est un moment charnière, et au vu de votre bien, vous avez parfaitement raison de déployer votre projet aujourd'hui.</p>
-
-      <p>En phase de lancement, une annonce bénéficie d'un effet "nouveauté". Cependant, les annonces traditionnelles basées sur quelques photos fixes génèrent souvent deux écueils : des acheteurs passifs et une multiplication de "visites touristiques" non qualifiées.</p>
-
-      <div class="highlight-card">
-        <h3>1. La Puissance Réseau + Le Booster Vidéo YouTube</h3>
-        <p style="margin: 0; text-align: justify;">Rattaché au réseau <strong>Propriétés Privées</strong>, je diffuse votre bien sur plus de 100 portails immobiliers[cite: 1]. Pour faire sortir votre annonce du lot, j'y associe une <strong>visite vidéo YouTube immersive[cite: 1]</strong>. Ce format capte l'attention immédiatement et démultiplie le taux de clic des acheteurs actifs.</p>
+      <!-- DESTINATAIRE -->
+      <div class="recipient-box">
+        <div class="recipient-title">À l’attention de M. / Mme [Nom du propriétaire]</div>
+        <div class="recipient-address">Bien situé au : [Adresse du bien]</div>
       </div>
 
-      <div class="highlight-card">
-        <h3>2. Une pré-qualification efficace des acheteurs</h3>
-        <ul>
-          <li><strong>Filtrage amont :</strong> L'acheteur visite le bien depuis son écran et valide les volumes avant de m'appeler[cite: 1].</li>
-          <li><strong>Visites ciblées :</strong> Le client qui se déplace vient pour concrétiser un coup de cœur déjà mûri[cite: 1].</li>
-          <li><strong>Liberté totale :</strong> Je déploie ce service <strong>dans le cadre d'un simple mandat</strong>, sans aucun engagement d'exclusivité.</li>
-        </ul>
+      <!-- OBJET -->
+      <div class="subject-line">
+        Objet : Votre récente mise en vente &amp; l'impact de la visite vidéo YouTube
       </div>
 
-      <p>Si vous souhaitez donner une visibilité maximale à votre bien et ne recevoir que des visites qualifiées, échangeons 15 minutes ensemble.</p>
+      <!-- CORPS DU TEXTE -->
+      <div class="content">
+        <p>Madame, Monsieur,</p>
+
+        <p>J'ai constaté que vous veniez tout juste de commercialiser votre propriété. C'est un moment charnière, et au vu de votre bien, vous avez parfaitement raison de déployer votre projet aujourd'hui.</p>
+
+        <p>En phase de lancement, une annonce bénéficie d'un effet "nouveauté". Cependant, les annonces traditionnelles basées sur quelques photos fixes génèrent souvent deux écueils majeurs : des acheteurs passifs et une multiplication de "visites touristiques" peu qualifiées.</p>
+
+        <div class="highlight-card">
+          <h3>1. La Puissance Réseau + Le Booster Vidéo YouTube</h3>
+          <p style="margin: 0; text-align: justify;">Rattaché au réseau <strong>Propriétés Privées</strong>, je diffuse votre bien sur plus de 100 portails immobiliers. Pour faire sortir votre annonce du lot face à la concurrence, j'y associe une <strong>visite vidéo YouTube immersive</strong>. Ce format capte l'attention immédiatement et démultiplie le taux de clic des acheteurs actifs.</p>
+        </div>
+
+        <div class="highlight-card">
+          <h3>2. Une pré-qualification efficace des acheteurs</h3>
+          <ul>
+            <li><strong>Filtrage amont :</strong> L'acheteur visite le bien depuis son écran et valide les volumes avant de m'appeler.</li>
+            <li><strong>Visites ciblées :</strong> Le client qui se déplace vient pour concrétiser un coup de cœur déjà mûri.</li>
+            <li><strong>Liberté totale :</strong> Je déploie ce service <strong>dans le cadre d'un simple mandat</strong>, sans aucun engagement d'exclusivité.</li>
+          </ul>
+        </div>
+
+        <p>Si vous souhaitez donner une visibilité maximale à votre bien et ne recevoir que des visites qualifiées, échangeons 15 minutes ensemble.</p>
+      </div>
     </div>
 
     <!-- PIED DE PAGE -->
     <table class="footer-table">
       <tr>
-        <td style="width: 60%;">
+        <td style="width: 58%;">
           Bien cordialement,<br><br>
           <div class="signature-title">Sylvain MATIGNON</div>
           <div class="signature-tagline">L'Immobilier d'ici, la Visibilité d'ailleurs.</div>
         </td>
-        <td style="width: 40%;">
+        <td style="width: 42%;">
           <div class="qr-card">
-            <div style="font-size: 8pt; font-weight: bold; color: #003366;">Découvrez la méthode en 1 min 30 :</div>
+            <div style="font-size: 8.5pt; font-weight: bold; color: #003366;">Découvrez la méthode en 1 min 30 :</div>
             <div class="qr-placeholder">[ QR CODE ]</div>
-            <div class="qr-caption">Scannez ce code pour voir l'impact de la visite vidéo[cite: 1].</div>
+            <div class="qr-caption">Scannez ce code pour voir l'impact de la visite vidéo.</div>
           </div>
         </td>
       </tr>
