@@ -1,1 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Courrier Prospection - Remise à zéro</title>
+  <style>
+    body {
+      background-color: #525659;
+      margin: 0;
+      padding: 20px 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.4;
+      color: #1a1a1a;
+    }
 
+    /* Conteneur Feuille A4 */
+    .page-a4 {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 12mm 18mm 12mm 18mm;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* En-tête Épuré */
+    .header-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-bottom: 2px solid #e61653;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    .sender-name {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #e61653;
+      letter-spacing: 0.3px;
+    }
+    .sender-info {
+      font-size: 9pt;
+      color: #444444;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+    .sender-tagline {
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #e61653;
+      margin-top: 2px;
+    }
+    .logo-img {
+      max-width: 150px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+    }
+
+    /* Destinataire Éditable */
+    .recipient-box {
+      width: 55%;
+      margin-left: auto;
+      background-color: #fdf2f4;
+      border-left: 4px solid #e61653;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+      border-radius: 0 4px 4px 0;
+    }
+    .recipient-title {
+      font-weight: bold;
+      color: #e61653;
+      font-size: 9.5pt;
+      outline: none;
+    }
+    .recipient-address {
+      font-size: 8.5pt;
+      color: #555555;
+      font-style: italic;
+      outline: none;
+    }
+
+    /* Bannière d'accroche ROUGE PP */
+    .hero-banner {
+      background-color: #e61653;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(230, 22, 83, 0.15);
+    }
+    .hero-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+    .hero-subtitle {
+      font-size: 8.5pt;
+      color: #ffffff;
+      opacity: 0.95;
+    }
+
+    /* Corps du texte */
+    .content p {
+      margin: 0 0 8px 0;
+      text-align: justify;
+    }
+
+    /* Carte d'arguments unifiée */
+    .highlight-card {
+      border: 1px solid #f8d7da;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 12px 0;
+      background-color: #ffffff;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #f8d7da;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .card-icon {
+      width: 18px;
+      height: 18px;
+      fill: #e61653;
+      flex-shrink: 0;
+    }
+    .card-title {
+      margin: 0;
+      color: #e61653;
+      font-size: 9.5pt;
+      font-weight: bold;
+    }
+
+    .highlight-card ul {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .highlight-card li {
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 18px;
+      font-size: 9pt;
+      line-height: 1.35;
+    }
+    .highlight-card li::before {
+      content: "✓";
+      color: #e61653;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .badge-highlight {
+      background-color: #fdf2f4;
+      color: #e61653;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+
+    .cta-text {
+      font-weight: bold;
+      color: #1a1a1a;
+      margin-top: 12px !important;
+      margin-bottom: 8px !important;
+      font-size: 9.5pt;
+    }
+
+    .ps-block {
+      font-size: 8pt;
+      color: #555555;
+      font-style: italic;
+      background-color: #fcfcfc;
+      border-left: 2px solid #ccc;
+      padding: 6px 10px;
+      margin-top: 8px;
+    }
+
+    /* Pied de page */
+    .footer-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    .footer-table td {
+      vertical-align: bottom;
+    }
+    .signature-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e61653;
+    }
+    .signature-title {
+      font-size: 10pt;
+      font-weight: bold;
+      color: #e61653;
+    }
+    .signature-role {
+      font-size: 8.5pt;
+      font-weight: bold;
+      color: #333333;
+      margin-top: 1px;
+    }
+    .signature-contact {
+      font-size: 8pt;
+      color: #444444;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+    .signature-tagline {
+      font-style: italic;
+      color: #666666;
+      font-size: 7.5pt;
+      margin-top: 2px;
+    }
+
+    /* Carte QR Code */
+    .qr-card {
+      border: 1px solid #f8d7da;
+      border-radius: 6px;
+      padding: 6px 8px;
+      text-align: center;
+      background-color: #fdf2f4;
+      color: #1a1a1a;
+    }
+    .yt-logo-img {
+      height: 14px;
+      width: auto;
+      display: block;
+      margin: 0 auto 2px auto;
+    }
+    .qr-subtitle {
+      font-size: 8pt;
+      font-weight: bold;
+      color: #e61653;
+      margin-bottom: 3px;
+    }
+    .qr-img {
+      width: 64px;
+      height: 64px;
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #e61653;
+      border-radius: 4px;
+      background-color: #ffffff;
+      padding: 2px;
+    }
+    .qr-caption {
+      font-size: 7pt;
+      color: #555555;
+      line-height: 1.2;
+      margin-top: 3px;
+    }
+
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .page-a4 {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 12mm 18mm 12mm 18mm;
+        box-shadow: none;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-a4">
+    <div>
+      <!-- EN-TÊTE LOCAL ÉPURÉ -->
+      <table class="header-table">
+        <tr>
+          <td>
+            <div class="sender-name">Sylvain MATIGNON</div>
+            <div class="sender-info">Conseiller Immobilier – Saint-Martial-de-Valette – Réseau Propriétés Privées</div>
+            <div class="sender-tagline">Votre conseiller dans le Périgord Vert</div>
+          </td>
+          <td style="text-align: right; width: 160px;">
+            <img src="pp_logo_quadri_seul.png" alt="Propriétés Privées" class="logo-img">
+          </td>
+        </tr>
+      </table>
+
+      <!-- DESTINATAIRE ÉDITABLE DIRECTEMENT DANS LE NAVIGATEUR -->
+      <div class="recipient-box">
+        <div class="recipient-title" contenteditable="true">À l’attention de M. / Mme [Nom du propriétaire]</div>
+        <div class="recipient-address" contenteditable="true">Bien situé au : [Adresse du bien]</div>
+      </div>
+
+      <!-- BANNIÈRE D'ACCROCHE -->
+      <div class="hero-banner">
+        <div class="hero-title">Toujours pas d'offre sur votre bien ? Et si on repartait de zéro ?</div>
+        <div class="hero-subtitle">Comment recréer un réel effet "Nouveauté" pour relancer votre vente.</div>
+      </div>
+
+      <!-- CORPS DU TEXTE -->
+      <div class="content">
+        <p>Madame, Monsieur,</p>
+
+        <p>Lorsqu'une maison stagne sur les portails, elle devient "invisible". Les acheteurs s'y habituent, la délaissent ou attendent une baisse de prix importante.</p>
+
+        <p><strong>Le problème vient rarement de votre maison elle-même</strong>, mais de l'usure de son annonce[cite: 2]. Pour déclencher de nouvelles visites, il faut re-captiver les acquéreurs avec une présentation 100 % neuve[cite: 2].</p>
+
+        <!-- CARTE D'ARGUMENTS : REMISE À ZÉRO -->
+        <div class="highlight-card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24">
+              <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+            </svg>
+            <h3 class="card-title">Une remise à zéro complète pour re-captiver les acheteurs</h3>
+          </div>
+          <ul>
+            <li><strong>Nouvelles photos &amp; texte retravaillé :</strong> On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf.</li>
+            <li><strong>Le "plus" Visite Vidéo Immersive :</strong> Un format dynamique sur YouTube pour démarquer votre bien, rassurer les acheteurs éloignés et éliminer les curieux inutiles[cite: 2].</li>
+            <li><strong>Visibilité &amp; Suivi :</strong> Une diffusion sur plus de 100 portails avec un bilan analytique régulier des vues et clics[cite: 1, 2].</li>
+            <li><strong>Liberté totale :</strong> Testez cette méthode <strong class="badge-highlight">sans engagement d'exclusivité</strong>[cite: 2].</li>
+          </ul>
+        </div>
+
+        <p class="cta-text">Scannez le QR code ci-contre pour voir une visite vidéo en action[cite: 2]. Échangeons 15 minutes pour poser un diagnostic offert et sans engagement sur votre vente au <span style="color: #e61653;">06 48 89 34 80</span>[cite: 2].</p>
+
+        <div class="ps-block">
+          <strong>P.S. :</strong> Si votre commercialisation actuelle vous apporte pleine satisfaction, ne tenez pas compte de ce courrier et je vous souhaite une excellente réussite dans votre projet[cite: 2].
+        </div>
+      </div>
+    </div>
+
+    <!-- PIED DE PAGE -->
+    <table class="footer-table">
+      <tr>
+        <td style="width: 58%;">
+          <p style="margin: 0 0 6px 0; font-size: 9pt;">Bien cordialement,</p>
+          <div class="signature-container">
+            <img src="photo moi ronde.png" alt="Sylvain Matignon" class="profile-img">
+            <div>
+              <div class="signature-title">Sylvain MATIGNON</div>
+              <div class="signature-role">Conseiller Immobilier</div>
+              <div class="signature-contact">
+                06 48 89 34 80<br>
+                s.matignon@proprietes-privees.com
+              </div>
+              <div class="signature-tagline">L'Immobilier d'ici, la Visibilité d'ailleurs.</div>
+            </div>
+          </div>
+        </td>
+        <td style="width: 42%;">
+          <!-- Carte QR Code Centrée -->
+          <div class="qr-card">
+            <img src="logo youtube.png" alt="YouTube" class="yt-logo-img">
+            <div class="qr-subtitle">Exemple de visite immersive</div>
+            <img src="qr-code bien maison année 30.png" alt="QR Code Visite Virtuelle" class="qr-img">
+            <div class="qr-caption">Scannez ce code pour voir une visite vidéo en action.</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+</html>
