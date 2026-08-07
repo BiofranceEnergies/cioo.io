@@ -109,7 +109,7 @@
       line-height: 1.5;
     }
 
-    /* Structure Liste à Icônes aérée */
+    /* Liste à Puces Stylisées (Infaillible sans bug d'icône) */
     .features-list {
       display: flex;
       flex-direction: column;
@@ -122,20 +122,17 @@
       gap: 14px;
     }
     .feature-icon-box {
-      background-color: #fdf2f4;
-      border: 1px solid #f8d7da;
+      background-color: #e61653;
+      color: #ffffff;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
-    .feature-icon {
-      width: 22px;
-      height: 22px;
-      fill: #e61653;
+      font-weight: bold;
+      font-size: 14pt;
     }
     .feature-content {
       flex: 1;
@@ -287,48 +284,36 @@
 
       <div class="intro-text">
         Madame, Monsieur,<br><br>
-        Lorsqu’un bien stagne, les acheteurs s'y habituent et finissent par l'ignorer. Le problème vient rarement de votre maison elle-même, mais d’une annonce usée devenue invisible[cite: 5].
+        Lorsqu’un bien stagne, les acheteurs s'y habituent et finissent par l'ignorer. Le problème vient rarement de votre maison elle-même, mais d’une annonce usée devenue invisible.
       </div>
 
-      <!-- LISTE À ICÔNES AÉRÉE -->
+      <!-- LISTE À ICÔNES SÉCURISÉE -->
       <div class="features-list">
         
         <!-- Bloc 1 -->
         <div class="feature-item">
-          <div class="feature-icon-box">
-            <svg class="feature-icon" viewBox="0 0 24 24">
-              <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
-            </svg>
-          </div>
+          <div class="feature-icon-box">↻</div>
           <div class="feature-content">
             <div class="feature-title">Remise à zéro globale :</div>
-            <div class="feature-desc">On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf (nouvelles photos HD, texte retravaillé) afin de créer un vrai effet "Nouveauté" sur plus de 100 portails[cite: 5].</div>
+            <div class="feature-desc">On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf (nouvelles photos HD, texte retravaillé) afin de créer un vrai effet "Nouveauté" sur plus de 100 portails.</div>
           </div>
         </div>
 
         <!-- Bloc 2 -->
         <div class="feature-item">
-          <div class="feature-icon-box">
-            <svg class="feature-icon" viewBox="0 0 24 24">
-              <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-            </svg>
-          </div>
+          <div class="feature-icon-box">▶</div>
           <div class="feature-content">
             <div class="feature-title">Zéro visite "Touristique" :</div>
-            <div class="feature-desc">Grâce à la visite vidéo immersive YouTube, les acheteurs découvrent les volumes réels depuis chez eux[cite: 5]. Je ne déplace que des candidats ultra-qualifiés et rassure les acheteurs éloignés[cite: 5].</div>
+            <div class="feature-desc">Grâce à la visite vidéo immersive YouTube, les acheteurs découvrent les volumes réels depuis chez eux. Je ne déplace que des candidats ultra-qualifiés et rassure les acheteurs éloignés.</div>
           </div>
         </div>
 
         <!-- Bloc 3 -->
         <div class="feature-item">
-          <div class="feature-icon-box">
-            <svg class="feature-icon" viewBox="0 0 24 24">
-              <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/>
-            </svg>
-          </div>
+          <div class="feature-icon-box">✓</div>
           <div class="feature-content">
             <div class="feature-title">Suivi toutes les 2 semaines :</div>
-            <div class="feature-desc">Un point régulier sur vos chiffres (clics, vues vidéo) pour lire la réalité du marché sans langue de bois et ne jamais laisser votre vente stagner[cite: 5].</div>
+            <div class="feature-desc">Un point régulier sur vos chiffres (clics, vues vidéo) pour lire la réalité du marché sans langue de bois et ne jamais laisser votre vente stagner.</div>
           </div>
         </div>
 
@@ -336,12 +321,12 @@
 
       <!-- CALL TO ACTION -->
       <div class="cta-block">
-        Scannez le QR code pour voir une visite vidéo en action[cite: 5].<br>
-        Échangeons 15 minutes pour un diagnostic offert au <span style="color: #e61653;">06 48 89 34 80</span> (sans engagement d'exclusivité)[cite: 5].
+        Scannez le QR code pour voir une visite vidéo en action.<br>
+        Échangeons 15 minutes pour un diagnostic offert au <span style="color: #e61653;">06 48 89 34 80</span> (sans engagement d'exclusivité).
       </div>
 
       <div class="ps-block">
-        <strong>P.S. :</strong> Si votre commercialisation actuelle vous apporte pleine satisfaction, ignorez simplement ce courrier et je vous souhaite une excellente continuation[cite: 5].
+        <strong>P.S. :</strong> Si votre commercialisation actuelle vous apporte pleine satisfaction, ignorez simplement ce courrier et je vous souhaite une excellente continuation.
       </div>
     </div>
 
