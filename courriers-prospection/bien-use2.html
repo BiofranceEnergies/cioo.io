@@ -91,7 +91,7 @@
       text-align: center;
     }
     .hero-title {
-      font-size: 13pt;
+      font-size: 12.5pt;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -109,32 +109,25 @@
       line-height: 1.5;
     }
 
-    /* TABLEAU D'ARGUMENTS POUR IMPRESSION PARFAITE */
-    .features-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 16px;
-      margin: 10px 0;
+    /* LISTE À PUCES ÉPURÉE ET COMPATIBLE */
+    .features-list {
+      margin: 16px 0;
+      padding-left: 0;
+      list-style-type: none;
     }
-    .icon-cell {
-      width: 45px;
-      vertical-align: top;
-      padding-right: 12px;
+    .feature-item {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 16px;
     }
-    .feature-badge {
-      background-color: #e61653;
-      color: #ffffff;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      line-height: 36px;
-      text-align: center;
+    .feature-item::before {
+      content: "➔";
+      color: #e61653;
       font-weight: bold;
-      font-size: 13pt;
-      display: block;
-    }
-    .text-cell {
-      vertical-align: top;
+      font-size: 12pt;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
     .feature-title {
       color: #e61653;
@@ -277,52 +270,34 @@
 
       <!-- BANNIÈRE D'ACCROCHE -->
       <div class="hero-banner">
-        <div class="hero-title">VOTRE MAISON EST EN VENTE OU BLOQUÉE SUR LE MARCHÉ ?</div>
-        <div class="hero-subtitle">Ne la laissez pas s'user. Appliquons une méthode 2.0 pour déclencher de nouvelles offres.</div>
+        <div class="hero-title">VOTRE MAISON EST EN VENTE DEPUIS PLUSIEURS MOIS... SANS OFFRE ?</div>
+        <div class="hero-subtitle">Ne la laissez pas s'user. Appliquons une méthode 2.0 pour déclencher de nouvelles visites.</div>
       </div>
 
       <div class="intro-text">
         Madame, Monsieur,<br><br>
-        Lorsqu’un bien stagne, les acheteurs s'y habituent et finissent par l'ignorer. Le problème vient rarement de votre maison elle-même, mais d’une annonce usée devenue invisible.
+        Lorsqu’un bien stagne sur les portails, les acheteurs s'y habituent et finissent par l'ignorer. Le problème vient rarement de votre maison elle-même, mais d’une annonce usée devenue "invisible".
       </div>
 
-      <!-- TABLEAU DES ARGUMENTS -->
-      <table class="features-table">
-        <!-- Bloc 1 -->
-        <tr>
-          <td class="icon-cell">
-            <span class="feature-badge">↻</span>
-          </td>
-          <td class="text-cell">
-            <div class="feature-title">Remise à zéro globale :</div>
-            <div class="feature-desc">On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf (nouvelles photos HD, texte retravaillé) afin de créer un vrai effet "Nouveauté" sur plus de 100 portails.</div>
-          </td>
-        </tr>
-        <!-- Bloc 2 -->
-        <tr>
-          <td class="icon-cell">
-            <span class="feature-badge">▶</span>
-          </td>
-          <td class="text-cell">
-            <div class="feature-title">Zéro visite "Touristique" :</div>
-            <div class="feature-desc">Grâce à la visite vidéo immersive YouTube, les acheteurs découvrent les volumes réels depuis chez eux. Je ne déplace que des candidats ultra-qualifiés et rassure les acheteurs éloignés.</div>
-          </td>
-        </tr>
-        <!-- Bloc 3 -->
-        <tr>
-          <td class="icon-cell">
-            <span class="feature-badge">✓</span>
-          </td>
-          <td class="text-cell">
-            <div class="feature-title">Suivi toutes les 2 semaines :</div>
-            <div class="feature-desc">Un point régulier sur vos chiffres (clics, vues vidéo) pour lire la réalité du marché sans langue de bois et ne jamais laisser votre vente stagner.</div>
-          </td>
-        </tr>
-      </table>
+      <!-- LISTE À PUCES -->
+      <ul class="features-list">
+        <li class="feature-item">
+          <div class="feature-title">Remise à zéro globale :</div>
+          <div class="feature-desc">On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf (nouvelles photos HD, texte retravaillé) afin de créer un vrai effet "Nouveauté" sur plus de 100 portails.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-title">Zéro visite "Touristique" :</div>
+          <div class="feature-desc">Grâce à la visite vidéo immersive YouTube, les acheteurs découvrent les volumes réels depuis chez eux. Je ne déplace que des candidats ultra-qualifiés et rassure les acheteurs éloignés.</div>
+        </li>
+        <li class="feature-item">
+          <div class="feature-title">Suivi toutes les 2 semaines :</div>
+          <div class="feature-desc">Un point régulier sur vos chiffres (clics, vues vidéo) pour lire la réalité du marché sans langue de bois et ne jamais laisser votre vente stagner.</div>
+        </li>
+      </ul>
 
       <!-- CALL TO ACTION -->
       <div class="cta-block">
-        Scannez le QR code pour voir une visite vidéo en action.<br>
+        Scannez le QR code en bas de page pour voir une visite vidéo en action.<br>
         Échangeons 15 minutes pour un diagnostic offert au <span style="color: #e61653;">06 48 89 34 80</span> (sans engagement d'exclusivité).
       </div>
 
