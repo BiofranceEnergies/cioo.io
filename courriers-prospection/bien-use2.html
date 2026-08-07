@@ -104,38 +104,37 @@
     }
 
     .intro-text {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       font-size: 10.5pt;
       line-height: 1.5;
     }
 
-    /* Liste à Puces Stylisées (Infaillible sans bug d'icône) */
-    .features-list {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin: 20px 0;
+    /* TABLEAU D'ARGUMENTS POUR IMPRESSION PARFAITE */
+    .features-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 16px;
+      margin: 10px 0;
     }
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
+    .icon-cell {
+      width: 45px;
+      vertical-align: top;
+      padding-right: 12px;
     }
-    .feature-icon-box {
+    .feature-badge {
       background-color: #e61653;
       color: #ffffff;
       border-radius: 50%;
       width: 36px;
       height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      line-height: 36px;
+      text-align: center;
       font-weight: bold;
-      font-size: 14pt;
+      font-size: 13pt;
+      display: block;
     }
-    .feature-content {
-      flex: 1;
+    .text-cell {
+      vertical-align: top;
     }
     .feature-title {
       color: #e61653;
@@ -284,49 +283,51 @@
 
       <div class="intro-text">
         Madame, Monsieur,<br><br>
-        Lorsqu’un bien stagne, les acheteurs s'y habituent et finissent par l'ignorer. Le problème vient rarement de votre maison elle-même, mais d’une annonce usée devenue invisible.
+        Lorsqu’un bien stagne, les acheteurs s'y habituent et finissent par l'ignorer[cite: 7]. Le problème vient rarement de votre maison elle-même, mais d’une annonce usée devenue invisible[cite: 7].
       </div>
 
-      <!-- LISTE À ICÔNES SÉCURISÉE -->
-      <div class="features-list">
-        
+      <!-- TABLEAU DES ARGUMENTS (AFFICHAGE DES PUCES SÉCURISÉ) -->
+      <table class="features-table">
         <!-- Bloc 1 -->
-        <div class="feature-item">
-          <div class="feature-icon-box">↻</div>
-          <div class="feature-content">
+        <tr>
+          <td class="icon-cell">
+            <span class="feature-badge">↻</span>
+          </td>
+          <td class="text-cell">
             <div class="feature-title">Remise à zéro globale :</div>
-            <div class="feature-desc">On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf (nouvelles photos HD, texte retravaillé) afin de créer un vrai effet "Nouveauté" sur plus de 100 portails.</div>
-          </div>
-        </div>
-
+            <div class="feature-desc">On efface l'ancienne annonce pour repartir sur un lancement 100 % neuf (nouvelles photos HD, texte retravaillé) afin de créer un vrai effet "Nouveauté" sur plus de 100 portails[cite: 7].</div>
+          </td>
+        </tr>
         <!-- Bloc 2 -->
-        <div class="feature-item">
-          <div class="feature-icon-box">▶</div>
-          <div class="feature-content">
+        <tr>
+          <td class="icon-cell">
+            <span class="feature-badge">▶</span>
+          </td>
+          <td class="text-cell">
             <div class="feature-title">Zéro visite "Touristique" :</div>
-            <div class="feature-desc">Grâce à la visite vidéo immersive YouTube, les acheteurs découvrent les volumes réels depuis chez eux. Je ne déplace que des candidats ultra-qualifiés et rassure les acheteurs éloignés.</div>
-          </div>
-        </div>
-
+            <div class="feature-desc">Grâce à la visite vidéo immersive YouTube, les acheteurs découvrent les volumes réels depuis chez eux[cite: 7]. Je ne déplace que des candidats ultra-qualifiés et rassure les acheteurs éloignés[cite: 7].</div>
+          </td>
+        </tr>
         <!-- Bloc 3 -->
-        <div class="feature-item">
-          <div class="feature-icon-box">✓</div>
-          <div class="feature-content">
+        <tr>
+          <td class="icon-cell">
+            <span class="feature-badge">✓</span>
+          </td>
+          <td class="text-cell">
             <div class="feature-title">Suivi toutes les 2 semaines :</div>
-            <div class="feature-desc">Un point régulier sur vos chiffres (clics, vues vidéo) pour lire la réalité du marché sans langue de bois et ne jamais laisser votre vente stagner.</div>
-          </div>
-        </div>
-
-      </div>
+            <div class="feature-desc">Un point régulier sur vos chiffres (clics, vues vidéo) pour lire la réalité du marché sans langue de bois et ne jamais laisser votre vente stagner[cite: 7].</div>
+          </td>
+        </tr>
+      </table>
 
       <!-- CALL TO ACTION -->
       <div class="cta-block">
-        Scannez le QR code pour voir une visite vidéo en action.<br>
-        Échangeons 15 minutes pour un diagnostic offert au <span style="color: #e61653;">06 48 89 34 80</span> (sans engagement d'exclusivité).
+        Scannez le QR code pour voir une visite vidéo en action[cite: 7].<br>
+        Échangeons 15 minutes pour un diagnostic offert au <span style="color: #e61653;">06 48 89 34 80</span> (sans engagement d'exclusivité)[cite: 7].
       </div>
 
       <div class="ps-block">
-        <strong>P.S. :</strong> Si votre commercialisation actuelle vous apporte pleine satisfaction, ignorez simplement ce courrier et je vous souhaite une excellente continuation.
+        <strong>P.S. :</strong> Si votre commercialisation actuelle vous apporte pleine satisfaction, ignorez simplement ce courrier et je vous souhaite une excellente continuation[cite: 7].
       </div>
     </div>
 
