@@ -109,25 +109,22 @@
       line-height: 1.5;
     }
 
-    /* LISTE À PUCES ÉPURÉE */
-    .features-list {
+    /* TABLEAU DE STRUCTURE SÉCURISÉ POUR LES PUCES (PDF PERFECT) */
+    .features-table {
+      width: 100%;
+      border-collapse: collapse;
       margin: 16px 0;
-      padding-left: 0;
-      list-style-type: none;
     }
-    .feature-item {
-      position: relative;
-      padding-left: 28px;
-      margin-bottom: 16px;
+    .features-table td {
+      vertical-align: top;
+      padding-bottom: 14px;
     }
-    .feature-item::before {
-      content: "➔";
+    .arrow-cell {
+      width: 24px;
       color: #e61653;
       font-weight: bold;
       font-size: 12pt;
-      position: absolute;
-      left: 0;
-      top: 0;
+      line-height: 1.3;
     }
     .feature-title {
       color: #e61653;
@@ -146,7 +143,7 @@
       border: 1px dashed #e61653;
       border-radius: 6px;
       padding: 14px 16px;
-      margin-top: 18px;
+      margin-top: 14px;
       text-align: center;
       font-size: 10.5pt;
       font-weight: bold;
@@ -270,7 +267,7 @@
       <!-- BANNIÈRE D'ACCROCHE -->
       <div class="hero-banner">
         <div class="hero-title">VOUS VENEZ DE METTRE VOTRE MAISON EN VENTE ?</div>
-        <div class="hero-subtitle">Offrez-lui une stratégie d'affichage 2.0 que les autres agences ne proposent pas.</div>
+        <div class="hero-subtitle">Offrez-lui une stratégie d'affichage 2.0 encore très rare sur notre secteur.</div>
       </div>
 
       <div class="intro-text">
@@ -278,21 +275,30 @@
         Votre bien vient de faire son entrée sur le marché. Dans les premières semaines, l'attention des acheteurs est maximale. Pour capter les meilleurs acquéreurs et éviter les déceptions, la simple parution de photos fixes ne suffit plus : il faut marquer les esprits dès le premier jour.
       </div>
 
-      <!-- LISTE À PUCES -->
-      <ul class="features-list">
-        <li class="feature-item">
-          <div class="feature-title">Une expérience immersive unique (Vidéo YouTube) :</div>
-          <div class="feature-desc">Je crée une visite vidéo immersive complète de votre maison. C'est le seul format capable de déclencher des coups de cœur à distance et de séduire les acquéreurs hors secteur qui hésitent à se déplacer.</div>
-        </li>
-        <li class="feature-item">
-          <div class="feature-title">Un filtre efficace anti-curieux :</div>
-          <div class="feature-desc">Les acheteurs valident les volumes et l'agencement réel depuis leur écran. Résultat : vous ne bloquez vos week-ends que pour des candidats réellement financés et convaincus avant même de passer le pas de votre porte.</div>
-        </li>
-        <li class="feature-item">
-          <div class="feature-title">Un boost en Mandat Simple :</div>
-          <div class="feature-desc">Vous conservez toute votre liberté. Nous formalisons simplement un mandat simple pour me donner le cadre légal de déployer ce dispositif vidéo et de propulser votre annonce sur plus de 100 portails.</div>
-        </li>
-      </ul>
+      <!-- LISTE D'ARGUMENTS SÉCURISÉE -->
+      <table class="features-table">
+        <tr>
+          <td class="arrow-cell">➔</td>
+          <td>
+            <div class="feature-title">Une expérience immersive unique (Vidéo YouTube) :</div>
+            <div class="feature-desc">Je crée une visite vidéo immersive complète de votre maison. C'est le seul format capable de déclencher des coups de cœur à distance et de séduire les acquéreurs hors secteur qui hésitent à se déplacer.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="arrow-cell">➔</td>
+          <td>
+            <div class="feature-title">Un filtre efficace anti-curieux :</div>
+            <div class="feature-desc">Les acheteurs valident les volumes et l'agencement réel depuis leur écran. Résultat : vous ne bloquez vos week-ends que pour des candidats réellement financés et convaincus avant même de passer le pas de votre porte.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="arrow-cell">➔</td>
+          <td>
+            <div class="feature-title">Un boost en Mandat Simple :</div>
+            <div class="feature-desc">Vous conservez toute votre liberté. Nous formalisons simplement un mandat simple pour me donner le cadre légal de déployer ce dispositif vidéo et de propulser votre annonce sur plus de 100 portails.</div>
+          </td>
+        </tr>
+      </table>
 
       <!-- CALL TO ACTION -->
       <div class="cta-block">
