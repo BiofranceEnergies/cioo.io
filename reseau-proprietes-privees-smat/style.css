@@ -38,7 +38,7 @@ body::before {
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     z-index: 0;
-    pointer-events: none; /* Laisse passer les clics utilisateur */
+    pointer-events: none;
 }
 
 /* ==========================================================================
@@ -358,12 +358,15 @@ h1 {
     background: #ffffff;
     width: 55px; height: 55px; min-width: 55px;
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .icon-badge img {
-    width: 65%; height: 65%;
+    width: 65%;
+    height: 65%;
     object-fit: contain;
 }
 
@@ -409,32 +412,68 @@ h1 {
    ========================================================================== */
 .phone-screen-immo {
     background: #060b18;
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     color: var(--text-white);
 }
 
 .phone-immo-header {
     height: 200px;
-    background: linear-gradient(to bottom, rgba(6, 11, 24, 0.1), rgba(6, 11, 24, 1)), 
-                url('https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/c7ec2689363d8c1be5c3204f6cd2d88ff2a0709a/reseau-proprietes-privees-smat/paysage%20perigourdin.png');
-    background-size: cover;
-    background-position: center 65%;
     padding: 15px;
-    display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     position: relative;
+    transition: filter 0.3s ease;
+}
+
+.phone-immo-header:hover {
+    filter: brightness(1.08);
 }
 
 .immo-status-tag {
-    background: #00b074;
-    color: white; font-size: 0.7rem; font-weight: 800;
-    padding: 3px 8px; border-radius: 4px;
-    align-self: flex-end; z-index: 2;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+/* Bouton Play central sur l'image */
+.center-play-btn {
+    align-self: center;
+    margin-bottom: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(237, 22, 81, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(237, 22, 81, 0.7);
+    transition: transform 0.3s ease, background 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.center-play-btn span {
+    color: #ffffff;
+    font-size: 1.15rem;
+    margin-left: 3px;
+}
+
+.phone-immo-header:hover .center-play-btn {
+    transform: scale(1.15);
+    background: #ff1f62;
 }
 
 .phone-immo-body {
     padding: 0 15px 15px 15px;
-    display: flex; flex-direction: column; gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .immo-price { font-size: 1.6rem; font-weight: 800; }
@@ -443,21 +482,27 @@ h1 {
 .immo-location { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 5px; }
 
 .immo-specs-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 8px; margin-bottom: 5px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 5px;
 }
 
 .spec-item {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 6px; border-radius: 6px;
-    font-size: 0.75rem; text-align: center;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    text-align: center;
 }
 
 .immo-marketing-card {
     background: linear-gradient(145deg, rgba(237, 22, 81, 0.06) 0%, rgba(0, 0, 0, 0) 100%);
     border: 1px solid rgba(237, 22, 81, 0.2);
-    border-radius: 10px; padding: 12px; margin-top: 5px;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 5px;
 }
 
 .immo-marketing-card h5 { font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
@@ -465,30 +510,34 @@ h1 {
 .immo-marketing-card li { font-size: 0.7rem; color: var(--text-gray); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
 .immo-marketing-card li::before { content: "•"; color: var(--primary); }
 
-.phone-immo-footer { padding: 0 15px; margin-top: auto; margin-bottom: 15px; }
+.phone-immo-footer {
+    padding: 0 15px;
+    margin-top: auto;
+    margin-bottom: 15px;
+}
 
-/* Bouton du Mockup cliquable */
+/* Bouton du Mockup cliquable et contrasté */
 .immo-btn {
     display: block;
-    background: transparent;
+    background: var(--primary);
     color: white;
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--primary);
     text-align: center;
     padding: 12px;
     border-radius: 8px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     transition: all 0.3s ease;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(237, 22, 81, 0.35);
 }
 
-.immo-btn:hover,
-.phone-frame:hover .immo-btn {
-    background: var(--primary);
-    border-color: var(--primary);
-    box-shadow: 0 4px 15px rgba(237, 22, 81, 0.4);
+.immo-btn:hover {
+    background: var(--primary-hover);
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(237, 22, 81, 0.5);
     color: white;
 }
 
@@ -652,13 +701,26 @@ h1 {
 
 /* Cookies Banner */
 .cookie-banner {
-    position: fixed; bottom: 20px; left: -100%; width: 90%; max-width: 450px;
-    background: rgba(5, 9, 20, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); z-index: 9999;
+    position: fixed;
+    bottom: 20px;
+    left: -100%;
+    width: 90%;
+    max-width: 450px;
+    background: rgba(5, 9, 20, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
     transition: left 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
 }
+
 .cookie-banner.show { left: 20px; }
 .cookie-content p { color: #a0aec0; font-size: 0.95rem; line-height: 1.6; margin: 0; }
 .cookie-content strong { color: #fff; }
@@ -709,7 +771,7 @@ h1 {
     .btn-ghost, .btn-primary-small { flex: 1; text-align: center; padding: 14px 0; }
 }
 
-/* Version Force Maximale pour le Bouton de Validation */
+/* Bouton Formulaire */
 .contact-form-col .btn-primary {
     padding: 20px 30px !important;
     font-size: 1.15rem !important;
