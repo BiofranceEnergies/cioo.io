@@ -427,11 +427,22 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
-    transition: filter 0.3s ease;
+    overflow: hidden;
+    background: #000;
 }
 
-.phone-immo-header:hover {
-    filter: brightness(1.08);
+/* Redimensionnement et centrage de la vidéo YouTube */
+.header-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 320%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.85;
+    border: none;
+    z-index: 1;
 }
 
 .immo-status-tag {
@@ -439,10 +450,11 @@ h1 {
     font-weight: 800;
     padding: 3px 8px;
     border-radius: 4px;
-    z-index: 2;
+    position: relative;
+    z-index: 3;
 }
 
-/* Bouton Play central avec effet de pulsation continue */
+/* Bouton Play central */
 .center-play-btn {
     align-self: center;
     margin-bottom: 20px;
@@ -456,6 +468,10 @@ h1 {
     border: 2px solid rgba(255, 255, 255, 0.3);
     animation: play-pulse 2s infinite ease-in-out;
     transition: transform 0.3s ease, background 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
 }
 
 .center-play-btn span {
@@ -480,10 +496,10 @@ h1 {
     }
 }
 
-.phone-immo-header:hover .center-play-btn {
+.center-play-btn:hover {
     transform: scale(1.15);
     background: #ff1f62;
-    animation: none; /* Se fige agrandi au survol */
+    animation: none;
 }
 
 .phone-immo-body {
@@ -533,7 +549,6 @@ h1 {
     margin-bottom: 15px;
 }
 
-/* Bouton du Mockup cliquable et contrasté */
 .immo-btn {
     display: block;
     background: var(--primary);
@@ -780,49 +795,49 @@ h1 {
     
     h1 { 
         font-size: 2.1rem !important; 
-        line-height: 1.15 !important;
-        margin-bottom: 1.2rem !important;
+        line-height: 1.15 !important; 
+        margin-bottom: 1.2rem !important; 
     }
     
     .hero-subtitle { 
-        font-size: 1.05rem !important;
-        line-height: 1.55 !important;
+        font-size: 1.05rem !important; 
+        line-height: 1.55 !important; 
         margin: 0 auto 1.8rem auto !important; 
     }
     
     .hero-ctas { 
-        flex-direction: column;
-        width: 100%;
+        flex-direction: column; 
+        width: 100%; 
         gap: 12px; 
     }
     
-    .hero-ctas .btn {
-        width: 100%;
-        padding: 14px 20px;
+    .hero-ctas .btn { 
+        width: 100%; 
+        padding: 14px 20px; 
     }
     
     /* Mockup assoupli sur mobile */
     .phone-frame { 
         width: 280px; 
-        transform: none !important; /* Retire l'angle 3D pour plus de netteté */
-        height: auto;
-        border: 4px solid #1a1a1a;
-        border-radius: 28px;
+        transform: none !important; 
+        height: auto; 
+        border: 4px solid #1a1a1a; 
+        border-radius: 28px; 
     }
     
     /* Section Comparaison */
-    .comparison-section {
-        padding: 60px 15px;
+    .comparison-section { 
+        padding: 60px 15px; 
     }
     
     .comparison-section .section-title { 
         font-size: 1.8rem !important; 
-        line-height: 1.25 !important;
+        line-height: 1.25 !important; 
     }
     
     .comparison-section .section-subtitle { 
         font-size: 1rem !important; 
-        margin-bottom: 35px !important;
+        margin-bottom: 35px !important; 
     }
     
     .vs-container { 
@@ -832,12 +847,12 @@ h1 {
     
     .vs-card { 
         width: 100%; 
-        padding: 25px 20px;
+        padding: 25px 20px; 
     }
     
     .vs-divider { 
         margin: 5px auto; 
-        font-size: 1.1rem;
+        font-size: 1.1rem; 
     }
     
     .flyer-item { 
@@ -851,8 +866,8 @@ h1 {
     }
     
     /* Section Contact */
-    .contact-section {
-        padding: 60px 15px;
+    .contact-section { 
+        padding: 60px 15px; 
     }
 
     .contact-wrapper { 
@@ -864,16 +879,16 @@ h1 {
         text-align: center; 
     }
     
-    .contact-info h2 {
-        font-size: 2rem !important;
+    .contact-info h2 { 
+        font-size: 2rem !important; 
     }
     
     .contact-info p { 
         margin: 0 auto 25px auto; 
     }
     
-    .profile-card {
-        margin: 0 auto 25px auto;
+    .profile-card { 
+        margin: 0 auto 25px auto; 
     }
     
     .detail-card-item { 
