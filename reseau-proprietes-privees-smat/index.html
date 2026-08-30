@@ -333,5 +333,19 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Notification Push Nouvelle Visite -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        fetch('https://ntfy.sh/lp-visite-sylvain-982', {
+          method: 'POST',
+          body: 'Un visiteur vient d\'ouvrir la landing page !',
+          headers: {
+            'Title': 'Nouvelle visite en cours',
+            'Tags': 'house,bell'
+          }
+        }).catch(err => console.log(err));
+      });
+    </script>
 </body>
 </html>
