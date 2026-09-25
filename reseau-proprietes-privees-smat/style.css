@@ -709,7 +709,7 @@ h1 {
 .anchor-image-wrapper {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 340px; /* Hauteur suffisante pour voir visage + buste + ville */
     overflow: hidden;
     background: #060b18;
 }
@@ -718,25 +718,8 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Décale et zoome légèrement pour couper le filigrane du coin inférieur droit */
-    object-position: 25% 15%;
-    transform: scale(1.05);
+    object-position: center 20%; /* Calé parfaitement sur le visage sans le couper */
     display: block;
-}
-
-.anchor-badge {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    background: rgba(6, 11, 24, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px);
-    color: #ffffff;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 50px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .anchor-content {
