@@ -120,7 +120,7 @@ body::before {
 }
 
 .logo img {
-    height: 55px !important;
+    height: 48px;
     width: auto;
     display: block;
 }
