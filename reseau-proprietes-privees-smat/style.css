@@ -665,7 +665,7 @@ h1 {
 .contact-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* <--- VERROUILLE L'ALIGNEMENT STRICT SUR LE BAS */
+    align-items: flex-end; /* Verrouille l'alignement strict sur la ligne du bas */
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
@@ -687,7 +687,7 @@ h1 {
     color: var(--text-gray);
     font-size: 1rem;
     line-height: 1.45;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     text-align: left;
 }
 
@@ -695,56 +695,65 @@ h1 {
     color: var(--primary);
 }
 
-/* Carte d'ancrage local & humain à Nontron */
-.local-anchor-card {
+/* Carte d'ancrage local & humain : Présentation Horizontale */
+.local-anchor-card.horizontal-layout {
+    display: flex;
+    flex-direction: row;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 0;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    min-height: 250px;
 }
 
-.anchor-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 250px !important;
+.local-anchor-card.horizontal-layout .anchor-image-wrapper {
+    flex: 0 0 210px;
+    width: 210px;
+    height: 100% !important;
+    min-height: 250px;
     overflow: hidden;
     background: #060b18;
 }
 
-.anchor-photo {
+.local-anchor-card.horizontal-layout .anchor-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20% !important;
+    object-position: 25% center !important; /* Cadre le visage, la cravate et Nontron sans coupure */
     display: block;
 }
 
-.anchor-content {
-    padding: 14px 18px;
+.local-anchor-card.horizontal-layout .anchor-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 22px;
     text-align: left;
-    background: rgba(255, 255, 255, 0.02);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.015);
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.anchor-lead {
-    font-size: 0.88rem;
-    line-height: 1.4;
+.local-anchor-card.horizontal-layout .anchor-lead {
+    font-size: 0.92rem;
+    line-height: 1.5;
     color: var(--text-white);
     font-style: italic;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 }
 
-/* Ruban de contact intégré dans la carte */
-.anchor-contact-strip {
+/* Ruban vertical des coordonnées */
+.local-anchor-card.horizontal-layout .anchor-contact-strip {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 16px;
-    padding-top: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    font-size: 0.82rem;
+    font-size: 0.85rem;
 }
 
 .strip-item {
@@ -1076,6 +1085,7 @@ a.strip-item:hover {
 
     .contact-wrapper { 
         flex-direction: column; 
+        align-items: stretch;
         gap: 35px; 
     }
     
@@ -1088,21 +1098,13 @@ a.strip-item:hover {
     }
     
     .contact-info p { 
-        margin: 0 auto 25px auto; 
+        margin: 0 auto 20px auto; 
     }
     
-    .local-anchor-card { 
+    .local-anchor-card.horizontal-layout { 
         margin: 0 auto 25px auto; 
         width: 100%;
         max-width: 500px;
-    }
-
-    .anchor-image-wrapper {
-        height: 280px !important;
-    }
-
-    .anchor-contact-strip {
-        justify-content: center;
     }
     
     .contact-form-col { 
@@ -1131,5 +1133,24 @@ a.strip-item:hover {
         flex: 1; 
         text-align: center; 
         padding: 12px 0; 
+    }
+}
+
+/* Bascule spécifique mobile pour la carte identité */
+@media (max-width: 640px) {
+    .local-anchor-card.horizontal-layout {
+        flex-direction: column;
+    }
+    .local-anchor-card.horizontal-layout .anchor-image-wrapper {
+        width: 100%;
+        flex: none;
+        height: 260px !important;
+    }
+    .local-anchor-card.horizontal-layout .anchor-content {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .local-anchor-card.horizontal-layout .anchor-contact-strip {
+        align-items: center;
     }
 }
