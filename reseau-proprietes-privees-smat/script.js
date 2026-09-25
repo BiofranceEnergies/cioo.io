@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const openVideoBtn = document.getElementById("open-video-btn") || document.getElementById("openVideoBtn");
     const closeVideoBtn = document.getElementById("close-video") || document.getElementById("closeVideoBtn");
     const youtubePlayer = document.getElementById("youtube-player") || document.getElementById("videoIframe");
-    const videoUrl = "https://www.youtube-nocookie.com/embed/6qBuLptOV04?autoplay=1&rel=0";
+    const videoUrl = "https://www.youtube.com/embed/ePCvHf_q9JE?autoplay=1";
 
     if (openVideoBtn && videoModal && youtubePlayer) {
         openVideoBtn.addEventListener("click", (e) => {
