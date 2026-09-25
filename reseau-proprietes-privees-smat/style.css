@@ -697,6 +697,7 @@ h1 {
 }
 
 /* Carte d'ancrage local & humain à Nontron */
+/* Carte d'ancrage local & humain à Nontron */
 .local-anchor-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -709,7 +710,7 @@ h1 {
 .anchor-image-wrapper {
     position: relative;
     width: 100%;
-    height: 310px; /* Buste, menton et Nontron bien visibles */
+    height: 380px !important; /* Hauteur généreuse : crâne + menton + cravate + Nontron intacts */
     overflow: hidden;
     background: #060b18;
 }
@@ -718,7 +719,7 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%; /* Cadrage parfait sans couper le menton */
+    object-position: center 25% !important; /* Calage naturel */
     display: block;
 }
 
