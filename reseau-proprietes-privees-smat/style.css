@@ -213,12 +213,17 @@ body::before {
     border: 1px solid rgba(237, 22, 81, 0.4);
 }
 
-.badge-fnaim-icon {
-    height: 22px;
-    width: auto;
-    display: inline-block;
-    vertical-align: middle;
+.badge-fnaim-box {
+    background-color: #ffd100;
+    color: #1a1a1a;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
     margin-left: 6px;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 h1 {
     font-size: 3.5rem;
