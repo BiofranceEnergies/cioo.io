@@ -168,7 +168,8 @@ body::before {
     gap: 12px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 6px 16px 6px 8px;
+    padding: 0 18px 0 8px;
+    height: 52px;              /* Hauteur commune */
     border-radius: 50px;
     backdrop-filter: blur(10px);
 }
@@ -202,23 +203,24 @@ body::before {
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: rgba(237, 22, 81, 0.1);
     color: #ffffff;
-    padding: 6px 18px;
+    padding: 0 20px;
+    height: 52px;              /* Même hauteur exacte */
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     border: 1px solid rgba(237, 22, 81, 0.4);
+    box-sizing: border-box;
 }
 
 .badge-fnaim-icon {
-    height: 18px;
+    height: 32px;              /* Agrandit le logo FNAIM pour une lisibilité optimale */
     width: auto;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 6px;
+    display: block;
+    margin-left: 4px;
 }
 h1 {
     font-size: 3.5rem;
