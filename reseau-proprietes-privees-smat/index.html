@@ -325,61 +325,6 @@
         </div>
     </div>
 
-    <!-- 10. SCRIPTS JS -->
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.anim').forEach(el => observer.observe(el));
-
-        const modal = document.getElementById('legalModal');
-        const openBtn = document.getElementById('openModalBtn');
-        const closeBtn = document.getElementById('closeModalBtn');
-        if (openBtn) openBtn.onclick = (e) => { e.preventDefault(); modal.style.display = 'block'; };
-        if (closeBtn) closeBtn.onclick = () => { modal.style.display = 'none'; };
-
-        const videoModal = document.getElementById('videoModal');
-        const openVideoBtn = document.getElementById('openVideoBtn');
-        const closeVideoBtn = document.getElementById('closeVideoBtn');
-        const videoIframe = document.getElementById('videoIframe');
-        const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
-
-        if (openVideoBtn) openVideoBtn.onclick = () => {
-            videoIframe.src = videoUrl;
-            videoModal.style.display = 'block';
-        };
-        if (closeVideoBtn) closeVideoBtn.onclick = () => {
-            videoModal.style.display = 'none';
-            videoIframe.src = "";
-        };
-
-        window.onclick = (e) => {
-            if (e.target === modal) modal.style.display = 'none';
-            if (e.target === videoModal) {
-                videoModal.style.display = 'none';
-                videoIframe.src = "";
-            }
-        };
-
-        const banner = document.getElementById('cookieBanner');
-        const acceptBtn = document.getElementById('cookieAccept');
-        const refuseBtn = document.getElementById('cookieRefuse');
-
-        if (!localStorage.getItem('cookiesChoice')) {
-            setTimeout(() => { banner.classList.add('show'); }, 1200);
-        }
-        if (acceptBtn) acceptBtn.onclick = () => {
-            localStorage.setItem('cookiesChoice', 'accepted');
-            banner.classList.remove('show');
-        };
-        if (refuseBtn) refuseBtn.onclick = () => {
-            localStorage.setItem('cookiesChoice', 'refused');
-            banner.classList.remove('show');
-        };
-    </script>
+   <script src="script.js"></script>
 </body>
 </html>
