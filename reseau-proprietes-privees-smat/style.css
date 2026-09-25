@@ -665,7 +665,7 @@ h1 {
 .contact-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* <--- C'EST ÇA QUI PROVOQUE LE DÉCALAGE EN BAS */
+    align-items: flex-end; /* <--- VERROUILLE L'ALIGNEMENT STRICT SUR LE BAS */
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
