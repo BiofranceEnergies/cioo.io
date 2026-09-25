@@ -247,9 +247,8 @@ h1 {
    4. SECTION COMPARAISON
    ========================================================================== */
 .comparison-section {
-    padding: 100px 20px;
+    padding: 100px 20px 60px 20px;
     background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     text-align: center;
     position: relative;
     z-index: 1;
@@ -277,7 +276,7 @@ h1 {
     align-items: stretch;
     justify-content: center;
     max-width: 1100px;
-    margin: 20px auto 40px auto;
+    margin: 20px auto 20px auto;
 }
 
 .vs-card {
@@ -410,7 +409,7 @@ h1 {
 }
 
 /* ==========================================================================
-   5. INTÉRIEUR DU SMARTPHONE (SANS BOUTON DU BAS)
+   5. INTERIEUR DU SMARTPHONE
    ========================================================================== */
 .phone-screen-immo {
     background: #060b18;
@@ -499,10 +498,119 @@ h1 {
 .immo-marketing-card li::before { content: "•"; color: var(--primary); }
 
 /* ==========================================================================
-   6. CONTACT & FORMULAIRE
+   6. SECTION AVIS & PREUVE SOCIALE
+   ========================================================================== */
+.reviews-section {
+    padding: 30px 20px 80px 20px;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.reviews-title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 35px;
+    color: var(--text-white);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1050px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(237, 22, 81, 0.3);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.review-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.avatar-vendeur { background: #2e7d32; }
+.avatar-buyer { background: #1c3b70; }
+
+.review-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.review-role {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+.review-stars {
+    margin-left: auto;
+    color: #f59e0b;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.review-body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.review-body strong {
+    color: #fff;
+    font-style: normal;
+}
+
+.review-badge-verified {
+    font-size: 0.75rem;
+    color: #64748b;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.review-badge-verified::before {
+    content: "✓";
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   7. CONTACT & FORMULAIRE
    ========================================================================== */
 .contact-section {
-    padding: 100px 20px;
+    padding: 80px 20px 100px 20px;
     background: transparent;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
@@ -657,7 +765,7 @@ h1 {
 }
 
 /* ==========================================================================
-   7. MODALES (MENTIONS LÉGALES & VIDÉO MÉTHODE)
+   8. MODALES (MENTIONS LÉGALES & VIDÉO MÉTHODE)
    ========================================================================== */
 .modal { 
     display: none; 
@@ -745,7 +853,7 @@ h1 {
 }
 
 /* ==========================================================================
-   8. BANNIÈRE COOKIES RGPD
+   9. BANNIÈRE COOKIES RGPD
    ========================================================================== */
 .cookie-banner {
     position: fixed;
@@ -781,7 +889,7 @@ h1 {
 }
 
 /* ==========================================================================
-   9. RESPONSIVE / MEDIA QUERIES
+   10. RESPONSIVE / MEDIA QUERIES
    ========================================================================== */
 @media (max-width: 968px) {
     .navbar { 
@@ -835,7 +943,7 @@ h1 {
     }
     
     .comparison-section { 
-        padding: 60px 15px; 
+        padding: 60px 15px 30px 15px; 
     }
     
     .comparison-section .section-title { 
@@ -871,6 +979,25 @@ h1 {
         width: 48px; 
         height: 48px; 
         min-width: 48px; 
+    }
+
+    /* Avis responsive */
+    .reviews-section {
+        padding: 20px 15px 60px 15px;
+    }
+
+    .reviews-title {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .review-card {
+        padding: 22px 18px;
     }
     
     .contact-section { 
