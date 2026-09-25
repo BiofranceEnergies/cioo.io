@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- 1. ANIMATIONS AU SCROLL ---
     const elementsToAnimate = document.querySelectorAll('.anim');
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 2. FORMATAGE AUTOMATIQUE TÉLÉPHONE (00 00 00 00 00) ---
-    const phoneInput = document.querySelector('input[name="telephone"]');
+    const phoneInput = document.querySelector('input[name="telephone"], input[name="phone"], #phone');
 
     if (phoneInput) {
         phoneInput.addEventListener('input', (e) => {
@@ -30,10 +30,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 3. GESTION COOKIES RGPD (Consent Mode V2) ---
-    const cookieBanner = document.getElementById('cookie-banner');
-    const acceptBtn = document.getElementById('cookie-accept');
-    const rejectBtn = document.getElementById('cookie-reject');
+    // --- 3. LECTURE VIDÉO IMMERSION (SMARTPHONE) ---
+    const bgVideo = document.querySelector('.header-bg-video');
+    if (bgVideo && bgVideo.tagName === 'VIDEO') {
+        bgVideo.muted = true;
+        bgVideo.play().catch(() => {
+            // Reprise automatique dès la première interaction si Chrome bloque l'autoplay
+            const startOnInteraction = () => {
+                bgVideo.play();
+                window.removeEventListener('click', startOnInteraction);
+                window.removeEventListener('touchstart', startOnInteraction);
+            };
+            window.addEventListener('click', startOnInteraction);
+            window.addEventListener('touchstart', startOnInteraction);
+        });
+    }
+
+
+    // --- 4. GESTION COOKIES RGPD (Consent Mode V2) ---
+    const cookieBanner = document.getElementById('cookie-banner') || document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('cookie-accept') || document.getElementById('cookieAccept');
+    const rejectBtn = document.getElementById('cookie-reject') || document.getElementById('cookieRefuse');
 
     function updateConsent(granted) {
         const status = granted ? 'granted' : 'denied';
@@ -80,11 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 4. GESTION MODALE VIDÉO MÉTHODE (50 SECONDES) ---
-    const videoModal = document.getElementById("video-modal");
-    const openVideoBtn = document.getElementById("open-video-btn");
-    const closeVideoBtn = document.getElementById("close-video");
-    const youtubePlayer = document.getElementById("youtube-player");
+    // --- 5. GESTION MODALE VIDÉO MÉTHODE (50 SECONDES) ---
+    const videoModal = document.getElementById("video-modal") || document.getElementById("videoModal");
+    const openVideoBtn = document.getElementById("open-video-btn") || document.getElementById("openVideoBtn");
+    const closeVideoBtn = document.getElementById("close-video") || document.getElementById("closeVideoBtn");
+    const youtubePlayer = document.getElementById("youtube-player") || document.getElementById("videoIframe");
     const videoUrl = "https://www.youtube-nocookie.com/embed/ePCvHf_q9JE?autoplay=1&rel=0";
 
     if (openVideoBtn && videoModal && youtubePlayer) {
@@ -111,10 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 5. GESTION MENTIONS LÉGALES (Modale) ---
-    const legalModal = document.getElementById("legal-modal");
-    const openLegalBtn = document.getElementById("open-legal");
-    const closeLegalBtn = legalModal ? legalModal.querySelector(".close-btn") : null;
+    // --- 6. GESTION MENTIONS LÉGALES (Modale) ---
+    const legalModal = document.getElementById("legal-modal") || document.getElementById("legalModal");
+    const openLegalBtn = document.getElementById("open-legal") || document.getElementById("openModalBtn");
+    const closeLegalBtn = legalModal ? (legalModal.querySelector(".close-btn") || document.getElementById("closeModalBtn")) : null;
     const linkCookies = document.getElementById('open-legal-cookies');
 
     if (openLegalBtn && legalModal) {
@@ -144,9 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 6. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE ---
-    const contactForm = document.getElementById("contact-form");
-    const submitBtn = document.getElementById("submit-button");
+    // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE ---
+    const contactForm = document.getElementById("contact-form") || document.querySelector(".clean-form");
+    const submitBtn = document.getElementById("submit-button") || (contactForm ? contactForm.querySelector('button[type="submit"]') : null);
 
     if (contactForm) {
         contactForm.addEventListener("submit", function (event) {
