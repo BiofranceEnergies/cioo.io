@@ -1176,14 +1176,10 @@ a.strip-item:hover {
         height: 280px !important; 
     }
 
-    .anchor-logo-badge {
-        top: 10px;
-        right: 10px;
-        padding: 5px 12px;
-    }
-
-    .anchor-logo-badge img {
-        height: 20px;
+ .anchor-direct-logo {
+        top: 12px;
+        right: 14px;
+        height: 28px;
     }
 
     .anchor-contact-strip { 
