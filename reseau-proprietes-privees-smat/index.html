@@ -130,7 +130,7 @@
                     <ul class="vs-list-flyer">
                         <li class="flyer-item">
                             <div class="icon-badge">
-                                <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/4d781052b74e48faf2a9d60b9b2ad7dbf25ec2ca/reseau-proprietes-privees-smat/LOGO%20COEUR.png" alt="Estimation Réelle">
+                                <span style="font-size: 1.6rem;">📊</span>
                             </div>
                             <div class="flyer-text">
                                 <h4>Estimation Précise en Temps Réel</h4>
@@ -139,7 +139,7 @@
                         </li>
                         <li class="flyer-item">
                             <div class="icon-badge">
-                                <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/4d781052b74e48faf2a9d60b9b2ad7dbf25ec2ca/reseau-proprietes-privees-smat/LOGO%20CAM%C3%89RA.png" alt="Vidéo Immersive">
+                                <span style="font-size: 1.6rem;">🎬</span>
                             </div>
                             <div class="flyer-text">
                                 <h4>Visite Vidéo Immersive</h4>
@@ -148,7 +148,7 @@
                         </li>
                         <li class="flyer-item">
                             <div class="icon-badge">
-                                <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/4d781052b74e48faf2a9d60b9b2ad7dbf25ec2ca/reseau-proprietes-privees-smat/LOGO%20MANDAT%20OUVERT.png" alt="Liberté & Sérénité">
+                                <span style="font-size: 1.6rem;">🔓</span>
                             </div>
                             <div class="flyer-text">
                                 <h4>Liberté & Zéro Contrainte</h4>
@@ -318,7 +318,6 @@
 
     <!-- 10. SCRIPTS JS -->
     <script>
-        // Animations d'apparition au défilement
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -328,19 +327,17 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.anim').forEach(el => observer.observe(el));
 
-        // Modale Mentions Légales
         const modal = document.getElementById('legalModal');
         const openBtn = document.getElementById('openModalBtn');
         const closeBtn = document.getElementById('closeModalBtn');
         if (openBtn) openBtn.onclick = (e) => { e.preventDefault(); modal.style.display = 'block'; };
         if (closeBtn) closeBtn.onclick = () => { modal.style.display = 'none'; };
 
-        // Modale Vidéo
         const videoModal = document.getElementById('videoModal');
         const openVideoBtn = document.getElementById('openVideoBtn');
         const closeVideoBtn = document.getElementById('closeVideoBtn');
         const videoIframe = document.getElementById('videoIframe');
-        const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; // Remplacez par votre lien YouTube
+        const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
 
         if (openVideoBtn) openVideoBtn.onclick = () => {
             videoIframe.src = videoUrl;
@@ -359,7 +356,6 @@
             }
         };
 
-        // Bannière Cookies RGPD
         const banner = document.getElementById('cookieBanner');
         const acceptBtn = document.getElementById('cookieAccept');
         const refuseBtn = document.getElementById('cookieRefuse');
