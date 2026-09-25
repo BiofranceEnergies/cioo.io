@@ -697,7 +697,7 @@ h1 {
 .contact-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* Les deux colonnes font rigoureusement la même hauteur */
+    align-items: stretch;
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
@@ -743,7 +743,7 @@ h1 {
 .anchor-image-wrapper {
     position: relative;
     width: 100%;
-    height: 340px !important; /* Hauteur idéale : buste, cravate, visage et Nontron intacts */
+    height: 340px !important;
     overflow: hidden;
     background: #060b18;
 }
@@ -752,28 +752,20 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 22% !important; /* Calage naturel */
+    object-position: center 22% !important;
     display: block;
 }
 
-/* Badge logo officiel incrusté sur la photo */
-.anchor-logo-badge {
+/* Logo officiel épuré directement sur la photo */
+.anchor-direct-logo {
     position: absolute;
-    top: 14px;
-    right: 14px;
-    background: #ffffff;
-    padding: 6px 14px;
-    border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-}
-
-.anchor-logo-badge img {
-    height: 24px;
+    top: 18px;
+    right: 20px;
+    height: 38px;
     width: auto;
-    display: block;
+    z-index: 2;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+    pointer-events: none;
 }
 
 .anchor-content {
@@ -1176,7 +1168,8 @@ a.strip-item:hover {
         height: 280px !important; 
     }
 
- .anchor-direct-logo {
+    /* Logo sur photo ajusté pour smartphone */
+    .anchor-direct-logo {
         top: 12px;
         right: 14px;
         height: 28px;
