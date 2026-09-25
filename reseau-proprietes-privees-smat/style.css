@@ -665,7 +665,7 @@ h1 {
 .contact-wrapper {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch; /* Force les deux colonnes à la même hauteur exacte */
     gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
@@ -673,6 +673,9 @@ h1 {
 
 .contact-info {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pousse naturellement la carte vers le bas */
 }
 
 .contact-info h2 {
@@ -701,6 +704,7 @@ h1 {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     overflow: hidden;
+    margin-top: auto; /* Aimante la carte sur la ligne inférieure */
     margin-bottom: 0;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
 }
@@ -708,7 +712,7 @@ h1 {
 .anchor-image-wrapper {
     position: relative;
     width: 100%;
-    height: 295px !important;
+    height: 270px !important; /* Cadrage stable sans rogner le portrait */
     overflow: hidden;
     background: #060b18;
 }
