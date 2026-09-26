@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bgVideo && bgVideo.tagName === 'VIDEO') {
         bgVideo.muted = true;
         bgVideo.play().catch(() => {
-            // Reprise automatique dès la première interaction si Chrome bloque l'autoplay
             const startOnInteraction = () => {
                 bgVideo.play();
                 window.removeEventListener('click', startOnInteraction);
@@ -107,13 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (openVideoBtn && videoModal && youtubePlayer) {
         openVideoBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            youtubePlayer.src = videoUrl; // Lance la vidéo avec son
+            youtubePlayer.src = videoUrl;
             videoModal.style.display = "block";
         });
 
         const stopAndCloseVideo = () => {
             videoModal.style.display = "none";
-            youtubePlayer.src = ""; // Coupe immédiatement la lecture et le son
+            youtubePlayer.src = "";
         };
 
         if (closeVideoBtn) {
@@ -161,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-  // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE & NTFY ---
+    // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE & NTFY ---
     const contactForm = document.getElementById("contact-form") || document.querySelector(".clean-form");
     const submitBtn = document.getElementById("submit-button") || (contactForm ? contactForm.querySelector('button[type="submit"]') : null);
 
@@ -211,3 +210,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+}); // <-- C'ÉTAIT CETTE LIGNE QUI MANQUAIT !
