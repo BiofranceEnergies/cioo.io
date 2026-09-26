@@ -160,14 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE & NTFY ---
+// --- 7. SOUMISSION FORMULAIRE FORMSPREE & NTFY BLINDÉE ---
     const contactForm = document.getElementById("contact-form") || document.querySelector(".clean-form");
     const submitBtn = document.getElementById("submit-button") || (contactForm ? contactForm.querySelector('button[type="submit"]') : null);
 
     const NTFY_TOPIC = "lp-visite-sylvain-982";
 
     if (contactForm) {
-        contactForm.addEventListener("submit", function (event) {
+        contactForm.addEventListener("submit", async function (event) {
             event.preventDefault();
             
             if (submitBtn) {
@@ -184,31 +184,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const ntfyMessage = `Nouveau prospect vendeur !\n\n👤 Nom : ${nom}\n📞 Tél : ${telephone}\n📧 Email : ${email}\n📍 Commune : ${adresse}`;
 
-            // 1. Envoi de l'alerte push sur ton smartphone
-            const ntfyRequest = fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                method: 'POST',
-                body: ntfyMessage,
-                headers: {
-                    'Title': '🚨 Nouveau Lead LP Nontron',
-                    'Priority': 'urgent',
-                    'Tags': 'house,telephone_receiver'
-                }
-            }).catch(err => console.error("Erreur ntfy:", err));
+            // 1. Envoi prioritaire vers ntfy.sh (en mode texte brut simple)
+            try {
+                await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                    method: 'POST',
+                    mode: 'no-cors', // Évite tout blocage de sécurité navigateur
+                    body: ntfyMessage
+                });
+            } catch (err) {
+                console.error("Erreur envoi ntfy:", err);
+            }
 
-            // 2. Envoi habituel vers Formspree
-            const formspreeRequest = fetch(contactForm.action, {
-                method: contactForm.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).catch(err => console.error("Erreur Formspree:", err));
+            // 2. Envoi vers Formspree
+            try {
+                await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+            } catch (err) {
+                console.error("Erreur envoi Formspree:", err);
+            }
 
-            // Redirection dès que les deux requêtes sont parties
-            Promise.allSettled([formspreeRequest, ntfyRequest]).then(() => {
-                window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
-            });
+            // 3. Redirection uniquement une fois les requêtes terminées
+            window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
         });
     }
-
-}); // <-- C'ÉTAIT CETTE LIGNE QUI MANQUAIT !
