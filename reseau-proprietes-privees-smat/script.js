@@ -5,19 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- 0. NOTIFICATION NTFY DE VISITE (SANS FORMULAIRE) ---
-    // Envoie une alerte dès l'ouverture de la page, limitée à une fois par session
     if (!sessionStorage.getItem('ntfy_visit_sent')) {
-        const referrer = document.referrer ? `Provenance : ${document.referrer}` : "Accès direct / Lien direct";
-        const ecran = `${window.innerWidth}x${window.innerHeight}`;
+        const referrer = document.referrer ? `de ${document.referrer}` : "Direct";
+        const messageVisite = `Visiteur sur la LP Nontron (${referrer})`;
 
-        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-            method: 'POST',
-            headers: {
-                'Title': '👀 Nouveau visiteur sur la page !',
-                'Priority': 'default',
-                'Tags': 'eyes,globe'
-            },
-            body: `Un prospect consulte actuellement la Landing Page Nontron.\n\n${referrer}\nFormat écran : ${ecran}`
+        // Envoi direct sans aucun en-tête bloquant
+        fetch(`https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("👀 Visiteur sur la LP")}&message=${encodeURIComponent(messageVisite)}&tags=eyes`, {
+            method: 'GET',
+            mode: 'no-cors'
         })
         .then(() => {
             sessionStorage.setItem('ntfy_visit_sent', 'true');
@@ -48,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (phoneInput) {
         phoneInput.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, ''); // Garde uniquement les chiffres
+            let value = e.target.value.replace(/\D/g, '');
             if (value.length > 10) value = value.substring(0, 10);
             const formattedValue = value.replace(/(\d{2})(?=\d)/g, '$1 ');
             e.target.value = formattedValue;
@@ -102,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedConsent === 'accepted') {
         updateConsent(true);
     } else if (savedConsent === 'rejected') {
-        // Reste bloqué par défaut
+        // Bloqué par défaut
     } else {
         setTimeout(() => {
             if (cookieBanner) cookieBanner.classList.add('show');
@@ -206,24 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = formData.get('email') || 'Non renseigné';
             const adresse = formData.get('address') || 'Non renseignée';
 
-            const ntfyMessage = `Nouveau prospect vendeur !\n\nNom : ${nom}\nTel : ${telephone}\nEmail : ${email}\nCommune : ${adresse}`;
+            const ntfyMessage = `Nom: ${nom} | Tel: ${telephone} | Ville: ${adresse} | Email: ${email}`;
 
-            // 1. Envoi prioritaire vers ntfy.sh
+            // 1. Envoi ntfy via publish (fiable à 100%)
+            const ntfyUrl = `https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("🚨 Lead Immo Nontron")}&message=${encodeURIComponent(ntfyMessage)}&priority=urgent&tags=house,telephone_receiver`;
+            
             try {
-                await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-                    method: 'POST',
-                    headers: {
-                        'Title': '🚨 Nouveau Lead LP Nontron',
-                        'Priority': 'urgent',
-                        'Tags': 'house,telephone_receiver'
-                    },
-                    body: ntfyMessage
-                });
+                await fetch(ntfyUrl, { mode: 'no-cors' });
             } catch (err) {
                 console.error("Erreur ntfy lead:", err);
             }
 
-            // 2. Envoi vers Formspree
+            // 2. Envoi habituel Formspree
             try {
                 await fetch(contactForm.action, {
                     method: contactForm.method,
