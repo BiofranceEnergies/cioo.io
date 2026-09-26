@@ -1,5 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- CONFIGURATION COMMUNE NTFY ---
+    const NTFY_TOPIC = "lp-visite-sylvain-982";
+
+
+    // --- 0. NOTIFICATION NTFY DE VISITE (SANS FORMULAIRE) ---
+    // Envoie une alerte dès l'ouverture de la page, limitée à une fois par session
+    if (!sessionStorage.getItem('ntfy_visit_sent')) {
+        const referrer = document.referrer ? `Provenance : ${document.referrer}` : "Accès direct / Lien direct";
+        const ecran = `${window.innerWidth}x${window.innerHeight}`;
+
+        fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+            method: 'POST',
+            headers: {
+                'Title': '👀 Nouveau visiteur sur la page !',
+                'Priority': 'default',
+                'Tags': 'eyes,globe'
+            },
+            body: `Un prospect consulte actuellement la Landing Page Nontron.\n\n${referrer}\nFormat écran : ${ecran}`
+        })
+        .then(() => {
+            sessionStorage.setItem('ntfy_visit_sent', 'true');
+        })
+        .catch(err => console.error("Erreur ntfy visite:", err));
+    }
+
+
     // --- 1. ANIMATIONS AU SCROLL ---
     const elementsToAnimate = document.querySelectorAll('.anim');
 
@@ -160,11 +186,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 7. SOUMISSION FORMULAIRE FORMSPREE & NTFY ---
+    // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE & NTFY ---
     const contactForm = document.getElementById("contact-form") || document.querySelector(".clean-form");
     const submitBtn = document.getElementById("submit-button") || (contactForm ? contactForm.querySelector('button[type="submit"]') : null);
-
-    const NTFY_TOPIC = "lp-visite-sylvain-982";
 
     if (contactForm) {
         contactForm.addEventListener("submit", async function (event) {
@@ -189,14 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'text/plain; charset=utf-8',
-                        'Title': 'Nouveau Lead LP Nontron',
-                        'Priority': 'high'
+                        'Title': '🚨 Nouveau Lead LP Nontron',
+                        'Priority': 'urgent',
+                        'Tags': 'house,telephone_receiver'
                     },
                     body: ntfyMessage
                 });
             } catch (err) {
-                console.error("Erreur ntfy:", err);
+                console.error("Erreur ntfy lead:", err);
             }
 
             // 2. Envoi vers Formspree
@@ -212,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Erreur Formspree:", err);
             }
 
-            // 3. Redirection une fois les deux requêtes complétées
+            // 3. Redirection finale
             window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
         });
     }
