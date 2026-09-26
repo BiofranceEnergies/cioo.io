@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-// --- 7. SOUMISSION FORMULAIRE FORMSPREE & NTFY BLINDÉE ---
+    // --- 7. SOUMISSION FORMULAIRE FORMSPREE & NTFY ---
     const contactForm = document.getElementById("contact-form") || document.querySelector(".clean-form");
     const submitBtn = document.getElementById("submit-button") || (contactForm ? contactForm.querySelector('button[type="submit"]') : null);
 
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener("submit", async function (event) {
             event.preventDefault();
-            
+
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = "<span>Envoi en cours...</span>";
@@ -182,17 +182,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = formData.get('email') || 'Non renseigné';
             const adresse = formData.get('address') || 'Non renseignée';
 
-            const ntfyMessage = `Nouveau prospect vendeur !\n\n👤 Nom : ${nom}\n📞 Tél : ${telephone}\n📧 Email : ${email}\n📍 Commune : ${adresse}`;
+            const ntfyMessage = `Nouveau prospect vendeur !\n\nNom : ${nom}\nTel : ${telephone}\nEmail : ${email}\nCommune : ${adresse}`;
 
-            // 1. Envoi prioritaire vers ntfy.sh (en mode texte brut simple)
+            // 1. Envoi prioritaire vers ntfy.sh
             try {
                 await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
                     method: 'POST',
-                    mode: 'no-cors', // Évite tout blocage de sécurité navigateur
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8',
+                        'Title': 'Nouveau Lead LP Nontron',
+                        'Priority': 'high'
+                    },
                     body: ntfyMessage
                 });
             } catch (err) {
-                console.error("Erreur envoi ntfy:", err);
+                console.error("Erreur ntfy:", err);
             }
 
             // 2. Envoi vers Formspree
@@ -205,10 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             } catch (err) {
-                console.error("Erreur envoi Formspree:", err);
+                console.error("Erreur Formspree:", err);
             }
 
-            // 3. Redirection uniquement une fois les requêtes terminées
+            // 3. Redirection une fois les deux requêtes complétées
             window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
         });
     }
+
+});
