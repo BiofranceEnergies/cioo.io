@@ -161,9 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE ---
+  // --- 7. SOUMISSION ASYNCHRONE FORMULAIRE FORMSPREE & NTFY ---
     const contactForm = document.getElementById("contact-form") || document.querySelector(".clean-form");
     const submitBtn = document.getElementById("submit-button") || (contactForm ? contactForm.querySelector('button[type="submit"]') : null);
+
+    const NTFY_TOPIC = "lp-visite-sylvain-982";
 
     if (contactForm) {
         contactForm.addEventListener("submit", function (event) {
@@ -176,18 +178,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(contactForm);
 
-            fetch(contactForm.action, {
+            const nom = formData.get('name') || 'Non renseigné';
+            const telephone = formData.get('telephone') || formData.get('phone') || 'Non renseigné';
+            const email = formData.get('email') || 'Non renseigné';
+            const adresse = formData.get('address') || 'Non renseignée';
+
+            const ntfyMessage = `Nouveau prospect vendeur !\n\n👤 Nom : ${nom}\n📞 Tél : ${telephone}\n📧 Email : ${email}\n📍 Commune : ${adresse}`;
+
+            // 1. Envoi de l'alerte push sur ton smartphone
+            const ntfyRequest = fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+                method: 'POST',
+                body: ntfyMessage,
+                headers: {
+                    'Title': '🚨 Nouveau Lead LP Nontron',
+                    'Priority': 'urgent',
+                    'Tags': 'house,telephone_receiver'
+                }
+            }).catch(err => console.error("Erreur ntfy:", err));
+
+            // 2. Envoi habituel vers Formspree
+            const formspreeRequest = fetch(contactForm.action, {
                 method: contactForm.method,
                 body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
-            }).then(() => {
-                window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
-            }).catch(() => {
+            }).catch(err => console.error("Erreur Formspree:", err));
+
+            // Redirection dès que les deux requêtes sont parties
+            Promise.allSettled([formspreeRequest, ntfyRequest]).then(() => {
                 window.location.href = "https://cioo.io/reseau-proprietes-privees-smat/merci.html";
             });
         });
     }
-
-});
