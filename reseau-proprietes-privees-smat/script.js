@@ -6,8 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 0. NOTIFICATION NTFY DE VISITE (SANS FORMULAIRE) ---
     if (!sessionStorage.getItem('ntfy_visit_sent')) {
-        const referrer = document.referrer ? `de ${document.referrer}` : "Direct";
-        const messageVisite = `Visiteur sur la LP Nontron (${referrer})`;
+        const urlParams = new URLSearchParams(window.location.search);
+        const ref = document.referrer;
+        let provenance = "Direct";
+
+        if (urlParams.has('gclid')) {
+            provenance = "Google Ads (Campagne payante)";
+        } else if (urlParams.get('source') === 'fiche-google' || urlParams.get('utm_source') === 'google_business') {
+            provenance = "Fiche Google Établissement";
+        } else if (ref && ref.includes('google.')) {
+            provenance = "Google (Recherche / Maps)";
+        } else if (ref) {
+            provenance = `Lien externe : ${ref}`;
+        }
+
+        const messageVisite = `Visiteur sur la LP Nontron (${provenance})`;
 
         // Envoi direct sans aucun en-tête bloquant
         fetch(`https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("👀 Visiteur sur la LP")}&message=${encodeURIComponent(messageVisite)}&tags=eyes`, {
