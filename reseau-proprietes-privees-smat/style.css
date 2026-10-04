@@ -1140,8 +1140,8 @@ a.strip-item:hover {
         padding: 60px 15px; 
     }
 
-    .contact-wrapper { 
-        flex-direction: column; 
+   .contact-wrapper { 
+        flex-direction: column-reverse; 
         align-items: stretch;
         gap: 35px; 
     }
