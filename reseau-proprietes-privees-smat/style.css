@@ -208,9 +208,13 @@ body::before {
 .agent-avatar {
     width: 38px;
     height: 38px;
+    min-width: 38px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: 18% 32%;
+    transform: scale(2.2);
     border: 2px solid var(--primary);
+    overflow: hidden;
 }
 
 .agent-info {
