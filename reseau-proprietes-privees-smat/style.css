@@ -205,16 +205,26 @@ body::before {
     backdrop-filter: blur(10px);
 }
 
-.agent-avatar {
+.agent-avatar-wrap {
     width: 38px;
     height: 38px;
     min-width: 38px;
     border-radius: 50%;
-    object-fit: cover;
-    object-position: 18% 32%;
-    transform: scale(2.2);
+    overflow: hidden;                /* Coupe tout ce qui dépasse du cercle */
     border: 2px solid var(--primary);
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.agent-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 18% 35%;        /* Cale le zoom pile sur ton visage */
+    transform: scale(2.4);           /* Zoom sur le visage */
+    border: none;
+    border-radius: 0;
 }
 
 .agent-info {
