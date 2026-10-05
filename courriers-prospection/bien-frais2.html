@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Courrier Prospection - Bien Frais</title>
+  <title>Courrier Prospection - Lancement Bien Récent</title>
   <style>
     body {
       background-color: #525659;
@@ -16,15 +16,11 @@
 
     .page-a4 {
       width: 210mm;
-      height: 297mm;
+      box-sizing: border-box;
       margin: 0 auto;
       background-color: #ffffff;
-      padding: 14mm 20mm 14mm 20mm;
+      padding: 14mm 18mm 14mm 18mm;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
     }
 
     /* En-tête */
@@ -32,8 +28,8 @@
       width: 100%;
       border-collapse: collapse;
       border-bottom: 2px solid #e61653;
-      padding-bottom: 10px;
-      margin-bottom: 16px;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
     }
     .sender-name {
       font-size: 14pt;
@@ -59,105 +55,107 @@
       margin-left: auto;
     }
 
-    /* Destinataire */
-    .recipient-box {
-      width: 55%;
-      margin-left: auto;
-      background-color: #fdf2f4;
-      border-left: 4px solid #e61653;
-      padding: 10px 14px;
-      margin-bottom: 18px;
+    /* Objet */
+    .object-box {
+      width: 100%;
+      background-color: #f4f5f7;
+      border-left: 4px solid #2b2b2b;
+      padding: 8px 14px;
+      margin-bottom: 14px;
       border-radius: 0 4px 4px 0;
+      box-sizing: border-box;
     }
-    .recipient-title {
+    .object-label {
       font-weight: bold;
-      color: #e61653;
-      font-size: 10pt;
+      color: #1a1a1a;
+      font-size: 9.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .recipient-address {
-      font-size: 9pt;
-      color: #555555;
+    .object-text {
+      font-size: 9.5pt;
+      color: #333333;
       font-style: italic;
-      margin-top: 2px;
+      margin-left: 6px;
     }
 
-    /* Accroche type Flyer */
+    /* Accroche */
     .hero-banner {
       background-color: #e61653;
       color: #ffffff;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-radius: 6px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       text-align: center;
     }
     .hero-title {
-      font-size: 12pt;
+      font-size: 11.5pt;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .hero-subtitle {
-      font-size: 10.5pt;
+      font-size: 10pt;
       font-weight: normal;
       opacity: 0.95;
     }
 
     .intro-text {
-      margin-bottom: 18px;
-      font-size: 10.5pt;
-      line-height: 1.5;
+      margin-bottom: 14px;
+      font-size: 10pt;
+      line-height: 1.45;
     }
 
-    /* TABLEAU DE STRUCTURE SÉCURISÉ POUR LES PUCES (PDF PERFECT) */
+    /* Tableau arguments */
     .features-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 16px 0;
+      margin: 12px 0;
     }
     .features-table td {
       vertical-align: top;
-      padding-bottom: 14px;
+      padding-bottom: 10px;
     }
     .arrow-cell {
-      width: 24px;
+      width: 22px;
       color: #e61653;
       font-weight: bold;
-      font-size: 12pt;
+      font-size: 11pt;
       line-height: 1.3;
       padding-top: 1px;
     }
     .feature-title {
-      color: #e61653;
+      color: #1a1a1a;
       font-weight: bold;
-      font-size: 11pt;
-      margin-bottom: 3px;
+      font-size: 10.5pt;
+      margin-bottom: 2px;
     }
     .feature-desc {
-      font-size: 10pt;
+      font-size: 9.5pt;
       color: #333333;
-      line-height: 1.45;
+      line-height: 1.4;
     }
 
-    /* CALL TO ACTION DÉCLENCHEUR SMS VIDÉO ÉPURÉ */
+    /* Call to Action */
     .cta-block {
-      background-color: #fcfcfc;
-      border: 1px dashed #e61653;
+      background-color: #f8f9fa;
+      border: 1.5px solid #2b2b2b;
       border-radius: 6px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       margin-top: 14px;
       text-align: center;
-      font-size: 10.5pt;
-      line-height: 1.5;
+      line-height: 1.45;
     }
     .cta-main {
+      font-size: 10pt;
       font-weight: bold;
       color: #1a1a1a;
       margin-bottom: 4px;
     }
     .cta-action {
       font-size: 11pt;
-      font-weight: bold;
+      font-weight: 800;
       color: #e61653;
     }
 
@@ -166,7 +164,7 @@
       color: #555555;
       font-style: italic;
       margin-top: 14px;
-      padding-top: 8px;
+      padding-top: 6px;
       border-top: 1px solid #eee;
     }
 
@@ -174,11 +172,11 @@
     .footer-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 16px;
-      padding-top: 10px;
+      margin-top: 24px;
+      padding-top: 8px;
     }
     .footer-table td {
-      vertical-align: bottom;
+      vertical-align: middle;
     }
     .signature-container {
       display: flex;
@@ -186,19 +184,19 @@
       gap: 12px;
     }
     .profile-img {
-      width: 65px;
-      height: 65px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #e61653;
     }
     .signature-title {
-      font-size: 11pt;
+      font-size: 10.5pt;
       font-weight: bold;
       color: #e61653;
     }
     .signature-role {
-      font-size: 9.5pt;
+      font-size: 9pt;
       font-weight: bold;
       color: #333333;
       margin-top: 1px;
@@ -206,37 +204,34 @@
     .signature-contact {
       font-size: 8.5pt;
       color: #444444;
-      line-height: 1.35;
+      line-height: 1.3;
       margin-top: 2px;
     }
 
     .qr-card {
       border: 1px solid #f8d7da;
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 6px 10px;
       text-align: center;
       background-color: #fdf2f4;
     }
-    .yt-logo-img {
-      height: 16px;
-      margin: 0 auto 3px auto;
-      display: block;
-    }
     .qr-subtitle {
-      font-size: 8pt;
+      font-size: 7.5pt;
       font-weight: bold;
       color: #e61653;
       margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
     .qr-img {
-      width: 70px;
-      height: 70px;
+      width: 68px;
+      height: 68px;
       display: block;
       margin: 0 auto;
       border: 1px solid #e61653;
       border-radius: 4px;
       background-color: #ffffff;
-      padding: 3px;
+      padding: 2px;
     }
     .qr-caption {
       font-size: 7pt;
@@ -245,83 +240,100 @@
     }
 
     @media print {
-      body { background-color: #ffffff; padding: 0; }
-      .page-a4 { width: 100%; height: 100%; box-shadow: none; padding: 14mm 20mm; }
-      @page { size: A4 portrait; margin: 0; }
+      body {
+        background-color: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .page-a4 {
+        width: 100% !important;
+        box-shadow: none !important;
+        padding: 12mm 18mm 16mm 18mm !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="page-a4">
-    <div>
-      <!-- EN-TÊTE -->
-      <table class="header-table">
-        <tr>
-          <td>
-            <div class="sender-name">Sylvain MATIGNON</div>
-            <div class="sender-info">Conseiller Immobilier – Saint-Martial-de-Valette – Réseau Propriétés Privées</div>
-            <div class="sender-tagline">Votre conseiller de proximité en Périgord Vert</div>
-          </td>
-          <td style="text-align: right; width: 160px;">
-            <img src="pp_logo_quadri_seul.png" alt="Propriétés Privées" class="logo-img">
-          </td>
-        </tr>
-      </table>
+    <!-- EN-TÊTE -->
+    <table class="header-table">
+      <tr>
+        <td>
+          <div class="sender-name">Sylvain MATIGNON</div>
+          <div class="sender-info">Conseiller Immobilier – Saint-Martial-de-Valette – Réseau Propriétés Privées</div>
+          <div class="sender-tagline">Votre conseiller de proximité en Périgord Vert</div>
+        </td>
+        <td style="text-align: right; width: 160px;">
+          <img src="pp_logo_quadri_seul.png" alt="Propriétés Privées" class="logo-img">
+        </td>
+      </tr>
+    </table>
 
-      <!-- DESTINATAIRE -->
-      <div class="recipient-box">
-        <div class="recipient-title" contenteditable="true">À l’attention de M. / Mme [Nom du propriétaire]</div>
-        <div class="recipient-address" contenteditable="true">Bien situé au : [Adresse du bien]</div>
+    <!-- OBJET -->
+    <div class="object-box">
+      <span class="object-label">Objet&nbsp;:</span>
+      <span class="object-text">Le lancement sur le marché de votre propriété</span>
+    </div>
+
+    <!-- BANNIÈRE D'ACCROCHE -->
+    <div class="hero-banner">
+      <div class="hero-title">
+        VOTRE MAISON VIENT D'ARRIVER SUR LE MARCHÉ...<br>LES 30 PREMIERS JOURS SONT DÉCISIFS&nbsp;!
       </div>
-
-      <!-- BANNIÈRE D'ACCROCHE -->
-      <div class="hero-banner">
-        <div class="hero-title">VOUS VENEZ DE METTRE VOTRE MAISON EN VENTE ?</div>
-        <div class="hero-subtitle">Offrez-lui une stratégie d'affichage 2.0 encore très rare sur notre secteur.</div>
+      <div class="hero-subtitle">
+        Ne laissez pas de simples photos figer votre vente. Déclenchez l'effet coup de cœur.
       </div>
+    </div>
 
-      <div class="intro-text">
-        Madame, Monsieur,<br><br>
-        Votre bien vient de faire son entrée sur le marché. Dans les premières semaines, l'attention des acheteurs est maximale. Pour capter les meilleurs acquéreurs et éviter les déceptions, la simple parution de photos fixes ne suffit plus : il faut marquer les esprits dès le premier jour.
-      </div>
+    <div class="intro-text">
+      Madame, Monsieur,<br><br>
+      Félicitations pour le lancement de votre projet. La mise en vente d’un bien en Périgord Vert suscite toujours une première vague de curiosité. Mais attention&nbsp;: c'est précisément durant les premières semaines que se joue le meilleur prix, avant que votre maison ne se banalise parmi les annonces concurrentes.
+    </div>
 
-      <!-- LISTE D'ARGUMENTS SÉCURISÉE -->
-      <table class="features-table">
-        <tr>
-          <td class="arrow-cell">➔</td>
-          <td>
-            <div class="feature-title">Une expérience immersive unique (Vidéo YouTube) :</div>
-            <div class="feature-desc">
-  Je crée une visite vidéo immersive complète de votre maison. C'est le seul format capable de déclencher des coups de cœur à distance et de séduire les acquéreurs hors secteur qui hésitent à se déplacer... <span style="color: #e61653; font-weight: bold;">Vous seriez surpris !</span>
-</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="arrow-cell">➔</td>
-          <td>
-            <div class="feature-title">Un filtre efficace anti-curieux :</div>
-            <div class="feature-desc">Les acheteurs valident les volumes et l'agencement réel depuis leur écran. Résultat : vous ne bloquez vos week-ends que pour des candidats réellement financés et convaincus avant même de passer le pas de votre porte.</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="arrow-cell">➔</td>
-          <td>
-            <div class="feature-title">Un boost en Mandat Simple :</div>
-            <div class="feature-desc">Vous conservez toute votre liberté. Nous formalisons simplement un mandat simple pour me donner le cadre légal de déployer ce dispositif vidéo et de propulser votre annonce sur plus de 100 portails.</div>
-          </td>
-        </tr>
-      </table>
+    <!-- LISTE D'ARGUMENTS -->
+    <table class="features-table">
+      <tr>
+        <td class="arrow-cell">➔</td>
+        <td>
+          <div class="feature-title">Toucher les acquéreurs parisiens et hors région (Format YouTube)&nbsp;:</div>
+          <div class="feature-desc">
+            Les acheteurs disposant des meilleurs financements ne se déplacent pas pour de simples photos. Une visite vidéo immersive scénarisée valide leur coup de cœur à distance et les incite à programmer immédiatement le voyage.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="arrow-cell">➔</td>
+        <td>
+          <div class="feature-title">Zéro défilé de curieux chez vous&nbsp;:</div>
+          <div class="feature-desc">
+            Vendre ne signifie pas ouvrir sa maison à n'importe qui. La vidéo fait office de premier filtre strict&nbsp;: agencement, volumes et validation du budget se font en amont pour préserver votre temps et vos week-ends.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="arrow-cell">➔</td>
+        <td>
+          <div class="feature-title">Créer l'effet de rareté et d'urgence&nbsp;:</div>
+          <div class="feature-desc">
+            Une mise en avant visuelle d'exception dès les premiers jours attire les profils décidés et évite d'entrer dans la spirale des négociations au rabais.
+          </div>
+        </td>
+      </tr>
+    </table>
 
-    <!-- CALL TO ACTION OPTIMISÉ -->
-<div class="cta-block">
-  <div class="cta-main">Scannez le QR code en bas de page pour un exemple de visite en vidéo.</div>
-  <div class="cta-action">Intéressé ? Envoyez simplement « VIDÉO » par SMS au 06 48 89 34 80.</div>
-</div>
+    <!-- CALL TO ACTION -->
+    <div class="cta-block">
+      <div class="cta-main">Envie de maximiser l'impact de votre vente dès le premier mois&nbsp;?</div>
+      <div class="cta-action">Envoyez simplement « DÉPART » par SMS au 06 48 89 34 80 pour un échange de 10 minutes.</div>
+    </div>
 
-      <div class="ps-block">
-        <strong>P.S. :</strong> Si votre démarche actuelle vous apporte déjà toute la visibilité souhaitée, ne tenez pas compte de ce courrier et je vous souhaite une excellente réussite dans votre projet.
-      </div>
+    <div class="ps-block">
+      <strong>P.S.&nbsp;:</strong> 80&nbsp;% des ventes au meilleur prix se concluent auprès des acquéreurs touchés lors des premières semaines de diffusion.
     </div>
 
     <!-- PIED DE PAGE -->
@@ -343,10 +355,9 @@
         </td>
         <td style="width: 42%;">
           <div class="qr-card">
-            <img src="logo youtube.png" alt="YouTube" class="yt-logo-img">
-            <div class="qr-subtitle">Exemple de visite immersive</div>
-            <img src="qr-code bien maison année 30.png" alt="QR Code" class="qr-img">
-            <div class="qr-caption">Scannez ce code pour voir la vidéo.</div>
+            <div class="qr-subtitle">Visite vidéo & méthode</div>
+            <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/f6e804e69fcade721f0e2abae956746a600c9285/courriers-prospection/qr-code-LP.png" alt="QR Code Démonstration" class="qr-img">
+            <div class="qr-caption">Scannez ce code pour voir la démonstration.</div>
           </div>
         </td>
       </tr>
