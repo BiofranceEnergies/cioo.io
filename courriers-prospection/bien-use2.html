@@ -16,10 +16,10 @@
 
     .page-a4 {
       width: 210mm;
-      height: 297mm;
+      min-height: 297mm;
       margin: 0 auto;
       background-color: #ffffff;
-      padding: 12mm 18mm 12mm 18mm;
+      padding: 10mm 18mm 10mm 18mm;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
       box-sizing: border-box;
       display: flex;
@@ -33,7 +33,7 @@
       border-collapse: collapse;
       border-bottom: 2px solid #e61653;
       padding-bottom: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .sender-name {
       font-size: 14pt;
@@ -59,19 +59,19 @@
       margin-left: auto;
     }
 
-    /* Objet (Option A : Universel pour tirage d'avance) */
+    /* Objet : Sobre et contrasté (fini le fond rose) */
     .object-box {
       width: 100%;
-      background-color: #fdf2f4;
-      border-left: 4px solid #e61653;
+      background-color: #f4f5f7;
+      border-left: 4px solid #2b2b2b;
       padding: 8px 14px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       border-radius: 0 4px 4px 0;
       box-sizing: border-box;
     }
     .object-label {
       font-weight: bold;
-      color: #e61653;
+      color: #1a1a1a;
       font-size: 9.5pt;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -130,7 +130,7 @@
       padding-top: 1px;
     }
     .feature-title {
-      color: #e61653;
+      color: #1a1a1a;
       font-weight: bold;
       font-size: 10.5pt;
       margin-bottom: 2px;
@@ -141,25 +141,25 @@
       line-height: 1.4;
     }
 
-    /* Call to Action */
+    /* Call to Action : Bloc d'action affirmé */
     .cta-block {
-      background-color: #fcfcfc;
-      border: 1px dashed #e61653;
+      background-color: #f8f9fa;
+      border: 1.5px solid #2b2b2b;
       border-radius: 6px;
-      padding: 10px 14px;
+      padding: 12px 14px;
       margin-top: 10px;
       text-align: center;
-      line-height: 1.4;
+      line-height: 1.45;
     }
     .cta-main {
-      font-size: 9.5pt;
+      font-size: 10pt;
       font-weight: bold;
       color: #1a1a1a;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .cta-action {
-      font-size: 10.5pt;
-      font-weight: bold;
+      font-size: 11pt;
+      font-weight: 800;
       color: #e61653;
     }
 
@@ -247,9 +247,25 @@
     }
 
     @media print {
-      body { background-color: #ffffff; padding: 0; }
-      .page-a4 { width: 100%; height: 100%; box-shadow: none; padding: 12mm 18mm; }
-      @page { size: A4 portrait; margin: 0; }
+      html, body {
+        height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: #ffffff !important;
+      }
+      .page-a4 {
+        width: 100% !important;
+        height: 100% !important;
+        min-height: 100% !important;
+        box-shadow: none !important;
+        padding: 10mm 18mm !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
     }
   </style>
 </head>
@@ -271,10 +287,10 @@
         </tr>
       </table>
 
-      <!-- OBJET GÉNÉRIQUE SANS NOM/ADRESSE FIGÉS -->
+      <!-- OBJET SOBRE ET NET -->
       <div class="object-box">
         <span class="object-label">Objet&nbsp;:</span>
-        <span class="object-text">La commercialisation et la visibilité de votre maison</span>
+        <span class="object-text">Pourquoi votre maison n'a toujours pas trouvé son acquéreur</span>
       </div>
 
       <!-- BANNIÈRE D'ACCROCHE -->
@@ -289,48 +305,48 @@
 
       <div class="intro-text">
         Madame, Monsieur,<br><br>
-        Lorsqu’un bien stagne sur les portails d'annonces, les acheteurs locaux s'en désintéressent et s'imaginent souvent un défaut caché. Le problème vient rarement de votre maison elle-même, mais d’une visibilité usée qui ne touche plus les bons acquéreurs.
+        Lorsqu’un bien stagne sur les portails d'annonces, les acquéreurs s'en désintéressent et s'imaginent souvent un défaut caché. Le problème vient rarement de votre maison, mais d’une annonce usée qui ne touche plus les bons profils.
       </div>
 
-      <!-- LISTE D'ARGUMENTS -->
+      <!-- LISTE D'ARGUMENTS PUNCHY -->
       <table class="features-table">
         <tr>
           <td class="arrow-cell">➔</td>
           <td>
-            <div class="feature-title">Une visite vidéo immersive (Format YouTube dédié)&nbsp;:</div>
+            <div class="feature-title">Rendre votre bien visible à 500 km (Format YouTube)&nbsp;:</div>
             <div class="feature-desc">
-              En Périgord Vert, les acheteurs avec le meilleur budget viennent souvent de loin. La vidéo scénarisée est le seul format capable de provoquer un coup de cœur à distance et de décider les candidats sérieux à faire le trajet.
+              En Périgord Vert, les acquéreurs disposant des meilleurs budgets viennent souvent de loin. La visite vidéo scénarisée déclenche le coup de cœur à distance et décide les candidats sérieux à faire le trajet.
             </div>
           </td>
         </tr>
         <tr>
           <td class="arrow-cell">➔</td>
           <td>
-            <div class="feature-title">Un filtre strict anti-curieux&nbsp;:</div>
+            <div class="feature-title">Fini les visites inutiles le dimanche&nbsp;:</div>
             <div class="feature-desc">
-              Les acheteurs valident les espaces, l'environnement et leur capacité de financement avant de se déplacer. Vous ne bloquez plus vos fins de semaine que pour des acquéreurs finançables et décidés.
+              Les candidats découvrent l'agencement, les volumes et valident leur capacité d'emprunt à l'écran. Vous ne bloquez plus vos fins de semaine que pour des acheteurs réellement finançables.
             </div>
           </td>
         </tr>
         <tr>
           <td class="arrow-cell">➔</td>
           <td>
-            <div class="feature-title">Une nouvelle impulsion sans contrainte&nbsp;:</div>
+            <div class="feature-title">Effacer l'étiquette du bien figé&nbsp;:</div>
             <div class="feature-desc">
-              Nous cassons l'image d'un bien figé sur le marché pour lui redonner toute la fraîcheur d'un nouveau lancement, sans jamais bousculer votre liberté de décision.
+              Nous cassons l'image d'un bien usé sur le marché pour recréer l'effet de nouveauté et d'opportunité auprès des acheteurs récents, en toute indépendance.
             </div>
           </td>
         </tr>
       </table>
 
-      <!-- CALL TO ACTION -->
+      <!-- CALL TO ACTION PUNCHY -->
       <div class="cta-block">
-        <div class="cta-main">Envie de savoir pourquoi votre annonce actuelle bloque et comment réactiver la demande&nbsp;?</div>
-        <div class="cta-action">Envoyez simplement « RELANCE » par SMS au 06 48 89 34 80 pour un échange de 10 minutes.</div>
+        <div class="cta-main">Arrêtons d'user votre maison inutilement sur les portails.</div>
+        <div class="cta-action">Envoyez simplement « RELANCE » par SMS au 06 48 89 34 80 pour un audit sans détour.</div>
       </div>
 
       <div class="ps-block">
-        <strong>P.S.&nbsp;:</strong> La vidéo immobilière permet d'éliminer près de 60&nbsp;% des visites de curiosité sans lendemain tout en doublant l'intérêt des acquéreurs hors région.
+        <strong>P.S.&nbsp;:</strong> La vidéo immobilière élimine près de 60&nbsp;% des visites de pure curiosité et multiplie par deux les contacts d'acheteurs hors région.
       </div>
     </div>
 
