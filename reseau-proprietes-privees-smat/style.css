@@ -900,6 +900,40 @@ a.strip-item:hover {
     z-index: 1; 
 }
 
+/* Lien YouTube dans le Footer */
+.footer-youtube-link {
+    margin-bottom: 18px;
+}
+
+.footer-youtube-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.25s ease;
+}
+
+.footer-yt-icon {
+    height: 20px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.footer-youtube-link a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
 /* ==========================================================================
    8. MODALES (MENTIONS LÉGALES & VIDÉO MÉTHODE)
    ========================================================================== */
@@ -1091,7 +1125,7 @@ a.strip-item:hover {
         height: auto; 
         border: 4px solid #1a1a1a; 
         border-radius: 28px; 
-        margin-bottom: 25px;
+        margin-bottom: 25px; 
     }
     
     .comparison-section { 
@@ -1134,31 +1168,31 @@ a.strip-item:hover {
     }
 
     /* Avis responsive */
-    .reviews-section {
-        padding: 20px 15px 60px 15px;
+    .reviews-section { 
+        padding: 20px 15px 60px 15px; 
     }
 
-    .reviews-title {
-        font-size: 1.4rem;
-        margin-bottom: 25px;
+    .reviews-title { 
+        font-size: 1.4rem; 
+        margin-bottom: 25px; 
     }
 
-    .reviews-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .reviews-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
     }
     
-    .review-card {
-        padding: 22px 18px;
+    .review-card { 
+        padding: 22px 18px; 
     }
     
     .contact-section { 
         padding: 60px 15px; 
     }
 
-   .contact-wrapper { 
+    .contact-wrapper { 
         flex-direction: column-reverse; 
-        align-items: stretch;
+        align-items: stretch; 
         gap: 35px; 
     }
     
@@ -1185,10 +1219,10 @@ a.strip-item:hover {
     }
 
     /* Logo sur photo ajusté pour smartphone */
-    .anchor-direct-logo {
-        top: 12px;
-        right: 14px;
-        height: 28px;
+    .anchor-direct-logo { 
+        top: 12px; 
+        right: 14px; 
+        height: 28px; 
     }
 
     .anchor-contact-strip { 
