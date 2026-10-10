@@ -247,42 +247,50 @@
                 </div>
             </div>
 
-            <div class="contact-form-col anim delay-2">
-                <form class="clean-form" id="contact-form" action="https://formspree.io/f/xbdqklqb" method="POST">
-                    <!-- Redirection de secours native Formspree -->
-                    <input type="hidden" name="_next" value="https://cioo.io/reseau-proprietes-privees-smat/merci.html">
-
-                    <div style="background: rgba(237, 22, 81, 0.08); border-left: 3px solid var(--primary); padding: 10px 14px; border-radius: 4px; margin-bottom: 20px;">
-                        <p style="font-size: 0.92rem; color: #fff; margin: 0; line-height: 1.4;">
-                            🤝 <strong>Je souhaite être recontacté pour échanger sur mon projet</strong><br>
-                            <span style="color: var(--text-gray); font-size: 0.82rem;">Étude locale offerte, confidentielle et sans engagement.</span>
-                        </p>
+  <div class="contact-form-col anim delay-2">
+                <div class="booking-card">
+                    <!-- Option 1 : Réservation Calendrier (Mise en avant) -->
+                    <div class="booking-option featured">
+                        <div class="booking-badge">Recommandé • Sans engagement</div>
+                        <div class="booking-header">
+                            <span class="booking-icon">📅</span>
+                            <div>
+                                <h3>Bloquer 15 min de conseil</h3>
+                                <p>Choisissez votre jour et heure. Je vous appelle au créneau convenu.</p>
+                            </div>
+                        </div>
+                        <ul class="booking-perks">
+                            <li>Analyse des ventes réelles (DVF) de votre secteur</li>
+                            <li>Échange confidentiel et sans pression commerciale</li>
+                        </ul>
+                        <a href="https://calendar.app.google/SDoccxfh2G53jq3M7" target="_blank" rel="noopener" class="btn btn-primary full-width btn-glow">
+                            Choisir mon créneau dans l'agenda →
+                        </a>
                     </div>
 
-                    <div class="form-group">
-                        <label for="name">Votre Nom complet</label>
-                        <input type="text" id="name" name="name" required placeholder="Ex: Jean Durant">
+                    <div class="booking-separator">
+                        <span>ou si votre projet est urgent</span>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Votre Adresse Email <span style="font-weight: normal; opacity: 0.7;">(facultatif)</span></label>
-                        <input type="email" id="email" name="email" placeholder="jean.durant@gmail.com">
+
+                    <!-- Option 2 : Appel direct -->
+                    <div class="booking-option direct-call">
+                        <div class="booking-header">
+                            <span class="booking-icon">📞</span>
+                            <div>
+                                <h3>M'appeler directement</h3>
+                                <p>Disponible du lundi au samedi pour échanger de vive voix.</p>
+                            </div>
+                        </div>
+                        <a href="tel:0648893480" class="btn btn-secondary full-width btn-call">
+                            06 48 89 34 80
+                        </a>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Votre Numéro de Téléphone</label>
-                        <input type="tel" id="phone" name="telephone" required placeholder="Ex: 06 12 34 56 78">
+
+                    <div class="booking-guarantee">
+                        🔒 Point conseil 100% gratuit • Zéro mandat forcé
                     </div>
-                    <div class="form-group">
-                        <label for="address">Localisation de votre propriété</label>
-                        <input type="text" id="address" name="address" required placeholder="Ex: 24300 Nontron, Brantôme, Thiviers...">
-                    </div>
-                    
-                    <button type="submit" id="submit-button" class="btn btn-primary full-width">Faire le point sur mon bien</button>
-                    <p style="font-size: 0.8rem; color: var(--text-gray); text-align: center; margin-top: 15px;">
-                        🔒 Service <strong>100% gratuit</strong> & <strong>sans aucun engagement</strong>
-                    </p>
-                </form>
+                </div>
             </div>
-        </div>
     </section>
 
    <!-- 6. PIED DE PAGE -->
