@@ -968,19 +968,23 @@ a.strip-item:hover {
     display: flex;
     align-items: center;
     text-align: center;
-    color: #64748b;
-    font-size: 0.8rem;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 10px 0;
 }
 
 .booking-separator::before,
 .booking-separator::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .booking-separator span {
-    padding: 0 12px;
+    padding: 0 16px;
 }
 
 .booking-guarantee {
