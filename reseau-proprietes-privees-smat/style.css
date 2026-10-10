@@ -889,15 +889,17 @@ a.strip-item:hover {
 .booking-badge {
     position: absolute;
     top: -11px;
-    right: 18px;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--primary);
     color: #fff;
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
+    white-space: nowrap;
 }
 
 .booking-header {
