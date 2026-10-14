@@ -3,17 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sylvain Matignon - Objectif une offre en 30 jours — Immobilier Périgord Vert</title>
+    <title>Sylvain Matignon - Vente Immobilière & Estimation en Périgord Vert | Objectif 30 Jours</title>
+    <meta name="description" content="Vendez votre bien immobilier au prix réel du marché à Nontron et en Périgord Vert. Estimation précise, visites vidéo immersives et zéro mandat bloquant.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+      /* Styles d'appoint pour les ajouts de conversion */
+      .trust-strip {
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1.25rem 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+        text-align: center;
+      }
+      .trust-item {
+        display: flex;
+        flex-direction: column;
+      }
+      .trust-item strong {
+        font-size: 1.25rem;
+        color: #1e293b;
+        font-weight: 800;
+      }
+      .trust-item span {
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+      .mobile-sticky-cta {
+        display: none;
+        position: fixed;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        z-index: 999;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+      }
+      @media (max-width: 768px) {
+        .mobile-sticky-cta {
+          display: block;
+        }
+      }
+    </style>
 </head>
 <body>
 
-  <!-- 1. NAVIGATION : Logo Propriétés Privées officiel épuré seul -->
-  <!-- 1. NAVIGATION : Logo Propriétés Privées officiel épuré -->
-   <header class="navbar">
+    <!-- 1. NAVIGATION -->
+    <header class="navbar">
         <div class="logo">
             <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/8f5cefbf6f21dafb8dd5ef5041fd596fa8550ca7/reseau-proprietes-privees-smat/pp_logo_quadri_seul%20propriete%20blanc.png" alt="Propriétés Privées">
         </div>
@@ -35,21 +76,22 @@
                         </div>
                     </div>
                     <div class="badge">
-                        Propriétés Privées — Affilié <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/1afdc48e2287b870b2cfa19ad009851d0e35f501/reseau-proprietes-privees-smat/pp_logo_FNAIM.webp" alt="FNAIM" class="badge-fnaim-icon">
+                        Propriétés Privées — Adhérent <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/1afdc48e2287b870b2cfa19ad009851d0e35f501/reseau-proprietes-privees-smat/pp_logo_FNAIM.webp" alt="FNAIM" class="badge-fnaim-icon">
                     </div>
                 </div>
+                
                 <h1 class="anim delay-1">
-                    Objectif : déclencher<br>
-                    <span class="highlight">une offre d'achat en 30 jours</span>
+                    Vendre en Périgord Vert :<br>
+                    <span class="highlight">Objectif une offre en 30 jours</span>
                 </h1>
 
                 <p class="hero-subtitle anim delay-2">
-                    Vous souhaitez vendre votre bien, ou votre vente peine à aboutir ? Donnons un <strong>coup d'accélérateur ou une seconde chance à votre projet</strong>. À Nontron et dans tout le Périgord Vert, j'associe une <strong>estimation calée sur les ventes réelles</strong> et des <strong>visites vidéo immersives</strong> pour sélectionner les vrais acheteurs et vendre sans perdre de temps, <strong>sans contrat d'exclusivité bloquant</strong>.
+                    Vous souhaitez vendre votre bien ou relancer une vente au point mort ? À <strong>Nontron et dans tout le Périgord Vert</strong>, j'associe une <strong>estimation calée sur les ventes réelles</strong> et des <strong>visites vidéo immersives</strong> pour sélectionner les acheteurs sérieux et vendre sans perdre de temps, <strong>sans contrat d'exclusivité bloquant</strong>.
                 </p>
 
                 <div class="hero-ctas anim delay-3">
                     <a href="#contact" class="btn btn-primary">Faire le point sur mon bien (Gratuit)</a>
-                    <button class="btn btn-secondary" id="openVideoBtn">▶ Comprendre la méthode (50 sec)</button>
+                    <button class="btn btn-secondary" id="openVideoBtn">▶ Voir la méthode vidéo (50 sec)</button>
                 </div>
             </div>
 
@@ -85,7 +127,7 @@
                                     <ul>
                                         <li>📊 Prix Juste (basé sur les ventes réelles)</li>
                                         <li>🎬 Visite Vidéo Immersive (volumes & environnement)</li>
-                                        <li>🎯 Tri des acquéreurs : zéro visite inutile</li>
+                                        <li>🎯 Tri des acquéreurs : zéro curieux chez vous</li>
                                         <li>🔒 Liberté totale, sans exclusivité forcée</li>
                                     </ul>
                                 </div>
@@ -97,6 +139,26 @@
             </div>
         </div>
     </section>
+
+    <!-- BANDEAU DE RÉASSURANCE / CHIFFRES CLÉS -->
+    <div class="trust-strip">
+        <div class="trust-item">
+            <strong>100 %</strong>
+            <span>Visites qualifiées par vidéo</span>
+        </div>
+        <div class="trust-item">
+            <strong>0 €</strong>
+            <span>Frais engagés avant la vente</span>
+        </div>
+        <div class="trust-item">
+            <strong>Liberté totale</strong>
+            <span>Zéro mandat d'exclusivité bloquant</span>
+        </div>
+        <div class="trust-item">
+            <strong>Périgord Vert</strong>
+            <span>Expertise locale de proximité</span>
+        </div>
+    </div>
 
     <!-- 3. SECTION COMPARAISON -->
     <section class="comparison-section">
@@ -143,7 +205,7 @@
                             </div>
                             <div class="flyer-text">
                                 <h4>Estimation au Prix Réel du Marché</h4>
-                                <p>Analyse concrète des biens vendus récemment autour de chez vous. Zéro spéculation, le positionnement exact qui attire les acheteurs sérieux et finançables.</p>
+                                <p>Analyse concrète des biens vendus récemment autour de chez vous. Zéro spéculation : le positionnement exact qui attire les acheteurs sérieux et finançables.</p>
                             </div>
                         </li>
                         <li class="flyer-item">
@@ -209,25 +271,24 @@
         </div>
     </section>
 
-    <!-- 5. SECTION CONTACT & FORMULAIRE -->
+    <!-- 5. SECTION CONTACT & PRISE DE RENDEZ-VOUS -->
     <section class="contact-section" id="contact">
         <div class="contact-wrapper">
             <div class="contact-info anim delay-1">
                 <h2>L'Immobilier d'ici,<br><span class="highlight">la Visibilité d'ailleurs.</span></h2>
                 
                 <p class="contact-intro-text">
-                    Conseiller de proximité affilié <strong>Propriétés Privées</strong>, j'associe la visibilité d'un réseau national à un engagement 100% terrain en Périgord Vert.
+                    Conseiller de proximité affilié <strong>Propriétés Privées</strong>, j'associe la puissance d'un réseau national à un engagement 100% terrain en Périgord Vert.
                 </p>
                 
-              <div class="local-anchor-card">
+                <div class="local-anchor-card">
                     <div class="anchor-image-wrapper">
                         <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/2e4d623362f1700aab8cce55b6317f744bb36d48/reseau-proprietes-privees-smat/moi%20nontron%202.webp" alt="Sylvain Matignon à Nontron" class="anchor-photo" loading="lazy">
-                        <!-- Logo direct sans boîte blanche -->
                         <img class="anchor-direct-logo" src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/8f5cefbf6f21dafb8dd5ef5041fd596fa8550ca7/reseau-proprietes-privees-smat/pp_logo_quadri_seul%20propriete%20blanc.png" alt="Propriétés Privées">
                     </div>
                     <div class="anchor-content">
                         <div class="anchor-lead">
-                            « J'estime votre bien au prix réel du marché, je filme la visite immersive et je vous accompagne personnellement de A à Z. »
+                            « J'estime votre bien au prix réel du marché, je réalise la visite vidéo immersive et je vous accompagne personnellement jusqu'à l'acte authentique. »
                         </div>
                         <div class="anchor-contact-strip">
                             <a href="tel:0648893480" class="strip-item">
@@ -237,33 +298,33 @@
                                 <span class="icon">📧</span> s.matignon@proprietes-privees.com
                             </a>
                             <div class="strip-item">
-                                <span class="icon">📍</span> Périgord Vert & environs
+                                <span class="icon">📍</span> Nontron & Périgord Vert
                             </div>
-                            <a href="http://www.proprietes-privees.com/negociateur/sylvain.matignon" target="_blank" class="strip-item strip-link">
-                                <span class="icon">🔗</span> Fiche officielle
+                            <a href="http://www.proprietes-privees.com/negociateur/sylvain.matignon" target="_blank" rel="noopener" class="strip-item strip-link">
+                                <span class="icon">🔗</span> Fiche officielle Propriétés Privées
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-  <div class="contact-form-col anim delay-2">
+            <div class="contact-form-col anim delay-2">
                 <div class="booking-card">
-                    <!-- Option 1 : Réservation Calendrier (Mise en avant) -->
+                    <!-- Option 1 : Agenda -->
                     <div class="booking-option featured">
-                        <div class="booking-badge">Recommandé • Sans engagement</div>
+                        <div class="booking-badge">Recommandé • Gratuit & Sans engagement</div>
                         <div class="booking-header">
                             <span class="booking-icon">📅</span>
                             <div>
-                                <h3>Bloquer 15 min de conseil</h3>
+                                <h3>Bloquer 15 min de point conseil</h3>
                                 <p>Choisissez votre jour et heure. Je vous appelle au créneau convenu.</p>
                             </div>
                         </div>
-                      <ul class="booking-perks">
-    <li>Comparatif avec les biens concurrents en vente sur votre secteur</li>
-    <li>Prix réels des dernières ventes sur votre commune</li>
-    <li>Échange confidentiel et sans pression commerciale</li>
-</ul>
+                        <ul class="booking-perks">
+                            <li>Comparatif avec les biens concurrents en vente sur votre commune</li>
+                            <li>Prix réels des dernières ventes notariées autour de chez vous</li>
+                            <li>Échange 100% confidentiel, sans pression commerciale</li>
+                        </ul>
                         <a href="https://calendar.app.google/SDoccxfh2G53jq3M7" target="_blank" rel="noopener" class="btn btn-primary full-width btn-glow">
                             Choisir mon créneau dans l'agenda →
                         </a>
@@ -283,7 +344,7 @@
                             </span>
                             <div>
                                 <h3>M'appeler directement</h3>
-                                <p>Disponible du lundi au samedi pour échanger de vive voix.</p>
+                                <p>Disponible du lundi au samedi pour faire le point de vive voix.</p>
                             </div>
                         </div>
                         <a href="tel:0648893480" class="btn btn-secondary full-width btn-call">
@@ -292,13 +353,21 @@
                     </div>
 
                     <div class="booking-guarantee">
-                        🔒 Point conseil 100% gratuit • Zéro mandat forcé
+                        🔒 Point conseil 100% gratuit • Zéro engagement • Réponse rapide
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
-   <!-- 6. PIED DE PAGE -->
+    <!-- BOUTON D'APPEL FLOTTANT SUR MOBILE -->
+    <div class="mobile-sticky-cta">
+        <a href="tel:0648893480" class="btn btn-primary full-width" style="padding: 0.85rem 1rem; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>📞</span> Appeler Sylvain (Conseil gratuit)
+        </a>
+    </div>
+
+    <!-- 6. PIED DE PAGE -->
     <footer class="main-footer">
         <div class="footer-youtube-link">
             <a href="https://www.youtube.com/@Sylvain-Proprietes-privees/featured" target="_blank" rel="noopener noreferrer">
@@ -306,12 +375,13 @@
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="#FF0000"/>
                     <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FFFFFF"/>
                 </svg>
-                <span>Découvrir mes visites en vidéo sur ma chaine YouTube</span>
+                <span>Découvrir mes visites en vidéo sur ma chaîne YouTube</span>
             </a>
         </div>
         <p>© 2026 Propriétés Privées — Sylvain Matignon. Tous droits réservés.<br>
-        Réseau National Immobilier sur Internet adossé FNAIM — <a href="#" id="openModalBtn" style="color: #888; text-decoration: underline;">Mentions Légales & RC Pro</a></p>
+        Réseau National Immobilier sur Internet adhérent FNAIM — <a href="#" id="openModalBtn" style="color: #888; text-decoration: underline;">Mentions Légales & RC Pro</a></p>
     </footer>
+
     <!-- 7. MODALE MENTIONS LÉGALES -->
     <div id="legalModal" class="modal">
         <div class="modal-content">
@@ -347,7 +417,7 @@
     <!-- 9. BANNIÈRE COOKIES RGPD -->
     <div class="cookie-banner" id="cookieBanner">
         <div class="cookie-content">
-            <p>🍪 En poursuivant votre navigation, vous acceptez l'utilisation de cookies techniques strictement nécessaires au bon fonctionnement du site et de son formulaire sécurisé.</p>
+            <p>🍪 En poursuivant votre navigation, vous acceptez l'utilisation de cookies techniques nécessaires au bon fonctionnement du site et de son calendrier sécurisé.</p>
         </div>
         <div class="cookie-actions">
             <button class="btn-ghost" id="cookieRefuse">Continuer sans accepter</button>
@@ -355,6 +425,6 @@
         </div>
     </div>
 
-   <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
