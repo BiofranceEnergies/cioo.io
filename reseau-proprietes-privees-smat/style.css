@@ -622,7 +622,7 @@ h1 {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start; /* Aligne le contenu naturellement vers le haut */
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -697,6 +697,7 @@ h1 {
     display: inline-flex;
     align-items: center;
     gap: 5px;
+    margin-top: auto; /* Pousse le badge en bas de la boîte sans étirer le texte */
 }
 
 .review-badge-verified::before {
