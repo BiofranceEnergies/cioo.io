@@ -490,13 +490,13 @@ h1 {
 
 .vs-footer-badge.warning { 
     background: rgba(239, 68, 68, 0.15) !important; 
-    color: #ff4a4a !important;
+    color: #ff4a4a !important; 
     border: 1px solid rgba(239, 68, 68, 0.4) !important;
 }
 
 .vs-footer-badge.success { 
     background: rgba(16, 185, 129, 0.15) !important; 
-    color: #34d399 !important;
+    color: #34d399 !important; 
     border: 1px solid rgba(16, 185, 129, 0.5) !important;
 }
 
@@ -611,7 +611,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    max-width: 1050px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -653,6 +653,12 @@ h1 {
 .avatar-vendeur { background: #2e7d32; }
 .avatar-buyer { background: #1c3b70; }
 
+.review-meta {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
 .review-name {
     font-weight: 700;
     font-size: 1rem;
@@ -677,6 +683,7 @@ h1 {
     color: var(--text-gray);
     margin-bottom: 20px;
     font-style: italic;
+    text-align: left;
 }
 
 .review-body strong {
@@ -1004,7 +1011,6 @@ a.strip-item:hover {
     z-index: 1; 
 }
 
-/* Lien YouTube dans le Footer */
 /* Lien YouTube dans le Footer */
 .footer-youtube-link {
     margin-bottom: 20px;
@@ -1364,6 +1370,7 @@ a.strip-item:hover {
         padding: 12px 0; 
     }
 }
+
 .booking-icon.phone-svg svg {
     width: 1.8rem;
     height: 1.8rem;
