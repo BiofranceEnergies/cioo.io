@@ -1279,11 +1279,12 @@ a.strip-item:hover {
         gap: 15px; 
     }
     
-    .icon-badge { 
-        width: 48px; 
-        height: 48px; 
-        min-width: 48px; 
-    }
+   .icon-badge { 
+    width: 46px; 
+    height: 46px; 
+    min-width: 46px; 
+    border-radius: 12px;
+}
 
     /* Avis responsive */
     .reviews-section { 
