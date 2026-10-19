@@ -448,13 +448,17 @@ h1 {
 }
 
 .icon-badge {
-    background: #ffffff;
-    width: 55px; height: 55px; min-width: 55px;
-    border-radius: 50%;
+    background: rgba(237, 22, 81, 0.12);
+    border: 1px solid rgba(237, 22, 81, 0.35);
+    width: 52px; 
+    height: 52px; 
+    min-width: 52px;
+    border-radius: 14px; /* Un arrondi moderne type icône d'application plutôt qu'un rond parfait */
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
 }
 
 .icon-badge img {
