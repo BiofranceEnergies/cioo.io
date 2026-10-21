@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <title>Avis de Valeur Immobilier — Étude Comparative de Marché (ECM)</title>
   <style>
-    /* Configuration stricte 2 pages A4 */
     @page {
       size: A4 portrait;
-      margin: 14mm 15mm 14mm 15mm;
+      margin: 12mm 15mm 12mm 15mm;
     }
     * {
       box-sizing: border-box;
@@ -19,8 +18,8 @@
       padding: 0;
       background: #f0f4f8;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 10.5px;
-      line-height: 1.4;
+      font-size: 11px;
+      line-height: 1.45;
       color: #1a202c;
     }
 
@@ -49,15 +48,19 @@
       background: #edf2f7;
     }
 
+    /* Chaque page occupe exactement la hauteur A4 imprimable */
     .sheet-page {
       width: 100%;
       max-width: 180mm;
+      min-height: 265mm;
       margin: 20px auto;
       background: #ffffff;
       padding: 24px 28px;
       border-radius: 6px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     @media print {
@@ -70,22 +73,34 @@
       .sheet-page {
         width: 100% !important;
         max-width: 100% !important;
+        min-height: 268mm !important;
+        height: 268mm !important;
         margin: 0 !important;
         padding: 0 !important;
         box-shadow: none !important;
         border-radius: 0 !important;
         page-break-after: always;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
       }
       .sheet-page:last-child {
         page-break-after: auto;
       }
     }
 
+    .content-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
     /* Header */
     header {
       border-bottom: 2px solid #1a365d;
-      padding-bottom: 10px;
-      margin-bottom: 14px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -93,22 +108,22 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
     .logo-container img {
-      height: 48px;
+      height: 52px;
       width: auto;
       object-fit: contain;
     }
     .advisor-info {
       border-left: 2px solid #e2e8f0;
-      padding-left: 12px;
-      font-size: 9.5px;
-      line-height: 1.35;
+      padding-left: 14px;
+      font-size: 10px;
+      line-height: 1.4;
       color: #4a5568;
     }
     .advisor-name {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: bold;
       color: #1a365d;
       text-transform: uppercase;
@@ -117,7 +132,7 @@
     .advisor-role {
       color: #718096;
       font-weight: 600;
-      margin-bottom: 1px;
+      margin-bottom: 2px;
     }
     .advisor-contact {
       color: #2b6cb0;
@@ -128,14 +143,14 @@
     }
     .header-doc-title h1 {
       margin: 0;
-      font-size: 16px;
+      font-size: 17px;
       color: #1a365d;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .header-doc-title p {
-      margin: 2px 0 0 0;
-      font-size: 9.5px;
+      margin: 3px 0 0 0;
+      font-size: 10px;
       color: #4a5568;
       font-weight: 500;
     }
@@ -144,44 +159,44 @@
     .section-title {
       background: #1a365d;
       color: #ffffff;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.4px;
-      padding: 5px 10px;
-      border-radius: 3px;
-      margin-top: 14px;
-      margin-bottom: 8px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-top: 16px;
+      margin-bottom: 10px;
     }
 
     /* Blocs signalétiques */
     .identity-grid {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 12px;
-      margin-bottom: 10px;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
     }
     .identity-card {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 10px 12px;
+      padding: 12px 14px;
     }
     .identity-card h4 {
-      margin: 0 0 8px 0;
-      font-size: 10px;
+      margin: 0 0 10px 0;
+      font-size: 10.5px;
       color: #1a365d;
       text-transform: uppercase;
       border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 4px;
+      padding-bottom: 5px;
     }
     .id-row {
       display: flex;
-      margin-bottom: 4px;
-      font-size: 9.5px;
+      margin-bottom: 6px;
+      font-size: 10px;
     }
     .id-label {
-      width: 120px;
+      width: 125px;
       font-weight: 600;
       color: #718096;
       flex-shrink: 0;
@@ -195,24 +210,25 @@
     table.data-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 6px;
-      font-size: 9.5px;
+      margin-top: 8px;
+      font-size: 10px;
     }
     table.data-table th {
       background: #edf2f7;
       color: #2d3748;
       text-align: left;
-      padding: 6px 8px;
+      padding: 8px 10px;
       font-weight: 600;
       border-bottom: 1px solid #cbd5e0;
-      font-size: 9px;
+      font-size: 9.5px;
       text-transform: uppercase;
     }
     table.data-table td {
-      padding: 6px 8px;
+      padding: 9px 10px;
       border-bottom: 1px solid #e2e8f0;
       color: #2d3748;
       vertical-align: middle;
+      line-height: 1.35;
     }
     table.data-table tr:last-child td {
       border-bottom: none;
@@ -221,21 +237,23 @@
       background: #ebf8ff;
       color: #2b6cb0;
       font-weight: bold;
-      padding: 2px 6px;
-      border-radius: 3px;
+      padding: 3px 7px;
+      border-radius: 4px;
       border: 1px solid #bee3f8;
       display: inline-block;
-      font-size: 8.5px;
+      font-size: 9px;
+      white-space: nowrap;
     }
     .badge-target {
       background: #e6fffa;
       color: #234e52;
       font-weight: bold;
-      padding: 2px 6px;
-      border-radius: 3px;
+      padding: 3px 7px;
+      border-radius: 4px;
       border: 1px solid #b2f5ea;
       display: inline-block;
-      font-size: 8.5px;
+      font-size: 9px;
+      white-space: nowrap;
     }
     .ref-link {
       color: #2b6cb0;
@@ -247,13 +265,13 @@
     .diag-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 6px;
+      gap: 16px;
+      margin-top: 10px;
     }
     .diag-box {
       border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 9.5px;
+      padding: 14px 16px;
+      font-size: 10px;
     }
     .diag-box.atouts {
       background: #f0fff4;
@@ -264,32 +282,36 @@
       border: 1px solid #feebc8;
     }
     .diag-box h4 {
-      margin: 0 0 6px 0;
-      font-size: 10px;
+      margin: 0 0 8px 0;
+      font-size: 10.5px;
       text-transform: uppercase;
     }
     .diag-box.atouts h4 { color: #22543d; }
-    .diag-box.freins h4 {{ color: #744210; }}
+    .diag-box.freins h4 { color: #744210; }
     .diag-box ul {
       margin: 0;
-      padding-left: 14px;
+      padding-left: 16px;
     }
     .diag-box li {
-      margin-bottom: 4px;
-      line-height: 1.35;
+      margin-bottom: 7px;
+      line-height: 1.4;
+    }
+    .diag-box li:last-child {
+      margin-bottom: 0;
     }
 
     /* Cartes de prix page 2 */
     .pricing-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 10px;
+      gap: 14px;
+      margin-top: 14px;
+      margin-bottom: 12px;
     }
     .price-card {
       border: 1px solid #cbd5e0;
       border-radius: 6px;
-      padding: 10px 12px;
+      padding: 14px 12px;
       text-align: center;
       background: #ffffff;
     }
@@ -298,54 +320,56 @@
       background: #ebf8ff;
     }
     .price-card-title {
-      font-size: 9.5px;
+      font-size: 10px;
       font-weight: bold;
       text-transform: uppercase;
       color: #718096;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .price-card.pivot .price-card-title {
       color: #2b6cb0;
     }
     .price-card-val {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: bold;
       color: #1a202c;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
     }
     .price-card.pivot .price-card-val {
       color: #2b6cb0;
-      font-size: 18px;
+      font-size: 19px;
     }
     .price-card-desc {
-      font-size: 8.5px;
+      font-size: 9px;
       color: #718096;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .conclusion-box {
       background: #f8fafc;
       border-left: 4px solid #1a365d;
-      padding: 10px 14px;
-      margin-top: 14px;
-      font-size: 9.5px;
-      line-height: 1.45;
+      padding: 14px 18px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+      font-size: 10px;
+      line-height: 1.5;
       color: #2d3748;
     }
     .conclusion-box h4 {
-      margin: 0 0 4px 0;
-      font-size: 10px;
+      margin: 0 0 6px 0;
+      font-size: 11px;
       color: #1a365d;
       text-transform: uppercase;
+      letter-spacing: 0.3px;
     }
 
     footer {
-      margin-top: 16px;
       border-top: 1px solid #e2e8f0;
-      padding-top: 6px;
+      padding-top: 8px;
+      margin-top: 16px;
       display: flex;
       justify-content: space-between;
-      font-size: 8px;
+      font-size: 8.5px;
       color: #a0aec0;
     }
   </style>
@@ -353,231 +377,243 @@
 <body>
 
   <div class="no-print-bar">
-    <span>💡 <strong>Avis de Valeur / ECM :</strong> Document 2 pages A4 — Imprimer ou enregistrer en PDF via <code>Ctrl+P</code>.</span>
+    <span>💡 <strong>Avis de Valeur / ECM :</strong> Document 2 pages A4 parfaitement réparties — <code>Ctrl+P</code>.</span>
     <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
   </div>
 
   <!-- ======================== PAGE 1 ======================== -->
   <div class="sheet-page">
-    <header>
-      <div class="header-left">
-        <div class="logo-container">
-          <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+    <div class="content-wrap">
+      <div>
+        <header>
+          <div class="header-left">
+            <div class="logo-container">
+              <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+            </div>
+            <div class="advisor-info">
+              <div class="advisor-name">Sylvain MATIGNON</div>
+              <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
+              <div class="advisor-contact">
+                📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+              </div>
+            </div>
+          </div>
+          <div class="header-doc-title">
+            <h1>Avis de Valeur Immobilier</h1>
+            <p>Étude de Marché Comparative & Méthodologie d'Évaluation</p>
+          </div>
+        </header>
+
+        <!-- IDENTIFICATION DU BIEN -->
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h4>Désignation du Bien Étudié</h4>
+            <div class="id-row"><span class="id-label">Propriétaires :</span><span class="id-value">[M. et Mme Propriétaire]</span></div>
+            <div class="id-row"><span class="id-label">Adresse :</span><span class="id-value">[Adresse complète, Code Postal Commune]</span></div>
+            <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">[Maison individuelle de plain-pied (Année XXXX)]</span></div>
+            <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value">[XX m² (X pièces : Salon XX m², X Chambres)]</span></div>
+            <div class="id-row"><span class="id-label">Terrain & Cadastre :</span><span class="id-value">[X XXX m² arboré (Section X n° XXXX)]</span></div>
+          </div>
+          <div class="identity-card">
+            <h4>Caractéristiques Énergétiques & Annexes</h4>
+            <div class="id-row"><span class="id-label">DPE / GES :</span><span class="id-value">[Classe X / Classe X (XX kWh/m²/an)]</span></div>
+            <div class="id-row"><span class="id-label">Chauffage :</span><span class="id-value">[Pompe à Chaleur Air/Air / Poêle granulés]</span></div>
+            <div class="id-row"><span class="id-label">Assainissement :</span><span class="id-value">[Tout-à-l'égout / Fosse autonome conforme]</span></div>
+            <div class="id-row"><span class="id-label">Annexes :</span><span class="id-value">[Garage fermé XX m² + Atelier / Grange XX m²]</span></div>
+            <div class="id-row"><span class="id-label">Aménagements :</span><span class="id-value">[Terrasse XX m², Store banne, Puits / Clôture]</span></div>
+          </div>
         </div>
-        <div class="advisor-info">
-          <div class="advisor-name">Sylvain MATIGNON</div>
-          <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
-          <div class="advisor-contact">
-            📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+
+        <!-- 1. CADRE MÉTHODOLOGIQUE & GRILLE TARIFAIRE -->
+        <div class="section-title">1. Cadre Méthodologique, Sectorisation & Grille Tarifaire</div>
+        <p style="margin: 4px 0 10px 0; font-size: 10px; color: #4a5568;">
+          Pour établir une valeur vénale rigoureuse et incontestable, notre étude s'appuie sur la décomposition des transactions notariées et des annonces actives dans un rayon de 15 km autour du bassin de chalandise réel (Nontron, Saint-Pardoux, Saint-Martial, Javerlhac, etc.). Ce filtre élimine les bruits de marché périphériques tout en traduisant les choix concrets des acquéreurs.
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tranche de Marché</th>
+              <th>Fourchette Prix / m²</th>
+              <th>Profil des Biens & Caractéristiques Techniques</th>
+              <th>Positionnement du Bien Étudié</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fourchette Basse</strong></td>
+              <td>800 € à 1 200 € / m²</td>
+              <td>Maisons anciennes de bourg, passoires énergétiques (F/G), gros travaux de réhabilitation ou absence de terrain.</td>
+              <td><span class="badge-pos">Surclassé (État / DPE)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Moyenne</strong></td>
+              <td>1 300 € à 1 650 € / m²</td>
+              <td>Pavillons traditionnels 1980-2000, bon état général, DPE D/E, chauffage fioul ou convecteurs électriques classiques.</td>
+              <td><span class="badge-pos">Surclassé (Prestations)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Haute</strong></td>
+              <td>1 800 € à 2 250 € / m²</td>
+              <td>Constructions récentes ou rénovations soignées, DPE A/B (PAC / isolation), état irréprochable et annexes de qualité.</td>
+              <td><span class="badge-target">POSITIONNEMENT RETENU</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2. DIAGNOSTIC TECHNIQUE & VALEUR AJOUTÉE -->
+        <div class="section-title">2. Diagnostic Technique & Facteurs Polarisants</div>
+        <div class="diag-grid">
+          <div class="diag-box atouts">
+            <h4>Points Forts & Justification de la Surcote</h4>
+            <ul>
+              <li><strong>Performance énergétique :</strong> Chauffage moderne économique (PAC), bonne isolation thermique, charges d'exploitation réduites.</li>
+              <li><strong>Annexes & Dépendances :</strong> Surfaces annexes exploitables (garages, atelier) offrant un ratio de stockage très recherché.</li>
+              <li><strong>Micro-localisation & Bâti :</strong> Proximité immédiate des services et commerces, environnement calme, aucun gros œuvre à prévoir.</li>
+            </ul>
+          </div>
+          <div class="diag-box freins">
+            <h4>Facteurs Dimensionnants & Plafonds de Verre</h4>
+            <ul>
+              <li><strong>Capacité d'accueil :</strong> Le nombre de chambres calibre directement la cible d'acquéreurs (familles vs couples/retraités).</li>
+              <li><strong>Seuil psychologique local :</strong> Au-delà d'un certain palier de budget, les acquéreurs comparent systématiquement avec des surfaces supérieures.</li>
+              <li><strong>Postes d'ajustement :</strong> Déduction forfaitaire appliquée pour les postes techniques restants (assainissement, rafraîchissement).</li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="header-doc-title">
-        <h1>Avis de Valeur Immobilier</h1>
-        <p>Étude de Marché Comparative & Méthodologie d'Évaluation</p>
-      </div>
-    </header>
 
-    <!-- IDENTIFICATION DU BIEN -->
-    <div class="identity-grid">
-      <div class="identity-card">
-        <h4>Désignation du Bien Étudié</h4>
-        <div class="id-row"><span class="id-label">Propriétaires :</span><span class="id-value">[M. et Mme Propriétaire]</span></div>
-        <div class="id-row"><span class="id-label">Adresse :</span><span class="id-value">[Adresse complète, Code Postal Commune]</span></div>
-        <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">[Maison individuelle de plain-pied (Année XXXX)]</span></div>
-        <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value">[XX m² (X pièces : Salon XX m², X Chambres)]</span></div>
-        <div class="id-row"><span class="id-label">Terrain & Cadastre :</span><span class="id-value">[X XXX m² arboré (Section X n° XXXX)]</span></div>
-      </div>
-      <div class="identity-card">
-        <h4>Caractéristiques Énergétiques & Annexes</h4>
-        <div class="id-row"><span class="id-label">DPE / GES :</span><span class="id-value">[Classe X / Classe X (XX kWh/m²/an)]</span></div>
-        <div class="id-row"><span class="id-label">Chauffage :</span><span class="id-value">[Pompe à Chaleur Air/Air / Poêle granulés]</span></div>
-        <div class="id-row"><span class="id-label">Assainissement :</span><span class="id-value">[Tout-à-l'égout / Fosse autonome conforme]</span></div>
-        <div class="id-row"><span class="id-label">Annexes :</span><span class="id-value">[Garage fermé XX m² + Atelier / Grange XX m²]</span></div>
-        <div class="id-row"><span class="id-label">Aménagements :</span><span class="id-value">[Terrasse XX m², Store banne, Puits / Clôture]</span></div>
+      <div>
+        <footer>
+          <span>Avis de Valeur Immobilier — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 1/2</span>
+        </footer>
       </div>
     </div>
-
-    <!-- 1. CADRE MÉTHODOLOGIQUE & GRILLE TARIFAIRE -->
-    <div class="section-title">1. Cadre Méthodologique, Sectorisation & Grille Tarifaire</div>
-    <p style="margin: 4px 0 8px 0; font-size: 9.5px; color: #4a5568;">
-      Pour établir une valeur vénale rigoureuse et incontestable, notre étude s'appuie sur la décomposition des transactions notariées et des annonces actives dans un rayon de 15 km autour du bassin de chalandise réel (Nontron, Saint-Pardoux, Saint-Martial, Javerlhac, etc.). Ce filtre élimine les bruits de marché périphériques tout en traduisant les choix concrets des acquéreurs.
-    </p>
-
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Tranche de Marché</th>
-          <th>Fourchette Prix / m²</th>
-          <th>Profil des Biens & Caractéristiques Techniques</th>
-          <th>Positionnement du Bien Étudié</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Fourchette Basse</strong></td>
-          <td>800 € à 1 200 € / m²</td>
-          <td>Maisons anciennes de bourg, passoires énergétiques (F/G), gros travaux de réhabilitation ou absence de terrain.</td>
-          <td><span class="badge-pos">Surclassé (État / DPE)</span></td>
-        </tr>
-        <tr>
-          <td><strong>Fourchette Moyenne</strong></td>
-          <td>1 300 € à 1 650 € / m²</td>
-          <td>Pavillons traditionnels 1980-2000, bon état général, DPE D/E, chauffage fioul ou convecteurs électriques classiques.</td>
-          <td><span class="badge-pos">Surclassé (Prestations)</span></td>
-        </tr>
-        <tr>
-          <td><strong>Fourchette Haute</strong></td>
-          <td>1 800 € à 2 250 € / m²</td>
-          <td>Constructions récentes ou rénovations soignées, DPE A/B (PAC / isolation), état irréprochable et annexes de qualité.</td>
-          <td><span class="badge-target">POSITIONNEMENT RETENU</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- 2. DIAGNOSTIC TECHNIQUE & VALEUR AJOUTÉE -->
-    <div class="section-title">2. Diagnostic Technique & Facteurs Polarisants</div>
-    <div class="diag-grid">
-      <div class="diag-box atouts">
-        <h4>Points Forts & Justification de la Surcote</h4>
-        <ul>
-          <li><strong>Performance énergétique :</strong> Chauffage moderne économique (PAC), bonne isolation thermique, charges réduites.</li>
-          <li><strong>Annexes & Dépendances :</strong> Surfaces annexes exploitables (garages, atelier) offrant un ratio de stockage très recherché.</li>
-          <li><strong>Micro-localisation & Bâti :</strong> Proximité immédiate des services et commerces, environnement calme, aucun gros œuvre à prévoir.</li>
-        </ul>
-      </div>
-      <div class="diag-box freins">
-        <h4>Facteurs Dimensionnants & Plafonds de Verre</h4>
-        <ul>
-          <li><strong>Capacité d'accueil :</strong> Le nombre de chambres calibre directement la cible d'acquéreurs (familles vs couples/retraités).</li>
-          <li><strong>Seuil psychologique local :</strong> Au-delà d'un certain palier de budget, les acquéreurs comparent systématiquement avec des surfaces supérieures.</li>
-          <li><strong>Postes d'ajustement :</strong> Déduction forfaitaire appliquée pour les postes techniques restants (assainissement, rafraîchissement).</li>
-        </ul>
-      </div>
-    </div>
-
-    <footer>
-      <span>Avis de Valeur Immobilier — Sylvain MATIGNON | Propriétés-Privées</span>
-      <span>Page 1/2</span>
-    </footer>
   </div>
 
   <!-- ======================== PAGE 2 ======================== -->
   <div class="sheet-page">
-    <!-- 3. ÉTUDE COMPARATIVE DU STOCK ACTIF -->
-    <div class="section-title" style="margin-top: 0;">3. Étude Comparative du Stock Actif (Concurrence Directe en Agences)</div>
-    <p style="margin: 4px 0 8px 0; font-size: 9.5px; color: #4a5568;">
-      L'échantillon ci-dessous est extrait directement de notre base d'observation des agences locales (Brun Salat, Human Immobilier, etc.) sur le secteur Nontronnais. Ces biens constituent l'alternative immédiate offerte aux acheteurs au moment de l'estimation :
-    </p>
+    <div class="content-wrap">
+      <div>
+        <!-- 3. ÉTUDE COMPARATIVE DU STOCK ACTIF -->
+        <div class="section-title" style="margin-top: 0;">3. Étude Comparative du Stock Actif (Concurrence Directe en Agences)</div>
+        <p style="margin: 4px 0 10px 0; font-size: 10px; color: #4a5568;">
+          L'échantillon ci-dessous est extrait directement de notre base d'observation des agences locales (Brun Salat, Human Immobilier, etc.) sur le secteur Nontronnais. Ces biens constituent l'alternative immédiate offerte aux acheteurs au moment de l'estimation :
+        </p>
 
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Réf. & Agence</th>
-          <th>Commune</th>
-          <th>Surf. / Pièces</th>
-          <th>DPE</th>
-          <th>Prix FAI</th>
-          <th>Prix / m²</th>
-          <th>Justification du Choix dans l'Échantillon Comparatif</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background: #ebf8ff; font-weight: bold;">
-          <td>BIEN ÉTUDIÉ</td>
-          <td>[Commune]</td>
-          <td>[XX m² (Xp/Xch)]</td>
-          <td>[DPE X]</td>
-          <td>[XXX XXX €]</td>
-          <td>[X XXX €/m²]</td>
-          <td>Base d'évaluation : [Plain-pied, annexes, état général, terrain]</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. [XXXX] (BS)</span></td>
-          <td>[Commune]</td>
-          <td>[XX m² (Xp/Xch)]</td>
-          <td>[DPE X]</td>
-          <td>[XXX XXX €]</td>
-          <td>[X XXX €/m²]</td>
-          <td><strong>Repère bas de marché :</strong> surface équivalente mais travaux ou DPE défavorable.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. [XXXX] (Human)</span></td>
-          <td>[Commune]</td>
-          <td>[XX m² (Xp/Xch)]</td>
-          <td>[DPE X]</td>
-          <td>[XXX XXX €]</td>
-          <td>[X XXX €/m²]</td>
-          <td><strong>Concurrence frontale :</strong> configuration identique, prestations comparables sur le secteur.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. [XXXX] (BS)</span></td>
-          <td>[Commune]</td>
-          <td>[XX m² (Xp/Xch)]</td>
-          <td>[DPE X]</td>
-          <td>[XXX XXX €]</td>
-          <td>[X XXX €/m²]</td>
-          <td><strong>Repère surévalué :</strong> bien similaire affiché plus cher mais en stock depuis plusieurs mois.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. [XXXX] (Human)</span></td>
-          <td>[Commune]</td>
-          <td>[XX m² (Xp/Xch)]</td>
-          <td>[DPE X]</td>
-          <td>[XXX XXX €]</td>
-          <td>[X XXX €/m²]</td>
-          <td><strong>Seuil supérieur direct :</strong> illustre le palier de surface ou de chambre supplémentaire.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. [XXXX] (BS)</span></td>
-          <td>[Commune]</td>
-          <td>[XX m² (Xp/Xch)]</td>
-          <td>[DPE X]</td>
-          <td>[XXX XXX €]</td>
-          <td>[X XXX €/m²]</td>
-          <td><strong>Haut de gamme local :</strong> plafond de verre du secteur pour les prestations contemporaines.</td>
-        </tr>
-      </tbody>
-    </table>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Réf. & Agence</th>
+              <th>Commune</th>
+              <th>Surf. / Pièces</th>
+              <th>DPE</th>
+              <th>Prix FAI</th>
+              <th>Prix / m²</th>
+              <th>Justification du Choix dans l'Échantillon Comparatif</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ebf8ff; font-weight: bold;">
+              <td>BIEN ÉTUDIÉ</td>
+              <td>[Commune]</td>
+              <td>[XX m² (Xp/Xch)]</td>
+              <td>[DPE X]</td>
+              <td>[XXX XXX €]</td>
+              <td>[X XXX €/m²]</td>
+              <td>Base d'évaluation : [Plain-pied, annexes, état général, terrain]</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. [XXXX] (BS)</span></td>
+              <td>[Commune]</td>
+              <td>[XX m² (Xp/Xch)]</td>
+              <td>[DPE X]</td>
+              <td>[XXX XXX €]</td>
+              <td>[X XXX €/m²]</td>
+              <td><strong>Repère bas de marché :</strong> surface équivalente mais travaux ou DPE défavorable.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. [XXXX] (Human)</span></td>
+              <td>[Commune]</td>
+              <td>[XX m² (Xp/Xch)]</td>
+              <td>[DPE X]</td>
+              <td>[XXX XXX €]</td>
+              <td>[X XXX €/m²]</td>
+              <td><strong>Concurrence frontale :</strong> configuration identique, prestations comparables sur le secteur.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. [XXXX] (BS)</span></td>
+              <td>[Commune]</td>
+              <td>[XX m² (Xp/Xch)]</td>
+              <td>[DPE X]</td>
+              <td>[XXX XXX €]</td>
+              <td>[X XXX €/m²]</td>
+              <td><strong>Repère surévalué :</strong> bien similaire affiché plus cher mais en stock depuis plusieurs mois.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. [XXXX] (Human)</span></td>
+              <td>[Commune]</td>
+              <td>[XX m² (Xp/Xch)]</td>
+              <td>[DPE X]</td>
+              <td>[XXX XXX €]</td>
+              <td>[X XXX €/m²]</td>
+              <td><strong>Seuil supérieur direct :</strong> illustre le palier de surface ou de chambre supplémentaire.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. [XXXX] (BS)</span></td>
+              <td>[Commune]</td>
+              <td>[XX m² (Xp/Xch)]</td>
+              <td>[DPE X]</td>
+              <td>[XXX XXX €]</td>
+              <td>[X XXX €/m²]</td>
+              <td><strong>Haut de gamme local :</strong> plafond de verre du secteur pour les prestations contemporaines.</td>
+            </tr>
+          </tbody>
+        </table>
 
-    <!-- 4. SYNTHÈSE D'ÉVALUATION & POSITIONNEMENT PRIX -->
-    <div class="section-title">4. Synthèse d'Évaluation & Positionnement de Prix</div>
-    <p style="margin: 4px 0 6px 0; font-size: 9.5px; color: #4a5568;">
-      L'analyse croisée des transactions et de la concurrence active permet de circonscrire précisément la valeur marchande du bien selon trois niveaux d'arbitrage :
-    </p>
+        <!-- 4. SYNTHÈSE D'ÉVALUATION & POSITIONNEMENT PRIX -->
+        <div class="section-title">4. Synthèse d'Évaluation & Positionnement de Prix</div>
+        <p style="margin: 4px 0 8px 0; font-size: 10px; color: #4a5568;">
+          L'analyse croisée des transactions et de la concurrence active permet de circonscrire précisément la valeur marchande du bien selon trois niveaux d'arbitrage :
+        </p>
 
-    <div class="pricing-cards">
-      <div class="price-card">
-        <div class="price-card-title">Prix Plancher Stratégique</div>
-        <div class="price-card-val">[XXX XXX] € FAI</div>
-        <div class="price-card-desc">Prix d'attaque garanti pour déclencher une vente ultra-rapide sans concurrence directe.</div>
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-card-title">Prix Plancher Stratégique</div>
+            <div class="price-card-val">[XXX XXX] € FAI</div>
+            <div class="price-card-desc">Prix d'attaque garanti pour déclencher une vente ultra-rapide sans concurrence directe.</div>
+          </div>
+          <div class="price-card pivot">
+            <div class="price-card-title">Prix d'Affichage Recommandé</div>
+            <div class="price-card-val">[XXX XXX] € FAI</div>
+            <div class="price-card-desc">Positionnement optimal : valorise pleinement les atouts et annexes tout en ménageant la marge de négociation.</div>
+          </div>
+          <div class="price-card">
+            <div class="price-card-title">Seuil de Surévaluation</div>
+            <div class="price-card-val">&gt; [XXX XXX] € FAI</div>
+            <div class="price-card-desc">Zone de blocage : concurrence directe défavorable avec les biens de catégorie supérieure du secteur.</div>
+          </div>
+        </div>
+
+        <!-- CONCLUSION DE L'EXPERTISE -->
+        <div class="conclusion-box">
+          <h4>Conclusion de l'Expertise Vénale</h4>
+          Le prix de présentation recommandé de <strong>[XXX XXX] € FAI</strong> est une décision technique et objective. Il permet de capter immédiatement les acquéreurs qualifiés sur le secteur de <strong>[Commune]</strong> sans subir la décote des biens énergivores, tout en évitant l'écueil de la surévaluation face aux biens du stock actif dotés de volumes supérieurs.
+        </div>
+
+        <div style="margin-top: 14px; font-size: 9.5px; color: #718096; text-align: right; font-style: italic;">
+          Document d'expertise réalisé pour <strong>[Commune]</strong> le [Date du jour] — Sylvain MATIGNON, Réseau Propriétés Privées.
+        </div>
       </div>
-      <div class="price-card pivot">
-        <div class="price-card-title">Prix d'Affichage Recommandé</div>
-        <div class="price-card-val">[XXX XXX] € FAI</div>
-        <div class="price-card-desc">Positionnement optimal : valorise pleinement les atouts et annexes tout en ménageant la marge de négociation.</div>
-      </div>
-      <div class="price-card">
-        <div class="price-card-title">Seuil de Surévaluation</div>
-        <div class="price-card-val">&gt; [XXX XXX] € FAI</div>
-        <div class="price-card-desc">Zone de blocage : concurrence directe défavorable avec les biens de catégorie supérieure du secteur.</div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Immobilier — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 2/2</span>
+        </footer>
       </div>
     </div>
-
-    <!-- CONCLUSION DE L'EXPERTISE -->
-    <div class="conclusion-box">
-      <h4>Conclusion de l'Expertise Vénale</h4>
-      Le prix de présentation recommandé de <strong>[XXX XXX] € FAI</strong> est une décision technique et objective. Il permet de capter immédiatement les acquéreurs qualifiés sur le secteur de <strong>[Commune]</strong> sans subir la décote des biens énergivores, tout en évitant l'écueil de la surévaluation face aux biens du stock actif dotés de volumes supérieurs.
-    </div>
-
-    <div style="margin-top: 14px; font-size: 9px; color: #718096; text-align: right; font-style: italic;">
-      Document d'expertise réalisé pour <strong>[Commune]</strong> le [Date du jour] — Sylvain MATIGNON, Réseau Propriétés Privées.
-    </div>
-
-    <footer>
-      <span>Avis de Valeur Immobilier — Sylvain MATIGNON | Propriétés-Privées</span>
-      <span>Page 2/2</span>
-    </footer>
   </div>
 
 </body>
