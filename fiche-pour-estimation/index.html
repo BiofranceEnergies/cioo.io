@@ -6,7 +6,7 @@
   <style>
     @page {
       size: A4 portrait;
-      margin: 10mm 12mm 10mm 12mm;
+      margin: 12mm 15mm 12mm 15mm;
     }
     * {
       box-sizing: border-box;
@@ -16,7 +16,7 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       font-size: 11px;
-      line-height: 1.35;
+      line-height: 1.4;
       color: #1a202c;
       margin: 0;
       padding: 0;
@@ -26,14 +26,14 @@
       max-width: 210mm;
       margin: 0 auto;
       background: #ffffff;
-      padding: 16px 20px;
+      padding: 24px 28px;
     }
     @media screen {
       .page-container {
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         margin-top: 20px;
         margin-bottom: 20px;
-        border-radius: 6px;
+        border-radius: 8px;
       }
       .no-print-bar {
         max-width: 210mm;
@@ -41,16 +41,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #2b6cb0;
+        background: #1a365d;
         color: white;
-        padding: 10px 16px;
+        padding: 10px 18px;
         border-radius: 6px;
       }
       .btn-print {
         background: #ffffff;
-        color: #2b6cb0;
+        color: #1a365d;
         border: none;
-        padding: 8px 16px;
+        padding: 8px 18px;
         font-weight: bold;
         border-radius: 4px;
         cursor: pointer;
@@ -68,8 +68,8 @@
 
     header {
       border-bottom: 2px solid #1a365d;
-      padding-bottom: 8px;
-      margin-bottom: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -82,19 +82,20 @@
       letter-spacing: 0.5px;
     }
     .header-title p {
-      margin: 3px 0 0 0;
+      margin: 4px 0 0 0;
       font-size: 10px;
       color: #4a5568;
     }
     .header-badge {
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 600;
       background: #ebf8ff;
       color: #2b6cb0;
       border: 1px solid #bee3f8;
-      padding: 4px 8px;
+      padding: 6px 10px;
       border-radius: 4px;
       text-align: right;
+      line-height: 1.3;
     }
 
     .section-title {
@@ -103,27 +104,27 @@
       font-size: 10px;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
-      padding: 4px 8px;
-      border-radius: 3px;
-      margin-top: 10px;
-      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      margin-top: 14px;
+      margin-bottom: 10px;
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px 12px;
+      gap: 12px 16px;
     }
     .grid-3 {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px 12px;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 12px 16px;
     }
     .grid-4 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 8px 12px;
+      gap: 12px 14px;
     }
 
     .field {
@@ -131,10 +132,10 @@
       flex-direction: column;
     }
     .field label {
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 600;
-      color: #4a5568;
-      margin-bottom: 2px;
+      color: #2d3748;
+      margin-bottom: 4px;
       display: flex;
       justify-content: space-between;
     }
@@ -143,56 +144,64 @@
       color: #718096;
       font-style: italic;
     }
-    .field input, .field select, .field textarea {
+    .field input, .field select {
       border: 1px solid #cbd5e0;
       background: #f7fafc;
-      padding: 5px 7px;
-      font-size: 10px;
-      border-radius: 3px;
+      padding: 6px 8px;
+      font-size: 10.5px;
+      border-radius: 4px;
       color: #2d3748;
       font-family: inherit;
     }
-    .field textarea {
-      resize: vertical;
-      min-height: 38px;
-    }
 
-    .radio-group, .checkbox-group {
+    .options-row {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
-      padding-top: 4px;
-      flex-wrap: nowrap;
+      padding-top: 5px;
+      flex-wrap: wrap;
     }
-    .radio-item, .checkbox-item {
+    .opt-label {
       display: inline-flex;
       align-items: center;
-      gap: 3px;
-      font-size: 9px;
+      gap: 4px;
+      font-size: 9.5px;
       color: #2d3748;
       cursor: pointer;
       white-space: nowrap;
+    }
+    .opt-label input {
+      margin: 0;
+      cursor: pointer;
     }
 
     .summary-box {
       background: #f0fff4;
       border: 1px dashed #38a169;
-      border-radius: 4px;
-      padding: 8px 10px;
-      margin-top: 10px;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 16px;
     }
     .summary-box h3 {
-      margin: 0 0 4px 0;
+      margin: 0 0 5px 0;
       font-size: 10px;
       color: #22543d;
       text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .summary-box p {
+      margin: 0;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 9.5px;
+      color: #2d3748;
+      line-height: 1.4;
     }
   </style>
 </head>
 <body>
 
   <div class="no-print-bar">
-    <span>💡 <strong>Astuce :</strong> Remplis les champs à l'écran puis clique sur « Imprimer en PDF » (ou <code>Ctrl+P</code>).</span>
+    <span>💡 <strong>Astuce :</strong> Saisie directe à l'écran puis clic sur « Imprimer en PDF » (ou <code>Ctrl+P</code>).</span>
     <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
   </div>
 
@@ -212,24 +221,24 @@
     <div class="section-title">1. Localisation & Implantation Sectorielle</div>
     <div class="grid-3">
       <div class="field">
-        <label>Commune exacte <span class="hint">(Crucial pour le ciblage)</span></label>
-        <input type="text" placeholder="Ex: Saint-Pardoux-la-Rivière">
+        <label>Commune exacte <span class="hint">(crucial)</span></label>
+        <input type="text" placeholder="Ex : Saint-Pardoux-la-Rivière">
       </div>
       <div class="field">
         <label>Implantation / Environnement</label>
-        <div class="radio-group">
-          <label class="radio-item"><input type="radio" name="loc"> Plein bourg</label>
-          <label class="radio-item"><input type="radio" name="loc"> Quartier calme</label>
-          <label class="radio-item"><input type="radio" name="loc"> Hameau</label>
-          <label class="radio-item"><input type="radio" name="loc"> Isolé</label>
+        <div class="options-row">
+          <label class="opt-label"><input type="radio" name="loc"> Bourg</label>
+          <label class="opt-label"><input type="radio" name="loc"> Calme</label>
+          <label class="opt-label"><input type="radio" name="loc"> Hameau</label>
+          <label class="opt-label"><input type="radio" name="loc"> Isolé</label>
         </div>
       </div>
       <div class="field">
         <label>Voisinage / Mitoyenneté</label>
-        <div class="radio-group">
-          <label class="radio-item"><input type="radio" name="mito"> Indépendante</label>
-          <label class="radio-item"><input type="radio" name="mito"> Mitoyenne 1 côté</label>
-          <label class="radio-item"><input type="radio" name="mito"> 2 côtés</label>
+        <div class="options-row">
+          <label class="opt-label"><input type="radio" name="mito"> Indépendante</label>
+          <label class="opt-label"><input type="radio" name="mito"> 1 côté</label>
+          <label class="opt-label"><input type="radio" name="mito"> 2 côtés</label>
         </div>
       </div>
     </div>
@@ -239,28 +248,28 @@
     <div class="grid-4">
       <div class="field">
         <label>Surface habitable (m²)</label>
-        <input type="number" placeholder="Ex: 110">
+        <input type="number" placeholder="Ex : 110">
       </div>
       <div class="field">
         <label>Surface terrain (m² ou ha)</label>
-        <input type="text" placeholder="Ex: 1 850 m²">
+        <input type="text" placeholder="Ex : 1 850 m²">
       </div>
       <div class="field">
         <label>Nombre de pièces</label>
-        <input type="number" placeholder="Ex: 5">
+        <input type="number" placeholder="Ex : 5">
       </div>
       <div class="field">
         <label>Nombre de chambres</label>
-        <input type="number" placeholder="Ex: 3">
+        <input type="number" placeholder="Ex : 3">
       </div>
     </div>
 
-    <div class="grid-3" style="margin-top: 8px;">
+    <div class="grid-3" style="margin-top: 10px;">
       <div class="field">
         <label>Configuration du bien</label>
         <select>
           <option>Plain-pied complet</option>
-          <option>Maison de plain-pied surélevé</option>
+          <option>Plain-pied surélevé</option>
           <option>Maison à étage (R+1 / R+2)</option>
           <option>Sous-sol total semi-enterré</option>
         </select>
@@ -269,7 +278,7 @@
         <label>Style architectural</label>
         <select>
           <option>Maison en pierre / Corps de ferme</option>
-          <option>Pavillon traditionnel (années 70 à 90)</option>
+          <option>Pavillon traditionnel (années 70-90)</option>
           <option>Plain-pied contemporain (> 2000)</option>
           <option>Maison de bourg / ville de caractère</option>
         </select>
@@ -278,7 +287,7 @@
         <label>État global du bien</label>
         <select>
           <option>Rénové récent / Impeccable (0 travaux)</option>
-          <option>Habitable de suite (rafraîchissement / déco)</option>
+          <option>Habitable de suite (rafraîchissement)</option>
           <option>Travaux moyens (cuisine/SdB/menuiseries)</option>
           <option>Gros travaux de réhabilitation</option>
         </select>
@@ -290,7 +299,7 @@
     <div class="grid-3">
       <div class="field">
         <label>Mode de chauffage principal</label>
-        <input type="text" placeholder="Ex: Pompe à chaleur / Poêle granulés / Fioul">
+        <input type="text" placeholder="Ex : Pompe à chaleur / Granulés / Fioul">
       </div>
       <div class="field">
         <label>Classe DPE (si connue)</label>
@@ -304,10 +313,10 @@
       </div>
       <div class="field">
         <label>Assainissement</label>
-        <div class="checkbox-group">
-          <label class="checkbox-item"><input type="radio" name="assain"> Tout-à-l'égout</label>
-          <label class="checkbox-item"><input type="radio" name="assain"> Fosse conforme</label>
-          <label class="checkbox-item"><input type="radio" name="assain"> Fosse non conforme</label>
+        <div class="options-row">
+          <label class="opt-label"><input type="radio" name="assain"> Tout-à-l'égout</label>
+          <label class="opt-label"><input type="radio" name="assain"> Fosse conforme</label>
+          <label class="opt-label"><input type="radio" name="assain"> Non conforme</label>
         </div>
       </div>
     </div>
@@ -317,7 +326,7 @@
     <div class="grid-3">
       <div class="field">
         <label>Grange / Atelier / Hangar</label>
-        <input type="text" placeholder="Surface m² et état du bâti/toiture">
+        <input type="text" placeholder="Surface m² et état bâti / toiture">
       </div>
       <div class="field">
         <label>Garage / Stationnement</label>
@@ -325,7 +334,7 @@
       </div>
       <div class="field">
         <label>Éléments d'agrément</label>
-        <input type="text" placeholder="Piscine, puits en eau, étang, vue dégagée...">
+        <input type="text" placeholder="Piscine, puits en eau, étang, vue...">
       </div>
     </div>
 
@@ -334,17 +343,17 @@
     <div class="grid-2">
       <div class="field">
         <label>Budget travaux estimé à déduire (€)</label>
-        <input type="text" placeholder="Ex: 12 000 € (mise aux normes fosse + convecteurs)">
+        <input type="text" placeholder="Ex : 12 000 € (mise aux normes fosse + convecteurs)">
       </div>
       <div class="field">
         <label>Attente vendeur ou particularité du dossier</label>
-        <input type="text" placeholder="Ex: Vendeur vise 140 000 € net, vente urgente succession">
+        <input type="text" placeholder="Ex : Vendeur vise 140 000 € net, vente urgente succession">
       </div>
     </div>
 
     <div class="summary-box">
       <h3>Message type à copier-coller dans notre échange pour lancer l'estimation :</h3>
-      <p style="margin: 0; font-family: monospace; font-size: 9.5px; color: #2d3748;">
+      <p>
         "Maison à [Commune], [Surface] m² hab, [Nb] ch, terrain [Terrain] m², style [Pierre/Pavillon/Plain-pied], état [Impeccable/Travaux légers/Réhabilitation], assainissement [Tout-à-l'égout/Fosse], chauffage [PAC/Bois/Fioul], dépendances [Grange/Garage]."
       </p>
     </div>
@@ -352,4 +361,3 @@
 
 </body>
 </html>
-```[cite: 6]
