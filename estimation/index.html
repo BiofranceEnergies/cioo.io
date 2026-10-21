@@ -6,7 +6,7 @@
   <style>
     @page {
       size: A4 portrait;
-      margin: 12mm 15mm 12mm 15mm;
+      margin: 10mm 14mm 10mm 14mm;
     }
     * {
       box-sizing: border-box;
@@ -26,7 +26,7 @@
       max-width: 210mm;
       margin: 0 auto;
       background: #ffffff;
-      padding: 24px 28px;
+      padding: 22px 26px;
     }
     @media screen {
       .page-container {
@@ -69,16 +69,45 @@
     header {
       border-bottom: 2px solid #1a365d;
       padding-bottom: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
     .logo-container img {
-      height: 48px;
+      height: 52px;
       width: auto;
       object-fit: contain;
     }
+    .advisor-info {
+      border-left: 2px solid #e2e8f0;
+      padding-left: 14px;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #4a5568;
+    }
+    .advisor-name {
+      font-size: 12px;
+      font-weight: bold;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .advisor-role {
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .advisor-contact {
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+
     .header-doc-title {
       text-align: right;
     }
@@ -104,17 +133,17 @@
       letter-spacing: 0.5px;
       padding: 5px 10px;
       border-radius: 4px;
-      margin-top: 14px;
-      margin-bottom: 10px;
+      margin-top: 12px;
+      margin-bottom: 8px;
     }
 
     .info-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px 12px;
+      gap: 8px 12px;
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      padding: 10px 14px;
+      padding: 9px 12px;
       border-radius: 6px;
     }
     .info-item {
@@ -122,14 +151,14 @@
       flex-direction: column;
     }
     .info-label {
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 600;
       color: #718096;
       text-transform: uppercase;
       margin-bottom: 2px;
     }
     .info-value {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
       color: #2d3748;
     }
@@ -137,21 +166,21 @@
     table.data-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 6px;
-      font-size: 10px;
+      margin-top: 4px;
+      font-size: 9.5px;
     }
     table.data-table th {
       background: #edf2f7;
       color: #2d3748;
       text-align: left;
-      padding: 6px 8px;
+      padding: 5px 8px;
       font-weight: 600;
       border-bottom: 1px solid #cbd5e0;
-      font-size: 9.5px;
+      font-size: 9px;
       text-transform: uppercase;
     }
     table.data-table td {
-      padding: 6px 8px;
+      padding: 5px 8px;
       border-bottom: 1px solid #e2e8f0;
       color: #2d3748;
       vertical-align: middle;
@@ -171,18 +200,18 @@
     .balance-box {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 6px;
+      gap: 12px;
+      margin-top: 4px;
     }
     .balance-col {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 10px 12px;
+      padding: 8px 12px;
     }
     .balance-col h4 {
-      margin: 0 0 8px 0;
-      font-size: 10px;
+      margin: 0 0 6px 0;
+      font-size: 9.5px;
       color: #1a365d;
       text-transform: uppercase;
       border-bottom: 1px solid #e2e8f0;
@@ -191,14 +220,14 @@
     .balance-line {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 4px;
-      font-size: 10px;
+      margin-bottom: 3px;
+      font-size: 9.5px;
     }
     .balance-line.total {
       font-weight: bold;
       border-top: 1px solid #cbd5e0;
-      padding-top: 6px;
-      margin-top: 6px;
+      padding-top: 5px;
+      margin-top: 5px;
       color: #c53030;
     }
 
@@ -206,12 +235,12 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     .price-card {
       border: 1px solid #cbd5e0;
       border-radius: 6px;
-      padding: 10px;
+      padding: 8px 10px;
       text-align: center;
       background: #ffffff;
     }
@@ -220,27 +249,27 @@
       background: #ebf8ff;
     }
     .price-card-title {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: bold;
       text-transform: uppercase;
       color: #718096;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .price-card.pivot .price-card-title {
       color: #2b6cb0;
     }
     .price-card-val {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       color: #1a202c;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
-    .price-card.pivot .price-card-val {{
+    .price-card.pivot .price-card-val {
       color: #2b6cb0;
-      font-size: 18px;
-    }}
+      font-size: 17px;
+    }
     .price-card-desc {
-      font-size: 8.5px;
+      font-size: 8px;
       color: #718096;
     }
 
@@ -248,9 +277,9 @@
       background: #2e8540;
       color: white;
       text-align: center;
-      padding: 8px 12px;
+      padding: 7px 12px;
       border-radius: 6px;
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 11px;
       display: flex;
       justify-content: space-between;
@@ -262,9 +291,9 @@
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 16px;
       border-top: 1px solid #e2e8f0;
-      padding-top: 8px;
+      padding-top: 6px;
       display: flex;
       justify-content: space-between;
       font-size: 8px;
@@ -281,12 +310,21 @@
 
   <div class="page-container">
     <header>
-      <div class="logo-container">
-        <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+      <div class="header-left">
+        <div class="logo-container">
+          <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+        </div>
+        <div class="advisor-info">
+          <div class="advisor-name">Sylvain MATIGNON</div>
+          <div class="advisor-role">Conseiller immobilier indépendant</div>
+          <div class="advisor-contact">
+            📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+          </div>
+        </div>
       </div>
       <div class="header-doc-title">
         <h1>Rapport d'Avis de Valeur</h1>
-        <p>Estimation vénale par méthode comparative de marché</p>
+        <p>Estimation vénale par méthode comparative</p>
       </div>
     </header>
 
@@ -409,7 +447,7 @@
 
     <footer>
       <span>Avis de valeur établi sur la base des biens comparables actuellement en vente sur le secteur.</span>
-      <span>Document confidentiel — Propriétés-Privées</span>
+      <span>Document confidentiel — Sylvain MATIGNON | Propriétés-Privées</span>
     </footer>
   </div>
 
