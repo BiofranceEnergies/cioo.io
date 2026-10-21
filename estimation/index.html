@@ -4,72 +4,89 @@
   <meta charset="UTF-8">
   <title>Avis de Valeur & Rapport d'Estimation Immobilière</title>
   <style>
+    /* 1. Définition stricte de la feuille A4 pour l'imprimante */
     @page {
       size: A4 portrait;
-      margin: 8mm 12mm 8mm 12mm;
+      margin: 15mm; /* Marges physiques réelles papier gauche, droite, haut, bas */
     }
+
     * {
       box-sizing: border-box;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 10.5px;
-      line-height: 1.35;
-      color: #1a202c;
+
+    html, body {
       margin: 0;
       padding: 0;
-      background: #f7fafc;
+      background: #f0f4f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #1a202c;
     }
-    .page-container {
-      max-width: 210mm;
-      margin: 0 auto;
+
+    /* 2. Barre d'action écran (masquée à l'impression) */
+    .no-print-bar {
+      max-width: 190mm;
+      margin: 15px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a365d;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+    }
+    .btn-print {
       background: #ffffff;
-      padding: 16px 20px;
+      color: #1a365d;
+      border: none;
+      padding: 8px 18px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
     }
-    @media screen {
-      .page-container {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        margin-top: 15px;
-        margin-bottom: 15px;
-        border-radius: 8px;
+    .btn-print:hover {
+      background: #edf2f7;
+    }
+
+    /* 3. Conteneur principal */
+    .sheet {
+      width: 100%;
+      max-width: 180mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 20px 24px;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* 4. Règles d'impression pour verrouiller les marges papier */
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        width: 100% !important;
+        height: auto !important;
       }
       .no-print-bar {
-        max-width: 210mm;
-        margin: 10px auto 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #1a365d;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
+        display: none !important;
       }
-      .btn-print {
-        background: #ffffff;
-        color: #1a365d;
-        border: none;
-        padding: 6px 14px;
-        font-weight: bold;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 11px;
+      .sheet {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
       }
-      .btn-print:hover {
-        background: #edf2f7;
-      }
-    }
-    @media print {
-      body { background: transparent; }
-      .page-container { padding: 0; box-shadow: none; margin: 0; }
-      .no-print-bar { display: none !important; }
     }
 
     header {
       border-bottom: 2px solid #1a365d;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -87,8 +104,8 @@
     .advisor-info {
       border-left: 2px solid #e2e8f0;
       padding-left: 12px;
-      font-size: 9.5px;
-      line-height: 1.3;
+      font-size: 9px;
+      line-height: 1.35;
       color: #4a5568;
     }
     .advisor-name {
@@ -120,7 +137,7 @@
     }
     .header-doc-title p {
       margin: 2px 0 0 0;
-      font-size: 9.5px;
+      font-size: 9px;
       color: #4a5568;
     }
 
@@ -133,8 +150,8 @@
       letter-spacing: 0.4px;
       padding: 4px 8px;
       border-radius: 3px;
-      margin-top: 9px;
-      margin-bottom: 6px;
+      margin-top: 11px;
+      margin-bottom: 7px;
     }
 
     .info-grid {
@@ -143,7 +160,7 @@
       gap: 6px 10px;
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      padding: 7px 10px;
+      padding: 8px 10px;
       border-radius: 5px;
     }
     .info-item {
@@ -207,7 +224,7 @@
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 5px;
-      padding: 6px 10px;
+      padding: 7px 10px;
     }
     .balance-col h4 {
       margin: 0 0 5px 0;
@@ -235,12 +252,12 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 6px;
+      margin-top: 7px;
     }
     .price-card {
       border: 1px solid #cbd5e0;
       border-radius: 5px;
-      padding: 6px 8px;
+      padding: 7px 8px;
       text-align: center;
       background: #ffffff;
     }
@@ -267,7 +284,7 @@
     .price-card.pivot .price-card-val {
       color: #2b6cb0;
       font-size: 16px;
-    }}
+    }
     .price-card-desc {
       font-size: 7.5px;
       color: #718096;
@@ -277,10 +294,10 @@
       background: #2e8540;
       color: white;
       text-align: center;
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: 5px;
-      margin-top: 8px;
-      font-size: 10px;
+      margin-top: 9px;
+      font-size: 10.5px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -291,9 +308,9 @@
     }
 
     footer {
-      margin-top: 10px;
+      margin-top: 12px;
       border-top: 1px solid #e2e8f0;
-      padding-top: 4px;
+      padding-top: 5px;
       display: flex;
       justify-content: space-between;
       font-size: 7.5px;
@@ -308,7 +325,7 @@
     <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
   </div>
 
-  <div class="page-container">
+  <div class="sheet">
     <header>
       <div class="header-left">
         <div class="logo-container">
