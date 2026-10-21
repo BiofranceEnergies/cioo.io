@@ -1,1 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Fiche Découverte & Critères Estimation Immobilière</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.35;
+      color: #1a202c;
+      margin: 0;
+      padding: 0;
+      background: #f7fafc;
+    }
+    .page-container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 16px 20px;
+    }
+    @media screen {
+      .page-container {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+      }
+      .no-print-bar {
+        max-width: 210mm;
+        margin: 15px auto 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #2b6cb0;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 6px;
+      }
+      .btn-print {
+        background: #ffffff;
+        color: #2b6cb0;
+        border: none;
+        padding: 8px 16px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .btn-print:hover {
+        background: #edf2f7;
+      }
+    }
+    @media print {
+      body { background: transparent; }
+      .page-container { padding: 0; box-shadow: none; margin: 0; }
+      .no-print-bar { display: none !important; }
+    }
 
+    header {
+      border-bottom: 2px solid #1a365d;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header-title h1 {
+      margin: 0;
+      font-size: 16px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-title p {
+      margin: 3px 0 0 0;
+      font-size: 10px;
+      color: #4a5568;
+    }
+    .header-badge {
+      font-size: 9px;
+      font-weight: 600;
+      background: #ebf8ff;
+      color: #2b6cb0;
+      border: 1px solid #bee3f8;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-align: right;
+    }
+
+    .section-title {
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 4px 8px;
+      border-radius: 3px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px 12px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+    .field label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .field label span.hint {
+      font-weight: normal;
+      color: #718096;
+      font-style: italic;
+    }
+    .field input, .field select, .field textarea {
+      border: 1px solid #cbd5e0;
+      background: #f7fafc;
+      padding: 5px 7px;
+      font-size: 10px;
+      border-radius: 3px;
+      color: #2d3748;
+      font-family: inherit;
+    }
+    .field textarea {
+      resize: vertical;
+      min-height: 38px;
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding-top: 4px;
+    }
+    .radio-item, .checkbox-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9.5px;
+      color: #2d3748;
+      cursor: pointer;
+    }
+
+    .summary-box {
+      background: #f0fff4;
+      border: 1px dashed #38a169;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 10px;
+    }
+    .summary-box h3 {
+      margin: 0 0 4px 0;
+      font-size: 10px;
+      color: #22543d;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>💡 <strong>Astuce :</strong> Remplis les champs à l'écran puis clique sur « Imprimer en PDF » (ou <code>Ctrl+P</code>).</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
+  </div>
+
+  <div class="page-container">
+    <header>
+      <div class="header-title">
+        <h1>Fiche Découverte & Paramètres d'Estimation</h1>
+        <p>Critères indispensables pour l'interrogation de la base de données agences (Périgord Vert)</p>
+      </div>
+      <div class="header-badge">
+        Usage Conseiller Immobilier<br>
+        proprietes-privees.com
+      </div>
+    </header>
+
+    <!-- 1. LOCALISATION & ENVIRONNEMENT -->
+    <div class="section-title">1. Localisation & Implantation Sectorielle</div>
+    <div class="grid-3">
+      <div class="field">
+        <label>Commune exacte <span class="hint">(Crucial pour le ciblage)</span></label>
+        <input type="text" placeholder="Ex: Saint-Pardoux-la-Rivière">
+      </div>
+      <div class="field">
+        <label>Implantation / Environnement</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="loc"> Plein bourg</label>
+          <label class="radio-item"><input type="radio" name="loc"> Quartier calme</label>
+          <label class="radio-item"><input type="radio" name="loc"> Hameau</label>
+          <label class="radio-item"><input type="radio" name="loc"> Isolé</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Voisinage / Mitoyenneté</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="mito"> Indépendante</label>
+          <label class="radio-item"><input type="radio" name="mito"> Mitoyenne 1 côté</label>
+          <label class="radio-item"><input type="radio" name="mito"> 2 côtés</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. DONNÉES CLÉS DU BÂTI -->
+    <div class="section-title">2. Métriques Principales & Typologie</div>
+    <div class="grid-4">
+      <div class="field">
+        <label>Surface habitable (m²)</label>
+        <input type="number" placeholder="Ex: 110">
+      </div>
+      <div class="field">
+        <label>Surface terrain (m² ou ha)</label>
+        <input type="text" placeholder="Ex: 1 850 m²">
+      </div>
+      <div class="field">
+        <label>Nombre de pièces</label>
+        <input type="number" placeholder="Ex: 5">
+      </div>
+      <div class="field">
+        <label>Nombre de chambres</label>
+        <input type="number" placeholder="Ex: 3">
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top: 8px;">
+      <div class="field">
+        <label>Configuration du bien</label>
+        <select>
+          <option>Plain-pied complet</option>
+          <option>Maison de plain-pied surélevé</option>
+          <option>Maison à étage (R+1 / R+2)</option>
+          <option>Sous-sol total semi-enterré</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Style architectural</label>
+        <select>
+          <option>Maison en pierre / Corps de ferme</option>
+          <option>Pavillon traditionnel (années 70 à 90)</option>
+          <option>Plain-pied contemporain (> 2000)</option>
+          <option>Maison de bourg / ville de caractère</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>État global du bien</label>
+        <select>
+          <option>Rénové récent / Impeccable (0 travaux)</option>
+          <option>Habitable de suite (rafraîchissement / déco)</option>
+          <option>Travaux moyens (cuisine/SdB/menuiseries)</option>
+          <option>Gros travaux de réhabilitation</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 3. TECHNIQUE, ÉNERGIE & ASSAINISSEMENT -->
+    <div class="section-title">3. Énergie, Technique & Assainissement (Points Critiques)</div>
+    <div class="grid-3">
+      <div class="field">
+        <label>Mode de chauffage principal</label>
+        <input type="text" placeholder="Ex: Pompe à chaleur / Poêle granulés / Fioul">
+      </div>
+      <div class="field">
+        <label>Classe DPE (si connue)</label>
+        <select>
+          <option>Non renseigné / En cours</option>
+          <option>A / B (Très économe)</option>
+          <option>C / D (Standard)</option>
+          <option>E (Moyen)</option>
+          <option>F / G (Passoire thermique)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Assainissement</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="radio" name="assain"> Tout-à-l'égout</label>
+          <label class="checkbox-item"><input type="radio" name="assain"> Fosse conforme</label>
+          <label class="checkbox-item"><input type="radio" name="assain"> Fosse non conforme</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. ANNEXES & VALEUR AJOUTÉE -->
+    <div class="section-title">4. Annexes, Dépendances & Équipements Clés</div>
+    <div class="grid-3">
+      <div class="field">
+        <label>Grange / Atelier / Hangar</label>
+        <input type="text" placeholder="Surface m² et état du bâti/toiture">
+      </div>
+      <div class="field">
+        <label>Garage / Stationnement</label>
+        <input type="text" placeholder="Garage attenant, carport, sous-sol...">
+      </div>
+      <div class="field">
+        <label>Éléments d'agrément</label>
+        <input type="text" placeholder="Piscine, puits en eau, étang, vue dégagée...">
+      </div>
+    </div>
+
+    <!-- 5. ENVELOPPE TRAVAUX & SYNTHÈSE RAPIDE POUR L'IA -->
+    <div class="section-title">5. Enveloppe Travaux & Remarques pour l'Estimation</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Budget travaux estimé à déduire (€)</label>
+        <input type="text" placeholder="Ex: 12 000 € (mise aux normes fosse + convecteurs)">
+      </div>
+      <div class="field">
+        <label>Attente vendeur ou particularité du dossier</label>
+        <input type="text" placeholder="Ex: Vendeur vise 140 000 € net, vente urgente succession">
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>Message type à copier-coller dans notre échange pour lancer l'estimation :</h3>
+      <p style="margin: 0; font-family: monospace; font-size: 9.5px; color: #2d3748;">
+        "Maison à [Commune], [Surface] m² hab, [Nb] ch, terrain [Terrain] m², style [Pierre/Pavillon/Plain-pied], état [Impeccable/Travaux légers/Réhabilitation], assainissement [Tout-à-l'égout/Fosse], chauffage [PAC/Bois/Fioul], dépendances [Grange/Garage]."
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
+```[cite: 6]
