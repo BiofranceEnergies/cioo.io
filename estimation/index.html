@@ -1,1 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Avis de Valeur & Rapport d'Estimation Immobilière</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #1a202c;
+      margin: 0;
+      padding: 0;
+      background: #f7fafc;
+    }
+    .page-container {
+      max-width: 210mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 24px 28px;
+    }
+    @media screen {
+      .page-container {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+      }
+      .no-print-bar {
+        max-width: 210mm;
+        margin: 15px auto 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #1a365d;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+      }
+      .btn-print {
+        background: #ffffff;
+        color: #1a365d;
+        border: none;
+        padding: 8px 18px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      .btn-print:hover {
+        background: #edf2f7;
+      }
+    }
+    @media print {
+      body { background: transparent; }
+      .page-container { padding: 0; box-shadow: none; margin: 0; }
+      .no-print-bar { display: none !important; }
+    }
 
+    header {
+      border-bottom: 2px solid #1a365d;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-container img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+    .header-doc-title {
+      text-align: right;
+    }
+    .header-doc-title h1 {
+      margin: 0;
+      font-size: 16px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-doc-title p {
+      margin: 3px 0 0 0;
+      font-size: 10px;
+      color: #4a5568;
+    }
+
+    .section-title {
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      margin-top: 14px;
+      margin-bottom: 10px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 10px 14px;
+      border-radius: 6px;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .info-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #718096;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .info-value {
+      font-size: 11px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 10px;
+    }
+    table.data-table th {
+      background: #edf2f7;
+      color: #2d3748;
+      text-align: left;
+      padding: 6px 8px;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e0;
+      font-size: 9.5px;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      vertical-align: middle;
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .tag-ref {
+      font-weight: bold;
+      color: #2b6cb0;
+    }
+    .price-cell {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .balance-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 6px;
+    }
+    .balance-col {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+    }
+    .balance-col h4 {
+      margin: 0 0 8px 0;
+      font-size: 10px;
+      color: #1a365d;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+    }
+    .balance-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-size: 10px;
+    }
+    .balance-line.total {
+      font-weight: bold;
+      border-top: 1px solid #cbd5e0;
+      padding-top: 6px;
+      margin-top: 6px;
+      color: #c53030;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .price-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .price-card.pivot {
+      border: 2px solid #2b6cb0;
+      background: #ebf8ff;
+    }
+    .price-card-title {
+      font-size: 9.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 4px;
+    }
+    .price-card.pivot .price-card-title {
+      color: #2b6cb0;
+    }
+    .price-card-val {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 3px;
+    }
+    .price-card.pivot .price-card-val {{
+      color: #2b6cb0;
+      font-size: 18px;
+    }}
+    .price-card-desc {
+      font-size: 8.5px;
+      color: #718096;
+    }
+
+    .fai-banner {
+      background: #2e8540;
+      color: white;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-top: 12px;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fai-banner span.val {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>💡 <strong>Avis de Valeur :</strong> Prêt à être imprimé ou enregistré en PDF via <code>Ctrl+P</code>.</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
+  </div>
+
+  <div class="page-container">
+    <header>
+      <div class="logo-container">
+        <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+      </div>
+      <div class="header-doc-title">
+        <h1>Rapport d'Avis de Valeur</h1>
+        <p>Estimation vénale par méthode comparative de marché</p>
+      </div>
+    </header>
+
+    <!-- 1. CARACTÉRISTIQUES DU BIEN ÉVALUÉ -->
+    <div class="section-title">1. Synthèse du Bien Évalué</div>
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="info-label">Localisation</span>
+        <span class="info-value">[Commune / Secteur]</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Surface Habitable</span>
+        <span class="info-value">[XXX] m²</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Terrain</span>
+        <span class="info-value">[X XXX] m²</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Pièces / Chambres</span>
+        <span class="info-value">[X] pièces ([X] ch)</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Configuration</span>
+        <span class="info-value">[Plain-pied / Étage]</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Énergie & DPE</span>
+        <span class="info-value">[Classe X - Chauffage PAC]</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Assainissement</span>
+        <span class="info-value">[Tout-à-l'égout / Fosse]</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Dépendances</span>
+        <span class="info-value">[Garage / Grange XX m²]</span>
+      </div>
+    </div>
+
+    <!-- 2. ANALYSE DU MARCHÉ ACTUEL (BASE AGENCES EN VENTE) -->
+    <div class="section-title">2. Étude Comparative du Marché (Biens Actuellement en Concurrence)</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Réf. / Agence</th>
+          <th>Secteur</th>
+          <th>Surf. Hab. / Terrain</th>
+          <th>Prix Affiché FAI</th>
+          <th>Analyse Comparative & Différentiels</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag-ref">Réf. [XXXX]</span><br><small style="color:#718096;">[Agence Salat/Human]</small></td>
+          <td>[Commune]</td>
+          <td>[XXX] m² / [X XXX] m²</td>
+          <td class="price-cell">[XXX XXX] €</td>
+          <td>[Prestations comparables, travaux similaires, assainissement conforme...]</td>
+        </tr>
+        <tr>
+          <td><span class="tag-ref">Réf. [XXXX]</span><br><small style="color:#718096;">[Agence Salat/Human]</small></td>
+          <td>[Commune]</td>
+          <td>[XXX] m² / [X XXX] m²</td>
+          <td class="price-cell">[XXX XXX] €</td>
+          <td>[Prestations supérieures en terrain mais cuisine à moderniser...]</td>
+        </tr>
+        <tr>
+          <td><span class="tag-ref">Réf. [XXXX]</span><br><small style="color:#718096;">[Agence Salat/Human]</small></td>
+          <td>[Commune]</td>
+          <td>[XXX] m² / [X XXX] m²</td>
+          <td class="price-cell">[XXX XXX] €</td>
+          <td>[Concurrence directe en termes de surface et d'emplacement...]</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 3. PONDÉRATION TECHNIQUE & POSTES TRAVAUX -->
+    <div class="section-title">3. Pondération & Déduction de l'Enveloppe Travaux</div>
+    <div class="balance-box">
+      <div class="balance-col">
+        <h4>Points Forts & Plus-Values</h4>
+        <div class="balance-line"><span>• Situation / Environnement calme</span><strong>Inclus</strong></div>
+        <div class="balance-line"><span>• Dépendances & annexes exploitables</span><strong>Valorisé</strong></div>
+        <div class="balance-line"><span>• État du gros œuvre (toiture / maçonnerie)</span><strong>Conforme</strong></div>
+      </div>
+      <div class="balance-col">
+        <h4>Postes de Travaux Déduits du Prix Marché</h4>
+        <div class="balance-line"><span>• Mise aux normes assainissement (fosse) :</span><span>[X XXX] €</span></div>
+        <div class="balance-line"><span>• Amélioration énergétique / menuiseries :</span><span>[X XXX] €</span></div>
+        <div class="balance-line"><span>• Rafraîchissement intérieur :</span><span>[X XXX] €</span></div>
+        <div class="balance-line total"><span>Total Décote Travaux Estimée :</span><span>[XX XXX] €</span></div>
+      </div>
+    </div>
+
+    <!-- 4. RÉSULTAT DE L'ESTIMATION VÉNALE -->
+    <div class="section-title">4. Avis de Valeur & Positionnement Prix Conseillé</div>
+    <div class="pricing-cards">
+      <div class="price-card">
+        <div class="price-card-title">Fourchette Basse (Net Vendeur)</div>
+        <div class="price-card-val">[XXX XXX] €</div>
+        <div class="price-card-desc">Vente rapide ou négociation intégrée</div>
+      </div>
+      <div class="price-card pivot">
+        <div class="price-card-title">Prix Pivot Recommandé (Net Vendeur)</div>
+        <div class="price-card-val">[XXX XXX] €</div>
+        <div class="price-card-desc">Juste valeur vénale de marché actuelle</div>
+      </div>
+      <div class="price-card">
+        <div class="price-card-title">Fourchette Haute (Net Vendeur)</div>
+        <div class="price-card-val">[XXX XXX] €</div>
+        <div class="price-card-desc">Plafond maximal face à l'offre concurrente</div>
+      </div>
+    </div>
+
+    <div class="fai-banner">
+      <span>Prix de Présentation Recommandé (Honoraires Agence Inclus FAI) :</span>
+      <span class="val">[XXX XXX] € FAI</span>
+    </div>
+
+    <footer>
+      <span>Avis de valeur établi sur la base des biens comparables actuellement en vente sur le secteur.</span>
+      <span>Document confidentiel — Propriétés-Privées</span>
+    </footer>
+  </div>
+
+</body>
+</html>
