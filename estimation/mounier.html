@@ -180,4 +180,476 @@
     }
     .identity-card h4 {
       margin: 0 0 8px 0;
-      font
+      font-size: 10px;
+      color: #1a365d;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 4px;
+    }
+    .id-row {
+      display: flex;
+      margin-bottom: 5px;
+      font-size: 9.5px;
+    }
+    .id-label {
+      width: 125px;
+      font-weight: 600;
+      color: #718096;
+      flex-shrink: 0;
+    }
+    .id-value {
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+      font-size: 9.5px;
+    }
+    table.data-table th {
+      background: #edf2f7;
+      color: #2d3748;
+      text-align: left;
+      padding: 7px 8px;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e0;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 7px 8px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      vertical-align: middle;
+      line-height: 1.35;
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-pos {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #bee3f8;
+      display: inline-block;
+      font-size: 8.5px;
+      white-space: nowrap;
+    }
+    .badge-target {
+      background: #e6fffa;
+      color: #234e52;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #b2f5ea;
+      display: inline-block;
+      font-size: 8.5px;
+      white-space: nowrap;
+    }
+    .ref-link {
+      color: #2b6cb0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .diag-box {
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 9.5px;
+    }
+    .diag-box.atouts {
+      background: #f0fff4;
+      border: 1px solid #c6f6d5;
+    }
+    .diag-box.freins {
+      background: #fffaf0;
+      border: 1px solid #feebc8;
+    }
+    .diag-box h4 {
+      margin: 0 0 6px 0;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+    .diag-box.atouts h4 { color: #22543d; }
+    .diag-box.freins h4 { color: #744210; }
+    .diag-box ul {
+      margin: 0;
+      padding-left: 15px;
+    }
+    .diag-box li {
+      margin-bottom: 5px;
+      line-height: 1.35;
+    }
+    .diag-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .price-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      padding: 12px 10px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .price-card.pivot {
+      border: 2px solid #2b6cb0;
+      background: #ebf8ff;
+    }
+    .price-card-title {
+      font-size: 9.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 4px;
+    }
+    .price-card.pivot .price-card-title {
+      color: #2b6cb0;
+    }
+    .price-card-val {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 4px;
+    }
+    .price-card.pivot .price-card-val {
+      color: #2b6cb0;
+      font-size: 17.5px;
+    }
+    .price-card-desc {
+      font-size: 8.5px;
+      color: #718096;
+      line-height: 1.3;
+    }
+
+    .audit-mandats {
+      background: #fff5f5;
+      border: 1px solid #feb2b2;
+      border-radius: 6px;
+      padding: 9px 12px;
+      margin-top: 10px;
+      font-size: 9px;
+    }
+    .audit-mandats h4 {
+      margin: 0 0 4px 0;
+      color: #9b2c2c;
+      font-size: 9.5px;
+      text-transform: uppercase;
+    }
+
+    .conclusion-box {
+      background: #f8fafc;
+      border-left: 4px solid #1a365d;
+      padding: 12px 16px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      font-size: 9.5px;
+      line-height: 1.45;
+      color: #2d3748;
+    }
+    .conclusion-box h4 {
+      margin: 0 0 5px 0;
+      font-size: 10.5px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .legal-notice {
+      margin-top: 8px;
+      padding: 6px 8px;
+      background: #edf2f7;
+      border-radius: 4px;
+      font-size: 7.8px;
+      line-height: 1.3;
+      color: #4a5568;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 6px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>💡 <strong>Avis de Valeur Vénale :</strong> Données ECM calées avec comparables réels (Honoraires 14 000 € TTC) — Prêt pour <code>Ctrl+P</code>.</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
+  </div>
+
+  <!-- ======================== PAGE 1 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <header>
+          <div class="header-left">
+            <div class="logo-container">
+              <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+            </div>
+            <div class="advisor-info">
+              <div class="advisor-name">Sylvain MATIGNON</div>
+              <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
+              <div class="advisor-contact">
+                📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+              </div>
+            </div>
+          </div>
+          <div class="header-doc-title">
+            <h1>Avis de Valeur Vénale</h1>
+            <p>Étude Comparative de Marché (Méthode ECM par Références)</p>
+          </div>
+        </header>
+
+        <!-- IDENTIFICATION DU BIEN -->
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h4>Désignation du Bien Étudié</h4>
+            <div class="id-row"><span class="id-label">Localisation :</span><span class="id-value">24300 Saint-Martin-le-Pin (Axe Angoulême)</span></div>
+            <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">Ancienne grange rénovée en pierre (avec mezzanine)</span></div>
+            <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value">120 m² Carrez (Séjour cathédrale, 4 Chambres)</span></div>
+            <div class="id-row"><span class="id-label">Configuration :</span><span class="id-value">2 ch + SDB au RDC / Mezzanine + 2 ch + SDE à l'étage</span></div>
+            <div class="id-row"><span class="id-label">Terrain :</span><span class="id-value">5 255 m² attenant au calme avec vue dégagée</span></div>
+          </div>
+          <div class="identity-card">
+            <h4>Caractéristiques Énergétiques & Annexes</h4>
+            <div class="id-row"><span class="id-label">DPE / GES :</span><span class="id-value">Classe C (136 kWh) / Classe A (4 kg CO₂)</span></div>
+            <div class="id-row"><span class="id-label">Chauffage :</span><span class="id-value">PAC réversible air/air (splits) + Poêle à granulés</span></div>
+            <div class="id-row"><span class="id-label">Menuiseries :</span><span class="id-value">Double vitrage PVC/Alu avec baie vitrée coulissante</span></div>
+            <div class="id-row"><span class="id-label">Sanitaires :</span><span class="id-value">1 SDB (baignoire + douche), 1 SDE, 2 WC</span></div>
+            <div class="id-row"><span class="id-label">Annexes & Atouts :</span><span class="id-value">Grenier aménageable, cellier/buanderie, filet de repos</span></div>
+          </div>
+        </div>
+
+        <!-- 1. CADRE MÉTHODOLOGIQUE & GRILLE TARIFAIRE -->
+        <div class="section-title">1. Cadre Méthodologique, Sectorisation & Grille Tarifaire</div>
+        <p style="margin: 4px 0 8px 0; font-size: 9.5px; color: #4a5568;">
+          Pour établir une valeur vénale objective, notre analyse confronte les caractéristiques intrinsèques du bien aux arbitrages réels des acquéreurs sur le bassin nontronnais (rayon de 15 km). La méthode ECM pondère les surfaces habitables, la taille de la parcelle, l'état de finition et la classe énergétique.
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tranche de Marché</th>
+              <th>Fourchette Prix / m²</th>
+              <th>Profil des Biens & Caractéristiques Techniques</th>
+              <th>Positionnement du Bien Étudié (120 m²)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fourchette d'Attaque</strong></td>
+              <td>1 000 € à 1 500 € / m²</td>
+              <td>Bâti ancien à gros travaux, passoires thermiques (F/G, fioul) ou petits volumes sans confort moderne.</td>
+              <td><span class="badge-pos">Surclassé (Rénovation intégrale / DPE C)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Médiane</strong></td>
+              <td>1 550 € à 1 850 € / m²</td>
+              <td>Grandes fermes en pierre avec finitions/rafraîchissement à prévoir (Réf. 3821, 3806) ou DPE D (Réf. 3511).</td>
+              <td><span class="badge-pos">Surclassé (Prêt à vivre / Confort PAC)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Haute</strong></td>
+              <td>1 900 € à 2 100 € / m²</td>
+              <td>Bâtisses de caractère rénovées sans travaux, grand terrain calme (> 5 000 m²), DPE C performant, 4 chambres.</td>
+              <td><span class="badge-target">POSITIONNEMENT RETENU (~1 950 € à 2 075 €/m²)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Plafond du Marché</strong></td>
+              <td>> 2 200 € / m² (> 290 k€)</td>
+              <td>Grands ensembles de 185 à 220 m² avec dépendances majeures (granges 70-80 m², fournil, planchers chauffants).</td>
+              <td><span class="badge-pos" style="background:#fff5f5; color:#c53030; border-color:#feb2b2;">Plafond Dépassé si > 270 000 € FAI</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2. DIAGNOSTIC TECHNIQUE & VALEUR AJOUTÉE -->
+        <div class="section-title">2. Facteurs de Valorisation & Plafonds de Verre</div>
+        <div class="diag-grid">
+          <div class="diag-box atouts">
+            <h4>Points Forts & Éléments de Valorisation</h4>
+            <ul>
+              <li><strong>Charme de la pierre & volumes :</strong> Grange réhabilitée avec séjour cathédrale, mezzanine ouverte et filet de détente suspendu.</li>
+              <li><strong>Performance énergétique remarquable :</strong> DPE C / GES A avec climatisation réversible toutes pièces et poêle à pellets (très rare sur de l'ancien).</li>
+              <li><strong>Vie de plain-pied complète :</strong> 2 chambres, buanderie et salle de bains complète (baignoire + douche) au rez-de-chaussée.</li>
+              <li><strong>Environnement champêtre :</strong> 5 255 m² d'un seul tenant au calme avec jolie vue dégagée, sur l'axe Angoulême.</li>
+            </ul>
+          </div>
+          <div class="diag-box freins">
+            <h4>Contraintes de Marché & Plafonds de Verre</h4>
+            <ul>
+              <li><strong>Le filtre psychologique des 250 000 € :</strong> 80 % des alertes portails sont plafonnées à 250 k€. Au-delà, l'audience d'acheteurs se réduit fortement.</li>
+              <li><strong>Absence de dépendances fermées :</strong> Pas de garage maçonné ni de grange attenante/séparée pour atelier ou stockage d'ampleur.</li>
+              <li><strong>Aménagements extérieurs à parfaire :</strong> Terrain brut à paysager, absence de terrasse maçonnée aménagée ou de piscine.</li>
+              <li><strong>Concurrence directe des grands volumes :</strong> Vers 290k-300k€, les acheteurs accèdent à 185-220 m² avec dépendances.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 1/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== PAGE 2 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <!-- 3. ÉTUDE COMPARATIVE DU STOCK ACTIF -->
+        <div class="section-title" style="margin-top: 0;">3. Analyse Comparative du Stock Actif Concurrent (Secteur Nontron / Rayon 15 km)</div>
+        <p style="margin: 4px 0 8px 0; font-size: 9.5px; color: #4a5568;">
+          Panel issu des fiches d'annonces de référence du marché local, illustrant les arbitrages réels des acquéreurs :
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Réf. & Agence</th>
+              <th>Commune / Secteur</th>
+              <th>Surf. / Terrain</th>
+              <th>DPE</th>
+              <th>Prix FAI</th>
+              <th>Prix / m²</th>
+              <th>Détail & Éléments de Comparaison</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ebf8ff; font-weight: bold;">
+              <td>BIEN ÉTUDIÉ (Cible ECM)</td>
+              <td>Saint-Martin-le-Pin</td>
+              <td>120 m² / 5 255 m²</td>
+              <td>DPE C (136 kWh)</td>
+              <td>249 000 €</td>
+              <td>2 075 €/m²</td>
+              <td><strong>Cœur de marché :</strong> 235 000 € net vendeur + 14 000 € TTC honoraires (Vidéo immersive incluse).</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3511 (Brun Salat)</span></td>
+              <td>Proche Piégut-Pluviers</td>
+              <td>94 m² / 2 400 m²</td>
+              <td>DPE D (167 kWh)</td>
+              <td>211 000 €</td>
+              <td>2 244 €/m²</td>
+              <td><strong>Fermette rénovée :</strong> 94 m², séjour 60 m², dépendance four à pain et grange attenante, mais surface plus modeste (-26 m²).</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3821 (Brun Salat)</span></td>
+              <td>Proche Brantôme</td>
+              <td>181 m² / 4 304 m²</td>
+              <td>DPE C (112 kWh)</td>
+              <td>190 000 €</td>
+              <td>1 050 €/m²</td>
+              <td><strong>Ancienne ferme rénovée :</strong> 181 m², séjour 77 m², garage 25 m², terrain 4 304 m², DPE C, mais <em>finitions intérieures à prévoir</em>.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3806 (Brun Salat)</span></td>
+              <td>Mareuil-sur-Belle</td>
+              <td>200 m² / 1 585 m²</td>
+              <td>DPE B (86 kWh)</td>
+              <td>190 000 €</td>
+              <td>950 €/m²</td>
+              <td><strong>Maison de campagne :</strong> 200 m², PAC + poêle, hangar 80 m² avec panneaux solaires, terrain 1 585 m², <em>finitions à achever</em>.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3750 (Brun Salat)</span></td>
+              <td>Saint-Front-la-Rivière</td>
+              <td>185 m² / 1 559 m²</td>
+              <td>DPE B (60 kWh)</td>
+              <td>299 000 €</td>
+              <td>1 616 €/m²</td>
+              <td><strong>Grange rénovée haut standing :</strong> 185 m², 4 chambres, PAC au sol, menuiseries alu, aspiration centralisée.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3811 (Brun Salat)</span></td>
+              <td>Savignac-de-Nontron</td>
+              <td>221 m² / 2 125 m²</td>
+              <td>DPE B (75 kWh)</td>
+              <td>299 250 €</td>
+              <td>1 354 €/m²</td>
+              <td><strong>Grande ferme rénovée :</strong> 221 m², 4 chambres, vaste séjour 70 m², PAC, grange séparée + fournil + puits.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- AUDIT DU CONTEXTE COMMERCIAL -->
+        <div class="audit-mandats">
+          <h4>Enseignements de l'ECM sur le positionnement du bien</h4>
+          L'étude comparative démontre que notre bien surclasse nettement les bâtisses avec travaux de finition affichées à 190 000 € (Réf. 3806 et 3821) grâce à son état irréprochable et son confort thermique. En revanche, le palier des 290 000 € - 300 000 € est occupé par de très grands volumes habitables (185 à 220 m²) assortis de granges et dépendances majeures. Le positionnement naturel d'une grange de 120 m² sans dépendance se situe donc dans la fenêtre d'arbitrage 230 000 € - 250 000 € net vendeur.
+        </div>
+
+        <!-- 4. SYNTHÈSE D'ÉVALUATION & POSITIONNEMENT PRIX -->
+        <div class="section-title">4. Synthèse d'Évaluation & Stratégie Tarifaire (Honoraires : 14 000 € TTC)</div>
+
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-card-title">Fourchette Basse (Prix d'Attaque)</div>
+            <div class="price-card-val">220 000 € Net</div>
+            <div class="price-card-desc"><strong>234 000 € FAI</strong><br>(Honoraires 14 000 € inclus)<br>Déclenchement d'offre rapide et sécurisée sans négociation.</div>
+          </div>
+          <div class="price-card pivot">
+            <div class="price-card-title">Valeur Pivot Recommandée (Cœur de Cible)</div>
+            <div class="price-card-val">235 000 € Net</div>
+            <div class="price-card-desc"><strong>249 000 € FAI</strong><br>(Honoraires 14 000 € inclus)<br>Calibrage stratégique sous 250 k€ : déclenche l'ensemble des alertes acheteurs.</div>
+          </div>
+          <div class="price-card">
+            <div class="price-card-title">Plafond Test Vendeur (30 Jours Max)</div>
+            <div class="price-card-val">250 000 € Net</div>
+            <div class="price-card-desc"><strong>264 000 € FAI</strong><br>(Honoraires 14 000 € inclus)<br>Seuil d'exigence vendeur testé avec marketing vidéo ciblé et qualification d'acquéreurs.</div>
+          </div>
+        </div>
+
+        <!-- CONCLUSION DE L'AVIS DE VALEUR -->
+        <div class="conclusion-box">
+          <h4>Conclusion & Stratégie de Commercialisation</h4>
+          La juste valeur vénale d'arbitrage s'établit à <strong>235 000 € Net Vendeur</strong>, permettant une commercialisation dynamique à <strong>249 000 € FAI</strong> (honoraires de 14 000 € TTC inclus). Ce palier permet de passer sous le seuil psychologique décisif des 250 000 € tout en valorisant pleinement la qualité de la rénovation, le confort thermique DPE C (PAC + granulés) et les 5 255 m² de terrain avec vue. Si les vendeurs souhaitent tester leur ambition à <strong>250 000 € Net Vendeur (264 000 € FAI)</strong>, une stratégie de test cadrée à <strong>30 jours</strong> avec vidéo de présélection permettra de jauger l'accueil du marché avant réajustement concerté.
+        </div>
+
+        <!-- CLAUSE DE RÉSERVE JURIDIQUE -->
+        <div class="legal-notice">
+          <strong>Avertissement juridique :</strong> Le présent document constitue un avis de valeur vénale établi par méthode comparative de marché sur la base des caractéristiques constatées et du stock concurrentiel disponible à la date d'émission. Il ne constitue pas une expertise judiciaire au sens des articles 232 et suivants du CPC et ne saurait engager la responsabilité du professionnel en cas de variation ultérieure de la conjoncture économique ou du marché immobilier local.
+        </div>
+
+        <div style="margin-top: 6px; font-size: 8.5px; color: #718096; text-align: right; font-style: italic;">
+          Fait à Nontron, le 23 Octobre 2026 — Sylvain MATIGNON, Conseiller Indépendant en Immobilier.
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 2/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
