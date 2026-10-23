@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Avis de Valeur Vénale — Grange Rénovée Secteur Nontron</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #1a202c;
+    }
+
+    .no-print-bar {
+      max-width: 180mm;
+      margin: 15px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a365d;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+    }
+    .btn-print {
+      background: #ffffff;
+      color: #1a365d;
+      border: none;
+      padding: 8px 18px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .btn-print:hover {
+      background: #edf2f7;
+    }
+
+    .sheet-page {
+      width: 100%;
+      max-width: 180mm;
+      min-height: 265mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 24px 28px;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body {
+        background: transparent !important;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .sheet-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 268mm !important;
+        height: 268mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-after: always;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+      .sheet-page:last-child {
+        page-break-after: auto;
+      }
+    }
+
+    .content-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header {
+      border-bottom: 2px solid #1a365d;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-container img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+    .advisor-info {
+      border-left: 2px solid #e2e8f0;
+      padding-left: 14px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #4a5568;
+    }
+    .advisor-name {
+      font-size: 12.5px;
+      font-weight: bold;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .advisor-role {
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .advisor-contact {
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+    .header-doc-title {
+      text-align: right;
+    }
+    .header-doc-title h1 {
+      margin: 0;
+      font-size: 17px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-doc-title p {
+      margin: 3px 0 0 0;
+      font-size: 10px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .section-title {
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .identity-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .identity-card h4 {
+      margin: 0 0 10px 0;
+      font-size: 10.5px;
+      color: #1a365d;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 5px;
+    }
+    .id-row {
+      display: flex;
+      margin-bottom: 6px;
+      font-size: 10px;
+    }
+    .id-label {
+      width: 125px;
+      font-weight: 600;
+      color: #718096;
+      flex-shrink: 0;
+    }
+    .id-value {
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 10px;
+    }
+    table.data-table th {
+      background: #edf2f7;
+      color: #2d3748;
+      text-align: left;
+      padding: 8px 10px;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e0;
+      font-size: 9.5px;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      vertical-align: middle;
+      line-height: 1.35;
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-pos {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: bold;
+      padding: 3px 7px;
+      border-radius: 4px;
+      border: 1px solid #bee3f8;
+      display: inline-block;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+    .badge-target {
+      background: #e6fffa;
+      color: #234e52;
+      font-weight: bold;
+      padding: 3px 7px;
+      border-radius: 4px;
+      border: 1px solid #b2f5ea;
+      display: inline-block;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+    .ref-link {
+      color: #2b6cb0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .diag-box {
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 10px;
+    }
+    .diag-box.atouts {
+      background: #f0fff4;
+      border: 1px solid #c6f6d5;
+    }
+    .diag-box.freins {
+      background: #fffaf0;
+      border: 1px solid #feebc8;
+    }
+    .diag-box h4 {
+      margin: 0 0 8px 0;
+      font-size: 10.5px;
+      text-transform: uppercase;
+    }
+    .diag-box.atouts h4 { color: #22543d; }
+    .diag-box.freins h4 { color: #744210; }
+    .diag-box ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+    .diag-box li {
+      margin-bottom: 7px;
+      line-height: 1.4;
+    }
+    .diag-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+      margin-bottom: 12px;
+    }
+    .price-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      padding: 14px 12px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .price-card.pivot {
+      border: 2px solid #2b6cb0;
+      background: #ebf8ff;
+    }
+    .price-card-title {
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 6px;
+    }
+    .price-card.pivot .price-card-title {
+      color: #2b6cb0;
+    }
+    .price-card-val {
+      font-size: 17px;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 5px;
+    }
+    .price-card.pivot .price-card-val {
+      color: #2b6cb0;
+      font-size: 19px;
+    }
+    .price-card-desc {
+      font-size: 9px;
+      color: #718096;
+      line-height: 1.35;
+    }
+
+    .conclusion-box {
+      background: #f8fafc;
+      border-left: 4px solid #1a365d;
+      padding: 14px 18px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+      font-size: 10px;
+      line-height: 1.5;
+      color: #2d3748;
+    }
+    .conclusion-box h4 {
+      margin: 0 0 6px 0;
+      font-size: 11px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .legal-notice {
+      margin-top: 12px;
+      padding: 8px 10px;
+      background: #edf2f7;
+      border-radius: 4px;
+      font-size: 8px;
+      line-height: 1.35;
+      color: #4a5568;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>💡 <strong>Avis de Valeur Vénale :</strong> Estimation prête pour impression ou PDF via <code>Ctrl+P</code>.</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
+  </div>
+
+  <!-- ======================== PAGE 1 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <header>
+          <div class="header-left">
+            <div class="logo-container">
+              <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+            </div>
+            <div class="advisor-info">
+              <div class="advisor-name">Sylvain MATIGNON</div>
+              <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
+              <div class="advisor-contact">
+                📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+              </div>
+            </div>
+          </div>
+          <div class="header-doc-title">
+            <h1>Avis de Valeur Vénale</h1>
+            <p>Étude Comparative de Marché (Méthode par Références)</p>
+          </div>
+        </header>
+
+        <!-- IDENTIFICATION DU BIEN -->
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h4>Désignation du Bien Étudié</h4>
+            <div class="id-row"><span class="id-label">Localisation :</span><span class="id-value">Secteur Nontron (10 min)</span></div>
+            <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">Ancienne grange rénovée en pierre (avec mezzanine)</span></div>
+            <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value">150 m² (Séjour cathédrale 40 m², 4 Chambres)</span></div>
+            <div class="id-row"><span class="id-label">Configuration :</span><span class="id-value">2 ch + SDB au RDC / 2 ch + SDE + grenier à l'étage</span></div>
+            <div class="id-row"><span class="id-label">Terrain :</span><span class="id-value">5 255 m² attenant avec vue dégagée</span></div>
+          </div>
+          <div class="identity-card">
+            <h4>Caractéristiques Énergétiques & Annexes</h4>
+            <div class="id-row"><span class="id-label">DPE / GES :</span><span class="id-value">Classe C (136 kWh) / Classe A (4 kg CO₂)</span></div>
+            <div class="id-row"><span class="id-label">Chauffage :</span><span class="id-value">Climatisation réversible (PAC) + Poêle à granulés</span></div>
+            <div class="id-row"><span class="id-label">Menuiseries :</span><span class="id-value">PVC/Alu double vitrage avec volets roulants</span></div>
+            <div class="id-row"><span class="id-label">Pièces d'eau :</span><span class="id-value">1 SDB (baignoire + douche), 1 SDE, 2 WC séparés</span></div>
+            <div class="id-row"><span class="id-label">Potentiel annexe :</span><span class="id-value">Grenier aménageable, grand cellier / buanderie</span></div>
+          </div>
+        </div>
+
+        <!-- 1. CADRE MÉTHODOLOGIQUE & GRILLE TARIFAIRE -->
+        <div class="section-title">1. Cadre Méthodologique, Sectorisation & Grille Tarifaire</div>
+        <p style="margin: 4px 0 10px 0; font-size: 10px; color: #4a5568;">
+          Pour établir une valeur vénale rigoureuse, notre étude applique la méthode d'évaluation par comparaison directe sur le bassin de chalandise réel (rayon de 15 km autour de Nontron). Ce périmètre élimine les bruits de marché extérieurs et traduit la capacité d'arbitrage financière réelle des acquéreurs.
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tranche de Marché</th>
+              <th>Fourchette Prix / m²</th>
+              <th>Profil des Biens & Caractéristiques Techniques</th>
+              <th>Positionnement du Bien Étudié</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fourchette Basse</strong></td>
+              <td>900 € à 1 250 € / m²</td>
+              <td>Maisons anciennes de bourg, passoires thermiques (F/G), gros travaux de réhabilitation ou absence de terrain.</td>
+              <td><span class="badge-pos">Surclassé (Rénovation / DPE C)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Moyenne</strong></td>
+              <td>1 300 € à 1 550 € / m²</td>
+              <td>Pavillons 1980-2000, corps de ferme partiels avec travaux de mise aux normes (assainissement, isolation), DPE D/E.</td>
+              <td><span class="badge-pos">Surclassé (Volumes / Prestations)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Haute</strong></td>
+              <td>1 600 € à 1 850 € / m²</td>
+              <td>Bâtisses de caractère rénovées sans travaux, DPE C/B, grand terrain calme (> 3 000 m²), confort thermique moderne.</td>
+              <td><span class="badge-target">POSITIONNEMENT RETENU (~1 660 €/m²)</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2. DIAGNOSTIC TECHNIQUE & VALEUR AJOUTÉE -->
+        <div class="section-title">2. Facteurs de Valorisation & Plafonds de Verre</div>
+        <div class="diag-grid">
+          <div class="diag-box atouts">
+            <h4>Points Forts & Éléments de Valorisation</h4>
+            <ul>
+              <li><strong>Charme du bâti & volumes :</strong> Grange en pierre avec séjour cathédrale de 40 m², mezzanine lumineuse et filet de détente.</li>
+              <li><strong>Excellente performance énergétique :</strong> Classé C/A grâce au poêle à granulés et à la climatisation réversible (rare sur de la pierre).</li>
+              <li><strong>Configuration familiale & plain-pied :</strong> 4 chambres au total dont 2 au rez-de-chaussée avec salle de bains complète.</li>
+              <li><strong>Environnement & extérieur :</strong> Plus de 5 000 m² de terrain avec vue dégagée sur la campagne, sans vis-à-vis gênant.</li>
+            </ul>
+          </div>
+          <div class="diag-box freins">
+            <h4>Contraintes de Marché & Plafonds de Verre</h4>
+            <ul>
+              <li><strong>Seuil psychologique des 250 000 € :</strong> Sur le bassin Nontronnais, dépasser 250 k€ élimine les acquéreurs locaux avec financement.</li>
+              <li><strong>Absence de dépendances séparées :</strong> À près de 300 000 €, la clientèle extérieure exige une seconde grange, atelier ou garage fermé.</li>
+              <li><strong>Absence de piscine / aménagements :</strong> Dans la tranche 270k€–300k€, les biens concurrents intègrent piscine ou étang.</li>
+              <li><strong>Risque d'usure en annonce :</strong> Tout affichage au-delà de 265 k€ FAI fige le bien sur le marché et freine les demandes de visite.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 1/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== PAGE 2 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <!-- 3. ÉTUDE COMPARATIVE DU STOCK ACTIF -->
+        <div class="section-title" style="margin-top: 0;">3. Analyse Comparative du Stock de Référence (Biens en Concurrence Directe)</div>
+        <p style="margin: 4px 0 10px 0; font-size: 10px; color: #4a5568;">
+          L'échantillon ci-dessous est extrait directement du stock actif des agences locales sur le secteur de Nontron (rayon 15 km). Ces biens constituent le choix alternatif direct proposé aux acheteurs au moment de l'évaluation :
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Réf. & Agence</th>
+              <th>Commune / Secteur</th>
+              <th>Surf. / Terrain</th>
+              <th>DPE</th>
+              <th>Prix FAI</th>
+              <th>Prix / m²</th>
+              <th>Justification Technique du Rapprochement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ebf8ff; font-weight: bold;">
+              <td>BIEN ÉTUDIÉ</td>
+              <td>Nontron (10 min)</td>
+              <td>150 m² / 5 255 m²</td>
+              <td>DPE C</td>
+              <td>249 000 €</td>
+              <td>1 660 €/m²</td>
+              <td>Base retenue : Grange rénovée 4 ch, séjour cathédrale, PAC + granulés.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3847 (BS)</span></td>
+              <td>Nontron (10 min)</td>
+              <td>145 m² / 3 200 m²</td>
+              <td>DPE D</td>
+              <td>258 000 €</td>
+              <td>1 779 €/m²</td>
+              <td><strong>Concurrence frontale :</strong> maison de caractère rénovée, prestations comparables, terrain inférieur.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3852 (BS)</span></td>
+              <td>Secteur Nontron</td>
+              <td>130 m² / 2 500 m²</td>
+              <td>DPE C</td>
+              <td>243 000 €</td>
+              <td>1 869 €/m²</td>
+              <td><strong>Repère cœur de marché :</strong> plain-pied récent sans travaux, valide le seuil des 240-250 k€.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 98-5626 (Human)</span></td>
+              <td>Champniers</td>
+              <td>138 m² / 4 000 m²</td>
+              <td>DPE D</td>
+              <td>241 960 €</td>
+              <td>1 753 €/m²</td>
+              <td><strong>Concurrence directe :</strong> maison familiale bon état, confirme le palier d'arbitrage immédiat.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3788 (BS)</span></td>
+              <td>Saint-Saud</td>
+              <td>125 m² / 2 800 m²</td>
+              <td>DPE E</td>
+              <td>195 000 €</td>
+              <td>1 560 €/m²</td>
+              <td><strong>Repère bas pierre :</strong> bâti pierre agréable mais DPE E et surface inférieure (justifie notre surcote).</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3836 (BS)</span></td>
+              <td>Nontron (10 min)</td>
+              <td>150 m² / 5 255 m²</td>
+              <td>DPE C</td>
+              <td>294 000 €</td>
+              <td>1 960 €/m²</td>
+              <td><strong>Seuil de blocage constaté :</strong> affichage excessif hors marché bloquant la transformation en visites.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 4. SYNTHÈSE D'ÉVALUATION & POSITIONNEMENT PRIX -->
+        <div class="section-title">4. Synthèse d'Évaluation & Détermination de la Valeur Vénale</div>
+        <p style="margin: 4px 0 8px 0; font-size: 10px; color: #4a5568;">
+          L'analyse croisée des caractéristiques du bien et des arbitrages acquéreurs permet d'établir les repères financiers suivants :
+        </p>
+
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-card-title">Fourchette Basse (Prix d'Attaque)</div>
+            <div class="price-card-val">220 000 € Net</div>
+            <div class="price-card-desc">233 000 € FAI — Déclenchement d'offre rapide en cas d'arbitrage urgent.</div>
+          </div>
+          <div class="price-card pivot">
+            <div class="price-card-title">Valeur Vénale Pivot Recommandée</div>
+            <div class="price-card-val">235 000 € Net</div>
+            <div class="price-card-desc"><strong>249 000 € FAI</strong> — Positionnement stratégique sous les 250 k€, maximisant la visibilité.</div>
+          </div>
+          <div class="price-card">
+            <div class="price-card-title">Plafond Maximal Négociable</div>
+            <div class="price-card-val">250 000 € Net</div>
+            <div class="price-card-desc">265 000 € FAI — Seuil limite avec marge de négociation ; au-delà, risque de blocage avéré.</div>
+          </div>
+        </div>
+
+        <!-- CONCLUSION DE L'AVIS DE VALEUR -->
+        <div class="conclusion-box">
+          <h4>Conclusion de l'Avis de Valeur Vénale</h4>
+          La juste valeur vénale recommandée s'établit à <strong>235 000 € Net Vendeur</strong>, soit un prix de présentation conseillé à <strong>249 000 € FAI</strong>. Ce calibrage sous la barre psychologique des 250 000 € valorise pleinement la qualité de la rénovation, le DPE C et les 5 255 m² de terrain, tout en garantissant un flux régulier de visites qualifiées sans subir la concurrence défavorable des propriétés avec piscine ou dépendances annexes.
+        </div>
+
+        <!-- CLAUSE DE RÉSERVE JURIDIQUE -->
+        <div class="legal-notice">
+          <strong>Avertissement juridique :</strong> Le présent document constitue un avis de valeur vénale établi par méthode comparative de marché sur la base des éléments techniques constatés et des données transactionnelles disponibles à la date d'émission. Il ne constitue pas une expertise immobilière judiciaire au sens des articles 232 et suivants du Code de procédure civile et ne saurait engager la responsabilité du professionnel en cas d'évolution ultérieure de la conjoncture économique ou du marché immobilier local.
+        </div>
+
+        <div style="margin-top: 8px; font-size: 9px; color: #718096; text-align: right; font-style: italic;">
+          Fait à Nontron, le 23 Octobre 2026 — Sylvain MATIGNON, Conseiller Indépendant en Immobilier.
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 2/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
