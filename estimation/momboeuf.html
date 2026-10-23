@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Avis de Valeur Vénale — Étude Comparative de Marché (ECM)</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      line-height: 1.45;
+      color: #1a202c;
+    }
+
+    .no-print-bar {
+      max-width: 180mm;
+      margin: 15px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a365d;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+    }
+    .btn-print {
+      background: #ffffff;
+      color: #1a365d;
+      border: none;
+      padding: 8px 18px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .btn-print:hover {
+      background: #edf2f7;
+    }
+
+    .sheet-page {
+      width: 100%;
+      max-width: 180mm;
+      min-height: 265mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 24px 28px;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media print {
+      body {
+        background: transparent !important;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .sheet-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 268mm !important;
+        height: 268mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-after: always;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+      .sheet-page:last-child {
+        page-break-after: auto;
+      }
+    }
+
+    .content-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    header {
+      border-bottom: 2px solid #1a365d;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-container img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+    .advisor-info {
+      border-left: 2px solid #e2e8f0;
+      padding-left: 14px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #4a5568;
+    }
+    .advisor-name {
+      font-size: 12.5px;
+      font-weight: bold;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .advisor-role {
+      color: #718096;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .advisor-contact {
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+    .header-doc-title {
+      text-align: right;
+    }
+    .header-doc-title h1 {
+      margin: 0;
+      font-size: 17px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-doc-title p {
+      margin: 3px 0 0 0;
+      font-size: 10px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .section-title {
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .identity-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .identity-card h4 {
+      margin: 0 0 10px 0;
+      font-size: 10.5px;
+      color: #1a365d;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 5px;
+    }
+    .id-row {
+      display: flex;
+      margin-bottom: 6px;
+      font-size: 10px;
+    }
+    .id-label {
+      width: 125px;
+      font-weight: 600;
+      color: #718096;
+      flex-shrink: 0;
+    }
+    .id-value {
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 10px;
+    }
+    table.data-table th {
+      background: #edf2f7;
+      color: #2d3748;
+      text-align: left;
+      padding: 8px 10px;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e0;
+      font-size: 9.5px;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      vertical-align: middle;
+      line-height: 1.35;
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-pos {
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: bold;
+      padding: 3px 7px;
+      border-radius: 4px;
+      border: 1px solid #bee3f8;
+      display: inline-block;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+    .badge-target {
+      background: #e6fffa;
+      color: #234e52;
+      font-weight: bold;
+      padding: 3px 7px;
+      border-radius: 4px;
+      border: 1px solid #b2f5ea;
+      display: inline-block;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+    .ref-link {
+      color: #2b6cb0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .diag-box {
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 10px;
+    }
+    .diag-box.atouts {
+      background: #f0fff4;
+      border: 1px solid #c6f6d5;
+    }
+    .diag-box.freins {
+      background: #fffaf0;
+      border: 1px solid #feebc8;
+    }
+    .diag-box h4 {
+      margin: 0 0 8px 0;
+      font-size: 10.5px;
+      text-transform: uppercase;
+    }
+    .diag-box.atouts h4 { color: #22543d; }
+    .diag-box.freins h4 { color: #744210; }
+    .diag-box ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+    .diag-box li {
+      margin-bottom: 7px;
+      line-height: 1.4;
+    }
+    .diag-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+      margin-bottom: 12px;
+    }
+    .price-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      padding: 14px 12px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .price-card.pivot {
+      border: 2px solid #2b6cb0;
+      background: #ebf8ff;
+    }
+    .price-card-title {
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 6px;
+    }
+    .price-card.pivot .price-card-title {
+      color: #2b6cb0;
+    }
+    .price-card-val {
+      font-size: 17px;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 5px;
+    }
+    .price-card.pivot .price-card-val {
+      color: #2b6cb0;
+      font-size: 19px;
+    }
+    .price-card-desc {
+      font-size: 9px;
+      color: #718096;
+      line-height: 1.35;
+    }
+
+    .conclusion-box {
+      background: #f8fafc;
+      border-left: 4px solid #1a365d;
+      padding: 14px 18px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+      font-size: 10px;
+      line-height: 1.5;
+      color: #2d3748;
+    }
+    .conclusion-box h4 {
+      margin: 0 0 6px 0;
+      font-size: 11px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .legal-notice {
+      margin-top: 12px;
+      padding: 8px 10px;
+      background: #edf2f7;
+      border-radius: 4px;
+      font-size: 8px;
+      line-height: 1.35;
+      color: #4a5568;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>💡 <strong>Avis de Valeur Vénale :</strong> Conforme aux exigences professionnelles et notariales — <code>Ctrl+P</code>.</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
+  </div>
+
+  <!-- ======================== PAGE 1 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <header>
+          <div class="header-left">
+            <div class="logo-container">
+              <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+            </div>
+            <div class="advisor-info">
+              <div class="advisor-name">Sylvain MATIGNON</div>
+              <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
+              <div class="advisor-contact">
+                📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+              </div>
+            </div>
+          </div>
+          <div class="header-doc-title">
+            <h1>Avis de Valeur Vénale</h1>
+            <p>Étude Comparative de Marché (Méthode par Références)</p>
+          </div>
+        </header>
+
+        <!-- IDENTIFICATION DU BIEN -->
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h4>Désignation du Bien Étudié</h4>
+            <div class="id-row"><span class="id-label">Propriétaires :</span><span class="id-value">M. et Mme MOMBOEUF</span></div>
+            <div class="id-row"><span class="id-label">Adresse :</span><span class="id-value">57 impasse des Palombes, 24300 Saint-Martin-le-Pin</span></div>
+            <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">Pavillon traditionnel sur sous-sol semi-enterré</span></div>
+            <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value">129,64 m² (6 pièces : Salon/Séjour, Cuisine, 3 Chambres)</span></div>
+            <div class="id-row"><span class="id-label">Terrain :</span><span class="id-value">6 573 m² (Parc clos et arboré, sans vis-à-vis)</span></div>
+          </div>
+          <div class="identity-card">
+            <h4>Caractéristiques Énergétiques & Annexes</h4>
+            <div class="id-row"><span class="id-label">DPE / GES :</span><span class="id-value">Classe C / D (Performant pour l'époque de bâti)</span></div>
+            <div class="id-row"><span class="id-label">Chauffage :</span><span class="id-value">Pompe à Chaleur Air/Air (partout) + Insert bois canalisable</span></div>
+            <div class="id-row"><span class="id-label">Assainissement :</span><span class="id-value">Fosse septique individuelle (à contrôler SPANC)</span></div>
+            <div class="id-row"><span class="id-label">Annexes :</span><span class="id-value">Sous-sol total avec Garage (~56 m²), Cave, Cabanon 20 m²</span></div>
+            <div class="id-row"><span class="id-label">État général :</span><span class="id-value">Rénové récent / Impeccable (0 travaux intérieurs)</span></div>
+          </div>
+        </div>
+
+        <!-- 1. CADRE MÉTHODOLOGIQUE & GRILLE TARIFAIRE -->
+        <div class="section-title">1. Cadre Méthodologique, Sectorisation & Grille Tarifaire</div>
+        <p style="margin: 4px 0 10px 0; font-size: 10px; color: #4a5568;">
+          Pour établir une valeur vénale rigoureuse et objective, notre étude applique la méthode d'évaluation par comparaison directe sur le bassin de chalandise de Nontron et sa périphérie (rayon de 15 à 20 km). Ce périmètre reflète le marché concurrentiel effectif dans lequel s'arbitrent les décisions d'achat et les valeurs de mutation.
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Tranche de Marché</th>
+              <th>Fourchette Prix / m²</th>
+              <th>Profil des Biens & Caractéristiques Techniques</th>
+              <th>Positionnement du Bien Étudié</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fourchette Basse</strong></td>
+              <td>800 € à 1 200 € / m²</td>
+              <td>Maisons anciennes de bourg, passoires énergétiques (F/G), gros travaux de réhabilitation ou absence de terrain privatif.</td>
+              <td><span class="badge-pos">Largement Surclassé</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Moyenne</strong></td>
+              <td>1 300 € à 1 650 € / m²</td>
+              <td>Pavillons traditionnels 1970-1995, bon état, sous-sol, DPE D/E, chauffage fioul ou convecteurs, terrains de 1 500 à 3 000 m².</td>
+              <td><span class="badge-target">POSITIONNEMENT RETENU (Cœur de cible)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Fourchette Haute</strong></td>
+              <td>1 750 € à 2 300 € / m²</td>
+              <td>Constructions récentes (post-2015) ou réhabilitations complètes contemporaines, DPE A/B, tout-à-l'égout et plain-pied strict.</td>
+              <td><span class="badge-pos">Plafond sectoriel</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 2. DIAGNOSTIC TECHNIQUE & VALEUR AJOUTÉE -->
+        <div class="section-title">2. Facteurs de Valorisation & Contraintes de Marché</div>
+        <div class="diag-grid">
+          <div class="diag-box atouts">
+            <h4>Points Forts & Éléments de Valorisation</h4>
+            <ul>
+              <li><strong>État intérieur irréprochable :</strong> Maison entièrement rénovée, propre, lumineuse et immédiatement habitable sans aucuns travaux.</li>
+              <li><strong>Confort thermique & énergétique :</strong> Système complet par Pompe à Chaleur réversible (climatisation) couplé à un insert bois avec distribution d'air chaud.</li>
+              <li><strong>Cadre & Environnement :</strong> Grand parc privatif de 6 573 m² assurant une tranquillité totale et l'absence de mitoyenneté directe.</li>
+              <li><strong>Volumes annexes :</strong> Sous-sol complet semi-enterré offrant un vaste garage (56 m²), atelier, cave et cabanon extérieur de 20 m².</li>
+            </ul>
+          </div>
+          <div class="diag-box freins">
+            <h4>Contraintes Techniques & Décotes Constatées</h4>
+            <ul>
+              <li><strong>Assainissement autonome :</strong> Fosse septique individuelle d'époque nécessitant une prévision budgétaire ou un recours technique SPANC.</li>
+              <li><strong>Typologie sur sous-sol :</strong> Plain-pied surélevé nécessitant quelques marches extérieures pour l'accès terrasse (par opposition au plain-pied de plain-terrasse).</li>
+              <li><strong>Seuil de marché pavillonnaire :</strong> Sur le bassin de Nontron, les pavillons des années 80-90 dépassent rarement la barre psychologique des 215 000 € net vendeur sans piscine ni dépendance en pierre.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 1/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== PAGE 2 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <!-- 3. ÉTUDE COMPARATIVE DU STOCK ACTIF -->
+        <div class="section-title" style="margin-top: 0;">3. Analyse Comparative du Stock de Référence (Biens Concurrents)</div>
+        <p style="margin: 4px 0 10px 0; font-size: 10px; color: #4a5568;">
+          L'échantillon ci-dessous rassemble les offres actives et biens témoins observés sur le secteur de Nontron et ses environs immédiats. Ils permettent d'étalonner la valeur vénale par analogie directe :
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Réf. & Agence</th>
+              <th>Commune</th>
+              <th>Surf. / Terrain</th>
+              <th>DPE</th>
+              <th>Prix FAI</th>
+              <th>Prix / m²</th>
+              <th>Justification & Éléments de Comparaison</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ebf8ff; font-weight: bold;">
+              <td>BIEN ÉTUDIÉ</td>
+              <td>St-Martin-le-Pin</td>
+              <td>129,6 m² / 6 573 m²</td>
+              <td>C / D</td>
+              <td>199 000 €</td>
+              <td>1 535 €/m²</td>
+              <td>Base : 3 ch, sous-sol complet, PAC + Insert, état impeccable, grand parc.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3590 (Brun Salat)</span></td>
+              <td>Nontron</td>
+              <td>150 m² / 2 998 m²</td>
+              <td>C (130)</td>
+              <td>169 000 €</td>
+              <td>1 126 €/m²</td>
+              <td><strong>Repère bas :</strong> Maison 1968 sur sous-sol, gros volumes mais finitions plus rustiques et rafraîchissement à prévoir.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3820 (Brun Salat)</span></td>
+              <td>Augignac</td>
+              <td>90 m² / 1 708 m²</td>
+              <td>C (86)</td>
+              <td>174 500 €</td>
+              <td>1 938 €/m²</td>
+              <td><strong>Concurrence directe :</strong> Pavillon 1998 très soigné, 3 chambres, garage attenant mais surface et terrain 4 fois plus petits.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3779 (Brun Salat)</span></td>
+              <td>Abjat-sur-Bandiat</td>
+              <td>150 m² / 2 538 m²</td>
+              <td>C (141)</td>
+              <td>180 000 €</td>
+              <td>1 200 €/m²</td>
+              <td><strong>Périgourdine sur sous-sol :</strong> Grand sous-sol et garage, bon état mais terrain moins grand et prestations thermiques plus classiques.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3827 (Brun Salat)</span></td>
+              <td>Nord Dordogne</td>
+              <td>105 m² / 2 100 m²</td>
+              <td>D</td>
+              <td>206 000 €</td>
+              <td>1 961 €/m²</td>
+              <td><strong>Plain-pied 2005 :</strong> 3 chambres, insert, garage attenant, bon état général sur terrain moyen.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3852 (Brun Salat)</span></td>
+              <td>St-Pardoux-la-Riv.</td>
+              <td>110 m² / 1 200 m²</td>
+              <td>B / C</td>
+              <td>243 000 €</td>
+              <td>2 209 €/m²</td>
+              <td><strong>Plafond haut rénové :</strong> Plain-pied entièrement refait à neuf, PAC au sol, tout-à-l'égout, commerces à pied.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 4. SYNTHÈSE D'ÉVALUATION & POSITIONNEMENT PRIX -->
+        <div class="section-title">4. Synthèse d'Évaluation & Détermination de la Valeur Vénale</div>
+        <p style="margin: 4px 0 8px 0; font-size: 10px; color: #4a5568;">
+          L'analyse croisée des caractéristiques techniques du bien et des valeurs réelles du marché local permet d'établir les repères financiers suivants :
+        </p>
+
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-card-title">Valeur Vénale Plancher</div>
+            <div class="price-card-val">175 000 €</div>
+            <div class="price-card-desc">Prix net vendeur en cas d'arbitrage rapide (30-60 jours) intégrant la reprise de la fosse septique.</div>
+          </div>
+          <div class="price-card pivot">
+            <div class="price-card-title">Valeur Vénale Recommandée</div>
+            <div class="price-card-val">188 000 €</div>
+            <div class="price-card-desc">Juste valeur vénale nette vendeur (soit ~199 000 € FAI conseillé en vitrine, cœur de marché idéal).</div>
+          </div>
+          <div class="price-card">
+            <div class="price-card-title">Plafond de Marché</div>
+            <div class="price-card-val">&gt; 205 000 €</div>
+            <div class="price-card-desc">Seuil haut net vendeur au-delà duquel la concurrence offre du plain-pied récent ou de la pierre avec piscine.</div>
+          </div>
+        </div>
+
+        <!-- CONCLUSION DE L'AVIS DE VALEUR -->
+        <div class="conclusion-box">
+          <h4>Conclusion de l'Avis de Valeur Vénale</h4>
+          La valeur vénale de référence retenue s'élève à <strong>188 000 € Net Vendeur</strong> (correspondant à une mise en marché conseillée à <strong>199 000 € FAI</strong>). Ce montant traduit fidèlement la qualité de l'aménagement intérieur, l'excellent confort apporté par la pompe à chaleur et l'insert, ainsi que la rareté d'une parcelle privative de plus de 6 500 m² au calme absolu sur la commune de <strong>Saint-Martin-le-Pin</strong>.
+        </div>
+
+        <!-- CLAUSE DE RÉSERVE JURIDIQUE -->
+        <div class="legal-notice">
+          <strong>Avertissement juridique :</strong> Le présent document constitue un avis de valeur vénale établi par méthode comparative de marché sur la base des éléments techniques constatés et des données transactionnelles disponibles à la date d'émission. Il ne constitue pas une expertise immobilière judiciaire au sens des articles 232 et suivants du Code de procédure civile et ne saurait engager la responsabilité du professionnel en cas d'évolution ultérieure de la conjoncture économique ou du marché immobilier local.
+        </div>
+
+        <div style="margin-top: 8px; font-size: 9px; color: #718096; text-align: right; font-style: italic;">
+          Fait à Saint-Martial-de-Valette, le 23 Octobre 2026 — Sylvain MATIGNON, Conseiller Immobilier.
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 2/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
