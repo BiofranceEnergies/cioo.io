@@ -384,55 +384,48 @@
             </div>
 
             <div class="contact-form-col anim delay-2">
-                <div class="booking-card">
-                    <!-- Option 1 : Agenda -->
-                    <!-- Option 1 : Agenda -->
-                    <div class="booking-option featured">
-                        <div class="booking-badge">Recommandé • Gratuit & Sans engagement</div>
-                        <div class="booking-header">
-                            <span class="booking-icon" style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: var(--primary);">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 1.5rem; height: 1.5rem;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                            </span>
-                            <div>
-                                
-        <h3>Échanger sur la valeur de votre bien</h3>
-        <p>Choisissez votre créneau. Je vous rappelle pour analyser ensemble les ventes récentes de votre secteur.</p>
-    </div>
-</div>
-                        <ul class="booking-perks">
-                            <li>Comparatif avec les biens concurrents en vente sur votre commune</li>
-                            <li>Prix réels des dernières ventes notariées autour de chez vous</li>
-                            <li>Échange 100% confidentiel, sans pression commerciale</li>
-                        </ul>
-                       <a href="https://calendar.app.google/SDoccxfh2G53jq3M7" target="_blank" rel="noopener" class="btn btn-primary full-width btn-glow">
-    Obtenir mon estimation conseil →
-</a>
-                    </div>
+                <div class="form-wrapper-card">
+                    <div class="form-badge">Gratuit & Sans engagement</div>
+                    <h3>Demander mon estimation confidentielle</h3>
+                    <p class="form-subtext">Recevez une étude comparative basée sur les ventes réelles de votre commune en Périgord Vert.</p>
+                    
+                    <form id="contact-form" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST" class="clean-form">
+                        <div class="form-group">
+                            <label for="address">Type de bien & Commune</label>
+                            <input type="text" id="address" name="address" placeholder="Ex: Maison de bourg à Nontron, Terrain à Thiviers..." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name">Votre Nom & Prénom</label>
+                            <input type="text" id="name" name="name" placeholder="Ex: Jean Dupont" required>
+                        </div>
 
-                    <div class="booking-separator">
-                        <span>ou si votre projet est urgent</span>
-                    </div>
-
-                    <!-- Option 2 : Appel direct -->
-                    <div class="booking-option direct-call">
-                        <div class="booking-header">
-                            <span class="booking-icon phone-svg">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M19.95 21C17.75 21 14.1 19.38 10.73 16.02C7.36 12.65 5.75 9 5.75 6.8C5.75 5.48 6.78 4 8.1 4H9.68C10.28 4 10.8 4.4 10.93 4.98L11.83 8.97C11.95 9.5 11.75 10.05 11.34 10.4L10.3 11.31C11.23 13.06 12.64 14.47 14.39 15.4L15.3 14.36C15.65 13.95 16.2 13.75 16.73 13.87L20.72 14.77C21.3 14.9 21.7 15.42 21.7 16.02V17.6C21.7 18.92 20.22 19.95 18.9 19.95C19.25 19.98 19.6 21 19.95 21Z" fill="currentColor"/>
-                                </svg>
-                            </span>
-                            <div>
-                                <h3>M'appeler directement</h3>
-                                <p>Disponible du lundi au samedi pour faire le point de vive voix.</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Téléphone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="votre@email.fr">
                             </div>
                         </div>
-                        <a href="tel:0648893480" class="btn btn-secondary full-width btn-call">
-                            06 48 89 34 80
-                        </a>
+
+                        <button type="submit" id="submit-button" class="btn btn-primary full-width btn-glow">
+                            Recevoir mon estimation conseil →
+                        </button>
+                    </form>
+
+                    <div class="booking-separator">
+                        <span>ou contact direct</span>
                     </div>
 
-                    <div class="booking-guarantee" style="color: #94a3b8; font-size: 0.8rem;">
-                        🔒 Estimation 100% confidentielle • Zéro engagement • Sans démarche commerciale agressive
+                    <a href="tel:0648893480" class="btn btn-secondary full-width btn-call" style="text-decoration: none;">
+                        📞 M'appeler : 06 48 89 34 80
+                    </a>
+
+                    <div class="booking-guarantee">
+                        🔒 Confidentialité totale • Zéro démarchage agressif • Réponse sous 24h
                     </div>
                 </div>
             </div>
