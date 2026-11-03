@@ -107,7 +107,7 @@ body::before {
 .delay-5 { transition-delay: 0.6s; }
 
 /* ==========================================================================
-   3. NAVIGATION & HERO SECTION (AVEC BADGE AGENT HUMAIN)
+   3. NAVIGATION & HERO SECTION
    ========================================================================== */
 .navbar {
     position: absolute;
@@ -125,7 +125,6 @@ body::before {
     display: block;
 }
 
-/* Bouton d'appel direct dans la Navbar : capsule blanche + texte rouge */
 .nav-phone-btn {
     display: inline-flex;
     align-items: center;
@@ -184,7 +183,7 @@ body::before {
     max-width: 700px;
 }
 
-/* Badges du Hero : Présence Agent + FNAIM */
+/* Badges du Hero */
 .hero-top-badges {
     display: flex;
     align-items: center;
@@ -200,7 +199,7 @@ body::before {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 0 18px 0 8px;
-    height: 52px;              /* Hauteur commune */
+    height: 52px;
     border-radius: 50px;
     backdrop-filter: blur(10px);
 }
@@ -210,7 +209,7 @@ body::before {
     height: 38px;
     min-width: 38px;
     border-radius: 50%;
-    overflow: hidden;                /* Coupe tout ce qui dépasse du cercle */
+    overflow: hidden;
     border: 2px solid var(--primary);
     display: flex;
     align-items: center;
@@ -254,7 +253,7 @@ body::before {
     background: rgba(237, 22, 81, 0.1);
     color: #ffffff;
     padding: 0 20px;
-    height: 52px;              /* Même hauteur exacte */
+    height: 52px;
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -264,7 +263,7 @@ body::before {
 }
 
 .badge-fnaim-icon {
-    height: 32px;              /* Agrandit le logo FNAIM pour une lisibilité optimale */
+    height: 32px;
     width: auto;
     display: block;
     margin-left: 4px;
@@ -453,7 +452,7 @@ h1 {
     width: 52px; 
     height: 52px; 
     min-width: 52px;
-    border-radius: 14px; /* Un arrondi moderne type icône d'application plutôt qu'un rond parfait */
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -505,7 +504,7 @@ h1 {
 }
 
 /* ==========================================================================
-   5. INTÉRIEUR DU SMARTPHONE
+   5. INTÉRIEUR DU SMARTPHONE & PREUVE VENDEUR
    ========================================================================== */
 .phone-screen-immo {
     background: #060b18;
@@ -559,25 +558,27 @@ h1 {
     justify-content: space-around;
 }
 
-.immo-price { font-size: 1.6rem; font-weight: 800; }
-.immo-hai { font-size: 0.75rem; color: var(--text-gray); }
-.immo-title { font-size: 1rem; font-weight: 700; line-height: 1.3; }
-.immo-location { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 5px; }
-
-.immo-specs-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 5px;
+.case-study-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #38bdf8;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
-.spec-item {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 6px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    text-align: center;
+.case-study-metric {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 6px;
+}
+
+.case-study-desc {
+    font-size: 0.78rem;
+    color: var(--text-gray);
+    line-height: 1.45;
 }
 
 .immo-marketing-card {
@@ -588,10 +589,30 @@ h1 {
     margin-top: 5px;
 }
 
-.immo-marketing-card h5 { font-size: 0.8rem; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
-.immo-marketing-card ul { list-style: none; }
-.immo-marketing-card li { font-size: 0.7rem; color: var(--text-gray); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
-.immo-marketing-card li::before { content: "•"; color: var(--primary); }
+.immo-marketing-card h5 { 
+    font-size: 0.8rem; 
+    color: var(--primary); 
+    font-weight: 700; 
+    margin-bottom: 6px; 
+}
+
+.immo-marketing-card ul { 
+    list-style: none; 
+}
+
+.immo-marketing-card li { 
+    font-size: 0.7rem; 
+    color: var(--text-gray); 
+    margin-bottom: 4px; 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+}
+
+.immo-marketing-card li::before { 
+    content: "•"; 
+    color: var(--primary); 
+}
 
 /* ==========================================================================
    6. SECTION AVIS & PREUVE SOCIALE
@@ -626,7 +647,7 @@ h1 {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Aligne le contenu naturellement vers le haut */
+    justify-content: flex-start;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -701,7 +722,7 @@ h1 {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    margin-top: auto; /* Pousse le badge en bas de la boîte sans étirer le texte */
+    margin-top: auto;
 }
 
 .review-badge-verified::before {
@@ -711,7 +732,7 @@ h1 {
 }
 
 /* ==========================================================================
-   7. CONTACT, FORMULAIRE & CARTE ANCRAGE LOCAL
+   7. CONTACT, FORMULAIRE & ANCRAGE LOCAL
    ========================================================================== */
 .contact-section {
     padding: 80px 20px 100px 20px;
@@ -758,7 +779,7 @@ h1 {
     color: var(--primary);
 }
 
-/* Carte d'ancrage local & humain à Nontron */
+/* Carte ancrage local Nontron */
 .local-anchor-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -784,7 +805,6 @@ h1 {
     display: block;
 }
 
-/* Logo officiel épuré directement sur la photo */
 .anchor-direct-logo {
     position: absolute;
     top: 18px;
@@ -842,7 +862,7 @@ a.strip-item:hover {
     text-decoration: underline;
 }
 
-/* Colonne Formulaire : calibrée pour rejoindre la hauteur de gauche */
+/* Colonne Formulaire */
 .contact-form-col {
     flex: 1;
     max-width: 550px;
@@ -856,7 +876,6 @@ a.strip-item:hover {
     justify-content: space-between;
 }
 
-/* Hub de Prise de Contact SaaS */
 .full-width {
     width: 100%;
     margin-top: 10px;
@@ -864,103 +883,81 @@ a.strip-item:hover {
     border: none;
 }
 
-.booking-card {
+/* Structure du Formulaire */
+.form-wrapper-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    height: 100%;
-    justify-content: center;
+    gap: 12px;
 }
 
-.booking-option {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 22px;
-    text-align: left;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.booking-option.featured {
-    border-color: rgba(237, 22, 81, 0.35);
-    background: linear-gradient(145deg, rgba(237, 22, 81, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-    box-shadow: 0 10px 30px rgba(237, 22, 81, 0.1);
-}
-
-.booking-option.featured:hover {
-    border-color: rgba(237, 22, 81, 0.6);
-    transform: translateY(-2px);
-}
-
-.booking-option.direct-call:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.booking-badge {
-    position: absolute;
-    top: -11px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary);
-    color: #fff;
-    font-size: 0.7rem;
+.form-wrapper-card h3 {
+    font-size: 1.35rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    white-space: nowrap;
-}
-
-.booking-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 12px;
-}
-
-.booking-icon {
-    font-size: 1.7rem;
-    line-height: 1;
-}
-
-.booking-header h3 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-white);
-    margin: 0 0 4px 0;
-}
-
-.booking-header p {
-    font-size: 0.85rem;
-    color: var(--text-gray);
+    color: #ffffff;
     margin: 0;
+}
+
+.form-subtext {
+    font-size: 0.88rem;
+    color: var(--text-gray);
+    margin: 0 0 10px 0;
     line-height: 1.4;
 }
 
-.booking-perks {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 16px 0;
+.form-badge {
+    align-self: flex-start;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 5px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
-.booking-perks li {
-    font-size: 0.82rem;
-    color: var(--text-gray);
+.form-row {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
-.booking-perks li::before {
-    content: "✓";
-    color: #10b981;
-    font-weight: bold;
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-gray);
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font-main);
+    transition: all 0.25s ease;
+    width: 100%;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #38bdf8;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
 }
 
 .btn-glow {
@@ -1006,6 +1003,17 @@ a.strip-item:hover {
     margin-top: 5px;
 }
 
+.booking-icon.phone-svg svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    color: var(--primary);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   8. PIED DE PAGE & LIEN YOUTUBE
+   ========================================================================== */
 .main-footer { 
     text-align: center; 
     padding: 40px 20px; 
@@ -1016,7 +1024,6 @@ a.strip-item:hover {
     z-index: 1; 
 }
 
-/* Lien YouTube dans le Footer */
 .footer-youtube-link {
     margin-bottom: 20px;
     display: flex;
@@ -1053,7 +1060,7 @@ a.strip-item:hover {
 }
 
 /* ==========================================================================
-   8. MODALES (MENTIONS LÉGALES & VIDÉO MÉTHODE)
+   9. MODALES (MENTIONS LÉGALES & VIDÉO MÉTHODE)
    ========================================================================== */
 .modal { 
     display: none; 
@@ -1112,7 +1119,6 @@ a.strip-item:hover {
     color: var(--primary); 
 }
 
-/* Modale Lecteur Vidéo */
 .video-modal-content {
     max-width: 800px;
     padding: 24px;
@@ -1123,7 +1129,7 @@ a.strip-item:hover {
 
 .video-container-ratio {
     position: relative;
-    padding-bottom: 56.25%; /* Ratio 16:9 */
+    padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
     border-radius: 12px;
@@ -1141,7 +1147,7 @@ a.strip-item:hover {
 }
 
 /* ==========================================================================
-   9. BANNIÈRE COOKIES RGPD
+   10. BANNIÈRE COOKIES RGPD
    ========================================================================== */
 .cookie-banner {
     position: fixed;
@@ -1177,7 +1183,7 @@ a.strip-item:hover {
 }
 
 /* ==========================================================================
-   10. RESPONSIVE / MEDIA QUERIES
+   11. RESPONSIVE / MEDIA QUERIES
    ========================================================================== */
 @media (max-width: 968px) {
     .navbar { 
@@ -1208,7 +1214,6 @@ a.strip-item:hover {
         max-width: 100%; 
     }
 
-    /* Centrage des badges sur smartphone */
     .hero-top-badges {
         justify-content: center;
         gap: 10px;
@@ -1270,23 +1275,17 @@ a.strip-item:hover {
         padding: 25px 20px; 
     }
     
-    .vs-divider { 
-        margin: 5px auto; 
-        font-size: 1.1rem; 
-    }
-    
     .flyer-item { 
         gap: 15px; 
     }
     
-   .icon-badge { 
-    width: 46px; 
-    height: 46px; 
-    min-width: 46px; 
-    border-radius: 12px;
-}
+    .icon-badge { 
+        width: 46px; 
+        height: 46px; 
+        min-width: 46px; 
+        border-radius: 12px;
+    }
 
-    /* Avis responsive */
     .reviews-section { 
         padding: 20px 15px 60px 15px; 
     }
@@ -1337,7 +1336,6 @@ a.strip-item:hover {
         height: 280px !important; 
     }
 
-    /* Logo sur photo ajusté pour smartphone */
     .anchor-direct-logo { 
         top: 12px; 
         right: 14px; 
@@ -1377,10 +1375,9 @@ a.strip-item:hover {
     }
 }
 
-.booking-icon.phone-svg svg {
-    width: 1.8rem;
-    height: 1.8rem;
-    color: var(--primary); /* Applique ton rose vibrant */
-    display: inline-block;
-    vertical-align: middle;
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
 }
