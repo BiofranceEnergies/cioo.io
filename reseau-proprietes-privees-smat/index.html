@@ -389,32 +389,27 @@
                     <h3>Demander mon estimation confidentielle</h3>
                     <p class="form-subtext">Recevez une étude comparative basée sur les ventes réelles de votre commune en Périgord Vert.</p>
                     
-                    <form id="contact-form" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST" class="clean-form">
-                        <div class="form-group">
-                            <label for="address">Type de bien & Commune</label>
-                            <input type="text" id="address" name="address" placeholder="Ex: Maison de bourg à Nontron, Terrain à Thiviers..." required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="name">Votre Nom & Prénom</label>
-                            <input type="text" id="name" name="name" placeholder="Ex: Jean Dupont" required>
-                        </div>
+                   <form id="contact-form" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST" class="clean-form">
+    <div class="form-group">
+        <label for="address">Commune du bien</label>
+        <input type="text" id="address" name="address" placeholder="Ex : Nontron, Thiviers, Brantôme..." required>
+    </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="phone">Téléphone</label>
-                                <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" placeholder="votre@email.fr">
-                            </div>
-                        </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="name">Votre nom / prénom</label>
+            <input type="text" id="name" name="name" placeholder="Ex : Jean Dupont" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00" required>
+        </div>
+    </div>
 
-                        <button type="submit" id="submit-button" class="btn btn-primary full-width btn-glow">
-                            Recevoir mon estimation conseil →
-                        </button>
-                    </form>
+    <button type="submit" id="submit-button" class="btn btn-primary full-width btn-glow">
+        Recevoir mon estimation conseil →
+    </button>
+</form>
 
                     <div class="booking-separator">
                         <span>ou contact direct</span>
