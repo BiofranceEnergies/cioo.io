@@ -1,177 +1,26 @@
 /**
- * OBSERVATOIRE IMMOBILIER & DVF — MOTEUR D'APPLICATION (app.js)
+ * OBSERVATOIRE IMMOBILIER & DVF — MOTEUR DYNAMIQUE TEMPS RÉEL (app.js)
+ * Connexion directe à Google Sheets via l'API Google Visualization
  * Sylvain MATIGNON | Propriétés-Privées — Bassin Nontronnais
  */
 
-// ==========================================================================
-// 1. DONNÉES SOURCES LOCALES & PARAMÈTRES
-// ==========================================================================
-
-const APP_CONFIG = {
-  sheetId: "17vApGLuH1dVbeOPjjUezAt4bn93h7WVqsz-2IFGcEeM",
-  seuilPlancherDvf: 400,
-  codesPostauxSecteur: ["24300", "24360", "24470"]
+const SHEET_CONFIG = {
+  // Votre Document ID officiel
+  docId: "17vApGLuH1dVbeOPjjUezAt4bn93h7WVqsz-2IFGcEeM",
+  // L'onglet source des biens filtrés
+  tabName: "Recherche par Prix"
 };
-
-// Portefeuille des biens du secteur Nontron (~15 km)
-const INITIAL_PROPERTIES = [
-  {
-    ref: "3631",
-    urlAgence: "https://www.brunsalat.com", // Ou l'URL exacte de la fiche
-    cp: "24300",
-    commune: "Saint-Martial-de-Valette",
-    type: "Maison",
-    prixFAI: 288750,
-    surface: 152,
-    prixM2: 1900,
-    chambres: 4,
-    dpe: "B",
-    ges: "A",
-    terrain: 11537,
-    agence: "Immobilière Brun Salat",
-    description: "Maison 1978 redécorée 2021 sur ss-sol aménageable, séjour 58m² cheminée, PAC + panneaux solaires, piscine 10x5, terrain 1,15 ha"
-  },
-  {
-    ref: "98-5589",
-    urlAgence: "https://www.human-immobilier.fr",
-    cp: "24300",
-    commune: "Nontron",
-    type: "Maison de plain-pied sans travaux",
-    prixFAI: 293216,
-    surface: 187,
-    prixM2: 1568,
-    chambres: 3,
-    dpe: "B",
-    ges: "A",
-    terrain: 11394,
-    agence: "HUMAN Immobilier Nontron",
-    description: "Proche centre-ville, maison de plain-pied, pièce de vie 51m² lumineuse, PAC, double garage, terrain de 11 394 m²"
-  },
-  {
-    ref: "BVI84708",
-    urlAgence: "https://beauxvillages.com",
-    cp: "24300",
-    commune: "Savignac-de-Nontron",
-    type: "Maison de caractère en pierre",
-    prixFAI: 297460,
-    surface: 183,
-    prixM2: 1625,
-    chambres: 5,
-    dpe: "B",
-    ges: "A",
-    terrain: 2125,
-    agence: "Beaux Villages Immobilier",
-    description: "Maison en pierre rénovée, cuisine ouverte 4 ch à l'étage, studio, PAC, dépendances, jardin 2 125 m²"
-  },
-  {
-    ref: "3750",
-    urlAgence: "https://www.brunsalat.com",
-    cp: "24300",
-    commune: "Saint-Front-la-Rivière",
-    type: "Grange rénovée",
-    prixFAI: 299000,
-    surface: 185,
-    prixM2: 1616,
-    chambres: 4,
-    dpe: "A",
-    ges: "A",
-    terrain: 1559,
-    agence: "Immobilière Brun Salat",
-    description: "Grange rénovée haut de gamme, séjour 57m², 4 ch, mezzanine, PAC au sol, alu DV, terrain 1 559 m²"
-  },
-  {
-    ref: "3811",
-    urlAgence: "https://www.brunsalat.com",
-    cp: "24300",
-    commune: "Savignac-de-Nontron",
-    type: "Maison de campagne",
-    prixFAI: 299250,
-    surface: 221,
-    prixM2: 1354,
-    chambres: 4,
-    dpe: "B",
-    ges: "B",
-    terrain: 2125,
-    agence: "Immobilière Brun Salat",
-    description: "Maison en pierre 1850 rénovée, séjour 70m², 4 ch dont suite, grange séparée, fournil, terrain 2 125 m²"
-  },
-  {
-    ref: "98-5456",
-    urlAgence: "https://www.human-immobilier.fr",
-    cp: "24360",
-    commune: "Varaignes",
-    type: "Maison en pierre rénovée",
-    prixFAI: 317700,
-    surface: 220,
-    prixM2: 1444,
-    chambres: 3,
-    dpe: "B",
-    ges: "A",
-    terrain: 6500,
-    agence: "HUMAN Immobilier Nontron",
-    description: "Au calme à la campagne, pierre rénovée, séjour 60m², suite RDC, PAC, 3 garages, terrain 6 500 m²"
-  },
-  {
-    ref: "2074784",
-    urlAgence: "https://www.iadfrance.fr",
-    cp: "24300",
-    commune: "Saint-Martin-le-Pin",
-    type: "Maison de plain-pied avec 2 studios",
-    prixFAI: 326000,
-    surface: 300,
-    prixM2: 1087,
-    chambres: 7,
-    dpe: "A",
-    ges: "A",
-    terrain: 7572,
-    agence: "iad France (Nicolas Brunet)",
-    description: "Résidence principale 180m² + 2 studios indépendants de 60m², séjour 39m², terrain 7 572 m²"
-  }
-];
-
-// Historique officiel des médianes DVF du secteur Nontron (~15 km)
-const DVF_SECTEUR_HISTORY = {
-  years: ["2021", "2022", "2023", "2024", "2025", "2026"],
-  medianes: [1293, 1302, 1445, 1357, 1319, 1276],
-  volumes: [569, 476, 414, 370, 353, 142]
-};
-
-// Historique DVF par commune repère
-const DVF_COMMUNES_HISTORY = {
-  "Saint-Martin-le-Pin": {
-    medianes: [1308, 1369, 1029, 1460, 1501, 993],
-    volumes: [16, 4, 10, 5, 6, 1]
-  },
-  "Nontron": {
-    medianes: [1150, 1220, 1285, 1240, 1215, 1180],
-    volumes: [85, 78, 62, 59, 54, 22]
-  },
-  "Saint-Martial-de-Valette": {
-    medianes: [1340, 1310, 1410, 1380, 1350, 1290],
-    volumes: [18, 14, 12, 11, 9, 4]
-  },
-  "Savignac-de-Nontron": {
-    medianes: [1280, 1315, 1390, 1340, 1310, 1250],
-    volumes: [12, 9, 8, 7, 6, 2]
-  },
-  "Saint-Front-la-Rivière": {
-    medianes: [1220, 1260, 1340, 1300, 1280, 1210],
-    volumes: [10, 8, 7, 6, 5, 2]
-  },
-  "Varaignes": {
-    medianes: [1250, 1290, 1370, 1320, 1295, 1240],
-    volumes: [9, 7, 6, 5, 4, 1]
-  }
-};
-
-// ==========================================================================
-// 2. ÉTAT DE L'APPLICATION
-// ==========================================================================
 
 let appState = {
-  properties: [...INITIAL_PROPERTIES],
-  filteredProperties: [...INITIAL_PROPERTIES],
-  selectedTargetRef: "2074784",
+  properties: [],
+  filteredProperties: [],
+  selectedTargetRef: null,
+  dvfCommuneData: {},
+  dvfSecteurData: {
+    years: ["2021", "2022", "2023", "2024", "2025", "2026"],
+    medianes: [1293, 1302, 1445, 1357, 1319, 1276],
+    volumes: [569, 476, 414, 370, 353, 142]
+  },
   filters: {
     budgetMax: 600000,
     chambresMin: 3,
@@ -179,28 +28,128 @@ let appState = {
   }
 };
 
-// ==========================================================================
-// 3. UTILITAIRES & FORMATAGE
-// ==========================================================================
-
+const DPE_ORDER = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
 const formatMoney = (val) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val);
 const formatNumber = (val) => new Intl.NumberFormat("fr-FR").format(val);
 const formatPercent = (val) => `${val > 0 ? "+" : ""}${val.toFixed(1).replace(".", ",")}%`;
 
-const DPE_ORDER = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
+// ==========================================================================
+// 1. CHARGEMENT DYNAMIQUE DEPUIS GOOGLE SHEETS
+// ==========================================================================
+async function loadDataFromGoogleSheets() {
+  const statusEl = document.querySelector(".status-pill");
+  if (statusEl) {
+    statusEl.textContent = "⏳ Chargement Google Sheets...";
+    statusEl.className = "status-pill";
+    statusEl.style.background = "#FEF3C7";
+    statusEl.style.color = "#D97706";
+  }
+
+  // URL de l'API Google Sheets gviz (lecture en direct de A8:AB50)
+  const query = encodeURIComponent("SELECT *");
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_CONFIG.docId}/gviz/tq?sheet=${encodeURIComponent(SHEET_CONFIG.tabName)}&range=A8:AB50&tq=${query}`;
+
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+    
+    // Google renvoie du JSON enveloppé dans google.visualization.Query.setResponse(...)
+    const jsonString = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
+    const json = JSON.parse(jsonString);
+
+    const rows = json.table.rows;
+    const properties = [];
+
+    rows.forEach((r) => {
+      const c = r.c;
+      // On vérifie que la ligne contient bien un prix FAI valide (colonne F, index 5)
+
+      if (!c || !c[1] || !c[5] || !c[5].v) return;
+
+      // Extraction propre des colonnes de votre onglet
+      const ref = String(c[1].v || "").trim();
+      const cp = String(c[2] ? c[2].v : "").trim();
+      const commune = String(c[3] ? c[3].v : "").trim();
+      const type = String(c[4] ? c[4].v : "Maison").trim();
+      const prixFAI = parseFloat(c[5].v) || 0;
+      const surface = parseFloat(c[9] ? c[9].v : 0) || 0;
+      const prixM2 = parseFloat(c[10] ? c[10].v : 0) || (surface > 0 ? Math.round(prixFAI / surface) : 0);
+      const terrain = parseFloat(c[12] ? c[12].v : 0) || 0;
+      const chambres = parseInt(c[13] ? c[13].v : 0, 10) || 0;
+      
+      // Extraction lettre DPE (ex: "B (107)" -> "B")
+      const dpeRaw = String(c[16] ? c[16].v : "D").trim().toUpperCase();
+      const dpeMatch = dpeRaw.match(/^[A-G]/);
+      const dpe = dpeMatch ? dpeMatch[0] : "D";
+
+      const agence = String(c[22] ? c[22].v : "").trim();
+      const description = String(c[23] ? c[23].v : "").trim();
+
+      // RÉCUPÉRATION DU LIEN DE LA COLONNE A (Lien agence)
+      // Si la cellule est un lien hypertexte Sheets, Google stocke l'URL dans c[0].formattedValue ou une propriété link
+      let urlAgence = "";
+      if (c[0]) {
+        // En format gviz, si c'est un lien, c[0].v ou c[0].f peut contenir l'URL
+        if (typeof c[0].v === "string" && c[0].v.startsWith("http")) {
+          urlAgence = c[0].v;
+        } else if (c[0].f && c[0].f.includes("http")) {
+          const match = c[0].f.match(/https?:\/\/[^\s"']+/);
+          if (match) urlAgence = match[0];
+        }
+      }
+
+      properties.push({
+        ref,
+        cp,
+        commune,
+        type,
+        prixFAI,
+        surface,
+        prixM2,
+        terrain,
+        chambres,
+        dpe,
+        agence,
+        description,
+        urlAgence
+      });
+    });
+
+    if (properties.length > 0) {
+      appState.properties = properties;
+      if (!appState.selectedTargetRef) {
+        appState.selectedTargetRef = properties[properties.length - 1].ref; // Bien sélectionné par défaut
+      }
+
+      if (statusEl) {
+        statusEl.textContent = `● Connecté (${properties.length} biens en direct)`;
+        statusEl.className = "status-pill live";
+        statusEl.style.background = "";
+        statusEl.style.color = "";
+      }
+
+      populateTargetSelect();
+      applyFilters();
+    }
+  } catch (err) {
+    console.error("Erreur de connexion Sheets :", err);
+    if (statusEl) {
+      statusEl.textContent = "⚠️ Mode Hors-ligne";
+      statusEl.className = "status-pill";
+      statusEl.style.background = "#FEE2E2";
+      statusEl.style.color = "#DC2626";
+    }
+  }
+}
 
 // ==========================================================================
-// 4. RENDU & LOGIQUE DE L'INTERFACE
+// 2. LOGIQUE D'AFFICHAGE & FILTRES
 // ==========================================================================
-
-// Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
-  populateTargetSelect();
-  applyFilters();
+  loadDataFromGoogleSheets(); // Chargement direct au lancement
 });
 
-// Configuration des écouteurs d'événements
 function setupEventListeners() {
   const rangeBudget = document.getElementById("filterBudgetMax");
   const selectChambres = document.getElementById("filterChambres");
@@ -219,11 +168,9 @@ function setupEventListeners() {
     applyFilters();
   });
 
-  // Boutons de sélection rapide du DPE
-  const dpePills = document.querySelectorAll(".dpe-btn");
-  dpePills.forEach((btn) => {
+  document.querySelectorAll(".dpe-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      dpePills.forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".dpe-btn").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       appState.filters.dpeMax = btn.dataset.dpe;
       applyFilters();
@@ -238,16 +185,11 @@ function setupEventListeners() {
 
   if (btnRefresh) {
     btnRefresh.addEventListener("click", () => {
-      btnRefresh.textContent = "Actualisation...";
-      setTimeout(() => {
-        applyFilters();
-        btnRefresh.textContent = "Actualiser";
-      }, 350);
+      loadDataFromGoogleSheets();
     });
   }
 }
 
-// Remplissage du menu déroulant de sélection du bien cible
 function populateTargetSelect() {
   const select = document.getElementById("selectTargetProperty");
   select.innerHTML = "";
@@ -261,7 +203,6 @@ function populateTargetSelect() {
   });
 }
 
-// Filtrage dynamique du portefeuille
 function applyFilters() {
   const { budgetMax, chambresMin, dpeMax } = appState.filters;
 
@@ -272,7 +213,6 @@ function applyFilters() {
     return true;
   });
 
-  // Tri par prix croissant
   appState.filteredProperties.sort((a, b) => a.prixFAI - b.prixFAI);
 
   updateKPIs();
@@ -280,7 +220,6 @@ function applyFilters() {
   updateTargetAnalysis();
 }
 
-// Mise à jour des cartes métriques (KPIs)
 function updateKPIs() {
   const items = appState.filteredProperties;
   const count = items.length;
@@ -301,7 +240,6 @@ function updateKPIs() {
   document.getElementById("kpiAvgM2").textContent = `${formatNumber(Math.round(sumM2 / count))} €/m²`;
 }
 
-// Rendu des cartes de biens en vente
 function renderPropertiesGrid() {
   const grid = document.getElementById("propertiesGrid");
   grid.innerHTML = "";
@@ -309,8 +247,7 @@ function renderPropertiesGrid() {
   if (appState.filteredProperties.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #64748B;">
-        <p style="font-size: 1.125rem; font-weight: 600;">Aucun bien ne correspond exactement à vos critères.</p>
-        <p style="font-size: 0.875rem; margin-top: 0.25rem;">Essayez d'augmenter le budget max ou d'élargir le DPE.</p>
+        <p style="font-size: 1.125rem; font-weight: 600;">Aucun bien ne correspond aux filtres.</p>
       </div>
     `;
     return;
@@ -320,8 +257,6 @@ function renderPropertiesGrid() {
     const isSelected = p.ref === appState.selectedTargetRef;
     const card = document.createElement("div");
     card.className = `property-card ${isSelected ? "selected" : ""}`;
-    
-    // Clic sur la carte = Sélectionne le bien pour l'analyse DVF
     card.onclick = () => {
       appState.selectedTargetRef = p.ref;
       document.getElementById("selectTargetProperty").value = p.ref;
@@ -329,22 +264,25 @@ function renderPropertiesGrid() {
       renderPropertiesGrid();
     };
 
-    // Lien agence externe
-    const linkHtml = p.urlAgence 
-      ? `<a href="${p.urlAgence}" target="_blank" rel="noopener noreferrer" class="ref-link" onclick="event.stopPropagation();" title="Ouvrir la fiche agence">RÉF. ${p.ref} ↗</a>`
-      : `<span class="prop-ref">RÉF. ${p.ref}</span>`;
+    // Lien agence dynamique direct
+    const linkAgenceHtml = p.urlAgence 
+      ? `<a href="${p.urlAgence}" target="_blank" rel="noopener noreferrer" class="ref-link" onclick="event.stopPropagation();">🌐 Voir l'annonce ↗</a>` 
+      : "";
 
     card.innerHTML = `
       <div class="card-top">
         <div>
-          ${linkHtml}
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+            <span class="prop-ref">RÉF. ${p.ref}</span>
+            ${linkAgenceHtml}
+          </div>
           <h3 class="prop-type">${p.type}</h3>
           <p class="prop-city">${p.commune} (${p.cp})</p>
         </div>
         <span class="badge-dpe dpe-${p.dpe}">DPE ${p.dpe}</span>
       </div>
 
-      <p style="font-size: 0.8125rem; color: #475569; line-height: 1.4;">${p.description}</p>
+      <p style="font-size: 0.8125rem; color: #475569; line-height: 1.4;">${p.description || "Aucune remarque spécifique."}</p>
 
       <div class="prop-features">
         <span>📐 <strong>${p.surface} m²</strong></span>
@@ -362,21 +300,15 @@ function renderPropertiesGrid() {
   });
 }
 
-// ==========================================================================
-// 5. CALCULS & TABLEAU DVF (COMMUNE vs SECTEUR)
-// ==========================================================================
-
 function updateTargetAnalysis() {
   const target = appState.properties.find((p) => p.ref === appState.selectedTargetRef) || appState.properties[0];
   if (!target) return;
 
-  // Mise à jour de la fiche du bien sélectionné
   document.getElementById("targetCommune").textContent = target.commune;
   document.getElementById("targetSurface").textContent = `${target.surface} m²`;
   document.getElementById("targetPrice").textContent = formatMoney(target.prixFAI);
   document.getElementById("targetPriceM2").textContent = `${formatNumber(target.prixM2)} €/m²`;
 
-  // Concurrence en vente sur la même commune
   const concurrenceCommune = appState.properties.filter((p) => p.commune === target.commune);
   const avgM2Offres = Math.round(concurrenceCommune.reduce((acc, c) => acc + c.prixM2, 0) / concurrenceCommune.length);
   const ecartOffres = ((target.prixM2 - avgM2Offres) / avgM2Offres) * 100;
@@ -385,36 +317,20 @@ function updateTargetAnalysis() {
   badgeOffres.textContent = formatPercent(ecartOffres);
   badgeOffres.className = `badge ${ecartOffres <= 0 ? "badge-success" : "badge-warning"}`;
 
-  // Récupération de l'historique DVF de la commune
-  const comHistory = DVF_COMMUNES_HISTORY[target.commune] || {
-    medianes: [1250, 1280, 1350, 1300, 1280, 1200],
-    volumes: [8, 6, 5, 4, 3, 1]
-  };
-
-  const years = DVF_SECTEUR_HISTORY.years;
-
+  // Historique DVF Secteur Nontron (~15 km)
+  const years = appState.dvfSecteurData.years;
   years.forEach((yr, idx) => {
-    const medCom = comHistory.medianes[idx];
-    const medSec = DVF_SECTEUR_HISTORY.medianes[idx];
-    const volCom = comHistory.volumes[idx];
-    const volSec = DVF_SECTEUR_HISTORY.volumes[idx];
+    const medSec = appState.dvfSecteurData.medianes[idx];
+    const volSec = appState.dvfSecteurData.volumes[idx];
 
-    // Médianes
-    const elMedCom = document.getElementById(`medCom${yr}`);
     const elMedSec = document.getElementById(`medSec${yr}`);
-    if (elMedCom) elMedCom.textContent = `${formatNumber(medCom)} €`;
     if (elMedSec) elMedSec.textContent = `${formatNumber(medSec)} €`;
 
-    // Écart Bien vs Médiane Secteur
     const ecartSec = ((target.prixM2 - medSec) / medSec) * 100;
     const elEcart = document.getElementById(`ecart${yr}`);
     if (elEcart) {
       elEcart.textContent = formatPercent(ecartSec);
       elEcart.style.color = ecartSec <= 0 ? "var(--success)" : "var(--danger)";
     }
-
-    // Volumes
-    const elVol = document.getElementById(`vol${yr}`);
-    if (elVol) elVol.textContent = `${volCom} / ${volSec}`;
   });
 }
