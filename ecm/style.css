@@ -167,7 +167,7 @@ body {
 /* 5. Section Contrôles & KPIs */
 .controls-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.2fr 2fr;
+  grid-template-columns: 1.3fr 1fr 1.1fr 2fr;
   gap: 1.5rem;
   align-items: center;
 }
@@ -182,6 +182,48 @@ body {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-muted);
+}
+
+/* Double curseur Budget Min / Max */
+.budget-range-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.budget-labels-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.budget-values-display {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.dual-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.slider-subfield {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subfield-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  width: 32px;
+}
+
+.slider-subfield input[type="range"] {
+  flex: 1;
 }
 
 .form-select {
@@ -533,6 +575,36 @@ input[type="range"] {
   border-radius: var(--radius-full);
 }
 
+.badge-warning {
+  background: var(--warning-bg);
+  color: var(--warning);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+/* Liens Agence et Drive */
+.ref-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  background: rgba(14, 165, 233, 0.08);
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.ref-link:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
 /* Footer */
 .app-footer {
   text-align: center;
@@ -542,7 +614,7 @@ input[type="range"] {
   border-top: 1px solid var(--border-color);
 }
 
-/* Responsive Tablette & Mobile */
+/* Responsive */
 @media (max-width: 1024px) {
   .controls-grid {
     grid-template-columns: 1fr 1fr;
@@ -566,65 +638,4 @@ input[type="range"] {
   .target-summary {
     grid-template-columns: 1fr 1fr;
   }
-}
-/* Style du lien Référence Agence */
-.ref-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-decoration: none;
-  background: rgba(14, 165, 233, 0.08);
-  padding: 0.2rem 0.45rem;
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-}
-
-.ref-link:hover {
-  background: var(--accent);
-  color: #FFFFFF;
-  text-decoration: none;
-}
-/* Double curseur Budget Min / Max */
-.budget-range-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.budget-labels-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.budget-values-display {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.dual-sliders {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.slider-subfield {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.subfield-lbl {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  width: 32px;
-}
-
-.slider-subfield input[type="range"] {
-  flex: 1;
 }
