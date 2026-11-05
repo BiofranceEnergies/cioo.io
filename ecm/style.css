@@ -567,3 +567,23 @@ input[type="range"] {
     grid-template-columns: 1fr 1fr;
   }
 }
+/* Style du lien Référence Agence */
+.ref-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  background: rgba(14, 165, 233, 0.08);
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.ref-link:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+  text-decoration: none;
+}
