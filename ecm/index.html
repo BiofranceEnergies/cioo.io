@@ -41,10 +41,24 @@
       <div class="controls-grid">
         
         <!-- Filtre Budget -->
-        <div class="control-item">
-          <label for="filterBudgetMax">Budget Max FAI : <span id="budgetDisplay">Tous</span></label>
-          <input type="range" id="filterBudgetMax" min="50000" max="600000" step="10000" value="600000">
-        </div>
+       <!-- Filtre Fourchette Budget (Min & Max) -->
+<div class="control-item budget-range-item">
+  <div class="budget-labels-bar">
+    <label>Fourchette Budget FAI :</label>
+    <span class="budget-values-display" id="budgetDisplay">0 € – Tous</span>
+  </div>
+  
+  <div class="dual-sliders">
+    <div class="slider-subfield">
+      <span class="subfield-lbl">Min :</span>
+      <input type="range" id="filterBudgetMin" min="0" max="600000" step="10000" value="0">
+    </div>
+    <div class="slider-subfield">
+      <span class="subfield-lbl">Max :</span>
+      <input type="range" id="filterBudgetMax" min="50000" max="600000" step="10000" value="600000">
+    </div>
+  </div>
+</div>
 
         <!-- Filtre Chambres -->
         <div class="control-item">
