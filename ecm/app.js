@@ -1,12 +1,12 @@
 /**
- * OBSERVATOIRE IMMOBILIER & DVF — MOTEUR DYNAMIQUE APPS SCRIPT (app.js)
+ * OBSERVATOIRE IMMOBILIER & DVF — MOTEUR DYNAMIQUE (app.js)
  * Sylvain MATIGNON | Propriétés-Privées — Bassin Nontronnais
  */
 
 // ==========================================================================
-// 1. COLLER VOTRE URL GOOGLE APPS SCRIPT CI-DESSOUS
+// 1. VOTRE URL DE DÉPLOIEMENT GOOGLE APPS SCRIPT
 // ==========================================================================
-const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbz3-6_6lZvLyKcnYC5P6NiB_qyP9EOIjMguEahlGvk8ZtxMVr7ckXlilD0Mgr468fYW/exec";
+const SCRIPT_API_URL = "VOTRE_URL_GOOGLE_APPS_SCRIPT_ICI";
 
 let appState = {
   properties: [],
@@ -17,7 +17,34 @@ let appState = {
     medianes: [1293, 1302, 1445, 1357, 1319, 1276],
     volumes: [569, 476, 414, 370, 353, 142]
   },
+  dvfCommunesHistory: {
+    "Saint-Martin-le-Pin": {
+      medianes: [1308, 1369, 1029, 1460, 1501, 993],
+      volumes: [16, 4, 10, 5, 6, 1]
+    },
+    "Nontron": {
+      medianes: [1150, 1220, 1285, 1240, 1215, 1180],
+      volumes: [85, 78, 62, 59, 54, 22]
+    },
+    "Saint-Martial-de-Valette": {
+      medianes: [1340, 1310, 1410, 1380, 1350, 1290],
+      volumes: [18, 14, 12, 11, 9, 4]
+    },
+    "Savignac-de-Nontron": {
+      medianes: [1280, 1315, 1390, 1340, 1310, 1250],
+      volumes: [12, 9, 8, 7, 6, 2]
+    },
+    "Saint-Front-la-Rivière": {
+      medianes: [1220, 1260, 1340, 1300, 1280, 1210],
+      volumes: [10, 8, 7, 6, 5, 2]
+    },
+    "Varaignes": {
+      medianes: [1250, 1290, 1370, 1320, 1295, 1240],
+      volumes: [9, 7, 6, 5, 4, 1]
+    }
+  },
   filters: {
+    budgetMin: 0,
     budgetMax: 600000,
     chambresMin: 3,
     dpeMax: "B"
@@ -81,17 +108,35 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function setupEventListeners() {
-  const rangeBudget = document.getElementById("filterBudgetMax");
+  const rangeBudgetMin = document.getElementById("filterBudgetMin");
+  const rangeBudgetMax = document.getElementById("filterBudgetMax");
+  const budgetDisplay = document.getElementById("budgetDisplay");
   const selectChambres = document.getElementById("filterChambres");
   const selectTarget = document.getElementById("selectTargetProperty");
   const btnRefresh = document.getElementById("btnRefresh");
 
-  rangeBudget.addEventListener("input", (e) => {
-    const val = parseInt(e.target.value, 10);
-    appState.filters.budgetMax = val;
-    document.getElementById("budgetDisplay").textContent = val >= 600000 ? "Tous" : formatMoney(val);
+  function updateBudgetLabels() {
+    let minVal = parseInt(rangeBudgetMin.value, 10);
+    let maxVal = parseInt(rangeBudgetMax.value, 10);
+
+    // Sécurité : le Min ne peut pas dépasser le Max
+    if (minVal > maxVal) {
+      minVal = maxVal;
+      rangeBudgetMin.value = minVal;
+    }
+
+    appState.filters.budgetMin = minVal;
+    appState.filters.budgetMax = maxVal;
+
+    const minText = minVal === 0 ? "0 €" : formatMoney(minVal);
+    const maxText = maxVal >= 600000 ? "Sans max" : formatMoney(maxVal);
+
+    budgetDisplay.textContent = `${minText} – ${maxText}`;
     applyFilters();
-  });
+  }
+
+  rangeBudgetMin.addEventListener("input", updateBudgetLabels);
+  rangeBudgetMax.addEventListener("input", updateBudgetLabels);
 
   selectChambres.addEventListener("change", (e) => {
     appState.filters.chambresMin = parseInt(e.target.value, 10);
@@ -134,10 +179,14 @@ function populateTargetSelect() {
 }
 
 function applyFilters() {
-  const { budgetMax, chambresMin, dpeMax } = appState.filters;
+  const { budgetMin, budgetMax, chambresMin, dpeMax } = appState.filters;
 
   appState.filteredProperties = appState.properties.filter((p) => {
-    if (p.prixFAI > budgetMax) return false;
+    // Filtre Fourchette Budget Min et Max
+    if (p.prixFAI < budgetMin) return false;
+    if (budgetMax < 600000 && p.prixFAI > budgetMax) return false;
+
+    // Filtres Chambres et DPE
     if (chambresMin > 0 && p.chambres < chambresMin) return false;
     if (dpeMax !== "ALL" && DPE_ORDER[p.dpe] > DPE_ORDER[dpeMax]) return false;
     return true;
@@ -194,7 +243,7 @@ function renderPropertiesGrid() {
       renderPropertiesGrid();
     };
 
-    // Liens Agence et Fiche Drive cliquables
+    // Liens Agence et Drive
     const linkAgenceHtml = p.urlAgence 
       ? `<a href="${p.urlAgence}" target="_blank" rel="noopener noreferrer" class="ref-link" onclick="event.stopPropagation();" title="Voir l'annonce sur le site de l'agence">🌐 Annonce Agence ↗</a>` 
       : "";
@@ -252,18 +301,35 @@ function updateTargetAnalysis() {
   badgeOffres.textContent = formatPercent(ecartOffres);
   badgeOffres.className = `badge ${ecartOffres <= 0 ? "badge-success" : "badge-warning"}`;
 
-  // Historique DVF Secteur Nontron
+  // Récupération de l'historique DVF communal
+  const comHistory = appState.dvfCommunesHistory[target.commune] || {
+    medianes: [1250, 1280, 1350, 1300, 1280, 1200],
+    volumes: [8, 6, 5, 4, 3, 1]
+  };
+
   const years = appState.dvfSecteurData.years;
   years.forEach((yr, idx) => {
+    const medCom = comHistory.medianes[idx];
     const medSec = appState.dvfSecteurData.medianes[idx];
+    const volCom = comHistory.volumes[idx];
+    const volSec = appState.dvfSecteurData.volumes[idx];
+
+    // Médianes
+    const elMedCom = document.getElementById(`medCom${yr}`);
     const elMedSec = document.getElementById(`medSec${yr}`);
+    if (elMedCom) elMedCom.textContent = `${formatNumber(medCom)} €`;
     if (elMedSec) elMedSec.textContent = `${formatNumber(medSec)} €`;
 
+    // Écart Bien vs Médiane Secteur
     const ecartSec = ((target.prixM2 - medSec) / medSec) * 100;
     const elEcart = document.getElementById(`ecart${yr}`);
     if (elEcart) {
       elEcart.textContent = formatPercent(ecartSec);
       elEcart.style.color = ecartSec <= 0 ? "var(--success)" : "var(--danger)";
     }
+
+    // Volumes
+    const elVol = document.getElementById(`vol${yr}`);
+    if (elVol) elVol.textContent = `${volCom} / ${volSec}`;
   });
 }
