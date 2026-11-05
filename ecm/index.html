@@ -1,1 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Observatoire Immobilier & DVF — Sylvain MATIGNON | Propriétés-Privées</title>
+  <meta name="description" content="Outil d'analyse de marché immobilier, comparaison des offres en vente et historique des prix notariés DVF sur le bassin de Nontron.">
+  
+  <!-- Typographie Inter SaaS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Feuilles de style -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- Navigation / Header SaaS -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-badge">PRO</div>
+        <div>
+          <h1 class="brand-title">Observatoire Immo & DVF</h1>
+          <p class="brand-subtitle">Sylvain MATIGNON • Propriétés-Privées • Bassin Nontronnais</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="status-pill live">● Base connectée</span>
+        <button id="btnRefresh" class="btn btn-secondary">Actualiser</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenu Principal -->
+  <main class="app-main">
+
+    <!-- Section 1 : Filtres & KPIs Synthèse -->
+    <section class="dashboard-controls card">
+      <div class="controls-grid">
+        
+        <!-- Filtre Budget -->
+        <div class="control-item">
+          <label for="filterBudgetMax">Budget Max FAI : <span id="budgetDisplay">Tous</span></label>
+          <input type="range" id="filterBudgetMax" min="50000" max="600000" step="10000" value="600000">
+        </div>
+
+        <!-- Filtre Chambres -->
+        <div class="control-item">
+          <label for="filterChambres">Chambres minimum :</label>
+          <select id="filterChambres" class="form-select">
+            <option value="0">Toutes</option>
+            <option value="2">2+ chambres</option>
+            <option value="3" selected>3+ chambres</option>
+            <option value="4">4+ chambres</option>
+            <option value="5">5+ chambres</option>
+          </select>
+        </div>
+
+        <!-- Filtre DPE -->
+        <div class="control-item">
+          <label>DPE Max :</label>
+          <div class="dpe-pills" id="dpePills">
+            <button class="dpe-btn" data-dpe="A">A</button>
+            <button class="dpe-btn active" data-dpe="B">B</button>
+            <button class="dpe-btn" data-dpe="C">C</button>
+            <button class="dpe-btn" data-dpe="D">D</button>
+            <button class="dpe-btn" data-dpe="E">E</button>
+            <button class="dpe-btn" data-dpe="ALL">Tous</button>
+          </div>
+        </div>
+
+        <!-- KPIs instantanés -->
+        <div class="kpi-group">
+          <div class="kpi-card">
+            <span class="kpi-label">Biens correspondants</span>
+            <span class="kpi-value" id="kpiCount">7</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Prix FAI moyen</span>
+            <span class="kpi-value" id="kpiAvgPrice">303 054 €</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Prix/m² moyen</span>
+            <span class="kpi-value highlight" id="kpiAvgM2">1 513 €/m²</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2 : Panneau Comparatif DVF (Commune vs Secteur 15 km) -->
+    <section class="dvf-analysis card">
+      <div class="card-header">
+        <div>
+          <h2 class="card-title">Analyse Comparative & Historique Notarié (DVF)</h2>
+          <p class="card-subtitle">Bien sélectionné vs Médianes réelles actées (2021 à 2026)</p>
+        </div>
+        <div class="target-select-wrapper">
+          <label for="selectTargetProperty">Bien ciblé :</label>
+          <select id="selectTargetProperty" class="form-select"></select>
+        </div>
+      </div>
+
+      <!-- Fiche synthétique du bien ciblé -->
+      <div class="target-summary" id="targetSummary">
+        <div class="summary-metric">
+          <span class="label">Commune</span>
+          <span class="value" id="targetCommune">Saint-Martin-le-Pin</span>
+        </div>
+        <div class="summary-metric">
+          <span class="label">Surface</span>
+          <span class="value" id="targetSurface">300 m²</span>
+        </div>
+        <div class="summary-metric">
+          <span class="label">Prix FAI</span>
+          <span class="value" id="targetPrice">326 000 €</span>
+        </div>
+        <div class="summary-metric">
+          <span class="label">Prix/m² FAI</span>
+          <span class="value highlight-target" id="targetPriceM2">1 087 €/m²</span>
+        </div>
+        <div class="summary-metric">
+          <span class="label">Position vs Concurrence</span>
+          <span class="badge badge-success" id="targetVsOffres">-22.0%</span>
+        </div>
+      </div>
+
+      <!-- Grille DVF Annuelle (Médianes) -->
+      <div class="table-responsive">
+        <table class="dvf-table">
+          <thead>
+            <tr>
+              <th class="th-indicator">Indicateurs DVF</th>
+              <th>2021</th>
+              <th>2022</th>
+              <th>2023</th>
+              <th>2024</th>
+              <th>2025</th>
+              <th>2026 (S1)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-commune">
+              <td class="td-indicator font-semibold">🏛️ Médiane Commune (€/m²)</td>
+              <td id="medCom2021">1 308 €</td>
+              <td id="medCom2022">1 369 €</td>
+              <td id="medCom2023">1 029 €</td>
+              <td id="medCom2024">1 460 €</td>
+              <td id="medCom2025">1 501 €</td>
+              <td id="medCom2026">993 €</td>
+            </tr>
+            <tr class="row-secteur">
+              <td class="td-indicator font-semibold">📍 Médiane Secteur (~15 km)</td>
+              <td id="medSec2021">1 293 €</td>
+              <td id="medSec2022">1 302 €</td>
+              <td id="medSec2023">1 445 €</td>
+              <td id="medSec2024">1 357 €</td>
+              <td id="medSec2025">1 319 €</td>
+              <td id="medSec2026">1 276 €</td>
+            </tr>
+            <tr class="row-ecart">
+              <td class="td-indicator">Écart Bien vs Secteur</td>
+              <td class="ecart-val" id="ecart2021">-15.9%</td>
+              <td class="ecart-val" id="ecart2022">-16.5%</td>
+              <td class="ecart-val" id="ecart2023">-24.8%</td>
+              <td class="ecart-val" id="ecart2024">-19.9%</td>
+              <td class="ecart-val" id="ecart2025">-17.6%</td>
+              <td class="ecart-val" id="ecart2026">-14.8%</td>
+            </tr>
+            <tr class="row-volumes text-muted">
+              <td class="td-indicator">Volumes (Commune / Secteur)</td>
+              <td id="vol2021">16 / 569</td>
+              <td id="vol2022">4 / 476</td>
+              <td id="vol2023">10 / 414</td>
+              <td id="vol2024">5 / 370</td>
+              <td id="vol2025">6 / 353</td>
+              <td id="vol2026">1 / 142</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3 : Grille des Biens en Vente -->
+    <section class="properties-section">
+      <div class="section-title-bar">
+        <h2 class="section-title">Portefeuille en Vente — Secteur Nontron</h2>
+        <span class="count-badge" id="resultsCount">7 biens</span>
+      </div>
+      <div class="properties-grid" id="propertiesGrid">
+        <!-- Rempli dynamiquement par app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>© 2026 Sylvain MATIGNON • Conseiller Immobilier Propriétés-Privées • Nontron & Périgord Vert</p>
+  </footer>
+
+  <!-- Script Applicatif -->
+  <script src="app.js"></script>
+</body>
+</html>
