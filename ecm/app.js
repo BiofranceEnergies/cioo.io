@@ -6,7 +6,7 @@
 // ==========================================================================
 // 1. VOTRE URL DE DÉPLOIEMENT GOOGLE APPS SCRIPT
 // ==========================================================================
-const SCRIPT_API_URL = "VOTRE_URL_GOOGLE_APPS_SCRIPT_ICI";
+const SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbz3-6_6lZvLyKcnYC5P6NiB_qyP9EOIjMguEahlGvk8ZtxMVr7ckXlilD0Mgr468fYW/exec";
 
 let appState = {
   properties: [],
