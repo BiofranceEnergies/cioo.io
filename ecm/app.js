@@ -17,6 +17,7 @@ const APP_CONFIG = {
 const INITIAL_PROPERTIES = [
   {
     ref: "3631",
+    urlAgence: "https://www.brunsalat.com", // Ou l'URL exacte de la fiche
     cp: "24300",
     commune: "Saint-Martial-de-Valette",
     type: "Maison",
@@ -32,6 +33,7 @@ const INITIAL_PROPERTIES = [
   },
   {
     ref: "98-5589",
+    urlAgence: "https://www.human-immobilier.fr",
     cp: "24300",
     commune: "Nontron",
     type: "Maison de plain-pied sans travaux",
@@ -47,6 +49,7 @@ const INITIAL_PROPERTIES = [
   },
   {
     ref: "BVI84708",
+    urlAgence: "https://beauxvillages.com",
     cp: "24300",
     commune: "Savignac-de-Nontron",
     type: "Maison de caractère en pierre",
@@ -62,6 +65,7 @@ const INITIAL_PROPERTIES = [
   },
   {
     ref: "3750",
+    urlAgence: "https://www.brunsalat.com",
     cp: "24300",
     commune: "Saint-Front-la-Rivière",
     type: "Grange rénovée",
@@ -77,6 +81,7 @@ const INITIAL_PROPERTIES = [
   },
   {
     ref: "3811",
+    urlAgence: "https://www.brunsalat.com",
     cp: "24300",
     commune: "Savignac-de-Nontron",
     type: "Maison de campagne",
@@ -92,6 +97,7 @@ const INITIAL_PROPERTIES = [
   },
   {
     ref: "98-5456",
+    urlAgence: "https://www.human-immobilier.fr",
     cp: "24360",
     commune: "Varaignes",
     type: "Maison en pierre rénovée",
@@ -107,6 +113,7 @@ const INITIAL_PROPERTIES = [
   },
   {
     ref: "2074784",
+    urlAgence: "https://www.iadfrance.fr",
     cp: "24300",
     commune: "Saint-Martin-le-Pin",
     type: "Maison de plain-pied avec 2 studios",
@@ -313,6 +320,8 @@ function renderPropertiesGrid() {
     const isSelected = p.ref === appState.selectedTargetRef;
     const card = document.createElement("div");
     card.className = `property-card ${isSelected ? "selected" : ""}`;
+    
+    // Clic sur la carte = Sélectionne le bien pour l'analyse DVF
     card.onclick = () => {
       appState.selectedTargetRef = p.ref;
       document.getElementById("selectTargetProperty").value = p.ref;
@@ -320,10 +329,15 @@ function renderPropertiesGrid() {
       renderPropertiesGrid();
     };
 
+    // Lien agence externe
+    const linkHtml = p.urlAgence 
+      ? `<a href="${p.urlAgence}" target="_blank" rel="noopener noreferrer" class="ref-link" onclick="event.stopPropagation();" title="Ouvrir la fiche agence">RÉF. ${p.ref} ↗</a>`
+      : `<span class="prop-ref">RÉF. ${p.ref}</span>`;
+
     card.innerHTML = `
       <div class="card-top">
         <div>
-          <span class="prop-ref">RÉF. ${p.ref}</span>
+          ${linkHtml}
           <h3 class="prop-type">${p.type}</h3>
           <p class="prop-city">${p.commune} (${p.cp})</p>
         </div>
