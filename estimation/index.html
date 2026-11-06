@@ -1,600 +1,669 @@
-.no-print-bar {
-  max-width: 186mm;
-  margin: 15px auto 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1a365d;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 6px;
-}
-.btn-print {
-  background: #ffffff;
-  color: #1a365d;
-  border: none;
-  padding: 8px 18px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 11px;
-}
-.btn-print:hover {
-  background: #edf2f7;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Étude Comparative de Marché & Stratégie de Commercialisation — Busserolles</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #1a202c;
+    }
 
-.sheet-page {
-  width: 100%;
-  max-width: 186mm;
-  min-height: 275mm;
-  margin: 20px auto;
-  background: #ffffff;
-  padding: 18px 22px;
-  border-radius: 6px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    .no-print-bar {
+      max-width: 186mm;
+      margin: 15px auto 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a365d;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+    }
+    .btn-print {
+      background: #ffffff;
+      color: #1a365d;
+      border: none;
+      padding: 8px 18px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .btn-print:hover {
+      background: #edf2f7;
+    }
 
-@media print {
-  body {
-    background: transparent !important;
-  }
-  .no-print-bar {
-    display: none !important;
-  }
-  .sheet-page {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 275mm !important;
-    height: 275mm !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    page-break-after: always;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-  }
-  .sheet-page:last-child {
-    page-break-after: auto;
-  }
-}
+    .sheet-page {
+      width: 100%;
+      max-width: 186mm;
+      min-height: 275mm;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 18px 22px;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.content-wrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    @media print {
+      body {
+        background: transparent !important;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .sheet-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 275mm !important;
+        height: 275mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-after: always;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+      }
+      .sheet-page:last-child {
+        page-break-after: auto;
+      }
+    }
 
-header {
-  border-bottom: 2px solid #1a365d;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.logo-container img {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
-}
-.advisor-info {
-  border-left: 2px solid #e2e8f0;
-  padding-left: 10px;
-  font-size: 9px;
-  line-height: 1.3;
-  color: #4a5568;
-}
-.advisor-name {
-  font-size: 11px;
-  font-weight: bold;
-  color: #1a365d;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-.advisor-role {
-  color: #718096;
-  font-weight: 600;
-}
-.advisor-contact {
-  color: #2b6cb0;
-  font-weight: 500;
-}
-.header-doc-title {
-  text-align: right;
-}
-.header-doc-title h1 {
-  margin: 0;
-  font-size: 14px;
-  color: #1a365d;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.header-doc-title p {
-  margin: 2px 0 0 0;
-  font-size: 9px;
-  color: #4a5568;
-  font-weight: 500;
-}
+    .content-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-.section-title {
-  background: #1a365d;
-  color: #ffffff;
-  font-size: 9.5px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-top: 8px;
-  margin-bottom: 6px;
-}
+    header {
+      border-bottom: 2px solid #1a365d;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-container img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+    .advisor-info {
+      border-left: 2px solid #e2e8f0;
+      padding-left: 10px;
+      font-size: 9px;
+      line-height: 1.3;
+      color: #4a5568;
+    }
+    .advisor-name {
+      font-size: 11px;
+      font-weight: bold;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .advisor-role {
+      color: #718096;
+      font-weight: 600;
+    }
+    .advisor-contact {
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+    .header-doc-title {
+      text-align: right;
+    }
+    .header-doc-title h1 {
+      margin: 0;
+      font-size: 14px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-doc-title p {
+      margin: 2px 0 0 0;
+      font-size: 9px;
+      color: #4a5568;
+      font-weight: 500;
+    }
 
-.identity-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 10px;
-  margin-bottom: 6px;
-}
-.identity-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  padding: 8px 10px;
-}
-.identity-card h4 {
-  margin: 0 0 6px 0;
-  font-size: 9.5px;
-  color: #1a365d;
-  text-transform: uppercase;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 3px;
-}
-.id-row {
-  display: flex;
-  margin-bottom: 3.5px;
-  font-size: 9px;
-}
-.id-label {
-  width: 115px;
-  font-weight: 600;
-  color: #718096;
-  flex-shrink: 0;
-}
-.id-value {
-  color: #2d3748;
-  font-weight: 600;
-}
+    .section-title {
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 9.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
 
-table.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 5px;
-  font-size: 9px;
-}
-table.data-table th {
-  background: #edf2f7;
-  color: #2d3748;
-  text-align: left;
-  padding: 5px 6px;
-  font-weight: 600;
-  border-bottom: 1px solid #cbd5e0;
-  font-size: 8.5px;
-  text-transform: uppercase;
-}
-table.data-table td {
-  padding: 5px 6px;
-  border-bottom: 1px solid #e2e8f0;
-  color: #2d3748;
-  vertical-align: middle;
-  line-height: 1.25;
-}
-table.data-table tr:last-child td {
-  border-bottom: none;
-}
-.badge-target {
-  background: #e6fffa;
-  color: #234e52;
-  font-weight: bold;
-  padding: 2px 5px;
-  border-radius: 4px;
-  border: 1px solid #b2f5ea;
-  display: inline-block;
-  font-size: 8px;
-  white-space: nowrap;
-}
-.badge-alert {
-  background: #fff5f5;
-  color: #9b2c2c;
-  font-weight: bold;
-  padding: 2px 5px;
-  border-radius: 4px;
-  border: 1px solid #fed7d7;
-  display: inline-block;
-  font-size: 8px;
-  white-space: nowrap;
-}
-.ref-link {
-  color: #2b6cb0;
-  font-weight: bold;
-  text-decoration: none;
-}
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .identity-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 10px;
+    }
+    .identity-card h4 {
+      margin: 0 0 6px 0;
+      font-size: 9.5px;
+      color: #1a365d;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 3px;
+    }
+    .id-row {
+      display: flex;
+      margin-bottom: 3.5px;
+      font-size: 9px;
+    }
+    .id-label {
+      width: 115px;
+      font-weight: 600;
+      color: #718096;
+      flex-shrink: 0;
+    }
+    .id-value {
+      color: #2d3748;
+      font-weight: 600;
+    }
 
-.diag-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 6px;
-}
-.diag-box {
-  border-radius: 6px;
-  padding: 8px 10px;
-  font-size: 9px;
-}
-.diag-box.atouts {
-  background: #f0fff4;
-  border: 1px solid #c6f6d5;
-  color: #22543d;
-}
-.diag-box.freins {
-  background: #fffaf0;
-  border: 1px solid #feebc8;
-  color: #744210;
-}
-.diag-box h4 {
-  margin: 0 0 5px 0;
-  font-size: 9.5px;
-  text-transform: uppercase;
-}
-.diag-box ul {
-  margin: 0;
-  padding-left: 12px;
-}
-.diag-box li {
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-.diag-box li:last-child {
-  margin-bottom: 0;
-}
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 5px;
+      font-size: 9px;
+    }
+    table.data-table th {
+      background: #edf2f7;
+      color: #2d3748;
+      text-align: left;
+      padding: 5px 6px;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e0;
+      font-size: 8.5px;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 5px 6px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      vertical-align: middle;
+      line-height: 1.25;
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-target {
+      background: #e6fffa;
+      color: #234e52;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #b2f5ea;
+      display: inline-block;
+      font-size: 8px;
+      white-space: nowrap;
+    }
+    .badge-alert {
+      background: #fff5f5;
+      color: #9b2c2c;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #fed7d7;
+      display: inline-block;
+      font-size: 8px;
+      white-space: nowrap;
+    }
+    .badge-success {
+      background: #f0fff4;
+      color: #22543d;
+      font-weight: bold;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid #c6f6d5;
+      display: inline-block;
+      font-size: 8px;
+      white-space: nowrap;
+    }
+    .ref-link {
+      color: #2b6cb0;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
-.pricing-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-.price-card {
-  border: 1px solid #cbd5e0;
-  border-radius: 6px;
-  padding: 8px 6px;
-  text-align: center;
-  background: #ffffff;
-}
-.price-card.pivot {
-  border: 2px solid #2b6cb0;
-  background: #ebf8ff;
-}
-.price-card-title {
-  font-size: 9px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #718096;
-  margin-bottom: 3px;
-}
-.price-card.pivot .price-card-title {
-  color: #2b6cb0;
-}
-.price-card-val {
-  font-size: 15px;
-  font-weight: bold;
-  color: #1a202c;
-  margin-bottom: 2px;
-}
-.price-card.pivot .price-card-val {
-  color: #2b6cb0;
-  font-size: 17px;
-}
-.price-card-desc {
-  font-size: 8px;
-  color: #718096;
-  line-height: 1.25;
-}
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .diag-box {
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 9px;
+    }
+    .diag-box.atouts {
+      background: #f0fff4;
+      border: 1px solid #c6f6d5;
+      color: #22543d;
+    }
+    .diag-box.freins {
+      background: #fffaf0;
+      border: 1px solid #feebc8;
+      color: #744210;
+    }
+    .diag-box h4 {
+      margin: 0 0 5px 0;
+      font-size: 9.5px;
+      text-transform: uppercase;
+    }
+    .diag-box ul {
+      margin: 0;
+      padding-left: 12px;
+    }
+    .diag-box li {
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .diag-box li:last-child {
+      margin-bottom: 0;
+    }
 
-.conclusion-box {
-  background: #f8fafc;
-  border-left: 4px solid #1a365d;
-  padding: 8px 12px;
-  margin-top: 8px;
-  margin-bottom: 6px;
-  font-size: 9px;
-  line-height: 1.4;
-  color: #2d3748;
-}
-.conclusion-box h4 {
-  margin: 0 0 3px 0;
-  font-size: 9.5px;
-  color: #1a365d;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    .price-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      padding: 8px 6px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .price-card.pivot {
+      border: 2px solid #2b6cb0;
+      background: #ebf8ff;
+    }
+    .price-card-title {
+      font-size: 9px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 3px;
+    }
+    .price-card.pivot .price-card-title {
+      color: #2b6cb0;
+    }
+    .price-card-val {
+      font-size: 15px;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 2px;
+    }
+    .price-card.pivot .price-card-val {
+      color: #2b6cb0;
+      font-size: 17px;
+    }
+    .price-card-desc {
+      font-size: 8px;
+      color: #718096;
+      line-height: 1.25;
+    }
 
-.legal-notice {
-  margin-top: 6px;
-  padding: 5px 7px;
-  background: #edf2f7;
-  border-radius: 4px;
-  font-size: 7.5px;
-  line-height: 1.25;
-  color: #4a5568;
-  font-style: italic;
-}
+    .conclusion-box {
+      background: #f8fafc;
+      border-left: 4px solid #1a365d;
+      padding: 8px 12px;
+      margin-top: 8px;
+      margin-bottom: 6px;
+      font-size: 9px;
+      line-height: 1.4;
+      color: #2d3748;
+    }
+    .conclusion-box h4 {
+      margin: 0 0 3px 0;
+      font-size: 9.5px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
 
-footer {
-  border-top: 1px solid #e2e8f0;
-  padding-top: 5px;
-  margin-top: 8px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 7.5px;
-  color: #a0aec0;
-}
+    .legal-notice {
+      margin-top: 6px;
+      padding: 5px 7px;
+      background: #edf2f7;
+      border-radius: 4px;
+      font-size: 7.5px;
+      line-height: 1.25;
+      color: #4a5568;
+      font-style: italic;
+    }
 
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 5px;
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
 
-    <!-- IDENTIFICATION DU BIEN -->
-    <div class="identity-grid">
-      <div class="identity-card">
-        <h4>Désignation & Configuration Bâtie</h4>
-        <div class="id-row"><span class="id-label">Localisation :</span><span class="id-value">24360 Busserolles — Lieudit « Le Grand Villotte »</span></div>
-        <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">Grange périgourdine réhabilitée en pierres apparentes</span></div>
-        <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value"><strong>162,49 m² métrés</strong> (séjour cathédrale 64,5 m², cuis. 31,7 m²)</span></div>
-        <div class="id-row"><span class="id-label">Distribution :</span><span class="id-value">Séjour, cuisine, 2 ch. (15,97 et 16,65 m²), mezzanine 19,5 m², 2 SdB</span></div>
-        <div class="id-row"><span class="id-label">Dépendances :</span><span class="id-value"><strong>145 m² utiles</strong> (stockage 60 m², garage 29 m², grange 56 m²)</span></div>
-        <div class="id-row"><span class="id-label">Terrain & Extérieurs :</span><span class="id-value"><strong>1 398 m²</strong> (13 a 98 ca) avec <strong>piscine maçonnée</strong></span></div>
-        <div class="id-row"><span class="id-label">Chauffage & ECS :</span><span class="id-value" style="color: #744210;">Poêle à bois + insert + rad. élec sdb / Cumulus 75 L (DPE E/F estimé)</span></div>
-      </div>
-      <div class="identity-card">
-        <h4>Assiette Cadastrale & Situation Juridique</h4>
-        <div class="id-row"><span class="id-label">Section Cadastrale :</span><span class="id-value"><strong>Section B</strong> (5 parcelles contiguës/proches)</span></div>
-        <div class="id-row"><span class="id-label">Bâti & Sol :</span><span class="id-value"><strong>B 360</strong> (375 m²) + <strong>B 517</strong> (68 m²) — Corps d'habitation</span></div>
-        <div class="id-row"><span class="id-label">Jardin & Piscine :</span><span class="id-value"><strong>B 515</strong> (832 m²) — Sanctuaire clos et intime au sud</span></div>
-        <div class="id-row"><span class="id-label">Grange déportée :</span><span class="id-value"><strong>B 362</strong> (52 m²) + <strong>B 364</strong> (71 m² lande) — Atelier/stockage</span></div>
-        <div class="id-row"><span class="id-label">Assainissement :</span><span class="id-value" style="color: #22543d;"><strong>Fosse septique conforme (< 10 ans)</strong> — Économie 12 k€</span></div>
-        <div class="id-row"><span class="id-label">Gros œuvre :</span><span class="id-value" style="color: #22543d;"><strong>Toitures & charpentes saines</strong> (maison et dépendances)</span></div>
-        <div class="id-row"><span class="id-label">Contrainte d'accès :</span><span class="id-value" style="color: #744210;">Cour traversée par passage communal C.r. (non clôsible)</span></div>
-      </div>
-    </div>
-
-    <!-- 1. DIAGNOSTIC STRATÉGIQUE DU BIEN -->
-    <div class="section-title">1. Diagnostic Technique & Commercial : Atouts & Postes de Négociation</div>
-    <div class="diag-grid">
-      <div class="diag-box atouts">
-        <h4>Atouts Porteurs de Valeur Vénale</h4>
-        <ul>
-          <li><strong>Cachet architectural & authenticité :</strong> Maçonnerie en moellons apparents jointoyés, charpente traditionnelle maîtresse en chêne et magnifique volume cathédrale (64,50 m²).</li>
-          <li><strong>Sécurité financière immédiate :</strong> Toitures révisées en très bon état et filière d'assainissement individuel conforme de moins de 10 ans, évitant le classique devis de 10 à 15 k€.</li>
-          <li><strong>Potentiel de stockage remarquable :</strong> 145 m² d'annexes saines (60 m² stockage attenant + garage 29 m² + grange indépendante 56 m²) très recherchés par artisans ou collectionneurs.</li>
-          <li><strong>Espace loisirs privatif préservé :</strong> Parcelle B 515 au sud avec piscine et terrasse, totalement affranchie du passage communal avant.</li>
-        </ul>
-      </div>
-      <div class="diag-box freins">
-        <h4>Freins & Anticipation des Négociations</h4>
-        <ul>
-          <li><strong>Chauffage & Eau Chaude Sanitaire :</strong> Absence de chauffage central (deux feux bois d'appoint dans les pièces de vie). Cumulus de 75 L sous-dimensionné pour 162 m² et 2 salles d'eau.</li>
-          <li><strong>DPE énergivore attendu (E ou F) :</strong> Nécessitera la présentation d'un devis estimatif rassurant (type PAC air/air réversible ou granulés) pour éviter des offres prédatrices.</li>
-          <li><strong>Second œuvre d'époque :</strong> Cuisine carrelée des années 80/90 et salles d'eau fonctionnelles mais datées, appelant un budget de rafraîchissement décoratif.</li>
-          <li><strong>Passage communal non clôsible devant :</strong> Impossibilité de fermer la cour avant (C.r.) ; l'intimité doit être impérativement démontrée côté sud (piscine).</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- 2. DÉCOMPOSITION ANALYTIQUE DE LA VALEUR VÉNALE -->
-    <div class="section-title">2. Décomposition Patrimoniale de la Valeur Vénale par Composante</div>
-    <p style="margin: 2px 0 5px 0; font-size: 8.5px; color: #4a5568;">
-      La valorisation combine la méthode du coût de remplacement déprécié et l'évaluation distincte des annexes et aménagements :
-    </p>
-
-    <table class="data-table" style="margin-bottom: 6px;">
-      <thead>
-        <tr>
-          <th>Composante du Bien</th>
-          <th>Surface</th>
-          <th>État & Prestations Constatées</th>
-          <th>Base Unitaire / Forfait</th>
-          <th>Valeur Vénale Retenue</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Corps d'habitation principal</strong></td>
-          <td>162,49 m²</td>
-          <td>Volumes cathédrale, vie de plain-pied, DPE énergivore, cuisine 80s</td>
-          <td>1 080 € à 1 140 € / m²</td>
-          <td><span class="badge-target">175 000 € à 185 000 €</span></td>
-        </tr>
-        <tr>
-          <td><strong>Dépendances & Annexes fermées</strong></td>
-          <td>145,00 m²</td>
-          <td>Stockage attenant 60 m², garage 29 m², grange déportée 56 m² (toitures saines)</td>
-          <td>150 € à 175 € / m² utile</td>
-          <td><strong>22 000 € à 25 000 €</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Terrain d'assiette & Piscine</strong></td>
-          <td>1 398 m²</td>
-          <td>Piscine maçonnée opérationnelle, terrasse d'agrément, jardin clos B 515</td>
-          <td>Forfait équipement & foncier</td>
-          <td><strong>15 000 € à 18 000 €</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Assainissement autonome conforme</strong></td>
-          <td>Fosse < 10 ans</td>
-          <td>Installation conforme aux normes SPANC (absence de travaux obligatoires)</td>
-          <td>Neutralisation de décote</td>
-          <td><strong style="color: #22543d;">+ 10 000 € (économie nette)</strong></td>
-        </tr>
-        <tr style="background: #fffaf0; color: #744210;">
-          <td colspan="3"><strong>Abattement d'accès & contraintes thermiques :</strong> Cour ouverte sur chemin rural public et poste PAC à créer</td>
-          <td>Pondération de marché</td>
-          <td><span class="badge-alert">-10 000 € à -15 000 €</span></td>
-        </tr>
-        <tr style="background: #ebf8ff; font-weight: bold; color: #1a365d;">
-          <td colspan="3">JUSTE VALEUR VÉNALE RÉELLE CONVERGENTE (NET PROPRIÉTAIRE)</td>
-          <td colspan="2"><span class="badge-target" style="font-size: 9.5px;">215 000 € à 225 000 € Net Vendeur</span></td>
-        </tr>
-      </tbody>
-    </table>
-
+  <div class="no-print-bar">
+    <span>💡 <strong>Étude Comparative de Marché :</strong> Évaluation & Arbitrage Commercial — Busserolles (Le Grand Villotte) — <code>Ctrl+P</code>.</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
   </div>
 
-  <div>
-    <footer>
-      <span>Étude Comparative de Marché (ECM) — Sylvain MATIGNON | Propriétés-Privées</span>
-      <span>Page 1/2</span>
-    </footer>
-  </div>
-</div>
+  <!-- ======================== PAGE 1 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <header>
+          <div class="header-left">
+            <div class="logo-container">
+              <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+            </div>
+            <div class="advisor-info">
+              <div class="advisor-name">Sylvain MATIGNON</div>
+              <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
+              <div class="advisor-contact">
+                📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+              </div>
+            </div>
+          </div>
+          <div class="header-doc-title">
+            <h1>Avis de Valeur & Stratégie Commerciale</h1>
+            <p>Étude Comparative de Marché (Méthode ECM — Panel Rayon 15-20 km Nontron)</p>
+          </div>
+        </header>
 
+        <!-- IDENTIFICATION DU BIEN -->
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h4>Désignation & Configuration Bâtie Validée</h4>
+            <div class="id-row"><span class="id-label">Localisation :</span><span class="id-value">24360 Busserolles — Lieudit « Le Grand Villotte »</span></div>
+            <div class="id-row"><span class="id-label">Type de bien :</span><span class="id-value">Ancienne grange périgourdine réhabilitée en habitation</span></div>
+            <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value"><strong>162,49 m²</strong> certifiée par métré d'architecte</span></div>
+            <div class="id-row"><span class="id-label">Distribution :</span><span class="id-value">Séjour cathédrale 64,5 m², cuisine 31,7 m², 2 ch, mezzanine, 2 SDB</span></div>
+            <div class="id-row"><span class="id-label">Dépendances :</span><span class="id-value"><strong>145 m²</strong> (stockage 60 m², garage 29 m², grange séparée 56 m²)</span></div>
+            <div class="id-row"><span class="id-label">Aménagements :</span><span class="id-value">Piscine maçonnée intégrée avec plage et terrasse</span></div>
+            <div class="id-row"><span class="id-label">Assiette cadastrale :</span><span class="id-value"><strong>1 398 m²</strong> (Section B n° 360, 515, 517, 362, 364)</span></div>
+          </div>
+          <div class="identity-card">
+            <h4>Environnement Juridique & Technique</h4>
+            <div class="id-row"><span class="id-label">Gros œuvre / Toitures :</span><span class="id-value" style="color: #22543d;"><strong>En très bon état</strong> (aucun remaniement lourd)</span></div>
+            <div class="id-row"><span class="id-label">Assainissement :</span><span class="id-value" style="color: #22543d;"><span class="badge-success">Fosse septique aux normes (&lt; 10 ans)</span></span></div>
+            <div class="id-row"><span class="id-label">Chauffage :</span><span class="id-value" style="color: #744210;">Poêle à bois séjour + insert cuisine + appoints élec. SDB</span></div>
+            <div class="id-row"><span class="id-label">Production ECS :</span><span class="id-value" style="color: #744210;">Cumulus électrique 75 L (dimensionnement d'appoint)</span></div>
+            <div class="id-row"><span class="id-label">Accès cour avant :</span><span class="id-value" style="color: #744210;">Traversée par chemin rural communal (non clôsible)</span></div>
+            <div class="id-row"><span class="id-label">Zone détente & intimité :</span><span class="id-value" style="color: #22543d;">Jardin piscine (B 515) 100 % privatif et sanctuarisé</span></div>
+            <div class="id-row"><span class="id-label">Urbanisme :</span><span class="id-value">Carte communale (Zone NC) — Terrain d'agrément</span></div>
+          </div>
+        </div>
 
-    <table class="data-table" style="margin-bottom: 6px;">
-      <thead>
-        <tr>
-          <th>Réf. Mandat</th>
-          <th>Commune</th>
-          <th>Surface</th>
-          <th>Terrain</th>
-          <th>DPE</th>
-          <th>Prix Net Vendeur</th>
-          <th>Prix FAI</th>
-          <th>Corrélation & Analyse Stratégique</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background: #ebf8ff;">
-          <td><strong>Cible Busserolles</strong></td>
-          <td><strong>Le Grand Villotte</strong></td>
-          <td><strong>162,5 m²</strong></td>
-          <td><strong>1 398 m²</strong></td>
-          <td><strong>E/F</strong></td>
-          <td><strong>220 000 €</strong></td>
-          <td><strong>235 000 €</strong></td>
-          <td><strong>Maison pierre, séjour cathédrale, 145 m² annexes saines, piscine, fosse conforme. Ratio : 1 446 €/m² FAI.</strong></td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. 3787</span></td>
-          <td>Étouars</td>
-          <td>158 m²</td>
-          <td>1 021 m²</td>
-          <td>F</td>
-          <td>170 000 €</td>
-          <td>180 000 €</td>
-          <td>Pierre 1850, séjour cathédrale, grange 90 m², toiture neuve. Notre bien lui est supérieur grâce à la piscine et la fosse aux normes.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. 3518</span></td>
-          <td>St-Pardoux-la-Riv.</td>
-          <td>160 m²</td>
-          <td>3 855 m²</td>
-          <td>D</td>
-          <td>200 000 €</td>
-          <td>211 000 €</td>
-          <td>Maison rénovée, séjour 60 m², garage et atelier bois 55 m², assainissement récent, pas de piscine. Ancre le prix plancher.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. 3712</span></td>
-          <td>St-Martial-Valette</td>
-          <td>192 m²</td>
-          <td>1 563 m²</td>
-          <td>C</td>
-          <td>250 000 €</td>
-          <td>263 000 €</td>
-          <td>Fermette pierre rénovée haut de gamme, salon cathédrale 50 m², piscine dôme, DPE C. Plafond haut indépassable pour Grand Villotte.</td>
-        </tr>
-        <tr>
-          <td><span class="ref-link">Réf. 3818</span></td>
-          <td>Piégut-Pluviers</td>
-          <td>177 m²</td>
-          <td>2 608 m²</td>
-          <td>C</td>
-          <td>230 000 €</td>
-          <td>242 000 €</td>
-          <td>Pavillon traditionnel 1990 rénové sur sous-sol complet. Témoigne de la résistance du seuil de 230 k€ net vendeur sur le secteur.</td>
-        </tr>
-        <tr style="background: #fff5f5;">
-          <td><span class="ref-link">Réf. 98-5613</span></td>
-          <td>Busserolles</td>
-          <td>176 m²</td>
-          <td>712 m²</td>
-          <td>E</td>
-          <td>100 000 €</td>
-          <td>108 600 €</td>
-          <td>Maison de bourg mitoyenne, chauffage fioul, gros rafraîchissement : illustre la forte décote des biens sans parc ni charme isolé.</td>
-        </tr>
-      </tbody>
-    </table>
+        <!-- 1. DIAGNOSTIC DE VALORISATION -->
+        <div class="section-title">1. Diagnostic Préalable : Forces Marché & Leviers d'Arbitrage</div>
+        <div class="diag-grid">
+          <div class="diag-box atouts">
+            <h4>Atouts Concurrentiels Majeurs (Sécurisation Vente)</h4>
+            <ul>
+              <li><strong>Zéro budget assainissement :</strong> Une filière individuelle conforme de moins de 10 ans neutralise d'emblée la négociation de 10 000 € à 15 000 € systématique sur ce secteur.</li>
+              <li><strong>Gros œuvre & Toitures saines :</strong> Couvertures et charpentes impeccables sur la maison et les 145 m² d'annexes : élimine la crainte des gros travaux de structure.</li>
+              <li><strong>Volume cathédrale & Authenticité :</strong> Pièce à vivre spectaculaire de 64,50 m² sous charpente apparente en chêne, murs en moellons jointoyés et cuisine de 31,70 m².</li>
+              <li><strong>Potentiel annexe & Piscine :</strong> 145 m² d'ateliers et garages complétant un espace piscine intime, très prisé en villégiature comme en résidence principale.</li>
+            </ul>
+          </div>
+          <div class="diag-box freins">
+            <h4>Points de Négociation Acquéreurs & Postes Travaux</h4>
+            <ul>
+              <li><strong>Vecteur thermique non centralisé :</strong> Absence de circuit central, mezzanine ouverte et chambres sans émetteurs fixes imposant une adaptation (DPE E/F prévisible).</li>
+              <li><strong>Dimensionnement ECS & Déco :</strong> Ballon d'eau chaude de 75 L à remplacer pour une famille, cuisine carrelée et sanitaires d'époque à réactualiser.</li>
+              <li><strong>Configuration de passage :</strong> Cour avant traversée par un chemin communal d'usage (C.r.) qui interdit la pose d'un portail sur rue, compensé par le jardin clos sud.</li>
+              <li><strong>Délai moyen de liquidité :</strong> Ralentissement du volume de transactions sur le bassin Nontronnais exigeant un cadrage prix réaliste dès le lancement.</li>
+            </ul>
+          </div>
+        </div>
 
-    <!-- SYNTHÈSE DVF HISTORIQUE -->
-    <p style="margin: 4px 0 2px 0; font-size: 8px; color: #4a5568;">
-      <strong>Confrontation DVF notaires (2021-2026) :</strong> Médiane bassin Nontron stabilisée à <strong>1 276 €/m²</strong>. Un positionnement à 220 000 € net vendeur (1 354 €/m²) place le bien à <strong>+6,1 % au-dessus de la médiane</strong>, prime parfaitement légitimée par la piscine, les 145 m² d'annexes et la conformité d'assainissement.
-    </p>
+        <!-- 2. DÉCOMPOSITION ANALYTIQUE DE LA VALEUR -->
+        <div class="section-title">2. Décomposition Méthodique de la Valeur Vénale</div>
+        <p style="margin: 2px 0 5px 0; font-size: 8.5px; color: #4a5568;">
+          Évaluation segmentée prenant en compte l'état d'usage intérieur, les équipements validés et l'absence d'aléa structurel :
+        </p>
 
-    <!-- 4. SCÉNARIOS TARIFAIRES -->
-    <div class="section-title">4. Scénarios Tarifaires & Impact sur les Délais de Vente</div>
+        <table class="data-table" style="margin-bottom: 6px;">
+          <thead>
+            <tr>
+              <th>Composante Patrimoniale</th>
+              <th>Surface</th>
+              <th>État & Prestations Constatées</th>
+              <th>Méthode d'Évaluation</th>
+              <th>Valeur Vénale Retenue</th>
+              <th>Ratio Moyen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Corps de logis principal</strong></td>
+              <td>162,49 m²</td>
+              <td>Volumes cathédrale, vie de plain-pied, toiture saine, déco/cuisine d'époque</td>
+              <td>Base habitable pondérée (DPE bois)</td>
+              <td><span class="badge-target">180 000 € à 190 000 €</span></td>
+              <td>1 108 à 1 169 € / m²</td>
+            </tr>
+            <tr>
+              <td><strong>Dépendances & Garages</strong></td>
+              <td>145,00 m²</td>
+              <td>Stockage accolé 60 m², garage 29 m², grange déportée saine 56 m²</td>
+              <td>Bâti annexe clos utile (150-175 €/m²)</td>
+              <td><strong>22 000 € à 25 000 €</strong></td>
+              <td>152 à 172 € / m²</td>
+            </tr>
+            <tr>
+              <td><strong>Terrain & Extérieurs</strong></td>
+              <td>1 398 m²</td>
+              <td>Piscine en dur avec plage, terrasse, murets pierre, verger/pelouse</td>
+              <td>Forfait aménagements d'agrément</td>
+              <td><strong>15 000 € à 18 000 €</strong></td>
+              <td>Valeur ajoutée brute</td>
+            </tr>
+            <tr>
+              <td><strong>Assainissement Individuel</strong></td>
+              <td>Filière &lt; 10 ans</td>
+              <td>Fosse septique aux normes contrôlée conforme (zéro réfection)</td>
+              <td>Bonus / Économie de mise en conformité</td>
+              <td><span class="badge-success">+10 000 € (Neutralisé)</span></td>
+              <td>Économie acquéreur</td>
+            </tr>
+            <tr style="background: #fffaf0; color: #744210;">
+              <td colspan="4"><strong>Ajustement de configuration :</strong> Impact cour ouverte sur passage communal (C.r.) et rénovation cuisine/ECS</td>
+              <td colspan="2"><span class="badge-alert">-10 000 € à -12 000 €</span></td>
+            </tr>
+            <tr style="background: #ebf8ff; font-weight: bold; color: #1a365d;">
+              <td colspan="4">JUSTE VALEUR VÉNALE DU CORPS DE PROPRIÉTÉ (NET VENDEUR CIBLE)</td>
+              <td colspan="2"><span class="badge-target" style="font-size: 9.5px;">215 000 € à 225 000 € Net</span></td>
+            </tr>
+          </tbody>
+        </table>
 
-    <div class="pricing-cards">
-      <div class="price-card">
-        <div class="price-card-title">Plancher de Sécurité (Vente Rapide)</div>
-        <div class="price-card-val">219 000 € FAI</div>
-        <div class="price-card-desc"><strong>205 000 € Net Vendeur</strong><br>Vente express sous 45 jours. Attire immédiatement les profils artisans ou bricoleurs intégrant d'emblée la pose d'une pompe à chaleur.</div>
       </div>
-      <div class="price-card pivot">
-        <div class="price-card-title">Cible Stratégique Recommandée</div>
-        <div class="price-card-val">235 000 € FAI</div>
-        <div class="price-card-desc"><strong>220 000 € Net Vendeur</strong><br><strong>Prix d'équilibre parfait du marché.</strong> Valorise l'absence de travaux toiture/fosse tout en restant sous les biens DPE C de St-Martial.</div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur & Stratégie ECM — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 1/2</span>
+        </footer>
       </div>
-      <div class="price-card">
-        <div class="price-card-title">Mise en Vente avec Négociation</div>
-        <div class="price-card-val">245 000 € FAI</div>
-        <div class="price-card-desc"><strong>230 000 € Net Vendeur</strong><br>Plafond psychologique avant blocage. Permet de tester un coup de cœur étranger tout en préservant une marge de discussion de 10 k€.</div>
-      </div>
-    </div>
-
-    <!-- PLAN D'ACTION COMMERCIAL -->
-    <div class="conclusion-box">
-      <h4>Plan d'Action Commercial : Valorisation & Levée des Objections</h4>
-      <ol style="margin: 0; padding-left: 14px;">
-        <li><strong>Mise en avant immédiate des deux "gros postes budgétaires neutres" :</strong> Valoriser dès l'accroche publicitaire la <strong>toiture saine</strong> et la <strong>fosse septique aux normes (< 10 ans)</strong> pour désamorcer la peur des devis lourds en zone rurale.</li>
-        <li><strong>Marketing axé sur l'espace de vie cathédrale & la piscine :</strong> Réaliser un shooting photo par météo lumineuse valorisant les <strong>64,50 m² de séjour cathédrale</strong> et la terrasse piscine plein sud (parcelle B 515), préservée de tout passage.</li>
-        <li><strong>Ciblage bi-profil (Résidence secondaire & Profils artisanaux) :</strong> Promotion bilingue (clientèle locale en quête de dépendances atelier/garage + acquéreurs néerlandais/britanniques séduits par la pierre et la piscine).</li>
-        <li><strong>Désamorçage de l'accès communal :</strong> Clarifier immédiatement que le chemin rural traversant la cour ne dessert que des granges d'écart sans trafic routier, assurant un calme absolu.</li>
-      </ol>
-    </div>
-
-    <!-- AVERTISSEMENT JURIDIQUE -->
-    <div class="legal-notice">
-      <strong>Cadre méthodologique :</strong> La présente étude comparative de marché (ECM) est arrêtée au regard des actes de propriété, du métré habitable officiel (162,49 m²), du plan cadastral de Busserolles et des ventes réelles constatées sur le secteur Nontronnais. Elle garantit une visibilité maximale dans un délai de commercialisation maîtrisé de 60 à 90 jours.
-    </div>
-
-    <div style="margin-top: 5px; font-size: 8px; color: #718096; text-align: right; font-style: italic;">
-      Fait à Saint-Martial-de-Valette, le 6 novembre 2026 — Sylvain MATIGNON, Conseiller Immobilier.
     </div>
   </div>
 
-  <div>
-    <footer>
-      <span>Étude Comparative de Marché (ECM) — Sylvain MATIGNON | Propriétés-Privées</span>
-      <span>Page 2/2</span>
-    </footer>
+  <!-- ======================== PAGE 2 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <!-- 3. CONFRONTATION AU MARCHÉ CONCURRENT -->
+        <div class="section-title" style="margin-top: 0;">3. Confrontation au Marché Actif & Données Notariales (DVF)</div>
+        <p style="margin: 2px 0 5px 0; font-size: 8.5px; color: #4a5568;">
+          Positionnement parmi les transactions réelles DVF du bassin de Nontron (médiane à 1 276 €/m²) et les biens comparables en concurrence active :
+        </p>
+
+        <table class="data-table" style="margin-bottom: 6px;">
+          <thead>
+            <tr>
+              <th>Réf. & Commune</th>
+              <th>Type de bien</th>
+              <th>Surface Hab.</th>
+              <th>Terrain / Dépend.</th>
+              <th>DPE</th>
+              <th>Prix Net Vendeur</th>
+              <th>Prix FAI</th>
+              <th>Analyse Comparative & Arbitrage Acquéreur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ebf8ff;">
+              <td><strong>Cible Recommandée</strong></td>
+              <td>Grange réhabilitée pierre</td>
+              <td><strong>162,5 m²</strong></td>
+              <td><strong>1 398 m²</strong> + 145 m² dép.</td>
+              <td>E / F</td>
+              <td><strong>220 000 €</strong></td>
+              <td><strong>235 000 €</strong></td>
+              <td><strong>1 446 €/m² FAI.</strong> Volumes cathédrale, piscine, fosse aux normes, toitures parfaites.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3787 (Étouars)</span></td>
+              <td>Maison pierre 1850</td>
+              <td>158 m²</td>
+              <td>1 021 m² + grange 90 m²</td>
+              <td>F</td>
+              <td>170 000 €</td>
+              <td>180 000 €</td>
+              <td>Volume cathédrale similaire mais <strong>sans piscine</strong>, moins de dépendances et assainissement non garanti.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3518 (St-Pardoux)</span></td>
+              <td>Maison de campagne</td>
+              <td>160 m²</td>
+              <td>3 855 m² + atelier 55 m²</td>
+              <td>D</td>
+              <td>200 000 €</td>
+              <td>211 000 €</td>
+              <td>Grand séjour 60 m², assainissement récent, mais bâti ordinaire sans le cachet pierre ni la piscine.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Réf. 3712 (St-Martial)</span></td>
+              <td>Fermette rénovée de luxe</td>
+              <td>192 m²</td>
+              <td>1 563 m² + piscine dôme</td>
+              <td>C</td>
+              <td>250 000 €</td>
+              <td>263 000 €</td>
+              <td>Plafond haut du secteur (1 370 €/m² FAI). Rénovation contemporaine totale, PAC et DPE C.</td>
+            </tr>
+            <tr style="background: #fff5f5;">
+              <td><span class="ref-link">Réf. 98-5613 (Busserolles)</span></td>
+              <td>Maison de bourg pierre</td>
+              <td>176 m²</td>
+              <td>712 m² + grange/atelier</td>
+              <td>E</td>
+              <td>100 000 €</td>
+              <td>108 600 €</td>
+              <td>Chauffage fioul, mitoyenneté de bourg. Hors concours face à l'environnement champêtre de Villotte.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 4. GRILLE D'ARBITRAGE ET STRATÉGIE DE PRIX -->
+        <div class="section-title">4. Scénarios Tarifaires & Fenêtre de Commercialisation</div>
+
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-card-title">Plancher de Sécurité</div>
+            <div class="price-card-val">219 000 € FAI</div>
+            <div class="price-card-desc"><strong>205 000 € Net Vendeur</strong><br>Prix d'absorption immédiate (&lt; 45 jours). Cible un acquéreur intégrant d'emblée un budget climatisation / PAC réversible.</div>
+          </div>
+          <div class="price-card pivot">
+            <div class="price-card-title">Cœur de Marché Équilibré</div>
+            <div class="price-card-val">235 000 € FAI</div>
+            <div class="price-card-desc"><strong>220 000 € Net Vendeur</strong><br><strong>Valeur pivot recommandée.</strong> Justifié par la piscine, les toitures saines et la fosse conforme. Déclenche des visites qualifiées.</div>
+          </div>
+          <div class="price-card">
+            <div class="price-card-title">Affichage Mandat Test</div>
+            <div class="price-card-val">245 000 € FAI</div>
+            <div class="price-card-desc"><strong>230 000 € Net Vendeur</strong><br>Marge de négociation préservée de 10 à 15 k€. Reste sous le seuil psychologique de 250 k€ pour capter les alertes acquéreurs.</div>
+          </div>
+        </div>
+
+        <!-- PLAN D'ACTION COMMERCIAL -->
+        <div class="conclusion-box">
+          <h4>Plan d'Action Commercial : Mise en Valeur & Déploiement</h4>
+          <ol style="margin: 0; padding-left: 14px;">
+            <li><strong>Mise en avant des certitudes techniques :</strong> Rassurer immédiatement les acheteurs sur les deux postes les plus anxiogènes en Dordogne : toitures/charpentes saines et assainissement individuel conforme de moins de 10 ans.</li>
+            <li><strong>Marketing immersif des volumes de réception :</strong> Reportage photographique grand angle valorisant la pièce cathédrale de 64,50 m², la charpente apparente et la terrasse intimiste de la piscine sans vis-à-vis.</li>
+            <li><strong>Ciblage acquéreur bicanal :</strong> Communication orientée à la fois vers la clientèle francophone en quête d'espace/atelier pour passion ou artisanat, et vers la clientèle européenne (néerlandaise/britannique) sensible au charme authentique de la pierre.</li>
+            <li><strong>Verrouillage juridique du passage communal :</strong> Transparence totale dès la visite sur le statut du chemin rural (C.r.) pour désamorcer toute objection ultérieure lors de la promesse de vente.</li>
+          </ol>
+        </div>
+
+        <!-- AVERTISSEMENT JURIDIQUE -->
+        <div class="legal-notice">
+          <strong>Cadre méthodologique :</strong> La présente étude d'évaluation comparative (ECM) est établie à partir des caractéristiques physiques intrinsèques du bien, du plan cadastral, des actes notariés de propriété et de l'analyse croisée du panel de 160 biens actifs sur le bassin Nontronnais. Elle définit la fenêtre d'arbitrage optimale pour concrétiser la vente dans un délai moyen de 60 à 90 jours.
+        </div>
+
+        <div style="margin-top: 5px; font-size: 8px; color: #718096; text-align: right; font-style: italic;">
+          Fait à Saint-Martial-de-Valette, le 6 novembre 2026 — Sylvain MATIGNON, Conseiller Immobilier.
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur & Stratégie ECM — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 2/2</span>
+        </footer>
+      </div>
+    </div>
   </div>
-</div>
+
+</body>
+</html>
