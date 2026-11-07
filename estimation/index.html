@@ -6,7 +6,7 @@
   <style>
     @page {
       size: A4 portrait;
-      margin: 10mm 12mm 10mm 12mm;
+      margin: 8mm 10mm 8mm 10mm;
     }
     * {
       box-sizing: border-box;
@@ -18,13 +18,13 @@
       padding: 0;
       background: #f0f4f8;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 10px;
-      line-height: 1.35;
+      font-size: 9.5px;
+      line-height: 1.3;
       color: #1a202c;
     }
 
     .no-print-bar {
-      max-width: 186mm;
+      max-width: 190mm;
       margin: 15px auto 0 auto;
       display: flex;
       justify-content: space-between;
@@ -49,17 +49,22 @@
     }
 
     .sheet-page {
-      width: 100%;
-      max-width: 186mm;
-      min-height: 275mm;
-      margin: 20px auto;
+      width: 190mm;
+      height: 280mm;
+      margin: 15px auto;
       background: #ffffff;
-      padding: 18px 22px;
-      border-radius: 6px;
+      padding: 14px 18px;
+      border-radius: 4px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+    }
+    .sheet-page:last-child {
+      page-break-after: auto;
+      break-after: auto;
     }
 
     @media print {
@@ -71,20 +76,17 @@
       }
       .sheet-page {
         width: 100% !important;
-        max-width: 100% !important;
-        min-height: 275mm !important;
-        height: 275mm !important;
+        height: 280mm !important;
         margin: 0 !important;
         padding: 0 !important;
         box-shadow: none !important;
         border-radius: 0 !important;
-        page-break-after: always;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
+        page-break-after: always !important;
+        break-after: page !important;
       }
       .sheet-page:last-child {
-        page-break-after: auto;
+        page-break-after: auto !important;
+        break-after: auto !important;
       }
     }
 
@@ -92,13 +94,13 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     header {
       border-bottom: 2px solid #1a365d;
-      padding-bottom: 8px;
-      margin-bottom: 10px;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -109,19 +111,19 @@
       gap: 12px;
     }
     .logo-container img {
-      height: 44px;
+      height: 40px;
       width: auto;
       object-fit: contain;
     }
     .advisor-info {
       border-left: 2px solid #e2e8f0;
       padding-left: 10px;
-      font-size: 9px;
-      line-height: 1.3;
+      font-size: 8.5px;
+      line-height: 1.25;
       color: #4a5568;
     }
     .advisor-name {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: bold;
       color: #1a365d;
       text-transform: uppercase;
@@ -140,14 +142,14 @@
     }
     .header-doc-title h1 {
       margin: 0;
-      font-size: 13px;
+      font-size: 12.5px;
       color: #1a365d;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .header-doc-title p {
       margin: 2px 0 0 0;
-      font-size: 9px;
+      font-size: 8.5px;
       color: #4a5568;
       font-weight: 500;
     }
@@ -155,43 +157,43 @@
     .section-title {
       background: #1a365d;
       color: #ffffff;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.3px;
-      padding: 4px 8px;
-      border-radius: 4px;
-      margin-top: 8px;
-      margin-bottom: 6px;
+      padding: 3.5px 7px;
+      border-radius: 3px;
+      margin-top: 6px;
+      margin-bottom: 5px;
     }
 
     .identity-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 10px;
-      margin-bottom: 6px;
+      gap: 8px;
+      margin-bottom: 4px;
     }
     .identity-card {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      padding: 8px 10px;
+      border-radius: 5px;
+      padding: 6px 8px;
     }
     .identity-card h4 {
-      margin: 0 0 6px 0;
-      font-size: 9.5px;
+      margin: 0 0 5px 0;
+      font-size: 9px;
       color: #1a365d;
       text-transform: uppercase;
       border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 3px;
+      padding-bottom: 2px;
     }
     .id-row {
       display: flex;
-      margin-bottom: 3.5px;
-      font-size: 9px;
+      margin-bottom: 2.5px;
+      font-size: 8.5px;
     }
     .id-label {
-      width: 120px;
+      width: 115px;
       font-weight: 600;
       color: #718096;
       flex-shrink: 0;
@@ -204,25 +206,25 @@
     table.data-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 5px;
-      font-size: 9px;
+      margin-top: 4px;
+      font-size: 8.5px;
     }
     table.data-table th {
       background: #edf2f7;
       color: #2d3748;
       text-align: left;
-      padding: 5px 6px;
+      padding: 4px 5px;
       font-weight: 600;
       border-bottom: 1px solid #cbd5e0;
-      font-size: 8.5px;
+      font-size: 8px;
       text-transform: uppercase;
     }
     table.data-table td {
-      padding: 5px 6px;
+      padding: 4px 5px;
       border-bottom: 1px solid #e2e8f0;
       color: #2d3748;
       vertical-align: middle;
-      line-height: 1.25;
+      line-height: 1.2;
     }
     table.data-table tr:last-child td {
       border-bottom: none;
@@ -231,44 +233,44 @@
       background: #e6fffa;
       color: #234e52;
       font-weight: bold;
-      padding: 2px 5px;
-      border-radius: 4px;
+      padding: 1.5px 4px;
+      border-radius: 3px;
       border: 1px solid #b2f5ea;
       display: inline-block;
-      font-size: 8px;
+      font-size: 7.5px;
       white-space: nowrap;
     }
     .badge-alert {
       background: #fff5f5;
       color: #9b2c2c;
       font-weight: bold;
-      padding: 2px 5px;
-      border-radius: 4px;
+      padding: 1.5px 4px;
+      border-radius: 3px;
       border: 1px solid #fed7d7;
       display: inline-block;
-      font-size: 8px;
+      font-size: 7.5px;
       white-space: nowrap;
     }
     .badge-success {
       background: #f0fff4;
       color: #22543d;
       font-weight: bold;
-      padding: 2px 5px;
-      border-radius: 4px;
+      padding: 1.5px 4px;
+      border-radius: 3px;
       border: 1px solid #c6f6d5;
       display: inline-block;
-      font-size: 8px;
+      font-size: 7.5px;
       white-space: nowrap;
     }
     .badge-warning {
       background: #fffaf0;
       color: #744210;
       font-weight: bold;
-      padding: 2px 5px;
-      border-radius: 4px;
+      padding: 1.5px 4px;
+      border-radius: 3px;
       border: 1px solid #feebc8;
       display: inline-block;
-      font-size: 8px;
+      font-size: 7.5px;
       white-space: nowrap;
     }
     .ref-link {
@@ -280,13 +282,13 @@
     .diag-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 6px;
+      gap: 8px;
+      margin-top: 4px;
     }
     .diag-box {
-      border-radius: 6px;
-      padding: 8px 10px;
-      font-size: 9px;
+      border-radius: 5px;
+      padding: 6px 8px;
+      font-size: 8.5px;
     }
     .diag-box.atouts {
       background: #f0fff4;
@@ -299,17 +301,17 @@
       color: #744210;
     }
     .diag-box h4 {
-      margin: 0 0 5px 0;
-      font-size: 9.5px;
+      margin: 0 0 4px 0;
+      font-size: 9px;
       text-transform: uppercase;
     }
     .diag-box ul {
       margin: 0;
-      padding-left: 12px;
+      padding-left: 11px;
     }
     .diag-box li {
-      margin-bottom: 4px;
-      line-height: 1.3;
+      margin-bottom: 3px;
+      line-height: 1.25;
     }
     .diag-box li:last-child {
       margin-bottom: 0;
@@ -318,14 +320,14 @@
     .pricing-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 8px;
-      margin-bottom: 8px;
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 6px;
     }
     .price-card {
       border: 1px solid #cbd5e0;
-      border-radius: 6px;
-      padding: 8px 6px;
+      border-radius: 5px;
+      padding: 6px 4px;
       text-align: center;
       background: #ffffff;
     }
@@ -334,64 +336,64 @@
       background: #ebf8ff;
     }
     .price-card-title {
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: bold;
       text-transform: uppercase;
       color: #718096;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     .price-card.pivot .price-card-title {
       color: #2b6cb0;
     }
     .price-card-val {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       color: #1a202c;
       margin-bottom: 2px;
     }
     .price-card.pivot .price-card-val {
       color: #2b6cb0;
-      font-size: 18px;
+      font-size: 17px;
     }
     .price-card-desc {
-      font-size: 8px;
+      font-size: 7.5px;
       color: #718096;
-      line-height: 1.25;
+      line-height: 1.2;
     }
 
     .conclusion-box {
       background: #f8fafc;
-      border-left: 4px solid #1a365d;
-      padding: 8px 12px;
-      margin-top: 8px;
-      margin-bottom: 6px;
-      font-size: 9px;
-      line-height: 1.4;
+      border-left: 3px solid #1a365d;
+      padding: 6px 10px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+      font-size: 8.5px;
+      line-height: 1.35;
       color: #2d3748;
     }
     .conclusion-box h4 {
       margin: 0 0 3px 0;
-      font-size: 9.5px;
+      font-size: 9px;
       color: #1a365d;
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
 
     .legal-notice {
-      margin-top: 6px;
-      padding: 5px 7px;
+      margin-top: 5px;
+      padding: 4px 6px;
       background: #edf2f7;
       border-radius: 4px;
-      font-size: 7.5px;
-      line-height: 1.25;
+      font-size: 7px;
+      line-height: 1.2;
       color: #4a5568;
       font-style: italic;
     }
 
     footer {
       border-top: 1px solid #e2e8f0;
-      padding-top: 5px;
-      margin-top: 8px;
+      padding-top: 4px;
+      margin-top: 6px;
       display: flex;
       justify-content: space-between;
       font-size: 7.5px;
@@ -402,7 +404,7 @@
 <body>
 
   <div class="no-print-bar">
-    <span>💡 <strong>Avis de Valeur Vénale Réaliste :</strong> 9 Rte des Châtaigniers, Saint-Pardoux-la-Rivière — <code>Ctrl+P</code> pour imprimer / exporter en PDF.</span>
+    <span>💡 <strong>Avis de Valeur Vénale :</strong> 9 Rte des Châtaigniers, Saint-Pardoux-la-Rivière — <code>Ctrl+P</code> pour imprimer / exporter en PDF.</span>
     <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
   </div>
 
@@ -436,9 +438,9 @@
             <div class="id-row"><span class="id-label">Localisation :</span><span class="id-value">24470 Saint-Pardoux-la-Rivière — 9 Rte des Châtaigniers / Chez Boissard</span></div>
             <div class="id-row"><span class="id-label">Nature du bien :</span><span class="id-value">Maison d'habitation (rénov. 1970) + grange attenante + annexe vétuste</span></div>
             <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value"><strong>120 m²</strong> (RDC 60 m² + Étage 60 m²)</span></div>
-            <div class="id-row"><span class="id-label">Agencement intérieur :</span><span class="id-value">RDC (60 m²) : entrée, séjour, cuisine, SDE avec WC, bureau | Étage (60 m²) : 2 ch. enfilade, WC nu</span></div>
+            <div class="id-row"><span class="id-label">Agencement intérieur :</span><span class="id-value">RDC (60 m²) : entrée, séjour, cuisine, SDE avec WC, bureau | Étage (60 m²) : 2 ch. enfilade, WC</span></div>
             <div class="id-row"><span class="id-label">Grange attenante :</span><span class="id-value"><strong>165 m² au sol</strong> (hauteur faîtage ~7 m, gros volume d'atelier/stockage)</span></div>
-            <div class="id-row"><span class="id-label">Bâtiment annexe :</span><span class="id-value"><strong>Grangette en pierre 40 m²</strong> (bâti dégradé/ruiniforme, valeur marchande nulle)</span></div>
+            <div class="id-row"><span class="id-label">Bâtiment annexe :</span><span class="id-value"><strong>Grangette en pierre 40 m²</strong> (état dégradé, valeur marchande résiduelle nulle)</span></div>
             <div class="id-row"><span class="id-label">Assiette foncière :</span><span class="id-value"><strong>1 044 m²</strong> — Section C n° 3899 (553 m²) et Section C n° 3901 (491 m²)</span></div>
           </div>
           <div class="identity-card">
@@ -469,20 +471,20 @@
             <h4>Facteurs de Décote Reconnus (Passif Second Œuvre & Structure)</h4>
             <ul>
               <li><strong>Rénovation 1970 figée « dans son jus » :</strong> Tapisseries, boiseries et doublages à curer intégralement pour un aménagement aux standards contemporains.</li>
-              <li><strong>Défauts majeurs d'agencement à l'étage :</strong> Escalier très pentu et resserré, distribution en enfilade totale et cuvette de WC implantée à nu dans la chambre principale.</li>
-              <li><strong>Passif thermique et énergétique lourd :</strong> Simple vitrage bois d'origine et électricité à reprendre de zéro, positionnant le bien en passoire thermique (DPE F / G probable).</li>
-              <li><strong>Annexe dégradée (40 m²) & humidité :</strong> Bâtisse en ruine partielle (péril toiture, lierre invasif) valant 0 €, et salpêtre / cloquage constaté sur les bas de murs au bureau RDC.</li>
+              <li><strong>Défauts majeurs d'agencement à l'étage :</strong> Escalier très pentu et resserré, distribution en enfilade totale et cuvette de WC implantée à nu dans la chambre.</li>
+              <li><strong>Passif thermique et électrique :</strong> Menuiseries en simple vitrage intégral et électricité hors normes, entraînant une note DPE défavorable (classe F ou G probable).</li>
+              <li><strong>Efflorescences & annexe dégradée :</strong> Traces d'humidité en bas de mur du séjour (secteur TV) nécessitant assainissement, et grangette extérieure de 40 m² en état de ruine partielle.</li>
             </ul>
           </div>
         </div>
 
         <!-- 2. DÉCOMPOSITION MÉTHODIQUE DE LA VALEUR VÉNALE -->
         <div class="section-title">2. Décomposition Analytique de la Valeur Vénale (Net Vendeur)</div>
-        <p style="margin: 2px 0 5px 0; font-size: 8.5px; color: #4a5568;">
+        <p style="margin: 2px 0 4px 0; font-size: 8px; color: #4a5568;">
           Ventilation réaliste de l'assiette bâtie selon la méthode d'évaluation sol-bâtiment et de déduction du passif second œuvre :
         </p>
 
-        <table class="data-table" style="margin-bottom: 6px;">
+        <table class="data-table">
           <thead>
             <tr>
               <th>Composante de la Propriété</th>
@@ -527,13 +529,13 @@
               <td><span class="badge-success">Inclus</span></td>
             </tr>
             <tr style="background: #fffaf0; color: #744210;">
-              <td colspan="4"><strong>Enveloppe travaux estimée pour un acquéreur :</strong> Restructuration complète de l'étage (couloir, isolation, cloisonnement sanitaire), réfection intégrale électricité, menuiseries double vitrage, assainissement des murs RDC et révision couverture grange.</td>
+              <td colspan="4"><strong>Enveloppe travaux estimée pour un acquéreur :</strong> Restructuration complète de l'étage (couloir, isolation, cloisonnement sanitaire), réfection intégrale électricité, menuiseries double vitrage, assainissement mur séjour et révision couverture grange.</td>
               <td colspan="2"><span class="badge-alert">Budget travaux : 55 000 € à 70 000 €</span></td>
             </tr>
             <tr style="background: #ebf8ff; font-weight: bold; color: #1a365d;">
               <td colspan="4">VALEUR VÉNALE RÉELLE RÉALISTE DE L'ENSEMBLE (NET VENDEUR HORS FRAIS)</td>
               <td><strong>80 000 €</strong></td>
-              <td><span class="badge-target" style="font-size: 9.5px;">95 000 € NET</span></td>
+              <td><span class="badge-target" style="font-size: 9px;">95 000 € NET</span></td>
             </tr>
           </tbody>
         </table>
@@ -555,11 +557,11 @@
       <div>
         <!-- 3. CONFRONTATION AUX DONNÉES DU MARCHÉ LOCAL -->
         <div class="section-title" style="margin-top: 0;">3. Cohérence avec le Marché Réel (Base Comparative ECM Nontronnais)</div>
-        <p style="margin: 2px 0 5px 0; font-size: 8.5px; color: #4a5568;">
+        <p style="margin: 2px 0 4px 0; font-size: 8px; color: #4a5568;">
           Confrontation directe de la valeur vénale avec les biens actuellement en vente sur le bassin de Saint-Pardoux-la-Rivière et environs immédiats :
         </p>
 
-        <table class="data-table" style="margin-bottom: 6px;">
+        <table class="data-table">
           <thead>
             <tr>
               <th>Référence / Commune</th>
@@ -621,11 +623,11 @@
               <td>D</td>
               <td>200 000 € net</td>
               <td>1 250 € / m²</td>
-              <td>Même route des Châtaigniers. Rénovation achevée (DPE D), aucun travaux. Plafond du marché montrant qu'un coût total achat + travaux ne peut dépasser ce seuil.</td>
+              <td>Même route des Châtaigniers. Rénovation contemporaine (DPE D), aucun travaux. Plafond du marché montrant qu'un coût total achat + travaux ne peut dépasser ce seuil.</td>
             </tr>
           </tbody>
         </table>
-        <div style="font-size: 7.5px; color: #718096; margin-top: -3px; margin-bottom: 5px;">*Ratio net global rapporté à la surface habitable, valorisant l'ensemble de l'assiette bâtie et la grange attenante de 165 m².</div>
+        <div style="font-size: 7.5px; color: #718096; margin-top: 2px; margin-bottom: 4px;">*Ratio net global rapporté à la surface habitable, valorisant l'ensemble de l'assiette bâtie et la grange attenante de 165 m².</div>
 
         <!-- 4. FOURCHETTES D'ARBITRAGE DE VALEUR VÉNALE -->
         <div class="section-title">4. Fourchettes d'Arbitrage & Préconisations de Valeur Vénale</div>
@@ -651,7 +653,7 @@
         <!-- NOTE MÉTHODOLOGIQUE D'EXPLICATION -->
         <div class="conclusion-box">
           <h4>Note Méthodologique & Justification de l'Évaluation</h4>
-          <ol style="margin: 0; padding-left: 14px;">
+          <ol style="margin: 0; padding-left: 13px;">
             <li><strong>Réalisme de la valeur vénale :</strong> Le montant pivot recommandé de <strong>88 000 € Net Vendeur</strong> tient compte du budget de réhabilitation globale chiffré entre 55 000 € et 70 000 €. En ajoutant les frais d'acquisition, l'opération revient à environ 165 000 € pour l'acquéreur, seuil maximal cohérent avec le stock concurrentiel rénové du secteur.</li>
             <li><strong>Double lecture des sanitaires :</strong> Si le rez-de-chaussée dispose d'une salle d'eau complète et fonctionnelle (douche, lavabo, WC), l'étage présente une cuvette de toilette sans aucun cloisonnement au milieu de la chambre à coucher et des pièces en enfilade, imposant une restructuration lourde des cloisons et des réseaux.</li>
             <li><strong>Neutralisation de l'annexe de 40 m² :</strong> Le constat visuel de la grangette (charpente fatiguée, toiture affaissée, colonisation par le lierre) confirme un état ruiniforme. Elle est valorisée à <strong>0 €</strong> car elle constitue pour l'acquéreur une charge d'entretien ou de sécurisation sans utilité immédiate.</li>
@@ -664,7 +666,7 @@
           <strong>Avertissement professionnel :</strong> Le présent avis de valeur est établi selon les règles de l'art par la méthode d'Étude Comparative de Marché (ECM) et par ventilation sol-bâtiment, à partir des caractéristiques techniques constatées sur place et de l'analyse des biens comparables sur le secteur de Saint-Pardoux-la-Rivière et du Périgord Nontronnais. Il reflète la valeur marchande nette à la date de son établissement.
         </div>
 
-        <div style="margin-top: 5px; font-size: 8px; color: #718096; text-align: right; font-style: italic;">
+        <div style="margin-top: 4px; font-size: 7.5px; color: #718096; text-align: right; font-style: italic;">
           Fait à Saint-Martial-de-Valette, le 7 novembre 2026 — Sylvain MATIGNON, Conseiller Immobilier.
         </div>
       </div>
