@@ -391,9 +391,11 @@ document.addEventListener('DOMContentLoaded', () => {
 💰 Estimation affichée: ${fourchetteTexte}`;
 
             // Envoi compatible navigateur sans blocage CORS
-            fetch(`https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("🎯 Prospect Immo : " + name)}&priority=urgent&tags=house,euro,telephone_receiver`, {
-                method: 'POST',
-                body: ntfyMessage,
+           // Envoi compatible et garanti sans blocage
+            const ntfyPublishUrl = `https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("Nouveau Prospect : " + name)}&priority=high&tags=house,euro&message=${encodeURIComponent(ntfyMessage)}`;
+
+            fetch(ntfyPublishUrl, {
+                method: 'GET',
                 mode: 'no-cors'
             }).catch(err => console.error("Erreur envoi ntfy:", err));
 
