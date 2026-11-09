@@ -400,8 +400,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(err => console.error("Erreur envoi ntfy:", err));
 
             // 4. Transition vers l'écran résultat
+         // 4. Transition vers l'écran résultat
             step2.style.display = 'none';
             stepResult.style.display = 'block';
+        });
+    }
+
+    // --- 6.7 RECOMMENCER / MODIFIER L'ESTIMATION ---
+    const btnRestart = document.getElementById('btn-restart-estimation');
+    if (btnRestart) {
+        btnRestart.addEventListener('click', () => {
+            if (stepResult && step1) {
+                stepResult.style.display = 'none';
+                step1.style.display = 'block';
+                if (btnSubmit) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerHTML = "Découvrir le positionnement de mon bien →";
+                }
+            }
         });
     }
 
