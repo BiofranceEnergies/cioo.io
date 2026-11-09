@@ -383,33 +383,143 @@
                 </div>
             </div>
 
-            <div class="contact-form-col anim delay-2">
+    <div class="contact-form-col anim delay-2">
                 <div class="form-wrapper-card">
-                    <div class="form-badge">Gratuit & Sans engagement</div>
-                    <h3>Demander mon estimation confidentielle</h3>
-                    <p class="form-subtext">Recevez une étude comparative basée sur les ventes réelles de votre commune en Périgord Vert.</p>
-                    
-                   <form id="contact-form" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST" class="clean-form">
-    <div class="form-group">
-        <label for="address">Commune du bien</label>
-        <input type="text" id="address" name="address" placeholder="Ex : Nontron, Thiviers, Brantôme..." required>
-    </div>
+                    <div class="form-badge">Observatoire Marché Périgord Vert</div>
+                    <h3>Estimer mon bien en direct</h3>
+                    <p class="form-subtext">Positionnement calculé face aux biens actuellement en vente (secteur 15 à 25 km autour de Nontron).</p>
 
-    <div class="form-row">
-        <div class="form-group">
-            <label for="name">Votre nom / prénom</label>
-            <input type="text" id="name" name="name" placeholder="Ex : Jean Dupont" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Téléphone</label>
-            <input type="tel" id="phone" name="phone" placeholder="06 00 00 00 00" required>
-        </div>
-    </div>
+                    <!-- ÉTAPE 1 : CRITÈRES DU BIEN -->
+                    <div id="step-1" class="form-step active">
+                        <div class="form-group">
+                            <label for="commune">Commune ou code postal du bien</label>
+                            <input type="text" id="commune" placeholder="Ex : Nontron, Piégut, Saint-Pardoux, Mareuil..." required>
+                        </div>
 
-    <button type="submit" id="submit-button" class="btn btn-primary full-width btn-glow">
-        Recevoir mon estimation conseil →
-    </button>
-</form>
+                        <div class="form-group">
+                            <label>Type de propriété</label>
+                            <div class="pill-group" id="typeBienGroup">
+                                <button type="button" class="pill-btn selected" data-value="Maison pierre">Maison pierre / Longère</button>
+                                <button type="button" class="pill-btn" data-value="Pavillon contemporain">Pavillon / Plain-pied</button>
+                                <button type="button" class="pill-btn" data-value="Maison de bourg">Maison de bourg / ville</button>
+                                <button type="button" class="pill-btn" data-value="Propriété de campagne">Propriété / Fermette</button>
+                            </div>
+                            <input type="hidden" id="type_bien" value="Maison pierre">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="surface_hab">Surface habitable (m²)</label>
+                                <input type="number" id="surface_hab" placeholder="Ex : 120" min="20" max="1000" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="surface_terrain">Terrain approximatif</label>
+                                <select id="surface_terrain" class="select-field">
+                                    <option value="Moins de 500 m²">Moins de 500 m² (cour / patio)</option>
+                                    <option value="500 à 2 000 m²" selected>500 à 2 000 m² (jardin)</option>
+                                    <option value="2 000 à 10 000 m²">2 000 à 10 000 m² (1 ha)</option>
+                                    <option value="Plus de 10 000 m²">Plus de 10 000 m² (pré, bois...)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>État général du bien</label>
+                            <div class="pill-group" id="etatBienGroup">
+                                <button type="button" class="pill-btn selected" data-value="Habitable de suite">Habitable de suite</button>
+                                <button type="button" class="pill-btn" data-value="À rafraîchir">À rafraîchir</button>
+                                <button type="button" class="pill-btn" data-value="Rénovation complète">Gros travaux / Rénovation</button>
+                            </div>
+                            <input type="hidden" id="etat_bien" value="Habitable de suite">
+                        </div>
+
+                        <button type="button" id="btn-to-step-2" class="btn btn-primary full-width btn-glow">
+                            Continuer vers mon analyse locale →
+                        </button>
+                    </div>
+
+                    <!-- ÉTAPE 2 : DÉBLOCAGE DU POSITIONNEMENT & COORDONNÉES -->
+                    <div id="step-2" class="form-step" style="display: none;">
+                        <div class="step-back-link">
+                            <button type="button" id="btn-back-to-step-1">← Modifier les critères</button>
+                        </div>
+
+                        <div class="step-summary-bar">
+                            <span id="summary-text">Maison pierre • 120 m² • Nontron</span>
+                        </div>
+
+                        <div class="form-group" style="position: relative;">
+                            <label for="address_input">Adresse exacte ou lieu-dit du bien</label>
+                            <input type="text" id="address_input" placeholder="Commencez à taper votre rue ou lieu-dit..." autocomplete="off" required>
+                            <div id="address-suggestions" class="address-dropdown" style="display: none;"></div>
+                            <small class="field-hint">Indispensable pour l'analyse de voisinage et le cadastre. Reste strictement confidentiel.</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="client_name">Votre prénom ou nom</label>
+                                <input type="text" id="client_name" placeholder="Ex : Pierre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="client_phone">Téléphone mobile</label>
+                                <input type="tel" id="client_phone" placeholder="06 00 00 00 00" required>
+                            </div>
+                        </div>
+
+                        <button type="button" id="btn-submit-estimation" class="btn btn-primary full-width btn-glow">
+                            Découvrir le positionnement de mon bien →
+                        </button>
+                        <small class="privacy-note">🔒 Analyse immédiate sans démarchage automatisé.</small>
+                    </div>
+
+                    <!-- ÉTAPE 3 : RÉSULTAT DU POSITIONNEMENT (S'affiche en direct) -->
+                    <div id="step-result" class="form-step" style="display: none;">
+                        <div class="result-header">
+                            <div class="result-check-icon">✓</div>
+                            <h4>Analyse locale réalisée</h4>
+                            <p id="result-property-badge" class="result-badge">Maison • Nontron</p>
+                        </div>
+
+                        <!-- Cas 1 : Dans la zone (15-25 km) -->
+                        <div id="result-in-zone">
+                            <div class="price-box">
+                                <span class="price-label">Fourchette de positionnement constatée :</span>
+                                <div class="price-value" id="result-price-range">145 000 € – 165 000 €</div>
+                                <span class="price-sub">Estimation indicative en prix net vendeur</span>
+                            </div>
+
+                            <div class="market-stats">
+                                <div class="stat-item">
+                                    <strong id="result-competition-count">4</strong>
+                                    <span>Biens concurrents directs en vente</span>
+                                </div>
+                                <div class="stat-item">
+                                    <strong id="result-avg-sqm">1 380 €</strong>
+                                    <span>Moyenne affichée / m²</span>
+                                </div>
+                            </div>
+
+                            <div class="result-warning-box">
+                                <strong>⚠️ Réalité terrain en Périgord Vert :</strong>
+                                <p>Un écart de 8 % sur le prix de départ double le délai moyen de vente. Seule une visite sur place (toiture, assainissement, charme) permet de figer le prix qui déclenchera une offre en 30 jours.</p>
+                            </div>
+                        </div>
+
+                        <!-- Cas 2 : Spécificité ou hors zone directe -->
+                        <div id="result-out-zone" style="display: none;">
+                            <div class="specific-case-box">
+                                <h5>Spécificité sectorielle détectée</h5>
+                                <p>Votre bien se situe en limite de zone d'analyse automatisée ou présente des caractéristiques uniques. Pour éviter toute estimation erronée au doigt mouillé, <strong>une étude manuelle approfondie s'impose</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="advisor-direct-card">
+                            <p><strong>Sylvain Matignon</strong> prépare votre dossier complet pour votre secteur.</p>
+                            <a href="tel:0648893480" class="btn btn-primary full-width btn-call" style="text-decoration: none;">
+                                📞 Échanger directement avec Sylvain
+                            </a>
+                        </div>
+                    </div>
 
                     <div class="booking-separator">
                         <span>ou contact direct</span>
@@ -424,8 +534,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
     <!-- BOUTON D'APPEL FLOTTANT SUR MOBILE -->
     <div class="mobile-sticky-cta">
