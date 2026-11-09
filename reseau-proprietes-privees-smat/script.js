@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
- // 6.6 Soumission, Envoi Lead & Interrogation Google Sheets
+ // 6.6 Soumission, Interrogation Google Sheets & Notification Complète
     if (btnSubmit) {
         btnSubmit.addEventListener('click', async () => {
             const address = addressInput ? addressInput.value.trim() : '';
@@ -328,22 +328,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const terrainVal = terrainSelect ? terrainSelect.value : '';
             const etatVal = etatHidden ? etatHidden.value : '';
 
-            // 1. Notification immédiate NTFY sur votre mobile
-            const ntfyMessage = `PROSPECT ESTIMATION EN DIRECT\n👤 ${name} - 📞 ${phone}\n📍 ${address} (${communeVal})\n🏠 ${typeVal} • ${surfaceVal} m² • Terrain: ${terrainVal}\n🔨 État: ${etatVal}`;
-            const ntfyUrl = `https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("🎯 Nouveau Prospect Estimation !")}&message=${encodeURIComponent(ntfyMessage)}&priority=urgent&tags=chart_with_upwards_trend,telephone_receiver,house`;
-
-            try {
-                await fetch(ntfyUrl, { mode: 'no-cors' });
-            } catch (err) {
-                console.error("Erreur ntfy lead:", err);
-            }
-
-            // 2. Interrogation directe de votre Google Sheets (Base ECM V2)
+            // 1. Interrogation directe de Google Sheets (Base ECM V2)
             const webAppUrl = "https://script.google.com/macros/s/AKfycbz3-6_6lZvLyKcnYC5P6NiB_qyP9EOIjMguEahlGvk8ZtxMVr7ckXlilD0Mgr468fYW/exec";
             const paramsUrl = `?action=estimer&commune=${encodeURIComponent(communeVal)}&surface=${surfaceVal}&type=${encodeURIComponent(typeVal)}&etat=${encodeURIComponent(etatVal)}`;
 
             let dataResult = null;
-
             try {
                 const response = await fetch(webAppUrl + paramsUrl);
                 dataResult = await response.json();
@@ -358,21 +347,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (badgeElem) badgeElem.textContent = `${typeVal} • ${surfaceVal} m² • ${communeVal}`;
 
-            // 3. Traitement de la réponse du tableur
+            let fourchetteTexte = "";
+            let estimationStatut = "Standard";
+
+            // 2. Traitement de la réponse
             if (dataResult && dataResult.success && !dataResult.specificite) {
-                // Données réelles issues de votre tableur
-                document.getElementById('result-price-range').textContent = `${dataResult.prix_bas.toLocaleString('fr-FR')} € – ${dataResult.prix_haut.toLocaleString('fr-FR')} €`;
+                fourchetteTexte = `${dataResult.prix_bas.toLocaleString('fr-FR')} € – ${dataResult.prix_haut.toLocaleString('fr-FR')} €`;
+                document.getElementById('result-price-range').textContent = fourchetteTexte;
                 document.getElementById('result-avg-sqm').textContent = `${dataResult.moyenne_m2.toLocaleString('fr-FR')} €`;
                 document.getElementById('result-competition-count').textContent = dataResult.nb_concurrents;
 
                 inZoneBox.style.display = 'block';
                 outZoneBox.style.display = 'none';
             } else if (dataResult && dataResult.specificite) {
-                // Bien hors secteur ou trop spécifique : bascule sur le message étude manuelle
+                estimationStatut = "Spécifique (Étude approfondie requise)";
+                fourchetteTexte = "Non chiffrée en direct (hors base / atypique)";
                 inZoneBox.style.display = 'none';
                 outZoneBox.style.display = 'block';
             } else {
-                // Fallback sécurité si problème réseau : calcul secours
+                // Fallback de sécurité
                 let basePrixM2 = typeVal.includes('Pavillon') ? 1550 : 1380;
                 if (etatVal.includes('rafraîchir')) basePrixM2 *= 0.88;
                 if (etatVal.includes('Rénovation')) basePrixM2 *= 0.60;
@@ -380,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prixEstime = Math.round((surfaceVal * basePrixM2) / 1000) * 1000;
                 const prixBas = Math.round((prixEstime * 0.92) / 1000) * 1000;
                 const prixHaut = Math.round((prixEstime * 1.08) / 1000) * 1000;
+                fourchetteTexte = `${prixBas.toLocaleString('fr-FR')} € – ${prixHaut.toLocaleString('fr-FR')} € (secours)`;
 
                 document.getElementById('result-price-range').textContent = `${prixBas.toLocaleString('fr-FR')} € – ${prixHaut.toLocaleString('fr-FR')} €`;
                 document.getElementById('result-avg-sqm').textContent = `${Math.round(basePrixM2).toLocaleString('fr-FR')} €`;
@@ -389,7 +383,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 outZoneBox.style.display = 'none';
             }
 
-            // Transition vers l'écran résultat
+            // 3. Notification NTFY immédiate avec la fourchette calculée
+            const ntfyMessage = `👤 ${name} - 📞 ${phone}
+📍 ${address} (${communeVal})
+🏠 ${typeVal} • ${surfaceVal} m² • Terrain: ${terrainVal}
+🔨 État: ${etatVal}
+💰 Estimation affichée: ${fourchetteTexte}`;
+
+            // Envoi compatible navigateur sans blocage CORS
+            fetch(`https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("🎯 Prospect Immo : " + name)}&priority=urgent&tags=house,euro,telephone_receiver`, {
+                method: 'POST',
+                body: ntfyMessage,
+                mode: 'no-cors'
+            }).catch(err => console.error("Erreur envoi ntfy:", err));
+
+            // 4. Transition vers l'écran résultat
             step2.style.display = 'none';
             stepResult.style.display = 'block';
         });
