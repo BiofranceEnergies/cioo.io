@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6.6 Soumission et calcul immédiat
+ // 6.6 Soumission, Envoi Lead & Interrogation Google Sheets
     if (btnSubmit) {
         btnSubmit.addEventListener('click', async () => {
             const address = addressInput ? addressInput.value.trim() : '';
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             btnSubmit.disabled = true;
-            btnSubmit.innerHTML = "<span>Analyse de marché en cours...</span>";
+            btnSubmit.innerHTML = "<span>Consultation de la base locale...</span>";
 
             const communeVal = communeInput ? communeInput.value.trim() : '';
             const surfaceVal = surfaceInput ? parseInt(surfaceInput.value.trim()) : 0;
@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const terrainVal = terrainSelect ? terrainSelect.value : '';
             const etatVal = etatHidden ? etatHidden.value : '';
 
-            // Envoi instantané NTFY
+            // 1. Notification immédiate NTFY sur votre mobile
             const ntfyMessage = `PROSPECT ESTIMATION EN DIRECT\n👤 ${name} - 📞 ${phone}\n📍 ${address} (${communeVal})\n🏠 ${typeVal} • ${surfaceVal} m² • Terrain: ${terrainVal}\n🔨 État: ${etatVal}`;
             const ntfyUrl = `https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("🎯 Nouveau Prospect Estimation !")}&message=${encodeURIComponent(ntfyMessage)}&priority=urgent&tags=chart_with_upwards_trend,telephone_receiver,house`;
 
@@ -338,35 +338,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Erreur ntfy lead:", err);
             }
 
-            // Calcul du positionnement
-            let basePrixM2 = 1350;
-            if (typeVal.includes('pierre')) basePrixM2 = 1380;
-            if (typeVal.includes('Pavillon')) basePrixM2 = 1550;
-            if (etatVal === 'À rafraîchir') basePrixM2 *= 0.85;
-            if (etatVal === 'Rénovation complète') basePrixM2 *= 0.55;
+            // 2. Interrogation directe de votre Google Sheets (Base ECM V2)
+            const webAppUrl = "https://script.google.com/macros/s/AKfycbz3-6_6lZvLyKcnYC5P6NiB_qyP9EOIjMguEahlGvk8ZtxMVr7ckXlilD0Mgr468fYW/exec";
+            const paramsUrl = `?action=estimer&commune=${encodeURIComponent(communeVal)}&surface=${surfaceVal}&type=${encodeURIComponent(typeVal)}&etat=${encodeURIComponent(etatVal)}`;
 
-            const prixEstime = Math.round((surfaceVal * basePrixM2) / 1000) * 1000;
-            const prixBas = Math.round((prixEstime * 0.92) / 1000) * 1000;
-            const prixHaut = Math.round((prixEstime * 1.08) / 1000) * 1000;
+            let dataResult = null;
 
+            try {
+                const response = await fetch(webAppUrl + paramsUrl);
+                dataResult = await response.json();
+            } catch (err) {
+                console.error("Erreur interrogation Google Sheets:", err);
+            }
+
+            // Éléments d'affichage
             const badgeElem = document.getElementById('result-property-badge');
-            const rangeElem = document.getElementById('result-price-range');
-            const avgElem = document.getElementById('result-avg-sqm');
-            const compElem = document.getElementById('result-competition-count');
+            const inZoneBox = document.getElementById('result-in-zone');
+            const outZoneBox = document.getElementById('result-out-zone');
 
             if (badgeElem) badgeElem.textContent = `${typeVal} • ${surfaceVal} m² • ${communeVal}`;
-            if (rangeElem) rangeElem.textContent = `${prixBas.toLocaleString('fr-FR')} € – ${prixHaut.toLocaleString('fr-FR')} €`;
-            if (avgElem) avgElem.textContent = `${Math.round(basePrixM2).toLocaleString('fr-FR')} €`;
 
-            const countComp = Math.floor(Math.random() * 4) + 3;
-            if (compElem) compElem.textContent = countComp;
+            // 3. Traitement de la réponse du tableur
+            if (dataResult && dataResult.success && !dataResult.specificite) {
+                // Données réelles issues de votre tableur
+                document.getElementById('result-price-range').textContent = `${dataResult.prix_bas.toLocaleString('fr-FR')} € – ${dataResult.prix_haut.toLocaleString('fr-FR')} €`;
+                document.getElementById('result-avg-sqm').textContent = `${dataResult.moyenne_m2.toLocaleString('fr-FR')} €`;
+                document.getElementById('result-competition-count').textContent = dataResult.nb_concurrents;
 
-            setTimeout(() => {
-                if (step2 && stepResult) {
-                    step2.style.display = 'none';
-                    stepResult.style.display = 'block';
-                }
-            }, 600);
+                inZoneBox.style.display = 'block';
+                outZoneBox.style.display = 'none';
+            } else if (dataResult && dataResult.specificite) {
+                // Bien hors secteur ou trop spécifique : bascule sur le message étude manuelle
+                inZoneBox.style.display = 'none';
+                outZoneBox.style.display = 'block';
+            } else {
+                // Fallback sécurité si problème réseau : calcul secours
+                let basePrixM2 = typeVal.includes('Pavillon') ? 1550 : 1380;
+                if (etatVal.includes('rafraîchir')) basePrixM2 *= 0.88;
+                if (etatVal.includes('Rénovation')) basePrixM2 *= 0.60;
+
+                const prixEstime = Math.round((surfaceVal * basePrixM2) / 1000) * 1000;
+                const prixBas = Math.round((prixEstime * 0.92) / 1000) * 1000;
+                const prixHaut = Math.round((prixEstime * 1.08) / 1000) * 1000;
+
+                document.getElementById('result-price-range').textContent = `${prixBas.toLocaleString('fr-FR')} € – ${prixHaut.toLocaleString('fr-FR')} €`;
+                document.getElementById('result-avg-sqm').textContent = `${Math.round(basePrixM2).toLocaleString('fr-FR')} €`;
+                document.getElementById('result-competition-count').textContent = "4";
+
+                inZoneBox.style.display = 'block';
+                outZoneBox.style.display = 'none';
+            }
+
+            // Transition vers l'écran résultat
+            step2.style.display = 'none';
+            stepResult.style.display = 'block';
         });
     }
 
