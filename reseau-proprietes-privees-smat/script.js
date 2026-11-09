@@ -322,10 +322,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const cleanPhone = phone.replace(/\s/g, '');
-            if (cleanPhone.length < 10) {
+           // Validation stricte du format et filtrage des faux numéros
+            const cleanPhone = phone.replace(/\D/g, '');
+
+            const fauxNumeros = [
+                '0600000000', '0700000000', '0500000000',
+                '0612345678', '0712345678', '0512345678',
+                '0601020304', '0701020304', '0611223344',
+                '0699999999', '0799999999', '0666666666'
+            ];
+
+            const estMobileValide = /^(06|07)\d{8}$/.test(cleanPhone);
+            const estFixeLocalValide = /^05\d{8}$/.test(cleanPhone); // Fixes Aquitaine / Dordogne
+            const estSuiteIdentique = /^(\d)\1{9}$/.test(cleanPhone); // Ex: 0000000000 ou 1111111111
+
+            if (!estMobileValide && !estFixeLocalValide) {
                 phoneInputStep2.focus();
-                alert("Merci d'indiquer un numéro de téléphone valide à 10 chiffres.");
+                alert("Merci d'indiquer un numéro joignable valide (commençant par 06, 07 ou 05).");
+                return;
+            }
+
+            if (fauxNumeros.includes(cleanPhone) || estSuiteIdentique) {
+                phoneInputStep2.focus();
+                alert("Ce numéro semble incorrect. Merci d'indiquer un vrai numéro pour valider la demande.");
                 return;
             }
 
