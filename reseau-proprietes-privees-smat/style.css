@@ -1010,7 +1010,130 @@ a.strip-item:hover {
     display: inline-block;
     vertical-align: middle;
 }
+/* ==========================================================================
+   MODULE ESTIMATION EN DIRECT (ÉTAPES & RÉSULTATS)
+   ========================================================================== */
 
+/* Boutons de sélection rapide (Pills) */
+.pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.pill-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-gray);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: var(--font-main);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    flex: 1 1 calc(50% - 8px);
+}
+
+.pill-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.pill-btn.selected {
+    background: rgba(237, 22, 81, 0.15);
+    border-color: var(--primary);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(237, 22, 81, 0.25);
+}
+
+/* Menu déroulant terrain */
+.select-field {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: var(--font-main);
+    width: 100%;
+    outline: none;
+    transition: all 0.25s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.select-field option {
+    background: #0f1936;
+    color: #ffffff;
+}
+
+.select-field:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+/* Barre de retour et récapitulatif Étape 2 */
+.step-back-link {
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.step-back-link button {
+    background: transparent;
+    border: none;
+    color: #38bdf8;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.step-back-link button:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.step-summary-bar {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    color: #38bdf8;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.field-hint {
+    display: block;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-top: 4px;
+    line-height: 1.3;
+}
+
+.privacy-note {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+/* Autocomplétion de l'adresse (API Gouv) */
+.address-dropdown {
+    position: absolute;
+    top: calc(100% - 20px);
+    left: 0;
+    right: 0;
+    background: #0f1936;
 /* ==========================================================================
    8. PIED DE PAGE & LIEN YOUTUBE
    ========================================================================== */
