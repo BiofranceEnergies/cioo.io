@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             btnSubmit.disabled = true;
-            btnSubmit.innerHTML = "<span>Consultation de la base locale...</span>";
+           btnSubmit.innerHTML = `<span>Consultation de la base locale</span><span class="loading-dots"><span></span><span></span><span></span></span>`;
 
             const communeVal = communeInput ? communeInput.value.trim() : '';
             const surfaceVal = surfaceInput ? parseInt(surfaceInput.value.trim()) : 0;
