@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const messageVisite = `Visiteur sur la LP Nontron (${provenance})`;
 
-        // Envoi direct sans aucun en-tête bloquant
         fetch(`https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("👀 Visiteur sur la LP")}&message=${encodeURIComponent(messageVisite)}&tags=eyes`, {
             method: 'GET',
             mode: 'no-cors'
@@ -51,20 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elementsToAnimate.forEach(el => observer.observe(el));
 
 
-    // --- 2. FORMATAGE AUTOMATIQUE TÉLÉPHONE (00 00 00 00 00) ---
-    const phoneInput = document.querySelector('input[name="telephone"], input[name="phone"], #phone');
-
-    if (phoneInput) {
-        phoneInput.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 10) value = value.substring(0, 10);
-            const formattedValue = value.replace(/(\d{2})(?=\d)/g, '$1 ');
-            e.target.value = formattedValue;
-        });
-    }
-
-
-    // --- 3. LECTURE VIDÉO IMMERSION (SMARTPHONE) ---
+    // --- 2. LECTURE VIDÉO IMMERSION (SMARTPHONE) ---
     const bgVideo = document.querySelector('.header-bg-video');
     if (bgVideo && bgVideo.tagName === 'VIDEO') {
         bgVideo.muted = true;
@@ -80,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 4. GESTION COOKIES RGPD (Consent Mode V2) ---
+    // --- 3. GESTION COOKIES RGPD ---
     const cookieBanner = document.getElementById('cookie-banner') || document.getElementById('cookieBanner');
     const acceptBtn = document.getElementById('cookie-accept') || document.getElementById('cookieAccept');
     const rejectBtn = document.getElementById('cookie-reject') || document.getElementById('cookieRefuse');
@@ -95,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 'ad_personalization': status,
                 'analytics_storage': status
             });
-            console.log("Consentement mis à jour : " + status);
         }
 
         if (cookieBanner) {
@@ -106,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const savedConsent = localStorage.getItem('cookieConsent');
-
     if (savedConsent === 'accepted') {
         updateConsent(true);
     } else if (savedConsent === 'rejected') {
@@ -118,19 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (acceptBtn) {
-        acceptBtn.addEventListener('click', () => {
-            updateConsent(true);
-        });
+        acceptBtn.addEventListener('click', () => updateConsent(true));
     }
-
     if (rejectBtn) {
-        rejectBtn.addEventListener('click', () => {
-            updateConsent(false);
-        });
+        rejectBtn.addEventListener('click', () => updateConsent(false));
     }
 
 
-    // --- 5. GESTION MODALE VIDÉO MÉTHODE (50 SECONDES) ---
+    // --- 4. GESTION MODALE VIDÉO MÉTHODE (50 SECONDES) ---
     const videoModal = document.getElementById("video-modal") || document.getElementById("videoModal");
     const openVideoBtn = document.getElementById("open-video-btn") || document.getElementById("openVideoBtn");
     const closeVideoBtn = document.getElementById("close-video") || document.getElementById("closeVideoBtn");
@@ -154,18 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addEventListener("click", (event) => {
-            if (event.target === videoModal) {
-                stopAndCloseVideo();
-            }
+            if (event.target === videoModal) stopAndCloseVideo();
         });
     }
 
 
-    // --- 6. GESTION MENTIONS LÉGALES (Modale) ---
+    // --- 5. GESTION MENTIONS LÉGALES ---
     const legalModal = document.getElementById("legal-modal") || document.getElementById("legalModal");
     const openLegalBtn = document.getElementById("open-legal") || document.getElementById("openModalBtn");
     const closeLegalBtn = legalModal ? (legalModal.querySelector(".close-btn") || document.getElementById("closeModalBtn")) : null;
-    const linkCookies = document.getElementById('open-legal-cookies');
 
     if (openLegalBtn && legalModal) {
         openLegalBtn.addEventListener("click", (e) => {
@@ -173,28 +149,17 @@ document.addEventListener('DOMContentLoaded', () => {
             legalModal.style.display = "block";
         });
     }
-
-    if (linkCookies && legalModal) {
-        linkCookies.addEventListener("click", (e) => {
-            e.preventDefault();
-            legalModal.style.display = "block";
-        });
-    }
-
     if (closeLegalBtn && legalModal) {
         closeLegalBtn.addEventListener("click", () => {
             legalModal.style.display = "none";
         });
     }
-
     window.addEventListener("click", (event) => {
-        if (event.target === legalModal) {
-            legalModal.style.display = "none";
-        }
+        if (event.target === legalModal) legalModal.style.display = "none";
     });
 
 
-   // --- 7. MODULE D'ESTIMATION EN DIRECT (TUNNEL 2 ÉTAPES & NTFY) ---
+    // --- 6. MODULE ESTIMATION EN DIRECT (TUNNEL 2 ÉTAPES & NTFY) ---
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     const stepResult = document.getElementById('step-result');
@@ -215,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const phoneInputStep2 = document.getElementById('client_phone');
     const summaryText = document.getElementById('summary-text');
 
-    // 7.1 Gestion des boutons pilules (Pill-buttons)
+    // 6.1 Gestion des boutons pilules (Pill-buttons)
     function setupPillGroup(groupId, hiddenInputId) {
         const group = document.getElementById(groupId);
         if (!group) return;
@@ -224,18 +189,19 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 buttons.forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
-                document.getElementById(hiddenInputId).value = btn.dataset.value;
+                const target = document.getElementById(hiddenInputId);
+                if (target) target.value = btn.dataset.value;
             });
         });
     }
     setupPillGroup('typeBienGroup', 'type_bien');
     setupPillGroup('etatBienGroup', 'etat_bien');
 
-    // 7.2 Passage Étape 1 -> Étape 2
+    // 6.2 Étape 1 -> Étape 2
     if (btnToStep2) {
         btnToStep2.addEventListener('click', () => {
-            const commune = communeInput.value.trim();
-            const surface = surfaceInput.value.trim();
+            const commune = communeInput ? communeInput.value.trim() : '';
+            const surface = surfaceInput ? surfaceInput.value.trim() : '';
 
             if (!commune) {
                 communeInput.focus();
@@ -248,25 +214,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Mise à jour du bandeau récapitulatif
-            summaryText.textContent = `${typeHidden.value} • ${surface} m² • ${commune}`;
+            if (summaryText && typeHidden) {
+                summaryText.textContent = `${typeHidden.value} • ${surface} m² • ${commune}`;
+            }
 
-            // Transition
-            step1.style.display = 'none';
-            step2.style.display = 'block';
-            addressInput.focus();
+            if (step1 && step2) {
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                if (addressInput) addressInput.focus();
+            }
         });
     }
 
-    // 7.3 Retour Étape 2 -> Étape 1
+    // 6.3 Étape 2 -> Étape 1
     if (btnBackToStep1) {
         btnBackToStep1.addEventListener('click', () => {
-            step2.style.display = 'none';
-            step1.style.display = 'block';
+            if (step1 && step2) {
+                step2.style.display = 'none';
+                step1.style.display = 'block';
+            }
         });
     }
 
-    // 7.4 Autocomplétion de l'adresse avec l'API officielle gouv.fr (Gratuit)
+    // 6.4 Autocomplétion de l'adresse (API Adresse Gouv)
     let debounceTimer;
     if (addressInput && addressDropdown) {
         addressInput.addEventListener('input', (e) => {
@@ -281,8 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             debounceTimer = setTimeout(async () => {
                 try {
-                    // Recherche ciblée sur la Dordogne (dept 24) en priorité
-                    const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&postcode=${encodeURIComponent(communeInput.value.trim())}`);
+                    const postCode = communeInput ? encodeURIComponent(communeInput.value.trim()) : '';
+                    const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&postcode=${postCode}`);
                     const data = await res.json();
 
                     if (data.features && data.features.length > 0) {
@@ -308,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 250);
         });
 
-        // Fermer la liste si clic en dehors
         document.addEventListener('click', (e) => {
             if (!addressInput.contains(e.target) && !addressDropdown.contains(e.target)) {
                 addressDropdown.style.display = 'none';
@@ -316,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7.5 Formatage automatique téléphone mobile Étape 2
+    // 6.5 Formatage téléphone
     if (phoneInputStep2) {
         phoneInputStep2.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, '');
@@ -325,12 +294,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7.6 Calcul et Soumission finale
+    // 6.6 Soumission et calcul immédiat
     if (btnSubmit) {
         btnSubmit.addEventListener('click', async () => {
-            const address = addressInput.value.trim();
-            const name = nameInput.value.trim();
-            const phone = phoneInputStep2.value.trim();
+            const address = addressInput ? addressInput.value.trim() : '';
+            const name = nameInput ? nameInput.value.trim() : '';
+            const phone = phoneInputStep2 ? phoneInputStep2.value.trim() : '';
 
             if (!address) {
                 addressInput.focus();
@@ -350,17 +319,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Bouton en état chargement
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = "<span>Analyse de marché en cours...</span>";
 
-            const communeVal = communeInput.value.trim();
-            const surfaceVal = parseInt(surfaceInput.value.trim());
-            const typeVal = typeHidden.value;
-            const terrainVal = terrainSelect.value;
-            const etatVal = etatHidden.value;
+            const communeVal = communeInput ? communeInput.value.trim() : '';
+            const surfaceVal = surfaceInput ? parseInt(surfaceInput.value.trim()) : 0;
+            const typeVal = typeHidden ? typeHidden.value : 'Maison';
+            const terrainVal = terrainSelect ? terrainSelect.value : '';
+            const etatVal = etatHidden ? etatHidden.value : '';
 
-            // Alerte instantanée NTFY sur votre téléphone
+            // Envoi instantané NTFY
             const ntfyMessage = `PROSPECT ESTIMATION EN DIRECT\n👤 ${name} - 📞 ${phone}\n📍 ${address} (${communeVal})\n🏠 ${typeVal} • ${surfaceVal} m² • Terrain: ${terrainVal}\n🔨 État: ${etatVal}`;
             const ntfyUrl = `https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("🎯 Nouveau Prospect Estimation !")}&message=${encodeURIComponent(ntfyMessage)}&priority=urgent&tags=chart_with_upwards_trend,telephone_receiver,house`;
 
@@ -370,8 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Erreur ntfy lead:", err);
             }
 
-            // Calcul du positionnement (Moyennes réelles observées sur la base Périgord Vert)
-            // Estimation du prix / m² selon l'état et le type
+            // Calcul du positionnement
             let basePrixM2 = 1350;
             if (typeVal.includes('pierre')) basePrixM2 = 1380;
             if (typeVal.includes('Pavillon')) basePrixM2 = 1550;
@@ -382,19 +349,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const prixBas = Math.round((prixEstime * 0.92) / 1000) * 1000;
             const prixHaut = Math.round((prixEstime * 1.08) / 1000) * 1000;
 
-            // Remplissage des éléments de l'Étape 3
-            document.getElementById('result-property-badge').textContent = `${typeVal} • ${surfaceVal} m² • ${communeVal}`;
-            document.getElementById('result-price-range').textContent = `${prixBas.toLocaleString('fr-FR')} € – ${prixHaut.toLocaleString('fr-FR')} €`;
-            document.getElementById('result-avg-sqm').textContent = `${Math.round(basePrixM2).toLocaleString('fr-FR')} €`;
+            const badgeElem = document.getElementById('result-property-badge');
+            const rangeElem = document.getElementById('result-price-range');
+            const avgElem = document.getElementById('result-avg-sqm');
+            const compElem = document.getElementById('result-competition-count');
 
-            // Simulation du nombre de concurrents du secteur (3 à 6 biens)
+            if (badgeElem) badgeElem.textContent = `${typeVal} • ${surfaceVal} m² • ${communeVal}`;
+            if (rangeElem) rangeElem.textContent = `${prixBas.toLocaleString('fr-FR')} € – ${prixHaut.toLocaleString('fr-FR')} €`;
+            if (avgElem) avgElem.textContent = `${Math.round(basePrixM2).toLocaleString('fr-FR')} €`;
+
             const countComp = Math.floor(Math.random() * 4) + 3;
-            document.getElementById('result-competition-count').textContent = countComp;
+            if (compElem) compElem.textContent = countComp;
 
-            // Affichage du résultat en direct
             setTimeout(() => {
-                step2.style.display = 'none';
-                stepResult.style.display = 'block';
+                if (step2 && stepResult) {
+                    step2.style.display = 'none';
+                    stepResult.style.display = 'block';
+                }
             }, 600);
         });
     }
+
+});
