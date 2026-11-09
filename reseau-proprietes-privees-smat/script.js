@@ -251,8 +251,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             debounceTimer = setTimeout(async () => {
                 try {
-                    const postCode = communeInput ? encodeURIComponent(communeInput.value.trim()) : '';
-                    const res = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5&postcode=${postCode}`);
+                    const communeBrute = communeInput ? communeInput.value.trim() : '';
+                    let apiUrl = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`;
+
+                    // Si le champ commune contient un code postal à 5 chiffres, on l'utilise en filtre strict
+                    if (/^\d{5}$/.test(communeBrute)) {
+                        apiUrl += `&postcode=${communeBrute}`;
+                    } else if (communeBrute.length > 0) {
+                        // Si c'est un nom de ville, on l'ajoute dans la recherche globale
+                        apiUrl = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query + ' ' + communeBrute)}&limit=5`;
+                    }
+
+                    const res = await fetch(apiUrl);
                     const data = await res.json();
 
                     if (data.features && data.features.length > 0) {
