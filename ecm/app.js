@@ -246,6 +246,7 @@ function renderProperties(filteredList = null) {
         const isTarget = prop.ref === appState.selectedTargetRef;
         const card = document.createElement("div");
         card.className = `property-card ${isTarget ? "is-target" : ""}`;
+        card.id = `card-prop-${prop.ref}`; // Permet de cibler la carte pour le scroll
 
         // 1. Badge Référence : ouvre la FICHE DRIVE (Colonne B)
         const refMarkup = prop.driveLink 
@@ -257,7 +258,13 @@ function renderProperties(filteredList = null) {
             ? `<a href="${prop.agencyLink}" target="_blank" rel="noopener noreferrer" class="agency-link-btn" title="Voir l'annonce sur le site de l'agence" onclick="event.stopPropagation()">🌐 Annonce agence ↗</a>`
             : "";
 
+        // Pastille "Bien sélectionné" si la carte est la cible active
+        const targetBadgeMarkup = isTarget 
+            ? `<span class="target-indicator-badge">🎯 Bien analysé</span>` 
+            : "";
+
         card.innerHTML = `
+            ${targetBadgeMarkup}
             <div class="card-top">
                 <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
                     ${refMarkup}
