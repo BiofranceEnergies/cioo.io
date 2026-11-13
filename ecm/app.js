@@ -229,7 +229,7 @@ function updateDvfGaps(targetSqmPrice) {
     });
 }
 
-// AFFICHAGE DES CARTES AVEC RÉFÉRENCE CLIQUABLE VERS L'ANNONCE
+// AFFICHAGE DES CARTES AVEC LES DEUX LIENS (FICHE DRIVE + LIEN AGENCE)
 function renderProperties(filteredList = null) {
     const list = filteredList || getFilteredProperties();
     const grid = document.getElementById("properties-grid");
@@ -247,14 +247,22 @@ function renderProperties(filteredList = null) {
         const card = document.createElement("div");
         card.className = `property-card ${isTarget ? "is-target" : ""}`;
 
-        // Si une URL agence existe, on en fait un lien cliquable ↗
-        const refMarkup = prop.agencyLink 
-            ? `<a href="${prop.agencyLink}" target="_blank" rel="noopener noreferrer" class="ref-badge ref-link" onclick="event.stopPropagation()">Réf. ${prop.ref} ↗</a>`
+        // 1. Badge Référence : ouvre la FICHE DRIVE (Colonne B)
+        const refMarkup = prop.driveLink 
+            ? `<a href="${prop.driveLink}" target="_blank" rel="noopener noreferrer" class="ref-badge drive-link" title="Ouvrir la fiche Drive / PDF" onclick="event.stopPropagation()">📄 Réf. ${prop.ref}</a>`
             : `<span class="ref-badge">Réf. ${prop.ref}</span>`;
+
+        // 2. Lien Annonce Agence : ouvre le site de l'agence (Colonne A)
+        const agencyMarkup = prop.agencyLink 
+            ? `<a href="${prop.agencyLink}" target="_blank" rel="noopener noreferrer" class="agency-link-btn" title="Voir l'annonce sur le site de l'agence" onclick="event.stopPropagation()">🌐 Annonce agence ↗</a>`
+            : "";
 
         card.innerHTML = `
             <div class="card-top">
-                ${refMarkup}
+                <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
+                    ${refMarkup}
+                    ${agencyMarkup}
+                </div>
                 <span class="dpe-badge dpe-${prop.dpe.charAt(0)}">DPE ${prop.dpe}</span>
             </div>
             <div>
@@ -273,7 +281,6 @@ function renderProperties(filteredList = null) {
             </div>
         `;
 
-        // Clic sur la carte = sélectionne le bien cible (sans interférer avec le lien)
         card.addEventListener("click", () => {
             appState.selectedTargetRef = prop.ref;
             document.getElementById("target-select").value = prop.ref;
