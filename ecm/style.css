@@ -683,3 +683,33 @@ body {
     background-color: #0284c7;
     color: #ffffff;
 }
+/* ==========================================================================
+   MISE EN ÉVIDENCE DU BIEN CIBLE SÉLECTIONNÉ
+   ========================================================================== */
+.property-card.is-target {
+    border: 2.5px solid #2563eb !important; /* Bordure bleue soutenue */
+    background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%) !important; /* Dégradé lumineux */
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.25), 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+    transform: translateY(-4px);
+    position: relative;
+}
+
+/* Petit badge "Bien sélectionné" au-dessus de la carte */
+.target-indicator-badge {
+    position: absolute;
+    top: -12px;
+    right: 14px;
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    pointer-events: none;
+}
