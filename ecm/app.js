@@ -229,6 +229,7 @@ function updateDvfGaps(targetSqmPrice) {
     });
 }
 
+// AFFICHAGE DES CARTES AVEC RÉFÉRENCE CLIQUABLE VERS L'ANNONCE
 function renderProperties(filteredList = null) {
     const list = filteredList || getFilteredProperties();
     const grid = document.getElementById("properties-grid");
@@ -246,9 +247,14 @@ function renderProperties(filteredList = null) {
         const card = document.createElement("div");
         card.className = `property-card ${isTarget ? "is-target" : ""}`;
 
+        // Si une URL agence existe, on en fait un lien cliquable ↗
+        const refMarkup = prop.agencyLink 
+            ? `<a href="${prop.agencyLink}" target="_blank" rel="noopener noreferrer" class="ref-badge ref-link" onclick="event.stopPropagation()">Réf. ${prop.ref} ↗</a>`
+            : `<span class="ref-badge">Réf. ${prop.ref}</span>`;
+
         card.innerHTML = `
             <div class="card-top">
-                <span class="ref-badge">Réf. ${prop.ref}</span>
+                ${refMarkup}
                 <span class="dpe-badge dpe-${prop.dpe.charAt(0)}">DPE ${prop.dpe}</span>
             </div>
             <div>
@@ -267,6 +273,7 @@ function renderProperties(filteredList = null) {
             </div>
         `;
 
+        // Clic sur la carte = sélectionne le bien cible (sans interférer avec le lien)
         card.addEventListener("click", () => {
             appState.selectedTargetRef = prop.ref;
             document.getElementById("target-select").value = prop.ref;
