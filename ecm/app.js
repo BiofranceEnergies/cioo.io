@@ -1,7 +1,7 @@
 /**
  * ==========================================================================
  * OBSERVATOIRE IMMOBILIER & DVF — APPLICATION JAVASCRIPT (app.js)
- * Sylvain MATIGNON • Propriétés-Privées • Nontron & Périgord Vert
+ * Mode 100% Autonome • Sylvain MATIGNON • Propriétés-Privées
  * ==========================================================================
  */
 
@@ -37,22 +37,8 @@ const DVF_BASSIN_DATA = {
     }
 };
 
-// PORTEFEUILLE DE BIENS (Synchronisable ou base de départ)
+// PORTEFEUILLE COMPLET — LES 17 BIENS RÉELS DE VOTRE TABLEUR (250k€ - 300k€)
 let propertiesData = [
-    {
-        ref: "2112309",
-        commune: "Saint-Martin-le-Pin",
-        type: "Grange rénovée",
-        price: 283500,
-        surface: 120,
-        sqmPrice: 2358,
-        land: 5255,
-        rooms: 4,
-        dpe: "C",
-        agency: "iad France",
-        desc: "Grange entièrement rénovée à neuf, séjour lumineux, poêle à granulés, terrain clos 5255m².",
-        isTargetDefault: true
-    },
     {
         ref: "98-5689",
         commune: "Soudat",
@@ -64,20 +50,20 @@ let propertiesData = [
         rooms: 5,
         dpe: "B",
         agency: "Human Immobilier",
-        desc: "Maison pierre rénovée 8p au calme, grand séjour 39m², 5 chambres, terrain 1010m²."
+        desc: "Maison pierre rénovée 8p au calme en impasse, séjour 39m², grande cuisine aménagée, 5 ch, terrain 1010m²."
     },
     {
         ref: "98-5554",
         commune: "Javerlhac-et-la-Chapelle-Saint-Robert",
-        type: "Propriété avec sous-sol",
+        type: "Propriété avec sous-sol aménagé",
         price: 254880,
         surface: 226,
         sqmPrice: 1128,
         land: 2210,
         rooms: 3,
         dpe: "D",
-        agency: "Human Immobilier",
-        desc: "Belle propriété avec pièce de vie de plain-pied et sous-sol totalement aménagé."
+        agency: "HUMAN Immobilier Nontron",
+        desc: "Belle propriété de plain-pied : séjour 36m², cuisine équipée, 3 ch, sous-sol totalement aménagé, jardin 2210m²."
     },
     {
         ref: "3847",
@@ -90,7 +76,7 @@ let propertiesData = [
         rooms: 3,
         dpe: "C",
         agency: "Immobilière Brun Salat",
-        desc: "Maison rénovée avec studio indépendant, grange/atelier, terrain pré et bois de 2,7 ha."
+        desc: "Maison rénovée, cheminée, studio indépendant, grange/atelier, terrain pré et bois de 2,7 ha."
     },
     {
         ref: "3712",
@@ -103,7 +89,7 @@ let propertiesData = [
         rooms: 3,
         dpe: "C",
         agency: "Immobilière Brun Salat",
-        desc: "Fermette rénovée de plain-pied, salon cathédrale 50m², piscine 8x4 avec dôme."
+        desc: "Fermette rénovée plain-pied, salon cathédrale 50m², poêle à bois, piscine 8x4 dôme, garage, terrain 1563m²."
     },
     {
         ref: "98-5652",
@@ -116,11 +102,11 @@ let propertiesData = [
         rooms: 7,
         dpe: "D",
         agency: "Human Immobilier",
-        desc: "Longère en pierre 9p à la campagne, granges attenantes, terrain exceptionnel 3,6 ha."
+        desc: "Longère en pierre 9p à la campagne, plain-pied, 7 ch, granges attenantes, grand terrain de 36670m²."
     },
     {
         ref: "3797",
-        commune: "Saint-Pardoux-la-Rivière",
+        commune: "Proche Saint-Pardoux-la-Rivière",
         type: "Ferme restaurée",
         price: 278250,
         surface: 121,
@@ -129,7 +115,20 @@ let propertiesData = [
         rooms: 4,
         dpe: "D",
         agency: "Immobilière Brun Salat",
-        desc: "Ferme restaurée, studio d'étage indépendant, étang de 9700m², parc de 2,3 ha."
+        desc: "Ferme restaurée, séjour 55m², studio à l'étage sur caves, atelier, 2 granges, puits, étang 9700m², parc 2,3 ha."
+    },
+    {
+        ref: "2112309",
+        commune: "Saint-Martin-le-Pin",
+        type: "Grange rénovée",
+        price: 283500,
+        surface: 120,
+        sqmPrice: 2358,
+        land: 5255,
+        rooms: 4,
+        dpe: "C",
+        agency: "iad France (Sylvie Vandenbosch)",
+        desc: "Grange entièrement rénovée à neuf, séjour lumineux, poêle à granulés, terrain clos 5255m² vue dégagée."
     },
     {
         ref: "3631",
@@ -142,24 +141,37 @@ let propertiesData = [
         rooms: 4,
         dpe: "B",
         agency: "Immobilière Brun Salat",
-        desc: "Maison 1978 sur sous-sol aménageable, PAC, piscine 10x5, terrain 1,15 ha."
+        desc: "Maison 1978 sur sous-sol aménageable, séjour 58m², PAC + solaire, piscine 10x5, hangar 156m², terrain 1,15 ha."
     },
     {
         ref: "BVI77625",
         commune: "Busserolles",
-        type: "Ensemble 2 maisons",
+        type: "Ensemble 2 maisons en pierre",
         price: 288850,
         surface: 191,
         sqmPrice: 1512,
         land: 2932,
         rooms: 5,
         dpe: "C",
-        agency: "Beaux Villages",
-        desc: "Ensemble de 2 maisons mitoyennes en pierre, hameau calme, terrasses indépendantes."
+        agency: "Beaux Villages Immobilier",
+        desc: "Ensemble 2 maisons mitoyennes pierre, hameau calme, PAC air-eau, garage indépendant, abri, terrain 2932m²."
+    },
+    {
+        ref: "98-5589",
+        commune: "Nontron",
+        type: "Maison de plain-pied sans travaux",
+        price: 293216,
+        surface: 187,
+        sqmPrice: 1568,
+        land: 11394,
+        rooms: 3,
+        dpe: "B",
+        agency: "HUMAN Immobilier Nontron",
+        desc: "Proche centre-ville Nontron, plain-pied 187m², pièce de vie 51m², PAC, double garage, grand parc 11394m²."
     },
     {
         ref: "3836",
-        commune: "Saint-Martin-le-Pin",
+        commune: "Nontron (10mn)",
         type: "Grange rénovée",
         price: 294000,
         surface: 120,
@@ -168,20 +180,46 @@ let propertiesData = [
         rooms: 4,
         dpe: "C",
         agency: "Immobilière Brun Salat",
-        desc: "Grange en pierre rénovée, vue dégagée campagne, terrain 5255m²."
+        desc: "Ancienne grange rénovée, séjour poêle granulés, cuisine équipée, 0 travaux, terrain 5255m²."
+    },
+    {
+        ref: "98-5647",
+        commune: "Saint-Martin-le-Pin",
+        type: "Ancienne grange rénovée",
+        price: 296520,
+        surface: 150,
+        sqmPrice: 1977,
+        land: 5255,
+        rooms: 4,
+        dpe: "C",
+        agency: "HUMAN Immobilier Nontron",
+        desc: "Cadre privilégié vue dégagée, grange en pierre rénovée, séjour 40m², clim réversible, terrain 5255m²."
     },
     {
         ref: "98-5336",
         commune: "Abjat-sur-Bandiat",
-        type: "Maison de caractère",
+        type: "Maison traditionnelle en pierre",
         price: 296800,
         surface: 177,
         sqmPrice: 1677,
         land: 2783,
         rooms: 6,
         dpe: "E",
-        agency: "Human Immobilier",
-        desc: "Maison familiale en pierre et poutres, séjour 37m² avec cheminée granit, piscine."
+        agency: "HUMAN Immobilier Nontron",
+        desc: "Maison de caractère familiale en pierre, séjour 37m² cheminée granit, piscine, parc clos 2783m²."
+    },
+    {
+        ref: "BVI84708",
+        commune: "Savignac-de-Nontron",
+        type: "Maison de caractère en pierre",
+        price: 297460,
+        surface: 183,
+        sqmPrice: 1625,
+        land: 2125,
+        rooms: 5,
+        dpe: "B",
+        agency: "Beaux Villages Immobilier",
+        desc: "Maison de caractère rénovée en bordure de village, plancher chauffant PAC, 3 dépendances, jardin 2125m²."
     },
     {
         ref: "3750",
@@ -194,7 +232,33 @@ let propertiesData = [
         rooms: 4,
         dpe: "A",
         agency: "Immobilière Brun Salat",
-        desc: "Grange rénovée haut de gamme, PAC au sol, alu double vitrage, prestations soignées."
+        desc: "Grange rénovée haut de gamme, séjour 57m², PAC au sol, double vitrage alu, terrain 1559m²."
+    },
+    {
+        ref: "3467",
+        commune: "Saint-Estèphe",
+        type: "Maison",
+        price: 299250,
+        surface: 227,
+        sqmPrice: 1318,
+        land: 2824,
+        rooms: 4,
+        dpe: "C",
+        agency: "Immobilière Brun Salat",
+        desc: "Villa 2000 proche étang, 2 suites RDC, gîte attenant, piscine couverte 11x5, parc 2824m²."
+    },
+    {
+        ref: "3811",
+        commune: "Savignac-de-Nontron",
+        type: "Maison de campagne",
+        price: 299250,
+        surface: 221,
+        sqmPrice: 1354,
+        land: 2125,
+        rooms: 4,
+        dpe: "B",
+        agency: "Immobilière Brun Salat",
+        desc: "Superbe rénovation pierre 1850, séjour 70m², suite parentale, PAC, grange séparée, puits, 2125m²."
     }
 ];
 
@@ -204,7 +268,7 @@ let appState = {
     maxPrice: null,
     minRooms: 0,
     dpeMax: "ALL",
-    selectedTargetRef: "2112309"
+    selectedTargetRef: "2112309" // Bien cible par défaut
 };
 
 // INITIALISATION DU DOM
@@ -215,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderDvfTable();
 });
 
-// INITIALISATION DES FILTRES
+// GESTION DES FILTRES ET ÉCOUTEURS
 function initFilters() {
     const minInput = document.getElementById("min-price");
     const maxInput = document.getElementById("max-price");
@@ -249,6 +313,7 @@ function initFilters() {
         });
     });
 
+    // Quand on change de bien cible via le menu déroulant
     targetSelect.addEventListener("change", (e) => {
         appState.selectedTargetRef = e.target.value;
         renderTargetBenchmark();
@@ -263,7 +328,7 @@ function updateBudgetLabel() {
     lbl.textContent = `${minStr} – ${maxStr}`;
 }
 
-// ALIMENTATION DU SÉLECTEUR DE BIEN CIBLE
+// ALIMENTATION DYNAMIQUE DU SÉLECTEUR DE BIEN CIBLE
 function populateTargetDropdown() {
     const select = document.getElementById("target-select");
     select.innerHTML = "";
@@ -279,7 +344,7 @@ function populateTargetDropdown() {
     });
 }
 
-// LOGIQUE DE FILTRAGE
+// FILTRAGE DYNAMIQUE DES BIENS
 function getFilteredProperties() {
     const dpeRank = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
 
@@ -298,7 +363,7 @@ function getFilteredProperties() {
     }).sort((a, b) => a.price - b.price);
 }
 
-// RENDU GLOBAL
+// MISE À JOUR GLOBALE DE L'INTERFACE
 function renderAll() {
     const filtered = getFilteredProperties();
     renderKpis(filtered);
@@ -306,7 +371,7 @@ function renderAll() {
     renderProperties(filtered);
 }
 
-// MISE À JOUR DES KPI MARCHÉ
+// MISE À JOUR DES KPI (CORRESPONDANT À G3, H3, I3 DU TABLEUR)
 function renderKpis(filtered) {
     const count = filtered.length;
     const avgPrice = count > 0 ? Math.round(filtered.reduce((s, p) => s + p.price, 0) / count) : 0;
@@ -318,19 +383,20 @@ function renderKpis(filtered) {
     document.getElementById("list-counter").textContent = `${count} bien(s) correspondant(s)`;
 }
 
-// ANALYSE DU BIEN CIBLE FACE À LA SÉLECTION FILTRÉE (HARMONISÉ AVEC G5)
+// ANALYSE DU BIEN CIBLE : SE RECALCULE INSTANTANÉMENT DÈS QU'ON CHANGE DE BIEN !
 function renderTargetBenchmark(filteredList = null) {
     const filtered = filteredList || getFilteredProperties();
     const target = propertiesData.find(p => p.ref === appState.selectedTargetRef);
 
     if (!target) return;
 
+    // Remplissage des détails du bien sélectionné
     document.getElementById("target-commune").textContent = target.commune;
     document.getElementById("target-surface").textContent = `${target.surface} m² (${target.rooms} ch.)`;
     document.getElementById("target-price").textContent = formatCurrency(target.price);
     document.getElementById("target-sqm").textContent = `${formatNumber(target.sqmPrice)} €/m²`;
 
-    // Calcul de l'écart face à la sélection active (Concurrence directe en vente)
+    // Calcul de l'écart face à la sélection filtrée (comme en G5 du tableur !)
     const vsMarketBadge = document.getElementById("target-vs-market");
     if (filtered.length > 0) {
         const avgFilteredSqm = filtered.reduce((s, p) => s + p.sqmPrice, 0) / filtered.length;
@@ -356,14 +422,14 @@ function renderTargetBenchmark(filteredList = null) {
         vsMarketBadge.style.color = "var(--text-muted)";
     }
 
-    // Actualisation des écarts dans le tableau DVF
+    // Mise à jour immédiate de la ligne "Votre bien vs le marché" dans le tableau DVF
     updateDvfGaps(target.sqmPrice);
 }
 
-// RENDU DU TABLEAU HISTORIQUE DVF DU BASSIN DE NONTRON
+// RENDU INITIAL DU TABLEAU HISTORIQUE DVF DU BASSIN
 function renderDvfTable() {
     DVF_BASSIN_DATA.years.forEach(year => {
-        // Ligne 1 : Prix réel de vente
+        // Ligne 1 : Prix réel de vente (Médiane)
         const medEl = document.getElementById(`dvf-median-${year}`);
         if (medEl) medEl.textContent = `${formatNumber(DVF_BASSIN_DATA.median_sqm[year])} €`;
 
@@ -380,7 +446,7 @@ function renderDvfTable() {
     if (target) updateDvfGaps(target.sqmPrice);
 }
 
-// ACTUALISATION DES ÉCARTS « VOTRE BIEN VS LE MARCHÉ » (LIGNE 3 DU TABLEAU DVF)
+// RECALCUL DYNAMIQUE DE LA LIGNE "VOTRE BIEN VS LE MARCHÉ" POUR CHAQUE ANNÉE
 function updateDvfGaps(targetSqmPrice) {
     DVF_BASSIN_DATA.years.forEach(year => {
         const gapEl = document.getElementById(`dvf-gap-${year}`);
@@ -391,11 +457,12 @@ function updateDvfGaps(targetSqmPrice) {
         const sign = gapPct >= 0 ? "+" : "";
 
         gapEl.textContent = `${sign}${gapPct.toFixed(1)}%`;
+        // Code couleur pédagogique : rouge si au-dessus de +20%, vert si en dessous de -5%, bleu sinon
         gapEl.style.color = gapPct > 20 ? "#b91c1c" : (gapPct < -5 ? "#047857" : "#1d4ed8");
     });
 }
 
-// RENDU DES CARTES DU PORTEFEUILLE
+// AFFICHAGE DES CARTES DES BIENS
 function renderProperties(filteredList = null) {
     const list = filteredList || getFilteredProperties();
     const grid = document.getElementById("properties-grid");
@@ -434,6 +501,7 @@ function renderProperties(filteredList = null) {
             </div>
         `;
 
+        // CLIC SUR UNE CARTE = SÉLECTION IMMÉDIATE DU BIEN COMME BIEN CIBLE !
         card.addEventListener("click", () => {
             appState.selectedTargetRef = prop.ref;
             document.getElementById("target-select").value = prop.ref;
@@ -445,7 +513,7 @@ function renderProperties(filteredList = null) {
     });
 }
 
-// FORMATTEURS UTILITAIRES
+// FORMATTEURS
 function formatCurrency(val) {
     return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(val);
 }
