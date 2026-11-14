@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
- // 6.6 Soumission, Interrogation Google Sheets & Notification Complète
+    // 6.6 Soumission, Interrogation Google Sheets & Notification Complète
     if (btnSubmit) {
         btnSubmit.addEventListener('click', async () => {
             const address = addressInput ? addressInput.value.trim() : '';
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-           // Validation stricte du format et filtrage des faux numéros
+            // Validation stricte du format et filtrage des faux numéros
             const cleanPhone = phone.replace(/\D/g, '');
 
             const fauxNumeros = [
@@ -349,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             btnSubmit.disabled = true;
-           btnSubmit.innerHTML = `<span>Consultation de la base locale</span><span class="loading-dots"><span></span><span></span><span></span></span>`;
+            btnSubmit.innerHTML = `<span>Consultation de la base locale</span><span class="loading-dots"><span></span><span></span><span></span></span>`;
 
             const communeVal = communeInput ? communeInput.value.trim() : '';
             const surfaceVal = surfaceInput ? parseInt(surfaceInput.value.trim()) : 0;
@@ -419,8 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
 🔨 État: ${etatVal}
 💰 Estimation affichée: ${fourchetteTexte}`;
 
-            // Envoi compatible navigateur sans blocage CORS
-           // Envoi compatible et garanti sans blocage
+            // Envoi compatible et garanti sans blocage
             const ntfyPublishUrl = `https://ntfy.sh/${NTFY_TOPIC}/publish?title=${encodeURIComponent("Nouveau Prospect : " + name)}&priority=high&tags=house,euro&message=${encodeURIComponent(ntfyMessage)}`;
 
             fetch(ntfyPublishUrl, {
@@ -428,8 +427,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 mode: 'no-cors'
             }).catch(err => console.error("Erreur envoi ntfy:", err));
 
+            // --- CONVERSION GOOGLE ADS (Lead Simulateur Périgord Vert) ---
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-11242044118/wMtCCOKQyLgdENb1z_Ap',
+                    'value': 1.0,
+                    'currency': 'EUR'
+                });
+            }
+            // -------------------------------------------------------------
+
             // 4. Transition vers l'écran résultat
-         // 4. Transition vers l'écran résultat
             step2.style.display = 'none';
             stepResult.style.display = 'block';
         });
