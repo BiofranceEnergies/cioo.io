@@ -132,3 +132,541 @@
     .advisor-role {
       color: #718096;
       font-weight: 600;
+    }
+    .advisor-contact {
+      color: #2b6cb0;
+      font-weight: 500;
+    }
+    .header-doc-title {
+      text-align: right;
+    }
+    .header-doc-title h1 {
+      margin: 0;
+      font-size: 12.5px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .header-doc-title p {
+      margin: 2px 0 0 0;
+      font-size: 8.5px;
+      color: #4a5568;
+      font-weight: 500;
+    }
+
+    .section-title {
+      background: #1a365d;
+      color: #ffffff;
+      font-size: 9px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      padding: 3.5px 7px;
+      border-radius: 3px;
+      margin-top: 6px;
+      margin-bottom: 5px;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .identity-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 6px 8px;
+    }
+    .identity-card h4 {
+      margin: 0 0 5px 0;
+      font-size: 9px;
+      color: #1a365d;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 2px;
+    }
+    .id-row {
+      display: flex;
+      margin-bottom: 2.5px;
+      font-size: 8.5px;
+    }
+    .id-label {
+      width: 115px;
+      font-weight: 600;
+      color: #718096;
+      flex-shrink: 0;
+    }
+    .id-value {
+      color: #2d3748;
+      font-weight: 600;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 8.5px;
+    }
+    table.data-table th {
+      background: #edf2f7;
+      color: #2d3748;
+      text-align: left;
+      padding: 4px 5px;
+      font-weight: 600;
+      border-bottom: 1px solid #cbd5e0;
+      font-size: 8px;
+      text-transform: uppercase;
+    }
+    table.data-table td {
+      padding: 4px 5px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #2d3748;
+      vertical-align: middle;
+      line-height: 1.2;
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-target {
+      background: #e6fffa;
+      color: #234e52;
+      font-weight: bold;
+      padding: 1.5px 4px;
+      border-radius: 3px;
+      border: 1px solid #b2f5ea;
+      display: inline-block;
+      font-size: 7.5px;
+      white-space: nowrap;
+    }
+    .badge-alert {
+      background: #fff5f5;
+      color: #9b2c2c;
+      font-weight: bold;
+      padding: 1.5px 4px;
+      border-radius: 3px;
+      border: 1px solid #fed7d7;
+      display: inline-block;
+      font-size: 7.5px;
+      white-space: nowrap;
+    }
+    .badge-success {
+      background: #f0fff4;
+      color: #22543d;
+      font-weight: bold;
+      padding: 1.5px 4px;
+      border-radius: 3px;
+      border: 1px solid #c6f6d5;
+      display: inline-block;
+      font-size: 7.5px;
+      white-space: nowrap;
+    }
+    .badge-warning {
+      background: #fffaf0;
+      color: #744210;
+      font-weight: bold;
+      padding: 1.5px 4px;
+      border-radius: 3px;
+      border: 1px solid #feebc8;
+      display: inline-block;
+      font-size: 7.5px;
+      white-space: nowrap;
+    }
+    .ref-link {
+      color: #2b6cb0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .diag-box {
+      border-radius: 5px;
+      padding: 6px 8px;
+      font-size: 8.5px;
+    }
+    .diag-box.atouts {
+      background: #f0fff4;
+      border: 1px solid #c6f6d5;
+      color: #22543d;
+    }
+    .diag-box.freins {
+      background: #fffaf0;
+      border: 1px solid #feebc8;
+      color: #744210;
+    }
+    .diag-box h4 {
+      margin: 0 0 4px 0;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+    .diag-box ul {
+      margin: 0;
+      padding-left: 11px;
+    }
+    .diag-box li {
+      margin-bottom: 3px;
+      line-height: 1.25;
+    }
+    .diag-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+    .price-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 5px;
+      padding: 6px 4px;
+      text-align: center;
+      background: #ffffff;
+    }
+    .price-card.pivot {
+      border: 2px solid #2b6cb0;
+      background: #ebf8ff;
+    }
+    .price-card-title {
+      font-size: 8.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #718096;
+      margin-bottom: 2px;
+    }
+    .price-card.pivot .price-card-title {
+      color: #2b6cb0;
+    }
+    .price-card-val {
+      font-size: 15px;
+      font-weight: bold;
+      color: #1a202c;
+      margin-bottom: 2px;
+    }
+    .price-card.pivot .price-card-val {
+      color: #2b6cb0;
+      font-size: 17px;
+    }
+    .price-card-desc {
+      font-size: 7.5px;
+      color: #718096;
+      line-height: 1.2;
+    }
+
+    .conclusion-box {
+      background: #f8fafc;
+      border-left: 3px solid #1a365d;
+      padding: 6px 10px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+      font-size: 8.5px;
+      line-height: 1.35;
+      color: #2d3748;
+    }
+    .conclusion-box h4 {
+      margin: 0 0 3px 0;
+      font-size: 9px;
+      color: #1a365d;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .legal-notice {
+      margin-top: 5px;
+      padding: 4px 6px;
+      background: #edf2f7;
+      border-radius: 4px;
+      font-size: 7px;
+      line-height: 1.25;
+      color: #4a5568;
+      font-style: italic;
+    }
+
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 4px;
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <span>💡 <strong>Avis de Valeur Vénale :</strong> Maison 78 m² sur Sous-sol complet, 24300 Nontron — <code>Ctrl+P</code> pour imprimer / exporter en PDF.</span>
+    <button class="btn-print" onclick="window.print()">Imprimer en PDF</button>
+  </div>
+
+  <!-- ======================== PAGE 1 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <header>
+          <div class="header-left">
+            <div class="logo-container">
+              <img src="https://raw.githubusercontent.com/BiofranceEnergies/cioo.io/6027976c74a7ef9161a4326c871d67e78413b602/reseau-proprietes-privees-smat/pp_logo_quadri_seul.png" alt="Propriétés Privées">
+            </div>
+            <div class="advisor-info">
+              <div class="advisor-name">Sylvain MATIGNON</div>
+              <div class="advisor-role">Conseiller Indépendant en Immobilier</div>
+              <div class="advisor-contact">
+                📞 06 48 89 34 80 &nbsp;|&nbsp; ✉️ s.matignon@proprietes-privees.com
+              </div>
+            </div>
+          </div>
+          <div class="header-doc-title">
+            <h1>Avis de Valeur Vénale Immobilière</h1>
+            <p>Étude Comparative de Marché (ECM) — Analyse Sol-Bâtiment & Dépendances</p>
+          </div>
+        </header>
+
+        <!-- IDENTIFICATION DU BIEN -->
+        <div class="identity-grid">
+          <div class="identity-card">
+            <h4>Désignation & Configuration Bâtie de l'Assiette</h4>
+            <div class="id-row"><span class="id-label">Localisation :</span><span class="id-value">24300 Nontron — Secteur résidentiel / accès goudronné</span></div>
+            <div class="id-row"><span class="id-label">Nature du bien :</span><span class="id-value">Pavillon individuel sur sous-sol complet (constr. 1966)</span></div>
+            <div class="id-row"><span class="id-label">Surface habitable :</span><span class="id-value"><strong>78 m²</strong> (3 pièces principales de plain-pied surélevé)</span></div>
+            <div class="id-row"><span class="id-label">Agencement intérieur :</span><span class="id-value">Pièce de vie, 2 chambres, 1 salle de bains, terrasse 20 m²</span></div>
+            <div class="id-row"><span class="id-label">Sous-sol & Annexes :</span><span class="id-value"><strong>Sous-sol complet 65 m²</strong> (garage, atelier, stockage, cuisine d'été)</span></div>
+            <div class="id-row"><span class="id-label">Assiette foncière :</span><span class="id-value"><strong>1 000 m²</strong> de terrain avec accès goudronné</span></div>
+          </div>
+          <div class="identity-card">
+            <h4>État Technique & Contraintes Matérielles</h4>
+            <div class="id-row"><span class="id-label">Assainissement :</span><span class="id-value"><span class="badge-success">Raccordé au Réseau Collectif (Tout-à-l'égout)</span></span></div>
+            <div class="id-row"><span class="id-label">Performance DPE :</span><span class="id-value"><span class="badge-success">DPE D / GES D (Classement favorable)</span></span></div>
+            <div class="id-row"><span class="id-label">Chauffage principal :</span><span class="id-value">Chauffage central au fioul</span></div>
+            <div class="id-row"><span class="id-label">État général :</span><span class="id-value"><span class="badge-alert">À rafraîchir nettement (décoration & second œuvre)</span></span></div>
+            <div class="id-row"><span class="id-label">Année de construction :</span><span class="id-value">1966 (maçonnerie traditionnelle saine)</span></div>
+            <div class="id-row"><span class="id-label">Stationnement :</span><span class="id-value">Garage intégré en sous-sol + cour goudronnée</span></div>
+          </div>
+        </div>
+
+        <!-- 1. DIAGNOSTIC ANALYTIQUE DES ÉLÉMENTS DE VALEUR -->
+        <div class="section-title">1. Facteurs d'Appréciation Objective de la Valeur Vénale</div>
+        <div class="diag-grid">
+          <div class="diag-box atouts">
+            <h4>Éléments Positifs Valorables (Plus-values d'Actif)</h4>
+            <ul>
+              <li><strong>Tout-à-l'égout effectif :</strong> Raccordement au réseau collectif d'assainissement, évitant à l'acquéreur un budget de mise aux normes de 10 000 € à 15 000 €.</li>
+              <li><strong>Sous-sol complet de 65 m² :</strong> Surface annexe polyvalente (garage, atelier, stockage, cuisine d'été) avec accès goudronné, très recherchée par les bricoleurs et artisans.</li>
+              <li><strong>Classement énergétique DPE D / GES D :</strong> Performance thermique déjà située en zone médiane malgré la chauffe fioul, limitant l'urgence d'une isolation lourde.</li>
+              <li><strong>Terrain calibré de 1 000 m² & terrasse 20 m² :</strong> Parcelle facile d'entretien en secteur nontronnais, offrant un extérieur agréable sans contrainte d'entretien excessif.</li>
+            </ul>
+          </div>
+          <div class="diag-box freins">
+            <h4>Facteurs de Décote Reconnus (Passif Second Œuvre & Configuration)</h4>
+            <ul>
+              <li><strong>État général à rafraîchir nettement :</strong> Sols, peintures/tapisseries, cuisine et salle de bains d'époque (1966) nécessitant une modernisation complète pour répondre aux standards actuels.</li>
+              <li><strong>Chauffage au fioul :</strong> Énergie fossile pénalisante à la revente ; les acquéreurs intègrent systématiquement le remplacement de la chaudière (PAC air/eau ou hybride) dans leur plan de financement.</li>
+              <li><strong>Surface habitable compacte (78 m² / 2 ch.) :</strong> Typologie T3 ciblant principalement les couples, primo-accédants ou retraités, excluant les familles de 2 enfants et plus.</li>
+              <li><strong>Accès surélevé (sous-sol) :</strong> Présence d'un escalier d'accès au niveau de vie principal, limitant l'attrait pour une clientèle senior recherchant un plain-pied intégral.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2. DÉCOMPOSITION MÉTHODIQUE DE LA VALEUR VÉNALE -->
+        <div class="section-title">2. Décomposition Analytique de la Valeur Vénale (Net Vendeur)</div>
+        <p style="margin: 2px 0 4px 0; font-size: 8px; color: #4a5568;">
+          Ventilation réaliste de l'assiette bâtie selon la méthode d'évaluation sol-bâtiment et de déduction du passif second œuvre :
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Composante de la Propriété</th>
+              <th>Surface / Unité</th>
+              <th>Caractéristiques & Niveau de Prestations Réel</th>
+              <th>Méthode d'Appréciation</th>
+              <th>Fourchette Basse</th>
+              <th>Fourchette Haute</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Habitation principale</strong></td>
+              <td>78,00 m² hab.</td>
+              <td>Pavillon 1966 (T3 / 2 ch.), DPE D, tout-à-l'égout, mais rafraîchissement net et fioul</td>
+              <td>Base marché corrigée (1 025 à 1 180 €/m²)</td>
+              <td>80 000 €</td>
+              <td>92 000 €</td>
+            </tr>
+            <tr>
+              <td><strong>Sous-sol complet & Terrasse</strong></td>
+              <td>65 m² + 20 m²</td>
+              <td>Garage, atelier, stockage, cuisine d'été, accès goudronné + terrasse extérieure 20 m²</td>
+              <td>Surfaces annexes utiles (~230 à 275 €/m²)</td>
+              <td>15 000 €</td>
+              <td>18 000 €</td>
+            </tr>
+            <tr>
+              <td><strong>Terrain & Réseaux</strong></td>
+              <td>1 000 m²</td>
+              <td>Parcelle résidentielle sur Nontron raccordée au tout-à-l'égout</td>
+              <td>Assiette foncière bâtie intégrée</td>
+              <td><span class="badge-success">Inclus</span></td>
+              <td><span class="badge-success">Inclus</span></td>
+            </tr>
+            <tr style="background: #fffaf0; color: #744210;">
+              <td colspan="4"><strong>Enveloppe travaux estimée pour un acquéreur :</strong> Rafraîchissement intérieur intégral (peintures, revêtements de sols, cuisine équipée, modernisation SDB, mise en sécurité électrique) et remplacement éventuel de la chaudière fioul.</td>
+              <td colspan="2"><span class="badge-alert">Budget travaux : 25 000 € à 35 000 €</span></td>
+            </tr>
+            <tr style="background: #ebf8ff; font-weight: bold; color: #1a365d;">
+              <td colspan="4">VALEUR VÉNALE RÉELLE RÉALISTE DE L'ENSEMBLE (NET VENDEUR HORS FRAIS)</td>
+              <td><strong>95 000 €</strong></td>
+              <td><span class="badge-target" style="font-size: 9px;">110 000 € NET</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Maison 78 m² sur Sous-sol, Nontron (24300) — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 1/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== PAGE 2 ======================== -->
+  <div class="sheet-page">
+    <div class="content-wrap">
+      <div>
+        <!-- 3. CONFRONTATION AUX DONNÉES DU MARCHÉ LOCAL -->
+        <div class="section-title" style="margin-top: 0;">3. Cohérence avec le Marché Réel (Base Comparative ECM Nontronnais)</div>
+        <p style="margin: 2px 0 4px 0; font-size: 8px; color: #4a5568;">
+          Confrontation directe de la valeur vénale avec les biens comparables relevés sur le bassin de Nontron (Base ECM) :
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Référence / Commune</th>
+              <th>Typologie & Prestations</th>
+              <th>Surf. Hab.</th>
+              <th>Terrain / Dépendance</th>
+              <th>DPE</th>
+              <th>Prix Net Vendeur</th>
+              <th>Ratio Net / m²</th>
+              <th>Analyse Comparative & Écarts Objectifs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: #ebf8ff;">
+              <td><strong>Bien Évalué (Nontron)</strong></td>
+              <td>Pavillon 1966 (2 ch.) à rafraîchir</td>
+              <td><strong>78 m²</strong></td>
+              <td><strong>1 000 m²</strong> + sous-sol 65 m²</td>
+              <td>D / D</td>
+              <td><strong>102 000 €</strong></td>
+              <td><strong>1 308 € / m²*</strong></td>
+              <td><strong>Valeur pivot réaliste.</strong> Valorise le sous-sol de 65 m², le tout-à-l'égout et le DPE D après décote travaux de modernisation.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">St-Pardoux (Réf. 3561)</span></td>
+              <td>Maison bourg rénovée (3 ch.)</td>
+              <td>93 m²</td>
+              <td>320 m² + atelier 50 m² + garage</td>
+              <td>C / A</td>
+              <td>90 000 € net</td>
+              <td>968 € / m²</td>
+              <td>PAC, toiture et menuiseries récentes, aucun gros œuvre. Confirme le plafond psychologique autour de 90-105 k€ net pour un bien compact.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Nontron (Réf. 98-5639)</span></td>
+              <td>Maison sur sous-sol complet (3 ch.)</td>
+              <td>136 m²</td>
+              <td>3 032 m² + sous-sol garage</td>
+              <td>F / F</td>
+              <td>120 000 € net</td>
+              <td>882 € / m²</td>
+              <td>Même configuration (sous-sol + fioul + intérieur d'origine) mais 58 m² habitables et 2 000 m² de terrain supplémentaires.</td>
+            </tr>
+            <tr>
+              <td><span class="ref-link">Nontron (Réf. 3763)</span></td>
+              <td>Pavillon plain-pied récent (3 ch.)</td>
+              <td>94 m²</td>
+              <td>2 500 m²</td>
+              <td>D / B</td>
+              <td>145 000 € net</td>
+              <td>1 543 € / m²</td>
+              <td>Plain-pied sans marche et sans travaux. Montre qu'un bien à rafraîchir (achat + 30 k€ travaux) doit rester nettement sous 145 k€ net.</td>
+            </tr>
+            <tr style="background: #fffaf0;">
+              <td><span class="ref-link">Nontron 10mn (Réf. 3449)</span></td>
+              <td>Maison pierre rénovée (2 ch.)</td>
+              <td>121 m²</td>
+              <td>300 m² + garage/atelier</td>
+              <td>D / C</td>
+              <td>160 000 € net</td>
+              <td>1 322 € / m²</td>
+              <td>Même nombre de chambres (2 ch.) et tout-à-l'égout, mais surface supérieure (+43 m²) et rénovation achevée sans travaux.</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 7.5px; color: #718096; margin-top: 2px; margin-bottom: 4px;">*Ratio net global rapporté à la surface habitable, intégrant la valeur utile des 65 m² de sous-sol complet et de la terrasse de 20 m².</div>
+
+        <!-- 4. FOURCHETTES D'ARBITRAGE DE VALEUR VÉNALE -->
+        <div class="section-title">4. Fourchettes d'Arbitrage & Préconisations de Valeur Vénale</div>
+
+        <div class="pricing-cards">
+          <div class="price-card">
+            <div class="price-card-title">Seuil Bas (Vente Immédiate)</div>
+            <div class="price-card-val">95 000 €</div>
+            <div class="price-card-desc"><strong>1 218 € / m² hab.</strong><br>Positionnement offensif intégrant l'enveloppe maximale de travaux (modernisation complète + remplacement chaudière fioul par PAC).</div>
+          </div>
+          <div class="price-card pivot">
+            <div class="price-card-title">Valeur Vénale Pivot Recommandée</div>
+            <div class="price-card-val">102 000 €</div>
+            <div class="price-card-desc"><strong>1 308 € / m² hab. (Point d'Équilibre Réel)</strong><br><strong>Montant pivot réaliste Net Vendeur.</strong> Prix déclencheur d'offres fermes valorisant le sous-sol 65 m², le tout-à-l'égout et le DPE D.</div>
+          </div>
+          <div class="price-card">
+            <div class="price-card-title">Seuil Haut d'Appréciation</div>
+            <div class="price-card-val">110 000 €</div>
+            <div class="price-card-desc"><strong>1 410 € / m² hab.</strong><br>Plafond d'affichage pour un acquéreur bricoleur réalisant lui-même les travaux de rafraîchissement et séduit par l'atelier en sous-sol.</div>
+          </div>
+        </div>
+
+        <!-- NOTE MÉTHODOLOGIQUE D'EXPLICATION -->
+        <div class="conclusion-box">
+          <h4>Note Méthodologique & Justification de l'Évaluation</h4>
+          <ol style="margin: 0; padding-left: 13px;">
+            <li><strong>Cohérence du budget global acquéreur :</strong> À une valeur pivot de <strong>102 000 € Net Vendeur</strong> (soit environ 110 000 € FAI), l'acquéreur supporte ~9 500 € de frais d'acte et 25 000 € à 30 000 € de rénovation intérieure/chauffage, aboutissant à un coût global de <strong>145 000 € à 150 000 € clés en main</strong>, parfaitement aligné avec les pavillons rénovés du secteur nontronnais.</li>
+            <li><strong>Valorisation du sous-sol complet (65 m²) :</strong> Bien que la surface habitable soit limitée à 78 m² (2 chambres), la présence d'un niveau inférieur complet accessible par cour goudronnée (garage, atelier, cuisine d'été) apporte une forte valeur d'usage qui compense la compacité du T3.</li>
+            <li><strong>Sécurité technique (DPE D & Tout-à-l'égout) :</strong> L'absence de travaux d'assainissement et le classement DPE D rassurent les acquéreurs et leurs banques sur la pérennité énergétique du bien à moyen terme.</li>
+          </ol>
+        </div>
+
+        <!-- AVERTISSEMENT JURIDIQUE -->
+        <div class="legal-notice">
+          <strong>Avertissement juridique :</strong> Le présent avis de valeur est établi selon les règles de l'art par la méthode comparative de marché (ECM) à partir des données de transactions et du stock disponible dans un rayon de 15 à 20 km autour de Nontron. Il est délivré à titre indicatif et déclaratif pour servir de base à l'estimation de la valeur vénale du bien et ne saurait se substituer à une expertise judiciaire au sens des articles 232 et suivants du CPC.
+        </div>
+
+        <div style="margin-top: 4px; font-size: 7.5px; color: #718096; text-align: right; font-style: italic;">
+          Fait à Saint-Martial-de-Valette, le 16 novembre 2026 — Sylvain MATIGNON, Conseiller Immobilier.
+        </div>
+      </div>
+
+      <div>
+        <footer>
+          <span>Avis de Valeur Vénale — Maison 78 m² sur Sous-sol, Nontron (24300) — Sylvain MATIGNON | Propriétés-Privées</span>
+          <span>Page 2/2</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
