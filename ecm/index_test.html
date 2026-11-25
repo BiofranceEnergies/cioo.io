@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatoire Immobilier & DVF (TEST) — Sylvain MATIGNON</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_test.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="brand">
+                <span class="badge-pro">PRO • TEST</span>
+                <h1>Observatoire Immo &amp; DVF</h1>
+                <p class="subtitle">Sylvain MATIGNON • Propriétés-Privées • Bassin Nontronnais</p>
+            </div>
+            <div class="header-status">
+                <span class="pulse-dot"></span>
+                <span id="sync-status">Base connectée</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- BARRE DE FILTRES -->
+        <section class="filters-card">
+            <div class="filter-group budget-group">
+                <label>Budget Acquéreur : <span id="budget-val" class="highlight">0 € – Max</span></label>
+                <div class="range-inputs">
+                    <input type="number" id="min-price" placeholder="Min (€)" step="10000" min="0">
+                    <span class="separator">à</span>
+                    <input type="number" id="max-price" placeholder="Max (€)" step="10000" min="0">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Chambres minimales</label>
+                <div class="segmented-control" id="room-filters">
+                    <button class="seg-btn active" data-rooms="0">Toutes</button>
+                    <button class="seg-btn" data-rooms="2">2+</button>
+                    <button class="seg-btn" data-rooms="3">3+</button>
+                    <button class="seg-btn" data-rooms="4">4+</button>
+                    <button class="seg-btn" data-rooms="5">5+</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="dpe-max">Performance Énergétique (DPE)</label>
+                <select id="dpe-max" class="custom-select">
+                    <option value="ALL">Tous les DPE (A à G)</option>
+                    <option value="A">DPE A uniquement</option>
+                    <option value="B">DPE B max</option>
+                    <option value="C">DPE C max</option>
+                    <option value="D">DPE D max</option>
+                    <option value="E">DPE E max</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- KPI DU MARCHÉ FILTRÉ -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <span class="kpi-label">Biens correspondants</span>
+                <span class="kpi-val" id="kpi-count">0</span>
+                <span class="kpi-sub">Offres actives</span>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-label">Prix FAI moyen</span>
+                <span class="kpi-val" id="kpi-avg-price">0 €</span>
+                <span class="kpi-sub">Sélection filtrée</span>
+            </div>
+            <div class="kpi-card accent">
+                <span class="kpi-label">Prix/m² moyen</span>
+                <span class="kpi-val" id="kpi-avg-sqm">0 €/m²</span>
+                <span class="kpi-sub">Sélection filtrée</span>
+            </div>
+        </section>
+
+        <!-- ANALYSE COMPARATIVE : BIEN CIBLE & HISTORIQUE DVF DU BASSIN -->
+        <section class="benchmark-section">
+            <div class="benchmark-card">
+                <div class="benchmark-header">
+                    <div>
+                        <span class="badge-tag">Étude de Marché</span>
+                        <h2>Analyse Comparative &amp; Tendance DVF</h2>
+                        <p class="section-desc">Bien sélectionné vs Historique notarié du Bassin de Nontron (2021 à 2026)</p>
+                    </div>
+                    <div class="target-picker">
+                        <label for="target-select">Bien analysé :</label>
+                        <select id="target-select" class="custom-select primary-select"></select>
+                    </div>
+                </div>
+
+                <div class="target-details-grid" id="target-summary">
+                    <div class="target-info-pill">
+                        <span class="lbl">Commune</span>
+                        <span class="val" id="target-commune">-</span>
+                    </div>
+                    <div class="target-info-pill">
+                        <span class="lbl">Surface Habitable</span>
+                        <span class="val" id="target-surface">-</span>
+                    </div>
+                    <div class="target-info-pill">
+                        <span class="lbl">Prix FAI</span>
+                        <span class="val" id="target-price">-</span>
+                    </div>
+                    <div class="target-info-pill highlight-pill">
+                        <span class="lbl">Prix au m² FAI</span>
+                        <span class="val" id="target-sqm">-</span>
+                    </div>
+                    <div class="target-info-pill status-pill">
+                        <span class="lbl">vs Concurrence Active</span>
+                        <span class="val" id="target-vs-market">-</span>
+                    </div>
+                </div>
+
+                <!-- TABLEAU DVF SIMPLIFIÉ & PÉDAGOGIQUE -->
+                <div class="table-responsive">
+                    <table class="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th style="min-width: 260px;">Tendance Bassin Nontron (~15 km)</th>
+                                <th>2021</th>
+                                <th>2022</th>
+                                <th>2023</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>2026 (S1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-highlight">
+                                <td><span class="icon">🏛️</span> <strong>Prix réel de vente (€/m²)</strong></td>
+                                <td id="dvf-median-2021">-</td>
+                                <td id="dvf-median-2022">-</td>
+                                <td id="dvf-median-2023">-</td>
+                                <td id="dvf-median-2024">-</td>
+                                <td id="dvf-median-2025">-</td>
+                                <td id="dvf-median-2026">-</td>
+                            </tr>
+                            <tr>
+                                <td><span class="icon">📊</span> Moyenne du secteur (€/m²)</td>
+                                <td id="dvf-avg-2021">-</td>
+                                <td id="dvf-avg-2022">-</td>
+                                <td id="dvf-avg-2023">-</td>
+                                <td id="dvf-avg-2024">-</td>
+                                <td id="dvf-avg-2025">-</td>
+                                <td id="dvf-avg-2026">-</td>
+                            </tr>
+                            <tr class="row-gap">
+                                <td><span class="icon">🎯</span> <strong>Votre bien vs le marché</strong></td>
+                                <td id="dvf-gap-2021">-</td>
+                                <td id="dvf-gap-2022">-</td>
+                                <td id="dvf-gap-2023">-</td>
+                                <td id="dvf-gap-2024">-</td>
+                                <td id="dvf-gap-2025">-</td>
+                                <td id="dvf-gap-2026">-</td>
+                            </tr>
+                            <tr class="row-muted">
+                                <td><span class="icon">📈</span> Nombre de maisons vendues</td>
+                                <td id="dvf-vol-2021">-</td>
+                                <td id="dvf-vol-2022">-</td>
+                                <td id="dvf-vol-2023">-</td>
+                                <td id="dvf-vol-2024">-</td>
+                                <td id="dvf-vol-2025">-</td>
+                                <td id="dvf-vol-2026">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTE DES BIENS CONCURRENTS EN VENTE -->
+        <section class="inventory-section">
+            <div class="section-header-flex">
+                <h2>Portefeuille en Vente — Secteur Nontron</h2>
+                <span class="counter-badge" id="list-counter">0 bien(s)</span>
+            </div>
+            <div class="cards-grid" id="properties-grid">
+                <!-- Les cartes sont générées dynamiquement par app_test.js -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Sylvain MATIGNON • Conseiller Immobilier Propriétés-Privées • Nontron &amp; Périgord Vert</p>
+    </footer>
+
+    <script src="app_test.js"></script>
+</body>
+</html>
