@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnAddParcelle = document.getElementById('btn-add-parcelle');
   const piecesTbody = document.getElementById('pieces-tbody');
   const btnAddPiece = document.getElementById('btn-add-piece');
+  const mobilierTbody = document.getElementById('mobilier-tbody');
+  const btnAddMobilier = document.getElementById('btn-add-mobilier');
 
   let vendeurCount = 1;
 
@@ -106,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   btnAddParcelle.addEventListener('click', () => {
-    // Pré-remplit la commune avec celle de la première ligne si renseignée
     const firstCommune = parcellesTbody.querySelector('[name="cad_commune[]"]');
     addParcelleRow({ commune: firstCommune ? firstCommune.value : '' });
   });
@@ -171,7 +172,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 5. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
+  // 5. Tableau dynamique du mobilier & équipements laissés par le vendeur
+  function recalculateMobilier() {
+    let totalMob = 0;
+    document.querySelectorAll('.calc-mob').forEach((inp) => {
+      const val = parseFloat(inp.value);
+      if (!isNaN(val) && val > 0) totalMob += val;
+    });
+    document.getElementById('total-mob').textContent =
+      Math.round(totalMob).toLocaleString('fr-FR') + ' €';
+  }
+
+  function addMobilierRow(data = {}) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" name="mob_nom[]" value="${data.nom || ''}" placeholder="Élément laissé..."></td>
+      <td><input type="text" name="mob_detail[]" value="${data.detail || ''}" placeholder="Marque, précision..."></td>
+      <td><input type="text" name="mob_etat[]" value="${data.etat || ''}" placeholder="Bon état / Année"></td>
+      <td><input type="number" step="10" name="mob_val[]" class="calc-mob" value="${data.val || ''}" placeholder="0"></td>
+      <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+    `;
+    mobilierTbody.appendChild(tr);
+  }
+
+  btnAddMobilier.addEventListener('click', () => addMobilierRow());
+
+  mobilierTbody.addEventListener('input', (e) => {
+    if (e.target.classList.contains('calc-mob')) {
+      recalculateMobilier();
+    }
+  });
+
+  mobilierTbody.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-del-row')) {
+      if (mobilierTbody.querySelectorAll('tr').length > 1) {
+        e.target.closest('tr').remove();
+        recalculateMobilier();
+      }
+    }
+  });
+
+  // 6. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
   document.getElementById('btn-save-json').addEventListener('click', () => {
     const data = {
       meta: {
@@ -181,7 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       fields: {},
       parcelles: [],
-      pieces: []
+      pieces: [],
+      mobilier: []
     };
 
     // Sauvegarde tous les champs nommés hors tableaux dynamiques
@@ -214,6 +256,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ann: tr.querySelector('[name="p_ann[]"]').value,
         ori: tr.querySelector('[name="p_ori[]"]').value,
         obs: tr.querySelector('[name="p_obs[]"]').value
+      });
+    });
+
+    // Sauvegarde du mobilier laissé
+    mobilierTbody.querySelectorAll('tr').forEach((tr) => {
+      data.mobilier.push({
+        nom: tr.querySelector('[name="mob_nom[]"]').value,
+        detail: tr.querySelector('[name="mob_detail[]"]').value,
+        etat: tr.querySelector('[name="mob_etat[]"]').value,
+        val: tr.querySelector('[name="mob_val[]"]').value
       });
     });
 
@@ -277,6 +329,13 @@ document.addEventListener('DOMContentLoaded', () => {
           data.pieces.forEach((p) => addPieceRow(p));
           recalculateSurfaces();
         }
+
+        // Restaurer le mobilier laissé
+        if (Array.isArray(data.mobilier) && data.mobilier.length > 0) {
+          mobilierTbody.innerHTML = '';
+          data.mobilier.forEach((m) => addMobilierRow(m));
+          recalculateMobilier();
+        }
       } catch (err) {
         alert('Fichier JSON invalide ou corrompu.');
       }
@@ -285,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = '';
   });
 
-  // 6. Réinitialiser & Exporter PDF
+  // 7. Réinitialiser & Exporter PDF
   document.getElementById('btn-reset').addEventListener('click', () => {
     if (confirm('Vider toutes les informations saisies pour démarrer un nouveau dossier vierge ?')) {
       formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
@@ -294,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       recalculateCadastre();
       recalculateSurfaces();
+      recalculateMobilier();
     }
   });
 
