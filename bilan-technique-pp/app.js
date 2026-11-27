@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const blockSci = document.getElementById('block-sci');
   const togglePiscine = document.getElementById('toggle-piscine');
   const blockPiscine = document.getElementById('block-piscine');
+  const agencesTbody = document.getElementById('agences-tbody');
+  const btnAddAgence = document.getElementById('btn-add-agence');
   const parcellesTbody = document.getElementById('parcelles-tbody');
   const btnAddParcelle = document.getElementById('btn-add-parcelle');
   const piecesTbody = document.getElementById('pieces-tbody');
@@ -74,7 +76,30 @@ document.addEventListener('DOMContentLoaded', () => {
     blockPiscine.classList.toggle('hidden-block', !e.target.checked);
   });
 
-  // 3. Tableau dynamique des parcelles cadastrales & calcul m² / ha
+  // 3. Tableau dynamique des agences / commercialisation actuelle
+  function addAgenceRow(data = {}) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" name="ag_nom[]" value="${data.nom || ''}" placeholder="Agence / Support..."></td>
+      <td><input type="date" name="ag_depuis[]" value="${data.depuis || ''}"></td>
+      <td><input type="number" step="500" name="ag_prix[]" value="${data.prix || ''}" placeholder="0"></td>
+      <td><input type="text" name="ag_obs[]" value="${data.obs || ''}" placeholder="Mandat simple, observations..."></td>
+      <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+    `;
+    agencesTbody.appendChild(tr);
+  }
+
+  btnAddAgence.addEventListener('click', () => addAgenceRow());
+
+  agencesTbody.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-del-row')) {
+      if (agencesTbody.querySelectorAll('tr').length > 1) {
+        e.target.closest('tr').remove();
+      }
+    }
+  });
+
+  // 4. Tableau dynamique des parcelles cadastrales & calcul m² / ha
   function recalculateCadastre() {
     let totalM2 = 0;
     document.querySelectorAll('.calc-cad').forEach((inp) => {
@@ -127,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4. Tableau dynamique des pièces & calcul automatique des surfaces
+  // 5. Tableau dynamique des pièces & calcul automatique des surfaces
   function recalculateSurfaces() {
     let sumHab = 0;
     let sumAnn = 0;
@@ -172,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 5. Tableau dynamique du mobilier & équipements laissés par le vendeur
+  // 6. Tableau dynamique du mobilier & équipements laissés par le vendeur
   function recalculateMobilier() {
     let totalMob = 0;
     document.querySelectorAll('.calc-mob').forEach((inp) => {
@@ -212,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 6. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
+  // 7. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
   document.getElementById('btn-save-json').addEventListener('click', () => {
     const data = {
       meta: {
@@ -221,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hasPiscine: togglePiscine.checked
       },
       fields: {},
+      agences: [],
       parcelles: [],
       pieces: [],
       mobilier: []
@@ -234,6 +260,16 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         data.fields[el.name] = el.value;
       }
+    });
+
+    // Sauvegarde des agences en concurrence
+    agencesTbody.querySelectorAll('tr').forEach((tr) => {
+      data.agences.push({
+        nom: tr.querySelector('[name="ag_nom[]"]').value,
+        depuis: tr.querySelector('[name="ag_depuis[]"]').value,
+        prix: tr.querySelector('[name="ag_prix[]"]').value,
+        obs: tr.querySelector('[name="ag_obs[]"]').value
+      });
     });
 
     // Sauvegarde des parcelles cadastrales
@@ -316,6 +352,12 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
 
+        // Restaurer les agences
+        if (Array.isArray(data.agences) && data.agences.length > 0) {
+          agencesTbody.innerHTML = '';
+          data.agences.forEach((ag) => addAgenceRow(ag));
+        }
+
         // Restaurer les parcelles cadastrales
         if (Array.isArray(data.parcelles) && data.parcelles.length > 0) {
           parcellesTbody.innerHTML = '';
@@ -344,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = '';
   });
 
-  // 7. Réinitialiser & Exporter PDF
+  // 8. Réinitialiser & Exporter PDF
   document.getElementById('btn-reset').addEventListener('click', () => {
     if (confirm('Vider toutes les informations saisies pour démarrer un nouveau dossier vierge ?')) {
       formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
