@@ -22,7 +22,7 @@
       <a href="#sec-equipements">5. Équipements &amp; Travaux</a>
       <a href="#sec-energie">6. Chauffage &amp; Solaire</a>
       <a href="#sec-urbanisme">7. Urbanisme &amp; DDT</a>
-      <a href="#sec-suivi">8. Suivi</a>
+      <a href="#sec-suivi">8. Consignes &amp; Notes</a>
     </nav>
     <div class="toolbar-actions">
       <button type="button" id="btn-save-json" class="btn btn-secondary" title="Sauvegarder les saisies dans un fichier">💾 Sauvegarder</button>
@@ -763,51 +763,25 @@
       </div>
     </section>
 
-    <!-- SECTION 8 : PROJET VENDEUR, SUIVI & RGPD -->
+    <!-- SECTION 8 : DÉLAIS, CONSIGNES DE VISITE & RGPD -->
     <section class="card page-break" id="sec-suivi">
       <div class="section-header">
-        <h2>8. Délais, projet de rachat &amp; suivi commercial</h2>
+        <h2>8. Délais, consignes de visite &amp; notes</h2>
       </div>
 
       <div class="sub-block">
-        <h3>Calendrier du vendeur &amp; projet d'acquisition</h3>
-        <div class="grid-4">
-          <div class="field"><label>Date butoir de vente / encaissement</label><input type="date" name="proj_butoir"></div>
-          <div class="field"><label>Nouvel achat en cours ? (Où ?)</label><input type="text" name="proj_rachat"></div>
-          <div class="field"><label>Solution relais (Location, prêt relais)</label><input type="text" name="proj_relais"></div>
-          <div class="field"><label>Budget &amp; secteur recherchés</label><input type="text" name="proj_budget"></div>
-        </div>
-        <div class="check-row mt-1">
-          <strong>Motivations principales (SONCASE) :</strong>
-          <label><input type="checkbox" name="son_s1"> Sécurité</label>
-          <label><input type="checkbox" name="son_o"> Orgueil / Prestige</label>
-          <label><input type="checkbox" name="son_n"> Nouveauté</label>
-          <label><input type="checkbox" name="son_c"> Confort</label>
-          <label><input type="checkbox" name="son_a"> Argent / Rentabilité</label>
-          <label><input type="checkbox" name="son_s2"> Sympathie / Relationnel</label>
-          <label><input type="checkbox" name="son_e"> Écologie</label>
+        <div class="grid-3">
+          <div class="field"><label>Date butoir souhaitée / Délai de vente</label><input type="text" name="proj_butoir" placeholder="Ex. : Dès que possible, été 2027..."></div>
+          <div class="field"><label>Nouvel achat en cours ? (Secteur / Prêt relais)</label><input type="text" name="proj_rachat"></div>
+          <div class="field"><label>Disponibilités / Clés / Alarme / Animaux</label><input type="text" name="visite_cles" placeholder="Clés agence, code alarme, chien..."></div>
         </div>
         <div class="grid-2 mt-1">
-          <div class="field"><label>Points forts du bien (selon le vendeur)</label><textarea name="bien_plus" rows="2"></textarea></div>
-          <div class="field"><label>Points faibles / freins potentiels (selon le vendeur)</label><textarea name="bien_moins" rows="2"></textarea></div>
+          <div class="field"><label>Points forts du bien (atouts à valoriser)</label><textarea name="bien_plus" rows="2"></textarea></div>
+          <div class="field"><label>Points d'attention / freins potentiels</label><textarea name="bien_moins" rows="2"></textarea></div>
         </div>
-      </div>
-
-      <div class="sub-block">
-        <h3>Plan d'action &amp; consignes de visite</h3>
-        <div class="grid-2">
-          <div class="field"><label>Consignes de visite (clés, alarme, animaux, préavis visite, locataire)</label><textarea name="visite_consignes" rows="3"></textarea></div>
-          <table class="data-table">
-            <thead>
-              <tr><th>Étape</th><th>Date</th><th>Heure / Lieu</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Remise Avis de Valeur &amp; Mandat</td><td><input type="date" name="rdv1_dt"></td><td><input type="text" name="rdv1_lieu"></td></tr>
-              <tr><td>Reportage photo / vidéo 4K / drone</td><td><input type="date" name="rdv2_dt"></td><td><input type="text" name="rdv2_lieu"></td></tr>
-              <tr><td>Point de suivi commercialisation</td><td><input type="date" name="rdv3_dt"></td><td><input type="text" name="rdv3_lieu"></td></tr>
-              <tr><td>Signature acte authentique prévisionnelle</td><td><input type="date" name="rdv4_dt"></td><td><input type="text" name="rdv4_lieu"></td></tr>
-            </tbody>
-          </table>
+        <div class="field mt-1">
+          <label>Consignes de visite &amp; observations complémentaires</label>
+          <textarea name="visite_consignes" rows="3"></textarea>
         </div>
       </div>
 
