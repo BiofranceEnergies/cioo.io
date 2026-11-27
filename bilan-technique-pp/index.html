@@ -16,12 +16,12 @@
     </div>
     <nav class="toolbar-nav">
       <a href="#sec-vendeurs">1. Vendeurs</a>
-      <a href="#sec-projet">2. Projet & Finance</a>
-      <a href="#sec-bien">3. Bien & Terrain</a>
+      <a href="#sec-projet">2. Projet &amp; Finance</a>
+      <a href="#sec-bien">3. Bien &amp; Parcelles</a>
       <a href="#sec-surfaces">4. Surfaces</a>
-      <a href="#sec-equipements">5. Équipements & Travaux</a>
-      <a href="#sec-energie">6. Chauffage & Solaire</a>
-      <a href="#sec-urbanisme">7. Urbanisme & DDT</a>
+      <a href="#sec-equipements">5. Équipements &amp; Travaux</a>
+      <a href="#sec-energie">6. Chauffage &amp; Solaire</a>
+      <a href="#sec-urbanisme">7. Urbanisme &amp; DDT</a>
       <a href="#sec-suivi">8. Suivi</a>
     </nav>
     <div class="toolbar-actions">
@@ -238,31 +238,30 @@
       </div>
     </section>
 
-    <!-- SECTION 3 : IDENTITÉ DU BIEN, TERRAIN & DÉPENDANCES -->
+    <!-- SECTION 3 : IDENTITÉ DU BIEN, PARCELLES & DÉPENDANCES -->
     <section class="card page-break" id="sec-bien">
       <div class="section-header">
-        <h2>3. Identité du bien, terrain &amp; dépendances</h2>
+        <h2>3. Identité du bien, parcelles cadastrales &amp; dépendances</h2>
       </div>
 
       <div class="sub-block">
-        <h3>Localisation, cadastre &amp; notaire</h3>
+        <h3>Localisation, nature &amp; notaire</h3>
         <div class="grid-3">
           <div class="field col-span-2"><label>Adresse exacte du bien à vendre</label><input type="text" name="bien_adresse"></div>
           <div class="field"><label>Code postal &amp; Commune</label><input type="text" name="bien_cp_ville"></div>
         </div>
-        <div class="grid-4 mt-1">
-          <div class="field"><label>Réf. cadastrales — Section(s)</label><input type="text" name="cad_section" placeholder="Ex. : AB"></div>
-          <div class="field"><label>Numéro(s) de parcelle</label><input type="text" name="cad_num" placeholder="Ex. : 124, 125"></div>
-          <div class="field"><label>Contenance totale (m² / ha)</label><input type="text" name="cad_contenance"></div>
+        <div class="grid-3 mt-1">
           <div class="field"><label>Style architectural</label><input type="text" name="bien_style" placeholder="Périgourdine, longère, pavillon..."></div>
-        </div>
-        <div class="check-row mt-1">
-          <strong>Nature du bien :</strong>
-          <label><input type="checkbox" name="nat_maison"> Maison individuelle</label>
-          <label><input type="checkbox" name="nat_propriete"> Propriété / Demeure / Corps de ferme</label>
-          <label><input type="checkbox" name="nat_immeuble"> Immeuble de rapport</label>
-          <label><input type="checkbox" name="nat_mixte"> Maison + Local / Commerce</label>
-          <label><input type="checkbox" name="nat_terrain"> Terrain à bâtir / Agricole</label>
+          <div class="field col-span-2">
+            <label>Nature du bien</label>
+            <div class="check-row">
+              <label><input type="checkbox" name="nat_maison"> Maison individuelle</label>
+              <label><input type="checkbox" name="nat_propriete"> Propriété / Corps de ferme</label>
+              <label><input type="checkbox" name="nat_immeuble"> Immeuble de rapport</label>
+              <label><input type="checkbox" name="nat_mixte"> Maison + Commerce</label>
+              <label><input type="checkbox" name="nat_terrain"> Terrain</label>
+            </div>
+          </div>
         </div>
         <div class="grid-4 mt-1">
           <div class="field"><label>Notaire du vendeur (Nom)</label><input type="text" name="not_nom"></div>
@@ -273,16 +272,51 @@
       </div>
 
       <div class="sub-block">
+        <h3>
+          <span>Références cadastrales (parcelles)</span>
+          <button type="button" class="btn-mini no-print" id="btn-add-parcelle">+ Ajouter une parcelle</button>
+        </h3>
+        <table class="data-table" id="table-parcelles">
+          <thead>
+            <tr>
+              <th style="width: 24%;">Commune</th>
+              <th style="width: 12%;">Section</th>
+              <th style="width: 14%;">N° Parcelle</th>
+              <th style="width: 18%;">Contenance (m²)</th>
+              <th>Nature / Occupation (bâti, jardin, bois, prairie, attenant...)</th>
+              <th class="no-print" style="width: 4%;"></th>
+            </tr>
+          </thead>
+          <tbody id="parcelles-tbody">
+            <tr>
+              <td><input type="text" name="cad_commune[]" placeholder="Commune"></td>
+              <td><input type="text" name="cad_section[]" placeholder="Ex. : AB"></td>
+              <td><input type="text" name="cad_num[]" placeholder="Ex. : 124"></td>
+              <td><input type="number" step="1" name="cad_surf[]" class="calc-cad" placeholder="0"></td>
+              <td><input type="text" name="cad_nature[]" placeholder="Maison + jardin attenant"></td>
+              <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="3"><strong>CONTENANCE CADASTRALE TOTALE</strong></td>
+              <td><strong id="total-cad-m2">0 m²</strong></td>
+              <td colspan="2"><strong id="total-cad-ha">0 ha 00 a 00 ca</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="sub-block">
         <h3>Terrain, environnement &amp; mitoyenneté</h3>
-        <div class="grid-4">
-          <div class="field"><label>Surface terrain (m²)</label><input type="number" name="ter_surface"></div>
+        <div class="grid-3">
           <div class="field"><label>Exposition principale</label><input type="text" name="ter_expo" placeholder="Sud, Sud-Ouest..."></div>
           <div class="field">
-            <label>Terrain attenant / Divisible</label>
+            <label>Configuration foncière</label>
             <div class="check-row">
               <label><input type="checkbox" name="ter_att"> Attenant</label>
-              <label><input type="checkbox" name="ter_nonatt"> Non attenant</label>
-              <label><input type="checkbox" name="ter_div"> Divisible</label>
+              <label><input type="checkbox" name="ter_nonatt"> Parcelles non attenantes</label>
+              <label><input type="checkbox" name="ter_div"> Divisible / Détachable</label>
             </div>
           </div>
           <div class="field">
