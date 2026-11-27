@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- BARRE D'OUTILS NUMÉRIQUE (Masquée à l'impression PDF et en lien partagé) -->
+  <!-- BARRE D'OUTILS NUMÉRIQUE (Masquée à l'impression PDF et sur la fiche exportée) -->
   <header class="toolbar no-print" id="main-toolbar">
     <div class="toolbar-brand">
       <span class="badge-pp">PROPRIÉTÉS-PRIVÉES.COM</span>
@@ -26,7 +26,7 @@
     </nav>
     <div class="toolbar-actions">
       <button type="button" id="btn-toggle-readonly" class="btn btn-secondary" title="Basculer entre édition et présentation écran">👁️ Mode Lecture</button>
-      <button type="button" id="btn-share-link" class="btn btn-secondary" title="Copier un lien web figé en lecture seule">🔗 Lien lecture seule</button>
+      <button type="button" id="btn-export-html" class="btn btn-secondary" title="Télécharger une page HTML autonome non modifiable">📄 Exporter Fiche HTML</button>
       <button type="button" id="btn-save-json" class="btn btn-secondary" title="Sauvegarder les saisies dans un fichier">💾 Sauvegarder</button>
       <label for="input-load-json" class="btn btn-secondary" title="Recharger un dossier sauvegardé">📂 Charger</label>
       <input type="file" id="input-load-json" accept=".json" hidden>
@@ -34,12 +34,6 @@
       <button type="button" id="btn-print" class="btn btn-primary">🖨️ Exporter PDF (A4)</button>
     </div>
   </header>
-
-  <!-- BANDEAU DISCRET EN CAS DE LIEN PARTAGÉ VERROUILLÉ -->
-  <div id="shared-banner" class="shared-banner hidden-block no-print">
-    <span>🔒 <strong>Dossier en consultation (lecture seule)</strong> — Document transmis par Sylvain MATIGNON — Propriétés-Privées.com</span>
-    <button type="button" id="btn-print-shared" class="btn btn-primary">🖨️ Imprimer / Enregistrer en PDF</button>
-  </div>
 
   <main class="document-container" id="form-container">
 
