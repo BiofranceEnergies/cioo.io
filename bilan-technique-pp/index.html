@@ -38,11 +38,40 @@
     <!-- PAGE DE COUVERTURE / EN-TÊTE -->
     <section class="card cover-card">
       <div class="cover-header">
-        <div>
+        <div class="cover-left">
           <p class="network-label">RÉSEAU NATIONAL IMMOBILIER</p>
           <h1 class="main-title">BILAN TECHNIQUE</h1>
           <p class="sub-title">Dossier de découverte vendeur &amp; prise de mandat — Maisons &amp; Propriétés</p>
+
+          <!-- Vignette photo + Liens Dossier Notaires & Vidéo YouTube -->
+          <div class="media-links-box">
+            <div class="photo-thumb-wrapper" id="photo-thumb-wrapper">
+              <img id="photo-preview" src="" alt="Photo du bien" class="hidden-block">
+              <div id="photo-placeholder" class="photo-placeholder no-print">
+                <span>Aucune photo</span>
+              </div>
+              <div class="photo-actions no-print">
+                <label for="input-photo" class="btn-mini">📷 Ajouter photo</label>
+                <input type="file" id="input-photo" accept="image/*" hidden>
+                <button type="button" id="btn-remove-photo" class="btn-del-row hidden-block" title="Supprimer la photo">×</button>
+              </div>
+            </div>
+
+            <div class="quick-links-col">
+              <div class="quick-link-item">
+                <span class="ql-label">📁 Lien Dossier Notaires :</span>
+                <input type="url" name="lien_notaires" id="input-lien-notaires" class="no-print" placeholder="https://drive.google.com/...">
+                <a href="#" id="link-notaires-view" target="_blank" rel="noopener" class="ql-anchor hidden-block">Ouvrir le Dossier Notaires ↗</a>
+              </div>
+              <div class="quick-link-item">
+                <span class="ql-label">▶️ Vidéo YouTube :</span>
+                <input type="url" name="lien_youtube" id="input-lien-youtube" class="no-print" placeholder="https://youtu.be/...">
+                <a href="#" id="link-youtube-view" target="_blank" rel="noopener" class="ql-anchor hidden-block">Voir la vidéo YouTube ↗</a>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div class="advisor-box">
           <div class="pp-logo-text">PROPRIÉTÉS-PRIVÉES<span>.com</span></div>
           <p class="advisor-name">Sylvain MATIGNON (EI)</p>
