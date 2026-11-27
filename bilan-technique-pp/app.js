@@ -1,1 +1,228 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const formContainer = document.getElementById('form-container');
+  const vendeursList = document.getElementById('vendeurs-list');
+  const btnAddVendeur = document.getElementById('btn-add-vendeur');
+  const toggleSci = document.getElementById('toggle-sci');
+  const blockSci = document.getElementById('block-sci');
+  const togglePiscine = document.getElementById('toggle-piscine');
+  const blockPiscine = document.getElementById('block-piscine');
+  const piecesTbody = document.getElementById('pieces-tbody');
+  const btnAddPiece = document.getElementById('btn-add-piece');
 
+  let vendeurCount = 1;
+
+  // 1. Gestion des vendeurs supplémentaires (2 à 6)
+  function createVendeurBlock(num) {
+    const div = document.createElement('div');
+    div.className = 'sub-block vendeur-block';
+    div.dataset.vendeur = num;
+    div.innerHTML = `
+      <h3>
+        <span>Vendeur ${num}</span>
+        <button type="button" class="btn-del-row no-print" title="Retirer ce vendeur">Retirer ×</button>
+      </h3>
+      <div class="check-row">
+        <strong>Qualité :</strong>
+        <label><input type="checkbox" name="v${num}_qual_pp"> Pleine propriété</label>
+        <label><input type="checkbox" name="v${num}_qual_ind"> Indivision</label>
+        <label><input type="checkbox" name="v${num}_qual_succ"> Succession</label>
+        <label><input type="checkbox" name="v${num}_qual_np"> Nue-propriété</label>
+        <label><input type="checkbox" name="v${num}_qual_usu"> Usufruitier</label>
+        <label>Autre : <input type="text" name="v${num}_qual_autre" class="inline-input"></label>
+      </div>
+      <div class="grid-4 mt-1">
+        <div class="field"><label>Nom</label><input type="text" name="v${num}_nom"></div>
+        <div class="field"><label>Prénoms</label><input type="text" name="v${num}_prenoms"></div>
+        <div class="field"><label>Date de naissance</label><input type="date" name="v${num}_ddn"></div>
+        <div class="field"><label>Lieu de naissance</label><input type="text" name="v${num}_ldn"></div>
+        <div class="field col-span-2"><label>Adresse</label><input type="text" name="v${num}_adresse"></div>
+        <div class="field"><label>Code postal</label><input type="text" name="v${num}_cp"></div>
+        <div class="field"><label>Ville</label><input type="text" name="v${num}_ville"></div>
+        <div class="field"><label>Téléphone / Portable</label><input type="tel" name="v${num}_port"></div>
+        <div class="field"><label>E-mail</label><input type="email" name="v${num}_email"></div>
+        <div class="field"><label>Nationalité &amp; Profession</label><input type="text" name="v${num}_nat_prof"></div>
+        <div class="field"><label>État civil &amp; Régime</label><input type="text" name="v${num}_ec_regime" placeholder="Marié(e), Pacsé(e), Célibataire..."></div>
+      </div>
+    `;
+    div.querySelector('.btn-del-row').addEventListener('click', () => {
+      div.remove();
+      vendeurCount = document.querySelectorAll('.vendeur-block').length;
+    });
+    return div;
+  }
+
+  btnAddVendeur.addEventListener('click', () => {
+    const currentBlocks = document.querySelectorAll('.vendeur-block').length;
+    if (currentBlocks >= 6) {
+      alert('Maximum 6 vendeurs atteint.');
+      return;
+    }
+    vendeurCount = currentBlocks + 1;
+    vendeursList.appendChild(createVendeurBlock(vendeurCount));
+  });
+
+  // 2. Affichage / Masquage SCI et Piscine
+  toggleSci.addEventListener('change', (e) => {
+    blockSci.classList.toggle('hidden-block', !e.target.checked);
+  });
+
+  togglePiscine.addEventListener('change', (e) => {
+    blockPiscine.classList.toggle('hidden-block', !e.target.checked);
+  });
+
+  // 3. Tableau dynamique des pièces & calcul automatique des surfaces
+  function recalculateSurfaces() {
+    let sumHab = 0;
+    let sumAnn = 0;
+    document.querySelectorAll('.calc-hab').forEach((inp) => {
+      const val = parseFloat(inp.value);
+      if (!isNaN(val)) sumHab += val;
+    });
+    document.querySelectorAll('.calc-ann').forEach((inp) => {
+      const val = parseFloat(inp.value);
+      if (!isNaN(val)) sumAnn += val;
+    });
+    document.getElementById('total-hab').textContent = sumHab.toFixed(1).replace('.', ',') + ' m²';
+    document.getElementById('total-ann').textContent = sumAnn.toFixed(1).replace('.', ',') + ' m²';
+  }
+
+  function addPieceRow(data = {}) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" name="p_niv[]" value="${data.niv || ''}" placeholder="RDC / Étage"></td>
+      <td><input type="text" name="p_nom[]" value="${data.nom || ''}" placeholder="Nom pièce"></td>
+      <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab" value="${data.hab || ''}"></td>
+      <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann" value="${data.ann || ''}"></td>
+      <td><input type="text" name="p_ori[]" value="${data.ori || ''}"></td>
+      <td><input type="text" name="p_obs[]" value="${data.obs || ''}"></td>
+      <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+    `;
+    piecesTbody.appendChild(tr);
+  }
+
+  btnAddPiece.addEventListener('click', () => addPieceRow());
+
+  piecesTbody.addEventListener('input', (e) => {
+    if (e.target.classList.contains('calc-hab') || e.target.classList.contains('calc-ann')) {
+      recalculateSurfaces();
+    }
+  });
+
+  piecesTbody.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-del-row')) {
+      e.target.closest('tr').remove();
+      recalculateSurfaces();
+    }
+  });
+
+  // 4. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
+  document.getElementById('btn-save-json').addEventListener('click', () => {
+    const data = {
+      meta: {
+        vendeursCount: document.querySelectorAll('.vendeur-block').length,
+        hasSci: toggleSci.checked,
+        hasPiscine: togglePiscine.checked,
+        piecesCount: piecesTbody.querySelectorAll('tr').length
+      },
+      fields: {},
+      pieces: []
+    };
+
+    // Sauvegarde tous les champs nommés hors tableau pièces
+    formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
+      if (!el.name || el.name.endsWith('[]')) return;
+      if (el.type === 'checkbox') {
+        data.fields[el.name] = el.checked;
+      } else {
+        data.fields[el.name] = el.value;
+      }
+    });
+
+    // Sauvegarde les lignes du tableau pièces
+    piecesTbody.querySelectorAll('tr').forEach((tr) => {
+      data.pieces.push({
+        niv: tr.querySelector('[name="p_niv[]"]').value,
+        nom: tr.querySelector('[name="p_nom[]"]').value,
+        hab: tr.querySelector('[name="p_hab[]"]').value,
+        ann: tr.querySelector('[name="p_ann[]"]').value,
+        ori: tr.querySelector('[name="p_ori[]"]').value,
+        obs: tr.querySelector('[name="p_obs[]"]').value
+      });
+    });
+
+    const nomVendeur = (data.fields.contact_nom || 'client').trim().replace(/\s+/g, '_');
+    const dateStr = new Date().toISOString().slice(0, 10);
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Bilan_Technique_PP_${nomVendeur}_${dateStr}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('input-load-json').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const data = JSON.parse(evt.target.result);
+
+        // Recréer le bon nombre de vendeurs
+        document.querySelectorAll('.vendeur-block').forEach((b, idx) => {
+          if (idx > 0) b.remove();
+        });
+        const targetVendeurs = (data.meta && data.meta.vendeursCount) || 1;
+        for (let i = 2; i <= targetVendeurs; i++) {
+          vendeursList.appendChild(createVendeurBlock(i));
+        }
+
+        // États SCI & Piscine
+        toggleSci.checked = !!(data.meta && data.meta.hasSci);
+        blockSci.classList.toggle('hidden-block', !toggleSci.checked);
+        togglePiscine.checked = !!(data.meta && data.meta.hasPiscine);
+        blockPiscine.classList.toggle('hidden-block', !togglePiscine.checked);
+
+        // Restaurer les champs
+        if (data.fields) {
+          Object.entries(data.fields).forEach(([name, val]) => {
+            const el = formContainer.querySelector(`[name="${name}"]`);
+            if (!el) return;
+            if (el.type === 'checkbox') {
+              el.checked = !!val;
+            } else {
+              el.value = val;
+            }
+          });
+        }
+
+        // Restaurer les pièces
+        if (Array.isArray(data.pieces)) {
+          piecesTbody.innerHTML = '';
+          data.pieces.forEach((p) => addPieceRow(p));
+          recalculateSurfaces();
+        }
+      } catch (err) {
+        alert('Fichier JSON invalide ou corrompu.');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
+  // 5. Réinitialiser & Exporter PDF
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (confirm('Vider toutes les informations saisies pour démarrer un nouveau dossier vierge ?')) {
+      formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
+        if (el.type === 'checkbox') el.checked = false;
+        else if (el.name !== 'sci_type') el.value = '';
+      });
+      recalculateSurfaces();
+    }
+  });
+
+  document.getElementById('btn-print').addEventListener('click', () => {
+    window.print();
+  });
+});
