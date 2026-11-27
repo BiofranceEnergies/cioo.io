@@ -1,1 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilan Technique Maisons — Propriétés-Privées.com | Sylvain MATIGNON</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- BARRE D'OUTILS NUMÉRIQUE (Masquée à l'impression PDF) -->
+  <header class="toolbar no-print">
+    <div class="toolbar-brand">
+      <span class="badge-pp">PROPRIÉTÉS-PRIVÉES.COM</span>
+      <strong>Bilan Technique Maisons</strong>
+    </div>
+    <nav class="toolbar-nav">
+      <a href="#sec-vendeurs">1. Vendeurs</a>
+      <a href="#sec-projet">2. Projet & Finance</a>
+      <a href="#sec-bien">3. Bien & Terrain</a>
+      <a href="#sec-surfaces">4. Surfaces</a>
+      <a href="#sec-equipements">5. Équipements & Travaux</a>
+      <a href="#sec-energie">6. Chauffage & Solaire</a>
+      <a href="#sec-urbanisme">7. Urbanisme & DDT</a>
+      <a href="#sec-suivi">8. Suivi</a>
+    </nav>
+    <div class="toolbar-actions">
+      <button type="button" id="btn-save-json" class="btn btn-secondary" title="Sauvegarder les saisies dans un fichier">💾 Sauvegarder</button>
+      <label for="input-load-json" class="btn btn-secondary" title="Recharger un dossier sauvegardé">📂 Charger</label>
+      <input type="file" id="input-load-json" accept=".json" hidden>
+      <button type="button" id="btn-reset" class="btn btn-outline" title="Vider tout le formulaire">🗑️ Vierge</button>
+      <button type="button" id="btn-print" class="btn btn-primary">🖨️ Exporter PDF (A4)</button>
+    </div>
+  </header>
+
+  <main class="document-container" id="form-container">
+
+    <!-- PAGE DE COUVERTURE / EN-TÊTE -->
+    <section class="card cover-card">
+      <div class="cover-header">
+        <div>
+          <p class="network-label">RÉSEAU NATIONAL IMMOBILIER</p>
+          <h1 class="main-title">BILAN TECHNIQUE</h1>
+          <p class="sub-title">Dossier de découverte vendeur &amp; prise de mandat — Maisons &amp; Propriétés</p>
+        </div>
+        <div class="advisor-box">
+          <div class="pp-logo-text">PROPRIÉTÉS-PRIVÉES<span>.com</span></div>
+          <p class="advisor-name">Sylvain MATIGNON (EI)</p>
+          <p class="advisor-role">Conseiller Immobilier indépendant — Agent Commercial</p>
+          <p>Secteur Nontron &amp; Périgord Vert</p>
+          <p>Tél. : <strong>06 48 89 34 80</strong></p>
+          <p>E-mail : <strong>s.matignon@proprietes-privees.com</strong></p>
+          <p class="rsac">Numéro RSAC : 422231928 EVREUX</p>
+          <p class="web">www.proprietes-privees.com</p>
+        </div>
+      </div>
+
+      <div class="cover-prospect">
+        <h2>Coordonnées du contact / Propriétaire principal</h2>
+        <div class="grid-3">
+          <div class="field"><label>Date du rendez-vous</label><input type="date" name="rdv_date"></div>
+          <div class="field"><label>Nom</label><input type="text" name="contact_nom" placeholder="Nom de famille"></div>
+          <div class="field"><label>Prénom</label><input type="text" name="contact_prenom" placeholder="Prénom"></div>
+          <div class="field"><label>Téléphone</label><input type="tel" name="contact_tel" placeholder="06..."></div>
+          <div class="field"><label>E-mail</label><input type="email" name="contact_email" placeholder="client@email.fr"></div>
+          <div class="field"><label>Réf. Mandat / Dossier IziConnect</label><input type="text" name="dossier_ref" placeholder="Ex. : Mandat n°..."></div>
+        </div>
+        <div class="grid-3 mt-1">
+          <div class="field col-span-2"><label>Adresse actuelle du vendeur</label><input type="text" name="contact_adresse"></div>
+          <div class="field"><label>Code postal &amp; Ville</label><input type="text" name="contact_cp_ville"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1 : IDENTIFICATION DES VENDEURS -->
+    <section class="card page-break" id="sec-vendeurs">
+      <div class="section-header">
+        <h2>1. Identification des vendeurs</h2>
+        <div class="section-controls no-print">
+          <button type="button" class="btn-mini" id="btn-add-vendeur">+ Ajouter un vendeur (max 6)</button>
+          <label class="toggle-chip"><input type="checkbox" id="toggle-sci"> Personne morale (SCI)</label>
+        </div>
+      </div>
+
+      <div id="vendeurs-list">
+        <!-- Vendeur 1 (Toujours affiché) -->
+        <div class="sub-block vendeur-block" data-vendeur="1">
+          <h3>Vendeur 1</h3>
+          <div class="check-row">
+            <strong>Qualité :</strong>
+            <label><input type="checkbox" name="v1_qual_pp"> Pleine propriété</label>
+            <label><input type="checkbox" name="v1_qual_ind"> Indivision</label>
+            <label><input type="checkbox" name="v1_qual_succ"> Succession</label>
+            <label><input type="checkbox" name="v1_qual_np"> Nue-propriété</label>
+            <label><input type="checkbox" name="v1_qual_usu"> Usufruitier</label>
+            <label>Autre : <input type="text" name="v1_qual_autre" class="inline-input"></label>
+          </div>
+          <div class="grid-4 mt-1">
+            <div class="field"><label>Nom</label><input type="text" name="v1_nom"></div>
+            <div class="field"><label>Prénoms</label><input type="text" name="v1_prenoms"></div>
+            <div class="field"><label>Date de naissance</label><input type="date" name="v1_ddn"></div>
+            <div class="field"><label>Lieu de naissance</label><input type="text" name="v1_ldn"></div>
+            <div class="field col-span-2"><label>Adresse</label><input type="text" name="v1_adresse"></div>
+            <div class="field"><label>Code postal</label><input type="text" name="v1_cp"></div>
+            <div class="field"><label>Ville</label><input type="text" name="v1_ville"></div>
+            <div class="field"><label>Téléphone fixe</label><input type="tel" name="v1_tel"></div>
+            <div class="field"><label>Portable</label><input type="tel" name="v1_port"></div>
+            <div class="field"><label>E-mail</label><input type="email" name="v1_email"></div>
+            <div class="field"><label>Nationalité &amp; Profession</label><input type="text" name="v1_nat_prof"></div>
+          </div>
+          <div class="check-row mt-1">
+            <strong>État civil :</strong>
+            <label><input type="checkbox" name="v1_ec_celib"> Célibataire</label>
+            <label><input type="checkbox" name="v1_ec_veuf"> Veuf(ve)</label>
+            <label><input type="checkbox" name="v1_ec_pacs"> Pacsé(e)</label>
+            <label><input type="checkbox" name="v1_ec_div"> Divorcé(e) le <input type="date" name="v1_div_date" class="inline-date"></label>
+            <label><input type="checkbox" name="v1_ec_marie"> Marié(e) le <input type="date" name="v1_mar_date" class="inline-date"> à <input type="text" name="v1_mar_lieu" class="inline-input"></label>
+          </div>
+          <div class="grid-3 mt-1">
+            <div class="field"><label>Régime matrimonial</label><input type="text" name="v1_regime" placeholder="Communauté réduite aux acquêts, séparation..."></div>
+            <div class="field"><label>Date du contrat de mariage</label><input type="date" name="v1_contrat_date"></div>
+            <div class="field"><label>Notaire ayant reçu le contrat</label><input type="text" name="v1_contrat_notaire"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloc SCI masquable -->
+      <div class="sub-block hidden-block" id="block-sci">
+        <h3>Personne Morale (SCI / Société)</h3>
+        <div class="grid-4">
+          <div class="field"><label>Type (SCI, SARL...)</label><input type="text" name="sci_type" value="SCI"></div>
+          <div class="field"><label>Dénomination sociale</label><input type="text" name="sci_nom"></div>
+          <div class="field"><label>N° SIRET / RCS</label><input type="text" name="sci_siret"></div>
+          <div class="field"><label>Gérant (Nom &amp; Prénoms)</label><input type="text" name="sci_gerant"></div>
+          <div class="field col-span-2"><label>Siège social (Adresse)</label><input type="text" name="sci_adresse"></div>
+          <div class="field"><label>Code postal &amp; Ville</label><input type="text" name="sci_cp_ville"></div>
+          <div class="field"><label>Téléphone &amp; E-mail gérant</label><input type="text" name="sci_contact"></div>
+        </div>
+        <div class="memo-box mt-1">
+          <strong>Mémo SCI :</strong> Contrôler les statuts pour vérifier si le gérant a le pouvoir de vendre seul l'actif immobilier. À défaut, prévoir un <strong>PV d'Assemblée Générale</strong> autorisant la vente et donnant pouvoir pour signer le mandat et le compromis.
+        </div>
+      </div>
+
+      <!-- Mémos juridiques vendeurs -->
+      <div class="memo-grid mt-1">
+        <div class="memo-box">
+          <strong>Domicile conjugal (art. 215 Code civil) :</strong> Si le bien constitue la résidence de la famille, le consentement et la signature des <strong>deux époux</strong> sont obligatoires pour le mandat et le compromis, quel que soit le régime matrimonial (même en séparation de biens).
+        </div>
+        <div class="memo-box">
+          <strong>Bien reçu par donation :</strong> Vérifier l'acte de donation (clause d'inaliénabilité, droit de retour, réserve d'usufruit). L'accord du donateur et/ou des héritiers réservataires (art. 924-4 Code civil) peut être requis.
+        </div>
+        <div class="memo-box">
+          <strong>Succession :</strong> Si réglée : fournir l'<em>attestation de propriété</em> après décès. Si en cours : fournir l'<em>acte de notoriété</em> (dévolution successorale) et le titre de propriété antérieur du défunt.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 : PROJET DE VENTE & SITUATION FINANCIÈRE -->
+    <section class="card page-break" id="sec-projet">
+      <div class="section-header">
+        <h2>2. Projet de vente, occupation &amp; situation financière</h2>
+      </div>
+
+      <div class="sub-block">
+        <h3>Historique d'acquisition &amp; situation commerciale</h3>
+        <div class="grid-4">
+          <div class="field"><label>Date d'acquisition</label><input type="date" name="acq_date"></div>
+          <div class="field"><label>Prix d'acquisition (€)</label><input type="number" name="acq_prix"></div>
+          <div class="field col-span-2">
+            <label>Origine de propriété</label>
+            <div class="check-row">
+              <label><input type="checkbox" name="orig_achat"> Achat</label>
+              <label><input type="checkbox" name="orig_succ"> Succession</label>
+              <label><input type="checkbox" name="orig_don"> Donation</label>
+              <label><input type="checkbox" name="orig_part"> Partage</label>
+            </div>
+          </div>
+          <div class="field col-span-2"><label>Pourquoi avez-vous acheté ce bien ?</label><input type="text" name="acq_pourquoi"></div>
+          <div class="field col-span-2"><label>Ce que vous auriez aimé avoir en plus ?</label><input type="text" name="acq_manque"></div>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field"><label>Comment avez-vous connu Propriétés-Privées ?</label><input type="text" name="comm_source"></div>
+          <div class="field"><label>Déjà en vente depuis le</label><input type="date" name="comm_depuis"></div>
+          <div class="field"><label>Prix affiché actuel (€)</label><input type="number" name="comm_prix"></div>
+          <div class="field"><label>Méthode d'estimation / Résultats</label><input type="text" name="comm_resultats"></div>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Utilisation &amp; disponibilité du bien</h3>
+        <div class="check-row">
+          <strong>Usage actuel :</strong>
+          <label><input type="checkbox" name="usage_rp"> Résidence principale</label>
+          <label><input type="checkbox" name="usage_rs"> Résidence secondaire</label>
+          <label><input type="checkbox" name="usage_loc"> Bien locatif</label>
+          <label><input type="checkbox" name="usage_vac"> Bien vacant</label>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Disponibilité :</strong>
+          <label><input type="checkbox" name="dispo_libre"> Bien libre à la vente</label>
+          <label><input type="checkbox" name="dispo_loue"> Bien loué en place</label>
+          <label>Congé / Préavis délivré le : <input type="date" name="dispo_conge" class="inline-date"></label>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field"><label>Nom du locataire</label><input type="text" name="loc_nom"></div>
+          <div class="field"><label>Type de bail &amp; échéance</label><input type="text" name="loc_bail" placeholder="Nu / Meublé — Échéance"></div>
+          <div class="field"><label>Loyer HC (€/mois)</label><input type="number" name="loc_loyer"></div>
+          <div class="field"><label>Charges &amp; Dépôt de garantie (€)</label><input type="text" name="loc_charges_dg"></div>
+        </div>
+        <div class="memo-box mt-1">
+          <strong>Mémo Vente d'un bien loué :</strong> Pour vendre libre (bail nu), congé pour vendre par commissaire de justice au moins <strong>6 mois avant l'échéance</strong> (droit de préemption du locataire). Si vendu occupé : récupérer bail, CNI locataire, attestation assurance, état des lieux d'entrée, 3 dernières quittances et montant du dépôt de garantie (à restituer à l'acquéreur le jour de l'acte).
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Capacité juridique &amp; situation financière</h3>
+        <div class="check-row">
+          <label>Propriétaire mineur ? <input type="checkbox" name="cap_mineur"> Oui</label>
+          <label>Tutelle / Curatelle ? <input type="checkbox" name="cap_tutelle"> Oui</label>
+          <label>Nom du tuteur/curateur : <input type="text" name="cap_tuteur" class="inline-input"></label>
+          <label>Pouvoir pour vendre ? <input type="checkbox" name="cap_pouvoir"> Oui</label>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field">
+            <label>Plus-value applicable ?</label>
+            <div class="check-row"><label><input type="checkbox" name="fin_pv_oui"> Oui</label><label><input type="checkbox" name="fin_pv_non"> Non</label></div>
+          </div>
+          <div class="field"><label>Crédit en cours — Capital restant dû (€)</label><input type="number" name="fin_crd"></div>
+          <div class="field">
+            <label>Hypothèque / Privilège inscrit ?</label>
+            <div class="check-row"><label><input type="checkbox" name="fin_hyp_oui"> Oui</label><label><input type="checkbox" name="fin_hyp_non"> Non</label></div>
+          </div>
+          <div class="field"><label>Procédure en cours (saisie, litige...)</label><input type="text" name="fin_proc" placeholder="Non / Préciser"></div>
+        </div>
+        <div class="memo-box mt-1">
+          <strong>Mémo Plus-value immobilière :</strong> Exonérations principales : résidence principale au jour de la cession ; détention &gt; 22 ans (IR) et &gt; 30 ans (prélèvements sociaux) ; prix de cession ≤ 15 000 € ; première cession d'un logement autre que la RP avec remploi dans la RP sous 24 mois ; titulaires de pension vieillesse ou carte mobilité inclusion sous plafond de revenus.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 : IDENTITÉ DU BIEN, TERRAIN & DÉPENDANCES -->
+    <section class="card page-break" id="sec-bien">
+      <div class="section-header">
+        <h2>3. Identité du bien, terrain &amp; dépendances</h2>
+      </div>
+
+      <div class="sub-block">
+        <h3>Localisation, cadastre &amp; notaire</h3>
+        <div class="grid-3">
+          <div class="field col-span-2"><label>Adresse exacte du bien à vendre</label><input type="text" name="bien_adresse"></div>
+          <div class="field"><label>Code postal &amp; Commune</label><input type="text" name="bien_cp_ville"></div>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field"><label>Réf. cadastrales — Section(s)</label><input type="text" name="cad_section" placeholder="Ex. : AB"></div>
+          <div class="field"><label>Numéro(s) de parcelle</label><input type="text" name="cad_num" placeholder="Ex. : 124, 125"></div>
+          <div class="field"><label>Contenance totale (m² / ha)</label><input type="text" name="cad_contenance"></div>
+          <div class="field"><label>Style architectural</label><input type="text" name="bien_style" placeholder="Périgourdine, longère, pavillon..."></div>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Nature du bien :</strong>
+          <label><input type="checkbox" name="nat_maison"> Maison individuelle</label>
+          <label><input type="checkbox" name="nat_propriete"> Propriété / Demeure / Corps de ferme</label>
+          <label><input type="checkbox" name="nat_immeuble"> Immeuble de rapport</label>
+          <label><input type="checkbox" name="nat_mixte"> Maison + Local / Commerce</label>
+          <label><input type="checkbox" name="nat_terrain"> Terrain à bâtir / Agricole</label>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field"><label>Notaire du vendeur (Nom)</label><input type="text" name="not_nom"></div>
+          <div class="field"><label>Commune de l'étude</label><input type="text" name="not_ville"></div>
+          <div class="field"><label>Clerc / Interlocuteur</label><input type="text" name="not_clerc"></div>
+          <div class="field"><label>E-mail / Tél. étude</label><input type="text" name="not_contact"></div>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Terrain, environnement &amp; mitoyenneté</h3>
+        <div class="grid-4">
+          <div class="field"><label>Surface terrain (m²)</label><input type="number" name="ter_surface"></div>
+          <div class="field"><label>Exposition principale</label><input type="text" name="ter_expo" placeholder="Sud, Sud-Ouest..."></div>
+          <div class="field">
+            <label>Terrain attenant / Divisible</label>
+            <div class="check-row">
+              <label><input type="checkbox" name="ter_att"> Attenant</label>
+              <label><input type="checkbox" name="ter_nonatt"> Non attenant</label>
+              <label><input type="checkbox" name="ter_div"> Divisible</label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Mitoyenneté</label>
+            <div class="check-row">
+              <label><input type="checkbox" name="mit_non"> Non</label>
+              <label><input type="checkbox" name="mit_1"> 1 côté</label>
+              <label><input type="checkbox" name="mit_2"> 2 côtés</label>
+            </div>
+          </div>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Nature des extérieurs :</strong>
+          <label><input type="checkbox" name="ext_jardin"> Jardin d'agrément</label>
+          <label><input type="checkbox" name="ext_verger"> Verger / Potager</label>
+          <label><input type="checkbox" name="ext_prairie"> Prairie / Pâture</label>
+          <label><input type="checkbox" name="ext_bois"> Bois / Taillis</label>
+          <label><input type="checkbox" name="ext_etang"> Étang / Mare / Ruisseau</label>
+        </div>
+        <div class="grid-3 mt-1">
+          <div class="field"><label>Clôture (Oui/Non, type, état)</label><input type="text" name="ter_cloture"></div>
+          <div class="field"><label>Vis-à-vis (Oui/Non, nature)</label><input type="text" name="ter_visavis"></div>
+          <div class="field"><label>Nuisances sonores / odeurs (route, élevage...)</label><input type="text" name="ter_nuisance"></div>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Structure du bâti &amp; dépendances</h3>
+        <div class="grid-4">
+          <div class="field"><label>Murs / Gros œuvre</label><input type="text" name="bati_murs" placeholder="Pierre, parpaing, brique, bois..."></div>
+          <div class="field"><label>Charpente &amp; Couverture</label><input type="text" name="bati_toit" placeholder="Tuiles canal/plates, ardoise, état..."></div>
+          <div class="field"><label>Isolation toiture / murs</label><input type="text" name="bati_isol" placeholder="Laine de verre, ouate, ITE, année..."></div>
+          <div class="field"><label>Sous-sol / Vide sanitaire / Cave</label><input type="text" name="bati_soussol" placeholder="Cave voûtée, vide sanitaire, surface..."></div>
+        </div>
+        <div class="grid-2 mt-1">
+          <div class="field"><label>Dépendances (Grange, hangar, atelier, four à pain, garage indépendant — surfaces &amp; état)</label><textarea name="bati_dependances" rows="2"></textarea></div>
+          <div class="field"><label>Stationnements &amp; accès (Garage, carport, cour, accueil camping-car, portail électrique/manuel)</label><textarea name="bati_stationnement" rows="2"></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 : SURFACES & DISTRIBUTION PIÈCE PAR PIÈCE -->
+    <section class="card page-break" id="sec-surfaces">
+      <div class="section-header">
+        <h2>4. Surfaces &amp; distribution pièce par pièce</h2>
+        <button type="button" class="btn-mini no-print" id="btn-add-piece">+ Ajouter une pièce</button>
+      </div>
+
+      <div class="grid-4">
+        <div class="field"><label>Nombre de pièces principales</label><input type="number" name="surf_nb_pieces"></div>
+        <div class="field"><label>Nombre de chambres</label><input type="number" name="surf_nb_chambres"></div>
+        <div class="field"><label>Surface habitable déclarée (m²)</label><input type="number" step="0.1" name="surf_hab_decl"></div>
+        <div class="field"><label>Surface utile totale (&gt; 1,80 m)</label><input type="number" step="0.1" name="surf_utile_decl"></div>
+      </div>
+
+      <table class="data-table mt-1" id="table-pieces">
+        <thead>
+          <tr>
+            <th style="width: 14%;">Niveau</th>
+            <th style="width: 24%;">Désignation pièce</th>
+            <th style="width: 14%;">Surf. Hab. (m²)</th>
+            <th style="width: 14%;">Surf. Annexe (m²)</th>
+            <th style="width: 12%;">Orientation</th>
+            <th>Observations (sol, HSP, placard, point d'eau...)</th>
+            <th class="no-print" style="width: 4%;"></th>
+          </tr>
+        </thead>
+        <tbody id="pieces-tbody">
+          <tr>
+            <td><input type="text" name="p_niv[]" value="RDC"></td>
+            <td><input type="text" name="p_nom[]" value="Entrée / Séjour"></td>
+            <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab"></td>
+            <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann"></td>
+            <td><input type="text" name="p_ori[]"></td>
+            <td><input type="text" name="p_obs[]"></td>
+            <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="p_niv[]" value="RDC"></td>
+            <td><input type="text" name="p_nom[]" value="Cuisine"></td>
+            <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab"></td>
+            <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann"></td>
+            <td><input type="text" name="p_ori[]"></td>
+            <td><input type="text" name="p_obs[]"></td>
+            <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="p_niv[]" value="RDC"></td>
+            <td><input type="text" name="p_nom[]" value="Chambre 1"></td>
+            <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab"></td>
+            <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann"></td>
+            <td><input type="text" name="p_ori[]"></td>
+            <td><input type="text" name="p_obs[]"></td>
+            <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="p_niv[]" value="RDC"></td>
+            <td><input type="text" name="p_nom[]" value="Salle d'eau / WC"></td>
+            <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab"></td>
+            <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann"></td>
+            <td><input type="text" name="p_ori[]"></td>
+            <td><input type="text" name="p_obs[]"></td>
+            <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="p_niv[]" value="Étage 1"></td>
+            <td><input type="text" name="p_nom[]" value="Chambre 2"></td>
+            <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab"></td>
+            <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann"></td>
+            <td><input type="text" name="p_ori[]"></td>
+            <td><input type="text" name="p_obs[]"></td>
+            <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="p_niv[]" value="Étage 1"></td>
+            <td><input type="text" name="p_nom[]" value="Chambre 3"></td>
+            <td><input type="number" step="0.1" name="p_hab[]" class="calc-hab"></td>
+            <td><input type="number" step="0.1" name="p_ann[]" class="calc-ann"></td>
+            <td><input type="text" name="p_ori[]"></td>
+            <td><input type="text" name="p_obs[]"></td>
+            <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td colspan="2"><strong>TOTAUX CALCULÉS</strong></td>
+            <td><strong id="total-hab">0,0 m²</strong></td>
+            <td><strong id="total-ann">0,0 m²</strong></td>
+            <td colspan="3"><em>Hors surfaces &lt; 1,80 m, garages, caves et dépendances non aménagées</em></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="memo-box mt-1">
+        <strong>Rappel réglementaire surfaces :</strong> Une pièce d'habitation (chambre) doit mesurer au minimum <strong>9 m²</strong> (ou volume ≥ 20 m³ selon le RSD) et disposer d'une ouverture sur l'extérieur. La surface habitable (art. R.156-1 CCH) exclut les murs, cloisons, marches, gaines, combles non aménagés, caves, sous-sols, remises, garages, terrasses, vérandas et locaux d'une hauteur inférieure à 1,80 m.
+      </div>
+    </section>
+
+    <!-- SECTION 5 : ÉQUIPEMENTS, PISCINE, TRAVAUX & ASSAINISSEMENT -->
+    <section class="card page-break" id="sec-equipements">
+      <div class="section-header">
+        <h2>5. Équipements, travaux &amp; assainissement</h2>
+        <label class="toggle-chip no-print"><input type="checkbox" id="toggle-piscine"> Le bien dispose d'une piscine</label>
+      </div>
+
+      <div class="sub-block">
+        <h3>Équipements intérieurs &amp; extérieurs</h3>
+        <div class="check-row">
+          <strong>Cuisine :</strong>
+          <label><input type="checkbox" name="cui_ouv"> Ouverte</label>
+          <label><input type="checkbox" name="cui_semi"> Semi-ouverte</label>
+          <label><input type="checkbox" name="cui_ind"> Indépendante</label>
+          <label><input type="checkbox" name="cui_ame"> Aménagée</label>
+          <label><input type="checkbox" name="cui_equ"> Équipée (électroménager inclus)</label>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Menuiseries :</strong>
+          <label><input type="checkbox" name="vit_double"> Double vitrage</label>
+          <label><input type="checkbox" name="vit_partiel"> Double vitrage partiel</label>
+          <label><input type="checkbox" name="vit_simple"> Simple vitrage</label>
+          <label><input type="checkbox" name="huis_pvc"> PVC</label>
+          <label><input type="checkbox" name="huis_bois"> Bois</label>
+          <label><input type="checkbox" name="huis_alu"> Alu</label>
+          <label>Volets : <input type="text" name="huis_volets" class="inline-input" placeholder="Battants, roulants élec..."></label>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Réseaux &amp; Confort :</strong>
+          <label><input type="checkbox" name="eq_fibre"> Fibre optique</label>
+          <label><input type="checkbox" name="eq_adsl"> ADSL / 4G</label>
+          <label><input type="checkbox" name="eq_vmc_sf"> VMC Simple flux</label>
+          <label><input type="checkbox" name="eq_vmc_df"> VMC Double flux</label>
+          <label><input type="checkbox" name="eq_alarme"> Alarme</label>
+          <label><input type="checkbox" name="eq_adouc"> Adoucisseur</label>
+          <label><input type="checkbox" name="eq_puits"> Puits / Source / Forage</label>
+          <label><input type="checkbox" name="eq_recup"> Récupérateur eau</label>
+        </div>
+        <div class="grid-3 mt-1">
+          <div class="field"><label>Terrasse / Balcon / Véranda (surfaces &amp; expo)</label><input type="text" name="eq_terrasse"></div>
+          <div class="field"><label>Puits / Forage (pompe, relié maison ?)</label><input type="text" name="eq_forage_detail"></div>
+          <div class="field"><label>Équipements inclus dans la vente</label><input type="text" name="eq_inclus" placeholder="Électroménager, tracteur tondeuse, cuve..."></div>
+        </div>
+      </div>
+
+      <!-- Bloc Piscine masquable -->
+      <div class="sub-block hidden-block" id="block-piscine">
+        <h3>Caractéristiques de la piscine</h3>
+        <div class="grid-4">
+          <div class="field"><label>Dimensions &amp; Profondeur</label><input type="text" name="pisc_dim" placeholder="Ex. : 8m x 4m"></div>
+          <div class="field"><label>Structure &amp; Revêtement</label><input type="text" name="pisc_struct" placeholder="Maçonnée liner, coque, carrelage..."></div>
+          <div class="field"><label>Filtration &amp; Traitement</label><input type="text" name="pisc_trait" placeholder="Chlore, sel, UV, PAC piscine..."></div>
+          <div class="field"><label>Année construction &amp; Décennale</label><input type="text" name="pisc_annee"></div>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Sécurité obligatoire (Loi 2003) :</strong>
+          <label><input type="checkbox" name="pisc_sec_volet"> Volet roulant (NF P90-308)</label>
+          <label><input type="checkbox" name="pisc_sec_abri"> Abri (NF P90-309)</label>
+          <label><input type="checkbox" name="pisc_sec_bar"> Barrière (NF P90-306)</label>
+          <label><input type="checkbox" name="pisc_sec_alarme"> Alarme (NF P90-307)</label>
+          <label><input type="checkbox" name="pisc_poolhouse"> Pool-house</label>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>État général &amp; historique des travaux (&lt; 10 ans)</h3>
+        <div class="check-row">
+          <strong>État du bien :</strong>
+          <label><input type="checkbox" name="etat_neuf"> Neuf / Récent</label>
+          <label><input type="checkbox" name="etat_bon"> Bon état général</label>
+          <label><input type="checkbox" name="etat_raf"> À rafraîchir</label>
+          <label><input type="checkbox" name="etat_ren"> À rénover</label>
+          <label>Année construction : <input type="text" name="annee_const" class="inline-input" style="width:70px;"></label>
+          <label>Année rénovation : <input type="text" name="annee_renov" class="inline-input" style="width:70px;"></label>
+        </div>
+        <table class="data-table mt-1">
+          <thead>
+            <tr>
+              <th>Poste de travaux</th>
+              <th>Année</th>
+              <th>Par Pro / Vendeur</th>
+              <th>Décennale / DO</th>
+              <th>Facture dispo</th>
+              <th>Notes / Entreprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Toiture / Charpente</td><td><input type="text" name="tr_toit_an"></td><td><input type="text" name="tr_toit_qui"></td><td><input type="text" name="tr_toit_dec"></td><td><input type="text" name="tr_toit_fac"></td><td><input type="text" name="tr_toit_note"></td></tr>
+            <tr><td>Huisseries / Isolation</td><td><input type="text" name="tr_isol_an"></td><td><input type="text" name="tr_isol_qui"></td><td><input type="text" name="tr_isol_dec"></td><td><input type="text" name="tr_isol_fac"></td><td><input type="text" name="tr_isol_note"></td></tr>
+            <tr><td>Électricité / Plomberie</td><td><input type="text" name="tr_elec_an"></td><td><input type="text" name="tr_elec_qui"></td><td><input type="text" name="tr_elec_dec"></td><td><input type="text" name="tr_elec_fac"></td><td><input type="text" name="tr_elec_note"></td></tr>
+            <tr><td>Chauffage / Climatisation</td><td><input type="text" name="tr_chauf_an"></td><td><input type="text" name="tr_chauf_qui"></td><td><input type="text" name="tr_chauf_dec"></td><td><input type="text" name="tr_chauf_fac"></td><td><input type="text" name="tr_chauf_note"></td></tr>
+            <tr><td>Façade / Extension / Autre</td><td><input type="text" name="tr_fac_an"></td><td><input type="text" name="tr_fac_qui"></td><td><input type="text" name="tr_fac_dec"></td><td><input type="text" name="tr_fac_fac"></td><td><input type="text" name="tr_fac_note"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sub-block">
+        <h3>Raccordements &amp; assainissement</h3>
+        <div class="check-row">
+          <strong>Type :</strong>
+          <label><input type="checkbox" name="ass_tae"> Tout-à-l'égout (collectif)</label>
+          <label><input type="checkbox" name="ass_fosse"> Fosse septique / Toutes eaux</label>
+          <label><input type="checkbox" name="ass_micro"> Micro-station</label>
+          <label><input type="checkbox" name="ass_phyto"> Phytoépuration</label>
+          <label><input type="checkbox" name="ass_relev"> Pompe de relevage</label>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field"><label>Rapport SPANC / Collectif fait ?</label><input type="text" name="ass_rapport" placeholder="Oui / Non"></div>
+          <div class="field"><label>Date du contrôle (validité 3 ans)</label><input type="date" name="ass_date"></div>
+          <div class="field"><label>Conformité / Travaux à prévoir</label><input type="text" name="ass_conf"></div>
+          <div class="field"><label>Compteurs (Eau, Linky, Gaz — emplacement)</label><input type="text" name="rac_compteurs"></div>
+        </div>
+        <div class="memo-box mt-1">
+          <strong>Mémo Assainissement :</strong> En non-collectif, le diagnostic <strong>SPANC de moins de 3 ans</strong> est obligatoire dès le compromis (en cas de non-conformité, l'acquéreur dispose d'1 an après l'acte pour réaliser les travaux). En collectif, vérifier si la commune ou la communauté de communes impose un contrôle de raccordement avant vente.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6 : CHAUFFAGE, PHOTOVOLTAÏQUE & VIE DE QUARTIER -->
+    <section class="card page-break" id="sec-energie">
+      <div class="section-header">
+        <h2>6. Chauffage, photovoltaïque &amp; environnement</h2>
+      </div>
+
+      <div class="sub-block">
+        <h3>Chauffage, climatisation &amp; eau chaude sanitaire</h3>
+        <div class="check-row">
+          <strong>Énergie(s) :</strong>
+          <label><input type="checkbox" name="ch_elec"> Électricité</label>
+          <label><input type="checkbox" name="ch_pac"> Pompe à chaleur (Air/Eau ou Air/Air)</label>
+          <label><input type="checkbox" name="ch_bois"> Bois (bûches)</label>
+          <label><input type="checkbox" name="ch_gran"> Granulés / Pellets</label>
+          <label><input type="checkbox" name="ch_fioul"> Fioul</label>
+          <label><input type="checkbox" name="ch_gaz_v"> Gaz ville</label>
+          <label><input type="checkbox" name="ch_gaz_c"> Gaz citerne</label>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Émetteurs :</strong>
+          <label><input type="checkbox" name="em_rad"> Radiateurs eau</label>
+          <label><input type="checkbox" name="em_conv"> Convecteurs / Inertie</label>
+          <label><input type="checkbox" name="em_sol"> Plancher chauffant</label>
+          <label><input type="checkbox" name="em_poele"> Poêle bois / granulés</label>
+          <label><input type="checkbox" name="em_insert"> Cheminée / Insert</label>
+          <label><input type="checkbox" name="em_clim"> Clim réversible</label>
+        </div>
+        <div class="grid-4 mt-1">
+          <div class="field"><label>Conso énergétique annuelle (€/an)</label><input type="number" name="ch_conso"></div>
+          <div class="field"><label>Date dernier entretien / ramonage</label><input type="date" name="ch_ramonage"></div>
+          <div class="field"><label>Mode eau chaude (Ballon, Thermo, Chaudière)</label><input type="text" name="ecs_mode"></div>
+          <div class="field"><label>Capacité (L) &amp; Année installation</label><input type="text" name="ecs_detail"></div>
+        </div>
+        <div class="grid-2 mt-1">
+          <div class="field"><label>Si citerne gaz ou cuve fioul (fournisseur, contrat location/propriété, contenance)</label><input type="text" name="ch_cuve"></div>
+          <div class="field"><label>Factures entretien &amp; ramonage fournies ?</label><input type="text" name="ch_factures"></div>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Panneaux photovoltaïques / Solaire thermique</h3>
+        <div class="grid-4">
+          <div class="field"><label>Puissance installée (kWc) &amp; Année</label><input type="text" name="pv_puiss"></div>
+          <div class="field"><label>Usage (Autoconso / Revente EDF OA)</label><input type="text" name="pv_usage"></div>
+          <div class="field"><label>Revenu / Économie annuel (€/an)</label><input type="number" name="pv_revenu"></div>
+          <div class="field"><label>Copie contrat &amp; décennale fournis ?</label><input type="text" name="pv_docs"></div>
+        </div>
+        <div class="memo-box mt-1">
+          <strong>Mémo Photovoltaïque :</strong> Récupérer l'autorisation d'urbanisme (DP), la déclaration d'achèvement (DAACT), la facture de pose + assurance décennale si &lt; 10 ans, et le contrat d'achat <strong>EDF OA / Enedis</strong> pour organiser l'avenant de cession au profit de l'acquéreur.
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Commodités &amp; vie locale (distances / temps)</h3>
+        <div class="grid-4">
+          <div class="field"><label>Commerces &amp; services</label><input type="text" name="vie_comm" placeholder="Bourg, supermarché, pharmacie..."></div>
+          <div class="field"><label>Écoles / Ramassage scolaire</label><input type="text" name="vie_ecole"></div>
+          <div class="field"><label>Collège / Lycée</label><input type="text" name="vie_coll"></div>
+          <div class="field"><label>Transports / Axes routiers / Gare</label><input type="text" name="vie_transp"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7 : URBANISME, FISCALITÉ & DIAGNOSTICS (DDT 2026) -->
+    <section class="card page-break" id="sec-urbanisme">
+      <div class="section-header">
+        <h2>7. Urbanisme, servitudes &amp; diagnostics obligatoires (DDT)</h2>
+      </div>
+
+      <div class="sub-block">
+        <h3>Fiscalité locale, urbanisme &amp; sinistres</h3>
+        <div class="grid-4">
+          <div class="field"><label>Taxe foncière annuelle (€)</label><input type="number" name="urb_tf"></div>
+          <div class="field"><label>Règlement (PLU, PLUi, Carte comm., RNU)</label><input type="text" name="urb_reg"></div>
+          <div class="field"><label>Zonage (U, AU, A, N...)</label><input type="text" name="urb_zone"></div>
+          <div class="field"><label>Lotissement / ASL (charges annuelles)</label><input type="text" name="urb_lotis" placeholder="Non / Oui + montant"></div>
+        </div>
+        <div class="grid-3 mt-1">
+          <div class="field"><label>Permis de construire / DP &amp; dates</label><input type="text" name="urb_pc"></div>
+          <div class="field"><label>DAACT &amp; Certificat de conformité</label><input type="text" name="urb_conf"></div>
+          <div class="field"><label>Servitudes (passage, puisage, réseau, vue...)</label><input type="text" name="urb_serv"></div>
+        </div>
+        <div class="grid-2 mt-1">
+          <div class="field"><label>Zones à risques (ABF / Monument historique, inondable, argiles, sismique)</label><input type="text" name="urb_risques"></div>
+          <div class="field"><label>Sinistre indemnisé (catastrophe naturelle, sécheresse, incendie — date &amp; nature)</label><input type="text" name="urb_sinistre"></div>
+        </div>
+        <div class="memo-box mt-1">
+          <strong>Mémo Travaux / Construction :</strong> Pour toute construction ou extension &lt; 10 ans : exiger Permis/DP, DAACT, attestation de non-contestation de conformité, et les attestations d'assurance <strong>décennale</strong> des artisans (ou Dommage-Ouvrage).
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Dossier de Diagnostic Technique (DDT Maisons — Réglementation 2026)</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Diagnostic</th>
+              <th>Condition d'obligation</th>
+              <th>Validité</th>
+              <th>Statut</th>
+              <th>Date réalisation</th>
+              <th>Résultat / Classe / Observations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>DPE</strong></td>
+              <td>Tout logement chauffé</td>
+              <td>10 ans (post-01/07/2021)</td>
+              <td><select name="ddt_dpe_st"><option value="">—</option><option>Fait</option><option>À faire</option></select></td>
+              <td><input type="date" name="ddt_dpe_dt"></td>
+              <td><input type="text" name="ddt_dpe_res" placeholder="Classe A à G + kWh/m²/an"></td>
+            </tr>
+            <tr>
+              <td><strong>Audit énergétique</strong></td>
+              <td>Monopropriété classée <strong>E, F ou G</strong></td>
+              <td>5 ans</td>
+              <td><select name="ddt_aud_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Non concerné</option></select></td>
+              <td><input type="date" name="ddt_aud_dt"></td>
+              <td><input type="text" name="ddt_aud_res"></td>
+            </tr>
+            <tr>
+              <td><strong>Amiante</strong></td>
+              <td>Permis avant le 01/07/1997</td>
+              <td>Illimitée si négatif</td>
+              <td><select name="ddt_ami_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Non concerné</option></select></td>
+              <td><input type="date" name="ddt_ami_dt"></td>
+              <td><input type="text" name="ddt_ami_res"></td>
+            </tr>
+            <tr>
+              <td><strong>Plomb (CREP)</strong></td>
+              <td>Construction avant le 01/01/1949</td>
+              <td>Illimitée si &lt; seuil (sinon 1 an)</td>
+              <td><select name="ddt_plo_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Non concerné</option></select></td>
+              <td><input type="date" name="ddt_plo_dt"></td>
+              <td><input type="text" name="ddt_plo_res"></td>
+            </tr>
+            <tr>
+              <td><strong>Électricité</strong></td>
+              <td>Installation &gt; 15 ans</td>
+              <td>3 ans</td>
+              <td><select name="ddt_ele_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Non concerné</option></select></td>
+              <td><input type="date" name="ddt_ele_dt"></td>
+              <td><input type="text" name="ddt_ele_res"></td>
+            </tr>
+            <tr>
+              <td><strong>Gaz</strong></td>
+              <td>Installation intérieure &gt; 15 ans</td>
+              <td>3 ans</td>
+              <td><select name="ddt_gaz_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Non concerné</option></select></td>
+              <td><input type="date" name="ddt_gaz_dt"></td>
+              <td><input type="text" name="ddt_gaz_res"></td>
+            </tr>
+            <tr>
+              <td><strong>ERP (Risques &amp; Pollutions)</strong></td>
+              <td>Toutes ventes (dès la 1re visite)</td>
+              <td>6 mois</td>
+              <td><select name="ddt_erp_st"><option value="">—</option><option>Fait</option><option>À faire</option></select></td>
+              <td><input type="date" name="ddt_erp_dt"></td>
+              <td><input type="text" name="ddt_erp_res"></td>
+            </tr>
+            <tr>
+              <td><strong>Assainissement (SPANC)</strong></td>
+              <td>Assainissement non collectif</td>
+              <td>3 ans</td>
+              <td><select name="ddt_spa_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Tout-à-l'égout</option></select></td>
+              <td><input type="date" name="ddt_spa_dt"></td>
+              <td><input type="text" name="ddt_spa_res"></td>
+            </tr>
+            <tr>
+              <td><strong>Termites / Mérules</strong></td>
+              <td>Zone sous arrêté préfectoral</td>
+              <td>6 mois (termites)</td>
+              <td><select name="ddt_ter_st"><option value="">—</option><option>Fait</option><option>À faire</option><option>Hors zone</option></select></td>
+              <td><input type="date" name="ddt_ter_dt"></td>
+              <td><input type="text" name="ddt_ter_res"></td>
+            </tr>
+            <tr>
+              <td><strong>ENSA (Bruit aérien)</strong></td>
+              <td>Plan d'exposition au bruit (PEB)</td>
+              <td>Informatif</td>
+              <td><select name="ddt_ens_st"><option value="">—</option><option>Fait</option><option>Non concerné</option></select></td>
+              <td><input type="date" name="ddt_ens_dt"></td>
+              <td><input type="text" name="ddt_ens_res"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 8 : PROJET VENDEUR, SUIVI & RGPD -->
+    <section class="card page-break" id="sec-suivi">
+      <div class="section-header">
+        <h2>8. Délais, projet de rachat &amp; suivi commercial</h2>
+      </div>
+
+      <div class="sub-block">
+        <h3>Calendrier du vendeur &amp; projet d'acquisition</h3>
+        <div class="grid-4">
+          <div class="field"><label>Date butoir de vente / encaissement</label><input type="date" name="proj_butoir"></div>
+          <div class="field"><label>Nouvel achat en cours ? (Où ?)</label><input type="text" name="proj_rachat"></div>
+          <div class="field"><label>Solution relais (Location, prêt relais)</label><input type="text" name="proj_relais"></div>
+          <div class="field"><label>Budget &amp; secteur recherchés</label><input type="text" name="proj_budget"></div>
+        </div>
+        <div class="check-row mt-1">
+          <strong>Motivations principales (SONCASE) :</strong>
+          <label><input type="checkbox" name="son_s1"> Sécurité</label>
+          <label><input type="checkbox" name="son_o"> Orgueil / Prestige</label>
+          <label><input type="checkbox" name="son_n"> Nouveauté</label>
+          <label><input type="checkbox" name="son_c"> Confort</label>
+          <label><input type="checkbox" name="son_a"> Argent / Rentabilité</label>
+          <label><input type="checkbox" name="son_s2"> Sympathie / Relationnel</label>
+          <label><input type="checkbox" name="son_e"> Écologie</label>
+        </div>
+        <div class="grid-2 mt-1">
+          <div class="field"><label>Points forts du bien (selon le vendeur)</label><textarea name="bien_plus" rows="2"></textarea></div>
+          <div class="field"><label>Points faibles / freins potentiels (selon le vendeur)</label><textarea name="bien_moins" rows="2"></textarea></div>
+        </div>
+      </div>
+
+      <div class="sub-block">
+        <h3>Plan d'action &amp; consignes de visite</h3>
+        <div class="grid-2">
+          <div class="field"><label>Consignes de visite (clés, alarme, animaux, préavis visite, locataire)</label><textarea name="visite_consignes" rows="3"></textarea></div>
+          <table class="data-table">
+            <thead>
+              <tr><th>Étape</th><th>Date</th><th>Heure / Lieu</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Remise Avis de Valeur &amp; Mandat</td><td><input type="date" name="rdv1_dt"></td><td><input type="text" name="rdv1_lieu"></td></tr>
+              <tr><td>Reportage photo / vidéo 4K / drone</td><td><input type="date" name="rdv2_dt"></td><td><input type="text" name="rdv2_lieu"></td></tr>
+              <tr><td>Point de suivi commercialisation</td><td><input type="date" name="rdv3_dt"></td><td><input type="text" name="rdv3_lieu"></td></tr>
+              <tr><td>Signature acte authentique prévisionnelle</td><td><input type="date" name="rdv4_dt"></td><td><input type="text" name="rdv4_lieu"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer class="rgpd-footer">
+        <p><strong>Protection des données personnelles (RGPD) :</strong> Les informations recueillies sur ce formulaire sont enregistrées par <strong>Sylvain MATIGNON (EI)</strong>, mandataire indépendant agissant pour le compte du réseau <strong>PROPRIÉTÉS-PRIVÉES.COM</strong> (SAS Propriétés-Privées — 44 allée des Cinq Continents, ZAC Le Chêne Ferré, 44120 Vertou), afin d'assurer l'estimation, la commercialisation et le suivi juridique de votre projet immobilier conformément à la loi n° 70-9 du 2 janvier 1970 (loi Hoguet). Conformément au Règlement (UE) 2016/679, vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition en écrivant à <em>dpo@proprietes-privees.com</em> ou à <em>s.matignon@proprietes-privees.com</em>.</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
