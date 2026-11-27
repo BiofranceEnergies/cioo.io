@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const STORAGE_KEY = 'bilan_technique_pp_autosave_v1';
+
   const formContainer = document.getElementById('form-container');
   const vendeursList = document.getElementById('vendeurs-list');
   const btnAddVendeur = document.getElementById('btn-add-vendeur');
@@ -27,8 +29,154 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let photoDataUrl = '';
   let vendeurCount = 1;
+  let isRestoring = false;
 
-  // 0. Gestion de la vignette photo (redimensionnée pour garder le JSON léger) & des liens
+  // --- FONCTIONS CENTRALES DE COLLECTE & RESTAURATION DES DONNÉES ---
+  function collectFormData() {
+    const data = {
+      meta: {
+        vendeursCount: document.querySelectorAll('.vendeur-block').length,
+        hasSci: toggleSci.checked,
+        hasPiscine: togglePiscine.checked,
+        photoDataUrl: photoDataUrl
+      },
+      fields: {},
+      agences: [],
+      parcelles: [],
+      pieces: [],
+      mobilier: []
+    };
+
+    formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
+      if (!el.name || el.name.endsWith('[]')) return;
+      if (el.type === 'checkbox') {
+        data.fields[el.name] = el.checked;
+      } else {
+        data.fields[el.name] = el.value;
+      }
+    });
+
+    agencesTbody.querySelectorAll('tr').forEach((tr) => {
+      data.agences.push({
+        nom: tr.querySelector('[name="ag_nom[]"]').value,
+        depuis: tr.querySelector('[name="ag_depuis[]"]').value,
+        prix: tr.querySelector('[name="ag_prix[]"]').value,
+        obs: tr.querySelector('[name="ag_obs[]"]').value
+      });
+    });
+
+    parcellesTbody.querySelectorAll('tr').forEach((tr) => {
+      data.parcelles.push({
+        commune: tr.querySelector('[name="cad_commune[]"]').value,
+        section: tr.querySelector('[name="cad_section[]"]').value,
+        num: tr.querySelector('[name="cad_num[]"]').value,
+        surf: tr.querySelector('[name="cad_surf[]"]').value,
+        nature: tr.querySelector('[name="cad_nature[]"]').value
+      });
+    });
+
+    piecesTbody.querySelectorAll('tr').forEach((tr) => {
+      data.pieces.push({
+        niv: tr.querySelector('[name="p_niv[]"]').value,
+        nom: tr.querySelector('[name="p_nom[]"]').value,
+        hab: tr.querySelector('[name="p_hab[]"]').value,
+        ann: tr.querySelector('[name="p_ann[]"]').value,
+        ori: tr.querySelector('[name="p_ori[]"]').value,
+        obs: tr.querySelector('[name="p_obs[]"]').value
+      });
+    });
+
+    mobilierTbody.querySelectorAll('tr').forEach((tr) => {
+      data.mobilier.push({
+        nom: tr.querySelector('[name="mob_nom[]"]').value,
+        detail: tr.querySelector('[name="mob_detail[]"]').value,
+        etat: tr.querySelector('[name="mob_etat[]"]').value,
+        val: tr.querySelector('[name="mob_val[]"]').value
+      });
+    });
+
+    return data;
+  }
+
+  function saveAutoDraft() {
+    if (isRestoring) return;
+    try {
+      const data = collectFormData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (err) {
+      // Ignore si quota localStorage atteint
+    }
+  }
+
+  function applyFormData(data) {
+    if (!data || typeof data !== 'object') return;
+    isRestoring = true;
+    try {
+      // Recréer le bon nombre de vendeurs
+      document.querySelectorAll('.vendeur-block').forEach((b, idx) => {
+        if (idx > 0) b.remove();
+      });
+      const targetVendeurs = (data.meta && data.meta.vendeursCount) || 1;
+      for (let i = 2; i <= targetVendeurs; i++) {
+        vendeursList.appendChild(createVendeurBlock(i));
+      }
+      vendeurCount = document.querySelectorAll('.vendeur-block').length;
+
+      // États SCI, Piscine & Photo
+      toggleSci.checked = !!(data.meta && data.meta.hasSci);
+      blockSci.classList.toggle('hidden-block', !toggleSci.checked);
+      togglePiscine.checked = !!(data.meta && data.meta.hasPiscine);
+      blockPiscine.classList.toggle('hidden-block', !togglePiscine.checked);
+      setPhoto((data.meta && data.meta.photoDataUrl) || '');
+
+      // Restaurer les champs
+      if (data.fields) {
+        Object.entries(data.fields).forEach(([name, val]) => {
+          const el = formContainer.querySelector(`[name="${name}"]`);
+          if (!el) return;
+          if (el.type === 'checkbox') {
+            el.checked = !!val;
+          } else {
+            el.value = val;
+          }
+        });
+      }
+
+      syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires');
+      syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
+
+      // Restaurer les agences
+      if (Array.isArray(data.agences) && data.agences.length > 0) {
+        agencesTbody.innerHTML = '';
+        data.agences.forEach((ag) => addAgenceRow(ag));
+      }
+
+      // Restaurer les parcelles cadastrales
+      if (Array.isArray(data.parcelles) && data.parcelles.length > 0) {
+        parcellesTbody.innerHTML = '';
+        data.parcelles.forEach((cad) => addParcelleRow(cad));
+        recalculateCadastre();
+      }
+
+      // Restaurer les pièces
+      if (Array.isArray(data.pieces)) {
+        piecesTbody.innerHTML = '';
+        data.pieces.forEach((p) => addPieceRow(p));
+        recalculateSurfaces();
+      }
+
+      // Restaurer le mobilier laissé
+      if (Array.isArray(data.mobilier) && data.mobilier.length > 0) {
+        mobilierTbody.innerHTML = '';
+        data.mobilier.forEach((m) => addMobilierRow(m));
+        recalculateMobilier();
+      }
+    } finally {
+      isRestoring = false;
+    }
+  }
+
+  // 0. Gestion de la vignette photo & des liens
   function setPhoto(dataUrl) {
     photoDataUrl = dataUrl || '';
     if (photoDataUrl) {
@@ -42,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
       photoPlaceholder.classList.remove('hidden-block');
       btnRemovePhoto.classList.add('hidden-block');
     }
+    saveAutoDraft();
   }
 
   inputPhoto.addEventListener('change', (e) => {
@@ -123,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
     div.querySelector('.btn-del-row').addEventListener('click', () => {
       div.remove();
       vendeurCount = document.querySelectorAll('.vendeur-block').length;
+      saveAutoDraft();
     });
     return div;
   }
@@ -135,15 +285,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     vendeurCount = currentBlocks + 1;
     vendeursList.appendChild(createVendeurBlock(vendeurCount));
+    saveAutoDraft();
   });
 
   // 2. Affichage / Masquage SCI et Piscine
   toggleSci.addEventListener('change', (e) => {
     blockSci.classList.toggle('hidden-block', !e.target.checked);
+    saveAutoDraft();
   });
 
   togglePiscine.addEventListener('change', (e) => {
     blockPiscine.classList.toggle('hidden-block', !e.target.checked);
+    saveAutoDraft();
   });
 
   // 3. Tableau dynamique des agences / commercialisation actuelle
@@ -159,12 +312,16 @@ document.addEventListener('DOMContentLoaded', () => {
     agencesTbody.appendChild(tr);
   }
 
-  btnAddAgence.addEventListener('click', () => addAgenceRow());
+  btnAddAgence.addEventListener('click', () => {
+    addAgenceRow();
+    saveAutoDraft();
+  });
 
   agencesTbody.addEventListener('click', (e) => {
     if (e.target.classList.contains('btn-del-row')) {
       if (agencesTbody.querySelectorAll('tr').length > 1) {
         e.target.closest('tr').remove();
+        saveAutoDraft();
       }
     }
   });
@@ -205,6 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btnAddParcelle.addEventListener('click', () => {
     const firstCommune = parcellesTbody.querySelector('[name="cad_commune[]"]');
     addParcelleRow({ commune: firstCommune ? firstCommune.value : '' });
+    saveAutoDraft();
   });
 
   parcellesTbody.addEventListener('input', (e) => {
@@ -218,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (parcellesTbody.querySelectorAll('tr').length > 1) {
         e.target.closest('tr').remove();
         recalculateCadastre();
+        saveAutoDraft();
       }
     }
   });
@@ -252,7 +411,10 @@ document.addEventListener('DOMContentLoaded', () => {
     piecesTbody.appendChild(tr);
   }
 
-  btnAddPiece.addEventListener('click', () => addPieceRow());
+  btnAddPiece.addEventListener('click', () => {
+    addPieceRow();
+    saveAutoDraft();
+  });
 
   piecesTbody.addEventListener('input', (e) => {
     if (e.target.classList.contains('calc-hab') || e.target.classList.contains('calc-ann')) {
@@ -264,6 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('btn-del-row')) {
       e.target.closest('tr').remove();
       recalculateSurfaces();
+      saveAutoDraft();
     }
   });
 
@@ -290,7 +453,10 @@ document.addEventListener('DOMContentLoaded', () => {
     mobilierTbody.appendChild(tr);
   }
 
-  btnAddMobilier.addEventListener('click', () => addMobilierRow());
+  btnAddMobilier.addEventListener('click', () => {
+    addMobilierRow();
+    saveAutoDraft();
+  });
 
   mobilierTbody.addEventListener('input', (e) => {
     if (e.target.classList.contains('calc-mob')) {
@@ -303,79 +469,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (mobilierTbody.querySelectorAll('tr').length > 1) {
         e.target.closest('tr').remove();
         recalculateMobilier();
+        saveAutoDraft();
       }
     }
   });
 
-  // 7. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
+  // 7. Sauvegarde automatique continue à chaque modification
+  formContainer.addEventListener('input', saveAutoDraft);
+  formContainer.addEventListener('change', saveAutoDraft);
+
+  // 8. Sauvegarde & Chargement JSON manuel (pour archiver/reprendre un dossier sur Drive)
   document.getElementById('btn-save-json').addEventListener('click', () => {
-    const data = {
-      meta: {
-        vendeursCount: document.querySelectorAll('.vendeur-block').length,
-        hasSci: toggleSci.checked,
-        hasPiscine: togglePiscine.checked,
-        photoDataUrl: photoDataUrl
-      },
-      fields: {},
-      agences: [],
-      parcelles: [],
-      pieces: [],
-      mobilier: []
-    };
-
-    // Sauvegarde tous les champs nommés hors tableaux dynamiques
-    formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
-      if (!el.name || el.name.endsWith('[]')) return;
-      if (el.type === 'checkbox') {
-        data.fields[el.name] = el.checked;
-      } else {
-        data.fields[el.name] = el.value;
-      }
-    });
-
-    // Sauvegarde des agences en concurrence
-    agencesTbody.querySelectorAll('tr').forEach((tr) => {
-      data.agences.push({
-        nom: tr.querySelector('[name="ag_nom[]"]').value,
-        depuis: tr.querySelector('[name="ag_depuis[]"]').value,
-        prix: tr.querySelector('[name="ag_prix[]"]').value,
-        obs: tr.querySelector('[name="ag_obs[]"]').value
-      });
-    });
-
-    // Sauvegarde des parcelles cadastrales
-    parcellesTbody.querySelectorAll('tr').forEach((tr) => {
-      data.parcelles.push({
-        commune: tr.querySelector('[name="cad_commune[]"]').value,
-        section: tr.querySelector('[name="cad_section[]"]').value,
-        num: tr.querySelector('[name="cad_num[]"]').value,
-        surf: tr.querySelector('[name="cad_surf[]"]').value,
-        nature: tr.querySelector('[name="cad_nature[]"]').value
-      });
-    });
-
-    // Sauvegarde des lignes du tableau pièces
-    piecesTbody.querySelectorAll('tr').forEach((tr) => {
-      data.pieces.push({
-        niv: tr.querySelector('[name="p_niv[]"]').value,
-        nom: tr.querySelector('[name="p_nom[]"]').value,
-        hab: tr.querySelector('[name="p_hab[]"]').value,
-        ann: tr.querySelector('[name="p_ann[]"]').value,
-        ori: tr.querySelector('[name="p_ori[]"]').value,
-        obs: tr.querySelector('[name="p_obs[]"]').value
-      });
-    });
-
-    // Sauvegarde du mobilier laissé
-    mobilierTbody.querySelectorAll('tr').forEach((tr) => {
-      data.mobilier.push({
-        nom: tr.querySelector('[name="mob_nom[]"]').value,
-        detail: tr.querySelector('[name="mob_detail[]"]').value,
-        etat: tr.querySelector('[name="mob_etat[]"]').value,
-        val: tr.querySelector('[name="mob_val[]"]').value
-      });
-    });
-
+    const data = collectFormData();
     const nomVendeur = (data.fields.contact_nom || 'client').trim().replace(/\s+/g, '_');
     const dateStr = new Date().toISOString().slice(0, 10);
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -394,65 +499,8 @@ document.addEventListener('DOMContentLoaded', () => {
     reader.onload = (evt) => {
       try {
         const data = JSON.parse(evt.target.result);
-
-        // Recréer le bon nombre de vendeurs
-        document.querySelectorAll('.vendeur-block').forEach((b, idx) => {
-          if (idx > 0) b.remove();
-        });
-        const targetVendeurs = (data.meta && data.meta.vendeursCount) || 1;
-        for (let i = 2; i <= targetVendeurs; i++) {
-          vendeursList.appendChild(createVendeurBlock(i));
-        }
-
-        // États SCI, Piscine & Photo
-        toggleSci.checked = !!(data.meta && data.meta.hasSci);
-        blockSci.classList.toggle('hidden-block', !toggleSci.checked);
-        togglePiscine.checked = !!(data.meta && data.meta.hasPiscine);
-        blockPiscine.classList.toggle('hidden-block', !togglePiscine.checked);
-        setPhoto((data.meta && data.meta.photoDataUrl) || '');
-
-        // Restaurer les champs
-        if (data.fields) {
-          Object.entries(data.fields).forEach(([name, val]) => {
-            const el = formContainer.querySelector(`[name="${name}"]`);
-            if (!el) return;
-            if (el.type === 'checkbox') {
-              el.checked = !!val;
-            } else {
-              el.value = val;
-            }
-          });
-        }
-
-        syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires');
-        syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
-
-        // Restaurer les agences
-        if (Array.isArray(data.agences) && data.agences.length > 0) {
-          agencesTbody.innerHTML = '';
-          data.agences.forEach((ag) => addAgenceRow(ag));
-        }
-
-        // Restaurer les parcelles cadastrales
-        if (Array.isArray(data.parcelles) && data.parcelles.length > 0) {
-          parcellesTbody.innerHTML = '';
-          data.parcelles.forEach((cad) => addParcelleRow(cad));
-          recalculateCadastre();
-        }
-
-        // Restaurer les pièces
-        if (Array.isArray(data.pieces)) {
-          piecesTbody.innerHTML = '';
-          data.pieces.forEach((p) => addPieceRow(p));
-          recalculateSurfaces();
-        }
-
-        // Restaurer le mobilier laissé
-        if (Array.isArray(data.mobilier) && data.mobilier.length > 0) {
-          mobilierTbody.innerHTML = '';
-          data.mobilier.forEach((m) => addMobilierRow(m));
-          recalculateMobilier();
-        }
+        applyFormData(data);
+        saveAutoDraft();
       } catch (err) {
         alert('Fichier JSON invalide ou corrompu.');
       }
@@ -461,9 +509,10 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = '';
   });
 
-  // 8. Réinitialiser & Exporter PDF
+  // 9. Réinitialiser (vide aussi le brouillon localStorage) & Exporter PDF
   document.getElementById('btn-reset').addEventListener('click', () => {
     if (confirm('Vider toutes les informations saisies pour démarrer un nouveau dossier vierge ?')) {
+      localStorage.removeItem(STORAGE_KEY);
       formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
         if (el.type === 'checkbox') el.checked = false;
         else if (el.name !== 'sci_type') el.value = '';
@@ -480,4 +529,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-print').addEventListener('click', () => {
     window.print();
   });
+
+  // 10. Restauration automatique au chargement de la page s'il existe un brouillon en cours
+  try {
+    const savedDraft = localStorage.getItem(STORAGE_KEY);
+    if (savedDraft) {
+      applyFormData(JSON.parse(savedDraft));
+    }
+  } catch (err) {
+    // Ignore si localStorage vide ou corrompu
+  }
 });
