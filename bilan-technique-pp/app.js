@@ -17,11 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobilierTbody = document.getElementById('mobilier-tbody');
   const btnAddMobilier = document.getElementById('btn-add-mobilier');
 
-  // Éléments Mode Lecture & Lien partagé
+  // Éléments Mode Lecture & Export HTML autonome
   const btnToggleReadonly = document.getElementById('btn-toggle-readonly');
-  const btnShareLink = document.getElementById('btn-share-link');
-  const sharedBanner = document.getElementById('shared-banner');
-  const btnPrintShared = document.getElementById('btn-print-shared');
+  const btnExportHtml = document.getElementById('btn-export-html');
 
   // Éléments vignette photo & liens couverture
   const inputPhoto = document.getElementById('input-photo');
@@ -38,12 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let photoDataUrl = '';
   let vendeurCount = 1;
   let isRestoring = false;
-  let isSharedView = false;
 
-  // --- MODE LECTURE & PARTAGE PAR LIEN ---
-  function setReadOnlyMode(enabled, isExternalShare = false) {
+  // --- MODE LECTURE ÉCRAN ---
+  function setReadOnlyMode(enabled) {
     document.body.classList.toggle('readonly-mode', enabled);
-    document.body.classList.toggle('shared-readonly-mode', isExternalShare);
 
     formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
       if (enabled) {
@@ -61,59 +57,87 @@ document.addEventListener('DOMContentLoaded', () => {
       btnToggleReadonly.textContent = enabled ? '✏️ Mode Édition' : '👁️ Mode Lecture';
       btnToggleReadonly.classList.toggle('btn-active-mode', enabled);
     }
-
-    if (sharedBanner) {
-      sharedBanner.classList.toggle('hidden-block', !isExternalShare);
-    }
   }
 
   btnToggleReadonly.addEventListener('click', () => {
     const nextState = !document.body.classList.contains('readonly-mode');
-    setReadOnlyMode(nextState, false);
+    setReadOnlyMode(nextState);
   });
 
-  if (btnPrintShared) {
-    btnPrintShared.addEventListener('click', () => window.print());
-  }
-
-  // Encodage / Décodage UTF-8 Base64 pour lien partageable
-  function encodeShareData(obj) {
-    const json = JSON.stringify(obj);
-    const bytes = new TextEncoder().encode(json);
-    let binary = '';
-    bytes.forEach((b) => { binary += String.fromCharCode(b); });
-    return btoa(binary);
-  }
-
-  function decodeShareData(b64) {
-    const binary = atob(b64);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) {
-      bytes[i] = binary.charCodeAt(i);
-    }
-    const json = new TextDecoder().decode(bytes);
-    return JSON.parse(json);
-  }
-
-  btnShareLink.addEventListener('click', async () => {
-    const data = collectFormData();
-    // On retire la photo base64 de l'URL pour éviter une adresse trop longue
-    if (data.meta) data.meta.photoDataUrl = '';
+  // --- EXPORT FICHE HTML AUTONOME EN LECTURE SEULE (AVEC PHOTO & CSS INTÉGRÉS) ---
+  btnExportHtml.addEventListener('click', async () => {
+    let cssText = '';
     try {
-      const encoded = encodeShareData(data);
-      const baseUrl = window.location.href.split('#')[0];
-      const shareUrl = `${baseUrl}#lecture=${encodeURIComponent(encoded)}`;
-      await navigator.clipboard.writeText(shareUrl);
-      const originalText = btnShareLink.textContent;
-      btnShareLink.textContent = '✅ Lien copié !';
-      btnShareLink.classList.add('btn-active-mode');
-      setTimeout(() => {
-        btnShareLink.textContent = originalText;
-        btnShareLink.classList.remove('btn-active-mode');
-      }, 2500);
-    } catch (err) {
-      alert('Impossible de copier automatiquement le lien dans le presse-papiers.');
+      const resp = await fetch('style.css');
+      if (resp.ok) cssText = await resp.text();
+    } catch (e) {
+      // Fallback via feuilles de style chargées
     }
+    if (!cssText) {
+      Array.from(document.styleSheets).forEach((sheet) => {
+        try {
+          Array.from(sheet.cssRules).forEach((rule) => {
+            cssText += rule.cssText + '\n';
+          });
+        } catch (err) {}
+      });
+    }
+
+    // Clone du formulaire avec toutes les valeurs figurées dans les attributs HTML
+    const clone = formContainer.cloneNode(true);
+    const origInputs = formContainer.querySelectorAll('input, select, textarea');
+    const cloneInputs = clone.querySelectorAll('input, select, textarea');
+
+    origInputs.forEach((orig, i) => {
+      const target = cloneInputs[i];
+      if (!target) return;
+      if (orig.type === 'checkbox' || orig.type === 'radio') {
+        if (orig.checked) target.setAttribute('checked', 'checked');
+        else target.removeAttribute('checked');
+        target.setAttribute('disabled', 'disabled');
+      } else if (orig.tagName === 'SELECT') {
+        Array.from(target.options).forEach((opt, idx) => {
+          if (idx === orig.selectedIndex) opt.setAttribute('selected', 'selected');
+          else opt.removeAttribute('selected');
+        });
+        target.setAttribute('disabled', 'disabled');
+      } else if (orig.tagName === 'TEXTAREA') {
+        target.textContent = orig.value;
+        target.setAttribute('readonly', 'readonly');
+      } else {
+        target.setAttribute('value', orig.value);
+        target.setAttribute('readonly', 'readonly');
+      }
+    });
+
+    // Supprime tous les éléments d'édition (.no-print) du clone
+    clone.querySelectorAll('.no-print').forEach((el) => el.remove());
+
+    const nomVendeur = (document.querySelector('[name="contact_nom"]').value || 'client')
+      .trim()
+      .replace(/\s+/g, '_');
+    const dateStr = new Date().toISOString().slice(0, 10);
+
+    const standaloneHtml = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche Technique — ${nomVendeur} | Propriétés-Privées.com</title>
+  <style>${cssText}</style>
+</head>
+<body class="readonly-mode standalone-export">
+  ${clone.outerHTML}
+</body>
+</html>`;
+
+    const blob = new Blob([standaloneHtml], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Fiche_Technique_PP_${nomVendeur}_${dateStr}.html`;
+    a.click();
+    URL.revokeObjectURL(url);
   });
 
   // --- FONCTIONS CENTRALES DE COLLECTE & RESTAURATION DES DONNÉES ---
@@ -184,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function saveAutoDraft() {
-    if (isRestoring || isSharedView) return;
+    if (isRestoring) return;
     try {
       const data = collectFormData();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -595,6 +619,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-reset').addEventListener('click', () => {
     if (confirm('Vider toutes les informations saisies pour démarrer un nouveau dossier vierge ?')) {
       localStorage.removeItem(STORAGE_KEY);
+      if (document.body.classList.contains('readonly-mode')) {
+        setReadOnlyMode(false);
+      }
       formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
         if (el.type === 'checkbox') el.checked = false;
         else if (el.name !== 'sci_type') el.value = '';
@@ -613,22 +640,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.print();
   });
 
-  // 10. Chargement initial : priorité au lien partagé (#lecture=...), sinon brouillon localStorage
+  // 10. Restauration automatique au chargement de la page s'il existe un brouillon en cours
   try {
-    const hash = window.location.hash || '';
-    if (hash.startsWith('#lecture=')) {
-      const encoded = decodeURIComponent(hash.slice('#lecture='.length));
-      const sharedData = decodeShareData(encoded);
-      isSharedView = true;
-      applyFormData(sharedData);
-      setReadOnlyMode(true, true);
-    } else {
-      const savedDraft = localStorage.getItem(STORAGE_KEY);
-      if (savedDraft) {
-        applyFormData(JSON.parse(savedDraft));
-      }
+    const savedDraft = localStorage.getItem(STORAGE_KEY);
+    if (savedDraft) {
+      applyFormData(JSON.parse(savedDraft));
     }
   } catch (err) {
-    // Ignore si hash ou localStorage invalide
+    // Ignore si localStorage vide ou corrompu
   }
 });
