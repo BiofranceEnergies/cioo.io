@@ -126,19 +126,6 @@ body {
   display: inline-block;
 }
 
-/* Bandeau lien lecture seule partagé */
-.shared-banner {
-  background: var(--pp-dark);
-  color: #fff;
-  padding: 10px 18px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  border-bottom: 3px solid var(--pp-primary);
-}
-
 /* Conteneur principal */
 .document-container {
   max-width: 1050px;
@@ -563,7 +550,7 @@ textarea:focus {
 }
 
 /* =========================================================
-   MODE LECTURE / PRÉSENTATION ÉCRAN (Non modifiable)
+   MODE LECTURE / PRÉSENTATION ÉCRAN & FICHE HTML EXPORTÉE
    ========================================================= */
 body.readonly-mode .btn-mini,
 body.readonly-mode .btn-del-row,
@@ -609,8 +596,8 @@ body.readonly-mode .check-row label {
   cursor: default;
 }
 
-/* Lien partagé externe : masque la barre d'édition complète */
-body.shared-readonly-mode #main-toolbar {
+/* Fiche HTML autonome exportée : masque complètement la barre d'outils */
+body.standalone-export #main-toolbar {
   display: none !important;
 }
 
@@ -655,16 +642,19 @@ body.shared-readonly-mode #main-toolbar {
   }
 }
 
-/* IMPRESSION / EXPORT PDF A4 */
+/* =========================================================
+   IMPRESSION / EXPORT PDF A4 ÉQUILIBRÉ
+   ========================================================= */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 11mm;
+    margin: 9mm 10mm;
   }
 
   body {
     background: #fff;
-    font-size: 10.5pt;
+    font-size: 9.5pt;
+    line-height: 1.32;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -684,13 +674,66 @@ body.shared-readonly-mode #main-toolbar {
     box-shadow: none;
     border: 1px solid #d1d5db;
     border-top: 3px solid var(--pp-primary);
-    padding: 12px 14px;
+    padding: 10px 14px;
+    break-inside: auto;
+  }
+
+  .sub-block,
+  .memo-grid,
+  .cover-header,
+  .cover-prospect,
+  .rgpd-footer {
     break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .data-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .page-break {
-    page-break-before: always;
-    break-before: page;
+    page-break-before: auto;
+    break-before: auto;
+  }
+
+  .cover-header {
+    flex-direction: row !important;
+    gap: 14px;
+  }
+
+  .cover-right {
+    min-width: 245px !important;
+    max-width: 265px !important;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .memo-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .data-table {
+    font-size: 8.5pt;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 3px 5px;
   }
 
   input[type="text"],
@@ -704,8 +747,8 @@ body.shared-readonly-mode #main-toolbar {
     border: none;
     border-bottom: 1px dotted #9ca3af;
     border-radius: 0;
-    padding: 2px 4px;
-    font-size: 10pt;
+    padding: 1px 3px;
+    font-size: 9pt;
     background: transparent !important;
   }
 
@@ -715,7 +758,7 @@ body.shared-readonly-mode #main-toolbar {
   }
 
   .memo-box {
-    font-size: 9pt;
-    padding: 6px 8px;
+    font-size: 8pt;
+    padding: 5px 7px;
   }
 }
