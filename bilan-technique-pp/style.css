@@ -77,6 +77,7 @@ body {
 
 .toolbar-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
 }
@@ -103,6 +104,11 @@ body {
   color: #fff;
 }
 
+.btn-active-mode {
+  background: #059669 !important;
+  color: #fff !important;
+}
+
 .btn-outline {
   background: transparent;
   color: #d1d5db;
@@ -118,6 +124,19 @@ body {
   font-size: 11.5px;
   cursor: pointer;
   display: inline-block;
+}
+
+/* Bandeau lien lecture seule partagé */
+.shared-banner {
+  background: var(--pp-dark);
+  color: #fff;
+  padding: 10px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 3px solid var(--pp-primary);
 }
 
 /* Conteneur principal */
@@ -543,6 +562,58 @@ textarea:focus {
   text-align: justify;
 }
 
+/* =========================================================
+   MODE LECTURE / PRÉSENTATION ÉCRAN (Non modifiable)
+   ========================================================= */
+body.readonly-mode .btn-mini,
+body.readonly-mode .btn-del-row,
+body.readonly-mode .photo-actions,
+body.readonly-mode .photo-placeholder,
+body.readonly-mode .section-controls,
+body.readonly-mode .toggle-chip,
+body.readonly-mode #input-lien-notaires,
+body.readonly-mode #input-lien-youtube,
+body.readonly-mode #input-lien-annonce {
+  display: none !important;
+}
+
+body.readonly-mode input[type="text"],
+body.readonly-mode input[type="number"],
+body.readonly-mode input[type="email"],
+body.readonly-mode input[type="tel"],
+body.readonly-mode input[type="url"],
+body.readonly-mode input[type="date"],
+body.readonly-mode select,
+body.readonly-mode textarea {
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: var(--pp-dark);
+  font-weight: 600;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+body.readonly-mode .data-table td input,
+body.readonly-mode .data-table td select {
+  border-bottom: none;
+  background: transparent;
+}
+
+body.readonly-mode input[type="checkbox"] {
+  pointer-events: none;
+}
+
+body.readonly-mode .check-row label {
+  cursor: default;
+}
+
+/* Lien partagé externe : masque la barre d'édition complète */
+body.shared-readonly-mode #main-toolbar {
+  display: none !important;
+}
+
 /* Responsive tablette */
 @media (max-width: 820px) {
   .grid-4, .grid-3, .memo-grid {
@@ -635,6 +706,7 @@ textarea:focus {
     border-radius: 0;
     padding: 2px 4px;
     font-size: 10pt;
+    background: transparent !important;
   }
 
   .data-table td input,
