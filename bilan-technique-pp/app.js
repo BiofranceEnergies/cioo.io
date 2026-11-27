@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const blockSci = document.getElementById('block-sci');
   const togglePiscine = document.getElementById('toggle-piscine');
   const blockPiscine = document.getElementById('block-piscine');
+  const parcellesTbody = document.getElementById('parcelles-tbody');
+  const btnAddParcelle = document.getElementById('btn-add-parcelle');
   const piecesTbody = document.getElementById('pieces-tbody');
   const btnAddPiece = document.getElementById('btn-add-piece');
 
@@ -70,7 +72,61 @@ document.addEventListener('DOMContentLoaded', () => {
     blockPiscine.classList.toggle('hidden-block', !e.target.checked);
   });
 
-  // 3. Tableau dynamique des pièces & calcul automatique des surfaces
+  // 3. Tableau dynamique des parcelles cadastrales & calcul m² / ha
+  function recalculateCadastre() {
+    let totalM2 = 0;
+    document.querySelectorAll('.calc-cad').forEach((inp) => {
+      const val = parseFloat(inp.value);
+      if (!isNaN(val) && val > 0) totalM2 += val;
+    });
+
+    document.getElementById('total-cad-m2').textContent =
+      Math.round(totalM2).toLocaleString('fr-FR') + ' m²';
+
+    const ha = Math.floor(totalM2 / 10000);
+    const resteHa = Math.round(totalM2) % 10000;
+    const ares = Math.floor(resteHa / 100);
+    const ca = resteHa % 100;
+    const pad = (n) => String(n).padStart(2, '0');
+    document.getElementById('total-cad-ha').textContent =
+      `${ha} ha ${pad(ares)} a ${pad(ca)} ca`;
+  }
+
+  function addParcelleRow(data = {}) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" name="cad_commune[]" value="${data.commune || ''}" placeholder="Commune"></td>
+      <td><input type="text" name="cad_section[]" value="${data.section || ''}" placeholder="Section"></td>
+      <td><input type="text" name="cad_num[]" value="${data.num || ''}" placeholder="N°"></td>
+      <td><input type="number" step="1" name="cad_surf[]" class="calc-cad" value="${data.surf || ''}" placeholder="0"></td>
+      <td><input type="text" name="cad_nature[]" value="${data.nature || ''}" placeholder="Jardin, bois, prairie..."></td>
+      <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+    `;
+    parcellesTbody.appendChild(tr);
+  }
+
+  btnAddParcelle.addEventListener('click', () => {
+    // Pré-remplit la commune avec celle de la première ligne si renseignée
+    const firstCommune = parcellesTbody.querySelector('[name="cad_commune[]"]');
+    addParcelleRow({ commune: firstCommune ? firstCommune.value : '' });
+  });
+
+  parcellesTbody.addEventListener('input', (e) => {
+    if (e.target.classList.contains('calc-cad')) {
+      recalculateCadastre();
+    }
+  });
+
+  parcellesTbody.addEventListener('click', (e) => {
+    if (e.target.classList.contains('btn-del-row')) {
+      if (parcellesTbody.querySelectorAll('tr').length > 1) {
+        e.target.closest('tr').remove();
+        recalculateCadastre();
+      }
+    }
+  });
+
+  // 4. Tableau dynamique des pièces & calcul automatique des surfaces
   function recalculateSurfaces() {
     let sumHab = 0;
     let sumAnn = 0;
@@ -115,20 +171,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
+  // 5. Sauvegarde & Chargement JSON (pour archiver/reprendre un dossier sur Chromebook/Drive)
   document.getElementById('btn-save-json').addEventListener('click', () => {
     const data = {
       meta: {
         vendeursCount: document.querySelectorAll('.vendeur-block').length,
         hasSci: toggleSci.checked,
-        hasPiscine: togglePiscine.checked,
-        piecesCount: piecesTbody.querySelectorAll('tr').length
+        hasPiscine: togglePiscine.checked
       },
       fields: {},
+      parcelles: [],
       pieces: []
     };
 
-    // Sauvegarde tous les champs nommés hors tableau pièces
+    // Sauvegarde tous les champs nommés hors tableaux dynamiques
     formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
       if (!el.name || el.name.endsWith('[]')) return;
       if (el.type === 'checkbox') {
@@ -138,7 +194,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Sauvegarde les lignes du tableau pièces
+    // Sauvegarde des parcelles cadastrales
+    parcellesTbody.querySelectorAll('tr').forEach((tr) => {
+      data.parcelles.push({
+        commune: tr.querySelector('[name="cad_commune[]"]').value,
+        section: tr.querySelector('[name="cad_section[]"]').value,
+        num: tr.querySelector('[name="cad_num[]"]').value,
+        surf: tr.querySelector('[name="cad_surf[]"]').value,
+        nature: tr.querySelector('[name="cad_nature[]"]').value
+      });
+    });
+
+    // Sauvegarde des lignes du tableau pièces
     piecesTbody.querySelectorAll('tr').forEach((tr) => {
       data.pieces.push({
         niv: tr.querySelector('[name="p_niv[]"]').value,
@@ -197,6 +264,13 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
 
+        // Restaurer les parcelles cadastrales
+        if (Array.isArray(data.parcelles) && data.parcelles.length > 0) {
+          parcellesTbody.innerHTML = '';
+          data.parcelles.forEach((cad) => addParcelleRow(cad));
+          recalculateCadastre();
+        }
+
         // Restaurer les pièces
         if (Array.isArray(data.pieces)) {
           piecesTbody.innerHTML = '';
@@ -211,13 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = '';
   });
 
-  // 5. Réinitialiser & Exporter PDF
+  // 6. Réinitialiser & Exporter PDF
   document.getElementById('btn-reset').addEventListener('click', () => {
     if (confirm('Vider toutes les informations saisies pour démarrer un nouveau dossier vierge ?')) {
       formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
         if (el.type === 'checkbox') el.checked = false;
         else if (el.name !== 'sci_type') el.value = '';
       });
+      recalculateCadastre();
       recalculateSurfaces();
     }
   });
