@@ -15,7 +15,77 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobilierTbody = document.getElementById('mobilier-tbody');
   const btnAddMobilier = document.getElementById('btn-add-mobilier');
 
+  // Éléments vignette photo & liens couverture
+  const inputPhoto = document.getElementById('input-photo');
+  const photoPreview = document.getElementById('photo-preview');
+  const photoPlaceholder = document.getElementById('photo-placeholder');
+  const btnRemovePhoto = document.getElementById('btn-remove-photo');
+  const inputLienNotaires = document.getElementById('input-lien-notaires');
+  const linkNotairesView = document.getElementById('link-notaires-view');
+  const inputLienYoutube = document.getElementById('input-lien-youtube');
+  const linkYoutubeView = document.getElementById('link-youtube-view');
+
+  let photoDataUrl = '';
   let vendeurCount = 1;
+
+  // 0. Gestion de la vignette photo (redimensionnée pour garder le JSON léger) & des liens
+  function setPhoto(dataUrl) {
+    photoDataUrl = dataUrl || '';
+    if (photoDataUrl) {
+      photoPreview.src = photoDataUrl;
+      photoPreview.classList.remove('hidden-block');
+      photoPlaceholder.classList.add('hidden-block');
+      btnRemovePhoto.classList.remove('hidden-block');
+    } else {
+      photoPreview.src = '';
+      photoPreview.classList.add('hidden-block');
+      photoPlaceholder.classList.remove('hidden-block');
+      btnRemovePhoto.classList.add('hidden-block');
+    }
+  }
+
+  inputPhoto.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const maxW = 640;
+        const scale = Math.min(1, maxW / img.width);
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        setPhoto(canvas.toDataURL('image/jpeg', 0.8));
+      };
+      img.src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  });
+
+  btnRemovePhoto.addEventListener('click', () => setPhoto(''));
+
+  function syncQuickLink(inputEl, anchorEl, labelText) {
+    const url = (inputEl.value || '').trim();
+    if (url) {
+      anchorEl.href = url.startsWith('http') ? url : 'https://' + url;
+      anchorEl.textContent = `${labelText} (${url}) ↗`;
+      anchorEl.classList.remove('hidden-block');
+    } else {
+      anchorEl.href = '#';
+      anchorEl.classList.add('hidden-block');
+    }
+  }
+
+  inputLienNotaires.addEventListener('input', () =>
+    syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires')
+  );
+  inputLienYoutube.addEventListener('input', () =>
+    syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube')
+  );
 
   // 1. Gestion des vendeurs supplémentaires (2 à 6)
   function createVendeurBlock(num) {
@@ -243,7 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
       meta: {
         vendeursCount: document.querySelectorAll('.vendeur-block').length,
         hasSci: toggleSci.checked,
-        hasPiscine: togglePiscine.checked
+        hasPiscine: togglePiscine.checked,
+        photoDataUrl: photoDataUrl
       },
       fields: {},
       agences: [],
@@ -333,11 +404,12 @@ document.addEventListener('DOMContentLoaded', () => {
           vendeursList.appendChild(createVendeurBlock(i));
         }
 
-        // États SCI & Piscine
+        // États SCI, Piscine & Photo
         toggleSci.checked = !!(data.meta && data.meta.hasSci);
         blockSci.classList.toggle('hidden-block', !toggleSci.checked);
         togglePiscine.checked = !!(data.meta && data.meta.hasPiscine);
         blockPiscine.classList.toggle('hidden-block', !togglePiscine.checked);
+        setPhoto((data.meta && data.meta.photoDataUrl) || '');
 
         // Restaurer les champs
         if (data.fields) {
@@ -351,6 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
         }
+
+        syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires');
+        syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
 
         // Restaurer les agences
         if (Array.isArray(data.agences) && data.agences.length > 0) {
@@ -393,6 +468,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (el.type === 'checkbox') el.checked = false;
         else if (el.name !== 'sci_type') el.value = '';
       });
+      setPhoto('');
+      syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires');
+      syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
       recalculateCadastre();
       recalculateSurfaces();
       recalculateMobilier();
