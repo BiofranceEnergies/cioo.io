@@ -455,10 +455,10 @@
       </div>
     </section>
 
-    <!-- SECTION 5 : ÉQUIPEMENTS, PISCINE, TRAVAUX & ASSAINISSEMENT -->
+    <!-- SECTION 5 : ÉQUIPEMENTS, MOBILIER LAISSÉ, PISCINE, TRAVAUX & ASSAINISSEMENT -->
     <section class="card page-break" id="sec-equipements">
       <div class="section-header">
-        <h2>5. Équipements, travaux &amp; assainissement</h2>
+        <h2>5. Équipements, mobilier laissé, travaux &amp; assainissement</h2>
         <label class="toggle-chip no-print"><input type="checkbox" id="toggle-piscine"> Le bien dispose d'une piscine</label>
       </div>
 
@@ -493,11 +493,44 @@
           <label><input type="checkbox" name="eq_puits"> Puits / Source / Forage</label>
           <label><input type="checkbox" name="eq_recup"> Récupérateur eau</label>
         </div>
-        <div class="grid-3 mt-1">
+        <div class="grid-2 mt-1">
           <div class="field"><label>Terrasse / Balcon / Véranda (surfaces &amp; expo)</label><input type="text" name="eq_terrasse"></div>
           <div class="field"><label>Puits / Forage (pompe, relié maison ?)</label><input type="text" name="eq_forage_detail"></div>
-          <div class="field"><label>Équipements inclus dans la vente</label><input type="text" name="eq_inclus" placeholder="Électroménager, tracteur tondeuse, cuve..."></div>
         </div>
+      </div>
+
+      <!-- Tableau dynamique du mobilier & équipements laissés par le vendeur -->
+      <div class="sub-block">
+        <h3>
+          <span>Mobilier &amp; équipements laissés dans la vente (pour compromis)</span>
+          <button type="button" class="btn-mini no-print" id="btn-add-mobilier">+ Ajouter un élément</button>
+        </h3>
+        <table class="data-table" id="table-mobilier">
+          <thead>
+            <tr>
+              <th style="width: 34%;">Désignation / Élément laissé</th>
+              <th style="width: 30%;">Marque / Modèle / Détail</th>
+              <th style="width: 16%;">État / Ancienneté</th>
+              <th style="width: 16%;">Valeur estimée (€)</th>
+              <th class="no-print" style="width: 4%;"></th>
+            </tr>
+          </thead>
+          <tbody id="mobilier-tbody">
+            <tr>
+              <td><input type="text" name="mob_nom[]" placeholder="Ex. : Cuisine équipée, four, plaque, hotte..."></td>
+              <td><input type="text" name="mob_detail[]" placeholder="Marque, précision..."></td>
+              <td><input type="text" name="mob_etat[]" placeholder="Bon état / Année"></td>
+              <td><input type="number" step="10" name="mob_val[]" class="calc-mob" placeholder="0"></td>
+              <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="3"><strong>TOTAL MOBILIER &amp; ÉQUIPEMENTS LAISSÉS</strong></td>
+              <td colspan="2"><strong id="total-mob">0 €</strong></td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
 
       <!-- Bloc Piscine masquable -->
