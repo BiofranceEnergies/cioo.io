@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const linkNotairesView = document.getElementById('link-notaires-view');
   const inputLienYoutube = document.getElementById('input-lien-youtube');
   const linkYoutubeView = document.getElementById('link-youtube-view');
+  const inputLienAnnonce = document.getElementById('input-lien-annonce');
+  const linkAnnonceView = document.getElementById('link-annonce-view');
 
   let photoDataUrl = '';
   let vendeurCount = 1;
@@ -144,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires');
       syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
+      syncQuickLink(inputLienAnnonce, linkAnnonceView, "Voir l'annonce en ligne");
 
       // Restaurer les agences
       if (Array.isArray(data.agences) && data.agences.length > 0) {
@@ -234,6 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   inputLienYoutube.addEventListener('input', () =>
     syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube')
+  );
+  inputLienAnnonce.addEventListener('input', () =>
+    syncQuickLink(inputLienAnnonce, linkAnnonceView, "Voir l'annonce en ligne")
   );
 
   // 1. Gestion des vendeurs supplémentaires (2 à 6)
@@ -520,6 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setPhoto('');
       syncQuickLink(inputLienNotaires, linkNotairesView, 'Ouvrir Dossier Notaires');
       syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
+      syncQuickLink(inputLienAnnonce, linkAnnonceView, "Voir l'annonce en ligne");
       recalculateCadastre();
       recalculateSurfaces();
       recalculateMobilier();
