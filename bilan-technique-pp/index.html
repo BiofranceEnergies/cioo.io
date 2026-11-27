@@ -158,11 +158,11 @@
     <!-- SECTION 2 : PROJET DE VENTE & SITUATION FINANCIÈRE -->
     <section class="card page-break" id="sec-projet">
       <div class="section-header">
-        <h2>2. Projet de vente, occupation &amp; situation financière</h2>
+        <h2>2. Historique, commercialisation actuelle &amp; situation financière</h2>
       </div>
 
       <div class="sub-block">
-        <h3>Historique d'acquisition &amp; situation commerciale</h3>
+        <h3>Origine de propriété &amp; commercialisation actuelle</h3>
         <div class="grid-4">
           <div class="field"><label>Date d'acquisition</label><input type="date" name="acq_date"></div>
           <div class="field"><label>Prix d'acquisition (€)</label><input type="number" name="acq_prix"></div>
@@ -175,14 +175,33 @@
               <label><input type="checkbox" name="orig_part"> Partage</label>
             </div>
           </div>
-          <div class="field col-span-2"><label>Pourquoi avez-vous acheté ce bien ?</label><input type="text" name="acq_pourquoi"></div>
-          <div class="field col-span-2"><label>Ce que vous auriez aimé avoir en plus ?</label><input type="text" name="acq_manque"></div>
         </div>
-        <div class="grid-4 mt-1">
-          <div class="field"><label>Comment avez-vous connu Propriétés-Privées ?</label><input type="text" name="comm_source"></div>
-          <div class="field"><label>Déjà en vente depuis le</label><input type="date" name="comm_depuis"></div>
-          <div class="field"><label>Prix affiché actuel (€)</label><input type="number" name="comm_prix"></div>
-          <div class="field"><label>Méthode d'estimation / Résultats</label><input type="text" name="comm_resultats"></div>
+
+        <div class="mt-1">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <strong style="font-size:12px; color:var(--pp-dark);">En vente actuellement dans :</strong>
+            <button type="button" class="btn-mini no-print" id="btn-add-agence">+ Ajouter une agence</button>
+          </div>
+          <table class="data-table" id="table-agences">
+            <thead>
+              <tr>
+                <th style="width: 32%;">Agence / Support</th>
+                <th style="width: 20%;">En vente depuis le</th>
+                <th style="width: 20%;">Prix affiché (€)</th>
+                <th>Mandat / Observations</th>
+                <th class="no-print" style="width: 4%;"></th>
+              </tr>
+            </thead>
+            <tbody id="agences-tbody">
+              <tr>
+                <td><input type="text" name="ag_nom[]" placeholder="Ex. : Human, Brun Salat, IAD, LBC..."></td>
+                <td><input type="date" name="ag_depuis[]"></td>
+                <td><input type="number" step="500" name="ag_prix[]" placeholder="0"></td>
+                <td><input type="text" name="ag_obs[]" placeholder="Mandat simple, exclusif, baisse de prix..."></td>
+                <td class="no-print"><button type="button" class="btn-del-row" title="Supprimer">×</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
