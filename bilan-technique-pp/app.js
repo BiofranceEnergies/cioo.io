@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobilierTbody = document.getElementById('mobilier-tbody');
   const btnAddMobilier = document.getElementById('btn-add-mobilier');
 
+  // Éléments Mode Lecture & Lien partagé
+  const btnToggleReadonly = document.getElementById('btn-toggle-readonly');
+  const btnShareLink = document.getElementById('btn-share-link');
+  const sharedBanner = document.getElementById('shared-banner');
+  const btnPrintShared = document.getElementById('btn-print-shared');
+
   // Éléments vignette photo & liens couverture
   const inputPhoto = document.getElementById('input-photo');
   const photoPreview = document.getElementById('photo-preview');
@@ -32,6 +38,83 @@ document.addEventListener('DOMContentLoaded', () => {
   let photoDataUrl = '';
   let vendeurCount = 1;
   let isRestoring = false;
+  let isSharedView = false;
+
+  // --- MODE LECTURE & PARTAGE PAR LIEN ---
+  function setReadOnlyMode(enabled, isExternalShare = false) {
+    document.body.classList.toggle('readonly-mode', enabled);
+    document.body.classList.toggle('shared-readonly-mode', isExternalShare);
+
+    formContainer.querySelectorAll('input, select, textarea').forEach((el) => {
+      if (enabled) {
+        el.setAttribute('readonly', 'readonly');
+        if (el.tagName === 'SELECT' || el.type === 'checkbox' || el.type === 'date') {
+          el.disabled = true;
+        }
+      } else {
+        el.removeAttribute('readonly');
+        el.disabled = false;
+      }
+    });
+
+    if (btnToggleReadonly) {
+      btnToggleReadonly.textContent = enabled ? '✏️ Mode Édition' : '👁️ Mode Lecture';
+      btnToggleReadonly.classList.toggle('btn-active-mode', enabled);
+    }
+
+    if (sharedBanner) {
+      sharedBanner.classList.toggle('hidden-block', !isExternalShare);
+    }
+  }
+
+  btnToggleReadonly.addEventListener('click', () => {
+    const nextState = !document.body.classList.contains('readonly-mode');
+    setReadOnlyMode(nextState, false);
+  });
+
+  if (btnPrintShared) {
+    btnPrintShared.addEventListener('click', () => window.print());
+  }
+
+  // Encodage / Décodage UTF-8 Base64 pour lien partageable
+  function encodeShareData(obj) {
+    const json = JSON.stringify(obj);
+    const bytes = new TextEncoder().encode(json);
+    let binary = '';
+    bytes.forEach((b) => { binary += String.fromCharCode(b); });
+    return btoa(binary);
+  }
+
+  function decodeShareData(b64) {
+    const binary = atob(b64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    const json = new TextDecoder().decode(bytes);
+    return JSON.parse(json);
+  }
+
+  btnShareLink.addEventListener('click', async () => {
+    const data = collectFormData();
+    // On retire la photo base64 de l'URL pour éviter une adresse trop longue
+    if (data.meta) data.meta.photoDataUrl = '';
+    try {
+      const encoded = encodeShareData(data);
+      const baseUrl = window.location.href.split('#')[0];
+      const shareUrl = `${baseUrl}#lecture=${encodeURIComponent(encoded)}`;
+      await navigator.clipboard.writeText(shareUrl);
+      const originalText = btnShareLink.textContent;
+      btnShareLink.textContent = '✅ Lien copié !';
+      btnShareLink.classList.add('btn-active-mode');
+      setTimeout(() => {
+        btnShareLink.textContent = originalText;
+        btnShareLink.classList.remove('btn-active-mode');
+      }, 2500);
+    } catch (err) {
+      alert('Impossible de copier automatiquement le lien dans le presse-papiers.');
+    }
+  });
 
   // --- FONCTIONS CENTRALES DE COLLECTE & RESTAURATION DES DONNÉES ---
   function collectFormData() {
@@ -101,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function saveAutoDraft() {
-    if (isRestoring) return;
+    if (isRestoring || isSharedView) return;
     try {
       const data = collectFormData();
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -114,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!data || typeof data !== 'object') return;
     isRestoring = true;
     try {
-      // Recréer le bon nombre de vendeurs
       document.querySelectorAll('.vendeur-block').forEach((b, idx) => {
         if (idx > 0) b.remove();
       });
@@ -124,14 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       vendeurCount = document.querySelectorAll('.vendeur-block').length;
 
-      // États SCI, Piscine & Photo
       toggleSci.checked = !!(data.meta && data.meta.hasSci);
       blockSci.classList.toggle('hidden-block', !toggleSci.checked);
       togglePiscine.checked = !!(data.meta && data.meta.hasPiscine);
       blockPiscine.classList.toggle('hidden-block', !togglePiscine.checked);
       setPhoto((data.meta && data.meta.photoDataUrl) || '');
 
-      // Restaurer les champs
       if (data.fields) {
         Object.entries(data.fields).forEach(([name, val]) => {
           const el = formContainer.querySelector(`[name="${name}"]`);
@@ -148,27 +228,23 @@ document.addEventListener('DOMContentLoaded', () => {
       syncQuickLink(inputLienYoutube, linkYoutubeView, 'Voir Vidéo YouTube');
       syncQuickLink(inputLienAnnonce, linkAnnonceView, "Voir l'annonce en ligne");
 
-      // Restaurer les agences
       if (Array.isArray(data.agences) && data.agences.length > 0) {
         agencesTbody.innerHTML = '';
         data.agences.forEach((ag) => addAgenceRow(ag));
       }
 
-      // Restaurer les parcelles cadastrales
       if (Array.isArray(data.parcelles) && data.parcelles.length > 0) {
         parcellesTbody.innerHTML = '';
         data.parcelles.forEach((cad) => addParcelleRow(cad));
         recalculateCadastre();
       }
 
-      // Restaurer les pièces
       if (Array.isArray(data.pieces)) {
         piecesTbody.innerHTML = '';
         data.pieces.forEach((p) => addPieceRow(p));
         recalculateSurfaces();
       }
 
-      // Restaurer le mobilier laissé
       if (Array.isArray(data.mobilier) && data.mobilier.length > 0) {
         mobilierTbody.innerHTML = '';
         data.mobilier.forEach((m) => addMobilierRow(m));
@@ -537,13 +613,22 @@ document.addEventListener('DOMContentLoaded', () => {
     window.print();
   });
 
-  // 10. Restauration automatique au chargement de la page s'il existe un brouillon en cours
+  // 10. Chargement initial : priorité au lien partagé (#lecture=...), sinon brouillon localStorage
   try {
-    const savedDraft = localStorage.getItem(STORAGE_KEY);
-    if (savedDraft) {
-      applyFormData(JSON.parse(savedDraft));
+    const hash = window.location.hash || '';
+    if (hash.startsWith('#lecture=')) {
+      const encoded = decodeURIComponent(hash.slice('#lecture='.length));
+      const sharedData = decodeShareData(encoded);
+      isSharedView = true;
+      applyFormData(sharedData);
+      setReadOnlyMode(true, true);
+    } else {
+      const savedDraft = localStorage.getItem(STORAGE_KEY);
+      if (savedDraft) {
+        applyFormData(JSON.parse(savedDraft));
+      }
     }
   } catch (err) {
-    // Ignore si localStorage vide ou corrompu
+    // Ignore si hash ou localStorage invalide
   }
 });
