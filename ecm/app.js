@@ -164,7 +164,6 @@ function getFilteredProperties() {
     const dpeRank = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
 
     const filtered = propertiesData.filter(item => {
-        // Toujours garder le bien analysé s'il correspond aux filtres numériques, même sans photo
         const isTarget = item.ref === appState.selectedTargetRef;
 
         if (appState.onlyWithPhoto && !isTarget && !hasValidPhoto(item)) return false;
@@ -261,7 +260,6 @@ function renderCompetitiveSummary(target, filtered) {
     const container = document.getElementById("competitive-summary");
     if (!container) return;
 
-    // On s'assure que le bien analysé est inclus dans le pool de comparaison
     const pool = filtered.some(p => p.ref === target.ref) ? [...filtered] : [target, ...filtered];
     const competitors = pool.filter(p => p.ref !== target.ref);
 
@@ -276,7 +274,7 @@ function renderCompetitiveSummary(target, filtered) {
 
     const total = pool.length;
 
-    // 1. Calcul des rangs du bien analysé (1er = le plus avantageux pour l'acquéreur)
+    // 1. Calcul des rangs du bien analysé
     const priceAsc = [...pool].sort((a, b) => a.price - b.price);
     const rankPrice = priceAsc.findIndex(p => p.ref === target.ref) + 1;
 
@@ -309,7 +307,6 @@ function renderCompetitiveSummary(target, filtered) {
         return score < targetDpeScore;
     });
 
-    // Détection de prestations clés dans les annonces concurrentes
     const featureMatchers = [
         { label: "piscine", regex: /\bpiscine\b/i },
         { label: "dépendance / grange / hangar", regex: /\b(d[ée]pendance|grange|hangar|atelier)\b/i },
@@ -328,7 +325,6 @@ function renderCompetitiveSummary(target, filtered) {
         }
     });
 
-    // Construction des points d'argumentation
     const advantageBullets = [];
 
     if (biggerSurface.length > 0) {
@@ -354,8 +350,9 @@ function renderCompetitiveSummary(target, filtered) {
     }
 
     if (betterDpe.length > 0) {
+        const bestDpeLetter = betterDpe.map(c => c.dpe.charAt(0)).sort()[0];
         advantageBullets.push(
-            `<strong>Performance énergétique :</strong> <strong>${betterDpe.length} concurrent(s)</strong> affichent une meilleure étiquette DPE (classe ${betterDpe.map(c => c.dpe.charAt(0)).sort()[0]} ou mieux contre DPE ${target.dpe}).`
+            `<strong>Performance énergétique :</strong> <strong>${betterDpe.length} concurrent(s)</strong> affichent une meilleure étiquette DPE (classe ${bestDpeLetter} ou mieux contre DPE ${target.dpe}).`
         );
     }
 
@@ -365,12 +362,19 @@ function renderCompetitiveSummary(target, filtered) {
         );
     }
 
-    // 3. Top 3 des concurrents directs les plus compétitifs (score combinant prix/m² bas + surplus surface/terrain)
-    const scoredCompetitors = competitors.map(c => {
+    const bulletsHtml = advantageBullets.map(item => `<li>${item}</li>`).join("");
+
+    // 3. Top 3 des concurrents résidentiels les plus compétitifs
+    const residentialCompetitors = competitors.filter(c => {
+        const t = (c.type || "").toLowerCase();
+        return !t.includes("commercial") && !t.includes("tertiaire") && !t.includes("terrain") && !t.includes("immeuble de rapport");
+    });
+    const poolForTop3 = residentialCompetitors.length > 0 ? residentialCompetitors : competitors;
+
+    const scoredCompetitors = poolForTop3.map(c => {
         const priceDiff = c.price - target.price;
         const surfDiff = c.surface - target.surface;
         const landDiff = (c.land || 0) - (target.land || 0);
-        // Score d'attractivité pour un acquéreur sur ce budget
         const valueScore = (target.sqmPrice - c.sqmPrice) + (surfDiff * 6) + (landDiff * 0.015) - (Math.max(0, priceDiff) * 0.01);
         return { prop: c, priceDiff, surfDiff, landDiff, valueScore };
     }).sort((a, b) => b.valueScore - a.valueScore).slice(0, 3);
@@ -399,7 +403,6 @@ function renderCompetitiveSummary(target, filtered) {
         `;
     }).join("");
 
-    // Verdict global d'accroche
     let positioningAlert = "";
     if (rankSqm === total && total > 1) {
         positioningAlert = `Le bien analysé affiche le <strong>prix au m² le plus élevé de toute la sélection (${formatRank(rankSqm)} / ${total})</strong>.`;
@@ -442,7 +445,7 @@ function renderCompetitiveSummary(target, filtered) {
             <div class="summary-col">
                 <h4>⚖️ Ce que la concurrence offre en plus sur ce budget</h4>
                 <ul class="advantages-list">
-                    ${advantageBullets.map(b => `<li>\${b}</li>`).join("")}
+                    ${bulletsHtml}
                 </ul>
             </div>
             <div class="summary-col">
