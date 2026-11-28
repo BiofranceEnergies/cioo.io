@@ -109,8 +109,7 @@ function initFilters() {
 
     targetSelect.addEventListener("change", (e) => {
         appState.selectedTargetRef = e.target.value;
-        renderTargetBenchmark();
-        renderProperties();
+        renderAll();
     });
 }
 
@@ -160,11 +159,36 @@ function populateTargetDropdown() {
     });
 }
 
+function getTargetDuplicateRefs() {
+    const target = propertiesData.find(p => p.ref === appState.selectedTargetRef);
+    if (!target || !target.desc) return new Set();
+
+    const refs = new Set();
+    const match = target.desc.match(/m[êe]me bien que[^)]*?([A-Z0-9-]{3,})/gi);
+    if (match) {
+        match.forEach(segment => {
+            const tokens = segment.match(/\b[A-Z0-9-]{3,}\b/gi) || [];
+            tokens.forEach(tok => {
+                if (!/^(m[êe]me|bien|que|r[ée]f|brun|salat|iad|human|efficity|anb|chez)$/i.test(tok)) {
+                    refs.add(tok.toLowerCase());
+                }
+            });
+        });
+    }
+    return refs;
+}
+
 function getFilteredProperties() {
     const dpeRank = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
+    const duplicateRefsOfTarget = getTargetDuplicateRefs();
 
     const filtered = propertiesData.filter(item => {
         const isTarget = item.ref === appState.selectedTargetRef;
+
+        if (!isTarget) {
+            if (/\b(m[êe]me bien que|doublon)\b/i.test(item.desc || "")) return false;
+            if (duplicateRefsOfTarget.has(String(item.ref).toLowerCase())) return false;
+        }
 
         if (appState.onlyWithPhoto && !isTarget && !hasValidPhoto(item)) return false;
         if (appState.minPrice !== null && item.price < appState.minPrice) return false;
@@ -462,8 +486,7 @@ window.selectPropertyFromSummary = function(ref) {
     appState.selectedTargetRef = ref;
     const select = document.getElementById("target-select");
     if (select) select.value = ref;
-    renderTargetBenchmark();
-    renderProperties();
+    renderAll();
     const card = document.getElementById(`card-prop-${ref}`);
     if (card) {
         card.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -580,8 +603,7 @@ function renderProperties(filteredList = null) {
         card.addEventListener("click", () => {
             appState.selectedTargetRef = prop.ref;
             document.getElementById("target-select").value = prop.ref;
-            renderTargetBenchmark();
-            renderProperties();
+            renderAll();
         });
 
         grid.appendChild(card);
