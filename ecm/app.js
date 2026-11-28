@@ -1,5 +1,5 @@
 /**
- * OBSERVATOIRE IMMOBILIER & DVF — VERSION TEST VIGNETTES (app_test.js)
+ * OBSERVATOIRE IMMOBILIER & DVF
  * Sylvain MATIGNON • Propriétés-Privées • Nontron & Périgord Vert
  */
 
@@ -13,12 +13,15 @@ const DVF_BASSIN_DATA = {
 };
 
 let propertiesData = [];
+const brokenImageRefs = new Set();
 
 let appState = {
     minPrice: null,
     maxPrice: null,
     minRooms: 0,
     dpeMax: "ALL",
+    onlyWithPhoto: true,
+    sortBy: "price-asc",
     selectedTargetRef: null
 };
 
@@ -61,6 +64,8 @@ function initFilters() {
     const dpeSelect = document.getElementById("dpe-max");
     const roomButtons = document.querySelectorAll("#room-filters .seg-btn");
     const targetSelect = document.getElementById("target-select");
+    const onlyPhotoCheckbox = document.getElementById("only-with-photo");
+    const sortSelect = document.getElementById("sort-select");
 
     minInput.addEventListener("input", (e) => {
         appState.minPrice = e.target.value ? parseFloat(e.target.value) : null;
@@ -79,6 +84,20 @@ function initFilters() {
         renderAll();
     });
 
+    if (onlyPhotoCheckbox) {
+        onlyPhotoCheckbox.addEventListener("change", (e) => {
+            appState.onlyWithPhoto = e.target.checked;
+            renderAll();
+        });
+    }
+
+    if (sortSelect) {
+        sortSelect.addEventListener("change", (e) => {
+            appState.sortBy = e.target.value;
+            renderProperties();
+        });
+    }
+
     roomButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             roomButtons.forEach(b => b.classList.remove("active"));
@@ -94,6 +113,30 @@ function initFilters() {
         renderProperties();
     });
 }
+
+function hasValidPhoto(prop) {
+    if (brokenImageRefs.has(prop.ref)) return false;
+    if (!prop.image) return false;
+    const firstUrl = prop.image.split("|")[0].trim();
+    if (!firstUrl || !firstUrl.startsWith("http")) return false;
+    const lower = firstUrl.toLowerCase();
+    if (lower.includes("no-photo") || lower.includes("nophoto") || lower.includes("placeholder") || lower.includes("indisponible")) {
+        return false;
+    }
+    return true;
+}
+
+window.handleImageError = function(imgEl, ref) {
+    brokenImageRefs.add(ref);
+    if (appState.onlyWithPhoto && ref !== appState.selectedTargetRef) {
+        renderAll();
+    } else {
+        imgEl.style.display = "none";
+        if (imgEl.nextElementSibling) {
+            imgEl.nextElementSibling.style.display = "flex";
+        }
+    }
+};
 
 function updateBudgetLabel() {
     const lbl = document.getElementById("budget-val");
@@ -120,19 +163,37 @@ function populateTargetDropdown() {
 function getFilteredProperties() {
     const dpeRank = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
 
-    return propertiesData.filter(item => {
+    const filtered = propertiesData.filter(item => {
+        // Toujours garder le bien analysé s'il correspond aux filtres numériques, même sans photo
+        const isTarget = item.ref === appState.selectedTargetRef;
+
+        if (appState.onlyWithPhoto && !isTarget && !hasValidPhoto(item)) return false;
         if (appState.minPrice !== null && item.price < appState.minPrice) return false;
         if (appState.maxPrice !== null && item.price > appState.maxPrice) return false;
         if (item.rooms < appState.minRooms) return false;
 
         if (appState.dpeMax !== "ALL") {
             const maxRank = dpeRank[appState.dpeMax] || 99;
-            const itemRank = dpeRank[item.dpe.charAt(0)] || 99;
+            const itemRank = dpeRank[(item.dpe || "").charAt(0)] || 99;
             if (itemRank > maxRank) return false;
         }
 
         return true;
-    }).sort((a, b) => a.price - b.price);
+    });
+
+    return filtered.sort((a, b) => {
+        switch (appState.sortBy) {
+            case "sqm-asc":
+                return a.sqmPrice - b.sqmPrice;
+            case "sqm-desc":
+                return b.sqmPrice - a.sqmPrice;
+            case "surface-desc":
+                return b.surface - a.surface;
+            case "price-asc":
+            default:
+                return a.price - b.price;
+        }
+    });
 }
 
 function renderAll() {
@@ -190,7 +251,221 @@ function renderTargetBenchmark(filteredList = null) {
     }
 
     updateDvfGaps(target.sqmPrice);
+    renderCompetitiveSummary(target, filtered);
 }
+
+/**
+ * GÉNÉRATION DU RÉSUMÉ & CLASSEMENT CONCURRENTIEL SOUS LE TABLEAU DVF
+ */
+function renderCompetitiveSummary(target, filtered) {
+    const container = document.getElementById("competitive-summary");
+    if (!container) return;
+
+    // On s'assure que le bien analysé est inclus dans le pool de comparaison
+    const pool = filtered.some(p => p.ref === target.ref) ? [...filtered] : [target, ...filtered];
+    const competitors = pool.filter(p => p.ref !== target.ref);
+
+    if (competitors.length === 0) {
+        container.innerHTML = `
+            <div class="summary-empty">
+                Aucune autre offre active dans cette fourchette de critères pour établir un classement concurrentiel.
+            </div>
+        `;
+        return;
+    }
+
+    const total = pool.length;
+
+    // 1. Calcul des rangs du bien analysé (1er = le plus avantageux pour l'acquéreur)
+    const priceAsc = [...pool].sort((a, b) => a.price - b.price);
+    const rankPrice = priceAsc.findIndex(p => p.ref === target.ref) + 1;
+
+    const sqmAsc = [...pool].sort((a, b) => a.sqmPrice - b.sqmPrice);
+    const rankSqm = sqmAsc.findIndex(p => p.ref === target.ref) + 1;
+
+    const surfDesc = [...pool].sort((a, b) => b.surface - a.surface);
+    const rankSurface = surfDesc.findIndex(p => p.ref === target.ref) + 1;
+
+    const landDesc = [...pool].sort((a, b) => (b.land || 0) - (a.land || 0));
+    const rankLand = landDesc.findIndex(p => p.ref === target.ref) + 1;
+
+    const formatRank = (r) => (r === 1 ? "1er" : `${r}e`);
+
+    // 2. Analyse comparative : ce que les concurrents offrent en plus
+    const dpeOrder = { "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7 };
+    const targetDpeScore = dpeOrder[(target.dpe || "G").charAt(0)] || 7;
+
+    const biggerSurface = competitors.filter(c => c.surface > target.surface);
+    const maxSurfaceComp = [...competitors].sort((a, b) => b.surface - a.surface)[0];
+
+    const moreRooms = competitors.filter(c => c.rooms > target.rooms);
+    const maxRoomsComp = [...competitors].sort((a, b) => b.rooms - a.rooms)[0];
+
+    const biggerLand = competitors.filter(c => (c.land || 0) > (target.land || 0));
+    const maxLandComp = [...competitors].sort((a, b) => (b.land || 0) - (a.land || 0))[0];
+
+    const betterDpe = competitors.filter(c => {
+        const score = dpeOrder[(c.dpe || "G").charAt(0)] || 7;
+        return score < targetDpeScore;
+    });
+
+    // Détection de prestations clés dans les annonces concurrentes
+    const featureMatchers = [
+        { label: "piscine", regex: /\bpiscine\b/i },
+        { label: "dépendance / grange / hangar", regex: /\b(d[ée]pendance|grange|hangar|atelier)\b/i },
+        { label: "gîte / studio / 2e logement", regex: /\b(g[îi]te|studio|2\s*maisons|logement|locatif)\b/i },
+        { label: "plain-pied", regex: /\bplain[\s-]pied\b/i }
+    ];
+
+    const targetDesc = `${target.type || ""} ${target.desc || ""}`;
+    const detectedExtras = [];
+
+    featureMatchers.forEach(fm => {
+        const targetHasIt = fm.regex.test(targetDesc);
+        const matchingComps = competitors.filter(c => fm.regex.test(`${c.type || ""} ${c.desc || ""}`));
+        if (matchingComps.length > 0 && !targetHasIt) {
+            detectedExtras.push(`<strong>${matchingComps.length}</strong> bien(s) avec <em>${fm.label}</em>`);
+        }
+    });
+
+    // Construction des points d'argumentation
+    const advantageBullets = [];
+
+    if (biggerSurface.length > 0) {
+        advantageBullets.push(
+            `<strong>Surface habitable :</strong> <strong>${biggerSurface.length} concurrent(s) sur ${competitors.length}</strong> offrent plus de surface habitable (jusqu'à <strong>${maxSurfaceComp.surface} m²</strong> à ${maxSurfaceComp.commune} pour ${formatCurrency(maxSurfaceComp.price)}).`
+        );
+    } else {
+        advantageBullets.push(
+            `<strong>Surface habitable :</strong> Votre bien offre la <strong>plus grande surface habitable</strong> de la sélection (${target.surface} m²).`
+        );
+    }
+
+    if (moreRooms.length > 0) {
+        advantageBullets.push(
+            `<strong>Capacité d'accueil :</strong> <strong>${moreRooms.length} concurrent(s)</strong> proposent davantage de chambres (jusqu'à <strong>${maxRoomsComp.rooms} ch.</strong> contre ${target.rooms} ch.).`
+        );
+    }
+
+    if (biggerLand.length > 0) {
+        advantageBullets.push(
+            `<strong>Terrain extérieur :</strong> <strong>${biggerLand.length} concurrent(s)</strong> disposent d'un terrain plus vaste (jusqu'à <strong>${formatNumber(maxLandComp.land)} m²</strong> à ${maxLandComp.commune}).`
+        );
+    }
+
+    if (betterDpe.length > 0) {
+        advantageBullets.push(
+            `<strong>Performance énergétique :</strong> <strong>${betterDpe.length} concurrent(s)</strong> affichent une meilleure étiquette DPE (classe ${betterDpe.map(c => c.dpe.charAt(0)).sort()[0]} ou mieux contre DPE ${target.dpe}).`
+        );
+    }
+
+    if (detectedExtras.length > 0) {
+        advantageBullets.push(
+            `<strong>Équipements absents du bien analysé :</strong> ${detectedExtras.join(" • ")}.`
+        );
+    }
+
+    // 3. Top 3 des concurrents directs les plus compétitifs (score combinant prix/m² bas + surplus surface/terrain)
+    const scoredCompetitors = competitors.map(c => {
+        const priceDiff = c.price - target.price;
+        const surfDiff = c.surface - target.surface;
+        const landDiff = (c.land || 0) - (target.land || 0);
+        // Score d'attractivité pour un acquéreur sur ce budget
+        const valueScore = (target.sqmPrice - c.sqmPrice) + (surfDiff * 6) + (landDiff * 0.015) - (Math.max(0, priceDiff) * 0.01);
+        return { prop: c, priceDiff, surfDiff, landDiff, valueScore };
+    }).sort((a, b) => b.valueScore - a.valueScore).slice(0, 3);
+
+    const threatsMarkup = scoredCompetitors.map(item => {
+        const c = item.prop;
+        const priceDeltaStr = item.priceDiff === 0
+            ? "même prix"
+            : (item.priceDiff > 0 ? `+${formatCurrency(item.priceDiff)}` : `${formatCurrency(item.priceDiff)}`);
+        const surfDeltaStr = item.surfDiff > 0 ? `+${item.surfDiff} m² hab.` : `${c.surface} m² hab.`;
+        const landDeltaStr = item.landDiff > 500 ? `+${formatNumber(item.landDiff)} m² terrain` : `${formatNumber(c.land || 0)} m² terrain`;
+
+        return `
+            <div class="threat-card" onclick="selectPropertyFromSummary('${c.ref}')" title="Cliquer pour analyser ce bien concurrent">
+                <div class="threat-header">
+                    <span class="threat-ref">Réf. ${c.ref} • ${c.commune}</span>
+                    <span class="threat-price">${formatCurrency(c.price)} <small>(${priceDeltaStr})</small></span>
+                </div>
+                <div class="threat-title">${c.type} — ${formatNumber(c.sqmPrice)} €/m² • DPE ${c.dpe}</div>
+                <div class="threat-gains">
+                    <span class="gain-pill">${surfDeltaStr}</span>
+                    <span class="gain-pill">${c.rooms} ch.</span>
+                    <span class="gain-pill">${landDeltaStr}</span>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    // Verdict global d'accroche
+    let positioningAlert = "";
+    if (rankSqm === total && total > 1) {
+        positioningAlert = `Le bien analysé affiche le <strong>prix au m² le plus élevé de toute la sélection (${formatRank(rankSqm)} / ${total})</strong>.`;
+    } else if (rankSqm > Math.ceil(total / 2)) {
+        positioningAlert = `Le bien analysé se situe dans la <strong>moitié haute des prix au m² (${formatRank(rankSqm)} / ${total})</strong> face à la concurrence active.`;
+    } else {
+        positioningAlert = `Le bien analysé est <strong>bien positionné au m² (${formatRank(rankSqm)} / ${total})</strong> par rapport aux offres concurrentes.`;
+    }
+
+    container.innerHTML = `
+        <div class="summary-header">
+            <span class="summary-badge">Synthèse &amp; Argumentaire Vendeur</span>
+            <p class="summary-headline">${positioningAlert}</p>
+        </div>
+
+        <div class="rank-pills-row">
+            <div class="rank-box">
+                <span class="rank-lbl">Classement Prix FAI</span>
+                <span class="rank-val">${formatRank(rankPrice)} <small>/ ${total}</small></span>
+                <span class="rank-hint">${rankPrice === 1 ? "Ticket d'entrée le plus bas" : "Du moins cher au plus cher"}</span>
+            </div>
+            <div class="rank-box ${rankSqm >= total - 1 ? "rank-alert" : ""}">
+                <span class="rank-lbl">Classement Prix / m²</span>
+                <span class="rank-val">${formatRank(rankSqm)} <small>/ ${total}</small></span>
+                <span class="rank-hint">${rankSqm === total ? "Le plus cher au m²" : "Du moins cher au plus cher/m²"}</span>
+            </div>
+            <div class="rank-box">
+                <span class="rank-lbl">Classement Surface Hab.</span>
+                <span class="rank-val">${formatRank(rankSurface)} <small>/ ${total}</small></span>
+                <span class="rank-hint">${rankSurface === total ? "La plus petite surface" : "De la plus grande à la plus petite"}</span>
+            </div>
+            <div class="rank-box">
+                <span class="rank-lbl">Classement Terrain</span>
+                <span class="rank-val">${formatRank(rankLand)} <small>/ ${total}</small></span>
+                <span class="rank-hint">Du plus grand au plus petit terrain</span>
+            </div>
+        </div>
+
+        <div class="summary-columns">
+            <div class="summary-col">
+                <h4>⚖️ Ce que la concurrence offre en plus sur ce budget</h4>
+                <ul class="advantages-list">
+                    ${advantageBullets.map(b => `<li>\${b}</li>`).join("")}
+                </ul>
+            </div>
+            <div class="summary-col">
+                <h4>🎯 Top 3 des concurrents les plus compétitifs</h4>
+                <div class="threats-list">
+                    ${threatsMarkup}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+window.selectPropertyFromSummary = function(ref) {
+    appState.selectedTargetRef = ref;
+    const select = document.getElementById("target-select");
+    if (select) select.value = ref;
+    renderTargetBenchmark();
+    renderProperties();
+    const card = document.getElementById(`card-prop-${ref}`);
+    if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+};
 
 function renderDvfTable() {
     DVF_BASSIN_DATA.years.forEach(year => {
@@ -224,7 +499,6 @@ function updateDvfGaps(targetSqmPrice) {
     });
 }
 
-// AFFICHAGE DES CARTES AVEC VIGNETTE PHOTO EN PLEINE LARGEUR
 function renderProperties(filteredList = null) {
     const list = filteredList || getFilteredProperties();
     const grid = document.getElementById("properties-grid");
@@ -243,14 +517,12 @@ function renderProperties(filteredList = null) {
         card.className = `property-card ${isTarget ? "is-target" : ""}`;
         card.id = `card-prop-${prop.ref}`;
 
-        // Si plusieurs URLs séparées par | sont stockées plus tard, on prend la 1ère
         const firstImageUrl = prop.image ? prop.image.split("|")[0].trim() : "";
 
-        // Bloc vignette en haut de carte avec repli automatique en cas d'absence ou d'erreur
-        const mediaMarkup = firstImageUrl
+        const mediaMarkup = firstImageUrl && !brokenImageRefs.has(prop.ref)
             ? `<div class="card-media">
                  <img src="${firstImageUrl}" alt="${prop.type} à ${prop.commune}" loading="lazy"
-                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      onerror="handleImageError(this, '${prop.ref}')">
                  <div class="card-media-placeholder" style="display: none;">
                      <span>🏠 Aperçu photo indisponible</span>
                  </div>
