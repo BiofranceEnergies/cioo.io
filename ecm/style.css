@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OBSERVATOIRE IMMO & DVF — STYLESHEET TEST (style_test.css)
+   OBSERVATOIRE IMMO & DVF — STYLESHEET
    Sylvain MATIGNON • Propriétés-Privées • Nontron & Périgord Vert
    ========================================================================== */
 
@@ -157,9 +157,35 @@ body {
     padding: 1.5rem;
     display: grid;
     grid-template-columns: 1.5fr 1.2fr 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem 1.5rem;
     box-shadow: var(--shadow-sm);
     align-items: flex-end;
+}
+
+.filter-checkbox-row {
+    grid-column: 1 / -1;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.checkbox-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    cursor: pointer;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    color: var(--text-secondary) !important;
+    user-select: none;
+}
+
+.checkbox-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
 }
 
 .filter-group {
@@ -471,6 +497,212 @@ body {
 }
 
 /* ==========================================================================
+   BLOC SYNTHÈSE & POSITIONNEMENT CONCURRENTIEL
+   ========================================================================== */
+.competitive-summary-box {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1.5px solid #cbd5e1;
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.summary-empty {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.summary-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.summary-badge {
+    align-self: flex-start;
+    background-color: #0f172a;
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+}
+
+.summary-headline {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.rank-pills-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.85rem;
+}
+
+.rank-box {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.rank-box.rank-alert {
+    border-color: #f59e0b;
+    background-color: #fffbeb;
+}
+
+.rank-lbl {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.rank-val {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1.2;
+}
+
+.rank-box.rank-alert .rank-val {
+    color: #b45309;
+}
+
+.rank-val small {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.rank-hint {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+.summary-columns {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 1.25rem;
+}
+
+.summary-col {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.summary-col h4 {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.45rem;
+}
+
+.advantages-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+}
+
+.advantages-list li {
+    padding-left: 1rem;
+    position: relative;
+}
+
+.advantages-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: 800;
+}
+
+.threats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.threat-card {
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+}
+
+.threat-card:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+}
+
+.threat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+}
+
+.threat-ref {
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.threat-price {
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.threat-price small {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.threat-title {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    margin: 0.2rem 0 0.35rem;
+}
+
+.threat-gains {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.gain-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
    INVENTORY & PROPERTY CARDS
    ========================================================================== */
 .inventory-section {
@@ -483,12 +715,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .section-header-flex h2 {
     font-size: 1.25rem;
     font-weight: 800;
     color: var(--text-primary);
+}
+
+.inventory-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.sort-select {
+    width: auto;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
 }
 
 .counter-badge {
@@ -498,6 +744,7 @@ body {
     font-weight: 700;
     padding: 0.35rem 0.75rem;
     border-radius: var(--radius-full);
+    white-space: nowrap;
 }
 
 .cards-grid {
@@ -650,7 +897,6 @@ body {
 .dpe-F { background-color: #ef4444; }
 .dpe-G { background-color: #991b1b; }
 
-/* Bouton Fiche Drive (Colonne B) */
 .ref-badge.drive-link {
     text-decoration: none;
     cursor: pointer;
@@ -664,7 +910,6 @@ body {
     color: #ffffff;
 }
 
-/* Bouton Annonce Agence (Colonne A) */
 .agency-link-btn {
     font-size: 0.72rem;
     font-weight: 700;
@@ -737,6 +982,12 @@ body {
     .kpi-grid {
         grid-template-columns: 1fr;
     }
+    .rank-pills-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .summary-columns {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 640px) {
@@ -744,7 +995,8 @@ body {
         flex-direction: column;
         align-items: flex-start;
     }
-    .target-details-grid {
+    .target-details-grid,
+    .rank-pills-row {
         grid-template-columns: 1fr;
     }
 }
