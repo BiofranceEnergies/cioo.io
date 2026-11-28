@@ -297,8 +297,9 @@ function renderCompetitiveSummary(target, filtered) {
     }
 
     const total = pool.length;
+    const compCount = competitors.length;
 
-    // 1. Calcul des rangs du bien analysé
+    // 1. Calcul des rangs du bien analysé (votre bien inclus dans le classement)
     const priceAsc = [...pool].sort((a, b) => a.price - b.price);
     const rankPrice = priceAsc.findIndex(p => p.ref === target.ref) + 1;
 
@@ -353,7 +354,7 @@ function renderCompetitiveSummary(target, filtered) {
 
     if (biggerSurface.length > 0) {
         advantageBullets.push(
-            `<strong>Surface habitable :</strong> <strong>${biggerSurface.length} concurrent(s) en vente sur ${competitors.length}</strong> offrent plus de surface habitable (jusqu'à <strong>${maxSurfaceComp.surface} m²</strong> à ${maxSurfaceComp.commune} pour ${formatCurrency(maxSurfaceComp.price)}).`
+            `<strong>Surface habitable :</strong> <strong>${biggerSurface.length} concurrent(s) en vente sur ${compCount}</strong> offrent plus de surface habitable (jusqu'à <strong>${maxSurfaceComp.surface} m²</strong> à ${maxSurfaceComp.commune} pour ${formatCurrency(maxSurfaceComp.price)}).`
         );
     } else {
         advantageBullets.push(
@@ -388,7 +389,7 @@ function renderCompetitiveSummary(target, filtered) {
 
     const bulletsHtml = advantageBullets.map(item => `<li>${item}</li>`).join("");
 
-    // 3. Top 3 des concurrents résidentiels les plus compétitifs
+    // 3. Top des concurrents résidentiels les plus compétitifs (jusqu'à 3)
     const residentialCompetitors = competitors.filter(c => {
         const t = (c.type || "").toLowerCase();
         return !t.includes("commercial") && !t.includes("tertiaire") && !t.includes("terrain") && !t.includes("immeuble de rapport");
@@ -427,18 +428,23 @@ function renderCompetitiveSummary(target, filtered) {
         `;
     }).join("");
 
+    const compLabel = compCount > 1 ? `${compCount} maisons concurrentes` : `1 maison concurrente`;
     let positioningAlert = "";
     if (rankSqm === total && total > 1) {
-        positioningAlert = `Parmi les <strong>${total} maisons actuellement en vente</strong> sur ce budget, votre bien affiche le <strong>prix au m² le plus élevé (${formatRank(rankSqm)} / ${total})</strong>.`;
+        positioningAlert = `Face aux <strong>${compLabel}</strong> actuellement en vente sur ces critères, votre bien se classe <strong>${formatRank(rankSqm)} / ${total}</strong> sur le prix au m² (<strong>le plus élevé</strong>).`;
     } else if (rankSqm > Math.ceil(total / 2)) {
-        positioningAlert = `Parmi les <strong>${total} maisons actuellement en vente</strong> sur ce budget, votre bien se situe dans la <strong>moitié haute des prix au m² (${formatRank(rankSqm)} / ${total})</strong>.`;
+        positioningAlert = `Face aux <strong>${compLabel}</strong> actuellement en vente sur ces critères, votre bien se classe <strong>${formatRank(rankSqm)} / ${total}</strong> (moitié haute des prix au m²).`;
     } else {
-        positioningAlert = `Parmi les <strong>${total} maisons actuellement en vente</strong> sur ce budget, votre bien est <strong>bien positionné au m² (${formatRank(rankSqm)} / ${total})</strong> face à la concurrence directe.`;
+        positioningAlert = `Face aux <strong>${compLabel}</strong> actuellement en vente sur ces critères, votre bien se classe <strong>${formatRank(rankSqm)} / ${total}</strong> sur le prix au m² (positionnement compétitif).`;
     }
+
+    const topColTitle = scoredCompetitors.length > 1
+        ? `🎯 Les ${scoredCompetitors.length} biens en vente qui captent vos acquéreurs`
+        : `🎯 Le bien en vente qui capte vos acquéreurs`;
 
     container.innerHTML = `
         <div class="summary-header">
-            <span class="summary-badge">Synthèse Concurrence Directe (Biens en vitrine)</span>
+            <span class="summary-badge">Synthèse Concurrence Directe (Votre bien inclus dans le classement)</span>
             <p class="summary-headline">${positioningAlert}</p>
         </div>
 
@@ -473,7 +479,7 @@ function renderCompetitiveSummary(target, filtered) {
                 </ul>
             </div>
             <div class="summary-col">
-                <h4>🎯 Les 3 biens en vente qui captent vos acquéreurs</h4>
+                <h4>${topColTitle}</h4>
                 <div class="threats-list">
                     ${threatsMarkup}
                 </div>
