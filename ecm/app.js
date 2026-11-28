@@ -234,7 +234,7 @@ function renderKpis(filtered) {
     document.getElementById("kpi-count").textContent = count;
     document.getElementById("kpi-avg-price").textContent = formatCurrency(avgPrice);
     document.getElementById("kpi-avg-sqm").textContent = `${formatNumber(avgSqm)} €/m²`;
-    document.getElementById("list-counter").textContent = `${count} bien(s) correspondant(s)`;
+    document.getElementById("list-counter").textContent = `${count} bien(s) en vente`;
 }
 
 function renderTargetBenchmark(filteredList = null) {
@@ -290,7 +290,7 @@ function renderCompetitiveSummary(target, filtered) {
     if (competitors.length === 0) {
         container.innerHTML = `
             <div class="summary-empty">
-                Aucune autre offre active dans cette fourchette de critères pour établir un classement concurrentiel.
+                Aucune autre annonce actuellement en vente dans cette fourchette de critères pour établir un classement concurrentiel.
             </div>
         `;
         return;
@@ -345,7 +345,7 @@ function renderCompetitiveSummary(target, filtered) {
         const targetHasIt = fm.regex.test(targetDesc);
         const matchingComps = competitors.filter(c => fm.regex.test(`${c.type || ""} ${c.desc || ""}`));
         if (matchingComps.length > 0 && !targetHasIt) {
-            detectedExtras.push(`<strong>${matchingComps.length}</strong> bien(s) avec <em>${fm.label}</em>`);
+            detectedExtras.push(`<strong>${matchingComps.length}</strong> maison(s) avec <em>${fm.label}</em>`);
         }
     });
 
@@ -353,36 +353,36 @@ function renderCompetitiveSummary(target, filtered) {
 
     if (biggerSurface.length > 0) {
         advantageBullets.push(
-            `<strong>Surface habitable :</strong> <strong>${biggerSurface.length} concurrent(s) sur ${competitors.length}</strong> offrent plus de surface habitable (jusqu'à <strong>${maxSurfaceComp.surface} m²</strong> à ${maxSurfaceComp.commune} pour ${formatCurrency(maxSurfaceComp.price)}).`
+            `<strong>Surface habitable :</strong> <strong>${biggerSurface.length} concurrent(s) en vente sur ${competitors.length}</strong> offrent plus de surface habitable (jusqu'à <strong>${maxSurfaceComp.surface} m²</strong> à ${maxSurfaceComp.commune} pour ${formatCurrency(maxSurfaceComp.price)}).`
         );
     } else {
         advantageBullets.push(
-            `<strong>Surface habitable :</strong> Votre bien offre la <strong>plus grande surface habitable</strong> de la sélection (${target.surface} m²).`
+            `<strong>Surface habitable :</strong> Votre bien offre la <strong>plus grande surface habitable</strong> actuellement en vente sur ce budget (${target.surface} m²).`
         );
     }
 
     if (moreRooms.length > 0) {
         advantageBullets.push(
-            `<strong>Capacité d'accueil :</strong> <strong>${moreRooms.length} concurrent(s)</strong> proposent davantage de chambres (jusqu'à <strong>${maxRoomsComp.rooms} ch.</strong> contre ${target.rooms} ch.).`
+            `<strong>Capacité d'accueil :</strong> <strong>${moreRooms.length} concurrent(s) en vente</strong> proposent davantage de chambres (jusqu'à <strong>${maxRoomsComp.rooms} ch.</strong> contre ${target.rooms} ch.).`
         );
     }
 
     if (biggerLand.length > 0) {
         advantageBullets.push(
-            `<strong>Terrain extérieur :</strong> <strong>${biggerLand.length} concurrent(s)</strong> disposent d'un terrain plus vaste (jusqu'à <strong>${formatNumber(maxLandComp.land)} m²</strong> à ${maxLandComp.commune}).`
+            `<strong>Terrain extérieur :</strong> <strong>${biggerLand.length} concurrent(s) en vente</strong> disposent d'un terrain plus vaste (jusqu'à <strong>${formatNumber(maxLandComp.land)} m²</strong> à ${maxLandComp.commune}).`
         );
     }
 
     if (betterDpe.length > 0) {
         const bestDpeLetter = betterDpe.map(c => c.dpe.charAt(0)).sort()[0];
         advantageBullets.push(
-            `<strong>Performance énergétique :</strong> <strong>${betterDpe.length} concurrent(s)</strong> affichent une meilleure étiquette DPE (classe ${bestDpeLetter} ou mieux contre DPE ${target.dpe}).`
+            `<strong>Performance énergétique :</strong> <strong>${betterDpe.length} concurrent(s) en vente</strong> affichent une meilleure étiquette DPE (classe ${bestDpeLetter} ou mieux contre DPE ${target.dpe}).`
         );
     }
 
     if (detectedExtras.length > 0) {
         advantageBullets.push(
-            `<strong>Équipements absents du bien analysé :</strong> ${detectedExtras.join(" • ")}.`
+            `<strong>Prestations proposées par les biens concurrents :</strong> ${detectedExtras.join(" • ")}.`
         );
     }
 
@@ -412,7 +412,7 @@ function renderCompetitiveSummary(target, filtered) {
         const landDeltaStr = item.landDiff > 500 ? `+${formatNumber(item.landDiff)} m² terrain` : `${formatNumber(c.land || 0)} m² terrain`;
 
         return `
-            <div class="threat-card" onclick="selectPropertyFromSummary('${c.ref}')" title="Cliquer pour analyser ce bien concurrent">
+            <div class="threat-card" onclick="selectPropertyFromSummary('${c.ref}')" title="Cliquer pour comparer avec cette annonce en vente">
                 <div class="threat-header">
                     <span class="threat-ref">Réf. ${c.ref} • ${c.commune}</span>
                     <span class="threat-price">${formatCurrency(c.price)} <small>(${priceDeltaStr})</small></span>
@@ -429,16 +429,16 @@ function renderCompetitiveSummary(target, filtered) {
 
     let positioningAlert = "";
     if (rankSqm === total && total > 1) {
-        positioningAlert = `Le bien analysé affiche le <strong>prix au m² le plus élevé de toute la sélection (${formatRank(rankSqm)} / ${total})</strong>.`;
+        positioningAlert = `Parmi les <strong>${total} maisons actuellement en vente</strong> sur ce budget, votre bien affiche le <strong>prix au m² le plus élevé (${formatRank(rankSqm)} / ${total})</strong>.`;
     } else if (rankSqm > Math.ceil(total / 2)) {
-        positioningAlert = `Le bien analysé se situe dans la <strong>moitié haute des prix au m² (${formatRank(rankSqm)} / ${total})</strong> face à la concurrence active.`;
+        positioningAlert = `Parmi les <strong>${total} maisons actuellement en vente</strong> sur ce budget, votre bien se situe dans la <strong>moitié haute des prix au m² (${formatRank(rankSqm)} / ${total})</strong>.`;
     } else {
-        positioningAlert = `Le bien analysé est <strong>bien positionné au m² (${formatRank(rankSqm)} / ${total})</strong> par rapport aux offres concurrentes.`;
+        positioningAlert = `Parmi les <strong>${total} maisons actuellement en vente</strong> sur ce budget, votre bien est <strong>bien positionné au m² (${formatRank(rankSqm)} / ${total})</strong> face à la concurrence directe.`;
     }
 
     container.innerHTML = `
         <div class="summary-header">
-            <span class="summary-badge">Synthèse &amp; Argumentaire Vendeur</span>
+            <span class="summary-badge">Synthèse Concurrence Directe (Biens en vitrine)</span>
             <p class="summary-headline">${positioningAlert}</p>
         </div>
 
@@ -467,13 +467,13 @@ function renderCompetitiveSummary(target, filtered) {
 
         <div class="summary-columns">
             <div class="summary-col">
-                <h4>⚖️ Ce que la concurrence offre en plus sur ce budget</h4>
+                <h4>⚖️ Ce que vos concurrents en vente offrent en plus aujourd'hui</h4>
                 <ul class="advantages-list">
                     ${bulletsHtml}
                 </ul>
             </div>
             <div class="summary-col">
-                <h4>🎯 Top 3 des concurrents les plus compétitifs</h4>
+                <h4>🎯 Les 3 biens en vente qui captent vos acquéreurs</h4>
                 <div class="threats-list">
                     ${threatsMarkup}
                 </div>
