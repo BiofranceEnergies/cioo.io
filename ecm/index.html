@@ -58,6 +58,13 @@
                     <option value="E">DPE E max</option>
                 </select>
             </div>
+
+            <div class="filter-group filter-checkbox-row">
+                <label class="checkbox-toggle">
+                    <input type="checkbox" id="only-with-photo" checked>
+                    <span>Masquer les biens sans photo (annonces retirées / hors marché)</span>
+                </label>
+            </div>
         </section>
 
         <!-- KPI DU MARCHÉ FILTRÉ -->
@@ -65,7 +72,7 @@
             <div class="kpi-card">
                 <span class="kpi-label">Biens correspondants</span>
                 <span class="kpi-val" id="kpi-count">0</span>
-                <span class="kpi-sub">Offres actives</span>
+                <span class="kpi-sub">Offres actives en ligne</span>
             </div>
             <div class="kpi-card">
                 <span class="kpi-label">Prix FAI moyen</span>
@@ -171,6 +178,11 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- RÉSUMÉ & POSITIONNEMENT CONCURRENTIEL AUTOMATIQUE -->
+                <div class="competitive-summary-box" id="competitive-summary">
+                    <!-- Généré dynamiquement par app.js -->
+                </div>
             </div>
         </section>
 
@@ -178,7 +190,15 @@
         <section class="inventory-section">
             <div class="section-header-flex">
                 <h2>Portefeuille en Vente — Secteur Nontron</h2>
-                <span class="counter-badge" id="list-counter">0 bien(s)</span>
+                <div class="inventory-controls">
+                    <select id="sort-select" class="custom-select sort-select" aria-label="Trier les annonces">
+                        <option value="price-asc">Trier : Prix FAI croissant</option>
+                        <option value="sqm-asc">Trier : Prix/m² croissant</option>
+                        <option value="sqm-desc">Trier : Prix/m² décroissant</option>
+                        <option value="surface-desc">Trier : Surface habitable décroissante</option>
+                    </select>
+                    <span class="counter-badge" id="list-counter">0 bien(s)</span>
+                </div>
             </div>
             <div class="cards-grid" id="properties-grid">
                 <!-- Les cartes sont générées dynamiquement par app.js -->
