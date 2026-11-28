@@ -186,7 +186,7 @@ function getFilteredProperties() {
         const isTarget = item.ref === appState.selectedTargetRef;
 
         if (!isTarget) {
-            if (/\b(m[êe]me bien que|doublon)\b/i.test(item.desc || "")) return false;
+            if (/\bdoublon\b/i.test(item.desc || "")) return false;
             if (duplicateRefsOfTarget.has(String(item.ref).toLowerCase())) return false;
         }
 
